@@ -1,5 +1,5 @@
 summary: Summary
-id: claat-docs
+id: s3-overview
 categories: AWS
 tags: Amazon S3
 status: Published
@@ -37,12 +37,12 @@ Duration: 01:00
 【AWS Black Belt Online Seminar】[Amazon S3/Glacier(YouTube)](https://www.youtube.com/watch?v=oFG5kMZjKtc)
 
 
-![](./files/blackbelt_s3.jpg)
+![](../articles_images/s3/files/blackbelt_s3.jpg)
 
 
 【AWS Black Belt Online Seminar】[Amazon S3 ユースケースおよびサービスアップデート(YouTube)](https://www.youtube.com/watch?v=7LRSDrHb2Ho)
 
-![](./files/blackbelt_s3_update.jpg)
+![](../articles_images/s3/files/blackbelt_s3_update.jpg)
 
 
 [S3 サービス概要](https://aws.amazon.com/jp/s3/)
@@ -54,7 +54,7 @@ Duration: 01:00
 ## S3 の基本
 Duration: 01:30
 
-![](./files/s3_overview.png)
+![](../articles_images/s3/files/s3_overview.png)
 
 S3 のデータ耐久性はイレブンナイン（99.999999999 %）で、可用性は 99.99 %です（ストレージタイプによって異なります）。
 耐久性とは、データが失われないことに対する指標で、可用性は稼働し続けることの指標です。
@@ -69,25 +69,25 @@ S3 はリージョンのサービスなので、VPC 内からアクセスする�
 
 ### ①EC2（パブリックサブネット）⇒ Internet Gateway
 
-![](./files/s3_ec2_access_pattern_1.png)
+![](../articles_images/s3/files/s3_ec2_access_pattern_1.png)
 
 シンプルに、Internet Gateway を通してアクセスします。
 
 ### ②EC2（プライベートサブネット） ⇒ NAT Gateway
 
-![](./files/s3_ec2_access_pattern_2.png)
+![](../articles_images/s3/files/s3_ec2_access_pattern_2.png)
 
 NAT Gateway を利用することでアクセスできます。ただし、NAT Gateway はコストが高めです。
 
 ### ③EC2（プライベートサブネット） ⇒ VPC Endpoint(Gatewayタイプ)
 
-![](./files/s3_ec2_access_pattern_3.png)
+![](../articles_images/s3/files/s3_ec2_access_pattern_3.png)
 
 S3 や DynamoDB を利用する場合は、コストがかからないのでこちらを使います。
 VPC Endpoint(Interfaceタイプ)と違い、アクセスはグローバル IPです。（通信経路は、AWS内でのプライベートです）
 ### ④EC2（プライベートサブネット） ⇒ VPC Endpoint(Interfaceタイプ)
 
-![](./files/s3_ec2_access_pattern_4.png)
+![](../articles_images/s3/files/s3_ec2_access_pattern_4.png)
 
 プライベートIPでのアクセスが可能です。ただし、VPC Endpointを起動している時間でコストが発生します。他のサービスでも VPC エンドポイントを使用していると最もコストが高くなるパターンです。
 
@@ -148,7 +148,7 @@ AWS ドキュメント> [バケット所有者がクロスアカウントのバ�
 
 
 バケットポリシーのサイズには制限があり、20 KB となっています。
-![](./files/s3_bucket_policy.png)
+![](../articles_images/s3/files/s3_bucket_policy.png)
 
 https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html
 
@@ -183,7 +183,7 @@ AWS ドキュメント > [ストレージのライフサイクルの管理](http
 このライフサイクルでオブジェクトが移動されるのは、0：00（UTC）です。日本時間では、午前 9時となります。
 削除日数が1日の場合、午前9時より前に作成されたものは翌日9時、午前9時より後に作成されたものは、翌々日の9時以降に削除されることになります。
 
-![](./files/s3_lifecycle_1.png)
+![](../articles_images/s3/files/s3_lifecycle_1.png)
 
 
 ## ストレージタイプ
@@ -191,11 +191,11 @@ Duration: 05:00
 
 AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage-class-intro.html)
 
-![](./files/s3_storage_type.png)
+![](../articles_images/s3/files/s3_storage_type.png)
 
 上記画像は、AWSドキュメントにある[ストレージクラス間の移行のためのウォーターフォールモデル](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-general-considerations-transition-sc)に情報を追加したものです。
 
-![](./files/lifecycle-transitions-v3.png)
+![](../articles_images/s3/files/lifecycle-transitions-v3.png)
 
 
 <aside class="positive">
@@ -243,7 +243,7 @@ AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](htt
 ## バージョニング
 Duration: 02:00
 
-![](./files/s3_versioning.png)
+![](../articles_images/s3/files/s3_versioning.png)
 
 パフォーマンスに影響を与えずに偶発的な上書きや削除から保護するためにアップロードごとに新しいバージョンを生成するオプションです。
 削除されたオブジェクトの取得や、過去のバージョンへのロールバックが可能になります。
@@ -291,18 +291,18 @@ AWS ドキュメント > [Amazon S3 を使用して静的ウェブサイトを�
 
 S3 バケット単体で静的ウェブサイトが構築できる機能です。この機能だけでは HTTP アクセスのみですので、HTTPS が必要な場合は他のサービスと組み合わせる必要があります。（CloudFrontとの併用が最も簡単です）
 
-![](./files/s3_static_website_1.png)
+![](../articles_images/s3/files/s3_static_website_1.png)
 
 IP制限をした静的ウェブサイトの設定例
 
-![](./files/s3_static_website_2.png)
+![](../articles_images/s3/files/s3_static_website_2.png)
 
 ## S3 Transfer Acceleration
 Duration: 05:00
 
 AWS ドキュメント>[Amazon S3 Transfer Acceleration を使用した高速かつ安全なファイル転送の設定](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html)
 
-![](./files/s3_Transfer_Acceleration.png)
+![](../articles_images/s3/files/s3_Transfer_Acceleration.png)
 
 遠方のリージョンからの転送を高速化できます。
 同一リージョンで転送する分には問題になりませんが、海外展開している事業で、海外リージョンを利用し、中央リージョンのバケットに対して、世界中からアップロードするようなシステムの場合には、データ転送の距離により遅延が問題になります。
@@ -328,26 +328,26 @@ AWS ドキュメント > [Transfer Acceleration を使用するための要件](
 
 [速度比較ツール](https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html)を使用すると、高速化した場合と高速化していない場合の Amazon S3 リージョン間でのアップロード速度を比較できます。
 
-![](./files/S3TransferAcceleration_0a.png)
+![](../articles_images/s3/files/S3TransferAcceleration_0a.png)
 
 ページを開くと計測が開始されます。全部終了するまでに、10分程度かかります。
 このようにマルチパートアップロードによってファイルがアップロードされています。
-![](./files/S3TransferAcceleration_0b.png)
+![](../articles_images/s3/files/S3TransferAcceleration_0b.png)
 
 結果はこのように表示されます。
 東京⇒東京リージョンだと、2 %遅くなってます。別のタイミングで実施したら、5%遅くなりました。やはりエッジロケーションを経由する分、遅くなるようです。（実際に利用するときは、AWS が判定を行い、エッジロケーションを経由しない転送にするはず）
 
-![](./files/S3TransferAcceleration_tool_0.png)
+![](../articles_images/s3/files/S3TransferAcceleration_tool_0.png)
 
-![](./files/S3TransferAcceleration_tool_1.png)
+![](../articles_images/s3/files/S3TransferAcceleration_tool_1.png)
 
-![](./files/S3TransferAcceleration_tool_2.png)
+![](../articles_images/s3/files/S3TransferAcceleration_tool_2.png)
 
-![](./files/S3TransferAcceleration_tool_3.png)
+![](../articles_images/s3/files/S3TransferAcceleration_tool_3.png)
 
 リージョンマップにマッピングしてみるとこのようになりました。
 リージョン間の距離と比例してスピードアップするわけではなさそうですが、遠方のリージョンの方が明らかにスピードアップしています。
-![](./files/S3TransferAcceleration_tool_world.png)
+![](../articles_images/s3/files/S3TransferAcceleration_tool_world.png)
 
 
 |Rank|Region| | |
@@ -375,7 +375,7 @@ AWS ドキュメント > [サーバーアクセスログを使用したリクエ
 
 バケットに対する監査などの目的で、S3のサーバアクセスログを別のバケットに保存することができます。
 
-![](./files/s3_accesslog.png)
+![](../articles_images/s3/files/s3_accesslog.png)
 
 設定する場合、以下に注意する必要があります。
 
@@ -406,11 +406,11 @@ AWS WAF のログに対して S3 Select を実行した例です。
 
 WAF のログは1行ずつのJSONレコードとなっています。
 
-![](./files/s3_select_0.png)
+![](../articles_images/s3/files/s3_select_0.png)
 
 形式を「JSON」、タイプを「行」、圧縮を「GZIP」とします。
 
-![](./files/s3_select_0a.png)
+![](../articles_images/s3/files/s3_select_0a.png)
 
 WHERE 句でのカラムの指定は、「s.action」ではなく「s."action"」とする必要がありました。
 
@@ -418,7 +418,7 @@ WHERE 句でのカラムの指定は、「s.action」ではなく「s."action"�
 SELECT * FROM s3object s WHERE s."action" = 'ALLOW' LIMIT 5
 ```
 
-![](./files/s3_select_1a.png)
+![](../articles_images/s3/files/s3_select_1a.png)
 
 抽出するカラムを絞ってみます（射影）
 
@@ -426,7 +426,7 @@ SELECT * FROM s3object s WHERE s."action" = 'ALLOW' LIMIT 5
 SELECT s."timestamp", s."terminatingRuleId",s."action"  FROM s3object s WHERE s."action" = 'ALLOW' LIMIT 5
 ```
 
-![](./files/s3_select_1b.png)
+![](../articles_images/s3/files/s3_select_1b.png)
 
 対象の日時が特定できている場合は S3 Select を使うことで手軽に検索・集計が可能です。Athena のように事前にテーブル定義を行わなくても検索できるのが便利です。
 ただ、対象の日時が特定できない場合や広い範囲を検索したい場合は、Athena を使うほうがよいと思います。
@@ -448,19 +448,19 @@ Storage Lens を使うと、オブジェクトストレージの使用状況と�
 より詳細に分析したい場合は、無料のメトリクスから有料のメトリクスに切り替えることができます。
 
 全バケットの概要
-![](./files/strage_lens_3.png)
+![](../articles_images/s3/files/strage_lens_3.png)
 
 バケットごとの容量推移
-![](./files/strage_lens_1.png)
+![](../articles_images/s3/files/strage_lens_1.png)
 
 バケットごとの現在の容量
-![](./files/strage_lens_2.png)
+![](../articles_images/s3/files/strage_lens_2.png)
 
 現行バージョン、非現行バージョン、削除マーカー、未完了のマルチパートアップロード
-![](./files/strage_lens_4.png)
+![](../articles_images/s3/files/strage_lens_4.png)
 
 ストレージクラスごと
-![](./files/strage_lens_5.png)
+![](../articles_images/s3/files/strage_lens_5.png)
 
 ## リクエスタ支払いバケット
 Duration: 02:00
@@ -484,7 +484,7 @@ AWS ドキュメント > [Amazon S3 アクセスポイントを使用したデ�
 バケットに複数のユーザーやアカウントからアクセスがある場合、バケットポリシーでの設定が煩雑になります。
 そこで、用途ごとにアクセスポイントを作成することで、アクセスポイントごとのポリシーを定義することができます。
 
-![](./files/s3_accesspoint.png)
+![](../articles_images/s3/files/s3_accesspoint.png)
 
 このように、アクセスポイントポリシーを定義できます。
 ```
@@ -557,7 +557,7 @@ BucketName/2022-11-02/aaa/xxx000000001.log
 ## 他のサービスとの連携
 Duration: 00:30
 
-![](./files/s3_services.png)
+![](../articles_images/s3/files/s3_services.png)
 
 2019年頃の資料のため、現在では AWS WAF も直接 S3 へログ配信できるようになっているため連携できるサービスが増えています。
 

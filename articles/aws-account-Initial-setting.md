@@ -1,5 +1,5 @@
 summary: Summary
-id: claat-docs
+id: aws-account-Initial-setting
 categories: AWS
 tags: AWS Account
 status: Published
