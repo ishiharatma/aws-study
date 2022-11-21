@@ -1,7 +1,7 @@
 summary: Summary
 id: claat-docs
 categories: AWS
-tags: AWS S3
+tags: Amazon S3
 status: Published
 authors: ishr
 Feedback Link: 
