@@ -1,0 +1,157 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWSアカウント作成後に行うべき設定事項</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="claat-docs"
+                  title="AWSアカウント作成後に行うべき設定事項"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>AWS アカウントは簡単に作成でき、手軽に利用できます。しかし、初期設定ではセキュリティ設定が弱いため、第三者に悪用される危険があります。安全に利用するために、適切な設定を実施しましょう。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="推奨する設定" duration="0">
+        <ol type="1">
+<li>ルートユーザーに多要素認証（MFA）を設定する<ul>
+<li>ルートユーザーの乗っ取りを防止する意味でも MFA を設定しましょう。</li>
+</ul>
+</li>
+<li>AWS アカウントの秘密の質問を設定する<ul>
+<li>ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。</li>
+<li>ただし、一度設定すると変更は可能ですが削除することはできません。</li>
+</ul>
+</li>
+<li>ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する<ul>
+<li>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678の場合、+81 3-1234-5678）</li>
+<li>国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</li>
+</ul>
+</li>
+<li>AWS アカウントの代替の連絡先を登録する<ul>
+<li>請求、オペレーション、セキュリティの３つに対して代替の連絡先を指定できます。必要に応じて設定しましょう。</li>
+</ul>
+</li>
+<li><a href="https://console.aws.amazon.com/artifact/home" target="_blank">AWS Artifact</a> にアクセスして、「日本準拠法」に変更する<ul>
+<li>AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。</li>
+</ul>
+</li>
+<li><a href="https://console.aws.amazon.com/billing/home#/budgets/overview" target="_blank">Billing コンソールの予算</a> にアクセスして予算アラートを設定する<ul>
+<li>アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。</li>
+</ul>
+</li>
+<li>CloudTrail のログ記録を有効にする<ul>
+<li>アカウント内で不正な操作を記録、検知するためにも有効にしましょう。</li>
+<li>CloudTrail のログ保存先の S3 は、ライフサイクルルールも設定しましょう。</li>
+<li>後述するログ監視を実施するために、CloudWatch Logs にも配信しましょう。CloudWatch のロググループには適切な保持期限を設定しましょう。</li>
+</ul>
+</li>
+<li>CloudTrail のログを監視する<ul>
+<li>CloudTrail のログを監視し、少なくとも以下を監視してアラートされるようにしましょう。 <ul>
+<li>ルートアカウントの使用を監視</li>
+<li>コンソールへの認証失敗を監視</li>
+</ul>
+</li>
+<li>その他に監視しておくとよいのは以下です。 <ul>
+<li>他要素認証 (MFA) を使用していないコンソールサインインを監視</li>
+<li>ネットワークアクセスコントロールリスト (ACL) の変更を監視</li>
+<li>Amazon Virtual Private Cloud (VPC) の変更を監視</li>
+<li>ネットワークゲートウェイの変更を監視</li>
+<li>セキュリティグループへの変更を監視</li>
+<li>IAMポリシーへの変更を監視</li>
+<li>IAMロールの変更を監視</li>
+<li>IAMユーザの作成を監視</li>
+<li>IAMアクセスキーの作成を監視</li>
+<li>CloudTrailの変更を監視</li>
+<li>SwitchRoleエラーの連続発生を監視</li>
+<li>S3バケットポリシーへの変更を監視</li>
+<li>KMSキーの無効またはスケジュールされた削除の発生を監視</li>
+<li>無効または削除されたKMSのキー使用時のエラー発生を監視</li>
+<li>不正な API 呼び出しの発生を監視</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Personal Service Dashboard のイベント検知を設定する<ul>
+<li><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。</li>
+<li>通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。 <ul>
+<li>入力トランスフォーマーの設定例</li>
+</ul>
+<pre><code>{&#34;eventDescription&#34;:&#34;$.detail.eventDescription[0].latestDescription&#34;,&#34;eventTypeCode&#34;:&#34;$.detail.eventTypeCode&#34;,&#34;region&#34;:&#34;$.region&#34;,&#34;service&#34;:&#34;$.detail.service&#34;,&#34;startTime&#34;:&#34;$.detail.startTime&#34;,&#34;type&#34;:&#34;$.detail-type&#34;}
+</code></pre>
+<pre><code>&#34;AWSにてメンテナンス通知が発行されました。&#34;
+&#34;type: &lt;type&gt;&#34;
+&#34;eventStartTime: &lt;startTime&gt;&#34;
+&#34;service: &lt;service&gt;&#34;
+&#34;region: &lt;region&gt;&#34;
+&#34;eventTypeCode: &lt;eventTypeCode&gt;&#34;
+&#34;eventDescription: &lt;eventDescription&gt;&#34;
+&#34;詳細は Personal Health Dashboard を確認してください。&#34;
+&#34;https://phd.aws.amazon.com/phd/home#/dashboard/open-issues&#34;
+</code></pre>
+</li>
+</ul>
+</li>
+<li><a href="https://console.aws.amazon.com/iam/home#/account_settings" target="_blank">IAM コンソールのアカウント設定</a> から、IAM パスワードポリシーを変更する<ul>
+<li>デフォルトの IAM ユーザーのパスワードポリシーは脆弱です。そのため、アカウントを作成したら忘れないうちに強力なポリシーに変更しましょう。</li>
+<li>推奨は、以下です。 <ul>
+<li>パスワードの最小長「8」以上</li>
+<li>少なくとも１つの大文字が必要</li>
+<li>少なくとも１つの小文字が必要</li>
+<li>少なくとも１つの数字が必要</li>
+<li>少なくとも１つの英数字以外の文字が必要</li>
+</ul>
+</li>
+<li>MFA を利用しない場合は、以下の追加も検討しましょう。 <ul>
+<li>パスワードの失効を許可「180日」</li>
+<li>パスワードの再利用を禁止「5回」</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ルートユーザーの代わりになる IAM ユーザとグループを作成する<ul>
+<li>AdministratorAccess の権限を付与したグループを作成し、IAM ユーザーを設定する。</li>
+<li>作成した IAM ユーザには MFA を付与する。</li>
+</ul>
+</li>
+<li>ルートユーザーは封印する<ul>
+<li>ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。</li>
+</ul>
+</li>
+</ol>
+<p>=== 以上 ===</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
