@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2022-11-21T22:45:53+09:00",
+  "id": "claat-docs",
+  "duration": 38,
+  "title": "Simple Storage Service（S3）",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "S3.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "awss3"
+  ],
+  "url": "claat-docs"
+}
