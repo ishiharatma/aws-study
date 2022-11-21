@@ -6,4 +6,4 @@
 
 [ELB 概要](/articles/ELB/ELB-overview.md)
 
-[S3 概要](/articles/S3/files/s3_overview.png)
+[S3 概要](/articles/S3/S3-overview.md)
