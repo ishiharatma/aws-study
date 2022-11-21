@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-11-22T01:37:51+09:00",
-  "id": "elb-overview",
-  "duration": 20,
-  "title": "Elastic Load Balancing(ELB)",
+  "updated": "2022-11-22T01:38:39+09:00",
+  "id": "rds-overview",
+  "duration": 3,
+  "title": "RDS",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\elb-overview.md",
+  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\rds-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,8 @@
     "aws"
   ],
   "tags": [
-    "awselb"
+    "amazonaurora",
+    "amazonrds"
   ],
-  "url": "elb-overview"
+  "url": "rds-overview"
 }

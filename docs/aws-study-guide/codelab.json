@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-11-22T01:37:51+09:00",
-  "id": "elb-overview",
-  "duration": 20,
-  "title": "Elastic Load Balancing(ELB)",
+  "updated": "2022-11-22T01:38:56+09:00",
+  "id": "aws-study-guide",
+  "duration": 0,
+  "title": "",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\elb-overview.md",
+  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\aws-study-guide.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awselb"
+    "awsaccount"
   ],
-  "url": "elb-overview"
+  "url": "aws-study-guide"
 }

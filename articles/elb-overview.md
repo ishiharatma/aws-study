@@ -9,16 +9,23 @@ Feedback Link:
 # Elastic Load Balancing(ELB)
 
 ## Contents
+Duration: 00:30
 
-- ELB とは
-- ELB の基本
-- ELB の種類
-- サブネットに必要な CIDR
-- スティッキーセッション
-- クロスゾーン負荷分散
-- Connection Draining
-- アクセスログ
-- 他のサービスとの連携
+- [Elastic Load Balancing(ELB)](#elastic-load-balancingelb)
+  - [Contents](#contents)
+  - [ELB とは](#elb-とは)
+  - [ELB の基本](#elb-の基本)
+  - [ELB の種類](#elb-の種類)
+    - [CLB:Classic Load Balancer](#clbclassic-load-balancer)
+    - [ALB:Application Load Balancer](#albapplication-load-balancer)
+    - [NLB:Network Load Balancer](#nlbnetwork-load-balancer)
+    - [GLB:Gateway Load Balancer](#glbgateway-load-balancer)
+  - [サブネットに必要な CIDR](#サブネットに必要な-cidr)
+  - [スティッキーセッション](#スティッキーセッション)
+  - [クロスゾーン負荷分散](#クロスゾーン負荷分散)
+  - [Connection Draining](#connection-draining)
+  - [アクセスログ](#アクセスログ)
+  - [他のサービスとの連携](#他のサービスとの連携)
 
 ## ELB とは
 Duration: 01:00
@@ -29,11 +36,11 @@ Elastic Load Balancing は、受信したトラフィックを複数のアベイ
 
 【AWS Black Belt Online Seminar】[Elastic Load Balancing (ELB)(YouTube)](https://www.youtube.com/watch?v=4laAoK-zXko)
 
-![](articles_images/elb/files/blackbelt_elb.jpg)
+![](../articles_images/elb/files/blackbelt_elb.jpg)
 
 【AWS Black Belt Online Seminar】[Gateway Load Balancer(YouTube)](https://www.youtube.com/watch?v=tiwgoSNvh3k)
 
-![](articles_images/elb/files/blackbelt_glb.jpg)
+![](../articles_images/elb/files/blackbelt_glb.jpg)
 
 
 [Elastic Load Balancing 概要](https://aws.amazon.com/jp/s3/)
@@ -50,20 +57,20 @@ Duration: 02:00
 - Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類がある
     - Internet-Facing はパブリックサブネットのみ配置可
     - Internal はプライベートサブネットにも配置可
-    - ![](articles_images/elb/files/create_elb.png)
+    - ![](../articles_images/elb/files/create_elb.png)
 - 上記どちらもデフォルトでは、「xxxxxx.ap-northeast-1.elb.amazonaws.com」といった DNS 名が付与されます。
-    - ![](articles_images/elb/files/elb_dns.png)
+    - ![](../articles_images/elb/files/elb_dns.png)
 - 独自ドメイン（例：www.example.com）が使用したい場合は、Route 53 のエイリアスレコードに登録することで利用可能です。
 - 負荷の状態に応じて自動的にスケーリングを行うため、管理者が手動で ELB の台数を増やしたり（スケールアウト）、スペックを上げたり（スケールアップ）する必要がありません。
     - 構成図ではこのように書くことが多いが・・
-        - ![](articles_images/elb/files/elb_scale_1.png)
+        - ![](../articles_images/elb/files/elb_scale_1.png)
     - 実際にはこのようにスケールアウトしています（クロスゾーン負荷分散が有効な場合の例）
-        - ![](articles_images/elb/files/elb_scale_2.png)
+        - ![](../articles_images/elb/files/elb_scale_2.png)
     - ELBが拡張されたり縮小すると応答するIPアドレスの数が変わります。
     - ただし、負荷のスパイク（負荷急増）が発生すると自動スケーリングが間に合わず `503` を返す可能性があります。
     - その場合、暖機運転申請（Pre-Warming ※サポートプランがBussiness以上必要）か自前で段階的に負荷をあげていく仕組みを構築する必要があります。
 - ELB で SSL 終端することができます。つまり、クライアント⇔ELB間はSSL通信で、ELB⇔バックエンド間はSSLなしの通信ができます。これにより、バックエンド側での SSL 処理の負荷を軽減できます。
-    - ![](articles_images/elb/files/elb_ssl.png)
+    - ![](../articles_images/elb/files/elb_ssl.png)
 - 起動している時間（1時間単位）＋LCU（ロードバランサーキャパシティーユニット）で課金されます。
     - 東京リージョンだと最低でも月額 $ 25程度は必要になります。
 
@@ -85,7 +92,7 @@ AWS ドキュメント > [Classic Load Balancer とは?](https://docs.aws.amazon
 AWS ドキュメント > [Application Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/introduction.html)
 
 - ALB の概要と関連するサービス
-    - ![](articles_images/elb/files/alb_overview.png)
+    - ![](../articles_images/elb/files/alb_overview.png)
 - L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）
 - クライアントと ALB 間は、HTTP/2 に対応していましたが、暫くの間は ALB とターゲット間の通信は、HTTP/1.1 に変換されていました。現在は、「HTTP/1.1」「HTTP/2」「gRPC」に対応
     - ※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。
@@ -109,7 +116,7 @@ AWS ドキュメント > [Application Load Balancer とは?](https://docs.aws.am
 AWS ドキュメント > [Network Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/network/introduction.html)
 
 - NLB の概要と関連するサービス
-    - ![](articles_images/elb/files/nlb_overview.png)
+    - ![](../articles_images/elb/files/nlb_overview.png)
 - L4（トランスポート層） で負荷分散（IPアドレスとポート番号による負荷分散が可能）
 - HTTP(S) 以外、TCP、UDP
 - 1AZ以上
@@ -129,7 +136,7 @@ AWS ドキュメント > [Network Load Balancer とは?](https://docs.aws.amazon
 AWS ドキュメント > [Gateway Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/gateway/introduction.html)
 
 - GLB 概要
-    - ![](articles_images/elb/files/glb.jpg)
+    - ![](../articles_images/elb/files/glb.jpg)
 - 2021年に発表された、セキュリティアプライアンス（ファイアウォールなど）をデプロイしたり、スケール、管理ができるようにするサービス
 - 従来、トラフィックの監査を行う場合、EC2 上にサードパーティ製の仮想アプライアンスを構築する必要があり、それに対して冗長化は大変だったが、この課題を解消することができるサービス
 - L3（ネットワーク層）で負荷分散
@@ -146,7 +153,7 @@ ELB を配置するサブネットの CIDR は最小で 「27」が必要であ�
 
 
 
-![](articles_images/elb/files/ELB_CIDR.png)
+![](../articles_images/elb/files/ELB_CIDR.png)
 
 ## スティッキーセッション
 Duration: 01:00

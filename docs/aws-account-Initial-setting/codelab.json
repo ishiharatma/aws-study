@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-11-22T00:46:15+09:00",
+  "updated": "2022-11-22T01:38:11+09:00",
   "id": "aws-account-Initial-setting",
-  "duration": 0,
+  "duration": 7,
   "title": "AWSアカウント作成後に行うべき設定事項",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "..\\articles\\aws-account-Initial-setting.md",
+  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\aws-account-Initial-setting.md",
   "theme": "",
   "status": [
     "published"

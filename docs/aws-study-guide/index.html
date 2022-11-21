@@ -1,0 +1,262 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="aws-study-guide"
+                  title=""
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Contents" duration="0">
+        <ul>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#%E3%81%95%E3%82%89%E3%81%AB" target="_blank">さらに</a></li>
+<li><a href="#%E3%83%AC%E3%83%99%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97" target="_blank">レベルアップ</a></li>
+<li><a href="#%E6%9C%80%E6%96%B0%E6%83%85%E5%A0%B1%E3%81%AF" target="_blank">最新情報は？</a></li>
+<li><a href="#aws-%E8%AA%8D%E5%AE%9A" target="_blank">AWS 認定</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <ul>
+<li>AWS のクラウドが選ばれる10の理由<ul>
+<li>https://aws.amazon.com/jp/aws-ten-reasons/</li>
+</ul>
+</li>
+<li>AWS 用語集<ul>
+<li>https://docs.aws.amazon.com/ja_jp/general/latest/gr/glos-chap.html</li>
+</ul>
+</li>
+<li>AWSマンガ<ul>
+<li>https://aws.amazon.com/jp/campaigns/manga/series/</li>
+</ul>
+</li>
+<li>AWSome Day<ul>
+<li>https://aws.amazon.com/jp/about-aws/events/awsomeday/</li>
+<li>毎月第一水曜日に配信されている AWS 初心者向けのオンラインイベントです。</li>
+</ul>
+</li>
+<li>AWS Builders Online Series<ul>
+<li>https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-level-100/</li>
+<li>AWS 初心者向けのオンラインイベントです。</li>
+</ul>
+</li>
+<li>AWS Cloud Practitioner Essentials (Japanese) (日本語実写版)<ul>
+<li>5時間ほどの動画</li>
+<li>https://explore.skillbuilder.aws/learn/course/external/view/elearning/1875/aws-cloud-practitioner-essentials-japanese-ri-ben-yu-zi-mu-ban</li>
+</ul>
+</li>
+<li>チュートリアル<ul>
+<li>https://aws.amazon.com/jp/getting-started/hands-on/?awsf.getting-started-category=*all&amp;awsf.getting-started-level=*all&amp;awsf.getting-started-content-type=*all</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="さらに" duration="0">
+        <ul>
+<li>AWS Hands-on for Beginners ハンズオンはじめの一歩: AWS アカウントの作り方 &amp; IAM 基本のキ<ul>
+<li>https://pages.awscloud.com/event_JAPAN_Ondemand_Hands-on-for-Beginners-1st-Step_LP.html?trk=aws_blog_k</li>
+</ul>
+</li>
+<li>AWS サービス別の資料<ul>
+<li>https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-service-cut/</li>
+</ul>
+</li>
+<li>AWS ドキュメント<ul>
+<li>https://docs.aws.amazon.com/ja_jp/index.html</li>
+</ul>
+</li>
+<li>よくある質問<ul>
+<li>https://aws.amazon.com/jp/faqs/</li>
+</ul>
+</li>
+<li>AWS ナレッジセンター<ul>
+<li>https://aws.amazon.com/jp/premiumsupport/knowledge-center/</li>
+</ul>
+</li>
+<li>[AWS Black Belt Online Seminar] オンデマンド動画 コンテンツ<ul>
+<li>https://aws.amazon.com/jp/aws-jp-introduction/#blackbelt</li>
+</ul>
+</li>
+<li>導入事例<ul>
+<li>https://aws.amazon.com/jp/solutions/case-studies/</li>
+</ul>
+</li>
+<li>AWS Summit<ul>
+<li><a href="https://aws.amazon.com/jp/summit2012-report/" target="_blank">2012</a></li>
+<li><a href="https://aws.amazon.com/jp/summit2013-report/" target="_blank">2013</a></li>
+<li><a href="https://aws.amazon.com/jp/summit2014-report/" target="_blank">2014</a></li>
+<li><a href="https://aws.amazon.com/jp/summit2015-report/" target="_blank">2015</a></li>
+<li><a href="https://aws.amazon.com/jp/summit2016-report/" target="_blank">2016</a></li>
+<li><a href="https://aws.amazon.com/jp/summit2017-report/" target="_blank">2017</a></li>
+<li><a href="https://aws.amazon.com/jp/summit2018-report/" target="_blank">2018</a></li>
+<li><a href="https://aws.amazon.com/jp/summits/tokyo-osaka-2019-report/" target="_blank">2019</a></li>
+<li><a href="https://aws.amazon.com/jp/summits/2020/" target="_blank">2020</a></li>
+<li><a href="https://aws.amazon.com/jp/events/summits/online/japan/" target="_blank">2021</a></li>
+<li><a href="https://aws.amazon.com/jp/summits/japan/" target="_blank">2022</a></li>
+</ul>
+</li>
+<li>AWS ハンズオン資料<ul>
+<li>https://aws.amazon.com/jp/aws-jp-introduction/aws-jp-webinar-hands-on/</li>
+</ul>
+</li>
+<li>AWS 日本語ハンズオン<ul>
+<li>Amazon Web Services(AWS) の 日本語ハンズオンやワークショップを、カテゴリごとにまとめたもの</li>
+<li>実体は、上記「AWS ハンズオン資料」</li>
+<li>https://aws-samples.github.io/jp-contents-hub/</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="レベルアップ" duration="0">
+        <ul>
+<li>30 の目的別 クラウド構成と料金試算例<ul>
+<li>「AWS アーキテクチャセンター」より具体的で料金試算も見れるので◎</li>
+<li>基本的なシステムはこれらをベースにして組み合わせる</li>
+<li>https://aws.amazon.com/jp/cdp/</li>
+</ul>
+</li>
+<li>AWS アーキテクチャセンター<ul>
+<li>https://aws.amazon.com/jp/architecture/</li>
+</ul>
+</li>
+<li>AWS のアーキテクチャ図を描きたい ! でもどうすれば良いの ?<ul>
+<li>https://aws.amazon.com/jp/builders-flash/202204/way-to-draw-architecture/?awsf.filter-name=*all</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="最新情報は？" duration="0">
+        <ul>
+<li>Amazon Web Services ブログ<ul>
+<li>https://aws.amazon.com/jp/blogs/news/</li>
+</ul>
+</li>
+<li>builders.flash<ul>
+<li>https://aws.amazon.com/jp/builders-flash/</li>
+<li>無料のメールメンバー登録をすると、メール本文にあるキーワードで応募すると、毎月 25 USD の無料クーポンが配布される特典あり。</li>
+<li>毎月抽選 300 名なのでハズレるときもあります。</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS 認定" duration="0">
+        <ul>
+<li>AWS認定資格<ul>
+<li>https://aws.amazon.com/jp/certification/</li>
+<li>FOUNDATIONAL<ul>
+<li>6 か月間の基礎的な AWS クラウドと業界知識</li>
+<li>AWS Certified Cloud Practitioner <ul>
+<li>100 USD(\10,000) / 90 分 / 65 問 / 合格基準 700/1000 点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ASSOCIATE<ul>
+<li>1 年間の AWS クラウドを使用した問題解決と解決策の実施における経験</li>
+<li>AWS Certified Solutions Architect - Associate <ul>
+<li>150 USD(\15,000) / 130 分 / 65 問 / 合格基準 720/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified Developer - Associate <ul>
+<li>150 USD(\15,000) / 130 分 / 65 問 / 合格基準 720/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified SysOps Administrator - Associate <ul>
+<li>150 USD(\15,000) / 180 分 / 65 問 / 合格基準 720/1000 点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PROFESSIONAL<ul>
+<li>2 年間の AWS クラウドを使用したソリューションの設計、運用、およびトラブルシューティングに関する経験</li>
+<li>AWS Certified Solutions Architect - Professional <ul>
+<li>300 USD(\30,000) / 180 分 / 75 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified DevOps Engineer - Professional <ul>
+<li>300 USD(\30,000) / 180 分 / 75 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SPECIALTY<ul>
+<li>試験ガイドで指定された Specialty 分野に関する技術的な AWS クラウドでの経験</li>
+<li>AWS Certified Advanced Networking - Specialty <ul>
+<li>300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified Data Analytics - Specialty <ul>
+<li>300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified Database - Specialty <ul>
+<li>300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified Machine Learning - Specialty <ul>
+<li>300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+<li>AWS Certified Security - Specialty <ul>
+<li>300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AWS 認定試験ワークショップ<ul>
+<li>https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&amp;get-certified-vilt-courses-cards.sort-order=asc&amp;awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&amp;awsf.get-certified-vilt-locations=*all&amp;ch=tile&amp;tile=prepare&amp;awsf.get-certified-vilt-courses-type=*all&amp;awsf.get-certified-vilt-audience=*all&amp;awsf.get-certified-vilt-countries=*all&amp;awsf.get-certified-vilt-languages=language%23japanese&amp;awsf.get-certified-vilt-courses-level=*all&amp;awsf.get-certified-vilt-courses-tech-category=*all</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

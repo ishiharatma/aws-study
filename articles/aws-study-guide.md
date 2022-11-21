@@ -1,4 +1,21 @@
 
+summary: Summary
+id: aws-study-guide
+categories: AWS
+tags: AWS Account
+status: Published
+authors: ishr
+Feedback Link: 
+
+## Contents
+
+- [Contents](#contents)
+- [はじめに](#はじめに)
+- [さらに](#さらに)
+- [レベルアップ](#レベルアップ)
+- [最新情報は？](#最新情報は)
+- [AWS 認定](#aws-認定)
+
 ## はじめに
 
 - AWS のクラウドが選ばれる10の理由

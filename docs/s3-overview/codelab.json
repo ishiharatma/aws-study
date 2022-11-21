@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2022-11-21T23:10:56+09:00",
-  "id": "claat-docs",
+  "updated": "2022-11-22T01:37:06+09:00",
+  "id": "s3-overview",
   "duration": 38,
   "title": "Simple Storage Service（S3）",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "S3-overview.md",
+  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\s3-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -20,5 +20,5 @@
   "tags": [
     "amazons3"
   ],
-  "url": "claat-docs"
+  "url": "s3-overview"
 }

@@ -8,14 +8,14 @@ Feedback Link:
 
 # RDS
 ## Contents
+Duration: 00:30
 
 !!!! Draft !!!!!
 - [RDS](#rds)
   - [Contents](#contents)
   - [RDS とは](#rds-とは)
 ## RDS とは
-
-
+Duration: 01:30
 
 【AWS Black Belt Online Seminar】[Amazon Relational Database Service (Amazon RDS)(YouTube)](https://youtu.be/nDme-ET-_EY)
 
