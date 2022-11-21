@@ -22,6 +22,7 @@ Feedback Link:
     - [PROFESSIONAL](#professional)
     - [SPECIALTY](#specialty)
     - [AWS 認定試験ワークショップ](#aws-認定試験ワークショップ)
+    - [おススメの書籍](#おススメの書籍)
 
 ## はじめに
 
@@ -121,8 +122,7 @@ Feedback Link:
 
 ## AWS 認定
 
-- AWS認定資格
-  - [https://aws.amazon.com/jp/certification/](https://aws.amazon.com/jp/certification/)
+[https://aws.amazon.com/jp/certification/](https://aws.amazon.com/jp/certification/)
 
 ### FOUNDATIONAL
 
@@ -153,7 +153,8 @@ Feedback Link:
 
 ### SPECIALTY
 
-- 試験ガイドで指定された Specialty 分野に関する技術的な AWS クラウドでの経験
+試験ガイドで指定された Specialty 分野に関する技術的な AWS クラウドでの経験
+
 - AWS Certified Advanced Networking - Specialty
   - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
 - AWS Certified Data Analytics - Specialty
@@ -168,3 +169,7 @@ Feedback Link:
 ### AWS 認定試験ワークショップ
 
 - [https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all](https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all)
+
+### おススメの書籍
+
+Under construction
