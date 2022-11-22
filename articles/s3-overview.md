@@ -1,34 +1,5 @@
 # Simple Storage Service（S3）
 
-## Contents
-Duration: 00:30
-
-- [Simple Storage Service（S3）](#simple-storage-services3)
-  - [Contents](#contents)
-  - [S3 とは](#s3-とは)
-  - [S3 の基本](#s3-の基本)
-    - [①EC2（パブリックサブネット）⇒ Internet Gateway](#ec2パブリックサブネット-internet-gateway)
-    - [②EC2（プライベートサブネット） ⇒ NAT Gateway](#ec2プライベートサブネット--nat-gateway)
-    - [③EC2（プライベートサブネット） ⇒ VPC Endpoint(Gatewayタイプ)](#ec2プライベートサブネット--vpc-endpointgatewayタイプ)
-    - [④EC2（プライベートサブネット） ⇒ VPC Endpoint(Interfaceタイプ)](#ec2プライベートサブネット--vpc-endpointinterfaceタイプ)
-    - [コスト比較](#コスト比較)
-  - [バケットポリシー](#バケットポリシー)
-  - [アクセスコントロールリスト（ACL）](#アクセスコントロールリストacl)
-  - [ライフサイクル](#ライフサイクル)
-  - [ストレージタイプ](#ストレージタイプ)
-  - [バージョニング](#バージョニング)
-  - [暗号化](#暗号化)
-  - [静的ウェブサイトのホスティング](#静的ウェブサイトのホスティング)
-  - [S3 Transfer Acceleration](#s3-transfer-acceleration)
-    - [Amazon S3 Transfer Acceleration の速度比較ツール](#amazon-s3-transfer-acceleration-の速度比較ツール)
-  - [アクセスログ](#アクセスログ)
-  - [S3 Select](#s3-select)
-  - [Storage Lens](#storage-lens)
-  - [リクエスタ支払いバケット](#リクエスタ支払いバケット)
-  - [アクセスポイント](#アクセスポイント)
-  - [パフォーマンスの最適化](#パフォーマンスの最適化)
-  - [他のサービスとの連携](#他のサービスとの連携)
-
 ## S3 とは
 Duration: 01:00
 スケーラビリティ、データ可用性、セキュリティ、およびパフォーマンスを提供するオブジェクトストレージサービスです。

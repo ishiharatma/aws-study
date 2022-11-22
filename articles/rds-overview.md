@@ -3,9 +3,7 @@
 Duration: 00:30
 
 !!!! Draft !!!!!
-- [RDS](#rds)
-  - [Contents](#contents)
-  - [RDS とは](#rds-とは)
+
 ## RDS とは
 Duration: 01:30
 

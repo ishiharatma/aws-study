@@ -1,24 +1,5 @@
 # Elastic Load Balancing(ELB)
 
-## Contents
-Duration: 00:30
-
-- [Elastic Load Balancing(ELB)](#elastic-load-balancingelb)
-  - [Contents](#contents)
-  - [ELB とは](#elb-とは)
-  - [ELB の基本](#elb-の基本)
-  - [ELB の種類](#elb-の種類)
-    - [CLB:Classic Load Balancer](#clbclassic-load-balancer)
-    - [ALB:Application Load Balancer](#albapplication-load-balancer)
-    - [NLB:Network Load Balancer](#nlbnetwork-load-balancer)
-    - [GLB:Gateway Load Balancer](#glbgateway-load-balancer)
-  - [サブネットに必要な CIDR](#サブネットに必要な-cidr)
-  - [スティッキーセッション](#スティッキーセッション)
-  - [クロスゾーン負荷分散](#クロスゾーン負荷分散)
-  - [Connection Draining](#connection-draining)
-  - [アクセスログ](#アクセスログ)
-  - [他のサービスとの連携](#他のサービスとの連携)
-
 ## ELB とは
 Duration: 01:00
 

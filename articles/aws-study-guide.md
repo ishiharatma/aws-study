@@ -1,21 +1,5 @@
 # AWS 勉強ガイド
 
-## Contents
-
-- [AWS 勉強ガイド](#aws-勉強ガイド)
-  - [Contents](#contents)
-  - [はじめに](#はじめに)
-  - [さらに](#さらに)
-  - [レベルアップ](#レベルアップ)
-  - [最新情報は？](#最新情報は)
-  - [AWS 認定](#aws-認定)
-    - [FOUNDATIONAL](#foundational)
-    - [ASSOCIATE](#associate)
-    - [PROFESSIONAL](#professional)
-    - [SPECIALTY](#specialty)
-    - [AWS 認定試験ワークショップ](#aws-認定試験ワークショップ)
-    - [おススメの書籍](#おススメの書籍)
-
 ## はじめに
 
 - AWS のクラウドが選ばれる10の理由
