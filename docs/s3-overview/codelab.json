@@ -9,7 +9,7 @@
   "title": "Simple Storage Service（S3）",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\s3-overview.md",
+  "source": "s3-overview.md",
   "theme": "",
   "status": [
     "published"

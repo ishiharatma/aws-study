@@ -9,7 +9,7 @@
   "title": "Elastic Load Balancing(ELB)",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\docs\\..\\articles\\elb-overview.md",
+  "source": "elb-overview.md",
   "theme": "",
   "status": [
     "published"
