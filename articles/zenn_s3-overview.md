@@ -1,3 +1,10 @@
+---
+title: "Simple Storage Service（S3） の概要" # 記事のタイトル
+type: "tech" # tech: 技術記事 / idea: アイデア記事
+topics: ["aws", "study"]
+published: false
+---
+
 # Simple Storage Service（S3）
 
 ## はじめに
@@ -538,6 +545,3 @@ Duration: 00:30
 ![](../articles_images/s3/s3_services.png)
 
 2019年頃の資料のため、現在では AWS WAF も直接 S3 へログ配信できるようになっているため連携できるサービスが増えています。
-
-
-=== 以上 ===

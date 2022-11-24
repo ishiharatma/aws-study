@@ -248,5 +248,3 @@ Duration: 01:00
     - AWS WAF
 - ALB で IP アドレスを固定したい
     - AWS Global Accelerator
-
-=== 以上 ===
