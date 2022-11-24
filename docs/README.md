@@ -8,6 +8,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+* 記載している人について⇒[こちら](https://ishiharatma.github.io/resume/)
+
 ## 勉強会資料
 
 - [AWS 勉強ガイド](./aws-study-guide/index.html)
