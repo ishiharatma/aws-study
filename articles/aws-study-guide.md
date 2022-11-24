@@ -105,42 +105,42 @@
 6 か月間の基礎的な AWS クラウドと業界知識
 
 - AWS Certified Cloud Practitioner
-  - 100 USD(\10,000) / 90 分 / 65 問 / 合格基準 700/1000 点
+  - 100 USD(10,000 JPY) / 90 分 / 65 問 / 合格基準 700/1,000 点
 
 ### ASSOCIATE
 
 1 年間の AWS クラウドを使用した問題解決と解決策の実施における経験
 
 - AWS Certified Solutions Architect - Associate
-  - 150 USD(\15,000) / 130 分 / 65 問 / 合格基準 720/1000 点
+  - 150 USD(15,000 JPY) / 130 分 / 65 問 / 合格基準 720/1,000 点
 - AWS Certified Developer - Associate
-  - 150 USD(\15,000) / 130 分 / 65 問 / 合格基準 720/1000 点
+  - 150 USD(15,000 JPY) / 130 分 / 65 問 / 合格基準 720/1,000 点
 - AWS Certified SysOps Administrator - Associate
-  - 150 USD(\15,000) / 180 分 / 65 問 / 合格基準 720/1000 点
+  - 150 USD(15,000 JPY) / 180 分 / 65 問 / 合格基準 720/1,000 点
 
 ### PROFESSIONAL
 
 2 年間の AWS クラウドを使用したソリューションの設計、運用、およびトラブルシューティングに関する経験
 
 - AWS Certified Solutions Architect - Professional
-  - 300 USD(\30,000) / 180 分 / 75 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 180 分 / 75 問 / 合格基準 750/1,000 点
 - AWS Certified DevOps Engineer - Professional
-  - 300 USD(\30,000) / 180 分 / 75 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 180 分 / 75 問 / 合格基準 750/1,000 点
 
 ### SPECIALTY
 
 試験ガイドで指定された Specialty 分野に関する技術的な AWS クラウドでの経験
 
 - AWS Certified Advanced Networking - Specialty
-  - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 170 分 / 65 問 / 合格基準 750/1,000 点
 - AWS Certified Data Analytics - Specialty
-  - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 180 分 / 65 問 / 合格基準 750/1,000 点
 - AWS Certified Database - Specialty
-  - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 180 分 / 65 問 / 合格基準 750/1,000 点
 - AWS Certified Machine Learning - Specialty
-  - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 180 分 / 65 問 / 合格基準 750/1,000 点
 - AWS Certified Security - Specialty
-  - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
+  - 300 USD(30,000 JPY) / 170 分 / 65 問 / 合格基準 750/1,000 点
 
 ### AWS 認定試験ワークショップ
 
