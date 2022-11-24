@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2022-11-25T00:12:22+09:00",
+  "updated": "2022-11-25T00:27:29+09:00",
   "id": "rds-overview",
   "duration": 3,
   "title": "RDS",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "claat_rds-overview.md",
+  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\claat_header\\..\\articles\\claat_rds-overview.md",
   "theme": "",
   "status": [
     "published"
