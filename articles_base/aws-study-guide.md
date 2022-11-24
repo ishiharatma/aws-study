@@ -146,6 +146,3 @@
 
 - [https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all](https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all)
 
-### おススメの書籍
-
-Under construction

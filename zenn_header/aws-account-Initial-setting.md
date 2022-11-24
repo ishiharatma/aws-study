@@ -2,6 +2,6 @@
 title: "AWSアカウント作成後に行うべき設定事項" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
