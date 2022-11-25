@@ -12,7 +12,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 ## 勉強会資料
 
-- [AWS 勉強ガイド](./aws-study-guide/index.html)
-- [AWSアカウント作成後に行うべき設定事項](./aws-account-Initial-setting/index.html)
-- [ELB 概要](./elb-overview/index.html)
-- [S3 概要](./s3-overview/index.html)
+- <a href="./aws-study-guide/index.html" target="_blank">AWS 勉強ガイド</a>
+- <a href="./aws-account-Initial-setting/index.html" target="_blank">AWSアカウント作成後に行うべき設定事項</a>
+- <a href="./elb-overview/index.html" target="_blank">ELB 概要</a
+- <a href="./s3-overview/index.html" target="_blank">S3 概要</a>
