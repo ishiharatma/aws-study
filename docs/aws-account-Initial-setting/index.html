@@ -60,7 +60,7 @@
     
       <google-codelab-step label="AWS アカウントの秘密の質問を設定する" duration="1">
         <p>ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。 ただし、一度設定すると変更は可能ですが削除することはできません。</p>
-<h2 is-upgraded>設定方法</h2>
+<p><strong>設定方法</strong></p>
 <ol type="1">
 <li>アカウント設定を開きます <ul>
 <li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
@@ -78,7 +78,7 @@
     
       <google-codelab-step label="ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="1">
         <p>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678の場合、+81 3-1234-5678） 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</p>
-<h2 is-upgraded>設定方法</h2>
+<p><strong>設定方法</strong></p>
 <ol type="1">
 <li>アカウント設定を開きます <ul>
 <li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
@@ -102,7 +102,7 @@
     
       <google-codelab-step label="予算アラートを設定する" duration="1">
         <p>アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。</p>
-<h2 is-upgraded>設定方法</h2>
+<p><strong>設定方法</strong></p>
 <ol type="1">
 <li>Billing コンソールの予算を開きます <ul>
 <li><a href="https://console.aws.amazon.com/billing/home#/budgets/overview" target="_blank">https://console.aws.amazon.com/billing/home#/budgets/overview</a></li>
@@ -128,7 +128,7 @@
     
       <google-codelab-step label="CloudTrail のログ記録を有効にする" duration="1">
         <p>アカウント内で不正な操作を記録、検知するためにも有効にしましょう。 CloudTrail のログ保存先の S3 は、ライフサイクルルールも設定しましょう。 後述するログ監視を実施するために、CloudWatch Logs にも配信しましょう。CloudWatch のロググループには適切な保持期限を設定しましょう。</p>
-<h2 is-upgraded>設定方法</h2>
+<p><strong>設定方法</strong></p>
 <ol type="1">
 <li>CloudTrail コンソールを開きます <ul>
 <li><a href="https://console.aws.amazon.com/cloudtrail/" target="_blank">https://console.aws.amazon.com/cloudtrail/</a></li>
@@ -172,7 +172,7 @@
     
       <google-codelab-step label="Personal Service Dashboard のイベント検知を設定する" duration="1">
         <p><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時確認し、監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。</p>
-<h2 is-upgraded>設定方法</h2>
+<p><strong>設定方法</strong></p>
 <ol type="1">
 <li>EventBridge コンソールを開きます <ul>
 <li><a href="https://console.aws.amazon.com/events/" target="_blank">https://console.aws.amazon.com/events/</a></li>
@@ -212,7 +212,7 @@
 <pre><code language="language-text" class="language-text">- パスワードの失効を許可「180日」
 - パスワードの再利用を禁止「5回」
 </code></pre>
-<h2 is-upgraded>設定方法</h2>
+<p><strong>設定方法</strong></p>
 <ol type="1">
 <li>IAM コンソールを開きます <ul>
 <li><a href="https://console.aws.amazon.com/iam/home#/account_settings" target="_blank">https://console.aws.amazon.com/iam/home#/account_settings</a></li>
