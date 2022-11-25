@@ -31,9 +31,10 @@ Elastic Load Balancing は、受信したトラフィックを複数のアベイ
 
 
 ## ELB の基本
+
 Duration: 02:00
 
-- Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類がある
+- Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類があります。
     - Internet-Facing はパブリックサブネットのみ配置可
     - Internal はプライベートサブネットにも配置可
     - ![](/images/elb/create_elb.png)
@@ -54,15 +55,17 @@ Duration: 02:00
     - 東京リージョンだと最低でも月額 $ 25程度は必要になります。
 
 ## ELB の種類
+
 Duration: 05:00
 
 ### CLB:Classic Load Balancer
+
 AWS ドキュメント > [Classic Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/classic/introduction.html)
 
 - L4/L7 で負荷分散
 - クロスゾーン負荷分散がデフォルトで有効
 - スティッキーセッション（sticky session）
-- 対応できるプロトコルは多いが複雑な設定ができないため、通常は、ALB や NLB を使用する。
+- 対応できるプロトコルは多いが複雑な設定ができないため、通常は、ALB や NLB を使用します。
 - 旧タイプのロードバランサ、<font color="red">現在は非推奨</font>となっています。
 - MTU=9,001(ジャンボフレーム)、変更不可
 
@@ -75,7 +78,7 @@ AWS ドキュメント > [Application Load Balancer とは?](https://docs.aws.am
 - L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）
 - クライアントと ALB 間は、HTTP/2 に対応していましたが、暫くの間は ALB とターゲット間の通信は、HTTP/1.1 に変換されていました。現在は、「HTTP/1.1」「HTTP/2」「gRPC」に対応
     - ※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。
-    - https://ja.wikipedia.org/wiki/GRPC
+    - <https://ja.wikipedia.org/wiki/GRPC>
 - 利用するには、2 AZ 以上が必要（1 AZ では起動できない）、3 AZ 構成が望ましい。選択する AZ 数は ALB 自体のコストに影響ありません。ただし、AZ 数が増えるということは、ロードバランサー配下のノード数も増えるので、その分のコストは発生します。
 - IP固定不可
     - 固定したい場合は、NLBやAWS Global Acceleratorを前段に配置する
@@ -124,17 +127,17 @@ AWS ドキュメント > [Gateway Load Balancer とは?](https://docs.aws.amazon
 
 
 ## サブネットに必要な CIDR
+
 Duration: 01:00
 
 AWS ドキュメント > Elastic Load Balancing > [ロードバランサーのサブネット](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer)
 
 ELB を配置するサブネットの CIDR は最小で 「27」が必要であり、8個以上の IP アドレスの空きが必要です。
 
-
-
 ![](/images/elb/ELB_CIDR.png)
 
 ## スティッキーセッション
+
 Duration: 01:00
 
 AWS ドキュメント > [Application Load Balancer のスティッキーセッション](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/sticky-sessions.html)
@@ -149,6 +152,7 @@ AWS ドキュメント > Network Load Balancer > [スティッキーセッショ
 可能であれば、セッション管理などは、Amazon ElastiCache や Amazon Aurora などのデータベースで保持しておくほうが ELB が振り分けるノードに障害があった場合にも影響を受けにくくなります。
 
 ## クロスゾーン負荷分散
+
 Duration: 05:00
 
 複数 AZ に跨るノードに対しても均等にトラフィックを分散するようにできるオプションです。
@@ -183,6 +187,7 @@ ELB 配下にあるノードが異なっている場合には以下のように�
 ![](/images/elb/xz_faq.png)
 
 ## Connection Draining
+
 Duration: 01:00
 
 ELB の配下のノードを切り離す場合、いきなり切り離されると、ノードで実行中だった場合にアプリケーション側でエラーが出てしまいます。
@@ -192,13 +197,14 @@ ELB の配下のノードを切り離す場合、いきなり切り離される�
 指定された待機時間に達した場合は、強制的に切り離しが実施されます。
 
 ## アクセスログ
+
 Duration: 02:00
 
 ELB のアクセスログは、S3に出力することができます。アクセスログは5分ごとに出力されます。
 
 出力されるログファイルのキーは、次のようになっています。
 
-```
+```text
 bucket[/prefix]/AWSLogs/aws-account-id/elasticloadbalancing/region/yyyy/mm/dd/aws-account-id_elasticloadbalancing_region_app.load-balancer-id_end-time_ip-address_random-string.log.gz
 ```
 
@@ -207,7 +213,7 @@ bucket[/prefix]/AWSLogs/aws-account-id/elasticloadbalancing/region/yyyy/mm/dd/aw
 
 東京リージョンの場合は、アカウントID「582318560864」を指定して、次のように記述します。
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -236,6 +242,7 @@ AWS ドキュメント > [Network Load Balancer のログのクエリ](https://d
 AWS ドキュメント > [Classic Load Balancer ログのクエリ](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/elasticloadbalancer-classic-logs.html)
 
 ## 他のサービスとの連携
+
 Duration: 01:00
 
 - 独自ドメインを使いたい

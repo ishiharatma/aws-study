@@ -93,9 +93,9 @@
         <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html" target="_blank">バケットポリシーの使用</a></p>
 <p>バケットとその中のオブジェクトへのアクセス許可を付与できるリソースベースのポリシーで、JSON で定義します。</p>
 <p>同一アカウント内でのアクセスに対する許可設定は、基本的にIAMポリシーによって制御します。（併用してもよいが設定が煩雑になります）</p>
-<aside class="warning"><p> IAMポリシーとバケットポリシーの両方を使用した場合、どちらかで拒否されていた場合は拒否されます。 </p>
-</aside>
-<pre><code>{
+<pre><code language="language-text" class="language-text">IAMポリシーとバケットポリシーの両方を使用した場合、どちらかで拒否されていた場合は拒否されます。
+</code></pre>
+<pre><code language="language-json" class="language-json">{
     &#34;Version&#34;: &#34;2012-10-17&#34;,
     &#34;Id&#34;: &#34;S3PolicyId1&#34;,
     &#34;Statement&#34;: [
@@ -140,8 +140,8 @@
       <google-codelab-step label="ライフサイクル" duration="1">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/object-lifecycle-mgmt.html" target="_blank">ストレージのライフサイクルの管理</a></p>
 <p>指定した期間が経過したファイルを、別のストレージタイプに移動してコスト削減したり、削除したりできる機能です。</p>
-<aside class="warning"><p> ライフサイクルのルールは、最大 1,000個です。この制限は引き上げができません。 </p>
-</aside>
+<pre><code language="language-text" class="language-text">ライフサイクルのルールは、最大 1,000個です。この制限は引き上げができません。
+</code></pre>
 <p>このライフサイクルでオブジェクトが移動されるのは、0：00（UTC）です。日本時間では、午前 9時となります。 削除日数が1日の場合、午前9時より前に作成されたものは翌日9時、午前9時より後に作成されたものは、翌々日の9時以降に削除されることになります。</p>
 <p class="image-container"><img src="img\\8101278a0849020b.png"></p>
 
@@ -153,8 +153,9 @@
 <p class="image-container"><img src="img\\e6b24db390ed5fe.png"></p>
 <p>上記画像は、AWSドキュメントにある<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-general-considerations-transition-sc" target="_blank">ストレージクラス間の移行のためのウォーターフォールモデル</a>に情報を追加したものです。</p>
 <p class="image-container"><img src="img\\a34df6694a7f3504.png"></p>
-<aside class="special"><p> アクセス頻度や削除頻度が不明な場合は、最低保存期間の制約がない「S3 Intelligent-Tiering」に移動するようにライフサイクルを定義しておけばコスト削減ができます。 </p>
-</aside>
+<pre><code language="language-text" class="language-text">アクセス頻度や削除頻度が不明な場合は、
+最低保存期間の制約がない「S3 Intelligent-Tiering」に移動するようにライフサイクルを定義しておけばコスト削減ができます。
+</code></pre>
 <ul>
 <li>S3 標準(Standard) <ul>
 <li>アクセス頻度の高いデータ向けに高い耐久性、可用性、パフォーマンスのオブジェクトストレージです。</li>
@@ -215,8 +216,8 @@
       <google-codelab-step label="バージョニング" duration="2">
         <p class="image-container"><img src="img\\4bfa9ca0511f3f5a.png"></p>
 <p>パフォーマンスに影響を与えずに偶発的な上書きや削除から保護するためにアップロードごとに新しいバージョンを生成するオプションです。 削除されたオブジェクトの取得や、過去のバージョンへのロールバックが可能になります。</p>
-<aside class="special"><p> デフォルトでは無効になっているので利用する場合は、バージョニングを有効にする必要があります。 </p>
-</aside>
+<pre><code language="language-text" class="language-text">デフォルトでは無効になっているので利用する場合は、バージョニングを有効にする必要があります。
+</code></pre>
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/Versioning.html" target="_blank">S3 バケットでのバージョニングの使用</a></p>
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/troubleshooting-by-symptom.html" target="_blank">バージョニングな有効なバケットへの Amazon S3 リクエストに対する HTTP 503 レスポンスが著しく増加する</a></p>
 
@@ -280,8 +281,8 @@
         <p>AWS ドキュメント&gt;<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html" target="_blank">Amazon S3 Transfer Acceleration を使用した高速かつ安全なファイル転送の設定</a></p>
 <p class="image-container"><img src="img\\2a8cbeba163a2016.png"></p>
 <p>遠方のリージョンからの転送を高速化できます。 同一リージョンで転送する分には問題になりませんが、海外展開している事業で、海外リージョンを利用し、中央リージョンのバケットに対して、世界中からアップロードするようなシステムの場合には、データ転送の距離により遅延が問題になります。 これを解消できる機能です。</p>
-<aside class="special"><p> 大きいオブジェクトの転送の場合、50%から500%まで転送速度を改善することができます。 </p>
-</aside>
+<pre><code language="language-text" class="language-text">大きいオブジェクトの転送の場合、50%から500%まで転送速度を改善することができます。
+</code></pre>
 <p>Transfer Acceleration はバケット単位で有効にします。有効にしたバケットへのファイル転送は、世界中に存在する CloudFront のエッジロケーションを経由してアップロードされます。エッジロケーションから S3 バケットは、AWS 内の最適化されたネットワークで通信されます。</p>
 <p>Transfer Acceleration を使用した方が速いと判断された場合は、Transfer Acceleration のエッジロケーションが利用されます。この判定は AWS によって自動的に実施されます。 逆に、遅いと判断された場合は「その転送で使用する S3 Transfer Acceleration の料金を AWS が請求することはなく、S3 Transfer Acceleration システムをバイパスする可能性があります。」と &#34;よくある質問&#34; に記載があります。よって、遅くなるのに無駄に利用してコスト増といったことはないので、安心して利用できます。</p>
 <p>ただし、使用するにはいくつか前提条件があります。 例えば、「Transfer Acceleration で使用するバケットは、ピリオド (&#34;.&#34;) が含まれていない」といったものがあり、使用する場合は既存の状態を確認する必要があります。 その他については、ドキュメントを参照してください。</p>
@@ -386,7 +387,7 @@
 <p class="image-container"><img src="img\\bd2218e0607be2e.png"></p>
 <p>設定する場合、以下に注意する必要があります。</p>
 <p>「Amazon S3 バケットについてのサーバーアクセスログを同じバケットにプッシュすることはできますか?」 https://aws.amazon.com/jp/premiumsupport/knowledge-center/s3-server-access-logs-same-bucket/</p>
-<pre><code>バケットについてのサーバーアクセスログを同じバケットにプッシュしないでください。
+<pre><code language="language-text" class="language-text">バケットについてのサーバーアクセスログを同じバケットにプッシュしないでください。
 この方法でサーバーアクセスログを設定した場合、ログの無限ループが発生します。
 これは、バケットにログファイルを書き込むと、バケットにもアクセスが発生し、別のログを生成するためです。
 ログファイルは、バケットに書き込まれるすべてのログに対して生成され、ループが作成されます。
@@ -406,16 +407,16 @@
 <p>形式を「JSON」、タイプを「行」、圧縮を「GZIP」とします。</p>
 <p class="image-container"><img src="img\\2a739fb46f4f2176.png"></p>
 <p>WHERE 句でのカラムの指定は、「s.action」ではなく「s.&#34;action&#34;」とする必要がありました。</p>
-<pre><code>SELECT * FROM s3object s WHERE s.&#34;action&#34; = &#39;ALLOW&#39; LIMIT 5
+<pre><code language="language-sql" class="language-sql">SELECT * FROM s3object s WHERE s.&#34;action&#34; = &#39;ALLOW&#39; LIMIT 5
 </code></pre>
 <p class="image-container"><img src="img\\168c6ff325d8c7d.png"></p>
 <p>抽出するカラムを絞ってみます（射影）</p>
-<pre><code>SELECT s.&#34;timestamp&#34;, s.&#34;terminatingRuleId&#34;,s.&#34;action&#34;  FROM s3object s WHERE s.&#34;action&#34; = &#39;ALLOW&#39; LIMIT 5
+<pre><code language="language-sql" class="language-sql">SELECT s.&#34;timestamp&#34;, s.&#34;terminatingRuleId&#34;,s.&#34;action&#34;  FROM s3object s WHERE s.&#34;action&#34; = &#39;ALLOW&#39; LIMIT 5
 </code></pre>
 <p class="image-container"><img src="img\\e017ccd0d7faab46.png"></p>
 <p>対象の日時が特定できている場合は S3 Select を使うことで手軽に検索・集計が可能です。Athena のように事前にテーブル定義を行わなくても検索できるのが便利です。 ただ、対象の日時が特定できない場合や広い範囲を検索したい場合は、Athena を使うほうがよいと思います。</p>
-<aside class="warning"><p> SQL の ORDER が使えないという点も注意が必要です。 </p>
-</aside>
+<pre><code language="language-text" class="language-text">SQL の ORDER が使えないという点も注意が必要です。
+</code></pre>
 <p>単一のファイルという点だと、外部連携ファイルといった単一のファイルであることが多い場合の検索・集計には有用だと思います。</p>
 
 
@@ -447,7 +448,7 @@
 <p>バケットに複数のユーザーやアカウントからアクセスがある場合、バケットポリシーでの設定が煩雑になります。 そこで、用途ごとにアクセスポイントを作成することで、アクセスポイントごとのポリシーを定義することができます。</p>
 <p class="image-container"><img src="img\\dd8843f83484a7be.png"></p>
 <p>このように、アクセスポイントポリシーを定義できます。</p>
-<pre><code>{
+<pre><code language="language-json" class="language-json">{
     &#34;Version&#34;:&#34;2012-10-17&#34;,
     &#34;Statement&#34;: [
     {
@@ -468,7 +469,7 @@
       <google-codelab-step label="パフォーマンスの最適化" duration="2">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/optimizing-performance.html" target="_blank">設計パターンのベストプラクティス: Amazon S3 のパフォーマンスの最適化</a></p>
 <p>以前は、連続するキープレフィックスのオブジェクトを作成すると、パフォーマンス上の問題がありましたが、現在ではそのような問題は発生しません。</p>
-<pre><code>BucketName/2022-11-02/aaa/xxx000000001.log
+<pre><code language="language-text" class="language-text">BucketName/2022-11-02/aaa/xxx000000001.log
 BucketName/2022-11-02/aaa/xxx000000002.log
 BucketName/2022-11-02/aaa/xxx000000003.log
 BucketName/2022-11-02/aaa/xxx000000004.log
@@ -478,19 +479,19 @@ BucketName/2022-11-03/aaa/zzz000000003.log
 BucketName/2022-11-03/aaa/zzz000000004.log
 </code></pre>
 <p>以前はこのようにランダムにして対処していました。</p>
-<pre><code>BucketName/232a-2022-11-02/aaa/xxx000000001.log
+<pre><code language="language-text" class="language-text">BucketName/232a-2022-11-02/aaa/xxx000000001.log
 BucketName/5akg-2022-11-02/aaa/xxx000000002.log
 BucketName/gsrt-2022-11-02/aaa/xxx000000003.log
 :
 </code></pre>
 <p>現在はこのままでも問題はありません。</p>
-<pre><code>BucketName/2022-11-02/aaa/xxx000000001.log
+<pre><code language="language-text" class="language-text">BucketName/2022-11-02/aaa/xxx000000001.log
 BucketName/2022-11-02/aaa/xxx000000002.log
 BucketName/2022-11-02/aaa/xxx000000003.log
 BucketName/2022-11-02/aaa/xxx000000004.log
 </code></pre>
 <p>さらに、現在は、PUT/COPY/POST/DELETE のリクエストを 3,500 回/秒、GET/HEAD リクエストを 5,500回/秒 以上を処理できるため、高アクセスを除いて特に問題は発生しません。 だた、高アクセスなシステムの場合、上記敷居値を超えるリクエストを送信すると <code>HTTP 503</code> が返ってくることがあります。 このようなケースに対応するには、「パーティションされたプレフィックス」を複数使用することを検討します。 上記敷居値は「パーティションされたプレフィックス」ごとの数値であるため、これを並列化することで、よりパフォーマンスを向上できます。 「パーティションされたプレフィックス」とは何かというと、オブジェクトキー名の先頭にある文字列（プレフィックス）です。 下記例だと、「パーティションされたプレフィックス」は <code>2022-11-02/aaa</code> が該当します。 オブジェクトキー名の最大長 (1,024 バイト)の制限の中で、プレフィックスを増やすことで、並列化によってパフォーマンスを向上させることができます。</p>
-<pre><code>BucketName/2022-11-02/aaa/xxx000000001.log
+<pre><code language="language-text" class="language-text">BucketName/2022-11-02/aaa/xxx000000001.log
 BucketName/2022-11-02/aaa/xxx000000001.log
 BucketName/2022-11-02/aaa/xxx000000001.log
 BucketName/2022-11-02/aaa/xxx000000001.log

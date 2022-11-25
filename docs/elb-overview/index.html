@@ -50,7 +50,7 @@
     
       <google-codelab-step label="ELB の基本" duration="2">
         <ul>
-<li>Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類がある <ul>
+<li>Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類があります。 <ul>
 <li>Internet-Facing はパブリックサブネットのみ配置可</li>
 <li>Internal はプライベートサブネットにも配置可</li>
 <li><img src="img\\8e36dee03cd33a1a.png"></li>
@@ -95,7 +95,7 @@
 <li>L4/L7 で負荷分散</li>
 <li>クロスゾーン負荷分散がデフォルトで有効</li>
 <li>スティッキーセッション（sticky session）</li>
-<li>対応できるプロトコルは多いが複雑な設定ができないため、通常は、ALB や NLB を使用する。</li>
+<li>対応できるプロトコルは多いが複雑な設定ができないため、通常は、ALB や NLB を使用します。</li>
 <li>旧タイプのロードバランサ、現在は非推奨となっています。</li>
 <li>MTU=9,001(ジャンボフレーム)、変更不可</li>
 </ul>
@@ -109,7 +109,7 @@
 <li>L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）</li>
 <li>クライアントと ALB 間は、HTTP/2 に対応していましたが、暫くの間は ALB とターゲット間の通信は、HTTP/1.1 に変換されていました。現在は、「HTTP/1.1」「HTTP/2」「gRPC」に対応 <ul>
 <li>※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。</li>
-<li>https://ja.wikipedia.org/wiki/GRPC</li>
+<li><a href="https://ja.wikipedia.org/wiki/GRPC" target="_blank">https://ja.wikipedia.org/wiki/GRPC</a></li>
 </ul>
 </li>
 <li>利用するには、2 AZ 以上が必要（1 AZ では起動できない）、3 AZ 構成が望ましい。選択する AZ 数は ALB 自体のコストに影響ありません。ただし、AZ 数が増えるということは、ロードバランサー配下のノード数も増えるので、その分のコストは発生します。</li>
@@ -215,11 +215,11 @@
       <google-codelab-step label="アクセスログ" duration="2">
         <p>ELB のアクセスログは、S3に出力することができます。アクセスログは5分ごとに出力されます。</p>
 <p>出力されるログファイルのキーは、次のようになっています。</p>
-<pre><code>bucket[/prefix]/AWSLogs/aws-account-id/elasticloadbalancing/region/yyyy/mm/dd/aws-account-id_elasticloadbalancing_region_app.load-balancer-id_end-time_ip-address_random-string.log.gz
+<pre><code language="language-text" class="language-text">bucket[/prefix]/AWSLogs/aws-account-id/elasticloadbalancing/region/yyyy/mm/dd/aws-account-id_elasticloadbalancing_region_app.load-balancer-id_end-time_ip-address_random-string.log.gz
 </code></pre>
 <p>ロードバランサーのアクセスログを出力する AWS アカウントIDはリージョンで異なるため、S3 バケットのバケットポリシーを設定する場合は注意が必要です。 リージョンとアカウント ID の対応は次のドキュメントを参照します。</p>
 <p>東京リージョンの場合は、アカウントID「582318560864」を指定して、次のように記述します。</p>
-<pre><code>{
+<pre><code language="language-json" class="language-json">{
   &#34;Version&#34;: &#34;2012-10-17&#34;,
   &#34;Statement&#34;: [
     {
