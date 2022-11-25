@@ -40,20 +40,55 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="AWS アカウントの代替の連絡先を設定する" duration="1">
+        <p>AWS アカウント登録時の連絡先以外にも連絡してくれるようになります。</p>
+<p>請求、オペレーション、セキュリティの３つに対して代替の連絡先を指定できます。必要に応じて設定しましょう。</p>
+<ol type="1">
+<li>アカウント設定を開きます <ul>
+<li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
+</ul>
+</li>
+<li>「代替の連絡先」の横にある「編集」リンクをクリックして連絡先を設定します <ul>
+<li><img alt="alternate_contacts" src="img\\dc781ab5587c6a5e.png"></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html</a></p>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="AWS アカウントの秘密の質問を設定する" duration="1">
         <p>ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。 ただし、一度設定すると変更は可能ですが削除することはできません。</p>
+<h2 is-upgraded>設定方法</h2>
+<ol type="1">
+<li>アカウント設定を開きます <ul>
+<li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
+</ul>
+</li>
+<li>「秘密の質問の設定」の横にある「編集」リンクをクリックして連絡先を設定します <ul>
+<li><img alt="security_challenge_questions" src="img\\6c6974266ad82234.png"></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="1">
         <p>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678の場合、+81 3-1234-5678） 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="AWS アカウントの代替の連絡先を登録する" duration="1">
-        <p>請求、オペレーション、セキュリティの３つに対して代替の連絡先を指定できます。必要に応じて設定しましょう。</p>
+<h2 is-upgraded>設定方法</h2>
+<ol type="1">
+<li>アカウント設定を開きます <ul>
+<li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
+</ul>
+</li>
+<li>「連絡先情報」の横にある「編集」リンクをクリックして連絡先を設定します <ul>
+<li><img alt="contact" src="img\\49a55f193697660b.png"></li>
+</ul>
+</li>
+</ol>
 
 
       </google-codelab-step>
@@ -65,14 +100,43 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Billing コンソールの予算 にアクセスして予算アラートを設定する" duration="1">
+      <google-codelab-step label="予算アラートを設定する" duration="1">
         <p>アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。</p>
+<h2 is-upgraded>設定方法</h2>
+<ol type="1">
+<li>Billing コンソールの予算を開きます <ul>
+<li><a href="https://console.aws.amazon.com/billing/home#/budgets/overview" target="_blank">https://console.aws.amazon.com/billing/home#/budgets/overview</a></li>
+</ul>
+</li>
+<li>「予讃を作成」ボタンをクリックして予算アラートを設定します <ul>
+<li><img alt="budgets_alert" src="img\\d06b49ca86f5d02a.png"></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html" target="_blank">https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コスト異常検知" duration="1">
+        <p>予算アラートは、設定した予算額に対してある敷居値を超えるときに通知するサービスでした。実際に超過しなければ通知されないため、異常な兆候は検出できません。</p>
+<p>コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常なAWSコストの発生を検出することができるサービスです。 AWSコスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。</p>
+<p><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html" target="_blank">https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="CloudTrail のログ記録を有効にする" duration="1">
         <p>アカウント内で不正な操作を記録、検知するためにも有効にしましょう。 CloudTrail のログ保存先の S3 は、ライフサイクルルールも設定しましょう。 後述するログ監視を実施するために、CloudWatch Logs にも配信しましょう。CloudWatch のロググループには適切な保持期限を設定しましょう。</p>
+<h2 is-upgraded>設定方法</h2>
+<ol type="1">
+<li>CloudTrail コンソールを開きます <ul>
+<li><a href="https://console.aws.amazon.com/cloudtrail/" target="_blank">https://console.aws.amazon.com/cloudtrail/</a></li>
+</ul>
+</li>
+<li>[証跡の作成]ボタンをクリックします</li>
+</ol>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html" target="_blank">https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html</a></p>
 
 
       </google-codelab-step>
@@ -101,15 +165,26 @@
 <li>無効または削除されたKMSのキー使用時のエラー発生を監視</li>
 <li>不正な API 呼び出しの発生を監視</li>
 </ul>
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html" target="_blank">https://docs.aws.amazon.com/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Personal Service Dashboard のイベント検知を設定する" duration="1">
-        <p><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。 入力トランスフォーマーの設定例</p>
-<pre><code>{&#34;eventDescription&#34;:&#34;$.detail.eventDescription[0].latestDescription&#34;,&#34;eventTypeCode&#34;:&#34;$.detail.eventTypeCode&#34;,&#34;region&#34;:&#34;$.region&#34;,&#34;service&#34;:&#34;$.detail.service&#34;,&#34;startTime&#34;:&#34;$.detail.startTime&#34;,&#34;type&#34;:&#34;$.detail-type&#34;}
+        <p><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時確認し、監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。</p>
+<h2 is-upgraded>設定方法</h2>
+<ol type="1">
+<li>EventBridge コンソールを開きます <ul>
+<li><a href="https://console.aws.amazon.com/events/" target="_blank">https://console.aws.amazon.com/events/</a></li>
+</ul>
+</li>
+<li>ナビゲーションペインで [ルール]を選択します。</li>
+<li>[ルールを作成] を選択します。</li>
+</ol>
+<p>入力トランスフォーマーの設定例</p>
+<pre><code language="language-text" class="language-text">{&#34;eventDescription&#34;:&#34;$.detail.eventDescription[0].latestDescription&#34;,&#34;eventTypeCode&#34;:&#34;$.detail.eventTypeCode&#34;,&#34;region&#34;:&#34;$.region&#34;,&#34;service&#34;:&#34;$.detail.service&#34;,&#34;startTime&#34;:&#34;$.detail.startTime&#34;,&#34;type&#34;:&#34;$.detail-type&#34;}
 </code></pre>
-<pre><code>&#34;AWSにてメンテナンス通知が発行されました。&#34;
+<pre><code language="language-text" class="language-text">&#34;AWSにてメンテナンス通知が発行されました。&#34;
 &#34;type: &lt;type&gt;&#34;
 &#34;eventStartTime: &lt;startTime&gt;&#34;
 &#34;service: &lt;service&gt;&#34;
@@ -119,36 +194,58 @@
 &#34;詳細は Personal Health Dashboard を確認してください。&#34;
 &#34;https://phd.aws.amazon.com/phd/home#/dashboard/open-issues&#34;
 </code></pre>
+<p><a href="https://docs.aws.amazon.com/ja_jp/health/latest/ug/cloudwatch-events-health.html" target="_blank">https://docs.aws.amazon.com/ja_jp/health/latest/ug/cloudwatch-events-health.html</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM コンソールのアカウント設定 から、IAM パスワードポリシーを変更する" duration="1">
-        <p>デフォルトの IAM ユーザーのパスワードポリシーは脆弱です。そのため、アカウントを作成したら忘れないうちに強力なポリシーに変更しましょう。 推奨は、以下です。</p>
-<ul>
-<li>パスワードの最小長「8」以上</li>
-<li>少なくとも１つの大文字が必要</li>
-<li>少なくとも１つの小文字が必要</li>
-<li>少なくとも１つの数字が必要</li>
-<li>少なくとも１つの英数字以外の文字が必要</li>
-</ul>
+      <google-codelab-step label="IAM パスワードポリシーを変更する" duration="1">
+        <p>デフォルトの IAM ユーザーのパスワードポリシーは脆弱です。そのため、アカウントを作成したら忘れないうちに強力なポリシーに変更しましょう。</p>
+<p>推奨は、以下です。</p>
+<pre><code language="language-text" class="language-text">- パスワードの最小長「12」以上
+- 少なくとも１つの大文字が必要
+- 少なくとも１つの小文字が必要
+- 少なくとも１つの数字が必要
+- 少なくとも１つの英数字以外の文字が必要
+</code></pre>
 <p>MFA を利用しない場合は、以下の追加も検討しましょう。</p>
-<ul>
-<li>パスワードの失効を許可「180日」</li>
-<li>パスワードの再利用を禁止「5回」</li>
+<pre><code language="language-text" class="language-text">- パスワードの失効を許可「180日」
+- パスワードの再利用を禁止「5回」
+</code></pre>
+<h2 is-upgraded>設定方法</h2>
+<ol type="1">
+<li>IAM コンソールを開きます <ul>
+<li><a href="https://console.aws.amazon.com/iam/home#/account_settings" target="_blank">https://console.aws.amazon.com/iam/home#/account_settings</a></li>
 </ul>
+</li>
+<li>ナビゲーションペインで [アカウント設定]を選択します</li>
+<li>[Change]ボタンをクリックして変更します <ul>
+<li><img alt="iam_password_policy" src="img\\126a0d8e18daaa6d.png"></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html" target="_blank">https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="1">
-        <p>AdministratorAccess の権限を付与したグループを作成し、IAM ユーザーを設定する。 作成した IAM ユーザには MFA を付与する。</p>
+        <p>AdministratorAccess の権限を付与したグループを作成します。IAM ユーザーを作成し、グループに登録します。 作成した IAM ユーザには MFA を設定しましょう。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="ルートユーザーは封印する" duration="1">
         <p>ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。</p>
+<p>ルートユーザーでしか出来ない作業が必要になった場合のみ利用するようにしましょう。</p>
+<ul>
+<li>請求情報とコスト管理コンソールへの IAM アクセスを有効にする</li>
+<li>AWS サポートプランの変更</li>
+<li>支払オプションの変更、削除</li>
+<li>AWS アカウントの解約</li>
+</ul>
+<p>詳しくは、以下の URL を参照してください。</p>
+<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html</a></p>
 
 
       </google-codelab-step>
