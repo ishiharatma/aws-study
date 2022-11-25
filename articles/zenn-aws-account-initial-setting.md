@@ -44,7 +44,7 @@ Duration: 00:30
 ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。
 ただし、一度設定すると変更は可能ですが削除することはできません。
 
-**設定方法**
+<設定方法>
 
 1. アカウント設定を開きます
     - <https://console.aws.amazon.com/billing/home#/account>
@@ -60,7 +60,7 @@ Duration: 00:30
 MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678の場合、+81 3-1234-5678）
 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。
 
-**設定方法**
+<設定方法>
 
 1. アカウント設定を開きます
     - <https://console.aws.amazon.com/billing/home#/account>
@@ -81,7 +81,7 @@ Duration: 00:30
 
 アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。
 
-**設定方法**
+<設定方法>
 
 1. Billing コンソールの予算を開きます
     - <https://console.aws.amazon.com/billing/home#/budgets/overview>
@@ -110,7 +110,7 @@ Duration: 00:30
 CloudTrail のログ保存先の S3 は、ライフサイクルルールも設定しましょう。
 後述するログ監視を実施するために、CloudWatch Logs にも配信しましょう。CloudWatch のロググループには適切な保持期限を設定しましょう。
 
-**設定方法**
+<設定方法>
 
 1. CloudTrail コンソールを開きます
     - <https://console.aws.amazon.com/cloudtrail/>
@@ -154,7 +154,7 @@ Duration: 00:30
 [Personal Health Dashboard](https://phd.aws.amazon.com/phd/home) で随時確認し、監視してもよいですが、[Amazon EventBridge コンソール](https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/) でイベントパターン{"source": ["aws.health"]}を監視して自動化しよう。
 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。
 
-**設定方法**
+<設定方法>
 
 1. EventBridge コンソールを開きます
     - <https://console.aws.amazon.com/events/>
@@ -205,7 +205,7 @@ MFA を利用しない場合は、以下の追加も検討しましょう。
 - パスワードの再利用を禁止「5回」
 ```
 
-**設定方法**
+<設定方法>
 
 1. IAM コンソールを開きます
     - <https://console.aws.amazon.com/iam/home#/account_settings>
