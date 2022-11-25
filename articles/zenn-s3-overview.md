@@ -128,7 +128,7 @@ IAMポリシーとバケットポリシーの両方を使用した場合、ど�
 
 AWS ドキュメント> [バケット所有者がユーザーにバケットのアクセス許可を付与する](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example1.html)
 
-別アカウントからのアクセスを許可する場合は、バケットポリシー（アクセスされる側のS3に設定）とIAMポリシー（アクセスする別アカウント側で設定）の<font color="red">両方</font>で許可する必要があります。
+別アカウントからのアクセスを許可する場合は、バケットポリシー（アクセスされる側のS3に設定）とIAMポリシー（アクセスする別アカウント側で設定）の**両方**で許可する必要があります。
 
 AWS ドキュメント> [バケット所有者がクロスアカウントのバケットのアクセス許可を付与する](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example2.html)
 
@@ -197,7 +197,7 @@ AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](htt
     - アクセス頻度は低いが、必要に応じてすぐに取り出すことが必要なデータに適しています。
     - 可用性は 99.9 %
     - このストレージクラスから、ライフサイクルによって他のストレージクラスへ移動することが可能です。
-    - <font color="red">このストレージクラスに格納してから 30日以内に削除された場合、30日分の課金が発生します。</font>
+    - **このストレージクラスに格納してから 30日以内に削除された場合、30日分の課金が発生します。**
 - S3 Intelligent-Tiering
     - アクセスパターンが不明または変化するデータに対して自動的にコストを削減する
     - 30 日間連続してアクセスされなかったオブジェクトを低頻度アクセス階層に移動
@@ -209,23 +209,23 @@ AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](htt
     - 他のクラスと違い、一つの AZ のみに保存されているので、Standard-IA より 20% コストを削減できます。
     - 可用性は 99.5 %
     - このストレージクラスから、ライフサイクルによって他のストレージクラスへ移動することが可能です。
-    - <font color="red">このストレージクラスに格納してから 30日以内に削除された場合、30日に満たなかった分も日割での課金が発生します。</font>
+    - **このストレージクラスに格納してから 30日以内に削除された場合、30日に満たなかった分も日割での課金が発生します。**
 - S3 Glacier Instant Retrieval
     - アクセスはほとんどないが、即時取り出しを必要とするアーカイブデータ向け
     - S3 Standard と同じミリ秒単位でのデータの取り出し
     - 可用性は 99.9 %
     - 四半期に一度データにアクセスする場合、S3 Standard-IA に比べて最大で 68%のコスト削減
-    - <font color="red">このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。</font>
+    - **このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。**
 - S3 Glacier Flexible Retrieval(旧 S3 Glacier)
     - 即時アクセスを必要としないアクセス頻度の低い長期データ用
     - 可用性は 99.99 %
     - 取り出し時間は 数分から数時間
-    - <font color="red">このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。</font>
+    - **このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。**
 - S3 Glacier Deep Archive
     - クラウド上の最も低コストなストレージで数時間で取り出し可能な長期アーカイブやデジタル保存用
     - 取り出し時間は 12 時間以内
     - 7～10年という長期間保存用に設計されており、磁気テープライブラリの理想的な代替策となる。
-    - <font color="red">このストレージクラスに格納してから 180日以内に削除された場合、180日に満たなかった分も日割での課金が発生します。</font>
+    - **このストレージクラスに格納してから 180日以内に削除された場合、180日に満たなかった分も日割での課金が発生します。**
 
 ## バージョニング
 Duration: 02:00
@@ -339,21 +339,21 @@ AWS ドキュメント > [Transfer Acceleration を使用するための要件](
 
 |Rank|Region| | |
 | --- | --- | ---: | --- |
-|1|CanadaCentral(CA-CENTRAL-1)|<font color="green">355%</font>|<font color="green">faster</font>|
-|2|Oregon(US-WEST-2)|<font color="green">346%</font>|<font color="green">faster</font>|
-|3|Dublin(EU-WEST-1)|<font color="green">320%</font>|<font color="green">faster</font>|
-|4|Virginia(US-EAST-1)|<font color="green">290%</font>|<font color="green">faster</font>|
-|5|Ohio(US-EAST-2)|<font color="green">275%</font>|<font color="green">faster</font>|
-|6|Singapore(AP-SOUTHEAST-1)|<font color="green">236%</font>|<font color="green">faster</font>|
-|7|Mumbai(AP-SOUTH-1)|<font color="green">214%</font>|<font color="green">faster</font>|
-|8|London(EU-WEST-2)|<font color="green">198%</font>|<font color="green">faster</font>|
-|9|Frankfurt(EU-CENTRAL-1)|<font color="green">189%</font>|<font color="green">faster</font>|
-|10|Paris(EU-WEST-3)|<font color="green">166%</font>|<font color="green">faster</font>|
-|11|SanFrancisco(US-WEST-1)|<font color="green">159%</font>|<font color="green">faster</font>|
-|12|SãoPaulo(SA-EAST-1)|<font color="green">155%</font>|<font color="green">faster</font>|
-|13|Sydney(AP-SOUTHEAST-2)|<font color="green">133%</font>|<font color="green">faster</font>|
-|14|Seoul(AP-NORTHEAST-2)|<font color="green">103%</font>|<font color="green">faster</font>|
-|15|Tokyo(AP-NORTHEAST-1)|<font color="red">2%</font>|<font color="red">slower</font>|
+|1|CanadaCentral(CA-CENTRAL-1)|355%|faster|
+|2|Oregon(US-WEST-2)|346%|faster|
+|3|Dublin(EU-WEST-1)|320%|faster|
+|4|Virginia(US-EAST-1)|290%|faster|
+|5|Ohio(US-EAST-2)|275%|faster|
+|6|Singapore(AP-SOUTHEAST-1)|236%|faster|
+|7|Mumbai(AP-SOUTH-1)|214%|faster|
+|8|London(EU-WEST-2)|198%|faster|
+|9|Frankfurt(EU-CENTRAL-1)|189%|faster|
+|10|Paris(EU-WEST-3)|166%|faster|
+|11|SanFrancisco(US-WEST-1)|159%|faster|
+|12|SãoPaulo(SA-EAST-1)|155%|faster|
+|13|Sydney(AP-SOUTHEAST-2)|133%|faster|
+|14|Seoul(AP-NORTHEAST-2)|103%|faster|
+|15|Tokyo(AP-NORTHEAST-1)|**2%**|**slower**|
 
 ## アクセスログ
 Duration: 02:00

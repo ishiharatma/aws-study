@@ -118,7 +118,7 @@
 }
 </code></pre>
 <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example1.html" target="_blank">バケット所有者がユーザーにバケットのアクセス許可を付与する</a></p>
-<p>別アカウントからのアクセスを許可する場合は、バケットポリシー（アクセスされる側のS3に設定）とIAMポリシー（アクセスする別アカウント側で設定）の両方で許可する必要があります。</p>
+<p>別アカウントからのアクセスを許可する場合は、バケットポリシー（アクセスされる側のS3に設定）とIAMポリシー（アクセスする別アカウント側で設定）の<strong>両方</strong>で許可する必要があります。</p>
 <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example2.html" target="_blank">バケット所有者がクロスアカウントのバケットのアクセス許可を付与する</a></p>
 <p>バケットポリシーのサイズには制限があり、20 KB となっています。 <img src="img\\6e89b68e49da0be9.png"></p>
 <p>https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html</p>
@@ -167,7 +167,7 @@
 <li>アクセス頻度は低いが、必要に応じてすぐに取り出すことが必要なデータに適しています。</li>
 <li>可用性は 99.9 %</li>
 <li>このストレージクラスから、ライフサイクルによって他のストレージクラスへ移動することが可能です。</li>
-<li>このストレージクラスに格納してから 30日以内に削除された場合、30日分の課金が発生します。</li>
+<li><strong>このストレージクラスに格納してから 30日以内に削除された場合、30日分の課金が発生します。</strong></li>
 </ul>
 </li>
 <li>S3 Intelligent-Tiering <ul>
@@ -183,7 +183,7 @@
 <li>他のクラスと違い、一つの AZ のみに保存されているので、Standard-IA より 20% コストを削減できます。</li>
 <li>可用性は 99.5 %</li>
 <li>このストレージクラスから、ライフサイクルによって他のストレージクラスへ移動することが可能です。</li>
-<li>このストレージクラスに格納してから 30日以内に削除された場合、30日に満たなかった分も日割での課金が発生します。</li>
+<li><strong>このストレージクラスに格納してから 30日以内に削除された場合、30日に満たなかった分も日割での課金が発生します。</strong></li>
 </ul>
 </li>
 <li>S3 Glacier Instant Retrieval <ul>
@@ -191,21 +191,21 @@
 <li>S3 Standard と同じミリ秒単位でのデータの取り出し</li>
 <li>可用性は 99.9 %</li>
 <li>四半期に一度データにアクセスする場合、S3 Standard-IA に比べて最大で 68%のコスト削減</li>
-<li>このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。</li>
+<li><strong>このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。</strong></li>
 </ul>
 </li>
 <li>S3 Glacier Flexible Retrieval(旧 S3 Glacier) <ul>
 <li>即時アクセスを必要としないアクセス頻度の低い長期データ用</li>
 <li>可用性は 99.99 %</li>
 <li>取り出し時間は 数分から数時間</li>
-<li>このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。</li>
+<li><strong>このストレージクラスに格納してから 90日以内に削除された場合、90日に満たなかった分も日割での課金が発生します。</strong></li>
 </ul>
 </li>
 <li>S3 Glacier Deep Archive <ul>
 <li>クラウド上の最も低コストなストレージで数時間で取り出し可能な長期アーカイブやデジタル保存用</li>
 <li>取り出し時間は 12 時間以内</li>
 <li>7～10年という長期間保存用に設計されており、磁気テープライブラリの理想的な代替策となる。</li>
-<li>このストレージクラスに格納してから 180日以内に削除された場合、180日に満たなかった分も日割での課金が発生します。</li>
+<li><strong>このストレージクラスに格納してから 180日以内に削除された場合、180日に満たなかった分も日割での課金が発生します。</strong></li>
 </ul>
 </li>
 </ul>
@@ -373,8 +373,8 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>15</p>
 </td><td colspan="1" rowspan="1"><p>Tokyo(AP-NORTHEAST-1)</p>
-</td><td colspan="1" rowspan="1"><p>2%</p>
-</td><td colspan="1" rowspan="1"><p>slower</p>
+</td><td colspan="1" rowspan="1"><p><strong>2%</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>slower</strong></p>
 </td></tr>
 </table>
 
