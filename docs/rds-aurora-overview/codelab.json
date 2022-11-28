@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2022-11-28T18:55:48+09:00",
-  "id": "rds-auroar-overview",
+  "updated": "2022-11-28T18:59:30+09:00",
+  "id": "rds-aurora-overview",
   "duration": 443,
   "title": "RDS と Aurora",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\claat_header\\..\\claat_rds-auroar-overview.md",
+  "source": "F:\\work\\git\\github.com\\myaccount\\aws-study\\claat_header\\..\\claat_rds-aurora-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -21,5 +21,5 @@
     "amazonaurora",
     "amazonrds"
   ],
-  "url": "rds-auroar-overview"
+  "url": "rds-aurora-overview"
 }

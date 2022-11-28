@@ -1,5 +1,5 @@
 summary: Summary
-id: rds-auroar-overview
+id: rds-aurora-overview
 categories: AWS
 tags: Amazon RDS, Amazon Aurora
 status: Published
