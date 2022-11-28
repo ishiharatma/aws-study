@@ -13,22 +13,20 @@ published: true
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-
 ## S3 とは
-Duration: 01:00
+
+Duration: 01:56:54
+
 スケーラビリティ、データ可用性、セキュリティ、およびパフォーマンスを提供するオブジェクトストレージサービスです。
 データ耐久性はイレブンナイン（99.999999999 %）です。可用性はストレージクラスによって異なります。
 
-【AWS Black Belt Online Seminar】[Amazon S3/Glacier(YouTube)](https://www.youtube.com/watch?v=oFG5kMZjKtc)
-
+【AWS Black Belt Online Seminar】[Amazon S3/Glacier(YouTube)](https://www.youtube.com/watch?v=oFG5kMZjKtc)(1:00:33)
 
 ![](/images/s3/blackbelt_s3.jpg)
 
-
-【AWS Black Belt Online Seminar】[Amazon S3 ユースケースおよびサービスアップデート(YouTube)](https://www.youtube.com/watch?v=7LRSDrHb2Ho)
+【AWS Black Belt Online Seminar】[Amazon S3 ユースケースおよびサービスアップデート(YouTube)](https://www.youtube.com/watch?v=7LRSDrHb2Ho)(56:21)
 
 ![](/images/s3/blackbelt_s3_update.jpg)
-
 
 [S3 サービス概要](https://aws.amazon.com/jp/s3/)
 
@@ -37,7 +35,8 @@ Duration: 01:00
 [S3 よくある質問](https://aws.amazon.com/jp/s3/faqs/)
 
 ## S3 の基本
-Duration: 01:30
+
+Duration: 0:01:30
 
 ![](/images/s3/s3_overview.png)
 
@@ -90,7 +89,8 @@ VPCエンドポイントは24時間×1か月（30.5日）使用しているも�
 |④EC2（プライベートサブネット） ⇒ VPC Endpoint(Interfaceタイプ)|$10.60||
 
 ## バケットポリシー
-Duration: 01:30
+
+Duration: 00:01:30
 
 AWS ドキュメント> [バケットポリシーの使用](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html)
 
@@ -139,7 +139,8 @@ AWS ドキュメント> [バケット所有者がクロスアカウントのバ�
 https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html
 
 ## アクセスコントロールリスト（ACL）
-Duration: 01:30
+
+Duration: 00:01:30
 
 AWS ドキュメント> [ACL によるアクセス管理](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/acls.html)
 
@@ -156,7 +157,8 @@ AWS ドキュメント> [バケット所有者が所有権のないオブジェ�
 
 
 ## ライフサイクル
-Duration: 01:00
+
+Duration: 00:01:00
 
 AWS ドキュメント > [ストレージのライフサイクルの管理](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
 
@@ -173,7 +175,8 @@ AWS ドキュメント > [ストレージのライフサイクルの管理](http
 
 
 ## ストレージタイプ
-Duration: 05:00
+
+Duration: 00:05:00
 
 AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage-class-intro.html)
 
@@ -228,7 +231,8 @@ AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](htt
     - **このストレージクラスに格納してから 180日以内に削除された場合、180日に満たなかった分も日割での課金が発生します。**
 
 ## バージョニング
-Duration: 02:00
+
+Duration: 00:02:00
 
 ![](/images/s3/s3_versioning.png)
 
@@ -244,7 +248,8 @@ AWS ドキュメント > [S3 バケットでのバージョニングの使用](h
 AWS ドキュメント > [バージョニングな有効なバケットへの Amazon S3 リクエストに対する HTTP 503 レスポンスが著しく増加する](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/troubleshooting-by-symptom.html)
 
 ## 暗号化
-Duration: 02:00
+
+Duration: 00:02:00
 
 AWS ドキュメント > [サーバー側の暗号化を使用したデータの保護](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/serv-side-encryption.html)
 
@@ -272,7 +277,8 @@ AWS ドキュメント > [クライアント側の暗号化を使用したデー
   - 機密性が高く、S3 からダウンロードされてしまった場合に情報漏洩されないようにしなければならない場合はこちらを採用する。
 
 ## 静的ウェブサイトのホスティング
-Duration: 01:00
+
+Duration: 00:01:00
 
 AWS ドキュメント > [Amazon S3 を使用して静的ウェブサイトをホスティングする](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/WebsiteHosting.html)
 
@@ -285,7 +291,8 @@ IP制限をした静的ウェブサイトの設定例
 ![](/images/s3/s3_static_website_2.png)
 
 ## S3 Transfer Acceleration
-Duration: 05:00
+
+Duration: 00:05:00
 
 AWS ドキュメント>[Amazon S3 Transfer Acceleration を使用した高速かつ安全なファイル転送の設定](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html)
 
@@ -356,7 +363,8 @@ AWS ドキュメント > [Transfer Acceleration を使用するための要件](
 |15|Tokyo(AP-NORTHEAST-1)|**2%**|**slower**|
 
 ## アクセスログ
-Duration: 02:00
+
+Duration: 00:02:00
 
 AWS ドキュメント > [サーバーアクセスログを使用したリクエストのログ記録](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/ServerLogs.html)
 
@@ -377,7 +385,8 @@ https://aws.amazon.com/jp/premiumsupport/knowledge-center/s3-server-access-logs-
 ```
 
 ## S3 Select
-Duration: 02:00
+
+Duration: 00:02:00
 
 AWS ドキュメント > [Amazon S3 Select を使用したデータのフィルタリングと取得](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/selecting-content-from-objects.html)
 
@@ -425,7 +434,8 @@ SQL の ORDER が使えないという点も注意が必要です。
 単一のファイルという点だと、外部連携ファイルといった単一のファイルであることが多い場合の検索・集計には有用だと思います。
 
 ## Storage Lens
-Duration: 03:00
+
+Duration: 00:03:00
 
 AWS ドキュメント > [S3 Storage Lens](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage_lens.html)
 
@@ -450,7 +460,8 @@ Storage Lens を使うと、オブジェクトストレージの使用状況と�
 ![](/images/s3/strage_lens_5.png)
 
 ## リクエスタ支払いバケット
-Duration: 02:00
+
+Duration: 00:02:00
 
 AWS ドキュメント > [ストレージ転送と使用量のリクエスタ支払いバケットの使用](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/RequesterPaysBuckets.html)
 
@@ -463,8 +474,10 @@ AWS ドキュメント > [ストレージ転送と使用量のリクエスタ支
 リクエスタ支払いを有効にしたバケットは、所有者を除き、通常の方法ではアクセスできなくなります。
 アクセスする場合、HTTPアクセスはリクエストヘッダに"x-amz-request-payer"を付けることで、リクエスタ側が明示的にデータアクセスに対して料金を負担することを了承したことになります。
 AWS CLI の場合は、オプションに「--request-player」を付与します。
+
 ## アクセスポイント
-Duration: 02:00
+
+Duration: 00:02:00
 
 AWS ドキュメント > [Amazon S3 アクセスポイントを使用したデータアクセスの管理](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/access-points.html)
 
@@ -493,7 +506,8 @@ AWS ドキュメント > [Amazon S3 アクセスポイントを使用したデ�
 詳しくは、AWS ドキュメント > [アクセスポイントポリシーの例](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/access-points-policies.html#access-points-policy-examples)を参照してください。
 
 ## パフォーマンスの最適化
-Duration: 02:00
+
+Duration: 00:02:00
 
 AWS ドキュメント > [設計パターンのベストプラクティス: Amazon S3 のパフォーマンスの最適化](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/optimizing-performance.html)
 
@@ -544,7 +558,8 @@ BucketName/2022-11-02/aaa/xxx000000001.log
 ```
 
 ## 他のサービスとの連携
-Duration: 00:30
+
+Duration: 00:00:30
 
 ![](/images/s3/s3_services.png)
 

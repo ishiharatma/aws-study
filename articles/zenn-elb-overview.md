@@ -14,7 +14,8 @@ published: true
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
 ## ELB とは
-Duration: 01:00
+
+Duration: 00:01:00
 
 ![](/images/elb/elb.png)
 
@@ -28,42 +29,39 @@ Elastic Load Balancing は、受信したトラフィックを複数のアベイ
 
 ![](/images/elb/blackbelt_glb.jpg)
 
-
 [Elastic Load Balancing 概要](https://aws.amazon.com/jp/s3/)
 
 [Elastic Load Balancing ドキュメント](https://docs.aws.amazon.com/ja_jp/s3/?id=docs_gateway)
 
 [Elastic Load Balancing のよくある質問](https://aws.amazon.com/jp/elasticloadbalancing/faqs/)
 
-
-
 ## ELB の基本
 
-Duration: 02:00
+Duration: 00:02:00
 
 - Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類があります。
-    - Internet-Facing はパブリックサブネットのみ配置可
-    - Internal はプライベートサブネットにも配置可
-    - ![](/images/elb/create_elb.png)
+  - Internet-Facing はパブリックサブネットのみ配置可
+  - Internal はプライベートサブネットにも配置可
+  - ![](/images/elb/create_elb.png)
 - 上記どちらもデフォルトでは、「xxxxxx.ap-northeast-1.elb.amazonaws.com」といった DNS 名が付与されます。
-    - ![](/images/elb/elb_dns.png)
+  - ![](/images/elb/elb_dns.png)
 - 独自ドメイン（例：www.example.com）が使用したい場合は、Route 53 のエイリアスレコードに登録することで利用可能です。
 - 負荷の状態に応じて自動的にスケーリングを行うため、管理者が手動で ELB の台数を増やしたり（スケールアウト）、スペックを上げたり（スケールアップ）する必要がありません。
-    - 構成図ではこのように書くことが多いが・・
-        - ![](/images/elb/elb_scale_1.png)
-    - 実際にはこのようにスケールアウトしています（クロスゾーン負荷分散が有効な場合の例）
-        - ![](/images/elb/elb_scale_2.png)
-    - ELBが拡張されたり縮小すると応答するIPアドレスの数が変わります。
-    - ただし、負荷のスパイク（負荷急増）が発生すると自動スケーリングが間に合わず `503` を返す可能性があります。
-    - その場合、暖機運転申請（Pre-Warming ※サポートプランがBussiness以上必要）か自前で段階的に負荷をあげていく仕組みを構築する必要があります。
+  - 構成図ではこのように書くことが多いが・・
+    - ![](/images/elb/elb_scale_1.png)
+  - 実際にはこのようにスケールアウトしています（クロスゾーン負荷分散が有効な場合の例）
+    - ![](/images/elb/elb_scale_2.png)
+  - ELBが拡張されたり縮小すると応答するIPアドレスの数が変わります。
+  - ただし、負荷のスパイク（負荷急増）が発生すると自動スケーリングが間に合わず `503` を返す可能性があります。
+  - その場合、暖機運転申請（Pre-Warming ※サポートプランがBussiness以上必要）か自前で段階的に負荷をあげていく仕組みを構築する必要があります。
 - ELB で SSL 終端することができます。つまり、クライアント⇔ELB間はSSL通信で、ELB⇔バックエンド間はSSLなしの通信ができます。これにより、バックエンド側での SSL 処理の負荷を軽減できます。
-    - ![](/images/elb/elb_ssl.png)
+  - ![](/images/elb/elb_ssl.png)
 - 起動している時間（1時間単位）＋LCU（ロードバランサーキャパシティーユニット）で課金されます。
-    - 東京リージョンだと最低でも月額 $ 25程度は必要になります。
+  - 東京リージョンだと最低でも月額 $ 25程度は必要になります。
 
 ## ELB の種類
 
-Duration: 05:00
+Duration: 00:05:00
 
 ### CLB:Classic Load Balancer
 
@@ -81,21 +79,21 @@ AWS ドキュメント > [Classic Load Balancer とは?](https://docs.aws.amazon
 AWS ドキュメント > [Application Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/introduction.html)
 
 - ALB の概要と関連するサービス
-    - ![](/images/elb/alb_overview.png)
+  - ![](/images/elb/alb_overview.png)
 - L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）
 - クライアントと ALB 間は、HTTP/2 に対応していましたが、暫くの間は ALB とターゲット間の通信は、HTTP/1.1 に変換されていました。現在は、「HTTP/1.1」「HTTP/2」「gRPC」に対応
-    - ※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。
-    - <https://ja.wikipedia.org/wiki/GRPC>
+  - ※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。
+  - <https://ja.wikipedia.org/wiki/GRPC>
 - 利用するには、2 AZ 以上が必要（1 AZ では起動できない）、3 AZ 構成が望ましい。選択する AZ 数は ALB 自体のコストに影響ありません。ただし、AZ 数が増えるということは、ロードバランサー配下のノード数も増えるので、その分のコストは発生します。
 - IP固定不可
-    - 固定したい場合は、NLBやAWS Global Acceleratorを前段に配置する
+  - 固定したい場合は、NLBやAWS Global Acceleratorを前段に配置する
 - Web アプリケーションを実行するサーバでは最も利用されているロードバランサーです
 - ターゲットは、インスタンスID、IPアドレス、Lambda
 - URL、リクエストヘッダー、リクエスト元IPでターゲットグループで振り分け可能
 - ルーティングアルゴリズムは、ラウンドロビン
 - クロスゾーン負荷分散がデフォルトで有効
 - スティッキーセッション（sticky session）
-    - 同一クライアントからのリクエストを同一のターゲットにルーティング可
+  - 同一クライアントからのリクエストを同一のターゲットにルーティング可
 - セキュリティグループでアクセスを制御します
 - AWS WAF を関連付けて、Webアプリケーションの脆弱性を保護することができます。
 - MTU=9,001(ジャンボフレーム)、変更不可
@@ -105,7 +103,7 @@ AWS ドキュメント > [Application Load Balancer とは?](https://docs.aws.am
 AWS ドキュメント > [Network Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/network/introduction.html)
 
 - NLB の概要と関連するサービス
-    - ![](/images/elb/nlb_overview.png)
+  - ![](/images/elb/nlb_overview.png)
 - L4（トランスポート層） で負荷分散（IPアドレスとポート番号による負荷分散が可能）
 - HTTP(S) 以外、TCP、UDP
 - 1AZ以上
@@ -117,7 +115,7 @@ AWS ドキュメント > [Network Load Balancer とは?](https://docs.aws.amazon
 - ALB とは違い、クロスゾーン負荷分散はデフォルトで無効
 - スティッキーセッション（sticky session）
 - セキュリティグループが設定できない
-    - バックエンドのインスタンスに関連付けしたセキュリティグループで制御
+  - バックエンドのインスタンスに関連付けしたセキュリティグループで制御
 - MTU=9,001(ジャンボフレーム)、変更不可
 
 ### GLB:Gateway Load Balancer
@@ -125,17 +123,16 @@ AWS ドキュメント > [Network Load Balancer とは?](https://docs.aws.amazon
 AWS ドキュメント > [Gateway Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/gateway/introduction.html)
 
 - GLB 概要
-    - ![](/images/elb/glb.jpg)
+  - ![](/images/elb/glb.jpg)
 - 2021年に発表された、セキュリティアプライアンス（ファイアウォールなど）をデプロイしたり、スケール、管理ができるようにするサービス
 - 従来、トラフィックの監査を行う場合、EC2 上にサードパーティ製の仮想アプライアンスを構築する必要があり、それに対して冗長化は大変だったが、この課題を解消することができるサービス
 - L3（ネットワーク層）で負荷分散
 - クロスゾーン負荷分散はデフォルトで無効
 - MTU=8,500、変更不可
 
-
 ## サブネットに必要な CIDR
 
-Duration: 01:00
+Duration: 00:01:00
 
 AWS ドキュメント > Elastic Load Balancing > [ロードバランサーのサブネット](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer)
 
@@ -145,7 +142,7 @@ ELB を配置するサブネットの CIDR は最小で 「27」が必要であ�
 
 ## スティッキーセッション
 
-Duration: 01:00
+Duration: 00:01:00
 
 AWS ドキュメント > [Application Load Balancer のスティッキーセッション](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/sticky-sessions.html)
 
@@ -160,7 +157,7 @@ AWS ドキュメント > Network Load Balancer > [スティッキーセッショ
 
 ## クロスゾーン負荷分散
 
-Duration: 05:00
+Duration: 00:05:00
 
 複数 AZ に跨るノードに対しても均等にトラフィックを分散するようにできるオプションです。
 
@@ -195,7 +192,7 @@ ELB 配下にあるノードが異なっている場合には以下のように�
 
 ## Connection Draining
 
-Duration: 01:00
+Duration: 00:01:00
 
 ELB の配下のノードを切り離す場合、いきなり切り離されると、ノードで実行中だった場合にアプリケーション側でエラーが出てしまいます。
 そのため、切り離し対象のノードへのリクエストが終わるまで一定時間切り離しを待機してくれる機能です。
@@ -205,7 +202,7 @@ ELB の配下のノードを切り離す場合、いきなり切り離される�
 
 ## アクセスログ
 
-Duration: 02:00
+Duration: 00:02:00
 
 ELB のアクセスログは、S3に出力することができます。アクセスログは5分ごとに出力されます。
 
@@ -250,15 +247,15 @@ AWS ドキュメント > [Classic Load Balancer ログのクエリ](https://docs
 
 ## 他のサービスとの連携
 
-Duration: 01:00
+Duration: 00:01:00
 
 - 独自ドメインを使いたい
-    - Amazon Route 53
+  - Amazon Route 53
 - CDN
-    - Amazon CloudFront
+  - Amazon CloudFront
 - バックエンドノードの可用性を高めたい
-    - AWS Auto Scaling
+  - AWS Auto Scaling
 - SQL インジェクションや XSS などの脆弱性から保護したい
-    - AWS WAF
+  - AWS WAF
 - ALB で IP アドレスを固定したい
-    - AWS Global Accelerator
+  - AWS Global Accelerator
