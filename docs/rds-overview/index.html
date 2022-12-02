@@ -1,0 +1,128 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>RDS</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="rds-overview"
+                  title="RDS"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#rds" target="_blank">RDS</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">RDS について知るには</a></li>
+<li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">RDS について知るには(その他)</a></li>
+<li><a href="#%E5%8F%AF%E7%94%A8%E6%80%A7" target="_blank">可用性</a><ul>
+<li><a href="#%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB-az" target="_blank">シングル AZ</a></li>
+<li><a href="#%E3%83%9E%E3%83%AB%E3%83%81-az" target="_blank">マルチ AZ</a></li>
+<li><a href="#%E3%83%9E%E3%83%AB%E3%83%81-az%EF%BC%92%E3%81%A4%E3%81%AE%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A%E5%8F%AF%E8%83%BD%E3%81%AA%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%90%E3%82%A4" target="_blank">マルチ AZ（２つの読み取り可能なスタンバイ）</a></li>
+<li><a href="#rds-%E3%81%AE%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%83%AC%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">RDS のクロスリージョンレプリケーション</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RDS について知るには" duration="53">
+        <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/nDme-ET-_EY" target="_blank">Amazon Relational Database Service (Amazon RDS)(YouTube)</a>(52:48)</p>
+<p class="image-container"><img alt="blackbelt-rds" src="img\\813b49560cc9128.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/rds/" target="_blank">Amazon RDS サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/rds/?icmpid=docs_homepage_databases" target="_blank">Amazon RDS ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/rds/faqs/" target="_blank">Amazon RDS よくある質問</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RDS について知るには(その他)" duration="186">
+        <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=h1r8AzOdlqo" target="_blank">AWS におけるデータベースの選択指針</a>(39:25)</p>
+<p class="image-container"><img alt="aws-summit-2019-c2-03" src="img\\49298d1b9cdedb44.jpg"></p>
+<p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=3oMR2hglQR0" target="_blank">Amazon RDS におけるパフォーマンス最適化とパフォーマンス管理</a>(41:33)</p>
+<p class="image-container"><img alt="aws-summit-2019-b3-04" src="img\\2be056bcc1f56ecc.jpg"></p>
+<p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=5McG3hJae9A" target="_blank">Amazon Aurora with PostgreSQL Compatibility における運用設計のファーストステップ</a>(39:53)</p>
+<p class="image-container"><img alt="aws-summit-2019-b3-05" src="img\\359bb8f2e1daa346.jpg"></p>
+<p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=DrtwAOND1Pc" target="_blank">Amazon Aurora storage demystified: How it all works (DAT309-R)</a>(1:04:45)</p>
+<p class="image-container"><img alt="aws-summit-2019-dat309-r" src="img\\f23b8d10aa213d9e.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="可用性" duration="30">
+        <h2 is-upgraded>シングル AZ</h2>
+<p class="image-container"><img alt="rds-single-az" src="img\\a13d399a51b4e17d.png"></p>
+<p>１つの AZ に RDS インスタンスを構築した最小構成です。 AZ 障害時にはインスタンスが利用できなくなります。</p>
+<p>開発環境や、可用性を求められない場合にコストを低く抑えることが出来る構成です。ただし、自動バックアップ時には、I/O が数秒～数分のごく短時間中断されることがあります。インスタンスタイプによってこの時間は異なります。</p>
+<p>読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
+<p>シングル AZ で構成された RDS を後からマルチ AZ に変更することも可能です。ダウンタイムは発生しません。マルチ AZ 変更後は、シングル AZ に比べてトランザクションスループットは若干低下します。これは同期的レプリケーションが行われるようになるからです。</p>
+<p>シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか? <a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/" target="_blank">https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/</a></p>
+<h2 is-upgraded>マルチ AZ</h2>
+<p class="image-container"><img alt="rds-multi-az-1" src="img\\5a190b2d59d098d7.png"></p>
+<p>２つの AZ に プライマリインスタンスとスタンバイインスタンスを構築し、プライマリからスタンバイに同期的にレプリケーションされています。 スタンバイインスタンスには、読み取りのみでもアクセスは出来ません。</p>
+<p>プライマリ障害時には、60秒ほどで自動的にスタンバイに切り替わります。エンドポイントの DNS が切り替わることで行われます。</p>
+<p>読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
+<p>メンテナンス（システムアップグレード – OS パッチ適用など）時は、以下の順で実行されます。</p>
+<ol type="1">
+<li>スタンバイインスタンスに変更を適用</li>
+<li>フェールオーバー実行</li>
+<li>旧プライマリインスタンスに変更を適用</li>
+</ol>
+<p>アプリケーションの構成が DNS をキャッシュする環境の場合、フェールオーバー後すぐに上手く切り替わらない場合もあります。その場合は、有効期限（TTL）を短くする（30秒未満）といった対応が必要です。アプリケーション側ではリトライを入れるなど、アクセスできないケースを想定しておく必要があります。</p>
+<p>RDS の自動バックアップは、スタンバイインスタンスから取得されます。そのため、プライマリインスタンスの I/O に影響を与えません。ただし、RDS for SQL Server については、プライマリインスタンスの I/O が一時的に中断されます。</p>
+<p>マルチ AZ 構成をシングル AZ に戻すことも可能です。ダウンタイムは発生しません。</p>
+<p>シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか? <a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/" target="_blank">https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/</a></p>
+<h2 is-upgraded>マルチ AZ（２つの読み取り可能なスタンバイ）</h2>
+<p class="image-container"><img alt="rds-multi-az-2" src="img\\9b65b3160e564117.png"></p>
+<p>以前からあるマルチ AZ を拡張したもので、スタンバイインスタンスは読み取りアクセスが可能となります。そのため、「従来のマルチ AZ + リードレプリカ」構成よりも読み取りスループット向上できます。</p>
+<p>自動フェールオーバーは 従来のマルチ AZ より早い、35秒となっています。トランザクションスループットも従来のマルチ AZ と比べて最大で2倍高速となっています。</p>
+<p>従来のマルチ AZ にリードレプリカを1台以上追加する場合は、こちらのマルチ AZを利用するほうがよいです。</p>
+<p>また、３つの AZ で構成されるため、AZ 障害にも強い構成と言えます。２つの AZ が同時に障害になっても継続できます。</p>
+<p>ただし、利用可能なデータベースエンジンは、2022年12月現在では MySQL と PostgreSQL のみとなっていますので注意が必要です。</p>
+<p><a href="https://aws.amazon.com/blogs/database/readable-standby-instances-in-amazon-rds-multi-az-deployments-a-new-high-availability-option/" target="_blank">https://aws.amazon.com/blogs/database/readable-standby-instances-in-amazon-rds-multi-az-deployments-a-new-high-availability-option/</a></p>
+<p>さらに読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
+<h2 is-upgraded>RDS のクロスリージョンレプリケーション</h2>
+<p>RDS のクロスリージョンレプリケーションは、レプリケーション先のリージョンにもう１つ RDS インスタンスが構築されてレプリケーションされます。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
