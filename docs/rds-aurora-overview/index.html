@@ -52,6 +52,7 @@
 <li><a href="#%E6%AF%94%E8%BC%83%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%97%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%BE%A9%E5%85%83" target="_blank">比較ポイント７：データの復元</a></li>
 <li><a href="#%E6%AF%94%E8%BC%83%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%98%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5" target="_blank">比較ポイント８：キャッシュ</a></li>
 <li><a href="#%E6%AF%94%E8%BC%83%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%99%E4%BE%A1%E6%A0%BC" target="_blank">比較ポイント９：価格</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">判断フロー</a></li>
 </ul>
 </li>
 </ul>
@@ -267,6 +268,9 @@
       <google-codelab-step label="比較ポイント４：可用性" duration="5">
         <p>RDS は マルチ AZ の場合のみ、スタンバイにフェールオーバーし、60秒で自動的に復旧します。 シングル AZ の場合、自動的に復旧できないので、スナップショットから手動復旧が必要になります。 マルチAZ は、プライマリインスタンスとスタンバイインスタンスで構成されます。プライマリインスタンスからスタンバイインスタンスには、同期的にレプリケーションされます。 通常、スタンバイインスタンスにはアクセスできません。</p>
 <p>Aurora はレプリカが存在する場合は、レプリカにフェールオーバーし、60秒から120秒で復旧します。 レプリカが存在しない場合、同じ AZ 内に新規インスタンスが作成され、10分以内に復旧します。リージョン障害時にはフェールオーバーが失敗する可能性があります。</p>
+<p>Aurora レプリカのフェールオーバーは優先順位を設定することが可能です。</p>
+<p>たとえば、バッチ処理やデータのエクスポートなど負荷の高い処理に使用しているレプリカの優先順位を下げておくといったことが可能です。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance" target="_blank">Aurora DB クラスターの耐障害性</a></p>
 <p>RDS / Aurora ともに、AWS マネジメントコンソール、AWS CLI から手動でフェールオーバーすることができます。</p>
 
 
@@ -276,28 +280,57 @@
         <p>プライマリインスタンスへの読み取りアクセスを分散することで、スループットを向上できます。</p>
 <p>RDS ではリードレプリカを追加することができます。リードレプリカは、「インスタンス + EBS + ミラーリング EBS 」のセットが増えていきます。</p>
 <p>Aurora ではレプリカを追加すると、「インスタンス」のみが増えていきます。</p>
+<p>Aurora のレプリカは、オートスケーリングによってスケールアップ／ダウンが可能です。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Integrating.AutoScaling.html" target="_blank">Aurora レプリカでの Amazon Aurora Auto Scaling の使用</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント６：自動バックアップの保持期間" duration="5">
-        <p>RDS は 0～35日(デフォルトは 7日)で、Aurora は 1～35日(デフォルトは 1日)となっており、バックアップを無効にすることは出来ません。</p>
+        <p>RDS は 0～35日(デフォルトは 7日)で、0日にすることでバックアップを無効化できます。</p>
+<p>Aurora は 1～35日(デフォルトは 1日)となっており、0日に設定できないため、バックアップを無効にすることは出来ません。</p>
+<p>自動バックアップは、インスタンスが起動している間のみ取得されます。ドキュメントには以下の記述があります。</p>
+<pre><code language="language-text" class="language-text">自動バックアップを行うには、DB インスタンスが AVAILABLE 状態になっている必要があります。
+DB インスタンスが AVAILABLEなどの STORAGE_FULL 以外の状態にある間は、自動バックアップは行われません。
+</code></pre>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html" target="_blank">バックアップの使用</a></p>
+<p>また、よくある質問には以下の記述があります。</p>
+<pre><code language="language-text" class="language-text">&gt;自動化された DB スナップショットの数が、DB インスタンスに対するリテンション期間の日数よりも多いのはなぜですか?
+
+リテンション期間の日数よりも 1 日か 2 日自動化 DB のスナップショットの日数が多いのは正常です。
+自動化スナップショットは 1 日余計にとられていて、リテンション期間中のいつにでも復帰できる時点を設けています。
+
+例えば、バックアップウィンドウが 1 日に設定されている場合、自動化スナップショットは 2 つ必要で、
+これで過去 24 時間中の任意の時点への復帰をサポートしています。
+また、さらに多くの自動化スナップショットがある場合もありますが、これは新たな自動化スナップショットが、
+最も古い自動化スナップショットを削除する前に常に生成されるためです。。
+</code></pre>
+<p><a href="https://aws.amazon.com/jp/rds/faqs/" target="_blank">よくある質問</a></p>
 <p>RDS / Aurora を停止している時間は保持期間の計算に含まれないので、保持期間より多い日数のスナップショットが存在している場合もあります。</p>
+<p>ドキュメントには以下の記述があります。</p>
+<p>7日分保持する設定にしていた場合、24時間 × 7日 = 168 時間になりますが、RDSを夜間に12時間停止していた場合、168 / 12 = 14日となるということでしょうか。</p>
+<pre><code language="language-text" class="language-text">DB インスタンスが停止している場合、バックアップ保持期間より長くバックアップを保持できます。
+RDSには、バックアップ保存期間の計算時にstopped状態にあった時間は含まれません。
+</code></pre>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupRetention" target="_blank">RDS バックアップの保存期間</a></p>
 <p>また、手動で取得したバックアップ（スナップショット）は保持期間の影響を受けないため、手動で削除する必要があります。</p>
-<p>自動バックアップは、インスタンスが起動している間のみ取得されますので、</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント７：データの復元" duration="5">
         <p>RDS と Aurora のともにポイントインタイムリカバリとして、5分前まで秒単位で復元が可能です。</p>
+<p>復元といっても「特定地点のデータ状態のデータベースクラスタを再作成する機能」ですので注意が必要です。</p>
+<p>データベースクラスタ内でデータのみをリカバリするわけではありません。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント８：キャッシュ" duration="5">
-        
+        <p>RDS ではデータベースインスタンス内にキャッシュを持つが、Aurora では、データベースとは分離して管理しています。</p>
+<p>Aurora PostgreSQL は、クラスタキャッシュ管理という仕組みで、プライマリインスタンスが持っているキャシュを特定のレプリカと共有することで、フェールオーバー時にキャッシュが失われて、処理性能が低下することを抑えることが可能になっています。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.cluster-cache-mgmt.html#AuroraPostgreSQL.cluster-cache-mgmt.Configure" target="_blank">Aurora PostgreSQL のクラスターキャッシュ管理によるフェイルオーバー後の高速リカバリ</a></p>
+
 
       </google-codelab-step>
     
@@ -381,7 +414,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="判断フロー" duration="0">
-        <p class="image-container"><img alt="rds-aurora-flow" src="img\\c052d0add1eeb7ae.png"></p>
+        <p class="image-container"><img alt="rds-aurora-flow" src="img\\b29de344ae27e538.png"></p>
 
 
       </google-codelab-step>
