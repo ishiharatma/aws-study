@@ -16,3 +16,5 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./aws-account-Initial-setting/index.html" target="_blank">AWSアカウント作成後に行うべき設定事項</a>
 - <a href="./elb-overview/index.html" target="_blank">ELB 概要</a>
 - <a href="./s3-overview/index.html" target="_blank">S3 概要</a>
+- <a href="./rds-aurora-overview/index.html" target="_blank">RDS と Aurora の比較</a>
+- <a href="./rds-overview/index.html" target="_blank">RDS 概要</a>

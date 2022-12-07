@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>RDS</title>
+  <title>Relational Database Service(RDS)</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="rds-overview"
-                  title="RDS"
+                  title="Relational Database Service(RDS)"
                   environment="web"
                   feedback-link="">
     
@@ -36,18 +36,30 @@
     
       <google-codelab-step label="Contents" duration="1">
         <ul>
-<li><a href="#rds" target="_blank">RDS</a><ul>
+<li><a href="#relational-database-servicerds" target="_blank">Relational Database Service(RDS)</a><ul>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
 <li><a href="#contents" target="_blank">Contents</a></li>
 <li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">RDS について知るには</a></li>
 <li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">RDS について知るには(その他)</a></li>
+<li><a href="#rds-%E3%81%A8%E3%81%AF" target="_blank">RDS とは</a></li>
+<li><a href="#%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3" target="_blank">サポートされているデータベースエンジン</a></li>
+<li><a href="#rds-%E3%81%AE%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E6%A7%8B%E6%88%90" target="_blank">RDS の基本的な構成</a></li>
+<li><a href="#sla" target="_blank">SLA</a></li>
 <li><a href="#%E5%8F%AF%E7%94%A8%E6%80%A7" target="_blank">可用性</a><ul>
 <li><a href="#%E3%82%B7%E3%83%B3%E3%82%B0%E3%83%AB-az" target="_blank">シングル AZ</a></li>
 <li><a href="#%E3%83%9E%E3%83%AB%E3%83%81-az" target="_blank">マルチ AZ</a></li>
 <li><a href="#%E3%83%9E%E3%83%AB%E3%83%81-az%EF%BC%92%E3%81%A4%E3%81%AE%E8%AA%AD%E3%81%BF%E5%8F%96%E3%82%8A%E5%8F%AF%E8%83%BD%E3%81%AA%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%90%E3%82%A4" target="_blank">マルチ AZ（２つの読み取り可能なスタンバイ）</a></li>
-<li><a href="#rds-%E3%81%AE%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%83%AC%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">RDS のクロスリージョンレプリケーション</a></li>
 </ul>
 </li>
+<li><a href="#%E3%83%AA%E3%83%BC%E3%83%89%E3%83%AC%E3%83%97%E3%83%AA%E3%82%AB" target="_blank">リードレプリカ</a></li>
+<li><a href="#%E3%83%AA%E3%83%BC%E3%83%89%E3%83%AC%E3%83%97%E3%83%AA%E3%82%AB%E3%81%AE%E6%98%87%E6%A0%BC" target="_blank">リードレプリカの昇格</a></li>
+<li><a href="#rds-%E3%81%AE%E3%82%AF%E3%83%AD%E3%82%B9%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E8%87%AA%E5%8B%95%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">RDS のクロスリージョン自動バックアップ</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">インスタンスタイプ</a></li>
+<li><a href="#%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AB%E3%82%A2%E3%83%83%E3%83%97%E3%83%80%E3%82%A6%E3%83%B3" target="_blank">スケールアップ/ダウン</a></li>
+<li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%AF%E3%83%A9%E3%82%B9" target="_blank">ストレージクラス</a></li>
+<li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%81%AE%E8%87%AA%E5%8B%95%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">ストレージの自動スケーリング</a></li>
+<li><a href="#rds-%E3%81%AE%E3%83%AD%E3%82%B0" target="_blank">RDS のログ</a></li>
+<li><a href="#bluegreen-deploymentsnew-2022-11-27" target="_blank">Blue/Green Deployments(New: 2022-11-27)</a></li>
 </ul>
 </li>
 </ul>
@@ -78,17 +90,71 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="可用性" duration="30">
+      <google-codelab-step label="RDS とは" duration="1">
+        <p>リレーショナルデータベースを提供するフルマネージドサービスです。</p>
+<p>マネジメントコンソールからわずか数クリックで冗長化、バックアップなどが設定されたデータベースを作成できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="サポートされているデータベースエンジン" duration="1">
+        <p>サポートされているデータベースエンジンは以下の通りです。それぞれのデータベースエンジンでバージョンや機能などサポートされている範囲が異なるので、利用するには確認が必要です。</p>
+<ul>
+<li>PostgreSQL <ul>
+<li>他のデータベースエンジンに比べて制限がほとんどない</li>
+</ul>
+</li>
+<li>MySQL <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/MySQL.Concepts.VersionMgmt.html" target="_blank">Amazon RDS での MySQL のバージョン</a></li>
+</ul>
+</li>
+<li>Oracle <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_Oracle.html" target="_blank">Amazon RDS for Oracle</a></li>
+</ul>
+</li>
+<li>Microsoft SQL Server <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html" target="_blank">Amazon RDS for Microsoft SQL Server</a></li>
+</ul>
+</li>
+<li>MariaDB <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.Storage" target="_blank">Amazon RDS for MariaDB</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RDS の基本的な構成" duration="5">
+        <p>RDS は EC2 に MySQL や PostgreSQL をインストールする場合と同じように、インスタンスに EBS が紐づいており、ミラーリング用の EBS で耐久性を高めています。</p>
+<p>データベースを作成すると、エンドポイントと呼ばれる専用の DNS 名が発行されます。</p>
+<p>アプリケーションは、エンドポイントに接続して、データベースへの操作を行います。</p>
+<p>このエンドポイントは、各データベースエンジンの接続ポートのみ接続することができます。</p>
+<p class="image-container"><img alt="rds-instance-00" src="img\\43b0cbd3f704e6c9.png"></p>
+<p>シングル AZ（単一構成） の場合は、１つの DB サーバーを DB インスタンスと呼びます。</p>
+<p>マルチ AZ（冗長化構成） の場合は、プライマリ・スタンバイの両方を合わせて、１つの DB インスタンスと呼びます。</p>
+<p class="image-container"><img alt="rds-instance-01" src="img\\81b32ab8d75a2373.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="SLA" duration="1">
+        <p><a href="https://aws.amazon.com/rds/sla/?nc1=h_ls" target="_blank">Amazon RDS Service Level Agreement</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="可用性" duration="15">
         <h2 is-upgraded>シングル AZ</h2>
-<p class="image-container"><img alt="rds-single-az" src="img\\a13d399a51b4e17d.png"></p>
 <p>１つの AZ に RDS インスタンスを構築した最小構成です。 AZ 障害時にはインスタンスが利用できなくなります。</p>
+<p class="image-container"><img alt="rds-single-az" src="img\\b67f3cf22d83203.png"></p>
 <p>開発環境や、可用性を求められない場合にコストを低く抑えることが出来る構成です。ただし、自動バックアップ時には、I/O が数秒～数分のごく短時間中断されることがあります。インスタンスタイプによってこの時間は異なります。</p>
 <p>読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
 <p>シングル AZ で構成された RDS を後からマルチ AZ に変更することも可能です。ダウンタイムは発生しません。マルチ AZ 変更後は、シングル AZ に比べてトランザクションスループットは若干低下します。これは同期的レプリケーションが行われるようになるからです。</p>
 <p>シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか? <a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/" target="_blank">https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/</a></p>
 <h2 is-upgraded>マルチ AZ</h2>
-<p class="image-container"><img alt="rds-multi-az-1" src="img\\5a190b2d59d098d7.png"></p>
-<p>２つの AZ に プライマリインスタンスとスタンバイインスタンスを構築し、プライマリからスタンバイに同期的にレプリケーションされています。 スタンバイインスタンスには、読み取りのみでもアクセスは出来ません。</p>
+<p class="image-container"><img alt="rds-multi-az-1" src="img\\67815b8f333d27d.png"></p>
+<p>同一リージョンの２つの AZ に プライマリインスタンスとスタンバイインスタンスを構築し、プライマリからスタンバイに同期的にレプリケーションされています。 スタンバイインスタンスには、読み取りのみでもアクセスは出来ません。</p>
 <p>プライマリ障害時には、60秒ほどで自動的にスタンバイに切り替わります。エンドポイントの DNS が切り替わることで行われます。</p>
 <p>読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
 <p>メンテナンス（システムアップグレード – OS パッチ適用など）時は、以下の順で実行されます。</p>
@@ -102,16 +168,248 @@
 <p>マルチ AZ 構成をシングル AZ に戻すことも可能です。ダウンタイムは発生しません。</p>
 <p>シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか? <a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/" target="_blank">https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/</a></p>
 <h2 is-upgraded>マルチ AZ（２つの読み取り可能なスタンバイ）</h2>
-<p class="image-container"><img alt="rds-multi-az-2" src="img\\9b65b3160e564117.png"></p>
+<p class="image-container"><img alt="rds-multi-az-2" src="img\\7cafe02515c0a3c6.png"></p>
 <p>以前からあるマルチ AZ を拡張したもので、スタンバイインスタンスは読み取りアクセスが可能となります。そのため、「従来のマルチ AZ + リードレプリカ」構成よりも読み取りスループット向上できます。</p>
 <p>自動フェールオーバーは 従来のマルチ AZ より早い、35秒となっています。トランザクションスループットも従来のマルチ AZ と比べて最大で2倍高速となっています。</p>
 <p>従来のマルチ AZ にリードレプリカを1台以上追加する場合は、こちらのマルチ AZを利用するほうがよいです。</p>
 <p>また、３つの AZ で構成されるため、AZ 障害にも強い構成と言えます。２つの AZ が同時に障害になっても継続できます。</p>
 <p>ただし、利用可能なデータベースエンジンは、2022年12月現在では MySQL と PostgreSQL のみとなっていますので注意が必要です。</p>
-<p><a href="https://aws.amazon.com/blogs/database/readable-standby-instances-in-amazon-rds-multi-az-deployments-a-new-high-availability-option/" target="_blank">https://aws.amazon.com/blogs/database/readable-standby-instances-in-amazon-rds-multi-az-deployments-a-new-high-availability-option/</a></p>
-<p>さらに読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
-<h2 is-upgraded>RDS のクロスリージョンレプリケーション</h2>
-<p>RDS のクロスリージョンレプリケーションは、レプリケーション先のリージョンにもう１つ RDS インスタンスが構築されてレプリケーションされます。</p>
+<p>参考&gt;<a href="https://aws.amazon.com/blogs/database/readable-standby-instances-in-amazon-rds-multi-az-deployments-a-new-high-availability-option/" target="_blank">Readable standby instances in Amazon RDS Multi-AZ deployments: A new high availability option</a></p>
+<p>この構成から、さらに読み取りスループットを向上させたい場合は、リードレプリカを追加します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リードレプリカ" duration="5">
+        <p>読み取り頻度の高いデータベースのワークロードに対して、スケールアウトすることにより、パフォーマンスを向上させます。</p>
+<p>リードレプリカへのレプリケーションは非同期で行われます。</p>
+<p class="image-container"><img alt="rds-readreplica-00" src="img\\2f0de020d27ccca6.png"></p>
+<p>リードレプリカは一部のデータベースエンジンを除いて、別リージョンでも作成することができます。（クロスリージョンリードレプリカ：CRR）</p>
+<p class="image-container"><img alt="rds-crr" src="img\\b61b8d21e75fa96.png"></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>DB エンジン</p>
+</td><td colspan="1" rowspan="1"><p>リードレプリカ作成可？</p>
+</td><td colspan="1" rowspan="1"><p>CRR可能？</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>PostgreSQL</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>MySQL</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Oracle</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Microsoft SQL Server</p>
+</td><td colspan="2" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>MariaDB</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+</table>
+<p><a href="https://aws.amazon.com/jp/rds/features/read-replicas/" target="_blank">Amazon RDS リードレプリカ</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PostgreSQL.Replication.ReadReplicas.html" target="_blank">Amazon RDS for PostgreSQL でのリードレプリカの使用</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_MySQL.Replication.ReadReplicas.html" target="_blank">MySQL リードレプリカの使用</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/oracle-read-replicas.html" target="_blank">Amazon RDS for Oracle でのリードレプリカの使用</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/SQLServer.ReadReplicas.html" target="_blank">Amazon RDS での Microsoft SQL Server 用のリードレプリカの使用</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リードレプリカの昇格" duration="5">
+        <p>リードレプリカは、スタンドアロン DB インスタンスに昇格させることができます。</p>
+<p>この昇格というのは、マスター・スレーブの関係性でマスターになるというわけではなく、リードレプリカが独立した DB インスタンスとなることです。</p>
+<p>そのため、昇格（独立）した時点でデータのレプリケーションは行われません。</p>
+<p>昇格するには、リードレプリカのダウンタイム（サーバの再起動）が発生するため、その間に書き込みがあった場合は、データにズレが生じます。</p>
+<p class="image-container"><img alt="rds-promote-read-replica" src="img\\d2f92d47c96d1c1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RDS のクロスリージョン自動バックアップ" duration="5">
+        <p>RDS のクロスリージョン自動バックアップは、レプリケーション先のリージョンに自動スナップショットとトランザクションログのバックアップが保存されます。</p>
+<p>本機能によって、災害対策（DR）が求められるシステムにおいて、リージョン障害が発生してもバックアップが作成されたリージョンでリストアを行うことで迅速に復旧することができます。</p>
+<p>ただし、リージョンを跨いだストレージ料金やデータ転送（スナップショットとトランザクションログ）が必要です。</p>
+<p>また、送信元と送信先のリージョンのサポートも確認しておく必要があります。</p>
+<p>日本に存在するリージョンでは、東京リージョンはサポートするリージョンは多いですが、大阪リージョンでは東京のみとなっています。</p>
+<ul>
+<li>アジアパシフィック (東京) <ul>
+<li>⇒アジアパシフィック (大阪)</li>
+<li>⇒アジアパシフィック (ソウル)</li>
+<li>⇒アジアパシフィック (シンガポール)</li>
+<li>⇒米国東部 (バージニア北部)</li>
+<li>⇒米国東部 (オハイオ)</li>
+<li>⇒米国西部 (オレゴン)</li>
+</ul>
+</li>
+<li>アジアパシフィック (大阪) <ul>
+<li>⇒アジアパシフィック (東京)</li>
+</ul>
+</li>
+</ul>
+<p>参考＞<a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html#USER_ReplicateBackups.RegionVersionAvailability" target="_blank">送信元と送信先 AWS リージョン サポート</a></p>
+<p>クロスリージョン自動バックアップがサポートされているデータベースエンジンは以下の通りです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>DB エンジン</p>
+</td><td colspan="1" rowspan="1"><p>CR自動バックアップ作成可？</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>PostgreSQL</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>MySQL</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>Oracle</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Microsoft SQL Server</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>MariaDB</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+</table>
+<p>参考＞<a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.html" target="_blank">クロスリージョン自動バックアップ</a></p>
+<p>参考＞<a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html" target="_blank">別の AWS リージョン への自動バックアップのレプリケーション</a></p>
+<p>参考＞<a href="https://aws.amazon.com/jp/blogs/news/best-practices-for-amazon-rds-for-postgresql-cross-region-read-replicas/" target="_blank">Amazon RDS for PostgreSQL クロスリージョンリードレプリカのためのベストプラクティス</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="インスタンスタイプ" duration="0">
+        <p>RDS のインスタンスタイプは、「db.m6g.large」のように <code>db</code> から始まります。それ以降は、EC2 のインスタンスタイプと同じ構成となっています。</p>
+<p><a href="https://aws.amazon.com/jp/rds/instance-types/" target="_blank">Amazon RDS インスタンスタイプ</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="スケールアップ/ダウン" duration="1">
+        <p>DB インスタンスはインスタンスタイプを変更することができます。インスタンスタイプの変更ではダウンタイムが発生します。</p>
+<p>インスタンスタイプの変更は、マネジメントコンソールや AWS CLI を使って手動で追加することができます。変更を適用するには、「すぐに適用」か「次に予定されるメンテナンスウィンドウ中」を選択できます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.Settings" target="_blank">[すぐに適用] で使用できる設定</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ストレージクラス" duration="5">
+        <p>RDS で選択できるストレージクラスは次の通りです。</p>
+<ul>
+<li>汎用 SSD <ul>
+<li>一般的な用途</li>
+<li>MariaDB、MySQL、Oracle、PostgreSQL データベースインスタンス: 20～64 TiB</li>
+<li>SQL Server Enterprise、Standard、Web、および Express エディション: 20 GiB-16 TiB</li>
+</ul>
+</li>
+<li>プロビジョンド IOPS <ul>
+<li>低レイテンシー、高 I/O スループットが必要な場合</li>
+<li>MariaDB:100 GiB - 64 TiB</li>
+<li>SQL Server:20 GiB - 16 TiB</li>
+<li>MySQL:100 GiB - 64 TiB</li>
+<li>Oracle:100 GiB - 64 TiB</li>
+<li>PostgreSQL:100 GiB - 64 TiB</li>
+</ul>
+</li>
+<li>マグネティック <ul>
+<li>下位互換</li>
+<li>現在は、汎用 SSD かプロビジョンド IOPS を推奨</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ストレージの自動スケーリング" duration="8">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling" target="_blank">Amazon RDS ストレージの自動スケーリングによる容量の自動管理</a></p>
+<p>RDS で使用するストレージは、DB インスタンス作成時にサイズを指定します。</p>
+<p>ストレージにかかるコストは、実際に使っている容量ではなく、定義した容量で課金されています。300 GB で定義した場合、実際には 10 GB しか使っていなくても 300 GB 分のストレージ料金を支払っています。</p>
+<p>最初に割り当てたストレージ容量が不足する場合、マネジメントコンソールや AWS CLI を使って手動で追加することができます。変更を適用するには、「すぐに適用」か「次に予定されるメンテナンスウィンドウ中」を選択できます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.ModifyingExisting" target="_blank">DB インスタンスストレージの容量を増加する</a></p>
+<p>「すぐに適用」をすると、ダウンタイムなしでストレージを追加することができます。ストレージが追加されるタイミングでパフォーマンスの低下が発生する可能性があります。</p>
+<p>ストレージの空き容量に余裕がある場合やパフォーマンス低下を発生させたくない場合は、「次に予定されるメンテナンスウィンドウ中」を選択することもできます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.Settings" target="_blank">[すぐに適用] で使用できる設定</a></p>
+<p>また、ストレージ追加後は「ストレージの最適化」というステータスになり、数時間かかる場合があります。さらにその後の6時間（ストレージの最適化がそれ以上かかる場合は、完了まで）は、ストレージを新たに追加することができなくなります。</p>
+<p>このように、ストレージ追加には手動での作業が必要なことと、次の割り当ての制約があることから、最初からある程度多めの容量を割り当て、CloudWatch のメトリクスにより空き容量を監視していました。</p>
+<p>この方式は、オンプレミスのデータベースサーバーと同じであり、クラウド的な利用形態ではありませんでした。</p>
+<p>そこで登場したのが、ストレージの自動スケーリングです。これにより必要になったタイミングでストレージが自動拡張できるようになります。</p>
+<p>自動拡張の発動条件は次の通りです。</p>
+<ul>
+<li>空き容量が割り当てられたサイズの10 % 未満</li>
+<li>低ストレージ状態が5分以上継続</li>
+<li>最後のストレージ変更後から6時間経過 <ul>
+<li>この制約があるため、RDS の自動スケーリングはストレージ不足状態を完全に防ぐことはできません。</li>
+<li>自動スケーリング後に大量のデータロードが発生した場合に数時間ストレージ容量不足状態になる可能性があります。</li>
+</ul>
+</li>
+</ul>
+<p>自動拡張で追加されるストレージは以下のうち大きい方です。</p>
+<ul>
+<li>5 GiB</li>
+<li>割り当てられているサイズの 10 %</li>
+<li>直近 1 時間の FreeStorageSpace メトリクスの変動に基づいて予測される 7 時間のストレージの増分</li>
+</ul>
+<p>RDS のストレージの自動スケーリングは有効にする前に、ドキュメントやよくある質問などをよく読み、利用するかどうかを慎重に検討する必要があります。</p>
+<p><a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-autoscaling-low-free-storage/" target="_blank">ストレージの自動スケーリングをオンにした後に、Amazon RDS の DB インスタンスの空きストレージ容量が少ない状態になったり、storage-full 状態になったりするのはなぜですか?</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="RDS のログ" duration="5">
+        <p>オンプレミスのデータベースでは、データベースのログはファイルシステムに存在します。ログが必要であれば、サーバーにログインすることでログを取得することができました。</p>
+<p>RDS でも、データベースのログは RDS のサーバー内のファイルにシステムに存在します。ただし、RDS ではデータベースサーバに SSH などで直接ログインできないため、取得できません。</p>
+<p>そのため、RDS では CloudWatch Logs にログをエクスポートする機能をもっています。</p>
+<p>CloudWatch Logs にエクスポートすることで、ログの検索やサブスクリプションフィルターによる検知を行うことが可能になります。</p>
+<p>データベースエンジンごとの保存できるログファイルの種類は次の通りです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>DB エンジン</p>
+</td><td colspan="1" rowspan="1"><p>ログファイル</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>PostgreSQL</p>
+</td><td colspan="1" rowspan="1"><p>Postgresql ログ、アップグレードログ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>MySQL</p>
+</td><td colspan="1" rowspan="1"><p>監査ログ、全般ログ、スロークエリログ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Oracle</p>
+</td><td colspan="1" rowspan="1"><p>アラートログ、監査ログ、トレースログ、リスナーログ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Microsoft SQL Server</p>
+</td><td colspan="1" rowspan="1"><p>エラーログ、エージェントログ、トレースファイル、ファンプファイル</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>MariaDB</p>
+</td><td colspan="1" rowspan="1"><p>エラーログ、スロークエリログ、一般ログ</p>
+</td></tr>
+</table>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html#USER_LogAccess.Concepts.PostgreSQL.PublishtoCloudWatchLogs" target="_blank">Amazon CloudWatch Logs への PostgreSQL ログの発行</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_LogAccess.MySQLDB.PublishtoCloudWatchLogs.html" target="_blank">Amazon CloudWatch Logs への MySQL ログの発行</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.Oracle.html#USER_LogAccess.Oracle.PublishtoCloudWatchLogs" target="_blank">Amazon CloudWatch Logs への Oracle ログの発行</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.SQLServer.html#USER_LogAccess.SQLServer.PublishtoCloudWatchLogs" target="_blank">Amazon CloudWatch Logs への SQL Server ログの発行</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.MariaDB.html#USER_LogAccess.MariaDB.PublishtoCloudWatchLogs" target="_blank">MariaDB ログを Amazon CloudWatch Logs に発行する</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Blue/Green Deployments(New: 2022-11-27)" duration="0">
+        <p><a href="https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/" target="_blank">New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS</a></p>
+<p><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html" target="_blank">Using Amazon RDS Blue/Green Deployments for database updates</a></p>
+<p class="image-container"><img alt="blue-green-deployment" src="img\\9598ff7d75b35fbb.png"></p>
+<p>データベースの切り替えを安全に行えるようになるマネージドサービスです。</p>
+<p>以下のような機能が提供されています。ステージング環境（Green）でテストを行い、適切なタイミングで本番環境（Blue）と切り替えを行った後で、万が一新しい環境で問題が発生してもすぐに切り戻しが可能になります。</p>
+<ul>
+<li>本番環境をコピーしたステージング環境</li>
+<li>本番環境とステージング環境のレプリケーション</li>
+<li>本番環境に影響を与えず、ステージング環境に変更を加えることが可能 <ul>
+<li>データベースのメジャーバージョンのアップグレード</li>
+<li>データベースパラメータ変更</li>
+<li>スキーマ変更　など。</li>
+</ul>
+</li>
+<li>切り替えは1分以内</li>
+<li>デーア損失なし</li>
+<li>アプリケーションの変更不要</li>
+</ul>
 
 
       </google-codelab-step>

@@ -42,7 +42,7 @@ Duration: 00:52:48
 
 【AWS Black Belt Online Seminar】[Amazon Relational Database Service (Amazon RDS)(YouTube)](https://youtu.be/nDme-ET-_EY)(52:48)
 
-![blackbelt-rds](/images/rds-aurora/blackbelt-rds-320.jpg)
+![blackbelt-rds](/images/rds/blackbelt-rds-320.jpg)
 
 [Amazon RDS サービス概要](https://aws.amazon.com/jp/rds/)
 
@@ -56,19 +56,19 @@ Duration: 03:22:41
 
 【AWS Black Belt Online Seminar】[Amazon Aurora MySQL(YouTube)](https://youtu.be/VerVNchaqVY)(55:41)
 
-![blackbelt-aurora-mysql](/images/rds-aurora/blackbelt-aurora-mysql-320.jpg)
+![blackbelt-aurora-mysql](/images/aurora/blackbelt-aurora-mysql-320.jpg)
 
 【AWS Black Belt Online Seminar】[Amazon Aurora MySQL Compatible Edition ユースケース毎のスケーリング手法](https://www.youtube.com/watch?v=9KQkskyP930)(55:41)
 
-![blackbelt-aurora-mysql-usecase](/images/rds-aurora/blackbelt-aurora-mysql-usecase-320.jpg)
+![blackbelt-aurora-mysql-usecase](/images/aurora/blackbelt-aurora-mysql-usecase-320.jpg)
 
 【AWS Black Belt Online Seminar】[Amazon Aurora with PostgreSQL Compatibility(YouTube)](https://youtu.be/oJqIzHIMh7Q)(1:03:46)
 
-![blackbelt-aurora-postgresql](/images/rds-aurora/blackbelt-aurora-postgresql-320.jpg)
+![blackbelt-aurora-postgresql](/images/aurora/blackbelt-aurora-postgresql-320.jpg)
 
 [RDS/Aurora Update | 2.5時間で学ぶ！ Amazon Aurora のいま(YouTube)](https://youtu.be/8uPU2T5Xj9E)(27:33)
 
-![rds-aurora-updates](/images/rds-aurora/rds-aurora-updates-320.jpg)
+![rds-aurora-updates](/images/aurora/rds-aurora-updates-320.jpg)
 
 [Amazon Aurora サービス概要](https://aws.amazon.com/jp/rds/aurora/)
 
@@ -148,13 +148,13 @@ RDS と Aurora の大きく異なる点といえば、ストレージのアー�
 RDS の方は EC2 に MySQL や PostgreSQL をインストールする場合と同じように、インスタンスに EBS が紐づいており、マルチ AZ の場合もそれぞれに EBS を持っています。
 ミラーリング用の EBS で耐久性を高めています。
 
-![rds-architecture](/images/rds-aurora/rds-architecture.png)
+![rds-architecture](/images/rds/rds-architecture.png)
 
 https://www.youtube.com/watch?v=oJqIzHIMh7Q&t=24m24s
 
 Aurora の方は、インスタンスとストレージが分離しています。さらに、3 AZ に6つのデータのコピーが作成され、耐久性が高められています。
 
-![aurora-architecuture](/images/rds-aurora/aurora-architecture.png)
+![aurora-architecuture](/images/aurora/aurora-architecture.png)
 
 https://www.youtube.com/watch?v=oJqIzHIMh7Q&t=25m49s
 
@@ -207,7 +207,7 @@ RDS は マルチ AZ の場合のみ、スタンバイにフェールオーバ�
 通常、スタンバイインスタンスにはアクセスできません。
 
 Aurora はレプリカが存在する場合は、レプリカにフェールオーバーし、60秒から120秒で復旧します。
-レプリカが存在しない場合、同じ AZ 内に新規インスタンスが作成され、10分以内に復旧します。リージョン障害時にはフェールオーバーが失敗する可能性があります。
+レプリカが存在しない場合、同じ AZ 内に新規インスタンスが作成され、10分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。
 
 Aurora レプリカのフェールオーバーは優先順位を設定することが可能です。
 
