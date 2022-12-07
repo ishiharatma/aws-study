@@ -23,12 +23,12 @@ Duration: 00:01:00
     - [単一構成](#単一構成)
     - [レプリカ構成](#レプリカ構成)
   - [レプリカの昇格](#レプリカの昇格)
-    - [Aurora のクロスリージョンレプリケーション](#aurora-のクロスリージョンレプリケーション)
   - [インスタンスタイプ](#インスタンスタイプ)
   - [スケールアップ/ダウン](#スケールアップダウン)
   - [ストレージの自動スケーリング](#ストレージの自動スケーリング)
   - [Aurora のログ](#aurora-のログ)
   - [Serverless](#serverless)
+  - [Global Database](#global-database)
   - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
 
 ## Aurora について知るには
@@ -177,50 +177,6 @@ Duration: 00:05:00
 
 [Amazon Aurora でリードレプリカを使用するときの一般的な問題を解決するにはどうすればよいですか？](https://aws.amazon.com/jp/premiumsupport/knowledge-center/aurora-mysql-read-replicas/)
 
-### Aurora のクロスリージョンレプリケーション
-
-Duration: 00:05:00
-
-RDS のクロスリージョンレプリケーションとは違い、Aurora ではストレージのみがレプリケーションされます。
-
-クロスリージョン自動バックアップは、レプリケーション先のリージョンに自動スナップショットとトランザクションログのバックアップが保存されます。
-
-本機能によって、災害対策（DR）が求められるシステムにおいて、リージョン障害が発生してもバックアップが作成されたリージョンでリストアを行うことで迅速に復旧することができます。
-
-ただし、リージョンを跨いだストレージ料金やデータ転送（スナップショットとトランザクションログ）が必要です。
-
-また、送信元と送信先のリージョンのサポートも確認しておく必要があります。
-
-日本に存在するリージョンでは、東京リージョンはサポートするリージョンは多いですが、大阪リージョンでは東京のみとなっています。
-
-- アジアパシフィック (東京)
-  - ⇒アジアパシフィック (大阪)
-  - ⇒アジアパシフィック (ソウル)
-  - ⇒アジアパシフィック (シンガポール)
-  - ⇒米国東部 (バージニア北部)
-  - ⇒米国東部 (オハイオ)
-  - ⇒米国西部 (オレゴン)
-- アジアパシフィック (大阪)
-  - ⇒アジアパシフィック (東京)
-
-参考＞[送信元と送信先 AWS リージョン サポート](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html#USER_ReplicateBackups.RegionVersionAvailability)
-
-クロスリージョン自動バックアップがサポートされているデータベースエンジンは以下の通りです。
-
-| DB エンジン          | CR自動バックアップ作成可？ |
-| -------------------- | -------------------------- |
-| PostgreSQL           | ○                          |
-| MySQL                |                            |
-| Oracle               | ○                          |
-| Microsoft SQL Server | ○                          |
-| MariaDB              |                            |
-
-参考＞[クロスリージョン自動バックアップ](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.html)
-
-参考＞[別の AWS リージョン への自動バックアップのレプリケーション](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
-
-参考＞[Amazon RDS for PostgreSQL クロスリージョンリードレプリカのためのベストプラクティス](https://aws.amazon.com/jp/blogs/news/best-practices-for-amazon-rds-for-postgresql-cross-region-read-replicas/)
-
 ## インスタンスタイプ
 
 Duration: 00:01:00
@@ -270,7 +226,34 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 
 ## Serverless
 
+Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユースケースは次の通りです。安定したトラフィックが予想できる場合は Provisioned インスタンス（通常の Aurora）を利用するほうが良いです。
 
+- v1
+  - 頻度が低く、断続的、または予測が困難なワークロード
+- v2
+  - データベースの使用負荷が短時間の間だけ増大し、その後に軽いアクティビティが長時間続く
+
+基本的にどちらも、開発とテストを主なユースケースとしつつ、一部本番アプリケーションも想定されています。
+
+| 項目                 | Serverless v1                                                                     | Serverless v2                                                         |
+| -------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| GA                   | 2018年10月                                                                        | 2022年4月                                                             |
+| サポートエンジン     | Aurora MySQL 5.6 or 5.7 互換バージョン、Aurora PostgreSQL 10 or 11 互換バージョン | Aurora MySQL バージョン 3、Aurora PostgreSQL 13 or 14                 |
+| ACU                  | 1～128 ACU                                                                        | 0.5～256 ACU（Performance Insights を使用した場合最低でも 2ACU必要 ） |
+| 料金                 | 0.10 USD/ACU                                                                      | 0.20 USD/ACU                                                          |
+| マルチ AZ            |                                                                                   | ○                                                                     |
+| 一時停止             | ○                                                                                 |                                                                       |
+| Data API             | ○                                                                                 |                                                                       |
+| クエリエディタ       | ○                                                                                 |                                                                       |
+| Global Database      |                                                                                   | ○                                                                     |
+| Performance Insights |                                                                                   | ○ |
+| RDS Proxy |                                                                                   | ○ |
+
+[Amazon Aurora Serverless v1 の使用](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
+
+[Aurora Serverless v2 を使用する](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.html)
+
+## Global Database
 
 ## Blue/Green Deployments(New: 2022-11-27)
 

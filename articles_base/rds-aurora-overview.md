@@ -91,7 +91,7 @@ Duration: 03:05:36
 
 ## RDS と Aurora の比較サマリ
 
-Duration: 00:10:00
+Duration: 00:05:00
 
 比較のサマリは以下の通りです。
 
