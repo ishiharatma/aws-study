@@ -15,4 +15,4 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [RDS と Aurora の比較](/articles_base/rds-aurora-overview.md)
 
-[RDS 概要(/articles_base/rds-overview.md)
+[RDS 概要](/articles_base/rds-overview.md)
