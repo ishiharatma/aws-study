@@ -326,6 +326,6 @@ RDS（マルチAZ）は月額「748.30USD」、Aurora（+レプリカ）は月�
 | Aurora（レプリカ） | 0.313USDx730時間=228.49USD | -                             | 0.24USD/100 万リクエストx3億/100万=72.00USD | 300.49USD |
 
 
-## 判断フロー
+## RDS と Aurora どっちを使うかフロー
 
 ![rds-aurora-flow](/images/rds-aurora/rds-aurora-flow.png)
