@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# Relational Database Service(RDS)
+# Amazon Relational Database Service(RDS)
 
 ## はじめに
 
@@ -39,7 +39,6 @@ Duration: 00:01:00
   - [ストレージの自動スケーリング](#ストレージの自動スケーリング)
   - [RDS のログ](#rds-のログ)
   - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
-
 
 ## RDS について知るには
 
@@ -76,7 +75,7 @@ Duration: 03:05:36
 ![aws-summit-2019-dat309-r](/images/rds-aurora/aws-summit-2019-dat309-r-320.jpg)
 
 
-## RDS とは
+## Amazon RDS とは
 
 Duration: 00:01:00
 

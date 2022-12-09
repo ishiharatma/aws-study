@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: false
 ---
 
-# Aurora
+# Amazon Aurora
 
 ## はじめに
 
@@ -17,12 +17,12 @@ published: false
 
 Duration: 00:01:00
 
-- [Aurora](#aurora)
+- [Amazon Aurora](#amazon-aurora)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [Aurora について知るには](#aurora-について知るには)
   - [Aurora について知るには(その他)](#aurora-について知るにはその他)
-  - [Aurora とは](#aurora-とは)
+  - [Amazon Aurora とは](#amazon-aurora-とは)
   - [サポートされているデータベースエンジン](#サポートされているデータベースエンジン)
   - [Aurora の基本的な構成](#aurora-の基本的な構成)
   - [SLA](#sla)
@@ -84,7 +84,7 @@ Duration: 03:05:36
 
 ![aws-summit-2019-dat309-r](/images/rds-aurora/aws-summit-2019-dat309-r-320.jpg)
 
-## Aurora とは
+## Amazon Aurora とは
 
 Duration: 00:01:00
 

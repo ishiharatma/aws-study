@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Simple Storage Service（S3）</title>
+  <title>Amazon Simple Storage Service（S3）</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="s3-overview"
-                  title="Simple Storage Service（S3）"
+                  title="Amazon Simple Storage Service（S3）"
                   environment="web"
                   feedback-link="">
     
@@ -34,36 +34,75 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="S3 とは" duration="117">
-        <p>スケーラビリティ、データ可用性、セキュリティ、およびパフォーマンスを提供するオブジェクトストレージサービスです。 データ耐久性はイレブンナイン（99.999999999 %）です。可用性はストレージクラスによって異なります。</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=oFG5kMZjKtc" target="_blank">Amazon S3/Glacier(YouTube)</a>(1:00:33)</p>
-<p class="image-container"><img src="img\\46ab453257be9a02.jpg"></p>
-<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=7LRSDrHb2Ho" target="_blank">Amazon S3 ユースケースおよびサービスアップデート(YouTube)</a>(56:21)</p>
-<p class="image-container"><img src="img\\3ad8a63f108a1b0b.jpg"></p>
-<p><a href="https://aws.amazon.com/jp/s3/" target="_blank">S3 サービス概要</a></p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/s3/?id=docs_gateway" target="_blank">S3 ドキュメント</a></p>
-<p><a href="https://aws.amazon.com/jp/s3/faqs/" target="_blank">S3 よくある質問</a></p>
+      <google-codelab-step label="Contents" duration="0">
+        <ul>
+<li><a href="#amazon-simple-storage-services3" target="_blank">Amazon Simple Storage Service（S3）</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#amazon-s3-%E3%81%A8%E3%81%AF" target="_blank">Amazon S3 とは</a></li>
+<li><a href="#amazon-s3-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">Amazon S3 の基本</a><ul>
+<li><a href="#1ec2%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88-internet-gateway" target="_blank">1.EC2（パブリックサブネット）&gt; Internet Gateway</a></li>
+<li><a href="#2ec2%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88-nat-gateway" target="_blank">2.EC2（プライベートサブネット）&gt; NAT Gateway</a></li>
+<li><a href="#3ec2%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88-vpc-endpointgateway%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">3.EC2（プライベートサブネット）&gt; VPC Endpoint(Gatewayタイプ)</a></li>
+<li><a href="#4ec2%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88-vpc-endpointinterface%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">4.EC2（プライベートサブネット）&gt; VPC Endpoint(Interfaceタイプ)</a></li>
+<li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E6%AF%94%E8%BC%83" target="_blank">コスト比較</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%90%E3%82%B1%E3%83%83%E3%83%88%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">バケットポリシー</a></li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%AA%E3%82%B9%E3%83%88acl" target="_blank">アクセスコントロールリスト（ACL）</a></li>
+<li><a href="#%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB" target="_blank">ライフサイクル</a></li>
+<li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">ストレージタイプ</a></li>
+<li><a href="#%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8B%E3%83%B3%E3%82%B0" target="_blank">バージョニング</a></li>
+<li><a href="#%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">暗号化</a></li>
+<li><a href="#%E9%9D%99%E7%9A%84%E3%82%A6%E3%82%A7%E3%83%96%E3%82%B5%E3%82%A4%E3%83%88%E3%81%AE%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">静的ウェブサイトのホスティング</a></li>
+<li><a href="#s3-transfer-acceleration" target="_blank">S3 Transfer Acceleration</a><ul>
+<li><a href="#amazon-s3-transfer-acceleration-%E3%81%AE%E9%80%9F%E5%BA%A6%E6%AF%94%E8%BC%83%E3%83%84%E3%83%BC%E3%83%AB" target="_blank">Amazon S3 Transfer Acceleration の速度比較ツール</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%AD%E3%82%B0" target="_blank">アクセスログ</a></li>
+<li><a href="#s3-select" target="_blank">S3 Select</a></li>
+<li><a href="#storage-lens" target="_blank">Storage Lens</a></li>
+<li><a href="#%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%82%BF%E6%94%AF%E6%89%95%E3%81%84%E3%83%90%E3%82%B1%E3%83%83%E3%83%88" target="_blank">リクエスタ支払いバケット</a></li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">アクセスポイント</a></li>
+<li><a href="#%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E6%9C%80%E9%81%A9%E5%8C%96" target="_blank">パフォーマンスの最適化</a></li>
+<li><a href="#%E4%BB%96%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">他のサービスとの連携</a></li>
+</ul>
+</li>
+</ul>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="S3 の基本" duration="2">
-        <p class="image-container"><img src="img\\a31f837f62e95f7f.png"></p>
+      <google-codelab-step label="Amazon S3 とは" duration="117">
+        <p>スケーラビリティ、データ可用性、セキュリティ、およびパフォーマンスを提供するオブジェクトストレージサービスです。 データ耐久性はイレブンナイン（99.999999999 %）です。可用性はストレージクラスによって異なります。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=oFG5kMZjKtc" target="_blank">Amazon S3/Glacier(YouTube)</a>(1:00:33)</p>
+<p class="image-container"><img alt="blackbelt_s3" src="img\\46ab453257be9a02.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=7LRSDrHb2Ho" target="_blank">Amazon S3 ユースケースおよびサービスアップデート(YouTube)</a>(56:21)</p>
+<p class="image-container"><img alt="blackbelt_s3_update" src="img\\3ad8a63f108a1b0b.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/s3/" target="_blank">Amazon S3 サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/s3/?id=docs_gateway" target="_blank">Amazon S3 ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/s3/faqs/" target="_blank">Amazon S3 よくある質問</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Amazon S3 の基本" duration="2">
+        <p class="image-container"><img alt="s3_overview" src="img\\a31f837f62e95f7f.png"></p>
 <p>S3 のデータ耐久性はイレブンナイン（99.999999999 %）で、可用性は 99.99 %です（ストレージタイプによって異なります）。 耐久性とは、データが失われないことに対する指標で、可用性は稼働し続けることの指標です。</p>
 <p>このイレブンナインという耐久性は、S3 にオブジェクトをアップロードすると、自動的に 3AZ 以上にバックアップが行われることで実現しています。バックアップされるのはリージョン内の AZ なので、リージョン障害時にはアクセスできなくなります。</p>
 <p>S3 のオブジェクトキー名には、<code>BucketName/Project/Word123.txt</code> のように指定することが多いです。 <code>Project/WordFiles</code> がプレフィックス、<code>123.txt</code> がオブジェクト名という定義です。 マネジメントコンソールでは、フォルダのような階層で表示されますが、実際は階層というのは存在せず、<code>/</code> 区切りのプレフィックスをグループ化して表示しており、フォルダという概念をサポートしているだけです。</p>
 <p>S3 はリージョンのサービスなので、VPC 内からアクセスするにはいくつかのパターンがあります。</p>
-<h2 is-upgraded>①EC2（パブリックサブネット）⇒ Internet Gateway</h2>
-<p class="image-container"><img src="img\\166ac9d8c3c44b7a.png"></p>
+<h2 is-upgraded>1.EC2（パブリックサブネット）&gt; Internet Gateway</h2>
+<p class="image-container"><img alt="s3_ec2_access_pattern_1" src="img\\166ac9d8c3c44b7a.png"></p>
 <p>シンプルに、Internet Gateway を通してアクセスします。</p>
-<h2 is-upgraded>②EC2（プライベートサブネット） ⇒ NAT Gateway</h2>
-<p class="image-container"><img src="img\\3c9426badfc0cc14.png"></p>
+<h2 is-upgraded>2.EC2（プライベートサブネット）&gt; NAT Gateway</h2>
+<p class="image-container"><img alt="s3_ec2_access_pattern_2" src="img\\3c9426badfc0cc14.png"></p>
 <p>NAT Gateway を利用することでアクセスできます。ただし、NAT Gateway はコストが高めです。</p>
-<h2 is-upgraded>③EC2（プライベートサブネット） ⇒ VPC Endpoint(Gatewayタイプ)</h2>
-<p class="image-container"><img src="img\\6937c19bfbc30139.png"></p>
+<h2 is-upgraded>3.EC2（プライベートサブネット）&gt; VPC Endpoint(Gatewayタイプ)</h2>
+<p class="image-container"><img alt="s3_ec2_access_pattern_3" src="img\\6937c19bfbc30139.png"></p>
 <p>S3 や DynamoDB を利用する場合は、コストがかからないのでこちらを使います。 VPC Endpoint(Interfaceタイプ)と違い、アクセスはグローバル IPです。（通信経路は、AWS内でのプライベートです）</p>
-<h2 is-upgraded>④EC2（プライベートサブネット） ⇒ VPC Endpoint(Interfaceタイプ)</h2>
-<p class="image-container"><img src="img\\cba24235a199877a.png"></p>
+<h2 is-upgraded>4.EC2（プライベートサブネット）&gt; VPC Endpoint(Interfaceタイプ)</h2>
+<p class="image-container"><img alt="s3_ec2_access_pattern_4" src="img\\cba24235a199877a.png"></p>
 <p>プライベートIPでのアクセスが可能です。ただし、VPC Endpointを起動している時間でコストが発生します。他のサービスでも VPC エンドポイントを使用していると最もコストが高くなるパターンです。</p>
 <h2 is-upgraded>コスト比較</h2>
 <p>月に100 GBほどデータ転送が発生した場合の比較です。 VPCエンドポイントは24時間×1か月（30.5日）使用しているものとします。</p>
@@ -121,7 +160,7 @@
 <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example1.html" target="_blank">バケット所有者がユーザーにバケットのアクセス許可を付与する</a></p>
 <p>別アカウントからのアクセスを許可する場合は、バケットポリシー（アクセスされる側のS3に設定）とIAMポリシー（アクセスする別アカウント側で設定）の<strong>両方</strong>で許可する必要があります。</p>
 <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/example-walkthroughs-managing-access-example2.html" target="_blank">バケット所有者がクロスアカウントのバケットのアクセス許可を付与する</a></p>
-<p>バケットポリシーのサイズには制限があり、20 KB となっています。 <img src="img\\6e89b68e49da0be9.png"></p>
+<p>バケットポリシーのサイズには制限があり、20 KB となっています。 <img alt="s3_bucket_policy" src="img\\6e89b68e49da0be9.png"></p>
 <p>https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html</p>
 
 
@@ -144,16 +183,16 @@
 <pre><code language="language-text" class="language-text">ライフサイクルのルールは、最大 1,000個です。この制限は引き上げができません。
 </code></pre>
 <p>このライフサイクルでオブジェクトが移動されるのは、0：00（UTC）です。日本時間では、午前 9時となります。 削除日数が1日の場合、午前9時より前に作成されたものは翌日9時、午前9時より後に作成されたものは、翌々日の9時以降に削除されることになります。</p>
-<p class="image-container"><img src="img\\8101278a0849020b.png"></p>
+<p class="image-container"><img alt="s3_lifecycle_1" src="img\\8101278a0849020b.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="ストレージタイプ" duration="5">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank">Amazon S3 ストレージクラスを使用する</a></p>
-<p class="image-container"><img src="img\\e6b24db390ed5fe.png"></p>
+<p class="image-container"><img alt="s3_storage_type" src="img\\e6b24db390ed5fe.png"></p>
 <p>上記画像は、AWSドキュメントにある<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-general-considerations-transition-sc" target="_blank">ストレージクラス間の移行のためのウォーターフォールモデル</a>に情報を追加したものです。</p>
-<p class="image-container"><img src="img\\a34df6694a7f3504.png"></p>
+<p class="image-container"><img alt="lifecycle-transitions-v3" src="img\\a34df6694a7f3504.png"></p>
 <pre><code language="language-text" class="language-text">アクセス頻度や削除頻度が不明な場合は、
 最低保存期間の制約がない「S3 Intelligent-Tiering」に移動するようにライフサイクルを定義しておけばコスト削減ができます。
 </code></pre>
@@ -215,7 +254,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="バージョニング" duration="2">
-        <p class="image-container"><img src="img\\4bfa9ca0511f3f5a.png"></p>
+        <p class="image-container"><img alt="s3_versioning" src="img\\4bfa9ca0511f3f5a.png"></p>
 <p>パフォーマンスに影響を与えずに偶発的な上書きや削除から保護するためにアップロードごとに新しいバージョンを生成するオプションです。 削除されたオブジェクトの取得や、過去のバージョンへのロールバックが可能になります。</p>
 <pre><code language="language-text" class="language-text">デフォルトでは無効になっているので利用する場合は、バージョニングを有効にする必要があります。
 </code></pre>
@@ -271,16 +310,16 @@
       <google-codelab-step label="静的ウェブサイトのホスティング" duration="1">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/WebsiteHosting.html" target="_blank">Amazon S3 を使用して静的ウェブサイトをホスティングする</a></p>
 <p>S3 バケット単体で静的ウェブサイトが構築できる機能です。この機能だけでは HTTP アクセスのみですので、HTTPS が必要な場合は他のサービスと組み合わせる必要があります。（CloudFrontとの併用が最も簡単です）</p>
-<p class="image-container"><img src="img\\b9f55aed65ad42e9.png"></p>
+<p class="image-container"><img alt="s3_static_website_1" src="img\\b9f55aed65ad42e9.png"></p>
 <p>IP制限をした静的ウェブサイトの設定例</p>
-<p class="image-container"><img src="img\\8950a549d9bad3bc.png"></p>
+<p class="image-container"><img alt="s3_static_website_2" src="img\\8950a549d9bad3bc.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="S3 Transfer Acceleration" duration="5">
         <p>AWS ドキュメント&gt;<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html" target="_blank">Amazon S3 Transfer Acceleration を使用した高速かつ安全なファイル転送の設定</a></p>
-<p class="image-container"><img src="img\\2a8cbeba163a2016.png"></p>
+<p class="image-container"><img alt="s3_Transfer_Acceleration" src="img\\2a8cbeba163a2016.png"></p>
 <p>遠方のリージョンからの転送を高速化できます。 同一リージョンで転送する分には問題になりませんが、海外展開している事業で、海外リージョンを利用し、中央リージョンのバケットに対して、世界中からアップロードするようなシステムの場合には、データ転送の距離により遅延が問題になります。 これを解消できる機能です。</p>
 <pre><code language="language-text" class="language-text">大きいオブジェクトの転送の場合、50%から500%まで転送速度を改善することができます。
 </code></pre>
@@ -290,14 +329,15 @@
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html#transfer-acceleration-requirements" target="_blank">Transfer Acceleration を使用するための要件</a></p>
 <h2 is-upgraded>Amazon S3 Transfer Acceleration の速度比較ツール</h2>
 <p><a href="https://s3-accelerate-speedtest.s3-accelerate.amazonaws.com/en/accelerate-speed-comparsion.html" target="_blank">速度比較ツール</a>を使用すると、高速化した場合と高速化していない場合の Amazon S3 リージョン間でのアップロード速度を比較できます。</p>
-<p class="image-container"><img src="img\\3dc955531237ae06.png"></p>
-<p>ページを開くと計測が開始されます。全部終了するまでに、10分程度かかります。 このようにマルチパートアップロードによってファイルがアップロードされています。 <img src="img\\5c975106851c42c9.png"></p>
+<p class="image-container"><img alt="S3TransferAcceleration_0a" src="img\\3dc955531237ae06.png"></p>
+<p>ページを開くと計測が開始されます。全部終了するまでに、10分程度かかります。 このようにマルチパートアップロードによってファイルがアップロードされています。 <img alt="S3TransferAcceleration_0b" src="img\\5c975106851c42c9.png"></p>
 <p>結果はこのように表示されます。 東京⇒東京リージョンだと、2 %遅くなってます。別のタイミングで実施したら、5%遅くなりました。やはりエッジロケーションを経由する分、遅くなるようです。（実際に利用するときは、AWS が判定を行い、エッジロケーションを経由しない転送にするはず）</p>
-<p class="image-container"><img src="img\\53c5fc274948a046.png"></p>
-<p class="image-container"><img src="img\\42f2017cb8ebabe8.png"></p>
-<p class="image-container"><img src="img\\d33b5850bfb772a8.png"></p>
-<p class="image-container"><img src="img\\ed2eee34fd6abcec.png"></p>
-<p>リージョンマップにマッピングしてみるとこのようになりました。 リージョン間の距離と比例してスピードアップするわけではなさそうですが、遠方のリージョンの方が明らかにスピードアップしています。 <img src="img\\8ba959d92c137906.png"></p>
+<p class="image-container"><img alt="S3TransferAcceleration_tool_0" src="img\\53c5fc274948a046.png"></p>
+<p class="image-container"><img alt="S3TransferAcceleration_tool_1" src="img\\42f2017cb8ebabe8.png"></p>
+<p class="image-container"><img alt="S3TransferAcceleration_tool_2" src="img\\d33b5850bfb772a8.png"></p>
+<p class="image-container"><img alt="S3TransferAcceleration_tool_3" src="img\\ed2eee34fd6abcec.png"></p>
+<p>リージョンマップにマッピングしてみるとこのようになりました。 リージョン間の距離と比例してスピードアップするわけではなさそうですが、遠方のリージョンの方が明らかにスピードアップしています。</p>
+<p class="image-container"><img alt="S3TransferAcceleration_tool_world" src="img\\8ba959d92c137906.png"></p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>Rank</p>
 </td><td colspan="3" rowspan="1"><p>Region</p>
@@ -385,7 +425,7 @@
       <google-codelab-step label="アクセスログ" duration="2">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/ServerLogs.html" target="_blank">サーバーアクセスログを使用したリクエストのログ記録</a></p>
 <p>バケットに対する監査などの目的で、S3のサーバアクセスログを別のバケットに保存することができます。</p>
-<p class="image-container"><img src="img\\bd2218e0607be2e.png"></p>
+<p class="image-container"><img alt="s3_accesslog" src="img\\bd2218e0607be2e.png"></p>
 <p>設定する場合、以下に注意する必要があります。</p>
 <p>「Amazon S3 バケットについてのサーバーアクセスログを同じバケットにプッシュすることはできますか?」 https://aws.amazon.com/jp/premiumsupport/knowledge-center/s3-server-access-logs-same-bucket/</p>
 <pre><code language="language-text" class="language-text">バケットについてのサーバーアクセスログを同じバケットにプッシュしないでください。
@@ -404,17 +444,17 @@
 <p>詳細は以下のドキュメントを参照してください。 AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/selecting-content-from-objects.html" target="_blank">Amazon S3 Select を使用したデータのフィルタリングと取得</a></p>
 <p>AWS WAF のログに対して S3 Select を実行した例です。</p>
 <p>WAF のログは1行ずつのJSONレコードとなっています。</p>
-<p class="image-container"><img src="img\\2638d748d2f2105d.png"></p>
+<p class="image-container"><img alt="s3_select_0" src="img\\2638d748d2f2105d.png"></p>
 <p>形式を「JSON」、タイプを「行」、圧縮を「GZIP」とします。</p>
-<p class="image-container"><img src="img\\2a739fb46f4f2176.png"></p>
+<p class="image-container"><img alt="s3_select_0a" src="img\\2a739fb46f4f2176.png"></p>
 <p>WHERE 句でのカラムの指定は、「s.action」ではなく「s.&#34;action&#34;」とする必要がありました。</p>
 <pre><code language="language-sql" class="language-sql">SELECT * FROM s3object s WHERE s.&#34;action&#34; = &#39;ALLOW&#39; LIMIT 5
 </code></pre>
-<p class="image-container"><img src="img\\168c6ff325d8c7d.png"></p>
+<p class="image-container"><img alt="s3_select_1a" src="img\\168c6ff325d8c7d.png"></p>
 <p>抽出するカラムを絞ってみます（射影）</p>
 <pre><code language="language-sql" class="language-sql">SELECT s.&#34;timestamp&#34;, s.&#34;terminatingRuleId&#34;,s.&#34;action&#34;  FROM s3object s WHERE s.&#34;action&#34; = &#39;ALLOW&#39; LIMIT 5
 </code></pre>
-<p class="image-container"><img src="img\\e017ccd0d7faab46.png"></p>
+<p class="image-container"><img alt="s3_select_1b" src="img\\e017ccd0d7faab46.png"></p>
 <p>対象の日時が特定できている場合は S3 Select を使うことで手軽に検索・集計が可能です。Athena のように事前にテーブル定義を行わなくても検索できるのが便利です。 ただ、対象の日時が特定できない場合や広い範囲を検索したい場合は、Athena を使うほうがよいと思います。</p>
 <pre><code language="language-text" class="language-text">SQL の ORDER が使えないという点も注意が必要です。
 </code></pre>
@@ -426,11 +466,11 @@
       <google-codelab-step label="Storage Lens" duration="3">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage_lens.html" target="_blank">S3 Storage Lens</a></p>
 <p>Storage Lens を使うと、オブジェクトストレージの使用状況とアクティビティの傾向を可視化し、ストレージコストの最適化とデータ保護のベストプラクティスの推奨事項を確認することができます。 不要なデータが存在していることや、ライフサイクルが想定通りになっておらず、容量が増加しているなど、分析できます。 デフォルトでは、「default-account-dashboard」というダッシュボードが作成されているので、すぐに分析することができます。 より詳細に分析したい場合は、無料のメトリクスから有料のメトリクスに切り替えることができます。</p>
-<p>全バケットの概要 <img src="img\\b4950fcab520a1bf.png"></p>
-<p>バケットごとの容量推移 <img src="img\\1bab67944dba4ea8.png"></p>
-<p>バケットごとの現在の容量 <img src="img\\8df6409dda6803dc.png"></p>
-<p>現行バージョン、非現行バージョン、削除マーカー、未完了のマルチパートアップロード <img src="img\\63b5cbe58ff673b8.png"></p>
-<p>ストレージクラスごと <img src="img\\774e60b22281b6f0.png"></p>
+<p>全バケットの概要 <img alt="strage_lens_3" src="img\\b4950fcab520a1bf.png"></p>
+<p>バケットごとの容量推移 <img alt="strage_lens_1" src="img\\1bab67944dba4ea8.png"></p>
+<p>バケットごとの現在の容量 <img alt="strage_lens_2" src="img\\8df6409dda6803dc.png"></p>
+<p>現行バージョン、非現行バージョン、削除マーカー、未完了のマルチパートアップロード <img alt="strage_lens_4" src="img\\63b5cbe58ff673b8.png"></p>
+<p>ストレージクラスごと <img alt="strage_lens_5" src="img\\774e60b22281b6f0.png"></p>
 
 
       </google-codelab-step>
@@ -447,7 +487,7 @@
       <google-codelab-step label="アクセスポイント" duration="2">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/access-points.html" target="_blank">Amazon S3 アクセスポイントを使用したデータアクセスの管理</a></p>
 <p>バケットに複数のユーザーやアカウントからアクセスがある場合、バケットポリシーでの設定が煩雑になります。 そこで、用途ごとにアクセスポイントを作成することで、アクセスポイントごとのポリシーを定義することができます。</p>
-<p class="image-container"><img src="img\\dd8843f83484a7be.png"></p>
+<p class="image-container"><img alt="s3_accesspoint" src="img\\dd8843f83484a7be.png"></p>
 <p>このように、アクセスポイントポリシーを定義できます。</p>
 <pre><code language="language-json" class="language-json">{
     &#34;Version&#34;:&#34;2012-10-17&#34;,
@@ -502,7 +542,7 @@ BucketName/2022-11-02/aaa/xxx000000001.log
       </google-codelab-step>
     
       <google-codelab-step label="他のサービスとの連携" duration="1">
-        <p class="image-container"><img src="img\\adcba94193679c8f.png"></p>
+        <p class="image-container"><img alt="s3_services" src="img\\adcba94193679c8f.png"></p>
 <p>2019年頃の資料のため、現在では AWS WAF も直接 S3 へログ配信できるようになっているため連携できるサービスが増えています。</p>
 
 

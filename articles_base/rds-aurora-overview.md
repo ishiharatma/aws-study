@@ -1,4 +1,4 @@
-# RDS と Aurora の比較
+# Amazon RDS と Amazon Aurora の比較
 
 ## はじめに
 

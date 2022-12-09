@@ -34,15 +34,42 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Contents" duration="0">
+        <ul>
+<li><a href="#elastic-load-balancingelb" target="_blank">Elastic Load Balancing(ELB)</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#elb-%E3%81%A8%E3%81%AF" target="_blank">ELB とは</a></li>
+<li><a href="#elb-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">ELB の基本</a></li>
+<li><a href="#elb-%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">ELB の種類</a><ul>
+<li><a href="#clbclassic-load-balancer" target="_blank">CLB:Classic Load Balancer</a></li>
+<li><a href="#albapplication-load-balancer" target="_blank">ALB:Application Load Balancer</a></li>
+<li><a href="#nlbnetwork-load-balancer" target="_blank">NLB:Network Load Balancer</a></li>
+<li><a href="#glbgateway-load-balancer" target="_blank">GLB:Gateway Load Balancer</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA-cidr" target="_blank">サブネットに必要な CIDR</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%82%A3%E3%83%83%E3%82%AD%E3%83%BC%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">スティッキーセッション</a></li>
+<li><a href="#%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%BE%E3%83%BC%E3%83%B3%E8%B2%A0%E8%8D%B7%E5%88%86%E6%95%A3" target="_blank">クロスゾーン負荷分散</a></li>
+<li><a href="#connection-draining" target="_blank">Connection Draining</a></li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%AD%E3%82%B0" target="_blank">アクセスログ</a></li>
+<li><a href="#%E4%BB%96%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">他のサービスとの連携</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="ELB とは" duration="1">
         <p class="image-container"><img src="img\\86b8c8c264fefa76.png"></p>
 <p>Elastic Load Balancing は、受信したトラフィックを複数のアベイラビリティーゾーンの複数のターゲット (EC2 インスタンス、コンテナ、IP アドレスなど) に自動的に分散させます。さらに、登録されているターゲットの状態をモニタリングし、正常なターゲットにのみトラフィックをルーティングします。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=4laAoK-zXko" target="_blank">Elastic Load Balancing (ELB)(YouTube)</a></p>
-<p class="image-container"><img src="img\\a996b51f3b64114e.jpg"></p>
+<p class="image-container"><img alt="blackbelt_elb" src="img\\a996b51f3b64114e.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=tiwgoSNvh3k" target="_blank">Gateway Load Balancer(YouTube)</a></p>
-<p class="image-container"><img src="img\\b7c1180fe80ca409.jpg"></p>
-<p><a href="https://aws.amazon.com/jp/s3/" target="_blank">Elastic Load Balancing 概要</a></p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/s3/?id=docs_gateway" target="_blank">Elastic Load Balancing ドキュメント</a></p>
+<p class="image-container"><img alt="blackbelt_glb" src="img\\b7c1180fe80ca409.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/elasticloadbalancing/" target="_blank">Elastic Load Balancing 概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/?id=docs_gateway" target="_blank">Elastic Load Balancing ドキュメント</a></p>
 <p><a href="https://aws.amazon.com/jp/elasticloadbalancing/faqs/" target="_blank">Elastic Load Balancing のよくある質問</a></p>
 
 
@@ -53,21 +80,21 @@
 <li>Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類があります。 <ul>
 <li>Internet-Facing はパブリックサブネットのみ配置可</li>
 <li>Internal はプライベートサブネットにも配置可</li>
-<li><img src="img\\8e36dee03cd33a1a.png"></li>
+<li><img alt="create_elb" src="img\\8e36dee03cd33a1a.png"></li>
 </ul>
 </li>
 <li>上記どちらもデフォルトでは、「xxxxxx.ap-northeast-1.elb.amazonaws.com」といった DNS 名が付与されます。 <ul>
-<li><img src="img\\a0e1f64f0a305803.png"></li>
+<li><img alt="elb_dns" src="img\\a0e1f64f0a305803.png"></li>
 </ul>
 </li>
 <li>独自ドメイン（例：www.example.com）が使用したい場合は、Route 53 のエイリアスレコードに登録することで利用可能です。</li>
 <li>負荷の状態に応じて自動的にスケーリングを行うため、管理者が手動で ELB の台数を増やしたり（スケールアウト）、スペックを上げたり（スケールアップ）する必要がありません。 <ul>
 <li>構成図ではこのように書くことが多いが・・ <ul>
-<li><img src="img\\41e29e9454c57ed7.png"></li>
+<li><img alt="elb_scale_1" src="img\\41e29e9454c57ed7.png"></li>
 </ul>
 </li>
 <li>実際にはこのようにスケールアウトしています（クロスゾーン負荷分散が有効な場合の例） <ul>
-<li><img src="img\\3b4868334c639848.png"></li>
+<li><img alt="elb_scale_2" src="img\\3b4868334c639848.png"></li>
 </ul>
 </li>
 <li>ELBが拡張されたり縮小すると応答するIPアドレスの数が変わります。</li>
@@ -76,7 +103,7 @@
 </ul>
 </li>
 <li>ELB で SSL 終端することができます。つまり、クライアント⇔ELB間はSSL通信で、ELB⇔バックエンド間はSSLなしの通信ができます。これにより、バックエンド側での SSL 処理の負荷を軽減できます。 <ul>
-<li><img src="img\\40c2542f5dcaafc7.png"></li>
+<li><img alt="elb_ssl" src="img\\40c2542f5dcaafc7.png"></li>
 </ul>
 </li>
 <li>起動している時間（1時間単位）＋LCU（ロードバランサーキャパシティーユニット）で課金されます。 <ul>
@@ -103,7 +130,7 @@
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/introduction.html" target="_blank">Application Load Balancer とは?</a></p>
 <ul>
 <li>ALB の概要と関連するサービス <ul>
-<li><img src="img\\938afdeb0ce03ad6.png"></li>
+<li><img alt="alb_overview" src="img\\938afdeb0ce03ad6.png"></li>
 </ul>
 </li>
 <li>L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）</li>
@@ -157,7 +184,7 @@
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/gateway/introduction.html" target="_blank">Gateway Load Balancer とは?</a></p>
 <ul>
 <li>GLB 概要 <ul>
-<li><img src="img\\ce3f01266ecabe92.jpg"></li>
+<li><img alt="glb" src="img\\ce3f01266ecabe92.jpg"></li>
 </ul>
 </li>
 <li>2021年に発表された、セキュリティアプライアンス（ファイアウォールなど）をデプロイしたり、スケール、管理ができるようにするサービス</li>
@@ -173,7 +200,7 @@
       <google-codelab-step label="サブネットに必要な CIDR" duration="1">
         <p>AWS ドキュメント &gt; Elastic Load Balancing &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer" target="_blank">ロードバランサーのサブネット</a></p>
 <p>ELB を配置するサブネットの CIDR は最小で 「27」が必要であり、8個以上の IP アドレスの空きが必要です。</p>
-<p class="image-container"><img src="img\\bff93f45807a995a.png"></p>
+<p class="image-container"><img alt="ELB_CIDR" src="img\\bff93f45807a995a.png"></p>
 
 
       </google-codelab-step>
@@ -191,17 +218,17 @@
       <google-codelab-step label="クロスゾーン負荷分散" duration="5">
         <p>複数 AZ に跨るノードに対しても均等にトラフィックを分散するようにできるオプションです。</p>
 <p>どういうことかというと、 ELB が２つの AZ に配置されている場合は、ラウンドロビンルーティングによって、それぞれの ELB に 50%のトラフィックが分散されます。 次のようにノードが等しくなるような構成の場合、それぞれのノードは 25%のトラフィックを処理します。</p>
-<p class="image-container"><img src="img\\c170db7c37f0176d.png"></p>
+<p class="image-container"><img alt="elb_normal" src="img\\c170db7c37f0176d.png"></p>
 <p>ELB 配下にあるノードが異なっている場合には以下のようにトラフィックが偏ります。 この例の場合は、1台のノードが50%のトラフィックを処理している状態になります。</p>
-<p class="image-container"><img src="img\\e9709c5b6ddea14f.png"></p>
+<p class="image-container"><img alt="xz_off_1" src="img\\e9709c5b6ddea14f.png"></p>
 <p>実際は、各 AZ に1台ずつ ELB が存在し、ELB に対してはラウンドロビンルーティングによって、50％ずつに振り分けられます。ELB は、自身と同じ AZ に存在するノードのみに振り分けを行うことからこのような偏りが発生します。</p>
-<p class="image-container"><img src="img\\f8adeb2478194bfb.png"></p>
+<p class="image-container"><img alt="xz_off_2" src="img\\f8adeb2478194bfb.png"></p>
 <p>これを解消し、以下のように均等にトラフィックを分散させるためのオプションが、<strong>クロースゾーン負荷分散</strong>です。クロースゾーン負荷分散が有効になっている場合、全てのノードの数に応じて均等に分散されます。ALB ではデフォルトで有効になっているため、意識しないで利用しています。</p>
-<p class="image-container"><img src="img\\750791b24151aa03.png"></p>
+<p class="image-container"><img alt="xz_on_1" src="img\\750791b24151aa03.png"></p>
 <p>実際は、以下のようになっており、各 ELB がAZ を跨いだノードに対して分散させるためトラフィックが均等になります。</p>
-<p class="image-container"><img src="img\\65eba4646c3f27c7.png"></p>
+<p class="image-container"><img alt="xz_on_2" src="img\\65eba4646c3f27c7.png"></p>
 <p>ただし、<strong>赤色の線は、AZ を跨いだ通信となっており、データ容量で課金される部分です。</strong> この課金有無は、ELB の種類で異なっています。 「よくある質問」にも以下のように記載があり、ALB のみ課金されません。</p>
-<p class="image-container"><img src="img\\970b62f0dcfc9fe9.png"></p>
+<p class="image-container"><img alt="xz_faq" src="img\\970b62f0dcfc9fe9.png"></p>
 
 
       </google-codelab-step>

@@ -6,6 +6,25 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+## Contents
+
+- [Elastic Load Balancing(ELB)](#elastic-load-balancingelb)
+  - [はじめに](#はじめに)
+  - [Contents](#contents)
+  - [ELB とは](#elb-とは)
+  - [ELB の基本](#elb-の基本)
+  - [ELB の種類](#elb-の種類)
+    - [CLB:Classic Load Balancer](#clbclassic-load-balancer)
+    - [ALB:Application Load Balancer](#albapplication-load-balancer)
+    - [NLB:Network Load Balancer](#nlbnetwork-load-balancer)
+    - [GLB:Gateway Load Balancer](#glbgateway-load-balancer)
+  - [サブネットに必要な CIDR](#サブネットに必要な-cidr)
+  - [スティッキーセッション](#スティッキーセッション)
+  - [クロスゾーン負荷分散](#クロスゾーン負荷分散)
+  - [Connection Draining](#connection-draining)
+  - [アクセスログ](#アクセスログ)
+  - [他のサービスとの連携](#他のサービスとの連携)
+
 ## ELB とは
 
 Duration: 00:01:00
@@ -16,15 +35,15 @@ Elastic Load Balancing は、受信したトラフィックを複数のアベイ
 
 【AWS Black Belt Online Seminar】[Elastic Load Balancing (ELB)(YouTube)](https://www.youtube.com/watch?v=4laAoK-zXko)
 
-![](/images/elb/blackbelt_elb.jpg)
+![blackbelt_elb](/images/elb/blackbelt_elb.jpg)
 
 【AWS Black Belt Online Seminar】[Gateway Load Balancer(YouTube)](https://www.youtube.com/watch?v=tiwgoSNvh3k)
 
-![](/images/elb/blackbelt_glb.jpg)
+![blackbelt_glb](/images/elb/blackbelt_glb.jpg)
 
-[Elastic Load Balancing 概要](https://aws.amazon.com/jp/s3/)
+[Elastic Load Balancing 概要](https://aws.amazon.com/jp/elasticloadbalancing/)
 
-[Elastic Load Balancing ドキュメント](https://docs.aws.amazon.com/ja_jp/s3/?id=docs_gateway)
+[Elastic Load Balancing ドキュメント](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/?id=docs_gateway)
 
 [Elastic Load Balancing のよくある質問](https://aws.amazon.com/jp/elasticloadbalancing/faqs/)
 
@@ -35,20 +54,20 @@ Duration: 00:02:00
 - Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類があります。
   - Internet-Facing はパブリックサブネットのみ配置可
   - Internal はプライベートサブネットにも配置可
-  - ![](/images/elb/create_elb.png)
+  - ![create_elb](/images/elb/create_elb.png)
 - 上記どちらもデフォルトでは、「xxxxxx.ap-northeast-1.elb.amazonaws.com」といった DNS 名が付与されます。
-  - ![](/images/elb/elb_dns.png)
+  - ![elb_dns](/images/elb/elb_dns.png)
 - 独自ドメイン（例：www.example.com）が使用したい場合は、Route 53 のエイリアスレコードに登録することで利用可能です。
 - 負荷の状態に応じて自動的にスケーリングを行うため、管理者が手動で ELB の台数を増やしたり（スケールアウト）、スペックを上げたり（スケールアップ）する必要がありません。
   - 構成図ではこのように書くことが多いが・・
-    - ![](/images/elb/elb_scale_1.png)
+    - ![elb_scale_1](/images/elb/elb_scale_1.png)
   - 実際にはこのようにスケールアウトしています（クロスゾーン負荷分散が有効な場合の例）
-    - ![](/images/elb/elb_scale_2.png)
+    - ![elb_scale_2](/images/elb/elb_scale_2.png)
   - ELBが拡張されたり縮小すると応答するIPアドレスの数が変わります。
   - ただし、負荷のスパイク（負荷急増）が発生すると自動スケーリングが間に合わず `503` を返す可能性があります。
   - その場合、暖機運転申請（Pre-Warming ※サポートプランがBussiness以上必要）か自前で段階的に負荷をあげていく仕組みを構築する必要があります。
 - ELB で SSL 終端することができます。つまり、クライアント⇔ELB間はSSL通信で、ELB⇔バックエンド間はSSLなしの通信ができます。これにより、バックエンド側での SSL 処理の負荷を軽減できます。
-  - ![](/images/elb/elb_ssl.png)
+  - ![elb_ssl](/images/elb/elb_ssl.png)
 - 起動している時間（1時間単位）＋LCU（ロードバランサーキャパシティーユニット）で課金されます。
   - 東京リージョンだと最低でも月額 $ 25程度は必要になります。
 
@@ -72,7 +91,7 @@ AWS ドキュメント > [Classic Load Balancer とは?](https://docs.aws.amazon
 AWS ドキュメント > [Application Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/introduction.html)
 
 - ALB の概要と関連するサービス
-  - ![](/images/elb/alb_overview.png)
+  - ![alb_overview](/images/elb/alb_overview.png)
 - L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）
 - クライアントと ALB 間は、HTTP/2 に対応していましたが、暫くの間は ALB とターゲット間の通信は、HTTP/1.1 に変換されていました。現在は、「HTTP/1.1」「HTTP/2」「gRPC」に対応
   - ※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。
@@ -116,7 +135,7 @@ AWS ドキュメント > [Network Load Balancer とは?](https://docs.aws.amazon
 AWS ドキュメント > [Gateway Load Balancer とは?](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/gateway/introduction.html)
 
 - GLB 概要
-  - ![](/images/elb/glb.jpg)
+  - ![glb](/images/elb/glb.jpg)
 - 2021年に発表された、セキュリティアプライアンス（ファイアウォールなど）をデプロイしたり、スケール、管理ができるようにするサービス
 - 従来、トラフィックの監査を行う場合、EC2 上にサードパーティ製の仮想アプライアンスを構築する必要があり、それに対して冗長化は大変だったが、この課題を解消することができるサービス
 - L3（ネットワーク層）で負荷分散
@@ -131,7 +150,7 @@ AWS ドキュメント > Elastic Load Balancing > [ロードバランサーの�
 
 ELB を配置するサブネットの CIDR は最小で 「27」が必要であり、8個以上の IP アドレスの空きが必要です。
 
-![](/images/elb/ELB_CIDR.png)
+![ELB_CIDR](/images/elb/ELB_CIDR.png)
 
 ## スティッキーセッション
 
@@ -158,30 +177,30 @@ Duration: 00:05:00
 ELB が２つの AZ に配置されている場合は、ラウンドロビンルーティングによって、それぞれの ELB に 50%のトラフィックが分散されます。
 次のようにノードが等しくなるような構成の場合、それぞれのノードは 25%のトラフィックを処理します。
 
-![](/images/elb/elb_normal.png)
+![elb_normal](/images/elb/elb_normal.png)
 
 ELB 配下にあるノードが異なっている場合には以下のようにトラフィックが偏ります。
 この例の場合は、1台のノードが50%のトラフィックを処理している状態になります。
 
-![](/images/elb/xz_off_1.png)
+![xz_off_1](/images/elb/xz_off_1.png)
 
 実際は、各 AZ に1台ずつ ELB が存在し、ELB に対してはラウンドロビンルーティングによって、50％ずつに振り分けられます。ELB は、自身と同じ AZ に存在するノードのみに振り分けを行うことからこのような偏りが発生します。
 
-![](/images/elb/xz_off_2.png)
+![xz_off_2](/images/elb/xz_off_2.png)
 
 これを解消し、以下のように均等にトラフィックを分散させるためのオプションが、**クロースゾーン負荷分散**です。クロースゾーン負荷分散が有効になっている場合、全てのノードの数に応じて均等に分散されます。ALB ではデフォルトで有効になっているため、意識しないで利用しています。
 
-![](/images/elb/xz_on_1.png)
+![xz_on_1](/images/elb/xz_on_1.png)
 
 実際は、以下のようになっており、各 ELB がAZ を跨いだノードに対して分散させるためトラフィックが均等になります。
 
-![](/images/elb/xz_on_2.png)
+![xz_on_2](/images/elb/xz_on_2.png)
 
 ただし、**赤色の線は、AZ を跨いだ通信となっており、データ容量で課金される部分です。**
 この課金有無は、ELB の種類で異なっています。
 「よくある質問」にも以下のように記載があり、ALB のみ課金されません。
 
-![](/images/elb/xz_faq.png)
+![xz_faq](/images/elb/xz_faq.png)
 
 ## Connection Draining
 
