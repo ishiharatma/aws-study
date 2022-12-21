@@ -1,6 +1,6 @@
 # AWS 勉強ガイド
 
-## はじめに
+## 初心者向け
 
 - AWS のクラウドが選ばれる10の理由
   - [https://aws.amazon.com/jp/aws-ten-reasons/](https://aws.amazon.com/jp/aws-ten-reasons/)
@@ -26,7 +26,7 @@
 - チュートリアル
   - [https://aws.amazon.com/jp/getting-started/hands-on/?awsf.getting-started-category=*all&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all](https://aws.amazon.com/jp/getting-started/hands-on/?awsf.getting-started-category=*all&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all)
 
-## さらに
+## さらに知識を深めたい
 
 - AWS Hands-on for Beginners ハンズオンはじめの一歩: AWS アカウントの作り方 & IAM 基本のキ
   - [https://pages.awscloud.com/event_JAPAN_Ondemand_Hands-on-for-Beginners-1st-Step_LP.html?trk=aws_blog_k](https://pages.awscloud.com/event_JAPAN_Ondemand_Hands-on-for-Beginners-1st-Step_LP.html?trk=aws_blog_k)
@@ -70,7 +70,7 @@
   - 実体は、上記「AWS ハンズオン資料」
   - [https://aws-samples.github.io/jp-contents-hub/](https://aws-samples.github.io/jp-contents-hub/)
 
-## レベルアップ
+## もっとレベルアップ！
 
 - 30 の目的別 クラウド構成と料金試算例
   - 「AWS アーキテクチャセンター」より具体的で料金試算も見れるので◎
@@ -86,7 +86,7 @@
 - AWSクラウドデザインパターン
   - [https://aws.clouddesignpattern.org/index.php/%e3%83%a1%e3%82%a4%e3%83%b3%e3%83%9a%e3%83%bc%e3%82%b8.html](https://aws.clouddesignpattern.org/index.php/%e3%83%a1%e3%82%a4%e3%83%b3%e3%83%9a%e3%83%bc%e3%82%b8.html)
 
-## 最新情報は？
+## 最新情報をキャッチアップするには？
 
 - Amazon Web Services ブログ
   - [https://aws.amazon.com/jp/blogs/news/](https://aws.amazon.com/jp/blogs/news/)
@@ -95,14 +95,19 @@
   - [https://aws.amazon.com/jp/builders-flash/](https://aws.amazon.com/jp/builders-flash/)
   - 無料のメールメンバー登録をすると、メール本文にあるキーワードで応募すると、毎月 25 USD の無料クーポンが配布される特典あり。
   - 毎月抽選 300 名なのでハズレるときもあります。
+  - 1年に10回までしか応募できません。
 
-## AWS 認定
+## スキルを証明するために AWS 認定を取得しよう！
 
 [https://aws.amazon.com/jp/certification/](https://aws.amazon.com/jp/certification/)
+
+AWS の認定試験の有効期間は 3 年間です。有効期限が切れる前に再認定を受ける必要があります。
 
 ### FOUNDATIONAL
 
 6 か月間の基礎的な AWS クラウドと業界知識
+
+ASSOCIATE または PROFESSIONAL に合格することで再認定されます。
 
 - AWS Certified Cloud Practitioner
   - 100 USD(10,000 JPY) / 90 分 / 65 問 / 合格基準 700/1,000 点
@@ -111,16 +116,23 @@
 
 1 年間の AWS クラウドを使用した問題解決と解決策の実施における経験
 
+再認定の際は、個別に認定を受けるか、上位試験に合格する必要があります。
+
 - AWS Certified Solutions Architect - Associate
   - 150 USD(15,000 JPY) / 130 分 / 65 問 / 合格基準 720/1,000 点
+  - AWS Certified Solutions Architect - Professional に合格することで、再認定されます。
 - AWS Certified Developer - Associate
   - 150 USD(15,000 JPY) / 130 分 / 65 問 / 合格基準 720/1,000 点
+  - AWS Certified DevOps Engineer - Professional に合格することで、再認定されます。
 - AWS Certified SysOps Administrator - Associate
   - 150 USD(15,000 JPY) / 180 分 / 65 問 / 合格基準 720/1,000 点
+  - AWS Certified DevOps Engineer - Professional に合格することで、再認定されます。
 
 ### PROFESSIONAL
 
 2 年間の AWS クラウドを使用したソリューションの設計、運用、およびトラブルシューティングに関する経験
+
+再認定の際は、個別に認定を受ける必要があります。
 
 - AWS Certified Solutions Architect - Professional
   - 300 USD(30,000 JPY) / 180 分 / 75 問 / 合格基準 750/1,000 点
@@ -130,6 +142,8 @@
 ### SPECIALTY
 
 試験ガイドで指定された Specialty 分野に関する技術的な AWS クラウドでの経験
+
+再認定の際は、個別に認定を受ける必要があります。
 
 - AWS Certified Advanced Networking - Specialty
   - 300 USD(30,000 JPY) / 170 分 / 65 問 / 合格基準 750/1,000 点
@@ -146,3 +160,7 @@
 
 - [https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all](https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all)
 
+
+## 取得した AWS 認定を維持するために再認定試験を受けよう！
+
+[AWS 再認定](https://aws.amazon.com/jp/certification/recertification/)
