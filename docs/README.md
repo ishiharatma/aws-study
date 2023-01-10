@@ -18,3 +18,5 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./s3-overview/index.html" target="_blank">S3 概要</a>
 - <a href="./rds-aurora-overview/index.html" target="_blank">RDS と Aurora の比較</a>
 - <a href="./rds-overview/index.html" target="_blank">RDS 概要</a>
+- <a href="./route53-overview/index.html" target="_blank">Route 53 概要</a>
+- <a href="./apigw-overview/index.html" target="_blank">API Gateway 概要</a>
