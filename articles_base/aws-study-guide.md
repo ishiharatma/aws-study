@@ -26,6 +26,9 @@
 - チュートリアル
   - [https://aws.amazon.com/jp/getting-started/hands-on/?awsf.getting-started-category=*all&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all](https://aws.amazon.com/jp/getting-started/hands-on/?awsf.getting-started-category=*all&awsf.getting-started-level=*all&awsf.getting-started-content-type=*all)
 
+- AWS 無料利用枠について
+  - [https://aws.amazon.com/jp/free/](https://aws.amazon.com/jp/free/)
+
 ## さらに知識を深めたい
 
 - AWS Hands-on for Beginners ハンズオンはじめの一歩: AWS アカウントの作り方 & IAM 基本のキ
@@ -70,7 +73,7 @@
   - 実体は、上記「AWS ハンズオン資料」
   - [https://aws-samples.github.io/jp-contents-hub/](https://aws-samples.github.io/jp-contents-hub/)
 
-## もっとレベルアップ！
+## もっとレベルアップ
 
 - 30 の目的別 クラウド構成と料金試算例
   - 「AWS アーキテクチャセンター」より具体的で料金試算も見れるので◎
@@ -97,7 +100,7 @@
   - 毎月抽選 300 名なのでハズレるときもあります。
   - 1年に10回までしか応募できません。
 
-## スキルを証明するために AWS 認定を取得しよう！
+## スキルを証明するために AWS 認定を取得しよう
 
 [https://aws.amazon.com/jp/certification/](https://aws.amazon.com/jp/certification/)
 
@@ -158,9 +161,8 @@ ASSOCIATE または PROFESSIONAL に合格することで再認定されます�
 
 ### AWS 認定試験ワークショップ
 
-- [https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all](https://aws.amazon.com/jp/training/events/?get-certified-vilt-courses-cards.sort-by=item.additionalFields.startDateSort&get-certified-vilt-courses-cards.sort-order=asc&awsf.get-certified-vilt-courses-series=series%23aws-certification-exam-readiness&awsf.get-certified-vilt-locations=*all&ch=tile&tile=prepare&awsf.get-certified-vilt-courses-type=*all&awsf.get-certified-vilt-audience=*all&awsf.get-certified-vilt-countries=*all&awsf.get-certified-vilt-languages=language%23japanese&awsf.get-certified-vilt-courses-level=*all&awsf.get-certified-vilt-courses-tech-category=*all)
+- [AWS トレーニングと認定イベントの詳細](https://aws.amazon.com/jp/training/events/)
 
-
-## 取得した AWS 認定を維持するために再認定試験を受けよう！
+## 取得した AWS 認定を維持するために再認定試験を受けよう
 
 [AWS 再認定](https://aws.amazon.com/jp/certification/recertification/)

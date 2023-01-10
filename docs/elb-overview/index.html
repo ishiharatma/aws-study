@@ -48,6 +48,8 @@
 <li><a href="#glbgateway-load-balancer" target="_blank">GLB:Gateway Load Balancer</a></li>
 </ul>
 </li>
+<li><a href="#elb-%E3%81%AE%E6%96%99%E9%87%91" target="_blank">ELB の料金</a></li>
+<li><a href="#%E3%83%AD%E3%83%BC%E3%83%89%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B5%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%91%E3%82%B7%E3%83%86%E3%82%A3%E3%83%BC%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88-lcu-%E3%81%A8%E3%81%AF" target="_blank">ロードバランサーキャパシティーユニット (LCU) とは</a></li>
 <li><a href="#%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA-cidr" target="_blank">サブネットに必要な CIDR</a></li>
 <li><a href="#%E3%82%B9%E3%83%86%E3%82%A3%E3%83%83%E3%82%AD%E3%83%BC%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">スティッキーセッション</a></li>
 <li><a href="#%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%BE%E3%83%BC%E3%83%B3%E8%B2%A0%E8%8D%B7%E5%88%86%E6%95%A3" target="_blank">クロスゾーン負荷分散</a></li>
@@ -62,7 +64,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="ELB とは" duration="1">
-        <p class="image-container"><img src="img\\86b8c8c264fefa76.png"></p>
+        <p class="image-container"><img alt="elb" src="img\\86b8c8c264fefa76.png"></p>
 <p>Elastic Load Balancing は、受信したトラフィックを複数のアベイラビリティーゾーンの複数のターゲット (EC2 インスタンス、コンテナ、IP アドレスなど) に自動的に分散させます。さらに、登録されているターゲットの状態をモニタリングし、正常なターゲットにのみトラフィックをルーティングします。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=4laAoK-zXko" target="_blank">Elastic Load Balancing (ELB)(YouTube)</a></p>
 <p class="image-container"><img alt="blackbelt_elb" src="img\\a996b51f3b64114e.jpg"></p>
@@ -193,6 +195,41 @@
 <li>クロスゾーン負荷分散はデフォルトで無効</li>
 <li>MTU=8,500、変更不可</li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ELB の料金" duration="0">
+        <p><a href="https://aws.amazon.com/jp/elasticloadbalancing/pricing/" target="_blank">Elastic Load Balancing 料金表</a></p>
+<p>料金は、各ロードバランサーが起動している時間と、ロードバランサーキャパシティーユニット (LCU) の使用時間で課金されます。</p>
+<ul>
+<li>無料枠 <ul>
+<li>12 か月間無料枠</li>
+<li>CLB と ALB で合計 750 時間/月、CLB の 15 GB のデータ処理、ALB の 15 LCU 分</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ロードバランサーキャパシティーユニット (LCU) とは" duration="0">
+        <p>ALB は LCU、NLB は NLCU、GLB は GLCU と呼ばれるメトリクスがあります。</p>
+<p>これは、新しい接続、アクティブ接続、処理タイプ、ルール評価のうち、消費量が最大のリソースで定義されます。</p>
+<ul>
+<li>新しい接続: 1 秒あたりの新たに確立された接続の数。通常、接続ごとに多くのリクエストが送信されます。</li>
+<li>アクティブ接続: 1 分あたりのアクティブな接続の数。</li>
+<li>処理タイプ: ロードバランサーによって処理された HTTP(S) リクエストと応答のバイト数 (GB 単位)。</li>
+<li>ルール評価: ロードバランサーにより処理されたルールの数とリクエストレートの積。最初に処理される 10 個のルールは無料 (ルール評価 = リクエスト率 * (処理されたルールの数 - 無料分の 10 個のルール))。</li>
+</ul>
+<p>1 つの LCU には次のものが含まれます。</p>
+<ul>
+<li>1 秒あたり 25 個の新しい接続</li>
+<li>1 分あたり 3,000 個のアクティブ接続</li>
+<li>ターゲットとしての Amazon Elastic Compute Cloud (EC2) インスタンス、コンテナおよび IP アドレスの場合は 1 時間あたり 1 GB、ターゲットとしての Lambda 関数の場合は 1 時間あたり 0.4 GBです。</li>
+<li>1 秒あたり 1,000 個のルール評価</li>
+</ul>
+<p>詳しい計算方法は、<a href="https://aws.amazon.com/jp/elasticloadbalancing/pricing/" target="_blank">Elastic Load Balancing 料金表</a>の料金の例を参照してください。</p>
 
 
       </google-codelab-step>

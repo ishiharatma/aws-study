@@ -25,6 +25,8 @@ published: true
     - [ALB:Application Load Balancer](#albapplication-load-balancer)
     - [NLB:Network Load Balancer](#nlbnetwork-load-balancer)
     - [GLB:Gateway Load Balancer](#glbgateway-load-balancer)
+  - [ELB の料金](#elb-の料金)
+  - [ロードバランサーキャパシティーユニット (LCU) とは](#ロードバランサーキャパシティーユニット-lcu-とは)
   - [サブネットに必要な CIDR](#サブネットに必要な-cidr)
   - [スティッキーセッション](#スティッキーセッション)
   - [クロスゾーン負荷分散](#クロスゾーン負荷分散)
@@ -36,7 +38,7 @@ published: true
 
 Duration: 00:01:00
 
-![](/images/elb/elb.png)
+![elb](/images/elb/elb.png)
 
 Elastic Load Balancing は、受信したトラフィックを複数のアベイラビリティーゾーンの複数のターゲット (EC2 インスタンス、コンテナ、IP アドレスなど) に自動的に分散させます。さらに、登録されているターゲットの状態をモニタリングし、正常なターゲットにのみトラフィックをルーティングします。
 
@@ -148,6 +150,36 @@ AWS ドキュメント > [Gateway Load Balancer とは?](https://docs.aws.amazon
 - L3（ネットワーク層）で負荷分散
 - クロスゾーン負荷分散はデフォルトで無効
 - MTU=8,500、変更不可
+
+## ELB の料金
+
+[Elastic Load Balancing 料金表](https://aws.amazon.com/jp/elasticloadbalancing/pricing/)
+
+料金は、各ロードバランサーが起動している時間と、ロードバランサーキャパシティーユニット (LCU) の使用時間で課金されます。
+
+- 無料枠
+  - 12 か月間無料枠
+  - CLB と ALB で合計 750 時間/月、CLB の 15 GB のデータ処理、ALB の 15 LCU 分
+
+## ロードバランサーキャパシティーユニット (LCU) とは
+
+ALB は LCU、NLB は NLCU、GLB は GLCU と呼ばれるメトリクスがあります。
+
+これは、新しい接続、アクティブ接続、処理タイプ、ルール評価のうち、消費量が最大のリソースで定義されます。
+
+- 新しい接続: 1 秒あたりの新たに確立された接続の数。通常、接続ごとに多くのリクエストが送信されます。
+- アクティブ接続: 1 分あたりのアクティブな接続の数。
+- 処理タイプ: ロードバランサーによって処理された HTTP(S) リクエストと応答のバイト数 (GB 単位)。
+- ルール評価: ロードバランサーにより処理されたルールの数とリクエストレートの積。最初に処理される 10 個のルールは無料 (ルール評価 = リクエスト率 * (処理されたルールの数 - 無料分の 10 個のルール))。
+
+1 つの LCU には次のものが含まれます。
+
+- 1 秒あたり 25 個の新しい接続
+- 1 分あたり 3,000 個のアクティブ接続
+- ターゲットとしての Amazon Elastic Compute Cloud (EC2) インスタンス、コンテナおよび IP アドレスの場合は 1 時間あたり 1 GB、ターゲットとしての Lambda 関数の場合は 1 時間あたり 0.4 GBです。
+- 1 秒あたり 1,000 個のルール評価
+
+詳しい計算方法は、[Elastic Load Balancing 料金表](https://aws.amazon.com/jp/elasticloadbalancing/pricing/)の料金の例を参照してください。
 
 ## サブネットに必要な CIDR
 
