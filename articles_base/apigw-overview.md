@@ -24,6 +24,7 @@ Duration: 00:01:00
   - [REST API のエンドポイントタイプ](#rest-api-のエンドポイントタイプ)
   - [API Gateway のメトリクス](#api-gateway-のメトリクス)
   - [X-Ray でのトレース](#x-ray-でのトレース)
+  - [まとめ](#まとめ)
 
 ## Amazon API Gateway とは
 
@@ -183,3 +184,7 @@ Duration: 00:01:00
 [X-Ray のトレースビューの例](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/apigateway-using-xray-maps.html#apigateway-using-xray-trace-view-active)
 
 ![apigateway-xray-traceview-1](/images/apigw/apigateway-xray-traceview-1.png)
+
+## まとめ
+
+![apigateway](/images/all/apigateway.png)
