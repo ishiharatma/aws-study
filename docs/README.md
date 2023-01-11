@@ -15,9 +15,9 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./aws-study-guide/index.html" target="_blank">AWS 勉強ガイド</a>
 - <a href="./aws-account-Initial-setting/index.html" target="_blank">AWSアカウント作成後に行うべき設定事項</a>
 - <a href="./elb-overview/index.html" target="_blank">ELB 概要</a>
-- <a href="./s3-overview/index.html" target="_blank">S3 概要</a>
+- <a href="./s3-overview/index.html" target="_blank">Amazon S3 概要</a>
 - <a href="./rds-aurora-overview/index.html" target="_blank">RDS と Aurora の比較</a>
-- <a href="./rds-overview/index.html" target="_blank">RDS 概要</a>
-- <a href="./Aurora-overview/index.html" target="_blank">Aurora 概要</a>
-- <a href="./route53-overview/index.html" target="_blank">Route 53 概要</a>
-- <a href="./apigw-overview/index.html" target="_blank">API Gateway 概要</a>
+- <a href="./rds-overview/index.html" target="_blank">Amazon RDS 概要</a>
+- <a href="./Aurora-overview/index.html" target="_blank">Amazon Aurora 概要</a>
+- <a href="./route53-overview/index.html" target="_blank">Amazon Route 53 概要</a>
+- <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
