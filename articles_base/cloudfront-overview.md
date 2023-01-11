@@ -13,6 +13,7 @@
   - [Contents](#contents)
   - [Amazon CloudFront とは](#amazon-cloudfront-とは)
   - [Amazon CloudFront の基本](#amazon-cloudfront-の基本)
+  - [まとめ](#まとめ)
 
 ## Amazon CloudFront とは
 
@@ -44,3 +45,6 @@
 
 Duration: 0:01:30
 
+## まとめ
+
+![cloudfront](/images/all/cloudfront.png)

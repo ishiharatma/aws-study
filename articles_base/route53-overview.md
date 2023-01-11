@@ -24,6 +24,7 @@
   - [Amazon Route 53 の料金](#amazon-route-53-の料金)
   - [Route 53 のクォータ](#route-53-のクォータ)
   - [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）](#amazon-route-53-が-dns-リソースレコードセットに対するアクセス許可をサポート2022-9-21)
+  - [まとめ](#まとめ)
 
 ## Amazon Route 53 とは
 
@@ -326,3 +327,7 @@ Duration: 0:00:30
 詳細については、ドキュメントを参照してください。
 
 [きめ細かなアクセスコントロールのための IAM ポリシー条件を使用してリソースレコードセットを管理する](https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/specifying-rrset-conditions.html#route53_rrset_conditionkeys-examples)
+
+## まとめ
+
+![route53](/images/all/route53.png)

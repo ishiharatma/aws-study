@@ -586,3 +586,4 @@ Duration: 00:00:30
 ![s3_services](/images/s3/s3_services.png)
 
 2019年頃の資料のため、現在では AWS WAF も直接 S3 へログ配信できるようになっているため連携できるサービスが増えています。
+

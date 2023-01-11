@@ -10,12 +10,12 @@
 
 Duration: 00:01:00
 
-- [Relational Database Service(RDS)](#relational-database-servicerds)
+- [Amazon Relational Database Service(RDS)](#amazon-relational-database-servicerds)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [RDS について知るには](#rds-について知るには)
   - [RDS について知るには(その他)](#rds-について知るにはその他)
-  - [RDS とは](#rds-とは)
+  - [Amazon RDS とは](#amazon-rds-とは)
   - [サポートされているデータベースエンジン](#サポートされているデータベースエンジン)
   - [RDS の基本的な構成](#rds-の基本的な構成)
   - [SLA](#sla)
@@ -32,6 +32,7 @@ Duration: 00:01:00
   - [ストレージの自動スケーリング](#ストレージの自動スケーリング)
   - [RDS のログ](#rds-のログ)
   - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
+  - [まとめ](#まとめ)
 
 ## RDS について知るには
 
@@ -408,3 +409,7 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 - 切り替えは1分以内
 - デーア損失なし
 - アプリケーションの変更不要
+
+## まとめ
+
+![rds](/images/all/rds.png)

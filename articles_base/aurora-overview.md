@@ -30,6 +30,7 @@ Duration: 00:01:00
   - [Serverless](#serverless)
   - [Global Database](#global-database)
   - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
+  - [まとめ](#まとめ)
 
 ## Aurora について知るには
 
@@ -276,3 +277,7 @@ Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユー
 - 切り替えは1分以内
 - デーア損失なし
 - アプリケーションの変更不要
+
+## まとめ
+
+![aurora](/images/all/aurora.png)
