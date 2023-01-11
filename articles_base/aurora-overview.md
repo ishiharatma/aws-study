@@ -143,8 +143,6 @@ AZ 障害時にはインスタンスが利用できなくなります。
 
 ### レプリカ構成
 
-Duration: 00:05:00
-
 読み取り頻度の高いデータベースのワークロードに対して、スケールアウトすることにより、パフォーマンスを向上させます。また、プライマリインスタンスに障害が発生した場合は、レプリカにフェールオーバーすることで自動的に復旧します。
 
 レプリカは最大で 15台まで追加することが可能です。
@@ -227,6 +225,8 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 
 ## Serverless
 
+Duration: 00:05:00
+
 Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユースケースは次の通りです。安定したトラフィックが予想できる場合は Provisioned インスタンス（通常の Aurora）を利用するほうが良いです。
 
 - v1
@@ -256,7 +256,13 @@ Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユー
 
 ## Global Database
 
+Duration: 00:01:00
+
+![globaldatabase](/images/aurora/aurora-globaldatabase.png)
+
 ## Blue/Green Deployments(New: 2022-11-27)
+
+Duration: 00:01:00
 
 [New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS](https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/)
 
@@ -279,5 +285,7 @@ Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユー
 - アプリケーションの変更不要
 
 ## まとめ
+
+Duration: 00:01:00
 
 ![aurora](/images/all/aurora.png)

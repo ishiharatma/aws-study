@@ -187,4 +187,6 @@ Duration: 00:01:00
 
 ## まとめ
 
+Duration: 00:01:00
+
 ![apigateway](/images/all/apigateway.png)

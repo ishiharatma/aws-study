@@ -75,7 +75,6 @@ Duration: 03:05:36
 
 ![aws-summit-2019-dat309-r](/images/rds-aurora/aws-summit-2019-dat309-r-320.jpg)
 
-
 ## Amazon RDS とは
 
 Duration: 00:01:00
@@ -282,6 +281,8 @@ RDS のクロスリージョン自動バックアップは、レプリケーシ�
 
 ## インスタンスタイプ
 
+Duration: 00:01:00
+
 RDS のインスタンスタイプは、「db.m6g.large」のように `db` から始まります。それ以降は、EC2 のインスタンスタイプと同じ構成となっています。
 
 [Amazon RDS インスタンスタイプ](https://aws.amazon.com/jp/rds/instance-types/)
@@ -397,6 +398,8 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 
 ## Blue/Green Deployments(New: 2022-11-27)
 
+Duration: 00:01:00
+
 [New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS](https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/)
 
 [Using Amazon RDS Blue/Green Deployments for database updates](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
@@ -418,5 +421,7 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 - アプリケーションの変更不要
 
 ## まとめ
+
+Duration: 00:01:00
 
 ![rds](/images/all/rds.png)

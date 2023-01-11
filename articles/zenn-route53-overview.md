@@ -100,7 +100,7 @@ Duration: 0:00:30
 
 ホストゾーンは次の2種類があります。
 
-![route53_hostedzone](/images/route53/route53_hostedzone.jpg)
+![route53_hostedzone](/images/route53/route53_hostedzone-320.jpg)
 
 - パブリックホストゾーン
   - インターネット上に公開された DNS ドメインのレコードを管理するコンテナ
@@ -113,8 +113,7 @@ Duration: 0:00:30
 
 Duration: 0:05:00
 
-![route53_hostedzone_record](/images/route53/route53_hostedzone_record.jpg)
-
+![route53_hostedzone_record](/images/route53/route53_hostedzone_record-320.jpg)
 
 主なレコードタイプは次の通りです。
 
@@ -272,7 +271,7 @@ Duration: 0:00:30
 
 ## Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）
 
-Duration: 0:00:30
+Duration: 00:01:00
 
 [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート](https://aws.amazon.com/jp/about-aws/whats-new/2022/09/amazon-route-53-support-dns-resource-record-set-permissions/)
 
@@ -336,5 +335,7 @@ Duration: 0:00:30
 [きめ細かなアクセスコントロールのための IAM ポリシー条件を使用してリソースレコードセットを管理する](https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/specifying-rrset-conditions.html#route53_rrset_conditionkeys-examples)
 
 ## まとめ
+
+Duration: 00:01:00
 
 ![route53](/images/all/route53.png)
