@@ -49,6 +49,9 @@
 - [AWS Black Belt Online Seminar] オンデマンド動画 コンテンツ
   - [https://aws.amazon.com/jp/aws-jp-introduction/#blackbelt](https://aws.amazon.com/jp/aws-jp-introduction/#blackbelt)
 
+- ソリューションライブラリ
+  - [https://aws.amazon.com/jp/solutions/](https://aws.amazon.com/jp/solutions/)
+
 - 導入事例
   - [https://aws.amazon.com/jp/solutions/case-studies/](https://aws.amazon.com/jp/solutions/case-studies/)
 
