@@ -1,0 +1,305 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon CloudFront</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="cloudfront-overview"
+                  title="Amazon CloudFront"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="0">
+        <ul>
+<li><a href="#amazon-cloudfront" target="_blank">Amazon CloudFront</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#amazon-cloudfront-%E3%81%A8%E3%81%AF" target="_blank">Amazon CloudFront とは</a></li>
+<li><a href="#cloudfront-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">CloudFront の基本</a><ul>
+<li><a href="#%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">ディストリビューション</a></li>
+<li><a href="#%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3" target="_blank">オリジン</a></li>
+<li><a href="#%E3%82%A8%E3%83%83%E3%82%B8%E3%83%AD%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">エッジロケーション</a></li>
+<li><a href="#%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E5%88%A5%E3%82%A8%E3%83%83%E3%82%B8%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5" target="_blank">リージョン別エッジキャッシュ</a></li>
+<li><a href="#%E3%83%93%E3%83%98%E3%82%A4%E3%83%93%E3%82%A2behavior" target="_blank">ビヘイビア（Behavior）</a></li>
+<li><a href="#%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5%E7%84%A1%E5%8A%B9%E5%8C%96invalidation" target="_blank">キャッシュ無効化（Invalidation）</a></li>
+<li><a href="#%E5%9C%A7%E7%B8%AE%E6%A9%9F%E8%83%BD" target="_blank">圧縮機能</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%99%E9%87%91%E3%82%AF%E3%83%A9%E3%82%B9" target="_blank">料金クラス</a></li>
+<li><a href="#%E7%BD%B2%E5%90%8D%E4%BB%98%E3%81%8D-url-%E3%81%A8%E7%BD%B2%E5%90%8D%E4%BB%98%E3%81%8D-cookie" target="_blank">署名付き URL と署名付き Cookie</a></li>
+<li><a href="#s3-%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%81%B8%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E9%99%90" target="_blank">S3 オリジンへのアクセス制限</a></li>
+<li><a href="#alb-%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%81%B8%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E9%99%90" target="_blank">ALB オリジンへのアクセス制限</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E5%9C%B0%E7%90%86%E7%9A%84%E3%81%AB%E5%88%B6%E9%99%90" target="_blank">コンテンツを地理的に制限</a></li>
+<li><a href="#aws-shield" target="_blank">AWS Shield</a></li>
+<li><a href="#aws-waf%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB" target="_blank">AWS WAFによるアクセスコントロール</a></li>
+<li><a href="#cloudfront-origin-shield" target="_blank">CloudFront Origin Shield</a></li>
+<li><a href="#aws-lambdaedge" target="_blank">AWS Lambda@Edge</a></li>
+<li><a href="#%E3%83%AD%E3%82%B0%E8%A8%98%E9%8C%B2" target="_blank">ログ記録</a></li>
+<li><a href="#%E7%9B%A3%E8%A6%96" target="_blank">監視</a></li>
+<li><a href="#use-cloudfront-continuous-deployment-to-safely-validate-cdn-changesnew-2022-11-18" target="_blank">Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Amazon CloudFront とは" duration="147">
+        <p>CloudFront とは、大容量キャパシティを持つ地理的に分散したサーバー群（エッジロケーション）にコンテンツをキャッシュしたり、代理配信をするコンテンツ配信ネットワーク (CDN（Content Delivery Network）) サービスです。</p>
+<p>CDN を導入することによって、ユーザーに一番近いエッジロケーションから配信することによる高速化と、エッジサーバーでコンテンツをキャッシュすることによるオリジンの負荷軽減ができるというメリットがあります。</p>
+<p>CloudFront は従量課金のサービスであるため、使った分だけの支払でよいため安価に始められます。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=mmRKzzOvJJY" target="_blank">Amazon CloudFrontの概要(YouTube)</a>(52:26)</p>
+<p class="image-container"><img alt="blackbelt-cloudfront_1" src="img\\f22b919324c647d1.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=C9SnQibtY0A" target="_blank">Amazon CloudFront deep dive(YouTube)</a>(44:42)</p>
+<p class="image-container"><img alt="blackbelt-cloudfront_2" src="img\\b3257da259aac370.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=-RldYeiMu2k" target="_blank">AmazonCloudFrontのこの機能使えてますか(YouTube)</a>(27:31)</p>
+<p class="image-container"><img alt="blackbelt-cloudfront_3" src="img\\d11b61eb607c16fe.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=Ce4bEWDN5b0" target="_blank">AWSで実践するCDNセキュリティ(YouTube)</a>(25:58)</p>
+<p class="image-container"><img alt="blackbelt-cloudfront_4" src="img\\c8c1608aba97c5b3.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/cloudfront/" target="_blank">Amazon CloudFront サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cloudfront/?id=docs_gateway" target="_blank">Amazon CloudFront ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/cloudfront/faqs/" target="_blank">Amazon CloudFront よくある質問</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CloudFront の基本" duration="1">
+        <h2 is-upgraded>ディストリビューション</h2>
+<p>ドメイン毎に割り当てられる CloudFront の設定の単位です。デフォルトのドメイン名は「xxxx.cloudfront.net」となっていますが、CNAME エイリアスを利用することで、独自のドメインを割り当てることができます。</p>
+<h2 is-upgraded>オリジン</h2>
+<p>コンテンツのオリジナルを保持するサーバーのことです。EC2 や S3、オンプレミスのウェブサーバーなどが該当します。</p>
+<h2 is-upgraded>エッジロケーション</h2>
+<p>世界中に分散して配置されたサーバーでオリジンのデータをキャッシュします。ユーザーを最も近いエッジロケーションに誘導することで、高速に配信することができます。また、オリジンサーバへのアクセスを減らすことが出来るため、負荷軽減になります。</p>
+<h2 is-upgraded>リージョン別エッジキャッシュ</h2>
+<p>エッジロケーションとオリジンの中間のキャッシュ層です。 エッジロケーションにキャッシュがなければ、オリジンからコンテンツを取得する必要がありますが、ユーザーから遠いリージョンにオリジンがある場合はパフォーマンスの劣化が課題です。 この課題を解決するために導入されたのが、オリジンより近いリージョンの単位でキャッシュし、さらにエッジロケーションより大容量のキャッシュを保持する仕組みです。</p>
+<h2 is-upgraded>ビヘイビア（Behavior）</h2>
+<p>簡単にいうと、振り分けのルールです。URL のパスパターンでオリジンに振り分けることができます。パスパターンには優先度を付けることができます。 パスパターンには、「api/<em>」や「images/</em>.jpg」のようにファイルパターンまで限定したものも設定できます。 定義したパスパターンごとに以下を設定することが可能です。</p>
+<ul>
+<li>プロトコル</li>
+<li>許可する HTTP メソッド</li>
+<li>キャッシュ</li>
+<li>TTL（Time To Live）</li>
+<li>圧縮（gzip および Brotli）</li>
+<li>アクセス制限（署名付きURL、Cookie）</li>
+</ul>
+<h2 is-upgraded>キャッシュ無効化（Invalidation）</h2>
+<p>コンテンツの有効期限が切れる前に、エッジキャッシュからファイルを削除することが出来る機能です。</p>
+<p>リリースした際にキャッシュを削除したい場合は手動で実施することができます。</p>
+<p>全て消したい場合は、「/*」というパスにすることで一括で削除することができます。</p>
+<p class="image-container"><img alt="cloudfront-invalidation" src="img\\7a2990e083af4a8b.png"></p>
+<p>複数パスの指定も可能ですが、パスの単位でリクエストが発生することになります。</p>
+<p class="image-container"><img alt="cloudfront-invalidation-any" src="img\\b77cf2126112370f.png"></p>
+<p>1か月 1000 リクエストまでは無料ですが、それ以上は 0.005USD / リクエストで課金されますので頻繁に実施する場合は、注意が必要です。</p>
+<h2 is-upgraded>圧縮機能</h2>
+<p>CloudFront エッジでコンテンツを gzip および Brotli 圧縮することで高速にコンテンツを配信することができる機能です。</p>
+<p class="image-container"><img alt="cloudfront-compress" src="img\\36fe13ed10658229.png"></p>
+<p>オリジンサーバが圧縮に対応していない場合でも、手軽に高速化を実現できます。</p>
+<p>参考&gt;<a href="https://ja.wikipedia.org/wiki/Brotli" target="_blank">Brotli(Wikipedia)</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="料金クラス" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPriceClass" target="_blank">価格クラス</a></p>
+<p>CloudFront はデフォルトでは世界中全てのエッジロケーションを利用し、クライアントのロケーションから最もレイテンシーが低いエッジロケーションから配信されます。</p>
+<p class="image-container"><img alt="cloudfront-priceclass" src="img\\a9caf5c9d4f669ce.png"></p>
+<p>コスト削減のため一部の地理的リージョンからのレイテンシーの増加を許容できる場合に次に示す料金クラスというものが選択できます。</p>
+<ul>
+<li>料金クラス ALL（デフォルト）</li>
+<li>料金クラス 200</li>
+<li>料金クラス 100</li>
+</ul>
+<p>高コストなエッジロケーションを使用しないようにすることで、コストを抑えることができます。 この料金クラスによって、ユーザーへの配信速度に影響がでる可能性があります。</p>
+<p>この中で、日本が含まれるのは「料金クラス ALL」と「料金クラス 200」のみです。 日本リージョンの HTTPS リクエスト（1万件あたり）の料金は、0.0120 USD です。「料金クラス 100」を選択して北米リージョンに限定した場合の料金は、0.0100 USD となります。</p>
+<p>高コストな南米やオーストラリアリージョンからのアクセスを想定しておらず、アクセスがあった場合でもレイテンシーの増加を許容できるならば、「料金クラス 200」を選択しておくとよいでしょう。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="署名付き URL と署名付き Cookie" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html" target="_blank">署名付き URL と署名付き Cookie を使用したプライベートコンテンツの提供</a></p>
+<p>プライベートコンテンツの配信に利用できる機能です。「ビューワーのアクセスを制限する」を有効にすることで利用できます。 CloudFront に登録したキーペアを利用して生成します。</p>
+<p class="image-container"><img alt="cloudfront-private-contents" src="img\\290a2ff4881be2a1.png"></p>
+<p>署名付き URL と署名付き Cookie の使い分けは次の通りです。</p>
+<ul>
+<li>署名付き URL <ul>
+<li>個別のファイルへのアクセス制限</li>
+<li>ユーザーが Cookie をサポートしていないクライアント</li>
+</ul>
+</li>
+<li>署名付き Cookie <ul>
+<li>複数のファイルへのアクセス制限</li>
+<li>現在の URL を変更したくない場合</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="S3 オリジンへのアクセス制限" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html" target="_blank">Amazon S3 オリジンへのアクセスの制限</a></p>
+<p>S3 をオリジンに設定する場合、オリジンアクセスコントロール (OAC、旧オリジンアクセスアイデンティティ (OAI)) を設定することで、S3バケットをパブリックアクセス可能にすることなく、意図しない 別の CloudFront ディストリビューション経由のアクセスを制限することができます。</p>
+<p>新しい OAC では、OAI で対応していなかった以下に対応できるようになっています。</p>
+<ul>
+<li>細かなポリシー設定</li>
+<li>AWS Signature Version 4（SigV4） を必要とする AWS リージョンでの POST メソッド</li>
+<li>SSE-KMS を使用したバケット</li>
+</ul>
+<p>OAI は引き続き使用することができますが、2022年12月以降に新たに作成されるリージョンでは、OAC のみのサポートとなります。</p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/amazon-cloudfront-introduces-origin-access-control-oac/" target="_blank">Amazon CloudFront オリジンアクセスコントロール（OAC）のご紹介-2022/8/31</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#migrate-from-oai-to-oac" target="_blank">オリジンアクセスアイデンティティ (OAI) からオリジンアクセスコントロール (OAC) への移行</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ALB オリジンへのアクセス制限" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/restrict-access-to-load-balancer.html" target="_blank">Application Load Balancers へのアクセスを制限する</a></p>
+<p>CloudFront のオリジンには ALB が設定できます。オリジンに設定するリソースは、パブリック IP によるアクセスができる必要があるため、ALBは インターネット向け（internet-facing）で作成します。</p>
+<p>この状態ですと、CloudFront を経由しなくてもアクセスが可能になっています。これでは、CloudFront のメリットを生かすことができません。</p>
+<p>ALB を CloudFront 経由のアクセスに限定することで、CloudFront のメリットを生かすことができるようになります。</p>
+<p>※ ALB を Internal で構築した場合、オリジンに指定することはできますが、<code>403</code> エラーとなります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コンテンツを地理的に制限" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/georestrictions.html" target="_blank">コンテンツの地理的ディストリビューションの制限</a></p>
+<p>指定した地域からのアクセスをブロックできる機能です。</p>
+<p class="image-container"><img alt="georestrictions" src="img\\c67c98ac652090ea.png"></p>
+<p>CloudFront は、サードパーティーのデータベースを使用して、ユーザーがいる場所を判別しており、IP アドレスと国のマッピングはリージョンによって異なるものの、正確性は 99.8% となっています。</p>
+<p>ユーザーの場所が特定できなかったときはコンテンツが配信されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Shield" duration="1">
+        <p>CloudFront は、AWS Shield Standard によって追加料金なしで保護されています。</p>
+<p>AWS Shield Advanced によってさらに高レベルの保護が可能になります。</p>
+<p>ただし、1年のサブスクリプションで固定月額 3,000 USD と、さらにデータ転送量による課金が発生します。</p>
+<p>この固定月額料金は、AWS Organizations を利用している場合は組織全体で共有され、アカウント単位で支払う必要はありません。ただし、データ転送量分はアカウント単位で支払う必要があります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS WAFによるアクセスコントロール" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html" target="_blank">AWS WAF を使用してコンテンツへのアクセスの管理</a></p>
+<p>CDN は様々な脅威に晒されています。AWS WAF を利用して、それらのアクセスから保護することができます。</p>
+<p>適用できるものは バージニア北部リージョンで作成した Web ACL のみです。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CloudFront Origin Shield" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html" target="_blank">Amazon CloudFront Origin Shield の使用</a></p>
+<p>CloudFront は、クライアントからのリクエストをエッジロケーションで受け、エッジロケーションにキャッシュがない場合、リージョン別エッジキャッシュという中間層に送信します。</p>
+<p>リージョン別エッジキャッシュにキャッシュがない場合は、オリジンにリクエストが送信されます。</p>
+<p class="image-container"><img alt="origin-shield-off" src="img\\12df4321fea09503.png"></p>
+<p>複数のリージョンで配信するサイトの場合、リージョン別エッジキャッシュからオリジンへのリクエストが重複して送信され、オリジンの負荷が上昇する可能性があります。</p>
+<p>これを回避するために、リージョン別エッジキャッシュとオリジンの間の追加キャッシュレイヤーとして動作し、オリジンへの負荷を軽減します。</p>
+<p class="image-container"><img alt="origin-shield-on" src="img\\34e67109a168f997.png"></p>
+<p>デフォルトでは、「使用しない」となっています。使用する場合は追加コストが発生します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Lambda@Edge" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/edge-functions.html" target="_blank">関数を使用してエッジでカスタマイズ</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/lambda-cloudfront-trigger-events.html" target="_blank">Lambda@Edge 関数をトリガーできる CloudFront イベント</a></p>
+<p>クライアントのロケーションに近い場所でコードを実行することができます。</p>
+<p class="image-container"><img alt="cloudfront-lambda@edge_1" src="img\\202d2fbdea9d5a7f.png"></p>
+<p class="image-container"><img alt="cloudfront-lambda@edge_2" src="img\\eda9cffc5bdcc11f.png"></p>
+<p>ただし、以下のような制約が存在するので注意が必要です（2023年1月時点）。詳しくは、<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/edge-functions-restrictions.html#lambda-at-edge-function-restrictions" target="_blank">Lambda@Edge に対する制限</a>を参照してください。</p>
+<ul>
+<li>関数のバージョン指定に <code>$LATEST</code> が使用できず、バージョン番号を指定しなければならない</li>
+<li>Lambda@Edge に指定できる Lambda は北米リージョンで作成したもののみ</li>
+<li>Lambda 環境変数が利用できない</li>
+<li>AWS X-Ray 使用不可</li>
+<li>コンテナイメージの Lambda 使用不可</li>
+<li>arm64 アーキテクチャの Lambda 使用不可　など。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ログ記録" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html" target="_blank">標準ログ (アクセスログ) の設定および使用</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html" target="_blank">リアルタイムログ</a></p>
+<p>ログは S3 へエクスポートすることができます（標準ログ）。ログはログ発生から 1時間以内にまたは、最大で 24時間遅延することがあります。</p>
+<p>標準ログは追加料金が発生しませんが、S3 のアクセスと保管料金がかかります。</p>
+<p>標準ログとは別に、リアルタイムログという機能があります。これは、Kinesis Data Streams を利用してログが配信されるようになる機能です。ただし、サポートするのは Kinesis Data Streams までですので、そこからログを取り出す Kiesis Data Firehose のようなコンシューマーが必要です。</p>
+<p>Kiesis Data Firehose を使用した場合、インターバルが 60 ～900 秒ですので、リアルタイムといっても 最低 60秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="監視" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/monitoring-using-cloudwatch.html" target="_blank">Amazon CloudWatch による CloudFront メトリクスのモニタリング</a></p>
+<p>CloudFront はデフォルトで記録されるメトリクスと、追加設定で記録されるメトリクスがあります。 追加メトリクスはメトリクスごとに料金がかかります。</p>
+<ul>
+<li>デフォルトメトリクス <ul>
+<li><img alt="cloudfront-metrics_1" src="img\\b0f00a0e3d728955.png"></li>
+</ul>
+</li>
+<li>追加メトリクス <ul>
+<li><img alt="cloudfront-metrics_2" src="img\\b41ebbbcf719e643.png"></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)" duration="2">
+        <p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html" target="_blank">Using CloudFront continuous deployment to safely test CDN configuration changes</a>（2023年1月時点で英語のみ）</p>
+<p>現在の設定に影響を与えることなく、新しい設定のディストリビューションの動作確認を Staging で行うことができます。動作確認ができたら、Staging を昇格させて変更を適用します。</p>
+<p class="image-container"><img alt="cloudfront-cd_1" src="img\\a7bc49ebed27a5f6.png"></p>
+<p class="image-container"><img alt="cloudfront-cd_2" src="img\\ffa4890b601a7983.png"></p>
+<p>利用する場合は制約などをドキュメントで確認しておく必要があります。</p>
+<p><a href="https://docs.aws.amazon.com/en_us/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html#continuous-deployment-quotas-considerations" target="_blank">Quotas and other considerations for continuous deployment</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p class="image-container"><img alt="cloudfront" src="img\\182c7d23050a7860.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -36,17 +36,17 @@ published: true
 
 ## ELB とは
 
-Duration: 00:01:00
+Duration: 02:02:11
 
 ![elb](/images/elb/elb.png)
 
 Elastic Load Balancing は、受信したトラフィックを複数のアベイラビリティーゾーンの複数のターゲット (EC2 インスタンス、コンテナ、IP アドレスなど) に自動的に分散させます。さらに、登録されているターゲットの状態をモニタリングし、正常なターゲットにのみトラフィックをルーティングします。
 
-【AWS Black Belt Online Seminar】[Elastic Load Balancing (ELB)(YouTube)](https://www.youtube.com/watch?v=4laAoK-zXko)
+【AWS Black Belt Online Seminar】[Elastic Load Balancing (ELB)(YouTube)](https://www.youtube.com/watch?v=4laAoK-zXko)(1:08:05)
 
 ![blackbelt_elb](/images/elb/blackbelt_elb.jpg)
 
-【AWS Black Belt Online Seminar】[Gateway Load Balancer(YouTube)](https://www.youtube.com/watch?v=tiwgoSNvh3k)
+【AWS Black Belt Online Seminar】[Gateway Load Balancer(YouTube)](https://www.youtube.com/watch?v=tiwgoSNvh3k)(54:06)
 
 ![blackbelt_glb](/images/elb/blackbelt_glb.jpg)
 
