@@ -22,3 +22,7 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 [Amazon Route 53 概要](/articles_base/route53-overview.md)
 
 [Amazon API Gateway 概要](/articles_base/apigw-overview.md)
+
+[Amazon CloudFront 概要](/articles_base/cloudfront-overview.md)
+
+[Amazon DynamoDB 概要](/articles_base/dynamodb-overview.md)

@@ -21,3 +21,5 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./aurora-overview/index.html" target="_blank">Amazon Aurora 概要</a>
 - <a href="./route53-overview/index.html" target="_blank">Amazon Route 53 概要</a>
 - <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
+- <a href="./cloudfront-overview/index.html" target="_blank">Amazon CloudFront 概要</a>
+- <a href="./dynamodb-overview/index.html" target="_blank">Amazon DynamoDB 概要</a>

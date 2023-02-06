@@ -12,20 +12,24 @@
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [Amazon DynamoDB とは](#amazon-dynamodb-とは)
+  - [Amazon DynamoDB のユースケース](#amazon-dynamodb-のユースケース)
+  - [Amazon DynamoDB の料金](#amazon-dynamodb-の料金)
   - [Amazon DynamoDB の基本](#amazon-dynamodb-の基本)
   - [Amazon DynamoDB のストレージ](#amazon-dynamodb-のストレージ)
   - [Amazon DynamoDB の耐久性](#amazon-dynamodb-の耐久性)
   - [Amazon DynamoDB の読み込み整合性](#amazon-dynamodb-の読み込み整合性)
   - [Amazon DynamoDB のパフォーマンス](#amazon-dynamodb-のパフォーマンス)
-  - [Amazon DynamoDB のユースケース](#amazon-dynamodb-のユースケース)
-  - [Amazon DynamoDB の料金](#amazon-dynamodb-の料金)
+  - [DynamoDB のテーブル操作](#dynamodb-のテーブル操作)
+  - [DynamoDB の項目操作](#dynamodb-の項目操作)
   - [TTL](#ttl)
   - [DynamoDB ストリーム](#dynamodb-ストリーム)
   - [グローバルテーブル](#グローバルテーブル)
   - [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
   - [条件付き書き込み](#条件付き書き込み)
   - [アトミックカウンター](#アトミックカウンター)
+  - [並列スキャン](#並列スキャン)
   - [設計](#設計)
+  - [まとめ](#まとめ)
 
 
 ## Amazon DynamoDB とは
@@ -43,23 +47,55 @@ DynamoDB は、「値」とそれを取得するための「キー」だけを�
 
 【AWS Black Belt Online Seminar】[Amazon DocumentDB (with MongoDB Compatibility)(YouTube)]([xxx](https://www.youtube.com/watch?v=RTfCVlo1EoA))(41:38)
 
-![xx](/images/xx/)
+![DocumentDB](/images/dynamodb/blackbelt-dynamodb_1-320.jpg)
 
 【AWS Black Belt Online Seminar】[Amazon DynamoDB Advanced Design Pattern(YouTube)](https://www.youtube.com/watch?v=Wd5gbLQ2a1E)(49:37)
 
-![xx](/images/xx/)
+![Advanced Design Pattern](/images/dynamodb/blackbelt-dynamodb_2-320.jpg)
 
 [【AWS Tech 再演】AWS の NoSQL 入門 〜Amazon ElastiCache, Amazon DynamoDB〜｜AWS Summit Tokyo 2017](https://www.youtube.com/watch?v=cEl4TMM9oYw)(40:01)
 
-[xx サービス概要](https://aws.amazon.com/jp/dynamodb/)
+![aws summit 2017](/images/dynamodb/aws-summit-2017-dynamodb-320.jpg)
 
-[xx ドキュメント](https://docs.aws.amazon.com/ja_jp/dynamodb/?id=docs_gateway)
 
-[xx よくある質問](https://aws.amazon.com/jp/dynamodb/faqs/)
+[Amazon DynamoDB サービス概要](https://aws.amazon.com/jp/dynamodb/)
+
+[Amazon DynamoDB ドキュメント](https://docs.aws.amazon.com/ja_jp/dynamodb/?id=docs_gateway)
+
+[Amazon DynamoDB よくある質問](https://aws.amazon.com/jp/dynamodb/faqs/)
+
+## Amazon DynamoDB のユースケース
+
+Duration: 0:01:30
+
+- ユーザー情報
+- 広告やゲームなどのユーザー行動履歴
+- モバイルアプリのバックエンド
+- クリックストリーム
+- IoTデータの蓄積
+- RDB のキャッシュ
+
+よくある構成は、「API Gateway / Lambda / DynamoDB」の組み合わせです。
+
+結合や集計処理や大量データの読み書きが必要なユースケースの場合には RDB の利用を検討します。
+
+## Amazon DynamoDB の料金
+
+Duration: 0:00:30
+
+[Amazon DynamoDB 料金](https://aws.amazon.com/jp/dynamodb/pricing/)
+
+「データストレージ」「読み込み/書き込み要求」によって課金されます。その他、使用したオプション機能によって追加で課金が発生します。
+
+また、「オンデマンド」と「プロビジョニング済み」のキャパシティーモードそれぞれで料金体系が異なります。
+
+詳しくは、料金表を参照してください。
 
 ## Amazon DynamoDB の基本
 
 Duration: 0:05:00
+
+![dynamodb table](/images/dynamodb/dynamodb-table.png)
 
 - パーティションキー
   - キーに設定した属性のハッシュ値によって、テーブルの Item はパーティションと呼ばれる領域に分散して配置されます
@@ -116,6 +152,8 @@ S3（Standard） は、0.025 USD/GB ですので 10倍となります。
 
 Duration: 0:00:30
 
+![3az](/images/dynamodb/dynamodb-3az.png)
+
 3 つの AZ にデータがレプリケートされることで冗長化されます。書き込みについては、少なくとも 2AZ に書き込みが完了した時点で、応答（Ack）が返却されます。
 
 最終的に、全てのAZに反映されます。
@@ -161,32 +199,305 @@ DynamoDB を利用する場合は、テーブルごとに RCU と WCU を設計�
   - 設定したキャパシティを超えた場合は、スロットリングが発生します
   - Auto Scaling を使用することで利用率に応じてキャパシティを自動調整でき、スロットリングの発生を回避できます。ただし、即応性はないので急激な負荷には対応できない場合もあります
 
-## Amazon DynamoDB のユースケース
+## DynamoDB のテーブル操作
 
-Duration: 0:01:30
+Duration: 0:03:00
 
-- ユーザー情報
-- 広告やゲームなどのユーザー行動履歴
-- モバイルアプリのバックエンド
-- クリックストリーム
-- IoTデータの蓄積
-- RDB のキャッシュ
+詳細は、[Amazon DynamoDB API Reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html)
 
-よくある構成は、「API Gateway / Lambda / DynamoDB」の組み合わせです。
+- list-tables: テーブル一覧
 
-結合や集計処理や大量データの読み書きが必要なユースケースの場合には RDB の利用を検討します。
+```sh
+aws dynamodb list-tables
 
-## Amazon DynamoDB の料金
+# response
+{
+    "TableNames": [
+        "users",
+        :
+    ]
+}
+```
 
-Duration: 0:00:30
+- create-table: テーブル作成
 
-[Amazon DynamoDB 料金](https://aws.amazon.com/jp/dynamodb/pricing/)
+```sh
+aws dynamodb create-table \
+--table-name 'users' \
+--attribute-definitions '[{ "AttributeName": "user_id", "AttributeType": "N"}, { "AttributeName": "created_at", "AttributeType": "S" }, { "AttributeName": "post_id", "AttributeType": "N" }]' \
+--key-schema '[{ "AttributeName": "user_id", "KeyType": "HASH" }, { "AttributeName": "created_at", "KeyType": "RANGE" }]' \
+--local-secondary-indexes '[{ "IndexName": "post_local_index", "Projection": { "ProjectionType": "ALL" }, "KeySchema": [{ "AttributeName": "user_id", "KeyType": "HASH" }, { "AttributeName": "post_id", "KeyType": "RANGE" }]}]' \
+--global-secondary-indexes '[{ "IndexName": "post_global_index", "Projection": { "ProjectionType": "ALL" }, "KeySchema": [{ "AttributeName": "post_id", "KeyType": "HASH" }], "ProvisionedThroughput": { "ReadCapacityUnits": 10, "WriteCapacityUnits": 10 }}]' \
+--provisioned-throughput '{"ReadCapacityUnits": 10, "WriteCapacityUnits": 10}'
 
-「データストレージ」「読み込み/書き込み要求」によって課金されます。その他、使用したオプション機能によって追加で課金が発生します。
+# response
+{
 
-また、「オンデマンド」と「プロビジョニング済み」のキャパシティーモードそれぞれで料金体系が異なります。
+    "TableDescription": {
+      "TableArn": "arn:aws:dynamodb:ap-northest-1:123456789012:table/users",
+        "AttributeDefinitions": [
+          :
+        ],
+        "ProvisionedThroughput": {...},
+        "TableClassSummary": {...},
+        :
+    }
+}
+```
 
-詳しくは、料金表を参照してください。
+- describe-table: テーブル詳細
+
+```sh
+aws dynamodb describe-table --table-name users
+
+# response
+{
+    "Table": {
+        "AttributeDefinitions": [
+            :
+        ],
+        :
+    }
+}
+```
+
+- update-table: テーブル変更
+
+```sh
+aws dynamodb update-table \
+--table-name users \
+--provisioned-throughput '{"ReadCapacityUnits": 3, "WriteCapacityUnits": 5}'
+--return-values ALL_NEW
+
+# response
+{
+  "TableDescription": {
+    "AttributeDefinitions": [
+      :
+    ],
+    "ProvisionedThroughput": {...},
+    "TableClassSummary": {...},
+    :
+  }
+}
+```
+
+- delete-table: テーブル削除
+
+```sh
+aws dynamodb delete-table --table-name users
+
+# response
+{
+  "TableDescription": {
+      "TableName": "users",
+      "TableStatus": "DELETING",
+      :
+  }
+}
+
+# 完全に削除されたかどうかは、describe-table で確認します。
+
+```
+
+## DynamoDB の項目操作
+
+Duration: 0:03:00
+
+詳細は、[Amazon DynamoDB API Reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html)
+
+- help: 利用できるコマンドの確認
+
+```sh
+aws dynamodb help
+
+# response
+batch-get-item
+batch-write-item
+create-backup
+create-global-table
+create-table
+:
+```
+
+- PutItem: 作成
+
+```sh
+aws dynamodb put-item \
+    --table-name users \
+    --item file://item.json
+
+# response
+なし
+```
+
+- GetItem: 読み込み
+
+```sh
+aws dynamodb get-item \
+    --table-name users \
+    --key '{"user_id":{"N":"1"}}'
+
+# response
+{
+    "Item": {
+        "message": {
+            "S": "dddddddddddddd"
+        },
+        "user_id": {
+            "N": "1"
+        },
+        "created_at": {
+            "S": "1544752292"
+        },
+        "post_id": {
+            "N": "5"
+        }
+    }
+}
+```
+
+- UpdateItem: 更新
+
+```sh
+aws dynamodb update-item \
+    --table-name users \
+    --key file://key.json \
+    --update-expression "SET Answered = :zero, Replies = :zero, LastPostedBy = :lastpostedby" \
+    --expression-attribute-values file://expression-attribute-values.json \
+    --return-values ALL_NEW
+
+# response
+{
+    "Attributes": {
+        "message": {
+            "S": "update_xxxxxxxxxxxxxxx"
+        },
+        "user_id": {
+            "N": "3"
+        },
+        "created_at": {
+            "S": "1544748692"
+        },
+        "post_id": {
+            "N": "100"
+        }
+    }
+}
+```
+
+- DeleteItem: 削除
+
+```sh
+aws dynamodb delete-item \
+    --table-name users \
+    --key '{ "user_id": { "N": "1" },  "created_at": { "S": "1544752292" }  }'
+
+aws dynamodb delete-item \
+    --table-name users \
+    --key file://key.json
+
+# response
+なし
+```
+
+- query: 条件に一致する項目の取得
+
+`expression-attribute-values` は、コロン(:)から始まる変数を置き換える場合に指定します。
+query が検索できるのは Key のみとなっています。同様の操作が出来るものに、scan のフィルタ式 がありますが、scan のほうは全件走査された上で、属性（パーティションキーおよびその他の属性）によるフィルターが行われる点で異なっています。
+
+```sh
+aws dynamodb query \
+--table-name users \
+--index-name xxxx-index \ ※GSI を指定する場合
+--key-condition-expression 'user_id = :user_id and created_at >= :created_at' \
+--expression-attribute-values '{ ":user_id": { "N": "1" }, ":created_at": { "S": "1544752292" } }'
+
+# response
+{
+    "Items": [
+        {
+            "message": {
+                "S": "dddddddddddddd"
+            },
+            "user_id": {
+                "N": "1"
+            },
+            "created_at": {
+                "S": "1544752292"
+            },
+            "post_id": {
+                "N": "5"
+            }
+        }
+    ],
+    "Count": 1,
+    "ScannedCount": 1,
+    "ConsumedCapacity": null
+}
+```
+
+- scan: 全項目 or 条件に一致する項目の取得
+
+scan は全件走査の API です。これを多用すると、キャパシティが枯渇します。
+
+```sh
+aws dynamodb scan \
+--table-name users
+
+# response
+{
+    "Items": [
+        {
+            "message": {
+                "S": "cccccccccccccc"
+            },
+            "user_id": {
+                "N": "3"
+            },
+            "created_at": {
+                "S": "1544748692"
+            },
+            "post_id": {
+                "N": "3"
+            }
+        },
+:
+}
+```
+
+query と同じような操作ができますが、そもそも scan は全件走査の API です。全データを取得した後、指定した属性（Attribute）で結果を絞り込むものです。そのため、キャパシティの枯渇に注意が必要です。
+
+```sh
+aws dynamodb scan \
+--table-name users \
+--filter-expression 'message = :message' \
+--expression-attribute-values '{ ":message": { "S": "cccccccccccccc" } }'
+
+# response
+{
+    "Items": [
+        {
+            "message": {
+                "S": "cccccccccccccc"
+            },
+            "user_id": {
+                "N": "3"
+            },
+            "created_at": {
+                "S": "1544748692"
+            },
+            "post_id": {
+                "N": "3"
+            }
+        }
+    ],
+    "Count": 1,
+    "ScannedCount": 5,
+    "ConsumedCapacity": null
+}
+
+```
 
 ## TTL
 
@@ -206,25 +517,35 @@ Duration: 0:01:30
 
 DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。
 
+ストリームの設定は、テーブル作成時、既存テーブルに対してもいつでも有効または無効にすることができます。
+
+ストリームは非同期的に動作するため、テーブルのパフォーマンスへの影響はありません。
+
 DynamoDB ストリームから「Lambda」や「Kinesis Firehose」を呼び出したりする用途が考えられます。
 
 ## グローバルテーブル
 
 Duration: 0:01:30
 
-指定したリージョンに DynamoDB テーブルを自動的にレプリケートする機能です。
+[グローバルテーブル – DynamoDB の複数リージョンレプリケーション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GlobalTables.html)
+
+指定したリージョンに DynamoDB テーブルを自動的にレプリケートする機能です。グローバルに分散したユーザーがいる場合など、大規模にスケールされたアプリケーションを使用する場合に最適です。
 
 ## DynamoDB Accelerator (DAX)
 
 Duration: 0:01:30
 
-DynamoDB と互換性のある高可用性インメモリキャッシュを提供するフルマネージドサービスです。
+[DynamoDB Accelerator (DAX) とインメモリアクセラレーション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DAX.html)
+
+DynamoDB と互換性のある高可用性インメモリキャッシュを提供するフルマネージドサービスで、VPC 内に DynamoDB のキャッシュクラスターを作成します。
 
 レスポンスをミリ秒単位からマイクロ秒単位まで高速化することが可能になります。
 
 ## 条件付き書き込み
 
 Duration: 0:01:30
+
+[条件付きの書き込み](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate)
 
 デフォルトの DynamoDB の書き込み（PutItem、UpdateItem、DeleteItem）は無条件であるため、指定したプライマリキーをもつ項目が上書きされます。
 
@@ -252,11 +573,11 @@ aws dynamodb update-item \
 
 [条件式](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html)
 
-[条件付きの書き込み](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate)
-
 ## アトミックカウンター
 
 Duration: 0:01:30
+
+[アトミックカウンタ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters)
 
 条件付き書き込みとは別に、アトミックカウンターというものが利用できます。この機能は、「UpdateItem」を利用して実現されます。インクリメントの他、デクリメントも可能です。
 
@@ -273,15 +594,34 @@ aws dynamodb update-item \
     --return-values UPDATED_NEW
 ```
 
-[アトミックカウンター](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters)
+## 並列スキャン
+
+Duration: 0:01:30
+
+[並列スキャン](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan)
+
+DynamoDB の scan は全件走査 API です。ベストプラクティスは、query を使うものですが、どうしても全レコードに対する処理が必要になるケースがあります。
+
+そのような時、並列スキャンを利用することで、効率よくスキャンすることができます。
+
+並列スキャンを行うには、scan コマンドに次のパラメータを追加します。
+通常の scan では、一度に１つのパーティションしか読み込むことが出来ません。
+
+- TotalSegments:テーブルに同時にアクセスするワーカーの数
+- Segment:コールしているワーカーによってアクセスされたテーブルのセグメント
+
+複数のスレッドでセグメント分割したデータを取得するため、指数関数的にパフォーマンスが向上しますが、CPU のパフォーマンス、コア数、帯域幅の制約、テーブルの読み込みユニットによりパフォーマンス向上に限界があります。
 
 ## 設計
 
 Duration: 0:01:30
 
+[DynamoDB を使用した設計とアーキテクチャの設計に関するベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
+
 リレーショナルデータベースと比べると様々な相違点があります。それらを考慮した上で、適切な設計を行わないと、DynamoDB の能力を発揮できません。
 
 ベストプラクティスのドキュメントを読み、 NoSQL に最適な設計をしましょう。
 
-[DynamoDB を使用した設計とアーキテクチャの設計に関するベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
+## まとめ
 
+![dynamodb](/images/all/dynamodb.png)
