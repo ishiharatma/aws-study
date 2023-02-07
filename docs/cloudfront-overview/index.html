@@ -159,6 +159,16 @@
 </ul>
 </li>
 </ul>
+<p>AWS CLI で署名付き URL を発行する場合は、次のようにします。</p>
+<pre><code language="language-sh" class="language-sh">aws cloudfront sign \
+  --url https://dxxxxxxxxxxxxx.cloudfront.net/example.txt \
+  --key-pair-id KXXXXXXXXXXXXX \
+  --private-key file://./private_key.pem \
+  --date-less-than $((`date &#34;+%s&#34;` + 3600))
+</code></pre>
+<p>有効期限切れの URL にアクセスすると、ステータスコード403 と下記レスポンスが返却されます。</p>
+<pre><code language="language-xml" class="language-xml">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;Error&gt;&lt;Code&gt;AccessDenied&lt;/Code&gt;&lt;Message&gt;Access denied&lt;/Message&gt;&lt;/Error&gt;
+</code></pre>
 
 
       </google-codelab-step>
@@ -250,9 +260,9 @@
     
       <google-codelab-step label="ログ記録" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html" target="_blank">標準ログ (アクセスログ) の設定および使用</a></p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html" target="_blank">リアルタイムログ</a></p>
 <p>ログは S3 へエクスポートすることができます（標準ログ）。ログはログ発生から 1時間以内にまたは、最大で 24時間遅延することがあります。</p>
 <p>標準ログは追加料金が発生しませんが、S3 のアクセスと保管料金がかかります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html" target="_blank">リアルタイムログ</a></p>
 <p>標準ログとは別に、リアルタイムログという機能があります。これは、Kinesis Data Streams を利用してログが配信されるようになる機能です。ただし、サポートするのは Kinesis Data Streams までですので、そこからログを取り出す Kiesis Data Firehose のようなコンシューマーが必要です。</p>
 <p>Kiesis Data Firehose を使用した場合、インターバルが 60 ～900 秒ですので、リアルタイムといっても 最低 60秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。</p>
 

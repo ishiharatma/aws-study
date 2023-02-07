@@ -179,6 +179,22 @@ CloudFront に登録したキーペアを利用して生成します。
   - 複数のファイルへのアクセス制限
   - 現在の URL を変更したくない場合
 
+AWS CLI で署名付き URL を発行する場合は、次のようにします。
+
+```sh
+aws cloudfront sign \
+  --url https://dxxxxxxxxxxxxx.cloudfront.net/example.txt \
+  --key-pair-id KXXXXXXXXXXXXX \
+  --private-key file://./private_key.pem \
+  --date-less-than $((`date "+%s"` + 3600))
+```
+
+有効期限切れの URL にアクセスすると、ステータスコード403 と下記レスポンスが返却されます。
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?><Error><Code>AccessDenied</Code><Message>Access denied</Message></Error>
+```
+
 ## S3 オリジンへのアクセス制限
 
 Duration: 0:00:30
@@ -298,11 +314,11 @@ Duration: 0:01:30
 
 [標準ログ (アクセスログ) の設定および使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html)
 
-[リアルタイムログ](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
-
 ログは S3 へエクスポートすることができます（標準ログ）。ログはログ発生から 1時間以内にまたは、最大で 24時間遅延することがあります。
 
 標準ログは追加料金が発生しませんが、S3 のアクセスと保管料金がかかります。
+
+[リアルタイムログ](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html)
 
 標準ログとは別に、リアルタイムログという機能があります。これは、Kinesis Data Streams を利用してログが配信されるようになる機能です。ただし、サポートするのは Kinesis Data Streams までですので、そこからログを取り出す Kiesis Data Firehose のようなコンシューマーが必要です。
 
