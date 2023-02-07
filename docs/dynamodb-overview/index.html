@@ -50,12 +50,15 @@
 <li><a href="#dynamodb-%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E6%93%8D%E4%BD%9C" target="_blank">DynamoDB のテーブル操作</a></li>
 <li><a href="#dynamodb-%E3%81%AE%E9%A0%85%E7%9B%AE%E6%93%8D%E4%BD%9C" target="_blank">DynamoDB の項目操作</a></li>
 <li><a href="#ttl" target="_blank">TTL</a></li>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%B3%E3%82%B6%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">トランザクション</a></li>
 <li><a href="#dynamodb-%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%A0" target="_blank">DynamoDB ストリーム</a></li>
 <li><a href="#%E3%82%B0%E3%83%AD%E3%83%BC%E3%83%90%E3%83%AB%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB" target="_blank">グローバルテーブル</a></li>
 <li><a href="#dynamodb-accelerator-dax" target="_blank">DynamoDB Accelerator (DAX)</a></li>
 <li><a href="#%E6%9D%A1%E4%BB%B6%E4%BB%98%E3%81%8D%E6%9B%B8%E3%81%8D%E8%BE%BC%E3%81%BF" target="_blank">条件付き書き込み</a></li>
 <li><a href="#%E3%82%A2%E3%83%88%E3%83%9F%E3%83%83%E3%82%AF%E3%82%AB%E3%82%A6%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank">アトミックカウンター</a></li>
 <li><a href="#%E4%B8%A6%E5%88%97%E3%82%B9%E3%82%AD%E3%83%A3%E3%83%B3" target="_blank">並列スキャン</a></li>
+<li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">バックアップ</a></li>
+<li><a href="#dynamodb-%E7%94%A8%E3%81%AE-nosql-workbench" target="_blank">DynamoDB 用の NoSQL Workbench</a></li>
 <li><a href="#%E8%A8%AD%E8%A8%88" target="_blank">設計</a></li>
 <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
 </ul>
@@ -134,6 +137,7 @@
 <li>テーブルとパーティションキーまたはパーティション/ソートキーが異なるインデックスです。</li>
 <li>例えば、プライマリパーティションキーがCustomerID で、GSI のパーティションキーが郵便番号</li>
 <li>1 テーブルあたり最大で 5つの GSI を作成できます。</li>
+<li>既存テーブルに追加・削除ができます。</li>
 <li>スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。</li>
 <li>GSI に依存するテーブル設計であれば、RDS の利用も検討したほうがよい。</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-indexes.html" target="_blank">DynamoDB でセカンダリインデックスを使用するためのベストプラクティス</a></li>
@@ -143,6 +147,7 @@
 <li>テーブルとパーティションキーは同じですが、ソートキーが異なるインデックスです。</li>
 <li>1 テーブルあたり最大で 5つの LSI を作成できます。</li>
 <li>スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。</li>
+<li>GSI と違い、既存テーブルに追加・削除ができません。</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank">セカンダリインデックスを使用したデータアクセス性の向上</a></li>
 </ul>
 </li>
@@ -218,7 +223,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB のテーブル操作" duration="3">
+      <google-codelab-step label="DynamoDB のテーブル操作" duration="5">
         <p>詳細は、<a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html" target="_blank">Amazon DynamoDB API Reference</a></p>
 <ul>
 <li>list-tables: テーブル一覧</li>
@@ -314,7 +319,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB の項目操作" duration="3">
+      <google-codelab-step label="DynamoDB の項目操作" duration="5">
         <p>詳細は、<a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html" target="_blank">Amazon DynamoDB API Reference</a></p>
 <ul>
 <li>help: 利用できるコマンドの確認</li>
@@ -501,15 +506,32 @@ aws dynamodb delete-item \
       </google-codelab-step>
     
       <google-codelab-step label="TTL" duration="2">
-        <p>テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。</p>
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/TTL.html" target="_blank">DynamoDB の有効期限 (TTL) を使用して項目を期限切れにする</a></p>
+<p>テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。</p>
 <p>削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは48時間以内に削除されます。</p>
 <p>TTLとして指定する属性は、Number型のUnixtime（ミリ秒無し）である必要があります。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB ストリーム" duration="2">
-        <p>テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24時間保存されます。</p>
+      <google-codelab-step label="トランザクション" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/transaction-apis.html" target="_blank">Amazon DynamoDB Transaction</a></p>
+<p>RDB のようなトランザクションまでは期待できないが、複数テーブルに対する操作をグループ化できます。</p>
+<p>複雑なトランザクションは、設計に依存する部分が大きいので、<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html" target="_blank">ベストプラクティス</a>を参考にしながら最適な設計を行う必要があります。</p>
+<p>また、制約もあるため、利用する場合は確認しておきます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/ServiceQuotas.html#limits-dynamodb-transactions" target="_blank">DynamoDB のトランザクション</a></p>
+<ul>
+<li>トランザクションには、100件を超えるアクションを含めることはできない</li>
+<li>トランザクションに 4MB を超えるデータを含めることはできない</li>
+<li>同一テーブルに2つのアクションを実行できない　など</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DynamoDB ストリーム" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html" target="_blank">DynamoDB Streams の変更データキャプチャ</a></p>
+<p>テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24時間保存されます。</p>
 <p>DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。</p>
 <p>ストリームの設定は、テーブル作成時、既存テーブルに対してもいつでも有効または無効にすることができます。</p>
 <p>ストリームは非同期的に動作するため、テーブルのパフォーマンスへの影響はありません。</p>
@@ -518,14 +540,14 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="グローバルテーブル" duration="2">
+      <google-codelab-step label="グローバルテーブル" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GlobalTables.html" target="_blank">グローバルテーブル – DynamoDB の複数リージョンレプリケーション</a></p>
 <p>指定したリージョンに DynamoDB テーブルを自動的にレプリケートする機能です。グローバルに分散したユーザーがいる場合など、大規模にスケールされたアプリケーションを使用する場合に最適です。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB Accelerator (DAX)" duration="2">
+      <google-codelab-step label="DynamoDB Accelerator (DAX)" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DAX.html" target="_blank">DynamoDB Accelerator (DAX) とインメモリアクセラレーション</a></p>
 <p>DynamoDB と互換性のある高可用性インメモリキャッシュを提供するフルマネージドサービスで、VPC 内に DynamoDB のキャッシュクラスターを作成します。</p>
 <p>レスポンスをミリ秒単位からマイクロ秒単位まで高速化することが可能になります。</p>
@@ -586,9 +608,31 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="設計" duration="2">
+      <google-codelab-step label="バックアップ" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/BackupRestore.html" target="_blank">DynamoDB のオンデマンドバックアップおよび復元の使用</a></p>
+<p>バックアップ機能を使用し、バックアップを保存することができます。バックアップは Management コンソールか、API を使うことで、バックアップおよび復元することができます。バックアップや復元はテーブルのパフォーマンスや可用性に影響を与えません。</p>
+<p>バックアップのオプションは次の２つです。</p>
+<ul>
+<li>DynamoDB の標準機能</li>
+<li>AWS Backup</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DynamoDB 用の NoSQL Workbench" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/workbench.html" target="_blank">DynamoDB 用の NoSQL Workbench</a></p>
+<p>Amazon DynamoDB 用の NoSQL Workbench は、最新のデータベース開発および運用向けのクロスプラットフォームのクライアント側 GUI アプリケーションです。</p>
+<p>macOS、Windows、Linux で利用できます。</p>
+<p>どんな画面なのかは、プレビュー時の記事で確認できます。</p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/nosql-workbench-for-amazon-dynamodb-available-in-preview/" target="_blank">NoSQL Workbench for Amazon DynamoDB – プレビューの使用が可能になりました(2019-9-19)</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="設計" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html" target="_blank">DynamoDB を使用した設計とアーキテクチャの設計に関するベストプラクティス</a></p>
-<p>リレーショナルデータベースと比べると様々な相違点があります。それらを考慮した上で、適切な設計を行わないと、DynamoDB の能力を発揮できません。</p>
+<p>リレーショナルデータベースと比べると様々な相違点があります。それらを考慮した上で、適切な設計を行わないと DynamoDB の能力を発揮できません。</p>
 <p>ベストプラクティスのドキュメントを読み、 NoSQL に最適な設計をしましょう。</p>
 
 

@@ -29,12 +29,15 @@ published: false
   - [DynamoDB のテーブル操作](#dynamodb-のテーブル操作)
   - [DynamoDB の項目操作](#dynamodb-の項目操作)
   - [TTL](#ttl)
+  - [トランザクション](#トランザクション)
   - [DynamoDB ストリーム](#dynamodb-ストリーム)
   - [グローバルテーブル](#グローバルテーブル)
   - [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
   - [条件付き書き込み](#条件付き書き込み)
   - [アトミックカウンター](#アトミックカウンター)
   - [並列スキャン](#並列スキャン)
+  - [バックアップ](#バックアップ)
+  - [DynamoDB 用の NoSQL Workbench](#dynamodb-用の-nosql-workbench)
   - [設計](#設計)
   - [まとめ](#まとめ)
 
@@ -120,8 +123,9 @@ Duration: 0:05:00
   - 「パーティションキー」または、「パーティションキーとソートキーの複合キー」のこと。
 - グローバルセカンダリインデックス（GSI）
   - テーブルとパーティションキーまたはパーティション/ソートキーが異なるインデックスです。
-  - 例えば、プライマリパーティションキーがCustomerID で、GSI のパーティションキーが郵便番号 
+  - 例えば、プライマリパーティションキーがCustomerID で、GSI のパーティションキーが郵便番号
   - 1 テーブルあたり最大で 5つの GSI を作成できます。
+  - 既存テーブルに追加・削除ができます。
   - スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。
   - GSI に依存するテーブル設計であれば、RDS の利用も検討したほうがよい。
   - [DynamoDB でセカンダリインデックスを使用するためのベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-indexes.html)
@@ -129,6 +133,7 @@ Duration: 0:05:00
   - テーブルとパーティションキーは同じですが、ソートキーが異なるインデックスです。
   - 1 テーブルあたり最大で 5つの LSI を作成できます。
   - スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。
+  - GSI と違い、既存テーブルに追加・削除ができません。
   - [セカンダリインデックスを使用したデータアクセス性の向上](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/SecondaryIndexes.html)
 
 ## Amazon DynamoDB のストレージ
@@ -208,7 +213,7 @@ DynamoDB を利用する場合は、テーブルごとに RCU と WCU を設計�
 
 ## DynamoDB のテーブル操作
 
-Duration: 0:03:00
+Duration: 0:05:00
 
 詳細は、[Amazon DynamoDB API Reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html)
 
@@ -309,7 +314,7 @@ aws dynamodb delete-table --table-name users
 
 ## DynamoDB の項目操作
 
-Duration: 0:03:00
+Duration: 0:05:00
 
 詳細は、[Amazon DynamoDB API Reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html)
 
@@ -510,15 +515,37 @@ aws dynamodb scan \
 
 Duration: 0:01:30
 
+[DynamoDB の有効期限 (TTL) を使用して項目を期限切れにする](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/TTL.html)
+
 テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。
 
 削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは48時間以内に削除されます。
 
 TTLとして指定する属性は、Number型のUnixtime（ミリ秒無し）である必要があります。
 
+## トランザクション
+
+Duration: 0:01:00
+
+[Amazon DynamoDB Transaction](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/transaction-apis.html)
+
+RDB のようなトランザクションまでは期待できないが、複数テーブルに対する操作をグループ化できます。
+
+複雑なトランザクションは、設計に依存する部分が大きいので、[ベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)を参考にしながら最適な設計を行う必要があります。
+
+また、制約もあるため、利用する場合は確認しておきます。
+
+[DynamoDB のトランザクション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/ServiceQuotas.html#limits-dynamodb-transactions)
+
+- トランザクションには、100件を超えるアクションを含めることはできない
+- トランザクションに 4MB を超えるデータを含めることはできない
+- 同一テーブルに2つのアクションを実行できない　など
+
 ## DynamoDB ストリーム
 
-Duration: 0:01:30
+Duration: 0:01:00
+
+[DynamoDB Streams の変更データキャプチャ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html)
 
 テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24時間保存されます。
 
@@ -532,7 +559,7 @@ DynamoDB ストリームから「Lambda」や「Kinesis Firehose」を呼び出�
 
 ## グローバルテーブル
 
-Duration: 0:01:30
+Duration: 0:01:00
 
 [グローバルテーブル – DynamoDB の複数リージョンレプリケーション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GlobalTables.html)
 
@@ -540,7 +567,7 @@ Duration: 0:01:30
 
 ## DynamoDB Accelerator (DAX)
 
-Duration: 0:01:30
+Duration: 0:01:00
 
 [DynamoDB Accelerator (DAX) とインメモリアクセラレーション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DAX.html)
 
@@ -619,13 +646,40 @@ DynamoDB の scan は全件走査 API です。ベストプラクティスは、
 
 複数のスレッドでセグメント分割したデータを取得するため、指数関数的にパフォーマンスが向上しますが、CPU のパフォーマンス、コア数、帯域幅の制約、テーブルの読み込みユニットによりパフォーマンス向上に限界があります。
 
+## バックアップ
+
+Duration: 0:01:00
+
+[DynamoDB のオンデマンドバックアップおよび復元の使用](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/BackupRestore.html)
+
+バックアップ機能を使用し、バックアップを保存することができます。バックアップは Management コンソールか、API を使うことで、バックアップおよび復元することができます。バックアップや復元はテーブルのパフォーマンスや可用性に影響を与えません。
+
+バックアップのオプションは次の２つです。
+
+- DynamoDB の標準機能
+- AWS Backup
+
+## DynamoDB 用の NoSQL Workbench
+
+Duration: 0:01:00
+
+[DynamoDB 用の NoSQL Workbench](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/workbench.html)
+
+Amazon DynamoDB 用の NoSQL Workbench は、最新のデータベース開発および運用向けのクロスプラットフォームのクライアント側 GUI アプリケーションです。
+
+macOS、Windows、Linux で利用できます。
+
+どんな画面なのかは、プレビュー時の記事で確認できます。
+
+[NoSQL Workbench for Amazon DynamoDB – プレビューの使用が可能になりました(2019-9-19)](https://aws.amazon.com/jp/blogs/news/nosql-workbench-for-amazon-dynamodb-available-in-preview/)
+
 ## 設計
 
-Duration: 0:01:30
+Duration: 0:01:00
 
 [DynamoDB を使用した設計とアーキテクチャの設計に関するベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
 
-リレーショナルデータベースと比べると様々な相違点があります。それらを考慮した上で、適切な設計を行わないと、DynamoDB の能力を発揮できません。
+リレーショナルデータベースと比べると様々な相違点があります。それらを考慮した上で、適切な設計を行わないと DynamoDB の能力を発揮できません。
 
 ベストプラクティスのドキュメントを読み、 NoSQL に最適な設計をしましょう。
 
