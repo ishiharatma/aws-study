@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2023-02-22T23:14:06+09:00",
-  "id": "aws-study-guide",
+  "id": "aws-certified-dva-keyword",
   "duration": 0,
-  "title": "AWS 勉強ガイド",
+  "title": "AWS Certified Developer - Associate 認定",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_aws-study-guide.md",
+  "source": "F:\\work\\git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_aws-certified-dva-keyword.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awsaccount"
+    "awscertifieddeveloper-associate"
   ],
-  "url": "aws-study-guide"
+  "url": "aws-certified-dva-keyword"
 }

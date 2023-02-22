@@ -1,0 +1,820 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Certified Developer - Associate 認定</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="aws-certified-dva-keyword"
+                  title="AWS Certified Developer - Associate 認定"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS 認定資格取得に向けて個人的に勉強した各サービスのキーワードを記載しております。AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lambda" duration="0">
+        <ul>
+<li>Java、Go、PowerShell、Node.js、C#、Python、Ruby</li>
+<li>C言語の場合は、カスタムランタイムでレイヤーを作成</li>
+<li>環境変数の暗号化 <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/security-dataprotection.html" target="_blank">保管データ暗号化</a></li>
+<li>保管時はデフォルトで KMS キーによって暗号化されている</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/security-dataprotection.html#security-privacy-intransit" target="_blank">転送時の暗号化</a><ul>
+<li>環境変数を使用する場合、コンソール暗号化ヘルパーを有効にして、クライアント側の暗号化で転送中の環境変数を保護</li>
+</ul>
+</li>
+<li>一時ファイルは、<code>/tmp</code><ul>
+<li>最大容量は、10GB</li>
+</ul>
+</li>
+<li>デッドレターキュー <ul>
+<li>非同期呼び出し処理の試みが 3 回 とも失敗</li>
+<li>SQS との連携で複数回失敗した場合に失敗したキューを別のキューに入れて再処理する</li>
+<li>DeadLetterConfig で設定</li>
+</ul>
+</li>
+<li>同時実行制御 <ul>
+<li>同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒）） <ul>
+<li>関数が平均10秒かかり、1秒あたり100個のイベントを発行⇒同時実行1000</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>エイリアス</li>
+<li>ベストプラクティス <ul>
+<li>Lambda ハンドラーをコアロジックから分離</li>
+<li>ランタイムを必要最低限にしてサイズを小さく</li>
+<li>レイヤー使う</li>
+<li>再帰呼び出ししない</li>
+<li>環境変数を使う</li>
+<li>冪等性のコード</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="API Gateway" duration="0">
+        <ul>
+<li>API 統合タイプ <ul>
+<li>AWS <ul>
+<li>Lambda統合</li>
+<li>デフォルトでは、クライアントから連携されたリクエストが Lambda に渡されない。</li>
+<li>マッピングテンプレートでリクエストのパラメータのどれを何という名前で Lambda に渡すかを定義しなければならない</li>
+</ul>
+</li>
+<li>AWS_PROXY <ul>
+<li>Lambdaプロキシ統合ともいう</li>
+<li>クライアントから連携されたリクエストを Lambda に渡す</li>
+<li>Lambda からは決められたレスポンス形式を返却する必要がある。</li>
+<li>形式が間違っていると、<code>502: Internal server error</code> となる</li>
+</ul>
+</li>
+<li>HTTP <ul>
+<li>バックエンドが HTTP エンドポイントとなる</li>
+<li>Lambda ではない点以外は、統合タイプ:AWS と同じ</li>
+</ul>
+</li>
+<li>HTTP_PROXY <ul>
+<li>バックエンドが HTTP エンドポイントとなる</li>
+<li>Lambda ではない点以外は、統合タイプ:AWS_PROXY と同じ</li>
+</ul>
+</li>
+<li>MOCK <ul>
+<li>API のテスト</li>
+<li>バックエンドにリクエストを送信せずにレスポンスを返す</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>CORS</li>
+<li>メトリクス <ul>
+<li>IntegrationLatency: バックエンドの処理時間</li>
+<li>Latency: API 全体</li>
+</ul>
+</li>
+<li>504: Gateway Timeoutエラーが発生する <ul>
+<li>Lambda の実行時間 29秒を超えていないか</li>
+</ul>
+</li>
+<li>オーソライザー <ul>
+<li>Lambda <ul>
+<li>Lambda 関数を使用してアクセス制御を行う</li>
+<li>リクエストパラメータベース</li>
+</ul>
+</li>
+<li>Cognito <ul>
+<li>Cognito ユーザープールを使用してアクセス制御を行う</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用量プラン <ul>
+<li>外部との連携などで、リクエスト可能な回数を設定できる</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cognito" duration="0">
+        <ul>
+<li>ユーザープール <ul>
+<li>MFA の設定</li>
+<li>ID トークンの発行（JWT：JSON Web Token）</li>
+</ul>
+</li>
+<li>ID プール <ul>
+<li>ゲストユーザー (未認証) と認証してトークンを受け取ったユーザーに一時的な AWS 認証情報（AWS STS）を提供</li>
+<li>GetSessionToken</li>
+</ul>
+</li>
+<li>Cognito Sync <ul>
+<li>WEBアプリとモバイルデバイスを同期</li>
+<li>デバイスがオフライン時でもローカルにデータキャッシュできる</li>
+<li>AppSync が後継サービス</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="S3" duration="0">
+        <ul>
+<li>SSE-S3 <ul>
+<li>S3 デフォルト</li>
+<li>リクエストヘッダー <ul>
+<li><code>x-amz-server-side-encryption: AES256</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SSE-KMS <ul>
+<li>KMS のキーを使う</li>
+<li>リクエストヘッダー <ul>
+<li><code>x-amz-server-side-encryption: aws:kms</code></li>
+<li><code>x-amz-server-side-encryption-aws-kms-key-id: arn:aws:....</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>SSE-C <ul>
+<li>独自の暗号化キー</li>
+<li>リクエストヘッダー <ul>
+<li>x-amz-server-side-encryption-customer-algorithm</li>
+<li>x-amz-server-side-encryption-customer-key</li>
+<li>x-amz-server-side-encryption-customer-key-MD5</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>サーバーアクセスログ <ul>
+<li>アクセス数に比例してストレージ容量Up</li>
+</ul>
+</li>
+<li>IAM ユーザーに S3 の個人スペースを提供する <ul>
+<li>IAM グループに 動的変数で IAM ポリシーを</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ECS" duration="0">
+        <ul>
+<li>タスク配置戦略 <ul>
+<li>binpack <ul>
+<li>EC2インスタンス数が最小となるように配置</li>
+</ul>
+</li>
+<li>random <ul>
+<li>ランダムで</li>
+</ul>
+</li>
+<li>spread <ul>
+<li>インスタンス、AZに均等に配置</li>
+<li>&#34;field&#34;: &#34;attribute:ecs.availability-zone&#34;</li>
+<li>&#34;field&#34;: &#34;instanceId&#34;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ECS タスクに IAM ロールを付与するには、<code>ECS_ENABLE_TASK_IAM_ROLE =True</code></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="X-Ray" duration="0">
+        <ul>
+<li>トレース <ul>
+<li>一連のリクエストの単位</li>
+</ul>
+</li>
+<li>セグメント <ul>
+<li>X-Ray データを送信するサービスや、SDKやX-Rayデーモンを利用した場合に作成される情報の単位</li>
+</ul>
+</li>
+<li>サブセグメント <ul>
+<li>独自で X-Ray データを送信できないサービス（DynamoDB）などを呼び出した際に、作成される情報の単位</li>
+</ul>
+</li>
+<li>注釈（Annotations） <ul>
+<li>フィルタするときに使うインデックスで、Key-Value形式</li>
+<li>１つのトレースで50個まで</li>
+<li>自動的に追加されるが、SDK利用時には独自に作成可能</li>
+</ul>
+</li>
+<li>メタデータ <ul>
+<li>追加情報</li>
+<li>インデックスは作成されないので、フィルタに使うことはできない</li>
+</ul>
+</li>
+<li>X-Ray のトレースデータ送信に必要なアクセス権限は <ul>
+<li><code>AWSXrayWriteOnlyAccess</code></li>
+<li><code>AWSXRayDaemonWriteAccess</code><ul>
+<li>サンプリングルールの使用も含まれる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lambda <ul>
+<li>コンソールで X-Ray アクティブトレースをオン</li>
+<li>実行ロールでトレースデータ送信の権限付与</li>
+<li>デバッグに必要な環境変数 <ul>
+<li>_X_AMZN_TRACE_ID</li>
+<li>AWS_XRAY_CONTEXT_MISSING <ul>
+<li>例外のスロー</li>
+</ul>
+</li>
+<li>AWS_XRAY_DAEMON_ADDRESS <ul>
+<li>X-Ray デーモンリスナーのホストとポートを設定</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>その他環境変数 <ul>
+<li>AWS_XRAY_LOG_LEVEL</li>
+<li>AWS_XRAY_TRACING_NAME</li>
+</ul>
+</li>
+<li>ECS <ul>
+<li>サイドカーで X-Ray デーモンを実行。公式のイメージあり。</li>
+<li>タスクロールで、トレースデータ送信の権限付与</li>
+</ul>
+</li>
+<li>EC2 <ul>
+<li>X-Ray デーモンをインストール</li>
+<li>起動時にインストールされるようにするには、ユーザーデータにスクリプト記述</li>
+<li>インスタンスプロファイルでトレースデータ送信の権限付与</li>
+</ul>
+</li>
+<li>API Gateway <ul>
+<li>「X-Rayトレースを有効にする」にチェック</li>
+<li>権限などの設定は不要</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CloudFormation" duration="0">
+        <ul>
+<li>テンプレート構成要素 <ul>
+<li>Parameters <ul>
+<li>任意</li>
+<li>実行時にテンプレートに渡すパラメータ</li>
+</ul>
+</li>
+<li>Conditions <ul>
+<li>任意</li>
+<li>条件判定に使う変数を作成する</li>
+</ul>
+</li>
+<li>Mappings <ul>
+<li>任意</li>
+<li>Key-Value の名前付き</li>
+<li>マッピングから値を取り出すには、<code>Fn::FindInMap: [ MapName, TopLevelKey, SecondLevelKey ]</code></li>
+</ul>
+</li>
+<li>Resource <ul>
+<li>必須</li>
+<li>リソースの定義</li>
+<li>作成したリソースの属性を取得するときは、<code>Fn::GetAtt</code></li>
+<li>アカウントID を参照したいときは、<code>AWS::AccountId</code></li>
+<li>Lambda を記述したい場合 <ul>
+<li>コードに依存関係がない場合は直接コードを記述 <ul>
+<li>Code: ZipFile: |　～</li>
+</ul>
+</li>
+<li>zip にして S3 にアップロード <ul>
+<li>Code: S3Bucket: 、 S3Key:</li>
+<li>PackageType: Zip</li>
+</ul>
+</li>
+<li>コンテナイメージ <ul>
+<li>Code: ImageUri:～</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Outputs <ul>
+<li>任意</li>
+<li>他のテンプレートで使用するために Key-Value 形式でエクスポート</li>
+<li>使用するには、<code>Fn::ImportValue</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>StackSet <ul>
+<li>複数アカウントに同じ設定を実行したいとき</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="SAM" duration="0">
+        <ul>
+<li>テンプレート <ul>
+<li>Transform: AWS::Serverless-2016-10-31</li>
+<li>AWS::Serverless::Function</li>
+<li>AWS::Serverless::Api</li>
+<li>AWS::Serverless::SimpleTable</li>
+</ul>
+</li>
+<li>sam package <ul>
+<li>アプリケーションをパッケージ化、zip にして S3 にアップロード</li>
+</ul>
+</li>
+<li>sam deploy <ul>
+<li>アプリケーションをデプロイ</li>
+</ul>
+</li>
+<li>以前は、sam package ⇒ sam deploy が必要だったが、sam deploy 一発でデプロイが可能</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CodePipeline" duration="0">
+        <ul>
+<li>CodeCommitにコミット後、デプロイ前にコードレビューが必要なとき <ul>
+<li>パイプラインに承認ステージを追加し、SNSで通知</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CodeBuild" duration="0">
+        <ul>
+<li>buildspec.yml</li>
+<li>ビルド出力アーティファクトを暗号化するには、</li>
+<li>ECR にプッシュ失敗するときは、CodeBuild サービスロール（IAMロール）を見直し</li>
+<li>timeoutInMinutesOverride <ul>
+<li>ビルドをキューに入れてからタイムアウトするまでの時間</li>
+<li>ビルドが長すぎる場合</li>
+</ul>
+</li>
+<li>buildspec.ymlのエラーを確認したい場合、ローカル実行 <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/use-codebuild-agent.html" target="_blank">AWS CodeBuild エージェントを使用してビルドをローカルで実行</a></li>
+<li>Docker が必要</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CodeDeploy" duration="0">
+        <ul>
+<li>appspec.yml</li>
+<li>インプレイスデプロイ <ul>
+<li>EC2, オンプレのみ</li>
+<li>デプロイフックの実行順序(⇒<a href="https://docs.aws.amazon.com/ja_jp/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#reference-appspec-file-structure-hooks-run-order" target="_blank">デプロイでのフックの実行順</a>) <ul>
+<li>ApplicationStop</li>
+<li>BeforeInstall</li>
+<li>AfterInstall</li>
+<li>ApplicationStart</li>
+<li>ValidateService</li>
+<li>BeforeAllowTraffic</li>
+<li>AllowTraffic</li>
+<li>AfterAllowTraffic</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Lambda のデプロイ時 <ul>
+<li>BeforeAllowTraffic <ul>
+<li>デプロイされたLambda関数バージョンに移行する前</li>
+<li>新バージョンにシフトする前に SNS 通知が欲しい場合、このイベントを使う</li>
+</ul>
+</li>
+<li>AllowTraffic: 移行実施</li>
+<li>AfterAllowTraffic: デプロイされたLambda関数バージョンに移行した後</li>
+</ul>
+</li>
+<li>デプロイグループ <ul>
+<li>デプロイ先のインスタンスの集合とデプロイの設定をまとめたもの</li>
+</ul>
+</li>
+<li>デプロイ失敗例 <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/codedeploy/latest/userguide/error-codes.html" target="_blank">エラーコード</a></li>
+</ul>
+</li>
+<li>自動ロールバック失敗 <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/codedeploy/latest/userguide/deployments-rollback-and-redeploy.html" target="_blank">CodeDeploy を使用してデプロイを再デプロイしてロールバックする</a></li>
+<li>ロールバックする場合、新しいデプロイとして以前のバージョンに戻す</li>
+<li>デプロイ ID は新しくなる</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DynamoDB" duration="0">
+        <ul>
+<li>パーティションキー <ul>
+<li>分散して配置するためのキー</li>
+<li>テーブルに１つ</li>
+<li>カーディナリティの高い属性を選ぶ</li>
+</ul>
+</li>
+<li>ソートキー <ul>
+<li>範囲の指定やソートを行うため</li>
+</ul>
+</li>
+<li>プライマリキー <ul>
+<li>「パーティションキー」または、「パーティションキーとソートキーの複合キー」</li>
+</ul>
+</li>
+<li>GSI（グローバルセカンダリインデックス） <ul>
+<li>プライマリキーとは異なる属性で作成する</li>
+<li>あとから追加できる</li>
+</ul>
+</li>
+<li>LSI（ローカルセカンダリインデックス） <ul>
+<li>パーティションキーは同じでソートキーが異なるもの</li>
+<li>テーブル作成時のみ</li>
+</ul>
+</li>
+<li>キャパシティ <ul>
+<li>1 RCU <ul>
+<li>4 KBの項目に対して、結果整合性のある読み取りの場合 2回/秒、強い整合性のある読み取りの場合 1回/秒</li>
+</ul>
+</li>
+<li>1 WCU <ul>
+<li>最大 1KB の項目に対して、1回/秒の書き込み</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>オンデマンドとプロビジョニング済み <ul>
+<li>オンデマンド <ul>
+<li>アクセスが読めない、RCU と WCU の見積が困難</li>
+<li>アクセス数でコスト増大する</li>
+</ul>
+</li>
+<li>プロビジョニング済み <ul>
+<li>予め RCU と WCU を見積もれる、安定したアクセス</li>
+<li>予め決めたキャパシティを超えるとスロットリング（一時的なキャパシティ不足）が発生</li>
+<li>Auto Scaling を設定することで回避できるが、即応性はない</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>クエリとスキャン <ul>
+<li><code>Scan</code> は全件走査なので RCU への影響が大きい</li>
+<li>プライマリキーに基づいて検索する <code>GetItem</code>, <code>BatchGetItem</code> への変更も検討する</li>
+<li><code>BatchGetItem</code> は大量に取得する際のパフォーマンス向上に</li>
+<li><code>Scan</code> でパフォーマンスアップしたい場合は、並列スキャン</li>
+<li>特定の属性のみを取得したい場合は、<code>--projection-expression</code></li>
+</ul>
+</li>
+<li>書き込みスルー <ul>
+<li>データベースに値が書き込まれるときに最新化する</li>
+<li>使われないデータもキャッシュ</li>
+</ul>
+</li>
+<li>遅延読み込み <ul>
+<li>リクエストされたデータだけキャッシュされる</li>
+<li>キャッシュには最低限</li>
+</ul>
+</li>
+<li>ProvisionedThroughputExceededExceptionが発生した <ul>
+<li>アプリケーションからのリクエストでExponential Backoffを使用</li>
+<li>Exponential Backoff（エクスポネンシャルバックオフ）とは、連続した衝突を防ぐためにジッター (ランダム化された遅延) を使用する <ul>
+<li>通信装置には古くからあるアルゴリズムでデータ送信時のコリジョン（衝突）を検知したら一定時間待機して再送に使われる</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TTL <ul>
+<li>有効期限</li>
+</ul>
+</li>
+<li>アトミックカウンター <ul>
+<li>UpdateItem</li>
+<li>訪問者数をカウントするケースなど</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ElastiCache" duration="0">
+        <ul>
+<li>Redis <ul>
+<li>シングルスレッド</li>
+<li>複雑な集計もできる</li>
+<li>レプリケーションや自動フェールオーバー</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/auth.html" target="_blank">Redis AUTH</a></li>
+</ul>
+</li>
+<li>Memcached <ul>
+<li>マルチスレッド</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="SQS" duration="0">
+        <ul>
+<li>FIFO キュー <ul>
+<li>順番に処理したい場合</li>
+</ul>
+</li>
+<li>可視性タイムアウト <ul>
+<li>キューから処理された後、一定時間非表示にできる</li>
+<li>他のコンシューマーから読み取れない <ul>
+<li>メッセージ処理に失敗した後、他のコンシューマーから読み取れないときの対処は？と聞かれたら可視性タイムアウトの時間を調整</li>
+</ul>
+</li>
+<li>デフォルト 30秒</li>
+<li>0秒 ～ 12時間</li>
+</ul>
+</li>
+<li>保持期間 <ul>
+<li>キューにメッセージが保存されている期間</li>
+<li>デフォルト 4日</li>
+<li>1分～14日</li>
+</ul>
+</li>
+<li>遅延キュー <ul>
+<li>キューが追加された直後、一定時間非表示にできる</li>
+<li>キューに配信されてからすぐに処理したくない場合</li>
+<li>コンシューマー側で待機処理をしなくてもよい</li>
+</ul>
+</li>
+<li>ロングポーリング <ul>
+<li>最大で 20秒間待機する</li>
+<li>0件多発するような場合、ロングポーリングでコスト削減</li>
+</ul>
+</li>
+<li>ショートポーリング <ul>
+<li>ポーリングしたタイミングでデータがなければ終了</li>
+<li>ポーリング回数が増えるのでコスト増、0件多発ならロングポーリングを検討</li>
+</ul>
+</li>
+<li>メッセージ重複削除ID <ul>
+<li>5分以内は同じIDが入らなくなる</li>
+</ul>
+</li>
+<li>一度に10件まで取得</li>
+<li>メッセージは 256KB <ul>
+<li>サイズの大きいメッセージは、SQS 拡張クライアントライブラリ</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Kinesis Data Streams" duration="0">
+        <ul>
+<li>ストリーミングデータを収集されて70〜200ミリ秒以内に、配信できる</li>
+<li>シャード <ul>
+<li>ストリーム内のデータレコードの一意に識別されたグループ</li>
+<li>配信データが多い場合はシャードを増やす</li>
+<li>少ない場合は減らす</li>
+</ul>
+</li>
+<li>ストリームデータの暗号化 <ul>
+<li>KMS による保存データの暗号化</li>
+<li>HTTPS エンドポイント</li>
+</ul>
+</li>
+<li>プロデューサーから二重送信 <ul>
+<li>レコード内に主キーを</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/streams/latest/dev/kinesis-record-processor-duplicates.html#kinesis-record-processor-duplicates-producer" target="_blank">プロデューサーの再試行</a></li>
+</ul>
+</li>
+<li>AWS Application Auto Scaling <ul>
+<li>シャードを自動的に追加・削除するスケーリングポリシーを定義</li>
+</ul>
+</li>
+<li>ProvisionedThroughputExceededException <ul>
+<li>シャードあたりの書き込み制限に引っかかっていないか <ul>
+<li>1000 records/second</li>
+<li>1 MB/second</li>
+<li>レコードの制限 <ul>
+<li>1 MB/record(base64エンコード前)</li>
+<li>5 MB/transaction(PutRecords の場合)</li>
+<li>500 records/transaction(PutRecords の場合)</li>
+</ul>
+</li>
+<li><code>PutRecords</code> でまとめて送信で回避できないか</li>
+</ul>
+</li>
+<li>シャードあたりの読み込み制限に引っかかっていないか <ul>
+<li>2 MB/second</li>
+<li>レコードの制限 <ul>
+<li>1 MB/record</li>
+<li>10000 records/transaction</li>
+<li>10 MB/transaction</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/kinesis-readprovisionedthroughputexceeded/" target="_blank">Kinesis Data Streams の ReadProvisionedThroughputExceeded 例外を検出してトラブルシューティングするにはどうすればよいですか?</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Kinesis Data Firehose" duration="0">
+        <ul>
+<li>リアルタイムのストリーミングデータをS3やRedShift、Elasticsearchなどのデータストア、分析ツールに配信する</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Kinesis Data Analytics" duration="0">
+        <ul>
+<li>Kinesis Data Streams, Amazon Kinesis Data Firehose ストリーミングソースからのデータ取り込み、標準SQLでストリーミングデータの処理、分析が可能</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Elastic Beanstalk" duration="0">
+        <ul>
+<li>Java,PHP,Ruby,Python,Node.js,.NET,Docker,Goなどに対応</li>
+<li>アプリケーション <ul>
+<li>最上位の構成単位</li>
+</ul>
+</li>
+<li>バージョン <ul>
+<li>デプロイ可能なコード</li>
+</ul>
+</li>
+<li>環境 <ul>
+<li>env.yaml</li>
+<li>cron.yaml <ul>
+<li>定期的なジョブ定義</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>環境設定 <ul>
+<li>.ebextensionsディレクトリに、xxx.conf を配置</li>
+</ul>
+</li>
+<li>デプロイメント <ul>
+<li>Rolling Deploy <ul>
+<li>ダウンタイムあり <ul>
+<li>All at once <ul>
+<li>全部一気に入れ替える</li>
+<li>展開までに一番時間がかからない</li>
+</ul>
+</li>
+<li>Rolling <ul>
+<li>新旧インスタンスが混在</li>
+<li>一定数量のインスタンスにデプロイ...を繰り返す</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>ダウンタイムなし：インスタンスの実行数(総容量)を維持したまま <ul>
+<li>Rolling with additional batch <ul>
+<li>新旧インスタンスが混在</li>
+<li>新インスタンスにデプロイ</li>
+<li>一定数量のインスタンスにデプロイ...を繰り返す</li>
+</ul>
+</li>
+<li>Immutable <ul>
+<li>新旧インスタンスが混在</li>
+<li>新インスタンスにデプロイ後、テスト</li>
+</ul>
+</li>
+<li>Taffic splitting <ul>
+<li>カナリアデプロイ</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Blue/Green Deployment</li>
+</ul>
+</li>
+<li>X-Ray 使う <ul>
+<li>Elastic Beanstalk コンソールで　<code>X-Ray デーモン</code> を有効に設定</li>
+<li>.ebextensionsディレクトリに、xxx.conf を配置</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Systems Manager" duration="0">
+        <ul>
+<li>パラメータストア <ul>
+<li>設定データ管理とシークレット管理のための安全な階層型ストレージ</li>
+<li>無料</li>
+<li>デフォルトのスループット: 40/秒（引き上げ可⇒引き上げ中は課金）</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/general/latest/gr/ssm.html#limits_ssm" target="_blank">AWS Systems Manager クォータ</a></li>
+<li>ローテーションが不要で無料範囲のスループットで良い場合は、シークレットよりパラメータストアのほうがコスパがよい。</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Secrets Manager" duration="0">
+        <ul>
+<li>シークレット <ul>
+<li>データベースの認証情報、API キー、その他のシークレットをそのライフサイクルを通して容易にローテーション、管理、取得</li>
+<li>ローテーションが必要ならパラメータストアより、シークレット。</li>
+<li>デフォルトのスループット:10,000/秒（引き上げ不可）</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/reference_limits.html#quotas" target="_blank">Secrets Manager のクォータ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Perfect Forward Secrecy (PFS)" duration="0">
+        <ul>
+<li>CloudFront と ELB</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

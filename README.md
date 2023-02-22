@@ -3,7 +3,7 @@
 個人の AWS 勉強や、社内勉強会で使用した資料を公開しているリポジトリです。
 claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://ishiharatma.github.io/aws-study/)で公開しています。
 
-## 目次
+## 目次: サービス
 
 [AWS 勉強ガイド](/articles_base/aws-study-guide.md)
 
@@ -26,3 +26,11 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 [Amazon CloudFront 概要](/articles_base/cloudfront-overview.md)
 
 [Amazon DynamoDB 概要](/articles_base/dynamodb-overview.md)
+
+Amazon ElastiCache 概要
+
+AWS Lambda 概要
+
+## 目次: 認定資格
+
+[AWS Certified Developer - Associate 認定](/articles_base/aws-certified-dva-keyword.md)
