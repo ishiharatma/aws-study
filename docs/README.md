@@ -23,3 +23,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
 - <a href="./cloudfront-overview/index.html" target="_blank">Amazon CloudFront 概要</a>
 - <a href="./dynamodb-overview/index.html" target="_blank">Amazon DynamoDB 概要</a>
+
+## AWS 認定資格勉強資料
+
+- <a href="./aws-certified-dva-keyword/index.html" target="_blank">AWS Certified Developer - Associate 認定</a>
