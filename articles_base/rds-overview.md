@@ -48,6 +48,8 @@ Duration: 00:52:48
 
 [Amazon RDS よくある質問](https://aws.amazon.com/jp/rds/faqs/)
 
+[Amazon RDS 料金](https://aws.amazon.com/jp/rds/pricing/)
+
 ## RDS について知るには(その他)
 
 Duration: 03:05:36

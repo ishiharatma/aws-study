@@ -35,7 +35,6 @@
   - [パフォーマンスの最適化](#パフォーマンスの最適化)
   - [他のサービスとの連携](#他のサービスとの連携)
 
-
 ## Amazon S3 とは
 
 Duration: 01:56:54
@@ -56,6 +55,8 @@ Duration: 01:56:54
 [Amazon S3 ドキュメント](https://docs.aws.amazon.com/ja_jp/s3/?id=docs_gateway)
 
 [Amazon S3 よくある質問](https://aws.amazon.com/jp/s3/faqs/)
+
+[Amazon S3 料金](https://aws.amazon.com/jp/s3/pricing/)
 
 ## Amazon S3 の基本
 

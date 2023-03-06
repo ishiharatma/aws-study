@@ -54,7 +54,6 @@ DynamoDB は、「可用性（Availability）」「ネットワーク分断耐�
 
 DynamoDB は、「値」とそれを取得するための「キー」だけを格納するというシンプルな機能を持った「キーバリュー型」の形式でデータを格納します。
 
-
 【AWS Black Belt Online Seminar】[Amazon DocumentDB (with MongoDB Compatibility)(YouTube)]([xxx](https://www.youtube.com/watch?v=RTfCVlo1EoA))(41:38)
 
 ![DocumentDB](/images/dynamodb/blackbelt-dynamodb_1-320.jpg)
@@ -67,12 +66,13 @@ DynamoDB は、「値」とそれを取得するための「キー」だけを�
 
 ![aws summit 2017](/images/dynamodb/aws-summit-2017-dynamodb-320.jpg)
 
-
 [Amazon DynamoDB サービス概要](https://aws.amazon.com/jp/dynamodb/)
 
 [Amazon DynamoDB ドキュメント](https://docs.aws.amazon.com/ja_jp/dynamodb/?id=docs_gateway)
 
 [Amazon DynamoDB よくある質問](https://aws.amazon.com/jp/dynamodb/faqs/)
+
+[Amazon DynamoDB 料金](https://aws.amazon.com/jp/dynamodb/pricing/)
 
 ## Amazon DynamoDB のユースケース
 

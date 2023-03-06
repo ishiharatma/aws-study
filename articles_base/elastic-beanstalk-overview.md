@@ -32,8 +32,10 @@ https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/Welcome.html
 
 [AWS Elastic Beanstalk よくある質問](https://aws.amazon.com/jp/elasticbeanstalk/faqs/)
 
+[AWS Elastic Beanstalk 料金](https://aws.amazon.com/jp/elasticbeanstalk/pricing/)
+
 ## xx の基本
 
 Duration: 0:01:30
 
-![dynamodb](/images/all/dynamodb.png)
+![eb](/images/all/eb.png)

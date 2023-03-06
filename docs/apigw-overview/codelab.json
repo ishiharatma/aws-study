@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2023-02-22T23:14:05+09:00",
+  "updated": "2023-03-06T19:39:27+09:00",
   "id": "apigw-overview",
   "duration": 61,
   "title": "Amazon API Gateway",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "F:\\work\\git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_apigw-overview.md",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_apigw-overview.md",
   "theme": "",
   "status": [
     "published"

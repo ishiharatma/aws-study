@@ -56,6 +56,8 @@ Elastic Load Balancing は、受信したトラフィックを複数のアベイ
 
 [Elastic Load Balancing のよくある質問](https://aws.amazon.com/jp/elasticloadbalancing/faqs/)
 
+[Elastic Load Balancing 料金](https://aws.amazon.com/jp/elasticloadbalancing/pricing/)
+
 ## ELB の基本
 
 Duration: 00:02:00

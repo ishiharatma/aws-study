@@ -73,6 +73,8 @@ CloudFront は従量課金のサービスであるため、使った分だけの
 
 [Amazon CloudFront よくある質問](https://aws.amazon.com/jp/cloudfront/faqs/)
 
+[Amazon CloudFront 料金](https://aws.amazon.com/jp/cloudfront/pricing/)
+
 ## CloudFront の基本
 
 Duration: 0:00:30

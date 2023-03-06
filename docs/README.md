@@ -14,15 +14,21 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 - <a href="./aws-study-guide/index.html" target="_blank">AWS 勉強ガイド</a>
 - <a href="./aws-account-Initial-setting/index.html" target="_blank">AWSアカウント作成後に行うべき設定事項</a>
-- <a href="./elb-overview/index.html" target="_blank">ELB 概要</a>
-- <a href="./s3-overview/index.html" target="_blank">Amazon S3 概要</a>
-- <a href="./rds-aurora-overview/index.html" target="_blank">RDS と Aurora の比較</a>
-- <a href="./rds-overview/index.html" target="_blank">Amazon RDS 概要</a>
-- <a href="./aurora-overview/index.html" target="_blank">Amazon Aurora 概要</a>
-- <a href="./route53-overview/index.html" target="_blank">Amazon Route 53 概要</a>
-- <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
-- <a href="./cloudfront-overview/index.html" target="_blank">Amazon CloudFront 概要</a>
-- <a href="./dynamodb-overview/index.html" target="_blank">Amazon DynamoDB 概要</a>
+- コンピューティング
+  - <a href="./elb-overview/index.html" target="_blank">ELB 概要</a>
+  - <a href="./lambda-overview/index.html" target="_blank">AWS Lambda 概要</a>
+- ストレージ
+  - <a href="./s3-overview/index.html" target="_blank">Amazon S3 概要</a>
+- データベース
+  - <a href="./rds-aurora-overview/index.html" target="_blank">RDS と Aurora の比較</a>
+  - <a href="./rds-overview/index.html" target="_blank">Amazon RDS 概要</a>
+  - <a href="./aurora-overview/index.html" target="_blank">Amazon Aurora 概要</a>
+  - <a href="./elasticache-overview/index.html" target="_blank">Amazon ElastiCache 概要</a>
+  - <a href="./dynamodb-overview/index.html" target="_blank">Amazon DynamoDB 概要</a>
+- ネットワーキング
+  - <a href="./route53-overview/index.html" target="_blank">Amazon Route 53 概要</a>
+  - <a href="./cloudfront-overview/index.html" target="_blank">Amazon CloudFront 概要</a>
+  - <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
 
 ## AWS 認定資格勉強資料
 

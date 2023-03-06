@@ -52,6 +52,8 @@ DNS ？？という人は、[DNS とは](https://aws.amazon.com/jp/route53/what-
 
 [Amazon Route 53 よくある質問](https://aws.amazon.com/jp/route53/faqs/)
 
+[Amazon Route 53 料金](https://aws.amazon.com/jp/route53/pricing/)
+
 ## ドメインの新規登録
 
 Duration: 0:00:30

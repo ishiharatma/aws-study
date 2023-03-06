@@ -9,9 +9,17 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [AWSアカウント作成後に行うべき設定事項](/articles_base/aws-account-Initial-setting.md)
 
+### コンピューティング
+
 [ELB 概要](/articles_base/elb-overview.md)
 
+[AWS Lambda 概要](/articles_base/lambda-overview.md)
+
+### ストレージ
+
 [Amazon S3 概要](/articles_base/s3-overview.md)
+
+### データベース
 
 [RDS と Aurora の比較](/articles_base/rds-aurora-overview.md)
 
@@ -19,17 +27,19 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [Amazon Aurora 概要](/articles_base/aurora-overview.md)
 
+[Amazon DynamoDB 概要](/articles_base/dynamodb-overview.md)
+
+[Amazon ElastiCache 概要](/articles_base/elasticache-overview.md)
+
+
+### ネットワーキング
+
 [Amazon Route 53 概要](/articles_base/route53-overview.md)
 
 [Amazon API Gateway 概要](/articles_base/apigw-overview.md)
 
 [Amazon CloudFront 概要](/articles_base/cloudfront-overview.md)
 
-[Amazon DynamoDB 概要](/articles_base/dynamodb-overview.md)
-
-Amazon ElastiCache 概要
-
-AWS Lambda 概要
 
 ## 目次: 認定資格
 

@@ -8,7 +8,6 @@
 
 ## AWS WAF & Shield とは
 
-
 【AWS Black Belt Online Seminar】[xx(YouTube)](xxx)(1:00:33)
 
 ![](/images/s3/blackbelt_s3.jpg)
@@ -19,6 +18,10 @@
 [AWS Shield ドキュメント](https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway)
 
 [AWS Shield よくある質問](https://aws.amazon.com/jp/shield/faqs/)
+
+[AWS Shield 料金](https://aws.amazon.com/jp/shield/pricing/)
+
+[AWS WAF 料金](https://aws.amazon.com/jp/waf/pricing/)
 
 ## AWS Shield の基本
 

@@ -21,6 +21,8 @@ Amazon EC2、Amazon ECS、AWS Lambda、AWS Elastic Beanstalk、API Gatewayなど
 
 [AWS X-Ray よくある質問](https://aws.amazon.com/jp/xray/faqs/)
 
+[AWS X-Ray 料金](https://aws.amazon.com/jp/xray/pricing/)
+
 ## AWS X-Ray の構造
 
 Duration: 0:01:30

@@ -47,6 +47,8 @@ API のバージョン管理、レスポンスのモニタリング、認証な�
 
 [Amazon API Gateway よくある質問](https://aws.amazon.com/jp/api-gateway/faqs/)
 
+[Amazon API Gateway 料金](https://aws.amazon.com/jp/api-gateway/pricing/)
+
 ## API Gateway の種類
 
 Duration: 00:01:00

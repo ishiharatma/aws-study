@@ -65,6 +65,8 @@ Duration: 03:22:41
 
 [Amazon Aurora よくある質問](https://aws.amazon.com/jp/rds/aurora/faqs/)
 
+[Amazon Aurora 料金](https://aws.amazon.com/jp/rds/aurora/pricing/)
+
 ## Aurora について知るには(その他)
 
 Duration: 03:05:36
