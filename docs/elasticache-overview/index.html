@@ -35,8 +35,11 @@
       </google-codelab-step>
     
       <google-codelab-step label="Amazon ElastiCache とは" duration="0">
-        <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=-NU1U8_fxo4" target="_blank">Amazon ElastiCache(YouTube)</a>(39:21)</p>
-<p class="image-container"><img alt="xx" src="img\\7ab03c476a884761.jpg"></p>
+        <p>フルマネージドのインメモリキャッシングサービスで、Memcached または Redis プロトコルに互換性があります。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=-NU1U8_fxo4" target="_blank">Amazon ElastiCache(YouTube)</a>(39:21)</p>
+<p class="image-container"><img alt="blackbelt-elasticache" src="img\\7ab03c476a884761.jpg"></p>
+<p>古い資料（PDF）はこちら<a href="https://d1.awsstatic.com/webinars/jp/pdf/services/20171214_AWS-Blackbelt-ElastiCache.pdf" target="_blank">【AWS Black Belt Online Seminar】 Amazon ElastiCache-2017.12.14</a></p>
+<p class="image-container"><img alt="blackbelt-elasticache-2017-320.jpg" src="img\\1d03ba0898809e62.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/xx/" target="_blank">Amazon ElastiCache サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/elasticache/?icmpid=docs_homepage_databases" target="_blank">Amazon ElastiCache ドキュメント</a></p>
 <p><a href="https://aws.amazon.com/jp/elasticache/faqs/" target="_blank">Amazon ElastiCache よくある質問</a></p>
@@ -45,27 +48,100 @@
 <p>レディス と読む</p>
 <p><a href="http://memcached.org/" target="_blank">Memcached</a></p>
 <p>memory cache daemon の略でメムキャッシュディーと読みます｡</p>
+<h2 is-upgraded>ハンズオン</h2>
+<p><a href="https://aws.amazon.com/jp/getting-started/hands-on/real-time-leaderboard-amazon-aurora-serverless-elasticache/?trk=gs_card" target="_blank">Amazon Aurora Serverless と Amazon ElastiCache を使用してリアルタイムなリーダーボードをビルドする</a></p>
+<p><a href="https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/" target="_blank">Amazon ElastiCache for Redis を使い、オンラインアプリケーション用の高速セッションストアを構築する</a>(※英語のみ)</p>
+<p><a href="https://aws.amazon.com/jp/getting-started/hands-on/boosting-mysql-database-performance-with-amazon-elasticache-for-redis/" target="_blank">Amazon ElastiCache for Redis を使い、オンラインアプリケーション用の高速セッションストアを構築する</a>(※英語のみ)</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/Tutorials.html#tutorial-videos" target="_blank">ElastiCache のチュートリアルと動画</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="xx の基本" duration="2">
-        
+      <google-codelab-step label="Memcached と Redis の比較" duration="2">
+        <p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/SelectEngine.html</p>
+<p>主な比較は次のとおりです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>key</p>
+</td><td colspan="1" rowspan="1"><p>Memcached</p>
+</td><td colspan="1" rowspan="1"><p>Redis</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>マルチスレッド</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>データ型</p>
+</td><td colspan="1" rowspan="1"><p>シンプル</p>
+</td><td colspan="1" rowspan="1"><p>複雑</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>自動フェイルオーバー</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レプリケーション</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>バックアップと復元</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Pub/Sub</p>
+</td><td colspan="1" rowspan="1"><p>No</p>
+</td><td colspan="1" rowspan="1"><p>Yes</p>
+</td></tr>
+</table>
+<p>Memcached のほうが単純な Key-Value の処理だとパフォーマンスが優れるが、レプリケーション／自動フェイルオーバー／複雑な集計などが必要な場合は Redis を選択するケースが多くなると思います。</p>
+<p>こちらにも詳しく記載があります。 https://aws.amazon.com/jp/elasticache/redis-vs-memcached/</p>
+
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache for Redis" duration="0">
-        
+      <google-codelab-step label="どのように利用したらよいか？" duration="2">
+        <ul>
+<li>キャッシュは揮発性のあるデータであるため、消えて困るデータは保存しないほうがよいです。 -結果整合性（分散データベース環境でデータが更新された際に、一定時間経過後には最終的な一貫性が担保されること）を前提とした設計を行う必要があります。</li>
+<li>TTL（Time to Live, 有効期限）を設定しましょう。データを保存しすぎて、メモリが溢れてしまうといったことが発生します。TTL は長すぎても TTL が切れる前にメモリが溢れることにもなります。また、TTL が切れるタイミングが同じデータが多く存在すると、CPU 使用率が上昇することがあります。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DynamoDB で代用できる？" duration="0">
+        <p>DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。 DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。</p>
+<p>基本的には、永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。</p>
+
 
       </google-codelab-step>
     
       <google-codelab-step label="Amazon ElastiCache for Memcached" duration="0">
-        
+        <p>構成イメージはこのようになります。クラスタ化されていますが、レプリケーションの機能はありません。 <img alt="Redis Cluster/Replication" src="img\\2941a7c03219dc39.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Amazon ElastiCache for Redis" duration="1">
+        <p>クラスタモード有効/無効　×　レプリケーション有/無のパターンがあります。 クラスタモードは複数のシャードにデータを分散させることが出来ます。クラスタモードが有効でもシャードを１つに設定することも可能です。</p>
+<p>クラスタもレプリケーションもない単一の構成です。 <img alt="Redis NonCluster/NonReplication" src="img\\94fedb0e6cba1c5a.png"></p>
+<p>レプリケーションが有効な構成です。 <img alt="Redis NonCluster/Replication" src="img\\21068385bc1e93fc.png"></p>
+<p>クラスタモードが有効ですが、レプリケーション無しの構成です。 <img alt="Redis Cluster/NonReplication" src="img\\5ef4b53b04c9e070.png"></p>
+<p>クラスタモードが有効でレプリケーション有りの構成です。 <img alt="Redis Cluster/Replication" src="img\\cf5715169ff1df56.png"></p>
+<h2 is-upgraded>自動フェイルオーバー</h2>
+<p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/AutoFailover.html</p>
+<p>レプリケーションされている場合、自動的にフェイルオーバーが実行されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Amazon ElastiCache for Redis の Global Datastore" duration="1">
+        <p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html</p>
+<p class="image-container"><img alt="globaldatastore" src="img\\771cb580337dceaa.png"></p>
+<p>Global Datastore for Redis 機能を使用すると、AWS リージョン全体で完全マネージド型、高速、信頼性、安全なレプリケーションを実行できます。</p>
+
 
       </google-codelab-step>
     
       <google-codelab-step label="まとめ" duration="0">
-        
+        <p class="image-container"><img alt="lambda" src="img\\db4dba2b46d05699.png"></p>
+
 
       </google-codelab-step>
     

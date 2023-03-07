@@ -81,6 +81,8 @@ Duration: 4:01:22
 
 ## ネットワーク
 
+Duration: 0:01:00
+
 Lambda は Lambda サービスが所有する VPC 内で実行されています。
 ![lambda-eni.png](/images/lambda/invoke-path-320.jpg)
 
@@ -89,6 +91,8 @@ Lambda を自 VPC に接続すると、Lambda サービスの VPC と自VPC を�
 ![lambda-eni.png](/images/lambda/lambda-eni-320.jpg)
 
 ## 実行環境
+
+Duration: 0:01:30
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.html
 
@@ -134,6 +138,8 @@ SnapStart の使用に追加コストは発生しませんが、利用するに�
 
 ## 命令セットアーキテクチャ
 
+Duration: 0:00:30
+
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html
 
 - arm64 — AWS Graviton2 プロセッサ用の 64 ビット ARM アーキテクチャ
@@ -148,6 +154,8 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html
 ARM と x86：その違い：https://www.redhat.com/ja/topics/linux/ARM-vs-x86
 
 ## Lambda のアクセス権限
+
+Duration: 0:01:00
 
 Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAMポリシーが含まれます）とリソースベースのポリシーがあります。
 
@@ -166,6 +174,8 @@ Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ば
 
 ## トリガー
 
+Duration: 0:01:30
+
 Pull モデルと Push モデルがあります。
 
 ### Pull モデル
@@ -182,7 +192,7 @@ Pull モデルは、ポーリング型の実行です。Lambda の[イベント�
 
 ### Push モデル
 
-Push モデルは、イベント駆動型の実行です。Lambda がイベントソースから直接呼び出されるものです。イベント発生からのコード実行順序は保証されていません。
+Push モデルは、イベント駆動型の実行です。Lambda がイベントソースから直接呼び出されるものです。発生したイベントの実行順序は保証されていません。発生したイベントの順番に処理される場合もありますし、タイミングによっては前後する場合もあります。
 イベントソースとなるサービスによって、Lmabda の呼び出しタイプ（同期、非同期）が決まっています。
 
 主に以下のようなサービスがあります。
@@ -195,6 +205,8 @@ Push モデルは、イベント駆動型の実行です。Lambda がイベン�
 
 ## 呼び出しタイプ
 
+Duration: 0:01:30
+
 AWS SDK や CLI から実行する際に、`InvocationType` を指定することでコントロールできます。
 
 - RequestResponse
@@ -203,7 +215,8 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
   - 直接 Lambda を1回実行し、処理が完了したらレスポンスが返ってきます。
   
   ```sh
-  aws lambda invoke --function-name hoge-function --payload .... response.json
+  aws lambda invoke --function-name hoge-function \
+  --payload .... response.json
 
   # Response
   {
@@ -221,7 +234,8 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
   - DLQ（デッドレターキュー）で、失敗した場合の設定が行えます。
 
   ```sh
-  aws lambda invoke --function-name hoge-function --invocation-type Event --payload .... response.json
+  aws lambda invoke --function-name hoge-function \
+  --invocation-type Event --payload .... response.json
 
   # Response
   {
@@ -233,7 +247,8 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
   - 関数を実行しないで必要な権限が付いているか確認できます。
 
   ```sh
-  aws lambda invoke --function-name hoge-function --invocation-type DryRun --payload .... response.json
+  aws lambda invoke --function-name hoge-function \
+  --invocation-type DryRun --payload .... response.json
 
   # Response
   {
@@ -281,12 +296,16 @@ Duration: 0:01:30
 
 ## Layer
 
+Duration: 0:01:00
+
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-layers.html
 
 Lambda 関数で使用するライブラリとその他の依存関係をパッケージ化できる機能です。関数には最大で 5つのレイヤーを含めることができます。
 レイヤーを使用することで、デプロイパッケージのサイズを削減し、デプロイスピードを速めることができます。
 
 ## デプロイパッケージ
+
+Duration: 0:03:00
 
 関数をデプロイするには、関数コードと依存関係を含む .zip ファイルまたは、[Open Container Initiative](https://opencontainers.org/) (OCI) の仕様に準拠したコンテナーイメージでデプロイできます。
 
@@ -391,12 +410,16 @@ AWS Serverless Application Model (AWS SAM) でデプロイするには次のよ�
 
 ## エフェメラルストレージ(一時領域)
 
+Duration: 0:00:30
+
 AWS Lambda で最大 10 GB のエフェメラルストレージをサポート可能に
 https://aws.amazon.com/jp/blogs/news/aws-lambda-now-supports-up-to-10-gb-ephemeral-storage/
 
 512 MB ～ 10 GB まで `/tmp` 領域を作成できます。
 
 ## 同時実行
+
+Duration: 0:00:30
 
 ある時点で実行されているリクエストの数のことです。
 Lambda関数の同時実行数は同一アカウントの同一リージョン内につき、1,000に制限されています。
@@ -410,6 +433,8 @@ Lambda関数が平均10秒かかり、1秒あたり100個のイベントを発�
 
 ## Qualifier
 
+Duration: 0:01:00
+
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-aliases.html
 
 ![lambda-alias](/images/lambda/lambda-alias.png)
@@ -421,6 +446,8 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-aliases.html
 ![5-8-AWS-Lambda-function-versions-and-aliases-1024x637.png](/images/lambda/5-8-AWS-Lambda-function-versions-and-aliases-1024x637.png)
 
 ## 関数 URL
+
+Duration: 0:01:00
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-urls.html
 
@@ -440,6 +467,8 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/urls-invocation.html
 
 ## モニタリング
 
+Duration: 0:01:30
+
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-monitoring.html
 
 ![monitoring-320.jpg](/images/lambda/monitoring-320.jpg)
@@ -457,6 +486,8 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-monitoring.html
 https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory-usage-monitoring/
 
 ## ベストプラクティス
+
+Duration: 0:01:00
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/best-practices.html
 
@@ -477,6 +508,8 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/best-practices.html
   - Lambda が重複して実行されることも考慮しておく。
 
 ## クォータ
+
+Duration: 0:00:30
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/gettingstarted-limits.html
 
