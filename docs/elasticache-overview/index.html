@@ -45,7 +45,7 @@
 <p><a href="https://aws.amazon.com/jp/elasticache/faqs/" target="_blank">Amazon ElastiCache よくある質問</a></p>
 <p><a href="https://aws.amazon.com/jp/elasticache/pricing/" target="_blank">Amazon ElastiCache 料金</a></p>
 <p><a href="https://redis.io/" target="_blank">Redis</a></p>
-<p>レディス と読む</p>
+<p>レディス と読みます。</p>
 <p><a href="http://memcached.org/" target="_blank">Memcached</a></p>
 <p>memory cache daemon の略でメムキャッシュディーと読みます｡</p>
 <h2 is-upgraded>ハンズオン</h2>
@@ -106,8 +106,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="DynamoDB で代用できる？" duration="0">
-        <p>DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。 DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。</p>
-<p>基本的には、永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。</p>
+        <p>DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。 ただ、DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。</p>
+<p>つまり、基本的には永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。</p>
 
 
       </google-codelab-step>
@@ -140,7 +140,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="まとめ" duration="0">
-        <p class="image-container"><img alt="lambda" src="img\\db4dba2b46d05699.png"></p>
+        <p class="image-container"><img alt="lambda" src="img\\16825857c0f78e6e.png"></p>
 
 
       </google-codelab-step>

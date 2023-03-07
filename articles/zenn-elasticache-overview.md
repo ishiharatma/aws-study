@@ -36,11 +36,11 @@ Amazon ElastiCache-2017.12.14](https://d1.awsstatic.com/webinars/jp/pdf/services
 
 [Redis](https://redis.io/)
 
-レディス と読む
+レディス と読みます。
 
 [Memcached](http://memcached.org/)
 
-memory cache daemon の略でメムキャッシュディーと読みます｡ 
+memory cache daemon の略でメムキャッシュディーと読みます｡
 
 ### ハンズオン
 
@@ -65,7 +65,7 @@ https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/SelectEngine.h
 | マルチスレッド       | Yes       | No    |
 | データ型             | シンプル  | 複雑  |
 | 自動フェイルオーバー | No        | Yes   |
-| レプリケーション     | No        | Yes |
+| レプリケーション     | No        | Yes   |
 | バックアップと復元   | No        | Yes   |
 | Pub/Sub              | No        | Yes   |
 
@@ -86,9 +86,9 @@ Duration: 0:01:30
 ## DynamoDB で代用できる？
 
 DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。
-DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。
+ただ、DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。
 
-基本的には、永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。
+つまり、基本的には永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。
 
 ## Amazon ElastiCache for Memcached
 
