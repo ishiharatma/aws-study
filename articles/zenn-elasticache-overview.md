@@ -66,7 +66,7 @@ memory cache daemon の略でメムキャッシュディーと読みます｡
 
 [Amazon ElastiCache for Redis を使い、オンラインアプリケーション用の高速セッションストアを構築する](https://aws.amazon.com/jp/getting-started/hands-on/building-fast-session-caching-with-amazon-elasticache-for-redis/)(※英語のみ)
 
-[Amazon ElastiCache for Redis を使い、オンラインアプリケーション用の高速セッションストアを構築する](https://aws.amazon.com/jp/getting-started/hands-on/boosting-mysql-database-performance-with-amazon-elasticache-for-redis/)(※英語のみ)
+[Amazon ElastiCache for Redis を使い、MySQL データベースのパフォーマンスを向上させる](https://aws.amazon.com/jp/getting-started/hands-on/boosting-mysql-database-performance-with-amazon-elasticache-for-redis/)(※英語のみ)
 
 [ElastiCache のチュートリアルと動画](https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/Tutorials.html#tutorial-videos)
 
