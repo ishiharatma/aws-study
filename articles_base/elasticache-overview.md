@@ -8,6 +8,8 @@
 
 ## Amazon ElastiCache とは
 
+Duration: 3:39:21
+
 フルマネージドのインメモリキャッシングサービスで、Memcached または Redis プロトコルに互換性があります。
 
 【AWS Black Belt Online Seminar】[Amazon ElastiCache(YouTube)](https://www.youtube.com/watch?v=-NU1U8_fxo4)(39:21)
@@ -67,7 +69,6 @@ Memcached のほうが単純な Key-Value の処理だとパフォーマンス�
 こちらにも詳しく記載があります。
 https://aws.amazon.com/jp/elasticache/redis-vs-memcached/
 
-
 ## どのように利用したらよいか？
 
 Duration: 0:01:30
@@ -78,6 +79,8 @@ Duration: 0:01:30
 
 ## DynamoDB で代用できる？
 
+Duration: 0:01:30
+
 DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。
 ただ、DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。
 
@@ -85,12 +88,14 @@ DynamoDB も Key-Value で低レイテンシーのサービスです。同じよ
 
 ## Amazon ElastiCache for Memcached
 
+Duration: 0:01:30
+
 構成イメージはこのようになります。クラスタ化されていますが、レプリケーションの機能はありません。
 ![Redis Cluster/Replication](/images/elasticache/elasticache-memcached-cluster.png)
 
 ## Amazon ElastiCache for Redis
 
-Duration: 0:01:30
+Duration: 0:03:00
 
 クラスタモード有効/無効　×　レプリケーション有/無のパターンがあります。
 クラスタモードは複数のシャードにデータを分散させることが出来ます。クラスタモードが有効でもシャードを１つに設定することも可能です。
@@ -107,7 +112,7 @@ Duration: 0:01:30
 クラスタモードが有効でレプリケーション有りの構成です。
 ![Redis Cluster/Replication](/images/elasticache/elasticache-redis-cluster-rep.png)
 
-### 自動フェイルオーバー
+## 自動フェイルオーバー
 
 Duration: 0:00:30
 

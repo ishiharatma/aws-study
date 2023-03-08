@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache とは" duration="0">
+      <google-codelab-step label="Amazon ElastiCache とは" duration="220">
         <p>フルマネージドのインメモリキャッシングサービスで、Memcached または Redis プロトコルに互換性があります。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=-NU1U8_fxo4" target="_blank">Amazon ElastiCache(YouTube)</a>(39:21)</p>
 <p class="image-container"><img alt="blackbelt-elasticache" src="img\\7ab03c476a884761.jpg"></p>
@@ -105,27 +105,31 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB で代用できる？" duration="0">
+      <google-codelab-step label="DynamoDB で代用できる？" duration="2">
         <p>DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。 ただ、DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。</p>
 <p>つまり、基本的には永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache for Memcached" duration="0">
+      <google-codelab-step label="Amazon ElastiCache for Memcached" duration="2">
         <p>構成イメージはこのようになります。クラスタ化されていますが、レプリケーションの機能はありません。 <img alt="Redis Cluster/Replication" src="img\\2941a7c03219dc39.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache for Redis" duration="1">
+      <google-codelab-step label="Amazon ElastiCache for Redis" duration="3">
         <p>クラスタモード有効/無効　×　レプリケーション有/無のパターンがあります。 クラスタモードは複数のシャードにデータを分散させることが出来ます。クラスタモードが有効でもシャードを１つに設定することも可能です。</p>
 <p>クラスタもレプリケーションもない単一の構成です。 <img alt="Redis NonCluster/NonReplication" src="img\\94fedb0e6cba1c5a.png"></p>
 <p>レプリケーションが有効な構成です。 <img alt="Redis NonCluster/Replication" src="img\\21068385bc1e93fc.png"></p>
 <p>クラスタモードが有効ですが、レプリケーション無しの構成です。 <img alt="Redis Cluster/NonReplication" src="img\\5ef4b53b04c9e070.png"></p>
 <p>クラスタモードが有効でレプリケーション有りの構成です。 <img alt="Redis Cluster/Replication" src="img\\cf5715169ff1df56.png"></p>
-<h2 is-upgraded>自動フェイルオーバー</h2>
-<p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/AutoFailover.html</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="自動フェイルオーバー" duration="1">
+        <p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/AutoFailover.html</p>
 <p>レプリケーションされている場合、自動的にフェイルオーバーが実行されます。</p>
 
 
