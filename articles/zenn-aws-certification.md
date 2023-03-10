@@ -15,12 +15,11 @@ published: true
 
 ## AWS 認定概要
 
--  AWS認定資格について
-  - [AWS 認定](https://aws.amazon.com/jp/certification/)
-  - [AWS 認定試験に備える](https://aws.amazon.com/jp/certification/certification-prep/)
-  - [再認定 | AWS 認定に関する情報とポリシー](https://aws.amazon.com/jp/certification/policies/recertification/)
+- [AWS 認定](https://aws.amazon.com/jp/certification/)
+- [AWS 認定試験に備える](https://aws.amazon.com/jp/certification/certification-prep/)
+- [再認定 | AWS 認定に関する情報とポリシー](https://aws.amazon.com/jp/certification/policies/recertification/)
 
-## 取得する順番
+## 取得する順番のおすすめ
 
 Certified Cloud Practitioner → Associate → Professional → Specialty
 
