@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2023-03-10T17:31:53+09:00",
-  "id": "aws-certified-dva-keyword",
+  "id": "aws-certified",
   "duration": 0,
-  "title": "AWS Certified Developer - Associate 認定",
+  "title": "AWS 認定",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_aws-certified-dva-keyword.md",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_aws-certification.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awscertifieddeveloper-associate"
+    "awscertification"
   ],
-  "url": "aws-certified-dva-keyword"
+  "url": "aws-certified"
 }
