@@ -32,4 +32,5 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 ## AWS 認定資格勉強資料
 
+- <a href="./aws-certification/index.html" target="_blank">AWS 認定概要</a>
 - <a href="./aws-certified-dva-keyword/index.html" target="_blank">AWS Certified Developer - Associate 認定</a>

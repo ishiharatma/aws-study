@@ -43,4 +43,6 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 ## 目次: 認定資格
 
+[AWS 認定概要](/articles_base/aws-certification.md)
+
 [AWS Certified Developer - Associate 認定](/articles_base/aws-certified-dva-keyword.md)
