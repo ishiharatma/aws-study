@@ -18,6 +18,8 @@
 
 [xx よくある質問](https://aws.amazon.com/jp/xx/faqs/)
 
+[xx の料金](https://aws.amazon.com/jp/xx/pricing/)
+
 ## xx の基本
 
 Duration: 0:01:30

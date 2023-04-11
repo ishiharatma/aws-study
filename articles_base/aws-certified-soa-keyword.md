@@ -22,6 +22,48 @@
 
 Duration: 0:01:30
 
+  ```sh
+  aws 
+  ```
+
+
+## S3
+
+- バケット作成
+  - aws s3 mb s3://bucket-name
+  - aws s3api create-bucket --bucket genzouw-test-bucket --create-bucket-configuration "LocationConstraint=ap-northeast-1"
+-  オブジェクトのコピー
+  - aws s3 cp localfile s3://bucket-name
+- バージョニングを設定
+  - aws s3api put-bucket-versioing --bucket xxx --versioing-configuration Status=Enabled
+
+## ELB
+
+- ロードバランサーの証明書を新しく
+ aws elb describe-load-balancers \
+    | jq -r '.LoadBalancerDescriptions[] | select(.ListenerDescriptions[].Listener.SSLCertificateId == "<更新前サーバ証明書のARN>") | .LoadBalancerName'
+
+aws elb set-load-balancer-listener-ssl-certificate \
+      --load-balancer-name <ロードバランサ名> \
+      --load-balancer-port 443 \
+      --ssl-certificate-id <更新後サーバ証明書のARN>
+
+- IAM へアップロード	
+
+aws iam upload-server-certificate\
+  --server-certificate-name chibayuki-oreore\
+  --certificate-body file://server.crt\
+  --private-key file://server.key
+{
+    "ServerCertificateMetadata": {
+        "Path": "/",
+        "ServerCertificateName": "chibayuki-oreore",
+        "ServerCertificateId": "ASCAQ3BIIH73R7DU7WLHE",
+        "Arn": "arn:aws:iam::012345678910:server-certificate/chibayuki-oreore",
+        "UploadDate": "2022-11-05T13:42:07+00:00",
+        "Expiration": "2032-11-02T13:19:52+00:00"
+    }
+}
 
 ## 試験ラボ対策
 
@@ -46,6 +88,7 @@ https://catalog.us-east-1.prod.workshops.aws/workshops/47782ec0-8e8c-41e8-b873-9
 
 Network編#1 AWS上にセキュアなプライベートネットワーク空間を作成する
 https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-Network1-2020-reg-event-LP.html?trk=aws_introduction_page
+
 ### Amazon S3
 
 - バケットのバージョニングの設定
@@ -61,12 +104,13 @@ https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-Network1-2020-r
 ④管理→ライフサイクルルール→ライフサイクルルールのアクションで指定の設定
 
 ### AWS CloudFormation
+
 - テンプレートファイルのアップロードによるスタックの更新
 
 インスタンスタイプ、SG、ロールの変更
 
 AWS 環境のコード管理 AWS CloudFormationで Web システムを構築する
-https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-cfn-2020-reg-event-LP.html?trk=aws_introduction_page
+https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-cfn-2022-reg-event.html?trk=aws_introduction_page
 
 ### Amazon CloudWatch＋Amazon SNS
 - メトリクスフィルターの作成
@@ -86,3 +130,16 @@ https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-cfn-2020-reg-ev
 ### Amazon EC2＋AWS Auto Scaling＋Elastic Load Balancing
 
 上記構成の作成
+
+https://catalog.us-east-1.prod.workshops.aws/workshops/47782ec0-8e8c-41e8-b873-9da91e822b36/ja-JP/advanced/autoscaling/autoscaling-imp
+
+### AWS Code サービス群を活用して CI/CD
+
+
+https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-cicd-2022-reg-event.html?trk=aws_introduction_page
+
+
+
+## デザインパターン
+
+https://aws.amazon.com/jp/serverless/patterns/serverless-pattern/

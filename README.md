@@ -40,6 +40,9 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [Amazon CloudFront 概要](/articles_base/cloudfront-overview.md)
 
+### デベロッパーツール
+
+[AWS Code 兄弟概要](/articles_base/codexx-overview.md)
 
 ## 目次: 認定資格
 
