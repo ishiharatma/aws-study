@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# AWS Certified Developer - Associate 認定
+# AWS Certified Developer - Associate 認定 (DVA-C01)
 
 ## はじめに
 
@@ -13,6 +13,9 @@ published: true
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+- [試験概要](https://aws.amazon.com/jp/certification/certified-developer-associate/)
+- [試験ガイド](https://d1.awsstatic.com/ja_JP/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Exam-Guide.pdf)
+- [サンプル問題](https://d1.awsstatic.com/ja_JP/training-and-certification/docs-dev-associate/AWS-Certified-Developer-Associate_Sample-Questions.pdf)
 
 ## Lambda
 
