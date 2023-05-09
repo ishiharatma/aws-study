@@ -31,7 +31,6 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [Amazon ElastiCache 概要](/articles_base/elasticache-overview.md)
 
-
 ### ネットワーキング
 
 [Amazon Route 53 概要](/articles_base/route53-overview.md)
@@ -39,6 +38,10 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 [Amazon API Gateway 概要](/articles_base/apigw-overview.md)
 
 [Amazon CloudFront 概要](/articles_base/cloudfront-overview.md)
+
+### マネジメントとガバナンス
+
+[Amazon CloudWatch 概要](/articles_base/cloudwatch-overview.md)
 
 ### デベロッパーツール
 

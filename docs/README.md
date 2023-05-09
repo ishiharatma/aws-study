@@ -29,6 +29,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./route53-overview/index.html" target="_blank">Amazon Route 53 概要</a>
   - <a href="./cloudfront-overview/index.html" target="_blank">Amazon CloudFront 概要</a>
   - <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
+- マネジメントとガバナンス
+  - <a href="./cloudwatch-overview/index.html" target="_blank">Amazon CloudWatch 概要</a>
 - デベロッパーツール
   - <a href="./codexx-overview/index.html" target="_blank">AWS Code 兄弟概要</a>
 
