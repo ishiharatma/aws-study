@@ -160,7 +160,7 @@ Duration: 0:03:00
 ログを集約できるサービスです。ロググループ＞ログストリーム という形式で格納されます。
 ロググループ単位で保存期間を任意に設定することで、コスト削減できます。
 
-サブスクリプションフィルターを使うことで、ログから任意の文字RROR など）を検知し、処理(kinesis や Lmabda に連携)を行うできます。
+サブスクリプションフィルターを使うことで、ログから任意の文字（ERROR など）を検知し、処理(kinesis や Lmabda に連携)を行うできます。
 
 kinesis と連携することでログを S3 に転送することもできます
 [CloudWatch Logs サブスクリプションフィルターの使用](https:/cs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/logsbscriptionFilters.html)
