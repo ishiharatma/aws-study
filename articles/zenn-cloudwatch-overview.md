@@ -307,7 +307,21 @@ Duration: 0:03:00
 
 [Amazon CloudWatch Application Insights](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html)
 
-特定のリソースのメトリクスだけでなく、リソースグループという単位でワークロードをまとめて監視、通知できるサービスです。
+特定のリソースのメトリクスだけでなく、リソースグループという単位で Amazon EC2 インスタンスを使用するアプリケーションをまとめて監視、通知できるサービスです。
+
+CloudWatch コンソールから、[Application Insightの使用を開始する] から設定するだけです。
+
+![CloudWatchServiceLens](/images/cloudwatch/CloudWarchApplicationInsights1.png)
+
+![CloudWarchApplicationInsights2](/images/cloudwatch/CloudWarchApplicationInsights2.png)
+
+セットアップ後、アラームも自動で作成されています。
+
+![CloudWarchApplicationInsights3](/images/cloudwatch/CloudWarchApplicationInsights3.png)
+
+ダッシュボードでアラームを確認することができます。
+
+![CloudWarchApplicationInsights4](/images/cloudwatch/CloudWarchApplicationInsights4.png)
 
 ## CloudWatch ServiceLens
 
