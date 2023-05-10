@@ -26,7 +26,7 @@
   - [CloudWatch Container Insights](#cloudwatch-container-insights)
   - [CloudWatch Lambda Insights](#cloudwatch-lambda-insights)
   - [CloudWatch Contributor Insights](#cloudwatch-contributor-insights)
-  - [CloudWarch Application Insights](#cloudwarch-application-insights)
+  - [CloudWatch Application Insights](#cloudwatch-application-insights)
   - [CloudWatch ServiceLens](#cloudwatch-servicelens)
   - [CloudWatch Resource Health](#cloudwatch-resource-health)
   - [CloudWatch Synthetics](#cloudwatch-synthetics)
@@ -294,7 +294,7 @@ CloudWatch Logs の特定箇所を抽出して、可視化することができ�
 
 他にも CloudWatch Logs にログを出力していれば、アプリケーションのログを分析することが可能です。
 
-## CloudWarch Application Insights
+## CloudWatch Application Insights
 
 Duration: 0:03:00
 
@@ -304,17 +304,17 @@ Duration: 0:03:00
 
 CloudWatch コンソールから、[Application Insightの使用を開始する] から設定するだけです。
 
-![CloudWatchServiceLens](/images/cloudwatch/CloudWarchApplicationInsights1.png)
+![CloudWatchApplicationInsights1](/images/cloudwatch/CloudWatchApplicationInsights1.png)
 
-![CloudWarchApplicationInsights2](/images/cloudwatch/CloudWarchApplicationInsights2.png)
+![CloudWatchApplicationInsights2](/images/cloudwatch/CloudWatchApplicationInsights2.png)
 
 セットアップ後、アラームも自動で作成されています。
 
-![CloudWarchApplicationInsights3](/images/cloudwatch/CloudWarchApplicationInsights3.png)
+![CloudWatchApplicationInsights3](/images/cloudwatch/CloudWatchApplicationInsights3.png)
 
 ダッシュボードでアラームを確認することができます。
 
-![CloudWarchApplicationInsights4](/images/cloudwatch/CloudWarchApplicationInsights4.png)
+![CloudWatchApplicationInsights4](/images/cloudwatch/CloudWatchApplicationInsights4.png)
 
 ## CloudWatch ServiceLens
 
