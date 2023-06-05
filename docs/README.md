@@ -31,6 +31,9 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
 - マネジメントとガバナンス
   - <a href="./cloudwatch-overview/index.html" target="_blank">Amazon CloudWatch 概要</a>
+- アプリケーション統合
+  - <a href="./sns-overview/index.html" target="_blank">Amazon SNS 概要</a>
+  - <a href="./sqs-overview/index.html" target="_blank">Amazon SQS 概要</a>
 - デベロッパーツール
   - <a href="./codexx-overview/index.html" target="_blank">AWS Code 兄弟概要</a>
 

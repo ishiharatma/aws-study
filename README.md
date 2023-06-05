@@ -43,6 +43,13 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [Amazon CloudWatch 概要](/articles_base/cloudwatch-overview.md)
 
+### アプリケーション統合
+
+[Amazon SNS 概要](/articles_base/sns-overview.md)
+
+[Amazon SQS 概要](/articles_base/sqs-overview.md)
+
+
 ### デベロッパーツール
 
 [AWS Code 兄弟概要](/articles_base/codexx-overview.md)
