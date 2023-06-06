@@ -34,6 +34,31 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="Contents" duration="0">
+        <ul>
+<li><a href="#amazon-simple-notification-service-sns" target="_blank">Amazon Simple Notification Service (SNS)</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#amazon-simple-notification-service-sns-%E3%81%A8%E3%81%AF" target="_blank">Amazon Simple Notification Service (SNS) とは</a></li>
+<li><a href="#sqs-%E3%81%A8%E3%81%AF%E9%81%95%E3%81%86%E3%81%AE" target="_blank">SQS とは違うの？</a></li>
+<li><a href="#sns-%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">SNS 構成要素</a><ul>
+<li><a href="#%E3%83%88%E3%83%94%E3%83%83%E3%82%AF" target="_blank">トピック</a></li>
+<li><a href="#%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%B7%E3%83%A5" target="_blank">パブリッシュ</a></li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">サブスクリプション</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB-e-%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%92%E7%99%BB%E9%8C%B2%E3%81%97%E3%81%9F%E5%A0%B4%E5%90%88" target="_blank">サブスクリプションに E メールを登録した場合</a></li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC" target="_blank">サブスクリプションフィルター</a></li>
+<li><a href="#%E3%83%87%E3%83%83%E3%83%89%E3%83%AC%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%BC" target="_blank">デッドレターキュー</a></li>
+<li><a href="#%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">暗号化</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Amazon Simple Notification Service (SNS) とは" duration="49">
         <p>A2A および A2P メッセージング用のフルマネージド Pub/Sub サービスです。</p>
 <ul>
@@ -52,14 +77,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="SQS とは違うの？" duration="0">
+      <google-codelab-step label="SQS とは違うの？" duration="1">
         <p>SQS は名前に Q (Queue) とあるように、キューイングサービスです。受け取り側はキューをある間隔でポーリングして監視したり、好きなタイミングで一気に取得したりすることができます。（プル式）</p>
 <p>SNS はメッセージングサービスで、メッセージが配信されたら受信者へ送信するプッシュ式です。イベント駆動アーキテクチャを構築できます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="SNS 構成要素" duration="0">
+      <google-codelab-step label="SNS 構成要素" duration="1">
         <ul>
 <li>トピック</li>
 <li>パブリッシュ</li>
@@ -115,7 +140,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="サブスクリプションに E メールを登録した場合" duration="0">
+      <google-codelab-step label="サブスクリプションに E メールを登録した場合" duration="1">
         <p>サブスクリプションに E メールを登録した場合、指定した E メールアドレスに [サブスクリプションの確認] メールが送信されます。</p>
 <p class="image-container"><img alt="sns-confirmation" src="img\\1bbadffced7d908e.png"></p>
 <p>メール本文にある <code>Confirm subscription</code> の URL をクリックすることで、メッセージの受信を開始することができます。誤ってクリックしてしまった場合は、<code>click here to unsubscribe</code> をクリックします。</p>
@@ -176,9 +201,9 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="サブスクリプションフィルター" duration="0">
+      <google-codelab-step label="サブスクリプションフィルター" duration="1">
         <p>JSON で定義したポリシーでメッセージの配信を制御できます。</p>
-<p>https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-subscription-filter-policies.html</p>
+<p>[https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-subscription-filter-policies.html]</p>
 <p>ポリシーのスコープは次の２つのどちらかを選択できます。</p>
 <ul>
 <li>メッセージ属性（デフォルト）</li>
@@ -217,7 +242,6 @@
       }
    }
 </code></pre>
-<p>この例の場合、&#34;encrypted&#34; プロパティが存在していないため、その他の値に関わらず拒否されるポリシーとなっています。 この性質を利用して、一時的に配信を止める場合に利用することもできます。</p>
 <pre><code language="language-json" class="language-json">{
    &#34;store&#34;: [&#34;example_corp&#34;],
    &#34;event&#34;: [&#34;order_cancelled&#34;],
@@ -228,21 +252,22 @@
    ]
 }
 </code></pre>
+<p>この例の場合、&#34;MessageAttributes&#34; 内に &#34;encrypted&#34; プロパティが存在していないため、その他の値に関わらず拒否されるポリシーとなっています。 存在しないポリシーを指定して、一時的に配信を止める場合に利用することもできます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="デッドレターキュー" duration="0">
+      <google-codelab-step label="デッドレターキュー" duration="1">
         <p>メッセージの受信者に正常に配信できなかった場合に格納する SQS のキューを指定できます。 これにより、エラーの分析や、再処理などを行うことができます。</p>
 <p>[https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-dead-letter-queues.html]</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="暗号化" duration="0">
+      <google-codelab-step label="暗号化" duration="1">
         <p>AWS KMS を利用して、トピック内のメッセージを暗号化することができます（サーバ側の暗号化（SSE）） 暗号化されたメッセージは、配信時に自動的に復号されて配信されます。</p>
 <p>指定できるキーは、デフォルトの <code>alias/aws/sns</code> と 作成済みの CMK を指定できます。</p>
-<p>ただし、暗号化を行う場合は、使用する暗号化キーに対する「kms:Decrypt」と「kms:GenerateDataKey」を適切に許可することが必要です。</p>
+<p>ただし、暗号化を行う場合は使用する暗号化キーに対する「kms:Decrypt」と「kms:GenerateDataKey」を適切に許可することが必要です。 これを行わなかった場合に、次のように配信されないことがあります。</p>
 <ul>
 <li><a href="https://repost.aws/ja/knowledge-center/cloudwatch-receive-sns-for-alarm-trigger" target="_blank">CloudWatch アラームトリガーの SNS 通知を受信しなかったのはなぜですか?</a></li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-troubleshooting.html#eb-no-messages-published-sns" target="_blank">【Amazon EventBridge】ルールは実行されるが、Amazon SNS トピックにいずれのメッセージもパブリッシュされない</a></li>

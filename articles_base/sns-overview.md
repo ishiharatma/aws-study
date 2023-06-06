@@ -6,6 +6,23 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+## Contents
+
+- [Amazon Simple Notification Service (SNS)](#amazon-simple-notification-service-sns)
+  - [はじめに](#はじめに)
+  - [Contents](#contents)
+  - [Amazon Simple Notification Service (SNS) とは](#amazon-simple-notification-service-sns-とは)
+  - [SQS とは違うの？](#sqs-とは違うの)
+  - [SNS 構成要素](#sns-構成要素)
+    - [トピック](#トピック)
+    - [パブリッシュ](#パブリッシュ)
+    - [サブスクリプション](#サブスクリプション)
+  - [サブスクリプションに E メールを登録した場合](#サブスクリプションに-e-メールを登録した場合)
+  - [サブスクリプションフィルター](#サブスクリプションフィルター)
+  - [デッドレターキュー](#デッドレターキュー)
+  - [暗号化](#暗号化)
+  - [まとめ](#まとめ)
+
 ## Amazon Simple Notification Service (SNS) とは
 
 Duration: 0:48:02
@@ -29,11 +46,15 @@ A2A および A2P メッセージング用のフルマネージド Pub/Sub サ�
 
 ## SQS とは違うの？
 
+Duration: 0:00:10
+
 SQS は名前に Q (Queue) とあるように、キューイングサービスです。受け取り側はキューをある間隔でポーリングして監視したり、好きなタイミングで一気に取得したりすることができます。（プル式）
 
 SNS はメッセージングサービスで、メッセージが配信されたら受信者へ送信するプッシュ式です。イベント駆動アーキテクチャを構築できます。
 
 ## SNS 構成要素
+
+Duration: 0:01:00
 
 - トピック
 - パブリッシュ
@@ -80,6 +101,8 @@ SNS はメッセージングサービスで、メッセージが配信された�
   - [https://docs.aws.amazon.com/ja_jp/sns/latest/dg/mobile-platform-endpoint.html]
 
 ## サブスクリプションに E メールを登録した場合
+
+Duration: 0:01:00
 
 サブスクリプションに E メールを登録した場合、指定した E メールアドレスに [サブスクリプションの確認] メールが送信されます。
 
@@ -152,9 +175,11 @@ https://sns.ap-northeast-1.amazonaws.com/confirmation.html?TopicArn=arn:aws:sns:
 
 ## サブスクリプションフィルター
 
+Duration: 0:01:00
+
 JSON で定義したポリシーでメッセージの配信を制御できます。
 
-https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-subscription-filter-policies.html
+[https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-subscription-filter-policies.html]
 
 ポリシーのスコープは次の２つのどちらかを選択できます。
 
@@ -201,9 +226,6 @@ MessageAttributes には 次のように Key-Value 形式で登録します。
    }
 ```
 
-この例の場合、"encrypted" プロパティが存在していないため、その他の値に関わらず拒否されるポリシーとなっています。
-この性質を利用して、一時的に配信を止める場合に利用することもできます。
-
 ```json
 {
    "store": ["example_corp"],
@@ -216,7 +238,12 @@ MessageAttributes には 次のように Key-Value 形式で登録します。
 }
 ```
 
+この例の場合、"MessageAttributes" 内に "encrypted" プロパティが存在していないため、その他の値に関わらず拒否されるポリシーとなっています。
+存在しないポリシーを指定して、一時的に配信を止める場合に利用することもできます。
+
 ## デッドレターキュー
+
+Duration: 0:01:00
 
 メッセージの受信者に正常に配信できなかった場合に格納する SQS のキューを指定できます。
 これにより、エラーの分析や、再処理などを行うことができます。
@@ -225,12 +252,15 @@ MessageAttributes には 次のように Key-Value 形式で登録します。
 
 ## 暗号化
 
+Duration: 0:01:00
+
 AWS KMS を利用して、トピック内のメッセージを暗号化することができます（サーバ側の暗号化（SSE））
 暗号化されたメッセージは、配信時に自動的に復号されて配信されます。
 
 指定できるキーは、デフォルトの `alias/aws/sns` と 作成済みの CMK を指定できます。
 
-ただし、暗号化を行う場合は、使用する暗号化キーに対する「kms:Decrypt」と「kms:GenerateDataKey」を適切に許可することが必要です。
+ただし、暗号化を行う場合は使用する暗号化キーに対する「kms:Decrypt」と「kms:GenerateDataKey」を適切に許可することが必要です。
+これを行わなかった場合に、次のように配信されないことがあります。
 
 - [CloudWatch アラームトリガーの SNS 通知を受信しなかったのはなぜですか?](https://repost.aws/ja/knowledge-center/cloudwatch-receive-sns-for-alarm-trigger)
 - [【Amazon EventBridge】ルールは実行されるが、Amazon SNS トピックにいずれのメッセージもパブリッシュされない](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-troubleshooting.html#eb-no-messages-published-sns)
