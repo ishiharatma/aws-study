@@ -42,6 +42,7 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 ### マネジメントとガバナンス
 
 [Amazon CloudWatch 概要](/articles_base/cloudwatch-overview.md)
+
 [AWS CloudTrail 概要](/articles_base/cloudtrail-overview.md)
 
 ### アプリケーション統合
