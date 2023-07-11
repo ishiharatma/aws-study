@@ -42,6 +42,7 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 ### マネジメントとガバナンス
 
 [Amazon CloudWatch 概要](/articles_base/cloudwatch-overview.md)
+[AWS CloudTrail 概要](/articles_base/cloudtrail-overview.md)
 
 ### アプリケーション統合
 
@@ -49,10 +50,13 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [Amazon SQS 概要](/articles_base/sqs-overview.md)
 
-
 ### デベロッパーツール
 
 [AWS Code 兄弟概要](/articles_base/codexx-overview.md)
+
+### セキュリティ、アイデンティティ、コンプライアンス
+
+[AWS IAM](/articles_base/iam-overview.md)
 
 ## 目次: 認定資格
 
