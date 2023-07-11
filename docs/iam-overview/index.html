@@ -1,0 +1,322 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Identity and Access Management(IAM)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="iam-overview"
+                  title="AWS Identity and Access Management(IAM)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="0">
+        <ul>
+<li><a href="#aws-identity-and-access-managementiam" target="_blank">AWS Identity and Access Management(IAM)</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#iam-%E3%81%A8%E3%81%AF" target="_blank">IAM とは</a></li>
+<li><a href="#%E8%AA%8D%E8%A8%BC%E8%AA%8D%E5%8F%AF%E3%81%A8%E3%81%AF" target="_blank">認証・認可とは</a></li>
+<li><a href="#iam-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC" target="_blank">IAM ユーザー</a><ul>
+<li><a href="#mfa" target="_blank">MFA</a></li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%AD%E3%83%BC" target="_blank">アクセスキー</a></li>
+<li><a href="#ssh-%E5%85%AC%E9%96%8B%E9%8D%B5" target="_blank">SSH 公開鍵</a></li>
+<li><a href="#git-%E8%AA%8D%E8%A8%BC%E6%83%85%E5%A0%B1" target="_blank">Git 認証情報</a></li>
+</ul>
+</li>
+<li><a href="#iam-%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">IAM ポリシー</a><ul>
+<li><a href="#%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AE%E8%AB%96%E7%90%86%E8%A9%95%E4%BE%A1" target="_blank">ポリシーの論理評価</a></li>
+</ul>
+</li>
+<li><a href="#iam-%E3%83%AD%E3%83%BC%E3%83%AB" target="_blank">IAM ロール</a></li>
+<li><a href="#iam-permissions-boundary%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%A8%A9%E9%99%90%E3%81%AE%E5%A2%83%E7%95%8C" target="_blank">IAM Permissions boundary（アクセス権限の境界）</a></li>
+<li><a href="#%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">パスワードポリシー</a></li>
+<li><a href="#iam-policy-simulator" target="_blank">IAM Policy Simulator</a></li>
+<li><a href="#iam-access-advisor" target="_blank">IAM Access Advisor</a></li>
+<li><a href="#iam-access-analyzer" target="_blank">IAM Access Analyzer</a></li>
+<li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM とは" duration="110">
+        <p>ID と AWS のサービスおよびリソースへのアクセスを安全に管理するサービスです。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=K7F5yTThynw&t=6s" target="_blank">AWS Identity and Access Management (AWS IAM) Part1(YouTube)</a>(48:03)</p>
+<p class="image-container"><img alt="blackbelt-iam-part1" src="img\\99a062884ea77b0b.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=SJQSWeogUWs" target="_blank">AWS Identity and Access Management (AWS IAM) Part2(YouTube)</a>(55:37)</p>
+<p class="image-container"><img alt="blackbelt-iam-part2" src="img\\e46cff91d561613a.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=qrZKKF6V6Dc&t=8s" target="_blank">How to use IAM Access Analyzer policy generation | Amazon Web Services(YouTube)</a>(5:32)</p>
+<p class="image-container"><img alt="how-to-use-iam-access-analyzer" src="img\\13ddd8188b82d84.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/iam/" target="_blank">IAM サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/iam/?id=docs_gateway" target="_blank">IAM ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/iam/faqs/" target="_blank">IAM よくある質問</a></p>
+<p>IAM の料金 はありません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="認証・認可とは" duration="2">
+        <p>IAM を理解する前に、「認証・認可」について把握しておく必要があります。</p>
+<ul>
+<li>認証 <ul>
+<li>相手が誰（何）であるかを確認すること</li>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%AA%8D%E8%A8%BC#%E8%AA%8D%E8%A8%BC_(%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3)" target="_blank">Wikipedia-認証 (セキュリティ)</a></li>
+</ul>
+</li>
+<li>認可 <ul>
+<li>リソースアクセスの権限を与えること</li>
+<li><a href="https://ja.wikipedia.org/wiki/%E8%AA%8D%E5%8F%AF_(%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3)" target="_blank">Wikipedia-認可 (セキュリティ)</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM ユーザー" duration="5">
+        <p>AWS アカウントを利用するときに使用するユーザーです。ユーザーは、次のようなものを管理することができます。</p>
+<h2 is-upgraded>MFA</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa.html" target="_blank">AWS での多要素認証 (MFA) の使用</a></p>
+<p class="image-container"><img alt="iam-user-mfa" src="img\\5fb264bd0bc0f686.jpg"></p>
+<p>ログインパスワードのほかに、仮想 MFA デバイスを有効化にして認証することで、セキュリティを高めることができます。 MFA は必ず設定するようにしましょう。</p>
+<p>MFA を使用したログインを行っている場合のみ、IAM ロールを切り替えることができるという条件を付与することが可能です。</p>
+<h2 is-upgraded>アクセスキー</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_access-keys.html" target="_blank">IAM ユーザーのアクセスキーの管理</a></p>
+<p class="image-container"><img alt="iam-user-accesskey" src="img\\ba8bf1798095c384.jpg"></p>
+<p>AWS CLI や API を利用する際に使用することができる認証情報です。 ベストプラクティスでは、アクセスキーの利用は避け、一時的なセキュリティ認証情報 (IAM ロール) を使用することが推奨されています。 EC2 などから CLI を利用する場合は、EC2 内にアクセスキーの情報を保持しない IAM ロールを使用するようにしましょう。 ローカル端末から AWS CLI で作業するには、アクセスキーが必要なので、アクセスキーを適切に管理しましょう。さらに、 MFA を利用したスイッチロールを行うようにして、認証直後に強い権限を保持している状態にしないようにしましょう。</p>
+<p>完全にアクセスキーを使用しない方法としては、CloudShell、SSM を利用した管理用 EC2 などの方法も検討しましょう。</p>
+<h2 is-upgraded>SSH 公開鍵</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/opsworks/latest/userguide/security-settingsshkey.html" target="_blank">ユーザーのパブリック SSH キーを登録する</a></p>
+<p class="image-container"><img alt="iam-user-sshkey" src="img\\1cadb75fec7cdf09.jpg"></p>
+<p>SSH 公開鍵を登録できます。ここで登録した SSH 公開鍵を利用すると、次のようなことができるようになります。</p>
+<ul>
+<li>CodeCommit への SSH 接続 <ul>
+<li>CodeCommit へのアクセスは HTTPS もある。この場合、後述の <code>Git 認証情報</code> の方を利用します。</li>
+</ul>
+</li>
+<li>EC2 の Linux ユーザ情報の管理 <ul>
+<li>SSH 公開鍵と、<a href="https://github.com/widdix/aws-ec2-ssh" target="_blank">aws-ec2-ssh</a> を利用することで、EC2 の Linux ユーザ情報を IAM と同期させることが出来ます。IAM のみで管理が完結できるようになります。</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>Git 認証情報</h2>
+<p class="image-container"><img alt="iam-user-git" src="img\\72ddb6ee7596f36f.jpg"></p>
+<p>CodeCommit に HTTPS 接続するための認証情報（ユーザー名とパスワード）を発行することができます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-gc.html" target="_blank">Git 認証情報を使用した HTTPS ユーザーのセットアップ</a></p>
+<p>CodeCommit には、Git 認証情報を使用しなくても接続できます。Git 認証情報を作成することがない代わりに、git-remote-codecommit をインストールする必要があります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/codecommit/latest/userguide/setting-up-git-remote-codecommit.html" target="_blank">git-remote-codecommit を使用して AWS CodeCommit への HTTPS 接続をセットアップする手順</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM ポリシー" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies.html" target="_blank">IAM でのポリシーとアクセス許可</a></p>
+<p>ポリシーとは、AWS リソースへのアクセス権限を定義した JSON ドキュメントです。</p>
+<pre><code language="language-json" class="language-json">{
+    &#34;Version&#34;: &#34;2012-10-17&#34;,
+    &#34;Statement&#34;: [
+        {
+            &#34;Effect&#34;: &#34;Allow&#34;,
+            &#34;Action&#34;: [
+                &#34;ec2:AttachVolume&#34;,
+                &#34;ec2:DetachVolume&#34;
+            ],
+            &#34;Resource&#34;: [
+                &#34;arn:aws:ec2:*:*:volume/*&#34;,
+                &#34;arn:aws:ec2:*:*:instance/*&#34;
+            ],
+            &#34;Condition&#34;: {
+                &#34;ArnEquals&#34;: {&#34;ec2:SourceInstanceARN&#34;: &#34;arn:aws:ec2:*:*:instance/instance-id&#34;}
+            }
+        }
+    ]
+}
+</code></pre>
+<p>ポリシーには次の３つがあります。</p>
+<ul>
+<li>AWS 管理ポリシー<ul>
+<li>AWS が提供しているポリシーです。各サービスを利用したり、職責のパターンで提供されています。</li>
+<li>AWS 管理ポリシーには、次の２つがあります。<ul>
+<li>サービスの利用を想定した管理ポリシー<ul>
+<li>AmazonS3FullAccess や　AmazonS3ReadOnlyAccess　など</li>
+</ul>
+<img alt="iam-policy-aws" src="img\\a9cefca04cb41ad5.png"></li>
+<li>職責を想定した管理ポリシー（ジョブ機能）<ul>
+<li>AdministratorAccess や PowerUserAccess など</li>
+</ul>
+<img alt="iam-policy-aws-job" src="img\\be939dc8fe1613eb.png"></li>
+</ul>
+</li>
+<li>AWS 管理ポリシーは非推奨になることがあります。<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_managed-deprecated.html" target="_blank">非推奨の AWS 管理ポリシー</a></li>
+<li><a href="https://aws.amazon.com/jp/blogs/news/service-notice-upcoming-changes-required-for-aws-config/" target="_blank">Amazon Web Services ブログ - AWS Config の AWS 管理ポリシー AWSConfigRole に関する変更</a> といったように事前に告知されます。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>カスタマー管理ポリシー<ul>
+<li>独自に定義したポリシーです。実際の要件にあった細やかな制御を実装できます。</li>
+<li>最大５つまでの自動的にバージョン管理が行われます。</li>
+</ul>
+</li>
+<li>インラインポリシー<ul>
+<li>ユーザーやロールに直接記述されるポリシーです。ここで記載したポリシーは他のリソースにアタッチすることが出来ません。</li>
+<li>ポリシーのバージョン管理ができません。</li>
+<li>汎用性が不要な場合や、ポリシーの検証などの用途に適しています。</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>ポリシーの論理評価</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_evaluation-logic.html" target="_blank">ポリシーの評価論理</a></p>
+<p>基本的には、次の優先度で判定されます。</p>
+<ul>
+<li>「明示的な拒否」 <ul>
+<li>ポリシー内に明示的に拒否（Deny）したものです。</li>
+</ul>
+</li>
+<li>「明示的な許可」 <ul>
+<li>ポリシー内に明示的に許可（Allow）したものです。</li>
+<li>Deny と Allow を両方記述した場合は、Deny になります。</li>
+</ul>
+</li>
+<li>「暗黙的な拒否」 <ul>
+<li>何も記載されていない操作は、暗黙的にすべてが拒否（Deny）されます。</li>
+</ul>
+</li>
+</ul>
+<p>拒否と許可は上記で示した優先度ですが、アクセス許可は様々なところで設定することができます。 それらの判断順序については、<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-denyallow" target="_blank">アカウント内でのリクエストの許可または拒否の決定</a> にポリシーの決定フローチャートがあります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM ロール" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles.html" target="_blank">IAM ロール</a></p>
+<p>ロールとは、ある用途や職責など目的のために１つ以上のポリシーをまとめたものです。 ロール自体はユーザーやグループなどに直接付与することができませんので、ロールを引き受けること（sts:AssumeRole アクション）を許可した IAM ポリシーを作成する必要があります。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: {
+    &#34;Effect&#34;: &#34;Allow&#34;,
+    &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+    &#34;Resource&#34;: &#34;arn:aws:iam::account-id:role/Test*&#34;
+  }
+}
+</code></pre>
+<p>ロールには、<a href="https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/howtosessionduration.html" target="_blank">セッション期間</a>が設定できます。セッション期間に指定した時間が経過すると、セッションからサインアウトします。以前は 1時間しか設定できませんでしたが、現在では 12 時間まで設定できます。あまり短くすると、マネジメントコンソールで作業していると、何度も「再ロード」画面がでますので作業内容を鑑みて設定しましょう。</p>
+<p>マネジメントコンソールで変更する場合は、「1時間 / 2時間 / 4時間 / 8時間 / 12時間 / カスタム期間」が選択できます。</p>
+<p class="image-container"><img alt="iam-role-sessionduration" src="img\\1fbbd95ebe887dc9.png"></p>
+<p>カスタム期間では、秒数で 1時間～ 12時間を指定できます。AWS CLI を使った場合と同じです。 <img alt="iam-role-sessionduration-custom" src="img\\db613e4bf93cec63.png"></p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/update-role.html" target="_blank">update-role</a></p>
+<pre><code language="language-sh" class="language-sh"># 12時間にする場合
+aws iam update-role --max-session-duration 43200
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM Permissions boundary（アクセス権限の境界）" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_boundaries.html" target="_blank">IAM エンティティのアクセス許可境界</a></p>
+<p>IAM ユーザーもしくはロールに付与できる権限の境界を定義したものです。IAM ポリシーで強力な権限（AdministratorAccess）が付与されたとしても、Permissions boundary を超えた権限は許可されません。</p>
+<p>IAM ポリシーと Permissions boundary は AND 条件で評価されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="パスワードポリシー" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html" target="_blank">IAM ユーザー用のアカウントパスワードポリシーの設定</a></p>
+<p>IAM ユーザーのパスワードポリシーを設定することができます。</p>
+<p class="image-container"><img alt="iam password policy" src="img\\c2766ff6d8b13fbc.png"></p>
+<p><a href="https://japan.zdnet.com/article/35202432/#:~:text=%E3%81%82%E3%82%89%E3%82%86%E3%82%8B%E6%96%87%E5%AD%97%E7%A8%AE%E3%82%92%E5%90%AB%E3%82%8010,%E3%81%AF600%E4%BA%AC%E5%B9%B4%E3%81%A0%E3%80%82&text=PassGAN%E3%81%AF%E3%81%AA%E3%81%9C%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE,%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%A0%E3%82%8D%E3%81%86%E3%81%8B%E3%80%82" target="_blank">ZDNET Japan-よくあるパスワード、約半数がAIツールで1分以内に解読可能</a> という記事に、パスワードポリシー別の解析時間が記載されています。</p>
+<p>この記事の引用元である、<a href="https://www.homesecurityheroes.com/ai-password-cracking/" target="_blank">こちらのサイト</a>では、パスワードの長さから解析にどれくらいかかるか判定してくれます。</p>
+<p>画像は、 <code>password</code> と入れた例です。当然ですが、実際に使用しているパスワードを入れないようにしましょう。</p>
+<p class="image-container"><img alt="password policy" src="img\\8921337e37a89213.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM Policy Simulator" duration="2">
+        <p><a href="https://policysim.aws.amazon.com/home/index.jsp?#" target="_blank">IAM Policy Simulator</a></p>
+<p class="image-container"><img alt="policy-simulator" src="img\\624764db6630b84b.png"></p>
+<p>ユーザー、グループ、ロールに対して設定したポリシーが正しいかどうかをテストすることができます。</p>
+<p class="image-container"><img alt="policy-simulator-run" src="img\\808cc6b89fd11cc8.jpg"></p>
+<p>各項目を展開することで、どこのポリシーで拒否されたかを確認することができます。 <img alt="policy-simulator-run" src="img\\c5d4e48439095b20.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM Access Advisor" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_access-advisor.html?icmpid=docs_iam_console" target="_blank">最終アクセス情報を使用した AWS のアクセス許可の調整</a></p>
+<p>アクセス可能なサービスと最終アクセス日時が表示されるので、未使用の権限を特定し削除することが可能になります。</p>
+<p>アクセスアドバイザーは、ユーザー/グループ/ロール/ポリシーで使用することができます。 グループの場合は、グループに所属するユーザーが最後に利用したものが表示されます。</p>
+<p class="image-container"><img alt="iam-access-advisor" src="img\\b12b9a7bcbfcaf4a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM Access Analyzer" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank">AWS Identity and Access Management Access Analyzer を使用する</a></p>
+<p>AWSリソースに紐付いているポリシーを検査し、他AWSアカウントや外部のインターネット等からのアクセスを可能とするような設定がされているかどうかを検出および可視化してくれる機能です。</p>
+<p class="image-container"><img alt="iam-access-analyzer-result" src="img\\204f5c0cc2ef60b9.png"></p>
+<p class="image-container"><img alt="iam-access-analyzer-result-detail" src="img\\c1c4016ed4c5cbdb.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ベストプラクティス" duration="2">
+        <p>https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html</p>
+<ul>
+<li>最小特権アクセス許可を適用</li>
+<li>多要素認証</li>
+<li>CloudTrail でモニタリング</li>
+<li>アクセスキーの利用は極力避ける</li>
+<li>ルートユーザーは使用しない</li>
+<li>未使用のロールは定期的に棚卸を</li>
+<li>IAM Access Analyzer を活用しよう</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p class="image-container"><img alt="iam" src="img\\8858c219d2025ff3.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
