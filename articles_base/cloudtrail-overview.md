@@ -257,7 +257,7 @@ SELECT
   sourceIPAddress,
   userIdentity.type,
   userIdentity.arn
-FROM cloudtrail_logs_cloudtrail700279630950
+FROM cloudtrail_logs_cloudtrail
 WHERE eventName = 'ConsoleLogin'
 LIMIT 10;
 ```

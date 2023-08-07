@@ -2,7 +2,7 @@
 title: "【初心者向け】AWS CloudTrail について改めて整理してみた" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 # AWS CloudTrail
@@ -264,7 +264,7 @@ SELECT
   sourceIPAddress,
   userIdentity.type,
   userIdentity.arn
-FROM cloudtrail_logs_cloudtrail700279630950
+FROM cloudtrail_logs_cloudtrail
 WHERE eventName = 'ConsoleLogin'
 LIMIT 10;
 ```
