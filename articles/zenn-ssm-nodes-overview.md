@@ -59,9 +59,11 @@ EC2、エッジデバイス、オンプレ、仮想マシンを管理するこ�
 ![session-manager-console](/images/ssm/session-manager/session-manager-1.jpg)
 
 Windows サーバーに接続した場合（CUI のみ）
+
 ![session-manager-2-windows](/images/ssm/session-manager/session-manager-2-windows.jpg)
 
 Linux サーバーに接続した場合
+
 ![session-manager-3-linux](/images/ssm/session-manager/session-manager-3-linux.jpg)
 
 もう一つの利用としては、ポート転送で接続する方法です。接続元のローカルポートへのアクセスをマネージドノードのポートの転送することでアクセスすることができます。
@@ -82,14 +84,17 @@ Linux サーバーに接続した場合
 ![fm-tool-menu](/images/ssm/fleet-manager/fm-tool-menu.png)
 
 Ｗindows サーバのイベントログの表示例
+
 ![fm-windows-eventlog](/images/ssm/fleet-manager/fm-windows-eventlog.png)
 
 ファイルシステムの表示例（WindowsサーバのCドライブ）
+
 ![fm-windows-fs](/images/ssm/fleet-manager/fm-windows-fs.png)
 
 リモートデスクトップで接続した場合は、Session Manager の接続と同様に CloudTrail によってセッションの開始と終了が記録されます。
 
 リモートデスクトップ接続の表示例
+
 ![fm-connect](/images/ssm/fleet-manager/fm-connect.png)
 
 ![fm-windows](/images/ssm/fleet-manager/fm-windows.jpg)
