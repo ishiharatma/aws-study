@@ -32,6 +32,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - マネジメントとガバナンス
   - <a href="./cloudwatch-overview/index.html" target="_blank">Amazon CloudWatch 概要</a>
   - <a href="./cloudtrail-overview/index.html" target="_blank">AWS CloudTrail 概要</a>
+  - <a href="./ssm-overview/index.html" target="_blank">AWS Systems Manager ①概要編</a>
+  - <a href="./ssm-nodes-overview/index.html" target="_blank">AWS Systems Manager ②ノード管理機能編</a>
 - アプリケーション統合
   - <a href="./sns-overview/index.html" target="_blank">Amazon SNS 概要</a>
   - <a href="./sqs-overview/index.html" target="_blank">Amazon SQS 概要</a>

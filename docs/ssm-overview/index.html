@@ -1,0 +1,138 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Systems Manager（SSM）</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ssm-overview"
+                  title="AWS Systems Manager（SSM）"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#aws-systems-managerssm" target="_blank">AWS Systems Manager（SSM）</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#systems-manager-%E3%81%A8%E3%81%AF" target="_blank">Systems Manager とは</a></li>
+<li><a href="#ssm" target="_blank">SSM？</a><ul>
+<li><a href="#%E5%89%8D%E6%8F%90%E6%9D%A1%E4%BB%B6" target="_blank">前提条件</a></li>
+<li><a href="#ssm-agent-%E3%81%AE%E4%BD%BF%E7%94%A8" target="_blank">SSM Agent の使用</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A9%9F%E8%83%BD%E5%88%86%E9%A1%9E" target="_blank">機能分類</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Systems Manager とは" duration="0">
+        <p>AWS 上のリソースを表示したり、インスタンスを制御するために使用できる AWS のマネージドサービスです。「インスタンスのパッチ管理」「アンチウィルス定義の更新」「ソフトウェアのインストール状況確認」「運用タスクの自動化」等の機能があります。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=g5ndLFklyb4" target="_blank">AWS Systems Manager(YouTube)</a>(38:57)</p>
+<p class="image-container"><img alt="black-belt-ssm" src="img\\88463f6ce29a57f4.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/" target="_blank">AWS Systems Manager サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/?id=docs_gateway" target="_blank">AWS Systems Manager ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/faq/" target="_blank">AWS Systems Manager よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/" target="_blank">AWS Systems Manager の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="SSM？" duration="2">
+        <p>Systems Manager の前身のサービス名である「Amazon Simple Systems Manager」の略称が <code>SSM</code> でしたので、それに由来しています。</p>
+<h2 is-upgraded>前提条件</h2>
+<p>Systems Manager を使ってサーバーを管理するには、マネージドノード（または、マネージドインスタンス）となっている必要があります。 マネージドノードとは・・・</p>
+<ol type="1">
+<li>SSM Agent が導入されていること。 オンプレミスサーバにも導入できます。</li>
+<li>インスタンスのアウトバンドが確保されていること。具体的には、以下のエンドポイントに対して HTTPS 通信が行える必要があります。<ul>
+<li>ec2messages.region.amazonaws.com</li>
+<li>ssm.region.amazonaws.com</li>
+<li>ssmmessages.region.amazonaws.com</li>
+</ul>
+</li>
+<li>AWS 管理ポリシー <code>AmazonSSMManagedInstanceCore</code> を与えるか、同等の権限を付与する必要があります。</li>
+</ol>
+<h2 is-upgraded>SSM Agent の使用</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/ssm-agent.html" target="_blank">SSM Agent の使用</a></p>
+<p>SSM Agent とは Systems Manager でこれらのリソースを更新、管理、設定できるようにするソフトウェアです。</p>
+<p>SSM Agent は事前にプリインストールされているものがあります。事前にインストールされている場合は、適切なポリシーが付与されていればすぐに利用することができます。（参考＞<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/ami-preinstalled-agent.html" target="_blank">SSM Agent がプリインストールされた Amazon Machine Images (AMIs)</a>）</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="機能分類" duration="0">
+        <p>運用管理、アプリケーション管理、変更管理、ノード管理の４つの機能があります。</p>
+<ul>
+<li>運用管理 <ul>
+<li>エクスプローラー</li>
+<li>OpsCenter</li>
+<li>インシデントマネージャー</li>
+</ul>
+</li>
+<li>アプリケーション管理 <ul>
+<li>アプリケーションマネージャー</li>
+<li>AppConfig</li>
+<li>パラメータストア</li>
+</ul>
+</li>
+<li>変更管理 <ul>
+<li>Change Manager</li>
+<li>オートメーション</li>
+<li>Change Calendar</li>
+<li>メンテナンスウィンドウ</li>
+</ul>
+</li>
+<li>ノード管理 <ul>
+<li>フリートマネージャー</li>
+<li>コンプライアンス</li>
+<li>インベントリ</li>
+<li>ハイブリッドアクティベーション</li>
+<li>セッションマネージャー</li>
+<li>Run Command</li>
+<li>ステートマネージャー</li>
+<li>パッチマネージャー</li>
+<li>ディストリビューター</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

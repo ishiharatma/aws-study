@@ -45,6 +45,10 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [AWS CloudTrail 概要](/articles_base/cloudtrail-overview.md)
 
+[AWS Systems Manager ①概要編](/articles_base/ssm-overview.md)
+
+[AWS Systems Manager ②ノード管理機能編](/articles_base/ssm-nodes-overview.md)
+
 ### アプリケーション統合
 
 [Amazon SNS 概要](/articles_base/sns-overview.md)
