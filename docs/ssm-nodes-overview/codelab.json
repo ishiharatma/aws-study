@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2023-08-09T01:57:24+09:00",
-  "id": "sns-overview",
-  "duration": 55,
-  "title": "Amazon Simple Notification Service (SNS)",
+  "id": "ssm-nodes-overview",
+  "duration": 6,
+  "title": "AWS Systems Manager（SSM）:ノード管理",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_sns-overview.md",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_ssm-nodes-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "amazonsns"
+    "awssystemsmanager"
   ],
-  "url": "sns-overview"
+  "url": "ssm-nodes-overview"
 }

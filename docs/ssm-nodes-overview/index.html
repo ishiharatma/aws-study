@@ -1,0 +1,202 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Systems Manager（SSM）:ノード管理</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ssm-nodes-overview"
+                  title="AWS Systems Manager（SSM）:ノード管理"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#aws-systems-managerssm%E3%83%8E%E3%83%BC%E3%83%89%E7%AE%A1%E7%90%86" target="_blank">AWS Systems Manager（SSM）:ノード管理</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%E3%83%8E%E3%83%BC%E3%83%89%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">ノード管理の機能</a></li>
+<li><a href="#%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">セッションマネージャー</a></li>
+<li><a href="#%E3%83%95%E3%83%AA%E3%83%BC%E3%83%88%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">フリートマネージャー</a></li>
+<li><a href="#run-command" target="_blank">Run Command</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">ステートマネージャー</a></li>
+<li><a href="#%E3%83%91%E3%83%83%E3%83%81%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">パッチマネージャー</a><ul>
+<li><a href="#%E3%83%91%E3%83%83%E3%83%81%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">パッチポリシー</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%8F%E3%82%A4%E3%83%96%E3%83%AA%E3%83%83%E3%83%89%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%99%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">ハイブリッドアクティベーション</a></li>
+<li><a href="#%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%BF%E3%83%BC" target="_blank">ディストリビューター</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%97%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%82%B9" target="_blank">コンプライアンス</a></li>
+<li><a href="#%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA" target="_blank">イベントリ</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ノード管理の機能" duration="0">
+        <ul>
+<li>ノード管理 <ul>
+<li>セッションマネージャー</li>
+<li>フリートマネージャー</li>
+<li>Run Command</li>
+<li>ステートマネージャー</li>
+<li>パッチマネージャー</li>
+<li>ハイブリッドアクティベーション</li>
+<li>ディストリビューター</li>
+<li>コンプライアンス</li>
+<li>インベントリ</li>
+</ul>
+</li>
+</ul>
+<p>よく使う機能から順番に解説します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="セッションマネージャー" duration="5">
+        <p>EC2、エッジデバイス、オンプレ、仮想マシンを管理することができる機能です。この機能を利用することで、踏み台サーバを構築したり、SSHキーを管理したりといったことが不要になります。</p>
+<p>セッションマネージャーの利用で最も簡単なのは、AWS マネジメントコンソールから利用することです。</p>
+<p class="image-container"><img alt="session-manager-console" src="img\\4fd027c7f353bcba.jpg"></p>
+<p>Windows サーバーに接続した場合（CUI のみ）</p>
+<p class="image-container"><img alt="session-manager-2-windows" src="img\\3dad471c442d280e.jpg"></p>
+<p>Linux サーバーに接続した場合</p>
+<p class="image-container"><img alt="session-manager-3-linux" src="img\\9d46490c0850f9b5.jpg"></p>
+<p>もう一つの利用としては、ポート転送で接続する方法です。接続元のローカルポートへのアクセスをマネージドノードのポートの転送することでアクセスすることができます。 この方法を利用する場合は、接続する端末に、AWS CLI および CLI 用の Session Manager プラグインをインストールする必要があります。（参考＞<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html" target="_blank">AWS CLI 用の Session Manager プラグインをインストールする</a>）</p>
+<p>どちらの方法を行った場合でも、CloudTrail にセッションの開始と終了のログが記録されます。</p>
+<p class="image-container"><img alt="session-manager-cloudtrail" src="img\\a160ce2fd5572ba8.png"></p>
+<p>これ以外に、フリートマネージャーを使った 接続も可能です。Windows サーバであれば、RDP 接続によって GUI 操作が可能になります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="フリートマネージャー" duration="0">
+        <p>マネジメントコンソールから、インスタンスを管理出来る機能です。</p>
+<p>ログやパフォーマンスカウンタなどを取得したり、リモートデスクトップに接続できるようになります。</p>
+<p class="image-container"><img alt="fm-tool-menu" src="img\\e8e856a3eb76062d.png"></p>
+<p>Ｗindows サーバのイベントログの表示例</p>
+<p class="image-container"><img alt="fm-windows-eventlog" src="img\\24c2756e7076b24.png"></p>
+<p>ファイルシステムの表示例（WindowsサーバのCドライブ）</p>
+<p class="image-container"><img alt="fm-windows-fs" src="img\\fbd51a1a4801dfcf.png"></p>
+<p>リモートデスクトップで接続した場合は、Session Manager の接続と同様に CloudTrail によってセッションの開始と終了が記録されます。</p>
+<p>リモートデスクトップ接続の表示例</p>
+<p class="image-container"><img alt="fm-connect" src="img\\c9722daeecce11b1.png"></p>
+<p class="image-container"><img alt="fm-windows" src="img\\1369c5c42fef6a4e.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Run Command" duration="0">
+        <p>マネジメントコンソール上から各種コマンドをインスタンスに接続することなく実行できる機能です。</p>
+<p class="image-container"><img alt="rc-1" src="img\\51a3cf188d5648a1.png"></p>
+<p>SSM　Agent のアップデートを行ったり、CloudWatch エージェントのインストールと設定を行ったりできます。</p>
+<p>参考：<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/run-command-tutorial-update-software.html" target="_blank">Run Command を使用して SSM Agent を更新する</a></p>
+<p>参考：<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/installing-cloudwatch-agent-ssm.html" target="_blank">AWS Systems Manager を使用した CloudWatch エージェントのインストール</a></p>
+<p>実行したコマンドは実行履歴として残っているので、一回実行したコマンドを再実行することも可能です。 コマンドが実行履歴として残りますので、例えば サーバーのユーザー作成などを Run Command から実行した場合、ユーザーのパスフレーズも履歴に残ってしまいます。これを避けるには、パラメータストアを利用することで、実行履歴に残らないようにすることもできます。 Run Command から使用するには、<code>&#123;&#123;ssm:parameter-name}}</code> と指定します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ステートマネージャー" duration="0">
+        <p>ステートマネージャーは設定管理の機能で、定期的に Run Command や Automation を実行することで、インスタンスの状態をあるべき状態にすることができます。</p>
+<p>例えば・・・</p>
+<ul>
+<li>SSM Agent などを更新する</li>
+<li>パッチを適用する</li>
+<li>スクリプトを実行する</li>
+</ul>
+<p>同様の機能は、メンテナンスウィンドウでも実現することができますが、メンテナンスウィンドウは指定した期間中に実行する場合に選択するとよいでしょう。 ステートマネージャーでは、<code>インスタンスが起動したタイミングに1回だけ</code> といったことができます。</p>
+<p>どちらを選択するかは、AWSドキュメント <a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html" target="_blank">State Manager または Maintenance Windows の選択</a> を参考にします。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="パッチマネージャー" duration="0">
+        <p>EC2 に対する　OS パッチ適用を自動化できる機能です。 サーバーを構築したはいいが、運用を行っていく上で必要だとはわかっていても後回しになりがちなパッチ適用を自動化できます。</p>
+<h2 is-upgraded>パッチポリシー</h2>
+<p>以前は、パッチベースライン と パッチグループといった設定が必要でしたが、簡素化されたパッチポリシーによって素早く利用を開始することができます。</p>
+<p>「使用を開始」からいくつかの設定を選択するだけで簡単に作成できます。</p>
+<p class="image-container"><img alt="pm-1" src="img\\9f19d90abe072c44.png"></p>
+<p class="image-container"><img alt="pm-2" src="img\\2333d28b2c1db8f5.png"></p>
+<p class="image-container"><img alt="pm-3" src="img\\611c6c27b88cd814.png"></p>
+<p>暫く待つ（10分程度？）とパッチポリシーが作成されます。</p>
+<p class="image-container"><img alt="pm-4" src="img\\8b13a50d6a0b0a28.png"></p>
+<p class="image-container"><img alt="pm-5" src="img\\5fce9b17d1f2e0b0.png"></p>
+<p>実行されると、状況を確認できます。</p>
+<p class="image-container"><img alt="pm-6" src="img\\7f16c094035d177f.jpg"></p>
+<p>インスタンス別に欠落してるパッチの数を確認できます。</p>
+<p class="image-container"><img alt="pm-7" src="img\\e47a1b1b2788c387.jpg"></p>
+<p>さらに、どのパッチが適用されていないかを確認することができます。</p>
+<p class="image-container"><img alt="pm-8" src="img\\bd766090778c517f.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ハイブリッドアクティベーション" duration="0">
+        <p>異なる AWS アカウントの EC2 、AWS 以外のクラウドのサーバ、オンプレの仮想マシンを管理対象として登録できる機能です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ディストリビューター" duration="0">
+        <p>ソフトウェアパッケージを作成および配信する機能です。ソフトウェアパッケージをインストールするには、 Run Command とステートマネージャーを使用します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コンプライアンス" duration="0">
+        <p>マネージドインスタンスがパッチマネージャーのパッチ適用のステータスや、ステートマネージャーの関連付けのステータスなどの情報をもとに、準拠または非準拠をレポートします。 これらの情報を確認し、Run Command などを使用して問題を解決します。</p>
+<p class="image-container"><img alt="Compliance" src="img\\87a4eeab82f7805.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="イベントリ" duration="0">
+        <p>マネージドインスタンスから、OSやアプリケーション、ネットワーク設定などの情報を定期的に取得ができる機能です。定期的に取得するのは、ステートマネージャーによって実行されます。</p>
+<p class="image-container"><img alt="inventory" src="img\\cf3e10e00b4dff15.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p class="image-container"><img alt="ssm-nodes-overview" src="img\\218a4d053e453f34.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
