@@ -1,0 +1,99 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Systems Manager（SSM）:アプリケーション管理</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ssm-apps-overview"
+                  title="AWS Systems Manager（SSM）:アプリケーション管理"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#aws-systems-managerssm%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86" target="_blank">AWS Systems Manager（SSM）:アプリケーション管理</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">アプリケーション管理の機能</a></li>
+<li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%B9%E3%83%88%E3%82%A2" target="_blank">パラメータストア</a></li>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">アプリケーションマネージャー</a></li>
+<li><a href="#appconfig" target="_blank">AppConfig</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="アプリケーション管理の機能" duration="0">
+        <ul>
+<li>アプリケーション管理 <ul>
+<li>アプリケーションマネージャー</li>
+<li>AppConfig</li>
+<li>パラメータストア</li>
+</ul>
+</li>
+</ul>
+<p>よく使う機能から順番に解説します。</p>
+<p>https://dev.classmethod.jp/articles/aws-systems-manager-all-you-need-to-know-japanese/</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="パラメータストア" duration="0">
+        <p>設定値やシークレットなどを安全に保存できる機能です。</p>
+<p class="image-container"><img alt="ps-1" src="img\\4264f640ad1a4b56.png"></p>
+<p>パラメータストアには最大スループットという制限があります。</p>
+<p>デフォルトのスループットは、毎秒 40 です。 高スループットの場合は、毎秒 10,000 です。高スループットにすると、追加料金が発生します。 詳しくは <a href="https://aws.amazon.com/jp/systems-manager/pricing/" target="_blank">Parameter Store 料金</a>を確認してください。</p>
+<p>高スループットにするには、設定より変更することができます。また、高スループットが不要になった場合は元に戻す（制限をリセットする）ことが可能です。</p>
+<p class="image-container"><img alt="ps-2" src="img\\57cde7ed1d824510.png"></p>
+<p class="image-container"><img alt="ps-3" src="img\\316fc3a97cda5ae4.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="アプリケーションマネージャー" duration="0">
+        
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AppConfig" duration="0">
+        
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2023-09-04T19:42:34+09:00",
+  "id": "ssm-changes-overview",
+  "duration": 1,
+  "title": "AWS Systems Manager（SSM）:変更管理",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_ssm-changes-overview.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "awssystemsmanager"
+  ],
+  "url": "ssm-changes-overview"
+}
