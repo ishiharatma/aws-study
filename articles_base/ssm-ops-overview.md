@@ -23,5 +23,3 @@ Duration: 00:01:00
   - インシデントマネージャー
 
 よく使う機能から順番に解説します。
-
-https://dev.classmethod.jp/articles/aws-systems-manager-all-you-need-to-know-japanese/

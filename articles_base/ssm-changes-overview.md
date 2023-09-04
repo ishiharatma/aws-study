@@ -29,8 +29,6 @@ Duration: 00:01:00
 
 よく使う機能から順番に解説します。
 
-https://dev.classmethod.jp/articles/aws-systems-manager-all-you-need-to-know-japanese/
-
 ## メンテナンスウィンドウ
 
 パッチ適用やソフトウェアのインストール、OSのアップグレードなどの一連のタスクをスケジュール実行できる機能です。
