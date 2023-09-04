@@ -46,7 +46,17 @@ Duration: 00:01:00
   - コンプライアンス
   - インベントリ
 
-よく使う機能から順番に解説します。
+【AWS Black Belt Online Seminar】[AWS Systems Manager State Manager(YouTube)](https://www.youtube.com/watch?v=vSAbhWZFtKU)(29:24)
+
+![black-belt-ssm-state-manager](/images/ssm/black-belt-ssm-state-manager-s.jpg)
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager Hybrid Activations 編(YouTube)](https://www.youtube.com/watch?v=LUdXlWW5F9I)(24:19)
+
+![black-belt-ssm-hybrid-activations](/images/ssm/black-belt-ssm-hybrid-activations-s.jpg)
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager Inventory 編(YouTube)](https://www.youtube.com/watch?v=2_6YcNmNFcg)(20:14)
+
+![black-belt-ssm-inventory](/images/ssm/black-belt-ssm-inventory-s.jpg)
 
 ## セッションマネージャー
 
@@ -69,7 +79,54 @@ Linux サーバーに接続した場合
 もう一つの利用としては、ポート転送で接続する方法です。接続元のローカルポートへのアクセスをマネージドノードのポートの転送することでアクセスすることができます。
 この方法を利用する場合は、接続する端末に、AWS CLI および CLI 用の Session Manager プラグインをインストールする必要があります。（参考＞[AWS CLI 用の Session Manager プラグインをインストールする](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html)）
 
-どちらの方法を行った場合でも、CloudTrail にセッションの開始と終了のログが記録されます。
+例えば、Windows サーバに接続する際には次のようなバッチファイルを用意しておくとメンバーへの展開も容易になります。
+
+Windows ノードにリモートデスクトッププロトコル (RDP) を使用して接続するため、`SERVER_PORT_NO` に `3389` を指定し、トラフィックのリダイレクト先となるクライアントのローカルポート `LOCAL_PORT_NO` に任意のポート番号を指定します。ここでは、`33890` を指定しています。
+
+```bat
+@echo off
+REM セッションマネージャー接続バッチ
+
+SET SERVER_NAME=hogehoge
+SET INSTANCE_ID=i-xxxxxxxxxxx
+SET SERVER_PORT_NO=3389
+SET LOCAL_PORT_NO=33890
+
+echo.
+echo ****************************************************
+echo セッションマネージャー接続バッチ（%SERVER_NAME%）
+echo ****************************************************
+echo.
+echo EC2 へセッションマネージャー経由で接続します。
+echo 本バッチファイルを実行するには、「%HOMEDRIVE%%HOMEPATH%\.aws\credentials」に設定が必要です。
+echo.
+echo 接続後、リモートデスクトップクライアントを利用し、以下のホストに接続してください。
+echo localhost:%LOCAL_PORT_NO%
+echo.
+echo 本バッチを切断する場合は、コマンドプロンプトを閉じるか、Ctrl + C で切断してください。
+echo.
+echo.
+
+aws ssm start-session --profile profilename ^
+--target %INSTANCE_ID% ^
+--document-name AWS-StartPortForwardingSession ^
+--parameters "portNumber=%SERVER_PORT_NO%,localPortNumber=%LOCAL_PORT_NO%" 
+
+echo .
+echo 切断しました。
+echo .
+
+pause
+
+exit /b 0
+echo .
+```
+
+接続するとこのように表示されます。
+
+![ssm-bat](/images/ssm/session-manager/ssm-bat.png)
+
+AWS マネジメントコンソールまたは AWS CLI で接続を行った場合には、CloudTrail にセッションの開始と終了のログが記録されます。
 
 ![session-manager-cloudtrail](/images/ssm/session-manager/session-manager-cloudtrail.png)
 

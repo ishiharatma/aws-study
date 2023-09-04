@@ -21,6 +21,8 @@ Duration: 00:01:00
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [Systems Manager とは](#systems-manager-とは)
+    - [Black Belt](#black-belt)
+    - [ドキュメント](#ドキュメント)
   - [SSM？](#ssm)
     - [前提条件](#前提条件)
     - [SSM Agent の使用](#ssm-agent-の使用)
@@ -30,9 +32,37 @@ Duration: 00:01:00
 
 AWS 上のリソースを表示したり、インスタンスを制御するために使用できる AWS のマネージドサービスです。「インスタンスのパッチ管理」「アンチウィルス定義の更新」「ソフトウェアのインストール状況確認」「運用タスクの自動化」等の機能があります。
 
+### Black Belt
+
 【AWS Black Belt Online Seminar】[AWS Systems Manager(YouTube)](https://www.youtube.com/watch?v=g5ndLFklyb4)(38:57)
 
 ![black-belt-ssm](/images/ssm/black-belt-ssm-s.jpg)
+
+- ノード管理
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager State Manager(YouTube)](https://www.youtube.com/watch?v=vSAbhWZFtKU)(29:24)
+
+![black-belt-ssm-state-manager](/images/ssm/black-belt-ssm-state-manager-s.jpg)
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager Hybrid Activations 編(YouTube)](https://www.youtube.com/watch?v=LUdXlWW5F9I)(24:19)
+
+![black-belt-ssm-hybrid-activations](/images/ssm/black-belt-ssm-hybrid-activations-s.jpg)
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager Inventory 編(YouTube)](https://www.youtube.com/watch?v=2_6YcNmNFcg)(20:14)
+
+![black-belt-ssm-inventory](/images/ssm/black-belt-ssm-inventory-s.jpg)
+
+- 運用管理
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager Explorer / OpsCenter 編(YouTube)](https://www.youtube.com/watch?v=XXG88mXS6_E)(30:03)
+
+![black-belt-ssm-explorer-opscenter](/images/ssm/black-belt-ssm-explorer-opscenter-s.jpg)
+
+【AWS Black Belt Online Seminar】[AWS Systems Manager Incident Manager 編(YouTube)](https://www.youtube.com/watch?v=03MiGRe9fkI)(23:46)
+
+![black-belt-ssm-incident-manager](/images/ssm/black-belt-ssm-incident-manager-s.jpg)
+
+### ドキュメント
 
 [AWS Systems Manager サービス概要](https://aws.amazon.com/jp/systems-manager/)
 

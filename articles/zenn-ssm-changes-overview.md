@@ -21,10 +21,10 @@ Duration: 00:01:00
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [変更管理の機能](#変更管理の機能)
+  - [Change Manager](#change-manager)
+  - [オートメーション](#オートメーション)
   - [メンテナンスウィンドウ](#メンテナンスウィンドウ)
   - [変更カレンダー](#変更カレンダー)
-  - [ドキュメント](#ドキュメント)
-  - [オートメーション](#オートメーション)
 
 ## 変更管理の機能
 
@@ -34,20 +34,27 @@ Duration: 00:01:00
   - Change Calendar
   - メンテナンスウィンドウ
 
-よく使う機能から順番に解説します。
+## Change Manager
+
+[AWS Systems Manager Change Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/change-manager.html)
+
+## オートメーション
+
+[AWS Systems Manager Automation](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-automation.html)
+
+インスタンス上でリモートコマンドを実行できるようにしたものです。
+自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。
+SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。
+なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。
 
 ## メンテナンスウィンドウ
+
+[AWS Systems Manager Maintenance Windows](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-maintenance.html)
 
 パッチ適用やソフトウェアのインストール、OSのアップグレードなどの一連のタスクをスケジュール実行できる機能です。
 
 ## 変更カレンダー
 
+[AWS Systems Manager Change Calendar](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-change-calendar.html)
+
 重要なイベントや負荷が集中する時間帯、バッチ処理が行われる時間帯などを設定することで、定期実行処理を回避することができます。
-
-## ドキュメント
-
-SSMには、Run Commands、Automation、States Managerで使用することができる多くの既成のドキュメントが付属しています。また、独自にドキュメントを作成することも可能です。SSMのドキュメント権限はAWS IAMと連携しており、AWS IAMのポリシーを使って誰がどのドキュメントの実行権限を持つか管理できるようになっている。
-
-## オートメーション
-
-インスタンス上でリモートコマンドを実行できるようにしたものです。自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。

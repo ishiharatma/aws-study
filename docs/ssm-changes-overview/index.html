@@ -40,10 +40,10 @@
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
 <li><a href="#contents" target="_blank">Contents</a></li>
 <li><a href="#%E5%A4%89%E6%9B%B4%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">変更管理の機能</a></li>
+<li><a href="#change-manager" target="_blank">Change Manager</a></li>
+<li><a href="#%E3%82%AA%E3%83%BC%E3%83%88%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">オートメーション</a></li>
 <li><a href="#%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6" target="_blank">メンテナンスウィンドウ</a></li>
 <li><a href="#%E5%A4%89%E6%9B%B4%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC" target="_blank">変更カレンダー</a></li>
-<li><a href="#%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">ドキュメント</a></li>
-<li><a href="#%E3%82%AA%E3%83%BC%E3%83%88%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">オートメーション</a></li>
 </ul>
 </li>
 </ul>
@@ -61,31 +61,33 @@
 </ul>
 </li>
 </ul>
-<p>よく使う機能から順番に解説します。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="メンテナンスウィンドウ" duration="0">
-        <p>パッチ適用やソフトウェアのインストール、OSのアップグレードなどの一連のタスクをスケジュール実行できる機能です。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="変更カレンダー" duration="0">
-        <p>重要なイベントや負荷が集中する時間帯、バッチ処理が行われる時間帯などを設定することで、定期実行処理を回避することができます。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="ドキュメント" duration="0">
-        <p>SSMには、Run Commands、Automation、States Managerで使用することができる多くの既成のドキュメントが付属しています。また、独自にドキュメントを作成することも可能です。SSMのドキュメント権限はAWS IAMと連携しており、AWS IAMのポリシーを使って誰がどのドキュメントの実行権限を持つか管理できるようになっている。</p>
+      <google-codelab-step label="Change Manager" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/change-manager.html" target="_blank">AWS Systems Manager Change Manager</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="オートメーション" duration="0">
-        <p>インスタンス上でリモートコマンドを実行できるようにしたものです。自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。</p>
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-automation.html" target="_blank">AWS Systems Manager Automation</a></p>
+<p>インスタンス上でリモートコマンドを実行できるようにしたものです。 自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。 SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。 なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="メンテナンスウィンドウ" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-maintenance.html" target="_blank">AWS Systems Manager Maintenance Windows</a></p>
+<p>パッチ適用やソフトウェアのインストール、OSのアップグレードなどの一連のタスクをスケジュール実行できる機能です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="変更カレンダー" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-change-calendar.html" target="_blank">AWS Systems Manager Change Calendar</a></p>
+<p>重要なイベントや負荷が集中する時間帯、バッチ処理が行われる時間帯などを設定することで、定期実行処理を回避することができます。</p>
 
 
       </google-codelab-step>

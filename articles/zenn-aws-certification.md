@@ -23,7 +23,7 @@ published: true
 
 Certified Cloud Practitioner → Associate → Professional → Specialty
 
-## AWS 認定
+## AWS 認定の種類
 
 - FOUNDATIONAL
   - 6 か月間の基礎的な AWS クラウドと業界知識

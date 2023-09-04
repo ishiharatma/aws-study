@@ -75,7 +75,12 @@
 </ul>
 </li>
 </ul>
-<p>よく使う機能から順番に解説します。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=vSAbhWZFtKU" target="_blank">AWS Systems Manager State Manager(YouTube)</a>(29:24)</p>
+<p class="image-container"><img alt="black-belt-ssm-state-manager" src="img\\2657d3eaf25a9586.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=LUdXlWW5F9I" target="_blank">AWS Systems Manager Hybrid Activations 編(YouTube)</a>(24:19)</p>
+<p class="image-container"><img alt="black-belt-ssm-hybrid-activations" src="img\\3733cc96ab3df6e7.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=2_6YcNmNFcg" target="_blank">AWS Systems Manager Inventory 編(YouTube)</a>(20:14)</p>
+<p class="image-container"><img alt="black-belt-ssm-inventory" src="img\\aedc1ad9b6899f99.jpg"></p>
 
 
       </google-codelab-step>
@@ -89,7 +94,48 @@
 <p>Linux サーバーに接続した場合</p>
 <p class="image-container"><img alt="session-manager-3-linux" src="img\\9d46490c0850f9b5.jpg"></p>
 <p>もう一つの利用としては、ポート転送で接続する方法です。接続元のローカルポートへのアクセスをマネージドノードのポートの転送することでアクセスすることができます。 この方法を利用する場合は、接続する端末に、AWS CLI および CLI 用の Session Manager プラグインをインストールする必要があります。（参考＞<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/session-manager-working-with-install-plugin.html" target="_blank">AWS CLI 用の Session Manager プラグインをインストールする</a>）</p>
-<p>どちらの方法を行った場合でも、CloudTrail にセッションの開始と終了のログが記録されます。</p>
+<p>例えば、Windows サーバに接続する際には次のようなバッチファイルを用意しておくとメンバーへの展開も容易になります。</p>
+<p>Windows ノードにリモートデスクトッププロトコル (RDP) を使用して接続するため、<code>SERVER_PORT_NO</code> に <code>3389</code> を指定し、トラフィックのリダイレクト先となるクライアントのローカルポート <code>LOCAL_PORT_NO</code> に任意のポート番号を指定します。ここでは、<code>33890</code> を指定しています。</p>
+<pre><code language="language-bat" class="language-bat">@echo off
+REM セッションマネージャー接続バッチ
+
+SET SERVER_NAME=hogehoge
+SET INSTANCE_ID=i-xxxxxxxxxxx
+SET SERVER_PORT_NO=3389
+SET LOCAL_PORT_NO=33890
+
+echo.
+echo ****************************************************
+echo セッションマネージャー接続バッチ（%SERVER_NAME%）
+echo ****************************************************
+echo.
+echo EC2 へセッションマネージャー経由で接続します。
+echo 本バッチファイルを実行するには、「%HOMEDRIVE%%HOMEPATH%\.aws\credentials」に設定が必要です。
+echo.
+echo 接続後、リモートデスクトップクライアントを利用し、以下のホストに接続してください。
+echo localhost:%LOCAL_PORT_NO%
+echo.
+echo 本バッチを切断する場合は、コマンドプロンプトを閉じるか、Ctrl + C で切断してください。
+echo.
+echo.
+
+aws ssm start-session --profile profilename ^
+--target %INSTANCE_ID% ^
+--document-name AWS-StartPortForwardingSession ^
+--parameters &#34;portNumber=%SERVER_PORT_NO%,localPortNumber=%LOCAL_PORT_NO%&#34; 
+
+echo .
+echo 切断しました。
+echo .
+
+pause
+
+exit /b 0
+echo .
+</code></pre>
+<p>接続するとこのように表示されます。</p>
+<p class="image-container"><img alt="ssm-bat" src="img\\64ce3787c72320c3.png"></p>
+<p>AWS マネジメントコンソールまたは AWS CLI で接続を行った場合には、CloudTrail にセッションの開始と終了のログが記録されます。</p>
 <p class="image-container"><img alt="session-manager-cloudtrail" src="img\\a160ce2fd5572ba8.png"></p>
 <p>これ以外に、フリートマネージャーを使った 接続も可能です。Windows サーバであれば、RDP 接続によって GUI 操作が可能になります。</p>
 

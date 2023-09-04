@@ -40,9 +40,12 @@
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
 <li><a href="#contents" target="_blank">Contents</a></li>
 <li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">アプリケーション管理の機能</a></li>
-<li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%B9%E3%83%88%E3%82%A2" target="_blank">パラメータストア</a></li>
-<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">アプリケーションマネージャー</a></li>
+<li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%B9%E3%83%88%E3%82%A2" target="_blank">パラメータストア</a><ul>
+<li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E9%9A%8E%E5%B1%A4" target="_blank">パラメータ階層</a></li>
+</ul>
+</li>
 <li><a href="#appconfig" target="_blank">AppConfig</a></li>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">アプリケーションマネージャー</a></li>
 </ul>
 </li>
 </ul>
@@ -64,25 +67,218 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="パラメータストア" duration="0">
-        <p>設定値やシークレットなどを安全に保存できる機能です。</p>
+      <google-codelab-step label="パラメータストア" duration="10">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank">AWS Systems Manager Parameter Store</a></p>
+<p>設定値やシークレットなどを安全に保存できる機能です。</p>
 <p class="image-container"><img alt="ps-1" src="img\\4264f640ad1a4b56.png"></p>
+<p>格納できるタイプは、次の通りです。</p>
+<ul>
+<li>文字列（String）<ul>
+<li>任意の文字列です。</li>
+<li>文字列ならば何でも格納できます。中身に <code>JSON</code> 文字列を格納することも可能です。</li>
+</ul>
+</li>
+<li>文字列のリスト（StringList）<ul>
+<li>カンマ区切りの文字列を格納できます。</li>
+<li>AWS マネジメントコンソールで改行を入れた場合のみ、カンマ区切りに変換されます。CLI の場合は改行コードがそのまま保存されます。ただし、AWS マネジメントコンソールで開いて保存すると、改行がカンマ区切りに変換されてしまいます。</li>
+<li>参照するときの動作は、文字列（String）と違いがありません。カンマ区切りの文字列が返ってきます。</li>
+<li>更新するときは、<code>AllowedPattern</code> によって、カンマ区切りにした値それぞれに入力チェックができます。 <ul>
+<li><code>aws ssm put-parameter --name "hoge" --value "123,456" --allowed-pattern="^\d+$" --type String</code><ul>
+<li>文字列（String）の場合、カンマが入っているため、エラーになります。</li>
+</ul>
+</li>
+<li><code>aws ssm put-parameter --name "hoge" --value "123,456" --allowed-pattern="^\d+$" --type StringList</code><ul>
+<li>文字列のリスト（StringList）の場合、エラーになりません。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>安全な文字列（SecureString）<ul>
+<li>KMS キーを使用して暗号化して格納できます</li>
+</ul>
+</li>
+</ul>
 <p>パラメータストアには最大スループットという制限があります。</p>
 <p>デフォルトのスループットは、毎秒 40 です。 高スループットの場合は、毎秒 10,000 です。高スループットにすると、追加料金が発生します。 詳しくは <a href="https://aws.amazon.com/jp/systems-manager/pricing/" target="_blank">Parameter Store 料金</a>を確認してください。</p>
 <p>高スループットにするには、設定より変更することができます。また、高スループットが不要になった場合は元に戻す（制限をリセットする）ことが可能です。</p>
 <p class="image-container"><img alt="ps-2" src="img\\57cde7ed1d824510.png"></p>
 <p class="image-container"><img alt="ps-3" src="img\\316fc3a97cda5ae4.png"></p>
+<p>Lambda からパラメータストアを利用する場合は、次のようになります。</p>
+<pre><code language="language-py" class="language-py">import boto3
+
+ssm = boto3.client(&#39;ssm&#39;, region)
+response = ssm.get_parameter(
+    Name = &#34;sampleparams&#34;
+)
+sample = response[&#34;Parameter&#34;][&#34;Value&#34;]
+print(sample)
+</code></pre>
+<p>複数のパラメータを取得することも可能です。ただし、<code>Names</code> に複数指定した場合は、返却される順番を指定することが出来ません。</p>
+<pre><code language="language-py" class="language-py">import boto3
+
+ssm = boto3.client(&#39;ssm&#39;, region)
+response = ssm.get_parameters(
+    Names=&#39;sampleparams1&#39;, &#39;sampleparams2&#39;, &#39;sampleparams3&#39;
+    WithDecryption=True,
+)
+
+sampleparams1 = response[&#34;Parameters&#34;][0][&#34;Value&#34;]
+sampleparams2 = response[&#34;Parameters&#34;][1][&#34;Value&#34;]
+sampleparams3 = response[&#34;Parameters&#34;][2][&#34;Value&#34;]
+
+
+print(sampleparams1) # パラメータ sampleparams1 になっているとは限らない
+print(sampleparams2)
+print(sampleparams3)
+
+</code></pre>
+<h2 is-upgraded>パラメータ階層</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/sysman-paramstore-hierarchies.html" target="_blank">パラメータ階層の使用</a></p>
+<p>パラメータ階層とは、パラメータ名を &#34;/&#34;(スラッシュ) 区切りで作成したものです。 通常、パラメータストアには文字列が格納でき、JSON なども格納することが可能です。</p>
+<p>例えばデータベース接続ユーザーとパスワードを次のように保存したとします。 このように保存すると、同じような情報を複数のパラメータストアに作成してしまうなど、管理が煩雑になってしまうケースがあります。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;username&#34;: &#34;hoge&#34;,
+  &#34;password&#34;:&#34;fuga&#34;,
+  &#34;database_name&#34;: &#34;piyo&#34;
+}
+</code></pre>
+<p>これを避けるために、名前で明確に管理するようにします。</p>
+<pre><code language="language-sh" class="language-sh">/prod/db/database_name
+/prod/db/username
+/prod/db/password
+</code></pre>
+<p>このようにすることで、名前から格納されている情報を判別でき、同じ情報を複数のパラメータ内に保存することを避けることができます。</p>
+<p>パラメータを取得するときは、次のようにすることで階層化したパラメータを一括で取得することができます。</p>
+<p>種類が &#34;SecureString&#34; のパラメータを取得する場合に <code>--with-decryption</code> を付けないと、暗号化された文字列が <code>"Value": "AQICAHghew2so+pI8yP5dBYCCInkLLp8X2HBzubi+TbUs75qwQHfDsjEL26GJ5GQhT8N/ymWAAAAYjBgBgkqhkiG9w0BBwagUzBRAgEAMEwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMzc2oVk47CCZD9EloAgEQgB+qZaLcuNu2/b1Itv6ZUjTpFUQTVWHTd05zFUP4uTSK"</code> のように返ってきます。</p>
+<pre><code language="language-sh" class="language-sh">aws ssm get-parameters-by-path --path /prod/db --with-decryption
+
+{
+  &#34;Parameters&#34;:[
+    {
+            &#34;Type&#34;: &#34;SecureString&#34;,
+            &#34;Name&#34;: &#34;/prod/db/database_name&#34;,
+            &#34;Value&#34;: &#34;piyo&#34;,
+            &#34;Version&#34;: 1,
+            &#34;LastModifiedDate&#34;: &#34;YYYY-MM-DDTHH:MI:SS.FFFFFF+00:00&#34;
+            &#34;ARN&#34;: &#34;arn:aws:ssm:region:123456789012:parameter/prod/db/database_name&#34;,
+            &#34;DataType&#34;: &#34;text&#34;
+    },
+    {
+            &#34;Type&#34;: &#34;SecureString&#34;,
+            &#34;Name&#34;: &#34;/prod/db/username&#34;,
+            &#34;Value&#34;: &#34;hoge&#34;,
+            &#34;Version&#34;: 1,
+            &#34;LastModifiedDate&#34;: &#34;YYYY-MM-DDTHH:MI:SS.FFFFFF+00:00&#34;
+            &#34;ARN&#34;: &#34;arn:aws:ssm:region:123456789012:parameter/prod/db/username&#34;,
+            &#34;DataType&#34;: &#34;text&#34;
+    },
+    {
+            &#34;Type&#34;: &#34;SecureString&#34;,
+            &#34;Name&#34;: &#34;/prod/db/password&#34;,
+            &#34;Value&#34;: &#34;fuga&#34;,
+            &#34;Version&#34;: 1,
+            &#34;LastModifiedDate&#34;: &#34;YYYY-MM-DDTHH:MI:SS.FFFFFF+00:00&#34;
+            &#34;ARN&#34;: &#34;arn:aws:ssm:region:123456789012:parameter/prod/db/password&#34;,
+            &#34;DataType&#34;: &#34;text&#34;
+    }
+  ]
+}
+</code></pre>
+<p>キーと値のみを取得したい場合は–queryオプションを使って以下のようにします。</p>
+<pre><code language="language-sh" class="language-sh">aws ssm get-parameters-by-path --path /prod/db --with-decryption --query &#34;Parameters[].[Name,Value]&#34;
+
+[
+    [
+        &#34;/prod/db/database_name&#34;,
+        &#34;piyo&#34;
+    ],
+    [
+        &#34;/prod/db/password&#34;,
+        &#34;fuga&#34;
+    ],
+    [
+        &#34;/prod/db/username&#34;,
+        &#34;hoge&#34;
+    ]
+]
+</code></pre>
+<p><code>--recursive</code> を指定すると階層を再帰的に取得します。指定しない場合や <code>--no-recursive</code> を指定した場合は、1階層のみの取得になります。</p>
+<pre><code language="language-sh" class="language-sh"># recursive を指定しないまたは、no-recursive を指定した場合
+aws ssm get-parameters-by-path --path /prod --with-decryption --query &#34;Parameters[].[Name,Value]&#34;
+aws ssm get-parameters-by-path --path /prod --with-decryption --query &#34;Parameters[].[Name,Value]&#34;　--no-recursive
+
+## prod の直下にはパラメータがないため取得できない
+[]
+
+# recursive を指定した場合
+aws ssm get-parameters-by-path --path /prod --with-decryption --query &#34;Parameters[].[Name,Value]&#34;　--recursive
+
+## 再帰的に取得
+[
+    [
+        &#34;/prod/db/database_name&#34;,
+        &#34;piyo&#34;
+    ],
+    [
+        &#34;/prod/db/password&#34;,
+        &#34;fuga&#34;
+    ],
+    [
+        &#34;/prod/db/username&#34;,
+        &#34;hoge&#34;
+    ]
+]
+</code></pre>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="アプリケーションマネージャー" duration="0">
-        
+      <google-codelab-step label="AppConfig" duration="10">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/appconfig.html" target="_blank">AWS AppConfig</a></p>
+<p>AppConfig はアプリケーションの設定を管理、保存、デプロイすることが出来るサービスです。 つまり、アプリケーションの設定をコードの外に出して別管理して、設定の変更のデプロイまで簡単に出来るサービスです。</p>
+<p>よくある質問には以下のように記載があります。</p>
+<pre><code language="language-text" class="language-text">Q: AWS AppConfig はどのような人が使うべきですか?
+AWS AppConfig は、コードを管理する方法に似ていますが、構成値が変更されたときにコードをデプロイする必要がなく、
+結果としてサービス停止のリスクが軽減したいシステム管理者、DevOps チーム、開発者向けに設計されています。
+AWS AppConfig は、構成のターゲット (ホスト、サーバー、AWS Lambda 関数、コンテナ、モバイルデバイス、IoT デバイスなど) を持つ
+任意の規模またはタイプの企業または組織を対象にしています。
+</code></pre>
+<p>アプリケーションの設定というと、環境変数、設定ファイル、データベース等で外だしにすることがあると思います。AWS でもパラメータストアで管理することが可能です。</p>
+<pre><code language="language-text" class="language-text">Q: AWS Systems Manager のパラメータストアと AWS AppConfig はそれぞれいつ使用すべきですか?
+
+AWS Systems Manager のパラメータストアは、秘密またはプレーンテキスト構成値を保存、取得、および管理する能力を提供する機能です。
+パラメータストアの一般的な使用には、データベース文字列とライセンスコードをパラメータ値として保存することが含まれます。
+セルフマネージドの方法で値を保存、取得する必要がある場合は、パラメータストアを使用してください。
+AWS AppConfig はランタイムに更新されたアプリケーションを安全にリリースし、構成をパラメータとして保存することができるようにする
+アプリケーション構成管理サービスです。
+特定の状況で変更をロールバックすることができる制御された環境で安全に検証して
+デプロイできる複雑なセットのアプリケーション構成をモデル化する必要がある場合、AWS AppConfig を使用する必要があります。
+</code></pre>
+<p>パラメータストアに比べて、AppConfig ではDeployment や Environment という概念を持っており、複数のパラメータをまとまった単位（configuration profile）で管理できるなどパラメータストアに比べて、アプリケーション向けになっていると言えます。</p>
+<p><a href="https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html" target="_blank">AWS AppConfig integration with Amazon ECS and Amazon EKS</a></p>
+<p>ECS に <code>AppConfig agent</code>（AppConfigの値をアプリケーションの代わりに自動でポーリング・データのキャッシュを行ってくれるプログラム） をインストールしたコンテナをサイドカーとして構成します。コンテナのポートは <code>2772</code> です。</p>
+<p>次のコマンドで取得することができるようになります。<a href="https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html#appconfig-integration-containers-agent-retrieving-data" target="_blank">Retrieving configuration data</a></p>
+<pre><code language="language-sh" class="language-sh">curl &#34;http://localhost:2772/applications/&lt;application_name&gt;/environments/&lt;environment_name&gt;/configurations/&lt;configuration_name&gt;&#34;
+</code></pre>
+<p><a href="https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/" target="_blank">Amazon Web Services ブログ&gt;AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ</a></p>
+
 
       </google-codelab-step>
     
-      <google-codelab-step label="AppConfig" duration="0">
-        
+      <google-codelab-step label="アプリケーションマネージャー" duration="10">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/application-manager.html" target="_blank">AWS Systems Manager Application Manager</a></p>
+<p>AWS 上で運用している各サービスを１つの画面で俯瞰・対応できるサービスで、追加料金なしで利用できます。 以下のようなサービスが1画面で俯瞰することができます。</p>
+<ul>
+<li>CloudFormation スタック</li>
+<li>AWS Resource Groups</li>
+<li>Launch Wizard デプロイ</li>
+<li>AppRegistry アプリケーション</li>
+<li>Amazon ECS および Amazon EKS クラスタ</li>
+</ul>
+<p class="image-container"><img alt="app-manager-view" src="img\\5f331d2d022a2384.jpg"></p>
+
 
       </google-codelab-step>
     
