@@ -34,6 +34,9 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./cloudtrail-overview/index.html" target="_blank">AWS CloudTrail 概要</a>
   - <a href="./ssm-overview/index.html" target="_blank">AWS Systems Manager ①概要編</a>
   - <a href="./ssm-nodes-overview/index.html" target="_blank">AWS Systems Manager ②ノード管理機能編</a>
+  - <a href="./ssm-apps-overview/index.html" target="_blank">AWS Systems Manager ③アプリケーション管理機能編</a>
+  - <a href="./ssm-ops-overview/index.html" target="_blank">AWS Systems Manager ④運用管理機能編</a>
+  - <a href="./ssm-changes-overview/index.html" target="_blank">AWS Systems Manager ⑤変更管理機能編</a>
 - アプリケーション統合
   - <a href="./sns-overview/index.html" target="_blank">Amazon SNS 概要</a>
   - <a href="./sqs-overview/index.html" target="_blank">Amazon SQS 概要</a>

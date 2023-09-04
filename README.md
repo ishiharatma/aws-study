@@ -49,6 +49,12 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [AWS Systems Manager ②ノード管理機能編](/articles_base/ssm-nodes-overview.md)
 
+[AWS Systems Manager ③アプリケーション管理機能編](/articles_base/ssm-apps-overview.md)
+
+[AWS Systems Manager ④運用管理機能編](/articles_base/ssm-ops-overview.md)
+
+[AWS Systems Manager ⑤変更管理機能編](/articles_base/ssm-changes-overview.md)
+
 ### アプリケーション統合
 
 [Amazon SNS 概要](/articles_base/sns-overview.md)
