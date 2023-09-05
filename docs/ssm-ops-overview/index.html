@@ -40,9 +40,18 @@
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
 <li><a href="#contents" target="_blank">Contents</a></li>
 <li><a href="#%E9%81%8B%E7%94%A8%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">運用管理の機能</a></li>
-<li><a href="#%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC" target="_blank">エクスプローラー</a></li>
-<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">インシデントマネージャー</a></li>
-<li><a href="#opscenter" target="_blank">OpsCenter</a></li>
+<li><a href="#%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC" target="_blank">エクスプローラー</a><ul>
+<li><a href="#%E3%82%A8%E3%82%AF%E3%82%B9%E3%83%97%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC%E3%81%AE%E6%96%99%E9%87%91" target="_blank">エクスプローラーの料金</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">インシデントマネージャー</a><ul>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B7%E3%83%87%E3%83%B3%E3%83%88%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%AE%E6%96%99%E9%87%91" target="_blank">インシデントマネージャーの料金</a></li>
+</ul>
+</li>
+<li><a href="#opscenter" target="_blank">OpsCenter</a><ul>
+<li><a href="#opscenter%E3%81%AE%E6%96%99%E9%87%91" target="_blank">OpsCenterの料金</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -50,7 +59,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="運用管理の機能" duration="0">
+      <google-codelab-step label="運用管理の機能" duration="1">
         <ul>
 <li>運用管理 <ul>
 <li>エクスプローラー</li>
@@ -67,20 +76,43 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="エクスプローラー" duration="0">
+      <google-codelab-step label="エクスプローラー" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/Explorer.html" target="_blank">AWS Systems Manager Explorer</a></p>
+<p>複数リージョンやアカウントの運用状況をひと目で把握できるダッシュボードのサービスです。</p>
+<p class="image-container"><img alt="explorer.png" src="img\\fd591a025bc1f607.png"></p>
+<p class="image-container"><img alt="explorer-dashboard" src="img\\8897b2ad10d451c5.png"></p>
+<p>「AWS Support Center のケース」と、「AWS Trusted Advisor」を表示するには、サポートプランがエンタープライズまたはビジネスが必要です。</p>
+<h2 is-upgraded>エクスプローラーの料金</h2>
+<p>無料で利用できます。</p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#Explorer" target="_blank">エクスプローラーの料金</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="インシデントマネージャー" duration="0">
+      <google-codelab-step label="インシデントマネージャー" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/incident-manager.html" target="_blank">AWS Systems Manager Incident Manager</a></p>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2021/05/introducing-incident-manager-aws-systems-manager/" target="_blank">AWS Systems Manager の Incident Manager のご紹介-May 10, 2021</a></p>
+<p>CloudWatch Alarm や EventBrige Events から検出された様々な異常状態やイベントをインシデントとして管理することが可能になります。</p>
+<pre><code language="language-text" class="language-text">※インシデント
+サービスにおける計画外の中断やサービス品質の低下をもたらすもの
+</code></pre>
+<p>インシデントは、「検知 &gt; 調査と対応 &gt; 分析」 を繰り返していく必要があります。そのための機能が提供されています。 詳しくは、【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=03MiGRe9fkI" target="_blank">AWS Systems Manager Incident Manager 編(YouTube)</a> を参照します。</p>
+<p class="image-container"><img alt="incident-manager-sample1.png" src="img\\8ae91a32fcc3a29a.png"></p>
+<p class="image-container"><img alt="incident-manager-sample2.png" src="img\\bdbc27c06e9c528b.png"></p>
+<h2 is-upgraded>インシデントマネージャーの料金</h2>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#Incident_Manager" target="_blank">インシデントマネージャーの料金</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="OpsCenter" duration="0">
+      <google-codelab-step label="OpsCenter" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/OpsCenter.html" target="_blank">AWS Systems Manager OpsCenter</a></p>
+<p>CloudWatch Events と連携して AWS リソースの運用上の問題、イベント、アラート等をOpsItems として集中管理する機能を提供しています。</p>
+<p>AWS リソースに関する運用項目を <code>OpsItem</code> として管理します。</p>
+<p class="image-container"><img alt="ops" src="img\\5bec964cd3d60bf7.png"></p>
+<p>詳しくは、【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=XXG88mXS6_E" target="_blank">AWS Systems Manager Explorer / OpsCenter 編(YouTube)</a> を参照します。</p>
+<h2 is-upgraded>OpsCenterの料金</h2>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#OpsCenter" target="_blank">OpsCenterの料金</a></p>
 
 
       </google-codelab-step>

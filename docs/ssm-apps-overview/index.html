@@ -42,10 +42,19 @@
 <li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">アプリケーション管理の機能</a></li>
 <li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%B9%E3%83%88%E3%82%A2" target="_blank">パラメータストア</a><ul>
 <li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E9%9A%8E%E5%B1%A4" target="_blank">パラメータ階層</a></li>
+<li><a href="#%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%B9%E3%83%88%E3%82%A2%E3%81%AE%E6%96%99%E9%87%91" target="_blank">パラメータストアの料金</a></li>
 </ul>
 </li>
-<li><a href="#appconfig" target="_blank">AppConfig</a></li>
-<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">アプリケーションマネージャー</a></li>
+<li><a href="#appconfig" target="_blank">AppConfig</a><ul>
+<li><a href="#ecs-%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B" target="_blank">ECS で利用する</a></li>
+<li><a href="#ec2-%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B" target="_blank">EC2 で利用する</a></li>
+<li><a href="#appconfig-%E3%81%AE%E6%96%99%E9%87%91" target="_blank">AppConfig の料金</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">アプリケーションマネージャー</a><ul>
+<li><a href="#%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%AE%E6%96%99%E9%87%91" target="_blank">アプリケーションマネージャーの料金</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -56,18 +65,17 @@
       <google-codelab-step label="アプリケーション管理の機能" duration="0">
         <ul>
 <li>アプリケーション管理 <ul>
-<li>アプリケーションマネージャー</li>
-<li>AppConfig</li>
 <li>パラメータストア</li>
+<li>AppConfig</li>
+<li>アプリケーションマネージャー</li>
 </ul>
 </li>
 </ul>
-<p>よく使う機能から順番に解説します。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="パラメータストア" duration="10">
+      <google-codelab-step label="パラメータストア" duration="20">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank">AWS Systems Manager Parameter Store</a></p>
 <p>設定値やシークレットなどを安全に保存できる機能です。</p>
 <p class="image-container"><img alt="ps-1" src="img\\4264f640ad1a4b56.png"></p>
@@ -102,7 +110,7 @@
 </ul>
 <p>パラメータストアには最大スループットという制限があります。</p>
 <p>デフォルトのスループットは、毎秒 40 です。 高スループットの場合は、毎秒 10,000 です。高スループットにすると、追加料金が発生します。 詳しくは <a href="https://aws.amazon.com/jp/systems-manager/pricing/" target="_blank">Parameter Store 料金</a>を確認してください。</p>
-<p>高スループットにするには、設定より変更することができます。また、高スループットが不要になった場合は元に戻す（制限をリセットする）ことが可能です。</p>
+<p>高スループットにするには、[設定]タブより変更することができます。高スループットが不要になった場合は元に戻す（制限をリセットする）ことが可能です。</p>
 <p class="image-container"><img alt="ps-2" src="img\\57cde7ed1d824510.png"></p>
 <p class="image-container"><img alt="ps-3" src="img\\316fc3a97cda5ae4.png"></p>
 <p>Lambda からパラメータストアを利用する場合は、次のようになります。</p>
@@ -144,12 +152,12 @@ print(sampleparams3)
   &#34;database_name&#34;: &#34;piyo&#34;
 }
 </code></pre>
-<p>これを避けるために、名前で明確に管理するようにします。</p>
+<p>これを避けるために、名前で明確に管理するようにします。 先ほどのデータベース接続の例の場合、データベース名、ユーザー名、パスワードと３つのパラメータを作成します。 複数環境も考慮して、環境識別子を付与しておくとよいでしょう。</p>
 <pre><code language="language-sh" class="language-sh">/prod/db/database_name
 /prod/db/username
 /prod/db/password
 </code></pre>
-<p>このようにすることで、名前から格納されている情報を判別でき、同じ情報を複数のパラメータ内に保存することを避けることができます。</p>
+<p>このようにすることで、パラメータ名から格納されている情報を判別することができ、同じ情報を複数のパラメータ内に保存することが避けられます。</p>
 <p>パラメータを取得するときは、次のようにすることで階層化したパラメータを一括で取得することができます。</p>
 <p>種類が &#34;SecureString&#34; のパラメータを取得する場合に <code>--with-decryption</code> を付けないと、暗号化された文字列が <code>"Value": "AQICAHghew2so+pI8yP5dBYCCInkLLp8X2HBzubi+TbUs75qwQHfDsjEL26GJ5GQhT8N/ymWAAAAYjBgBgkqhkiG9w0BBwagUzBRAgEAMEwGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMzc2oVk47CCZD9EloAgEQgB+qZaLcuNu2/b1Itv6ZUjTpFUQTVWHTd05zFUP4uTSK"</code> のように返ってきます。</p>
 <pre><code language="language-sh" class="language-sh">aws ssm get-parameters-by-path --path /prod/db --with-decryption
@@ -231,6 +239,9 @@ aws ssm get-parameters-by-path --path /prod --with-decryption --query &#34;Param
     ]
 ]
 </code></pre>
+<h2 is-upgraded>パラメータストアの料金</h2>
+<p>パラメータの種類が「アドバンスド」の場合に追加料金が発生します。</p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#Parameter_Store" target="_blank">パラメータストアの料金</a></p>
 
 
       </google-codelab-step>
@@ -238,6 +249,7 @@ aws ssm get-parameters-by-path --path /prod --with-decryption --query &#34;Param
       <google-codelab-step label="AppConfig" duration="10">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/appconfig.html" target="_blank">AWS AppConfig</a></p>
 <p>AppConfig はアプリケーションの設定を管理、保存、デプロイすることが出来るサービスです。 つまり、アプリケーションの設定をコードの外に出して別管理して、設定の変更のデプロイまで簡単に出来るサービスです。</p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/" target="_blank">Amazon Web Services ブログ&gt;AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ - 02 12月 2019</a></p>
 <p>よくある質問には以下のように記載があります。</p>
 <pre><code language="language-text" class="language-text">Q: AWS AppConfig はどのような人が使うべきですか?
 AWS AppConfig は、コードを管理する方法に似ていますが、構成値が変更されたときにコードをデプロイする必要がなく、
@@ -257,12 +269,17 @@ AWS AppConfig はランタイムに更新されたアプリケーションを安
 デプロイできる複雑なセットのアプリケーション構成をモデル化する必要がある場合、AWS AppConfig を使用する必要があります。
 </code></pre>
 <p>パラメータストアに比べて、AppConfig ではDeployment や Environment という概念を持っており、複数のパラメータをまとまった単位（configuration profile）で管理できるなどパラメータストアに比べて、アプリケーション向けになっていると言えます。</p>
+<h2 is-upgraded>ECS で利用する</h2>
 <p><a href="https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html" target="_blank">AWS AppConfig integration with Amazon ECS and Amazon EKS</a></p>
 <p>ECS に <code>AppConfig agent</code>（AppConfigの値をアプリケーションの代わりに自動でポーリング・データのキャッシュを行ってくれるプログラム） をインストールしたコンテナをサイドカーとして構成します。コンテナのポートは <code>2772</code> です。</p>
 <p>次のコマンドで取得することができるようになります。<a href="https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html#appconfig-integration-containers-agent-retrieving-data" target="_blank">Retrieving configuration data</a></p>
 <pre><code language="language-sh" class="language-sh">curl &#34;http://localhost:2772/applications/&lt;application_name&gt;/environments/&lt;environment_name&gt;/configurations/&lt;configuration_name&gt;&#34;
 </code></pre>
-<p><a href="https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/" target="_blank">Amazon Web Services ブログ&gt;AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ</a></p>
+<h2 is-upgraded>EC2 で利用する</h2>
+<p>EC2 もサポートされるようになりました。</p>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/07/aws-appconfig-agent-feature-flag-configuration-amazon-ec2/" target="_blank">AWS AppConfig エージェントが Amazon EC2 の機能フラグと設定の使用を簡素化 -  Jul 21, 2023</a></p>
+<h2 is-upgraded>AppConfig の料金</h2>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#AppConfig" target="_blank">AppConfig の料金</a></p>
 
 
       </google-codelab-step>
@@ -278,6 +295,8 @@ AWS AppConfig はランタイムに更新されたアプリケーションを安
 <li>Amazon ECS および Amazon EKS クラスタ</li>
 </ul>
 <p class="image-container"><img alt="app-manager-view" src="img\\5f331d2d022a2384.jpg"></p>
+<h2 is-upgraded>アプリケーションマネージャーの料金</h2>
+<p>無料で利用できます。</p>
 
 
       </google-codelab-step>

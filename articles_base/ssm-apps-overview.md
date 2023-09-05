@@ -16,21 +16,24 @@ Duration: 00:01:00
   - [アプリケーション管理の機能](#アプリケーション管理の機能)
   - [パラメータストア](#パラメータストア)
     - [パラメータ階層](#パラメータ階層)
+    - [パラメータストアの料金](#パラメータストアの料金)
   - [AppConfig](#appconfig)
+    - [ECS で利用する](#ecs-で利用する)
+    - [EC2 で利用する](#ec2-で利用する)
+    - [AppConfig の料金](#appconfig-の料金)
   - [アプリケーションマネージャー](#アプリケーションマネージャー)
+    - [アプリケーションマネージャーの料金](#アプリケーションマネージャーの料金)
 
 ## アプリケーション管理の機能
 
 - アプリケーション管理
-  - アプリケーションマネージャー
-  - AppConfig
   - パラメータストア
-
-よく使う機能から順番に解説します。
+  - AppConfig
+  - アプリケーションマネージャー
 
 ## パラメータストア
 
-Duration: 00:10:00
+Duration: 00:20:00
 
 [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
@@ -62,7 +65,7 @@ Duration: 00:10:00
 高スループットの場合は、毎秒 10,000 です。高スループットにすると、追加料金が発生します。
 詳しくは [Parameter Store 料金](https://aws.amazon.com/jp/systems-manager/pricing/)を確認してください。
 
-高スループットにするには、設定より変更することができます。また、高スループットが不要になった場合は元に戻す（制限をリセットする）ことが可能です。
+高スループットにするには、[設定]タブより変更することができます。高スループットが不要になった場合は元に戻す（制限をリセットする）ことが可能です。
 
 ![ps-2](/images/ssm/parameter-store/parameterstore-2.png)
 
@@ -122,6 +125,8 @@ print(sampleparams3)
 ```
 
 これを避けるために、名前で明確に管理するようにします。
+先ほどのデータベース接続の例の場合、データベース名、ユーザー名、パスワードと３つのパラメータを作成します。
+複数環境も考慮して、環境識別子を付与しておくとよいでしょう。
 
 ```sh
 /prod/db/database_name
@@ -129,7 +134,7 @@ print(sampleparams3)
 /prod/db/password
 ```
 
-このようにすることで、名前から格納されている情報を判別でき、同じ情報を複数のパラメータ内に保存することを避けることができます。
+このようにすることで、パラメータ名から格納されている情報を判別することができ、同じ情報を複数のパラメータ内に保存することが避けられます。
 
 パラメータを取得するときは、次のようにすることで階層化したパラメータを一括で取得することができます。
 
@@ -192,7 +197,6 @@ aws ssm get-parameters-by-path --path /prod/db --with-decryption --query "Parame
 ]
 ```
 
-
 `--recursive` を指定すると階層を再帰的に取得します。指定しない場合や `--no-recursive` を指定した場合は、1階層のみの取得になります。
 
 ```sh
@@ -223,6 +227,12 @@ aws ssm get-parameters-by-path --path /prod --with-decryption --query "Parameter
 ]
 ```
 
+### パラメータストアの料金
+
+パラメータの種類が「アドバンスド」の場合に追加料金が発生します。
+
+[パラメータストアの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Parameter_Store)
+
 ## AppConfig
 
 Duration: 00:10:00
@@ -231,6 +241,8 @@ Duration: 00:10:00
 
 AppConfig はアプリケーションの設定を管理、保存、デプロイすることが出来るサービスです。
 つまり、アプリケーションの設定をコードの外に出して別管理して、設定の変更のデプロイまで簡単に出来るサービスです。
+
+[Amazon Web Services ブログ>AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ - 02 12月 2019](https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/)
 
 よくある質問には以下のように記載があります。
 
@@ -258,6 +270,8 @@ AWS AppConfig はランタイムに更新されたアプリケーションを安
 
 パラメータストアに比べて、AppConfig ではDeployment や Environment という概念を持っており、複数のパラメータをまとまった単位（configuration profile）で管理できるなどパラメータストアに比べて、アプリケーション向けになっていると言えます。
 
+### ECS で利用する
+
 [AWS AppConfig integration with Amazon ECS and Amazon EKS](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html)
 
 ECS に `AppConfig agent`（AppConfigの値をアプリケーションの代わりに自動でポーリング・データのキャッシュを行ってくれるプログラム） をインストールしたコンテナをサイドカーとして構成します。コンテナのポートは `2772` です。
@@ -268,7 +282,15 @@ ECS に `AppConfig agent`（AppConfigの値をアプリケーションの代わ�
 curl "http://localhost:2772/applications/<application_name>/environments/<environment_name>/configurations/<configuration_name>"
 ```
 
-[Amazon Web Services ブログ>AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ](https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/)
+### EC2 で利用する
+
+EC2 もサポートされるようになりました。
+
+[AWS AppConfig エージェントが Amazon EC2 の機能フラグと設定の使用を簡素化 -  Jul 21, 2023](https://aws.amazon.com/jp/about-aws/whats-new/2023/07/aws-appconfig-agent-feature-flag-configuration-amazon-ec2/)
+
+### AppConfig の料金
+
+[AppConfig の料金](https://aws.amazon.com/jp/systems-manager/pricing/#AppConfig)
 
 ## アプリケーションマネージャー
 
@@ -286,3 +308,7 @@ AWS 上で運用している各サービスを１つの画面で俯瞰・対応�
 - Amazon ECS および Amazon EKS クラスタ
 
 ![app-manager-view](/images/ssm/application-manager/app-manager-view-s.jpg)
+
+### アプリケーションマネージャーの料金
+
+無料で利用できます。

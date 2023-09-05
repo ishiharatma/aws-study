@@ -22,15 +22,24 @@ Duration: 00:01:00
   - [Contents](#contents)
   - [ノード管理の機能](#ノード管理の機能)
   - [セッションマネージャー](#セッションマネージャー)
+    - [セッションマネージャーの料金](#セッションマネージャーの料金)
   - [フリートマネージャー](#フリートマネージャー)
+    - [フリートマネージャーの料金](#フリートマネージャーの料金)
   - [Run Command](#run-command)
+    - [Run Command の料金](#run-command-の料金)
   - [ステートマネージャー](#ステートマネージャー)
+    - [ステートマネージャーの料金](#ステートマネージャーの料金)
   - [パッチマネージャー](#パッチマネージャー)
     - [パッチポリシー](#パッチポリシー)
+    - [パッチマネージャーの料金](#パッチマネージャーの料金)
   - [ハイブリッドアクティベーション](#ハイブリッドアクティベーション)
+    - [ハイブリッドアクティベーションの料金](#ハイブリッドアクティベーションの料金)
   - [ディストリビューター](#ディストリビューター)
+    - [ディストリビューターの料金](#ディストリビューターの料金)
   - [コンプライアンス](#コンプライアンス)
+    - [コンプライアンスの料金](#コンプライアンスの料金)
   - [イベントリ](#イベントリ)
+    - [インベントリの料金](#インベントリの料金)
   - [まとめ](#まとめ)
 
 ## ノード管理の機能
@@ -132,6 +141,12 @@ AWS マネジメントコンソールまたは AWS CLI で接続を行った場�
 
 これ以外に、フリートマネージャーを使った 接続も可能です。Windows サーバであれば、RDP 接続によって GUI 操作が可能になります。
 
+### セッションマネージャーの料金
+
+無料で利用できます。
+
+[セッションマネージャーの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Session_Manager)
+
 ## フリートマネージャー
 
 マネジメントコンソールから、インスタンスを管理出来る機能です。
@@ -156,6 +171,12 @@ AWS マネジメントコンソールまたは AWS CLI で接続を行った場�
 
 ![fm-windows](/images/ssm/fleet-manager/fm-windows.jpg)
 
+### フリートマネージャーの料金
+
+無料で利用できます。
+
+[フリートマネージャーの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Fleet_Manager)
+
 ## Run Command
 
 マネジメントコンソール上から各種コマンドをインスタンスに接続することなく実行できる機能です。
@@ -172,6 +193,12 @@ SSM　Agent のアップデートを行ったり、CloudWatch エージェント
 コマンドが実行履歴として残りますので、例えば サーバーのユーザー作成などを Run Command から実行した場合、ユーザーのパスフレーズも履歴に残ってしまいます。これを避けるには、パラメータストアを利用することで、実行履歴に残らないようにすることもできます。
 Run Command から使用するには、`{{ssm:parameter-name}}` と指定します。
 
+### Run Command の料金
+
+無料で利用できます。
+
+[Run Command の料金](https://aws.amazon.com/jp/systems-manager/pricing/#Run_Command)
+
 ## ステートマネージャー
 
 ステートマネージャーは設定管理の機能で、定期的に Run Command や Automation を実行することで、インスタンスの状態をあるべき状態にすることができます。
@@ -186,6 +213,12 @@ Run Command から使用するには、`{{ssm:parameter-name}}` と指定しま�
 ステートマネージャーでは、`インスタンスが起動したタイミングに1回だけ` といったことができます。
 
 どちらを選択するかは、AWSドキュメント [State Manager または Maintenance Windows の選択](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html) を参考にします。
+
+### ステートマネージャーの料金
+
+無料で利用できます。
+
+[ステートマネージャーの料金](https://aws.amazon.com/jp/systems-manager/pricing/#State_Manager)
 
 ## パッチマネージャー
 
@@ -222,13 +255,30 @@ EC2 に対する　OS パッチ適用を自動化できる機能です。
 
 ![pm-8](/images/ssm/patch-manager/pm-8.jpg)
 
+### パッチマネージャーの料金
+
+無料で利用できます。
+
+[パッチマネージャーの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Patch_Manager)
+
+
 ## ハイブリッドアクティベーション
 
 異なる AWS アカウントの EC2 、AWS 以外のクラウドのサーバ、オンプレの仮想マシンを管理対象として登録できる機能です。
 
+### ハイブリッドアクティベーションの料金
+
+アクティベーション自体に料金はかかりません。
+
+[オンプレミスインスタンス管理](https://aws.amazon.com/jp/systems-manager/pricing/#On-Premises_Instance_Management)
+
 ## ディストリビューター
 
 ソフトウェアパッケージを作成および配信する機能です。ソフトウェアパッケージをインストールするには、 Run Command とステートマネージャーを使用します。
+
+### ディストリビューターの料金
+
+[ディストリビューターの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Distributor)
 
 ## コンプライアンス
 
@@ -237,11 +287,24 @@ EC2 に対する　OS パッチ適用を自動化できる機能です。
 
 ![Compliance](/images/ssm/compliance-1.png)
 
+### コンプライアンスの料金
+
+無料で利用できます。
+
+[コンプライアンスの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Compliance)
+
+
 ## イベントリ
 
 マネージドインスタンスから、OSやアプリケーション、ネットワーク設定などの情報を定期的に取得ができる機能です。定期的に取得するのは、ステートマネージャーによって実行されます。
 
 ![inventory](/images/ssm/inventory/inventory-1.png)
+
+### インベントリの料金
+
+無料で利用できます。
+
+[インベントリの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Inventory)
 
 ## まとめ
 

@@ -40,10 +40,22 @@
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
 <li><a href="#contents" target="_blank">Contents</a></li>
 <li><a href="#%E5%A4%89%E6%9B%B4%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">変更管理の機能</a></li>
-<li><a href="#change-manager" target="_blank">Change Manager</a></li>
-<li><a href="#%E3%82%AA%E3%83%BC%E3%83%88%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">オートメーション</a></li>
-<li><a href="#%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6" target="_blank">メンテナンスウィンドウ</a></li>
-<li><a href="#%E5%A4%89%E6%9B%B4%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC" target="_blank">変更カレンダー</a></li>
+<li><a href="#%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6" target="_blank">メンテナンスウィンドウ</a><ul>
+<li><a href="#%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%82%A6%E3%82%A3%E3%83%B3%E3%83%89%E3%82%A6%E3%81%AE%E6%96%99%E9%87%91" target="_blank">メンテナンスウィンドウの料金</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%AA%E3%83%BC%E3%83%88%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">オートメーション</a><ul>
+<li><a href="#%E3%82%AA%E3%83%BC%E3%83%88%E3%83%A1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E6%96%99%E9%87%91" target="_blank">オートメーションの料金</a></li>
+</ul>
+</li>
+<li><a href="#change-manager" target="_blank">Change Manager</a><ul>
+<li><a href="#change-manager%E3%81%AE%E6%96%99%E9%87%91" target="_blank">Change Managerの料金</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%89%E6%9B%B4%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC" target="_blank">変更カレンダー</a><ul>
+<li><a href="#%E5%A4%89%E6%9B%B4%E3%82%AB%E3%83%AC%E3%83%B3%E3%83%80%E3%83%BC%E3%81%AE%E6%96%99%E9%87%91" target="_blank">変更カレンダーの料金</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -51,13 +63,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="変更管理の機能" duration="0">
+      <google-codelab-step label="変更管理の機能" duration="1">
         <ul>
 <li>変更管理 <ul>
-<li>Change Manager</li>
-<li>オートメーション</li>
-<li>Change Calendar</li>
 <li>メンテナンスウィンドウ</li>
+<li>オートメーション</li>
+<li>Change Manager</li>
+<li>Change Calendar</li>
 </ul>
 </li>
 </ul>
@@ -65,29 +77,145 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Change Manager" duration="0">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/change-manager.html" target="_blank">AWS Systems Manager Change Manager</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="オートメーション" duration="0">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-automation.html" target="_blank">AWS Systems Manager Automation</a></p>
-<p>インスタンス上でリモートコマンドを実行できるようにしたものです。 自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。 SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。 なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="メンテナンスウィンドウ" duration="0">
+      <google-codelab-step label="メンテナンスウィンドウ" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-maintenance.html" target="_blank">AWS Systems Manager Maintenance Windows</a></p>
 <p>パッチ適用やソフトウェアのインストール、OSのアップグレードなどの一連のタスクをスケジュール実行できる機能です。</p>
+<p class="image-container"><img alt="maintenance-window" src="img\\1267589468decff3.png"></p>
+<h2 is-upgraded>メンテナンスウィンドウの料金</h2>
+<p>無料で利用できます。</p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#Maintenance_Windows" target="_blank">メンテナンスウィンドウの料金</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="変更カレンダー" duration="0">
+      <google-codelab-step label="オートメーション" duration="1">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-automation.html" target="_blank">AWS Systems Manager Automation</a></p>
+<p>インスタンス上でリモートコマンドを実行できるようにしたものです。 自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。 SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。 なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。</p>
+<h2 is-upgraded>オートメーションの料金</h2>
+<p>ステップの数と実行時間で課金されます。</p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#Automation" target="_blank">オートメーションの料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Change Manager" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/change-manager.html" target="_blank">AWS Systems Manager Change Manager</a></p>
+<p>AWS の変更管理といえば、「AWS CloudTrail」や「AWS Config」を利用した証跡管理があります。ただ、これらは変更があった事実を記録しているだけであり、変更に至った経緯などは記録できていません。</p>
+<p>そこで、「アプリケーションの設定とインフラストラクチャに対する運用上の変更をリクエスト、承認、実装、および報告するためのエンタープライズ変更管理フレームワーク」を提供する Change Manager を利用します。</p>
+<p class="image-container"><img alt="change-manager" src="img\\978f95bc8ec4fe56.png"></p>
+<p>テンプレートには、オートメーションのドキュメントを指定することができます。</p>
+<p>例えば、EC2 の起動 <code>AWS-StartEC2Instance</code> をワークフロー化することができます。 <img alt="change-manager-start-ec2" src="img\\9ddff7c14424c6c6.png"></p>
+<p>他には、<code>AWS-AttachEBSVolume</code>や <code>AWS-StopRdsInstance</code> などがあります。</p>
+<h2 is-upgraded>Change Managerの料金</h2>
+<p>「変更リクエスト件数」とそれによって実行された「API リクエスト数」で課金されます。</p>
+<p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#Change_Manager" target="_blank">Change Managerの料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="変更カレンダー" duration="10">
         <p><a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-change-calendar.html" target="_blank">AWS Systems Manager Change Calendar</a></p>
 <p>重要なイベントや負荷が集中する時間帯、バッチ処理が行われる時間帯などを設定することで、定期実行処理を回避することができます。</p>
+<p>作成するカレンダーは次の2種類が選択できます。</p>
+<ul>
+<li>Open by default (デフォルトでオープン) <ul>
+<li>カレンダーに作成されたイベントの期間を休業日、つまり「CLOSE」と扱うカレンダーになります。</li>
+</ul>
+</li>
+<li>Closed by default (デフォルトでクローズ) <ul>
+<li>カレンダーに作成されたイベントの期間を営業日、つまり「OPEN」と扱うカレンダーになります。</li>
+</ul>
+</li>
+</ul>
+<p>この違いは、カレンダーを使って日付を判定するときの結果に影響します。</p>
+<p><code>at-time</code> で指定した日時をカレンダーで「OPEN」であるのか「CLOSED」であるのかを判定させます。このパラメータを省略した場合は、現在日時が使用されます。</p>
+<p>※ 日時の指定は、厳密な「<a href="https://ja.wikipedia.org/wiki/ISO_8601" target="_blank">ISO 8601</a>」の書式に準拠している必要があります。</p>
+<pre><code language="language-sh" class="language-sh">aws ssm get-calendar-state \
+    --calendar-names &#34;arn:aws:ssm:ap-northeast-1:123456789012:document/calendar-name&#34; \
+    --at-time &#34;2023-09-18T00:00:00+09:00&#34;
+</code></pre>
+<p>このような結果が返ってきます。<code>State</code> が判定結果です。 <code>AtTime</code> はコマンドで与えた日時です。UTC になっているので注意です。 <code>NextTransitionTime</code> は、次に <code>State</code> が変化する日時です。<code>AtTime</code> の日時が &#34;OPEN&#34;ならば &#34;CLOSED&#34;、&#34;CLOSED&#34; ならば &#34;OPEN&#34; となる日時です。</p>
+<pre><code language="language-json" class="language-json">{
+    &#34;State&#34;: &#34;CLOSED&#34;,
+    &#34;AtTime&#34;: &#34;2023-09-17T15:00:00Z&#34;,
+    &#34;NextTransitionTime&#34;: &#34;2023-09-18T15:00:00Z&#34;
+}
+</code></pre>
+<p><code>ssm get-calendar-state</code> のパラメータ <code>calendar-names</code> にはカレンダーを複数指定して組み合わせて判定することができます。</p>
+<pre><code language="language-sh" class="language-sh">aws ssm get-calendar-state \
+    --calendar-names &#34;arn:aws:ssm:ap-northeast-1:123456789012:document/calendar-name1&#34; \
+                      &#34;arn:aws:ssm:ap-northeast-1:123456789012:document/calendar-name2&#34; \
+    --at-time &#34;2023-09-18T00:00:00+09:00&#34;
+</code></pre>
+<ul>
+<li>複数のカレンダーを指定した場合、全てのカレンダーで「OPEN」の場合に「OPEN」となります。</li>
+<li>どれか一つでも「CLOSED」となっている場合は「CLOSED」と判定されます。 <ul>
+<li>この判定ロジックの仕様上、カレンダー上は休業日だが、臨時営業日とするといった場合は別のカレンダーのみを使用して判定する必要があります。</li>
+</ul>
+</li>
+</ul>
+<p>また、他のカレンダーをインポートすることもできます。 Googleの祝日カレンダーの <code>iCal 形式の公開 URL</code> から ics ファイルをダウンロードします。</p>
+<pre><code language="language-text" class="language-text">※ 祝日は自動更新されませんので、手動でインポートするか、自動でインポートできるような仕組みを構築する必要があります。
+例えば、「内閣府&gt;「国民の祝日」について」から CSV 形式でダウンロードして利用することもできます。
+2月に翌年のカレンダーが掲載されるようです。
+
+内閣府&gt;「国民の祝日」について
+https://www8.cao.go.jp/chosei/shukujitsu/gaiyou.html
+</code></pre>
+<p>ダウンロードした部分にタイムゾーンの記載があるので <code>UTC</code> から <code>Asia/Tokyo</code> 変更します。（ここを変更しないでインポートした場合は後述します。）</p>
+<pre><code language="language-text" class="language-text">X-WR-TIMEZONE:Asia/Tokyo
+</code></pre>
+<p>[Import calendar] で先ほどダウンロードした ics ファイルを指定します。</p>
+<p class="image-container"><img alt="change-calendar-import-1" src="img\\109537a35c9c99c3.png"></p>
+<p class="image-container"><img alt="change-calendar-import-2" src="img\\8cae84c3f3dd276a.png"></p>
+<p>無事にインポートされました。</p>
+<p class="image-container"><img alt="google-holiday" src="img\\3a7f59641fe1ccfd.png"></p>
+<p>先ほどタイムゾーンを <code>UTC</code> から <code>Asia/Tokyo</code> に変更しましたが、変更しないでインポートした場合は、次のようなカレンダーになります。</p>
+<p class="image-container"><img alt="-google-holiday-utc" src="img\\b64655eaa4c47232.png"></p>
+<p>「敬老の日」が <code>Asia/Tokyo</code> では「2023/09/18 9:00～2023/09/19 9:00」になってしまっています。 <img alt="google-holiday-keirou" src="img\\f99657328c266c0b.png"></p>
+<p>これは、ics ファイルで敬老の日は次のように定義されているものを 「2023/09/18 00:00+0:00～2023/09/19 00:00+0:00」として UTC でインポートしてしまうためです。</p>
+<pre><code language="language-text" class="language-text">DTSTART;VALUE=DATE:20230918
+DTEND;VALUE=DATE:20230919
+DTSTAMP:20230905T140124Z
+:
+CLASS:PUBLIC
+CREATED:20220927T105018Z
+DESCRIPTION:祝日
+LAST-MODIFIED:20220927T105018Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:敬老の日
+</code></pre>
+<p>UTC でインポートしたカレンダーを使用した場合、先ほどは 「CLOSED」と判定された日時　&#34;2023-09-18T00:00:00+09:00&#34;　は次のように「OPEN」と判定されました。</p>
+<pre><code language="language-sh" class="language-sh">aws ssm get-calendar-state \
+    --calendar-names &#34;arn:aws:ssm:ap-northeast-1:123456789012:document/calendar-name3&#34; \
+    --at-time &#34;2023-09-18T00:00:00+09:00&#34;
+
+{
+    &#34;State&#34;: &#34;OPEN&#34;,
+    &#34;AtTime&#34;: &#34;2023-09-17T15:00:00Z&#34;,
+    &#34;NextTransitionTime&#34;: &#34;2023-09-18T00:00:00Z&#34;
+}
+</code></pre>
+<p>Lambda など、Python を使って取得する場合は、<a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/ssm/client/get_calendar_state.html#" target="_blank">get_calendar_state</a> を使用します。</p>
+<pre><code language="language-py" class="language-py">client = boto3.client(&#39;ssm&#39;)
+
+response = client.get_calendar_state(
+    CalendarNames=[
+        &#39;＜カレンダーの名前またはARN＞&#39;,
+        &#39;＜カレンダーの名前またはARN＞&#39;,
+    ],
+    AtTime=&#39;＜判定対象の日付時刻 (省略時は現在時刻)＞&#39;
+)
+
+{
+    &#39;State&#39;: &#39;OPEN&#39;|&#39;CLOSED&#39;,
+    &#39;AtTime&#39;: &#39;string&#39;,
+    &#39;NextTransitionTime&#39;: &#39;string&#39;
+}
+</code></pre>
+<h2 is-upgraded>変更カレンダーの料金</h2>
+<p>無料で利用できます。</p>
 
 
       </google-codelab-step>
