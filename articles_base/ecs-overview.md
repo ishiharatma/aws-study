@@ -47,8 +47,6 @@ Duration: 2:45:12
 
 【AWS Black Belt Online Seminar】 [CON207 Auto Scaling in ECS](https://www.youtube.com/watch?v=FeRkcA33-d0)(0:11:16)
 
-![blackbelt-ecs-as](/images/ecs/)
-
 【AWS Black Belt Online Seminar】[CON307 ECS Capacity Providers](https://www.youtube.com/watch?v=45uuyy16RS4)(0:17:47)
 
 ![blackbelt-ecs-cp](/images/ecs/blackbelt-ecs-cp-s.jpg)
