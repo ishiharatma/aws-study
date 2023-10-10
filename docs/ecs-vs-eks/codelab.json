@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2023-10-10T23:50:50+09:00",
+  "id": "ecs-vs-eks",
+  "duration": 0,
+  "title": "ECS（Elastic Container Service）とEKS（Elastic Kubernetes Service）",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_ecs-vs-eks.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "amazonecs",
+    "amazoneks"
+  ],
+  "url": "ecs-vs-eks"
+}

@@ -15,9 +15,12 @@
     - [コンテナオーケストレーション](#コンテナオーケストレーション)
     - [コントロールプレーン](#コントロールプレーン)
     - [データプレーン](#データプレーン)
+    - [データプレーン の種類](#データプレーン-の種類)
+  - [4つのアーキテクチャパターン](#4つのアーキテクチャパターン)
   - [ECS と EKS のサービスの利用想定](#ecs-と-eks-のサービスの利用想定)
-  - [データプレーン の種類](#データプレーン-の種類)
   - [比較](#比較)
+  - [付録：AWS コンテナロードマップ](#付録aws-コンテナロードマップ)
+  - [付録：コンテナセキュリティ](#付録コンテナセキュリティ)
 
 ## ECS と EKS とは
 
@@ -50,21 +53,7 @@ AWS が提供するデータプレーンは次の2種類あります。
 - EC2
 - Fargate
 
-データプレーンの詳細については、後述します。
-
-## ECS と EKS のサービスの利用想定
-
-簡単に書くと、次のような利用想定です。
-
-- EKS（Elastic Kubernetes Service）
-  - 既に [Kubernetes (K8s)](https://kubernetes.io/ja/docs/concepts/overview/)を利用している、またはこれから積極的に利用してコンテナの管理を行いたい
-  - オンプレミスや他のクライド上でも稼働させたい
-- ECS（Elastic Container Service）
-  - K8s の運用経験がないか、K8s よりも簡単にコンテナの管理を行いたい
-    - K8s は 基本的に 3か月に1回のアップデートが行われるため、アップデートに追従するために運用コストが高くなる傾向があります。
-  - AWS のみで利用できればよい
-
-## データプレーン の種類
+### データプレーン の種類
 
 AWS が提供するデータプレーンは次の2種類あります。
 
@@ -89,6 +78,44 @@ AWS が提供するデータプレーンは次の2種類あります。
 
 これだけを見ると、Fargate のデメリットが多いように思えますが、コンテナが実際に稼働するリソース環境の運用から解放されるのは非常に大きなメリットですので、作業要員のコストも考えるとデメリットを上回る価値があると考えられます。
 よって、まずは Fargate を利用することができないかを検討するのが良いと思います。
+
+## 4つのアーキテクチャパターン
+
+コントロールプレーンとデータプレーンの組み合わせで 4つのアーキテクチャパターンがあります。
+
+![pattern-matrix](/images/ecs-vs-eks/pattern-matrix.png)
+
+それぞれのパターンの構成概要図は次の通りです。
+
+- ECS on Fargate
+
+![ecs-fargate-pattern](/images/ecs-vs-eks/ecs-fargate-pattern.png)
+
+- ECS on EC2
+
+![ecs-ec2-pattern](/images/ecs-vs-eks/ecs-ec2-pattern.png)
+
+- EKS on Fargate
+
+![eks-fargate-pattern](/images/ecs-vs-eks/eks-fargate-pattern.png)
+
+※ 2023年10月現在、Fargate には 1つの Pod しか起動できない制約([Fargate Pod の設定](https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/fargate-pod-configuration.html))があります。そのため、[DaemonSet](https://kubernetes.io/ja/docs/concepts/workloads/controllers/daemonset/) が利用できません。ログ集約などで利用したい場合、サイドカーコンテナを作成する方法があります。（参考：[AWS Fargate で Amazon EKS を使用するときにアプリケーションログをキャプチャする方法](https://aws.amazon.com/jp/blogs/news/how-to-capture-application-logs-when-using-amazon-eks-on-aws-fargate/)）
+
+- EKS on EC2
+
+![eks-ec2-pattern](/images/ecs-vs-eks/eks-ec2-pattern.png)
+
+## ECS と EKS のサービスの利用想定
+
+簡単に書くと、次のような利用想定です。
+
+- EKS（Elastic Kubernetes Service）
+  - 既に [Kubernetes (K8s)](https://kubernetes.io/ja/docs/concepts/overview/)を利用している、またはこれから積極的に利用してコンテナの管理を行いたい
+  - オンプレミスや他のクライド上でも稼働させたい
+- ECS（Elastic Container Service）
+  - K8s の運用経験がないか、K8s よりも簡単にコンテナの管理を行いたい
+    - K8s は 基本的に 3か月に1回のアップデートが行われるため、アップデートに追従するために運用コストが高くなる傾向があります。
+  - AWS のみで利用できればよい
 
 ## 比較
 
@@ -116,6 +143,7 @@ AWS が提供するデータプレーンは次の2種類あります。
 ※1 ... アジアパシフィック（東京）リージョンで Linux を利用した場合の比較
 
 Fargate のほうが EC2 に比べてコストが高いが、3段階評価で差が出るほどではないとの判断。
+[2019年1月](https://aws.amazon.com/jp/about-aws/whats-new/2019/01/announcing-aws-fargate-price-reduction-by-up-to-50-/) に Fargate の大幅な値下げがあったため、以前に比べて利用しやすくなっています。
 
 | スペック       | Fargate     | EC2                       | Fargate vs EC2 |
 | -------------- | ----------- | ------------------------- | -------------- |
@@ -127,10 +155,12 @@ Fargate のほうが EC2 に比べてコストが高いが、3段階評価で差
 1 時間あたりの vCPU 単位　＞ USD 0.04045
 1 時間あたりの GB 単位 ＞ USD 0.00442
 
-※2 ... コンテナが稼働するリソース環境にはいくつか制限がある
+※2 ... コンテナが稼働するリソース環境にはいくつか制限があります
 
 - [エフェメラルストレージは最大 200GB](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/fargate-task-storage.html)
 - [AWS Fargate の料金](https://aws.amazon.com/jp/fargate/pricing/)にもあるとおり、2023年10月現在では 16 vCPU/32~120 GB メモリという上限があります。
+- EKS on Fargate は Pod を１つしか構成できません。([Fargate Pod の設定](https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/fargate-pod-configuration.html))
+  - [AWS Fargate で Amazon EKS を使用するときにアプリケーションログをキャプチャする方法](https://aws.amazon.com/jp/blogs/news/how-to-capture-application-logs-when-using-amazon-eks-on-aws-fargate/)
 
 ※3 ... 以前はコンテナに接続するには自前で sshd を立てるなどしなければならなかったが、「[Amazon ECS Exec](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/userguide/ecs-exec.html)」により障害調査はしやすくなった
 
@@ -147,3 +177,19 @@ Fargate のほうが EC2 に比べてコストが高いが、3段階評価で差
 2021/05/27 [Amazon Elastic Container Service Anywhere が利用可能に](https://aws.amazon.com/jp/about-aws/whats-new/2021/05/amazon-elastic-container-service-anywhere-is-now-generally-available/)
 
 2021/09/10 [Amazon EKS Anywhere — オンプレミスで Kubernetes クラスターの作成と管理が広く利用可能になりました](https://aws.amazon.com/jp/blogs/news/amazon-eks-anywhere-now-generally-available-to-create-and-manage-kubernetes-clusters-on-premises/)
+
+## 付録：AWS コンテナロードマップ
+
+[aws-containers-roadmap](https://github.com/aws/containers-roadmap/)
+
+![aws-containers-roadmap](/images/ecs-vs-eks/aws-containers-roadmap-s.jpg)
+
+## 付録：コンテナセキュリティ
+
+- [NECセキュリティブログ>特権コンテナの脅威から学ぶコンテナセキュリティ](https://jpn.nec.com/cybersecurity/blog/210730/index.html)
+
+- [【IPA】NIST SP800-190 アプリケーションコンテナセキュリティガイド](https://www.ipa.go.jp/security/reports/oversea/nist/ug65p90000019cp4-att/000085279.pdf)
+
+- [AWS ドキュメント > AWS Fargate のセキュリティ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-fargate.html)
+
+- [AWS ドキュメント > タスクとコンテナのセキュリティ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-tasks-containers.html)

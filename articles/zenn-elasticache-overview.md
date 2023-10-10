@@ -155,4 +155,4 @@ Global Datastore for Redis 機能を使用すると、AWS リージョン全体�
 
 ## まとめ
 
-![lambda](/images/all/elasticache.png)
+![elasticache](/images/all/elasticache.png)

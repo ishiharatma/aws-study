@@ -18,10 +18,6 @@
 
 [コンテナについて理解する(Red Hat)](https://www.redhat.com/ja/topics/containers)
 
-[Docker](https://www.docker.com/)
-
-[Kubernetes (K8s)](https://kubernetes.io/ja/docs/concepts/overview/)
-
 ここでは、簡単に要点だけ記述します。
 
 アプリケーションは、主に「ランタイム、ライブラリ、プログラムコード、設定ファイル」から構成されます。
@@ -61,6 +57,12 @@
 
 - [NECセキュリティブログ>特権コンテナの脅威から学ぶコンテナセキュリティ](https://jpn.nec.com/cybersecurity/blog/210730/index.html)
 
+- [【IPA】NIST SP800-190 アプリケーションコンテナセキュリティガイド](https://www.ipa.go.jp/security/reports/oversea/nist/ug65p90000019cp4-att/000085279.pdf)
+
+- [AWS ドキュメント > AWS Fargate のセキュリティ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-fargate.html)
+
+- [AWS ドキュメント > タスクとコンテナのセキュリティ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-tasks-containers.html)
+
 ## AWS Black Belt Online Seminar
 
 【AWS Black Belt Online Seminar】[CON141 コンテナ入門](https://www.youtube.com/watch?v=fUPyxos7Z-k)(0:10:00)
@@ -78,3 +80,71 @@
 【AWS Black Belt Online Seminar】[CON232 コンテナセキュリティ入門 Part.2](https://www.youtube.com/watch?v=OTwC6zpgZjc)(0:10:26)
 
 【AWS Black Belt Online Seminar】[CON233 コンテナセキュリティ入門 Part.3](https://www.youtube.com/watch?v=drWE7enGFvo)(0:13:26)
+
+## Docker
+
+[Docker](https://www.docker.com/)
+
+Docker社（旧 dotCloud）が開発するコンテナのアプリケーション実行環境を管理するオープンソースソフトウェア（OSS）です。
+
+ドッカー と読みます([Wikipedia](https://ja.wikipedia.org/wiki/Docker))。
+
+2021年9月に有料化されましたが、個人利用、スモールビジネス、教育機関、非商用のオープンソースプロジェクトでは引き続き無料で利用できます。
+有償化の猶予期間は、2022年1月31日までした。
+
+[Pricing & Subscriptions](https://www.docker.com/pricing/)
+
+![docker-price](/images/container/docker-price-s.jpg)
+
+コンテナは、Dockerfile というテキストファイルに記述することで利用できます。
+
+```Dockerfile
+# syntax=docker/dockerfile:1
+FROM ubuntu:22.04
+COPY . /app
+RUN make /app
+CMD python /app/app.py
+```
+
+[Dockerfile を書くベストプラクティス](https://docs.docker.jp/develop/develop-images/dockerfile_best-practices.html)
+
+## Docker Compose
+
+複数のコンテナで構成されるアプリケーションで、Docker イメージのビルドや各コンテナの起動・停止などを簡単に行えるようにするツールで、YAML 形式で定義します。
+
+```yaml
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8000:5000"
+  redis:
+    image: "redis:alpine"
+```
+
+[Docker Compose](https://docs.docker.jp/compose/toc.html)
+
+## Kubernetes (K8s)
+
+[Kubernetes (K8s)](https://kubernetes.io/ja/docs/concepts/overview/)
+
+コンテナの運用管理と自動化を行うために設計されたオープンソースソフトウェアで、Google 社が社内で利用していたコンテナ管理ツールを汎用化したものです。
+
+「クバネティス」「クバネテス」「クーべネティス」など読みます（[Wikipedia](https://ja.wikipedia.org/wiki/Kubernetes)）。「クーベ」と略したり、「K8s（ケーエイツ）」
+
+マニフェストファイルを YAML または JSON 形式で定義します。
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox-sleep
+spec:
+  containers:
+  - name: busybox
+    image: busybox
+    args:
+    - sleep
+    - "1000000"
+```
