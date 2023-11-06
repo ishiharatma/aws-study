@@ -2,7 +2,7 @@
 title: "【初心者向け】Amazon ECS について改めて整理してみた" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 # Amazon Elastic Container Service (Amazon ECS)
@@ -26,7 +26,7 @@ published: false
   - [タスク：起動する１つ以上のコンテナの集合](#タスク起動する１つ以上のコンテナの集合)
   - [タスク定義：タスクを作成する定義テンプレート](#タスク定義タスクを作成する定義テンプレート)
     - [memoryReservation（ソフト制限）とmemory（ハード制限）の組み合わせ](#memoryreservationソフト制限とmemoryハード制限の組み合わせ)
-  - [作成手順](#作成手順)
+  - [ECS クラスタ作成手順](#ecs-クラスタ作成手順)
   - [AWS Copilot](#aws-copilot)
   - [まとめ](#まとめ)
 
@@ -82,16 +82,18 @@ Duration: 0:00:00
 
 Duration: 0:01:00
 
-![ecs-components](/images/ecs/ecs-components.png)
+![ecs-components](/images/ecs/ecs-components_no.png)
 
-- クラスター
-- サービス
-- タスク
-- タスク定義
+1. クラスター
+1. サービス
+1. タスク
+1. タスク定義
 
 ## クラスター：サービスとタスクを実行する基盤
 
 Duration: 0:01:00
+
+![ecs-components-1](/images/ecs/ecs-components_no-1.jpg)
 
 起動タイプが EC2 の場合、EC2 インスタンス群のことです。
 Fargate の場合は、どのインスタンスで動いているかは隠ぺいされているので、論理的なグループに過ぎない。
@@ -108,11 +110,15 @@ Duration: 0:01:00
 
 [Amazon ECS サービス](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ecs_services.html)
 
+![ecs-components-2](/images/ecs/ecs-components_no-2.jpg)
+
 サービスは、指定した数のタスクを維持したり、ロードバランサーなど、実行するタスクの管理をする単位です。
 
 ## タスク：起動する１つ以上のコンテナの集合
 
 Duration: 0:01:00
+
+![ecs-components-3](/images/ecs/ecs-components_no-3.jpg)
 
 タスク定義とよばれる定義テンプレートに従って起動されるコンテナの集まりです。
 タスクの単位で、CPU やメモリの割り当てを行い、割り当てられた範囲でコンテナを起動します。
@@ -123,7 +129,56 @@ Duration: 0:05:00
 
 [Amazon ECSの タスク定義](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html)
 
-[タスク定義パラメータ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html)
+![ecs-components-4](/images/ecs/ecs-components_no-4.jpg)
+
+タスク定義は、次のようになります。（公式のサンプル）
+
+```json
+{
+   "containerDefinitions": [ 
+      { 
+         "command": [
+            "/bin/sh -c \"echo '<html> <head> <title>Amazon ECS Sample App</title> <style>body {margin-top: 40px; background-color: #333;} </style> </head><body> <div style=color:white;text-align:center> <h1>Amazon ECS Sample App</h1> <h2>Congratulations!</h2> <p>Your application is now running on a container in Amazon ECS.</p> </div></body></html>' >  /usr/local/apache2/htdocs/index.html && httpd-foreground\""
+         ],
+         "entryPoint": [
+            "sh",
+            "-c"
+         ],
+         "essential": true,
+         "image": "httpd:2.4",
+         "logConfiguration": { 
+            "logDriver": "awslogs",
+            "options": { 
+               "awslogs-group" : "/ecs/fargate-task-definition",
+               "awslogs-region": "us-east-1",
+               "awslogs-stream-prefix": "ecs"
+            }
+         },
+         "name": "sample-fargate-app",
+         "portMappings": [ 
+            { 
+               "containerPort": 80,
+               "hostPort": 80,
+               "protocol": "tcp"
+            }
+         ]
+      }
+   ],
+   "cpu": "256",
+   "executionRoleArn": "arn:aws:iam::012345678910:role/ecsTaskExecutionRole",
+   "family": "fargate-task-definition",
+   "memory": "512",
+   "networkMode": "awsvpc",
+   "runtimePlatform": {
+        "operatingSystemFamily": "LINUX"
+    },
+   "requiresCompatibilities": [ 
+       "FARGATE" 
+    ]
+}
+```
+
+代表的なパラメータは次のとおりです。その他のパラメータについては、「[タスク定義パラメータ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html)」を参照してください。
 
 - [ファミリー名](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html#family)
   - タスク定義の名称を指定します。
@@ -172,13 +227,15 @@ Duration: 0:05:00
 
 Duration: 0:01:00
 
+`memoryReservation` と `memory` のパラメータは指定有無などの組み合わせによって割り当てが異なります。
+
 | memoryReservation（ソフト制限） | memory（ハード制限） | 予約メモリ～上限メモリ                          |
 | ------------------------------- | -------------------- | ----------------------------------------------- |
 | 未指定                          | 3072 MiB             | 3072 MiB ～ 3072 MiB                            |
 | 2048 MiB                        | 未指定               | 2048 MiB ～  タスクサイズのmemory / EC2のメモリ |
 | 2048 MiB                        | 3072 MiB             | 2048 MiB ～ 3072 MiB                            |
 
-## 作成手順
+## ECS クラスタ作成手順
 
 Duration: 0:00:30
 

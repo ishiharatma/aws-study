@@ -2,7 +2,7 @@
 title: "【初心者向け】Amazon ECS と EKS について改めて整理してみた" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 # ECS（Elastic Container Service）とEKS（Elastic Kubernetes Service）
@@ -118,7 +118,7 @@ AWS が提供するデータプレーンは次の2種類あります。
 
 - EKS（Elastic Kubernetes Service）
   - 既に [Kubernetes (K8s)](https://kubernetes.io/ja/docs/concepts/overview/)を利用している、またはこれから積極的に利用してコンテナの管理を行いたい
-  - オンプレミスや他のクライド上でも稼働させたい
+  - オンプレミスや他のクラウド上でも稼働させたい
 - ECS（Elastic Container Service）
   - K8s の運用経験がないか、K8s よりも簡単にコンテナの管理を行いたい
     - K8s は 基本的に 3か月に1回のアップデートが行われるため、アップデートに追従するために運用コストが高くなる傾向があります。
@@ -133,6 +133,8 @@ AWS が提供するデータプレーンは次の2種類あります。
 ※ 【AWS Black Belt Online Seminar】CON120 AWSコンテナ全体概要 より引用
 
 それぞれのパターンをいくつかの比較項目で、3段階の評価を行い比較した結果は次のとおりです。
+
+※個人的な解釈をベースとザックリと比較した結果となっておりますので、参考程度にお読みください。
 
 ◎・・・3点、○・・・2点、△・・・1点
 
