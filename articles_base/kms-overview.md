@@ -24,7 +24,6 @@ Duration: 0:59:33
 
 [KMS の料金](https://aws.amazon.com/jp/kms/pricing/)
 
-
 ## 基本概念
 
 Duration: 0:01:30
@@ -35,6 +34,8 @@ KMS では、[エンベロープ暗号化](https://docs.aws.amazon.com/ja_jp/wel
 これは、データを暗号化する鍵(データキー)とデータキーを暗号化する鍵(マスターキー)を利用する方式で、セキュリティが強化されます。
 
 KMS のキーに対する操作は CloudTrail に記録されます。詳しくは、「[AWS KMS による AWS CloudTrail API コールのログ記録](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/logging-using-cloudtrail.html)」を参照してください。
+
+![kms](/images/kms/kms-overview.png)
 
 ## マスターキーとデータキー
 
@@ -47,8 +48,8 @@ KMS では、マスターキーとデータキーという2種類の鍵が登場
   - AWS の管理下において、マスターキーも暗号化して格納されています
 - データキー(Customer Data Key: CDK)
   - データを暗号化するキー
-  - `kms:GenerateDataKey` を使用してデータキーを都度生成します。
-  - 生成された CDK は、平文の状態と CMK で暗号化された2種類が生成されます。
+  - `kms:GenerateDataKey` を使用して平文のデータキーと暗号化されたデータキーを都度生成します。
+  - `kms:GenerateDataKeyWithoutPaintext` では、暗号化されたデータキーのみを生成します。
   - 後述のサーバサイド暗号化の場合はデータ暗号化後に平文のキーは削除されますが、クライアントサイド暗号化の場合はクライアント側が保持している平文のキーを削除するようにします。残しておいて第三者の手に渡った場合、暗号化されたデータを簡単に復号できてしまいます。
 
 ## マスターキー
@@ -57,7 +58,7 @@ Duration: 0:01:30
 
 - AWS マネージド型キー
   - AWS サービスが作成・管理する CMK で、キー名が「aws/s3」 のようになっています。
-  - 3年ごとに自動的にローテーションされます
+  - 1年ごとに自動的にローテーションされます
   - 無効化や削除ができません
 - カスタマー管理型のキー
   - 利用者が作成・管理する CMK です。
@@ -74,9 +75,11 @@ Duration: 0:01:30
 
 CMK にはエイリアス（別名）を付けることができます。エイリアスを使用することで、キーをローテーションした場合など、エイリアスの紐づけを変更するだけで、アプリケーション側の更新が不要になります。
 
+![kms-alias](/images/kms/kms-rotate.png)
+
 エイリアス名の ARN は次のようになります。そのため、リージョン/アカウントで一意にする必要があります。
 
-```
+```text
 arn:aws:kms:ap-northeast-1:123456789012:alias/aliasName
 ```
 
@@ -102,11 +105,45 @@ Duration: 0:03:00
   - [AWS CloudHSM の概要](https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/introduction.html)
   - [AWS CloudHSM のよくある質問](https://aws.amazon.com/jp/cloudhsm/faqs/)
   - 料金は東京リージョンでは、1時間当たり 1.81USD と KMSに比べると高額です。
-  - 次のような要件がある場合
+  - 次のような要件がある場合に利用します。
     - PCI DSSやその他の特定の縦断的なセキュリティ標準
     - 政府のワークロード
     - FIPS認可要求ポリシー
     - RDS Oracleでの[透過的なデータ暗号化](https://docs.oracle.com/cd/E57425_01/121/ASOAG/introduction-to-transparent-data-encryption.htm) (Transparent data encryption: TDE) サポート
+
+## キーポリシー
+
+Duration: 0:01:00
+
+CMK にはリソースベースの[キーポリシー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-policies.html)を付与することができます。
+これにより、特定のサービスからのみアクセスさせるといった制御ができます。
+CMK 作成時には[デフォルトのキーポリシー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-policy-default.html)が設定されているので、必要に応じて変更します。
+
+キーポリシーに指定できる代表的な条件は次のとおりです。その他については、[AWS KMS 条件キー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/policy-conditions.html)を参照してください。
+
+- kms:ViaService
+- kms:CallerAccount
+- kms:EncryptionAlgorithm
+- kms:KeyOrigin
+- kms:ValidTo
+
+## マルチリージョンキー
+
+Duration: 0:01:00
+
+単一リージョンで作成した CMK はエクスポートのインポートも出来ないため、作成したリージョン以外では使用することができません。
+しかし、[マルチリージョンキー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/multi-region-keys-overview.html)を選択することで、複数のリージョンにレプリケートすることが可能です。
+
+## 別のAWSアカウントへの許可
+
+Duration: 0:01:00
+
+CMK は別のアカウントに使用を許可することができます。
+
+このように使用を許可するアカウントを指定すると、キーポリシーに反映されます。
+![kms-use-other-account](/images/kms/kms-use-other-account.png)
+
+![kms-use-other-account-policy](/images/kms/kms-use-other-account-policy.png)
 
 ## キーの削除
 
@@ -134,7 +171,7 @@ CloudTrail に以下のイベントが記録されます。
 - 削除予定
   - KMSInvalidStateException
 
-  ```
+  ```text
   {
     "errorCode": "KMSInvalidStateException",
     "errorMessage": "arn:aws:kms:ap-northeast-1:123456789012:key/XXX is pending deletion."
@@ -144,7 +181,7 @@ CloudTrail に以下のイベントが記録されます。
 - 無効化
   - DisabledException
 
-  ```
+  ```text
   {
     "errorCode": "KMSInvalidStateException",
     "errorMessage": "arn:aws:kms:ap-northeast-1:123456789012:key/XXX is disabled."
@@ -153,7 +190,7 @@ CloudTrail に以下のイベントが記録されます。
 
 フィルタパターン例
 
-```
+```text
 {($.eventSource=kms.amazonaws.com) && (($.errorCode="KMSInvalidStateException") || ($.errorCode="DisabledException"))}
 
 OR
@@ -171,27 +208,36 @@ OR
 - 無効化
   - 「eventName」が[DisableKey](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/ct-disablekey.html)
 
-
 フィルタパターン例
 
-```
+```text
 {($.eventSource=kms.amazonaws.com) && (($.eventName="DisableKey") || ($.eventName="ScheduleKeyDeletion"))}
 ```
 
+## データキーキャッシュ
+
+Duration: 0:00:15
+
+AWS Encryption SDKの機能として、「[データキーキャッシュ](https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html)」がある。
+これを利用することでデータキー取得のAPIコールを減らすことができます。
 
 ## クライアントサイド暗号化とサーバサイド暗号化
 
 Duration: 0:03:00
 
-KMS を利用した暗号化は、次の2種類がある
+KMS を利用した暗号化は、次の2種類があります。
 
 - クライアントサイド暗号化（Client-Side-Encryption: CSE）
-  - アプリケーション側で暗号化
+  - アプリケーション側で暗号化を実施します。
   - アプリケーション側で暗号化済みデータを送信するので、AWSまでの通信経路上は暗号化された状態となります。
-  - クライアントサイドで暗号化/復号の処理が必要なため、実装に手間がかかる
+  - クライアントサイドで暗号化/復号の処理が必要なため、実装に手間がかかります
 - サーバサイド暗号化（Server-Side-Encryption: SSE）
-  - AWS の各サービスが提供する暗号化を利用する
-  - AWS 側で暗号化し、データにアクセスがあった場合は自動的に復号する
-  - 通信経路上では暗号化されていない。（使用しているプロトコルによる暗号化は別）
-  - クライアントサイドでの暗号化/復号の処理が必要ないため、実装が容易である。
+  - AWS の各サービスが提供する暗号化を利用します。（例：S3バケット）
+  - ![s3-encrypt](/images/kms/s3-encrypt.png)
+  - AWS 側で暗号化し、データにアクセスがあった場合は自動的に復号されます。
+  - 通信経路上では暗号化されていません。（使用しているプロトコルによる暗号化は別）
+  - クライアントサイドでの暗号化/復号の処理が必要ないため、実装が容易になります。
 
+## まとめ
+
+![kms-overview](/images/all/kms.png)
