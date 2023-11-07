@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2023-11-07T22:21:34+09:00",
-  "id": "rds-overview",
-  "duration": 300,
-  "title": "Amazon Relational Database Service(RDS)",
+  "id": "kms-overview",
+  "duration": 79,
+  "title": "AWS Key Management Service（KMS）",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_rds-overview.md",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_kms-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "amazonrds"
+    "awskms"
   ],
-  "url": "rds-overview"
+  "url": "kms-overview"
 }

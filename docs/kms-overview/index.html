@@ -1,0 +1,233 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Key Management Service（KMS）</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="kms-overview"
+                  title="AWS Key Management Service（KMS）"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="KMS とは" duration="60">
+        <p>暗号化操作に使用されるキーを簡単に作成および管理できるマネージドサービスです。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=4F5rSxzu0U4" target="_blank">AWS Key Management Service(YouTube)</a>(0:59:33)</p>
+<p class="image-container"><img alt="blackbelt-kms" src="img\\f8cb233944a76343.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/kms/" target="_blank">KMS サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/kms/?id=docs_gateway" target="_blank">KMS ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/kms/faqs/" target="_blank">KMS よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/kms/pricing/" target="_blank">KMS の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="基本概念" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/basic-concepts.html" target="_blank">基本概念</a></p>
+<p>KMS では、<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/financial-services-industry-lens/use-envelope-encryption-with-customer-master-keys.html" target="_blank">エンベロープ暗号化</a>を使用しています。 これは、データを暗号化する鍵(データキー)とデータキーを暗号化する鍵(マスターキー)を利用する方式で、セキュリティが強化されます。</p>
+<p>KMS のキーに対する操作は CloudTrail に記録されます。詳しくは、「<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/logging-using-cloudtrail.html" target="_blank">AWS KMS による AWS CloudTrail API コールのログ記録</a>」を参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="マスターキーとデータキー" duration="2">
+        <p>KMS では、マスターキーとデータキーという2種類の鍵が登場します。</p>
+<ul>
+<li>マスターキー(Customer Master Key: CMK) <ul>
+<li>データキーを暗号化するキー</li>
+<li>AWS の管理下において、マスターキーも暗号化して格納されています</li>
+</ul>
+</li>
+<li>データキー(Customer Data Key: CDK) <ul>
+<li>データを暗号化するキー</li>
+<li><code>kms:GenerateDataKey</code> を使用してデータキーを都度生成します。</li>
+<li>生成された CDK は、平文の状態と CMK で暗号化された2種類が生成されます。</li>
+<li>後述のサーバサイド暗号化の場合はデータ暗号化後に平文のキーは削除されますが、クライアントサイド暗号化の場合はクライアント側が保持している平文のキーを削除するようにします。残しておいて第三者の手に渡った場合、暗号化されたデータを簡単に復号できてしまいます。</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="マスターキー" duration="2">
+        <ul>
+<li>AWS マネージド型キー <ul>
+<li>AWS サービスが作成・管理する CMK で、キー名が「aws/s3」 のようになっています。</li>
+<li>3年ごとに自動的にローテーションされます</li>
+<li>無効化や削除ができません</li>
+</ul>
+</li>
+<li>カスタマー管理型のキー <ul>
+<li>利用者が作成・管理する CMK です。</li>
+<li>自動ローテーションを有効化することで、1年ごとにローテーションさせることができます。</li>
+<li>1年より短い周期でローテーションしたい場合は手動で新しいキーを作成します。</li>
+<li>無効化や削除ができます。</li>
+</ul>
+</li>
+<li>AWS 所有のキー <ul>
+<li>AWS サービスの裏側で使用されるキーで、ユーザーからは見えないため、意識する必要はありません。</li>
+<li>利用者から見えないので、無効化や削除はできません</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="エイリアス" duration="2">
+        <p>CMK にはエイリアス（別名）を付けることができます。エイリアスを使用することで、キーをローテーションした場合など、エイリアスの紐づけを変更するだけで、アプリケーション側の更新が不要になります。</p>
+<p>エイリアス名の ARN は次のようになります。そのため、リージョン/アカウントで一意にする必要があります。</p>
+<pre><code>arn:aws:kms:ap-northeast-1:123456789012:alias/aliasName
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="キーマテリアル" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material" target="_blank">キーマテリアル</a>とは、「暗号化キーを生成するために必要な材料」であり「CMK作成時に使用されるデータのこと」をいいます。</p>
+<p>キーマテリアルは、次の3種類が指定できます。</p>
+<ul>
+<li>KMS <ul>
+<li>デフォルト</li>
+<li>AWS 独自のキーストアに作成され管理されます。</li>
+<li>アクセス制限はされていますが、物理的には他のアカウントと同じサーバ上に保管されています。</li>
+</ul>
+</li>
+<li>外部 <ul>
+<li>利用者が作成した共通鍵を指定します</li>
+</ul>
+</li>
+<li>カスタムキーストア（CloudHSM） <ul>
+<li>これを利用するには、<a href="https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/create-cluster.html" target="_blank">AWS CloudHSMクラスターを事前に作成</a>しておく必要があります。</li>
+<li>AWS CloudHSMクラスター とは、ユーザー自身しかアクセスできない 専用 HSM（ハードウェアセキュリティモジュール）インスタンスを作成してデータセキュリティのコンプライアンスを満たすことができるキーストアを作成できるもの。HSM は VPC 内で実行されます。</li>
+<li>VPC 内に配置しているので、レイテンシーは低い。</li>
+<li>冗長化構成は利用者の責任範囲となる。推奨はAZを跨いだ 2台以上の HSMインスタンス</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/introduction.html" target="_blank">AWS CloudHSM の概要</a></li>
+<li><a href="https://aws.amazon.com/jp/cloudhsm/faqs/" target="_blank">AWS CloudHSM のよくある質問</a></li>
+<li>料金は東京リージョンでは、1時間当たり 1.81USD と KMSに比べると高額です。</li>
+<li>次のような要件がある場合 <ul>
+<li>PCI DSSやその他の特定の縦断的なセキュリティ標準</li>
+<li>政府のワークロード</li>
+<li>FIPS認可要求ポリシー</li>
+<li>RDS Oracleでの<a href="https://docs.oracle.com/cd/E57425_01/121/ASOAG/introduction-to-transparent-data-encryption.htm" target="_blank">透過的なデータ暗号化</a> (Transparent data encryption: TDE) サポート</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="キーの削除" duration="5">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html" target="_blank">キーの削除</a></p>
+<p>CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。 削除スケジュールは、7日～30日を指定できます。この期間ないであれば削除をキャンセルすることができます。 削除されると、既存データを二度と復号できなくなるので注意が必要です。</p>
+<p>削除ではなく、無効化することもできますのでまずは無効化を行い、本当にキーが使用されていないことを確認することを推奨します。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/enable-and-disable-key.html" target="_blank">キーの有効化と無効化</a></p>
+<p>削除予定の CMK が利用されたら通知させることもできます。</p>
+<h2 is-upgraded>削除予定または無効化された CMK の使用を通知</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/deleting-keys-creating-cloudwatch-alarm.html" target="_blank">削除保留中の KMS キーの使用を検出するアラームの作成</a><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-state.html" target="_blank">キーステータスの表</a></p>
+<p>CloudTrail に以下のイベントが記録されます。</p>
+<ul>
+<li>削除予定<ul>
+<li>KMSInvalidStateException</li>
+</ul>
+<pre><code>{
+  &#34;errorCode&#34;: &#34;KMSInvalidStateException&#34;,
+  &#34;errorMessage&#34;: &#34;arn:aws:kms:ap-northeast-1:123456789012:key/XXX is pending deletion.&#34;
+}
+</code></pre>
+</li>
+<li>無効化<ul>
+<li>DisabledException</li>
+</ul>
+<pre><code>{
+  &#34;errorCode&#34;: &#34;KMSInvalidStateException&#34;,
+  &#34;errorMessage&#34;: &#34;arn:aws:kms:ap-northeast-1:123456789012:key/XXX is disabled.&#34;
+}
+</code></pre>
+</li>
+</ul>
+<p>フィルタパターン例</p>
+<pre><code>{($.eventSource=kms.amazonaws.com) &amp;&amp; (($.errorCode=&#34;KMSInvalidStateException&#34;) || ($.errorCode=&#34;DisabledException&#34;))}
+
+OR
+
+{($.eventSource=kms.amazonaws.com) &amp;&amp; (($.errorCode=&#34;*Exception&#34;))}
+
+</code></pre>
+<h2 is-upgraded>キーが削除予定または無効化された場合の通知</h2>
+<p>次の CloudTrail イベントを監視することで通知が可能です。</p>
+<ul>
+<li>削除予定 <ul>
+<li>「eventName」が<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/ct-schedule-key-deletion.html" target="_blank">ScheduleKeyDeletion</a></li>
+</ul>
+</li>
+<li>無効化 <ul>
+<li>「eventName」が<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/ct-disablekey.html" target="_blank">DisableKey</a></li>
+</ul>
+</li>
+</ul>
+<p>フィルタパターン例</p>
+<pre><code>{($.eventSource=kms.amazonaws.com) &amp;&amp; (($.eventName=&#34;DisableKey&#34;) || ($.eventName=&#34;ScheduleKeyDeletion&#34;))}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="クライアントサイド暗号化とサーバサイド暗号化" duration="3">
+        <p>KMS を利用した暗号化は、次の2種類がある</p>
+<ul>
+<li>クライアントサイド暗号化（Client-Side-Encryption: CSE） <ul>
+<li>アプリケーション側で暗号化</li>
+<li>アプリケーション側で暗号化済みデータを送信するので、AWSまでの通信経路上は暗号化された状態となります。</li>
+<li>クライアントサイドで暗号化/復号の処理が必要なため、実装に手間がかかる</li>
+</ul>
+</li>
+<li>サーバサイド暗号化（Server-Side-Encryption: SSE） <ul>
+<li>AWS の各サービスが提供する暗号化を利用する</li>
+<li>AWS 側で暗号化し、データにアクセスがあった場合は自動的に復号する</li>
+<li>通信経路上では暗号化されていない。（使用しているプロトコルによる暗号化は別）</li>
+<li>クライアントサイドでの暗号化/復号の処理が必要ないため、実装が容易である。</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
