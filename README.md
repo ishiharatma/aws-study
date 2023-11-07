@@ -7,6 +7,8 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [AWS 勉強ガイド](/articles_base/aws-study-guide.md)
 
+[AWS 学習教材完全ガイド 2023年最新版](/articles_base/aws-study-guide-2023.md)
+
 [AWSアカウント作成後に行うべき設定事項](/articles_base/aws-account-Initial-setting.md)
 
 ### コンピューティング
@@ -76,6 +78,7 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 ### セキュリティ、アイデンティティ、コンプライアンス
 
 [AWS IAM](/articles_base/iam-overview.md)
+[AWS KMS](/articles_base/kms-overview.md)
 
 ## 目次: 認定資格
 

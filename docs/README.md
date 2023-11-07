@@ -48,6 +48,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./codexx-overview/index.html" target="_blank">AWS Code 兄弟概要</a>
 - セキュリティ、アイデンティティ、コンプライアンス
   - <a href="./iam-overview/index.html" target="_blank">AWS IAM</a>
+  - <a href="./kms-overview/index.html" target="_blank">AWS KMS</a>
 
 ## AWS 認定資格勉強資料
 
