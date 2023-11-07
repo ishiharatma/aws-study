@@ -140,7 +140,7 @@ Duration: 0:01:00
 
 CMK は別のアカウントに使用を許可することができます。
 
-このように使用を許可するアカウントを指定すると、キーポリシーに反映されます。
+次のように使用を許可するアカウントを指定すると、キーポリシーに反映されます。
 ![kms-use-other-account](/images/kms/kms-use-other-account.png)
 
 ![kms-use-other-account-policy](/images/kms/kms-use-other-account-policy.png)
@@ -152,7 +152,7 @@ Duration: 0:05:00
 [キーの削除](https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html)
 
 CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。
-削除スケジュールは、7日～30日を指定できます。この期間ないであれば削除をキャンセルすることができます。
+削除スケジュールは、7日～30日を指定できます。この期間内であれば削除をキャンセルすることができます。
 削除されると、既存データを二度と復号できなくなるので注意が必要です。
 
 削除ではなく、無効化することもできますのでまずは無効化を行い、本当にキーが使用されていないことを確認することを推奨します。
@@ -218,7 +218,7 @@ OR
 
 Duration: 0:00:15
 
-AWS Encryption SDKの機能として、「[データキーキャッシュ](https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html)」がある。
+AWS Encryption SDKの機能として、「[データキーキャッシュ](https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html)」があります。
 これを利用することでデータキー取得のAPIコールを減らすことができます。
 
 ## クライアントサイド暗号化とサーバサイド暗号化

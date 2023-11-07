@@ -168,7 +168,7 @@
     
       <google-codelab-step label="別のAWSアカウントへの許可" duration="1">
         <p>CMK は別のアカウントに使用を許可することができます。</p>
-<p>このように使用を許可するアカウントを指定すると、キーポリシーに反映されます。 <img alt="kms-use-other-account" src="img\\1ecedb492d16839c.png"></p>
+<p>次のように使用を許可するアカウントを指定すると、キーポリシーに反映されます。 <img alt="kms-use-other-account" src="img\\1ecedb492d16839c.png"></p>
 <p class="image-container"><img alt="kms-use-other-account-policy" src="img\\d03b8bb27d8906b2.png"></p>
 
 
@@ -176,7 +176,7 @@
     
       <google-codelab-step label="キーの削除" duration="5">
         <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html" target="_blank">キーの削除</a></p>
-<p>CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。 削除スケジュールは、7日～30日を指定できます。この期間ないであれば削除をキャンセルすることができます。 削除されると、既存データを二度と復号できなくなるので注意が必要です。</p>
+<p>CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。 削除スケジュールは、7日～30日を指定できます。この期間内であれば削除をキャンセルすることができます。 削除されると、既存データを二度と復号できなくなるので注意が必要です。</p>
 <p>削除ではなく、無効化することもできますのでまずは無効化を行い、本当にキーが使用されていないことを確認することを推奨します。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/enable-and-disable-key.html" target="_blank">キーの有効化と無効化</a></p>
 <p>削除予定の CMK が利用されたら通知させることもできます。</p>
@@ -231,7 +231,7 @@ OR
       </google-codelab-step>
     
       <google-codelab-step label="データキーキャッシュ" duration="1">
-        <p>AWS Encryption SDKの機能として、「<a href="https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html" target="_blank">データキーキャッシュ</a>」がある。 これを利用することでデータキー取得のAPIコールを減らすことができます。</p>
+        <p>AWS Encryption SDKの機能として、「<a href="https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html" target="_blank">データキーキャッシュ</a>」があります。 これを利用することでデータキー取得のAPIコールを減らすことができます。</p>
 
 
       </google-codelab-step>
