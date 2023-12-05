@@ -1,0 +1,116 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Certificae Manager (ACM)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="acm-overview"
+                  title="AWS Certificae Manager (ACM)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#aws-certificae-manager-acm" target="_blank">AWS Certificae Manager (ACM)</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#aws-certificae-manager-%E3%81%A8%E3%81%AF" target="_blank">AWS Certificae Manager とは</a></li>
+<li><a href="#%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8" target="_blank">リージョナルサービスであること</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%8F%AF%E8%83%BD%E3%81%AA%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9" target="_blank">使用可能なサービス</a></li>
+<li><a href="#%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF%E8%A8%BC%E6%98%8E%E6%9B%B8%E3%81%A8%E3%83%97%E3%83%A9%E3%82%A4%E3%83%99%E3%83%BC%E3%83%88%E8%A8%BC%E6%98%8E%E6%9B%B8" target="_blank">パブリック証明書とプライベート証明書</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%88%E3%81%95%E3%82%8C%E3%81%9F%E8%A8%BC%E6%98%8E%E6%9B%B8" target="_blank">インポートされた証明書</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Certificae Manager とは" duration="58">
+        <p>AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続リソースで使用するパブリックおよびプライベート SSL/TLS 証明書をプロビジョニング、管理するサービスです。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/d-zsi1ZRwLs" target="_blank">AWS Certificate Manager(YouTube)</a>(0:57:12)</p>
+<p class="image-container"><img alt="blackbelt-acm" src="img\\e7d5b4f38b5b5e88.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/certificate-manager/" target="_blank">AWS Certificae Manager サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/acm/?id=docs_gateway" target="_blank">AWS Certificae Manager ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/certificate-manager/faqs/" target="_blank">AWS Certificae Manager よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/certificate-manager/pricing/" target="_blank">AWS Certificae Manager の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="リージョナルサービスであること" duration="1">
+        <p>ACM はリージョンごとのサービスであるということを意識する必要があります。 他の AWS サービスで利用する場合は、リージョンの関係を意識しないといけません。</p>
+<p>特に、CloudFront で利用する場合は、<code>バージニア北部リージョン</code> で証明書を発行する必要があります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/acm-regions.html" target="_blank">サポートされるリージョン</a></p>
+<p>Amazon CloudFront で ACM 証明書を使用するには、米国東部 (バージニア北部) リージョン の証明書をリクエスト (またはインポート) していることを確認します。</p>
+<p>ALB に使用する場合は、ALB のリージョンで発行します。</p>
+<p>Elastic Load Balancing で証明書を使用するには...(略)...リージョンごとに証明書の各ドメイン名を取得する必要があることを意味します。リージョン間で証明書をコピーすることはできません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="使用可能なサービス" duration="1">
+        <p>Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner、API Gateway、CloudFormationなどで利用できます。</p>
+<p>詳細は、<a href="https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/acm-services.html" target="_blank">サービスと AWS Certificate Manager の統合</a> を参照します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="パブリック証明書とプライベート証明書" duration="2">
+        <p>FAQ の <a href="https://aws.amazon.com/jp/certificate-manager/faqs/" target="_blank">Q: パブリック証明書とプライベート証明書の違いは何ですか?</a> に記載があります。</p>
+<p>パブリック証明書は厳しい審査をクリアしているパブリック認証局から発行しているのに対し、プライベート証明書は審査を受けていない認証局から発行するもので、ざっくりいうと、インターネットからアクセスするようなサービスの場合は、パブリック証明書で、組織内などのプライベートネットワークの場合は、プライベート証明書という使い分けです。</p>
+<p>パブリック証明書とプライベート証明書は有効期限が近づくと、自動更新されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="インポートされた証明書" duration="1">
+        <p>サードパーティーの証明書を使う場合はインポートすることで、CloudFront、ELB、API Gatewayで利用することができます。 ただし、自動更新は行われないため、証明書が切れる前に手動でインポートする必要があります。 自動更新は行われませんが、<a href="https://docs.amazonaws.cn/en_us/acm/latest/userguide/cloudwatch-metrics.html" target="_blank">ACM CloudWatch メトリクス</a>で証明書の有効期限を監視することはできます。</p>
+<p><code>DaysToExpiry</code> は証明書が切れるまでの残り日数になっているので、このように減少していきます。</p>
+<p class="image-container"><img alt="DaysToExpiry" src="img\\ae736248a41f7586.JPG"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p class="image-container"><img alt="acm" src="img\\ad29533069789467.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

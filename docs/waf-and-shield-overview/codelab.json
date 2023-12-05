@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2023-12-05T20:09:31+09:00",
+  "id": "waf-and-shield-overview",
+  "duration": 208,
+  "title": "AWS WAF \u0026 Shield",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_waf-and-shield-overview.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "awswaf\u0026shield"
+  ],
+  "url": "waf-and-shield-overview"
+}

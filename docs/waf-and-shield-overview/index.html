@@ -1,0 +1,451 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS WAF &amp; Shield</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="waf-and-shield-overview"
+                  title="AWS WAF &amp; Shield"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#aws-waf--shield" target="_blank">AWS WAF &amp; Shield</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#aws-waf-%E3%81%A8%E3%81%AF" target="_blank">AWS WAF とは</a></li>
+<li><a href="#aws-shield-%E3%81%A8%E3%81%AF" target="_blank">AWS Shield とは</a></li>
+<li><a href="#osi-%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E3%81%AF" target="_blank">OSI モデルとは</a></li>
+<li><a href="#aws-waf-%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">AWS WAF の機能</a><ul>
+<li><a href="#web-acl" target="_blank">Web ACL</a></li>
+<li><a href="#wcuweb-acl-capacity-units" target="_blank">WCU(web ACL Capacity Units)</a></li>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%A8%E3%83%AB%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">ルールとルールグループ</a><ul>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%AB" target="_blank">ルール</a><ul>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">アクション</a></li>
+</ul>
+</li>
+<li><a href="#aws-%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%89%E3%83%AB%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">AWS マネージドルールグループ</a><ul>
+<li><a href="#aws-%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%89%E3%83%AB%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AE%E9%81%A9%E7%94%A8%E4%BE%8B" target="_blank">AWS マネージドルールグループの適用例</a></li>
+</ul>
+</li>
+<li><a href="#aws-marketplace-%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%89%E3%83%AB%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">AWS Marketplace マネージドルールグループ</a></li>
+<li><a href="#%E7%8B%AC%E8%87%AA%E3%81%AE%E3%83%AB%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">独自のルールグループ</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%AD%E3%82%B0" target="_blank">ログ</a><ul>
+<li><a href="#%E3%83%AD%E3%82%B0%E5%87%BA%E5%8A%9B" target="_blank">ログ出力</a></li>
+<li><a href="#%E3%83%AD%E3%82%B0%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89" target="_blank">ログフィールド</a></li>
+<li><a href="#%E3%83%AD%E3%82%B0%E3%81%AE%E5%88%86%E6%9E%90" target="_blank">ログの分析</a></li>
+</ul>
+</li>
+<li><a href="#waf-%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">WAF のまとめ</a></li>
+</ul>
+</li>
+<li><a href="#aws-shield-%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">AWS Shield の機能</a><ul>
+<li><a href="#global-threat-dashboard" target="_blank">Global threat dashboard</a></li>
+<li><a href="#shield-%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">Shield のまとめ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS WAF とは" duration="119">
+        <p>AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAFは、HTTP / HTTPSリクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAFは、XSS（クロスサイトスクリプティング）、SQLインジェクション、CSRF（クロスサイトリクエストフォージェリ）などのWebアプリケーション攻撃を検出および防止するための機能を提供します。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/ceQ7eU_jkD4" target="_blank">AWS Managed Rules for AWS WAF の活用(YouTube)</a>(0:32:28)</p>
+<p class="image-container"><img alt="blackbelt-waf-rule" src="img\\2075acc0a5ea132a.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/4KbCJAjiA3A" target="_blank">AWS WAF アップデート(YouTube)</a>(1:01:15)</p>
+<p class="image-container"><img alt="blackbelt-waf-update" src="img\\6f7c6524a7efa8f2.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/x11kHIESSGA" target="_blank">AWS WAF でできる Bot 対策(YouTube)</a>(0:24:54)</p>
+<p class="image-container"><img alt="blackbelt-waf-bot" src="img\\165a393ad8192f67.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/waf/" target="_blank">AWS WAF サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/waf/?id=docs_gateway" target="_blank">AWS WAF ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/waf/faqs/" target="_blank">AWS WAF よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/waf/pricing/" target="_blank">AWS WAF 料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Shield とは" duration="61">
+        <p>AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/qKNsYWHWOiYxx" target="_blank">AWS Shield Advanced(YouTube)</a>(1:00:33)</p>
+<p class="image-container"><img alt="blackbelt-shield" src="img\\498e741a485f9d0a.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/shield/" target="_blank">AWS Shield サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway" target="_blank">AWS Shield ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/shield/faqs/" target="_blank">AWS Shield よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/shield/pricing/" target="_blank">AWS Shield 料金</a></p>
+<p><a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="OSI モデルとは" duration="1">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>層</p>
+</td><td colspan="1" rowspan="1"><p>名称</p>
+</td><td colspan="1" rowspan="1"><p>プロトコル</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>7</p>
+</td><td colspan="1" rowspan="1"><p>アプリケーション層</p>
+</td><td colspan="1" rowspan="1"><p>HTTP/HTTPS,FTP,DNS..</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>6</p>
+</td><td colspan="1" rowspan="1"><p>プレゼンテーション層</p>
+</td><td colspan="1" rowspan="1"><p>TLS,SSL,FTP(Ascii)...</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>5</p>
+</td><td colspan="1" rowspan="1"><p>セッション層</p>
+</td><td colspan="1" rowspan="1"><p>TLS,NetBIOS...</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>4</p>
+</td><td colspan="1" rowspan="1"><p>トランスポート層</p>
+</td><td colspan="1" rowspan="1"><p>TCP,UDP...</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>3</p>
+</td><td colspan="1" rowspan="1"><p>ネットワーク層</p>
+</td><td colspan="1" rowspan="1"><p>IP,ICMP,ARP,RARP...</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>2</p>
+</td><td colspan="1" rowspan="1"><p>データリンク層</p>
+</td><td colspan="1" rowspan="1"><p>PPP,Ethernet</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>1</p>
+</td><td colspan="1" rowspan="1"><p>物理層</p>
+</td><td colspan="1" rowspan="1"><p>RS-232,UTP,無線</p>
+</td></tr>
+</table>
+<p>詳しくは、<a href="https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB" target="_blank">OSI参照モデル(Wikipedia)</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS WAF の機能" duration="5">
+        <h2 is-upgraded>Web ACL</h2>
+<p>Web ACL(ウェブアクセスコントロールリスト：web access control list)は、WAF を利用する際に作成する同一の制御ルールを含んだ論理的なグループのことです。 Web ACL は作成した直後から課金対象となります。 料金は月額固定で、１か月に満たない場合は案分されます。</p>
+<p class="image-container"><img alt="webacl" src="img\\22cca25d8f6d6bf1.JPG"></p>
+<p>WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。 すべてのルールが通った場合のデフォルトの動作を指定することができます。</p>
+<p class="image-container"><img alt="waf-rules" src="img\\9eb4cb736c7f5ab1.JPG"></p>
+<p class="image-container"><img alt="default-action" src="img\\fe4bc4f3f21a6ad6.JPG"></p>
+<h2 is-upgraded>WCU(web ACL Capacity Units)</h2>
+<p>WebACL に設定できるルールやルールグループにはそれぞれ WCU(web ACL Capacity Units) という処理コストの定義があり、複雑なルールほど WCU が多くなっています。 １つの WebACL に設定できる WCU に上限をつけることで、適用できるルール数を制限しています。</p>
+<p class="image-container"><img alt="waf-wcu" src="img\\6857c2219c9721da.JPG"></p>
+<p>下記アップデート以前は、最大 1,500 WCU となっており、これを超える場合は上限緩和申請が必要でしたが、アップデートにより 5,000 WCU まで上限緩和申請なしで使用できるようになりました。 ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100万件あたりに追加料金が発生するようになります。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/04/aws-waf-web-acl-capacity-units-limits/" target="_blank">AWS WAF でウェブ ACL の容量ユニット制限を引き上げ(Apr 11, 2023)</a></p>
+<h2 is-upgraded>ルールとルールグループ</h2>
+<h3 is-upgraded>ルール</h3>
+<p>リクエストに対する検査基準(ステートメント：Statement)と、検査基準に一致した場合のアクション(Action)を定義したものです。</p>
+<p class="image-container"><img alt="waf-rule" src="img\\dfdb66a06f8f9113.JPG"></p>
+<p>いろいろな検査基準を作成できますが、処理が複雑になると WCU も増加していきます。</p>
+<p>WCU の加算ルールは下記を参照してください。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-rule-statements-match.html" target="_blank">一致ルールステートメント</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-rule-statements-logical.html" target="_blank">論理ルールステートメント</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-rule-statement-type-rate-based.html" target="_blank">レートベースのルールステートメント</a></p>
+<h4 is-upgraded>アクション</h4>
+<p>アクションには、終了アクションと非終了アクションがあります。 終了アクションは、残りのルールを実施しないアクションです。 ルールのアクションは次のとおりです。</p>
+<ul>
+<li>ALLOW <ul>
+<li>リクエストの転送を許可します。</li>
+<li>終了アクション</li>
+</ul>
+</li>
+<li>BLOCK <ul>
+<li>リクエストの転送を拒否します。HTTP 403 (Forbidden) ステータスコードで応答します。</li>
+<li>終了アクション</li>
+</ul>
+</li>
+<li>COUNT <ul>
+<li>リクエストがあったことを記録（カウント）しますが、なんのアクションも実施しません。残りのルールがある場合は継続します。</li>
+<li>非終了アクション</li>
+</ul>
+</li>
+<li>CAPTCHA および Challenge <ul>
+<li>CAPTCHA パズルおよびサイレントチャレンジを使用して、ボットかどうかを判定します。</li>
+<li>判定結果によって、終了アクションか非終了アクションとなります。</li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>AWS マネージドルールグループ</h3>
+<p>AWS が用意しているいくつかのルールをまとめて用途ごとに定義したものです。 WordPress や PHP など特定タイプのアプリケーションを保護するように設計されたものもあります。</p>
+<p>ほとんどが無料で利用できますが、一部有料なルールグループも存在します。</p>
+<p class="image-container"><img alt="managed-paid" src="img\\1d1bd3e2249c0c2d.JPG"></p>
+<p class="image-container"><img alt="managed-free" src="img\\647010d81af69df2.JPG"></p>
+<p>マネージドルールは、AWS によって随時アップデートされ、バージョンが上がっていきます。 マネージドルールを使用する際は、バージョン固定で利用するか、推奨されてるバージョンに自動的にアップデートするかを選択できます。</p>
+<p class="image-container"><img alt="managed-version" src="img\\f27017b15602f9d1.JPG"></p>
+<p>推奨されているバージョンに自動的にアップデートする場合、運用コストは下がりますが、アップデートにより予期せぬブロックが発生するリスクがあります。</p>
+<p>バージョンを固定する場合、新しいバージョンを検証し適用する運用コストが上がりますが、予期せぬブロックが発生するリスクは回避できます。 どちらが適しているかはしっかり検討するのがよいでしょう。</p>
+<p>ルールグループがアップデートされることを検知するには、<a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-using-managed-rule-groups-sns-topic.html" target="_blank">マネージドルールグループに対する新しいバージョンと更新の通知を受け取る</a>を参考にします。</p>
+<p class="image-container"><img alt="managed-versionup" src="img\\6effcd5a17cf9362.JPG"></p>
+<h4 is-upgraded>AWS マネージドルールグループの適用例</h4>
+<ul>
+<li>推奨ルールのみ（◎のみ）：1,175 / 1,500 WCU　残り：325 WCU<table>
+<tr><td colspan="1" rowspan="1"><p>ルール名</p>
+</td><td colspan="1" rowspan="1"><p>キャパシティ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Core rule set</p>
+</td><td colspan="1" rowspan="1"><p>700</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Know bad inputs</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>SQL database</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon IP reputation list</p>
+</td><td colspan="1" rowspan="1"><p>25</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Anonymous IP list</p>
+</td><td colspan="1" rowspan="1"><p>50</p>
+</td></tr>
+</table>
+</li>
+<li>Linuxサーバ：1,375 / 1,500 WCU　残り：125 WCU<table>
+<tr><td colspan="1" rowspan="1"><p>ルール名</p>
+</td><td colspan="1" rowspan="1"><p>キャパシティ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>推奨ルール</p>
+</td><td colspan="1" rowspan="1"><p>1,175</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Linux operating system</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td></tr>
+</table>
+</li>
+</ul>
+<p>分類の記号の意味は次のとおりです。</p>
+<ul>
+<li>◎：導入を推奨</li>
+<li>△：OSの種類によって導入を検討</li>
+<li>▲：アプリケーションの性質によって導入を検討</li>
+</ul>
+<table>
+<tr><td colspan="1" rowspan="1"><p>ルール名</p>
+</td><td colspan="1" rowspan="1"><p>キャパシティ</p>
+</td><td colspan="1" rowspan="1"><p>ルール説明</p>
+</td><td colspan="1" rowspan="1"><p>分類</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Core rule set</p>
+</td><td colspan="1" rowspan="1"><p>700</p>
+</td><td colspan="1" rowspan="1"><p>OWASP(Open Web Application Security Project *1) で公開されているWebサイトを狙った攻撃に対して作られたルールで、多くのインジェクション関係の基本的なルールが含まれているため、Webサイトを保護するための基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>◎</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Admin protection</p>
+</td><td colspan="1" rowspan="1"><p>100</p>
+</td><td colspan="1" rowspan="1"><p>管理画面へのアクセスを制御するためのルールで、公開された管理ページへの外部アクセスをブロックできるルールが含まれています。アプリケーションの性質から導入を検討します。</p>
+</td><td colspan="1" rowspan="1"><p>▲</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Know bad inputs</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td><td colspan="1" rowspan="1"><p>既知の脆弱性の悪用または発見に関連付けられている要求パターンをブロックできるルールです。悪意のある攻撃者が脆弱なアプリケーションを発見するリスクを減らすことができるため、Webサイトを保護するための基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>◎</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>SQL database</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td><td colspan="1" rowspan="1"><p>SQLインジェクションなどSQLデータベースに対する脆弱性からアプリケーションを保護するために準備されたルールです。データベースを利用する環境では基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>◎</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Linux operating system</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td><td colspan="1" rowspan="1"><p>ローカルファイルインクルージョンなどLinuxの環境に絞り込んだルールです。Linuxの環境でサーバ上でWebアプリケーションを稼働している場合は導入を検討します。</p>
+</td><td colspan="1" rowspan="1"><p>△</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>POSIX operating system</p>
+</td><td colspan="1" rowspan="1"><p>100</p>
+</td><td colspan="1" rowspan="1"><p>ローカルファイルインクルージョンなどPOSIX系のOS向け構成したルールです。Webアプリケーションを稼働している場合、導入を検討します。</p>
+</td><td colspan="1" rowspan="1"><p>△</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Windows operating system</p>
+</td><td colspan="1" rowspan="1"><p>200</p>
+</td><td colspan="1" rowspan="1"><p>Powershell コマンドを利用したコマンドインジェクション攻撃やWindows OSに関連する脆弱性からアプリケーションを保護するために構成されたルールで、Windows OSでアプリケーションを構成している環境では導入を推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>△</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>PHP application</p>
+</td><td colspan="1" rowspan="1"><p>100</p>
+</td><td colspan="1" rowspan="1"><p>PHP に対する脆弱性や攻撃を検知する目的で作られたルールで、アプリケーションの性質から導入を検討します。</p>
+</td><td colspan="1" rowspan="1"><p>▲</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Wordpress application</p>
+</td><td colspan="1" rowspan="1"><p>100</p>
+</td><td colspan="1" rowspan="1"><p>Wordpress に関連する脆弱性に対応したルールです。Webアプリケーションを WordPress で構築している環境においては実装することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>▲</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon IP reputation list</p>
+</td><td colspan="1" rowspan="1"><p>25</p>
+</td><td colspan="1" rowspan="1"><p>AWSが収集した脅威IPアドレスのリストで、悪質なボットなどを防ぐことができるルールです。Webサイトを保護するための基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>◎</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Anonymous IP list</p>
+</td><td colspan="1" rowspan="1"><p>50</p>
+</td><td colspan="1" rowspan="1"><p>Torや匿名でアクセスするためのプロキシーサービスのIPリストによる攻撃を防ぐことができるルールです。これらのIPリストからのアクセスは攻撃の可能性が高いですが、攻撃を目的としたものではなく、プライバシー保護を目的として利用するユーザーがいる場合もありますので、不特定対数のユーザーがアクセスするサイトでは利用するか検討した方が良い。(*2)</p>
+</td><td colspan="1" rowspan="1"><p>◎</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Bot Control</p>
+</td><td colspan="1" rowspan="1"><p>50</p>
+</td><td colspan="1" rowspan="1"><p>このルールは有償です。サイトに合わせて許可するボット、拒否するボットをコントロールすることができます。</p>
+</td><td colspan="1" rowspan="1"><p>-</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Account Takeover Prevention(ATP)*3</p>
+</td><td colspan="1" rowspan="1"><p>50</p>
+</td><td colspan="1" rowspan="1"><p>このルールは有償です。クレデンシャルスタッフィング攻撃、ブルートフォース試行、その他の異常ログインアクティビティからアプリケーションのログインページを保護することができます。</p>
+</td><td colspan="1" rowspan="1"><p>-</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Account Creation Fraud Prevention(ACFP)*4</p>
+</td><td colspan="1" rowspan="1"><p>50</p>
+</td><td colspan="1" rowspan="1"><p>このルールは有償です。偽アカウントや不正アカウントの作成を防ぐことができます。</p>
+</td><td colspan="1" rowspan="1"><p>-</p>
+</td></tr>
+</table>
+<p>*1 <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Project</a></p>
+<p>*2 Anonymous IP listを利用すると、その中に含まれる[HostingProviderIPList]というルールによってAWS内からのアクセスも遮断されます（それ以外も悪用されやすいGCPなどのクラウドサービスのIPからも遮断している可能性もあります）。セキュリティテストなどでAWSインスタンスからアクセスさせたい場合、Anonymous IP listのスコープダウンに「ホワイトリストに一致しない場合」というのを付与して除外するとよい。</p>
+<p>*3 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2022/02/aws-waf-fraud-control-login-credential-attacks/" target="_blank">Account Takeover Prevention(ATP)(Feb 14, 2022)</a></p>
+<p>*4 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/06/aws-waf-fraud-control-account-creation-prevention-pricing/" target="_blank">Account Creation Fraud Prevention(ACFP)(Jun 13, 2023)</a></p>
+<h3 is-upgraded>AWS Marketplace マネージドルールグループ</h3>
+<p>セキュリティベンダーが提供するルールセットです。それぞれのルールセットごとに料金が異なります。</p>
+<p class="image-container"><img alt="waf-marketplace-rules-1" src="img\\8624a549a4ff4651.JPG"></p>
+<p class="image-container"><img alt="waf-marketplace-rules-2" src="img\\5a6369906c517c27.JPG"></p>
+<h3 is-upgraded>独自のルールグループ</h3>
+<p>独自のルールをまとめて名前を付けておくことで、再利用可能にしたものです。 作成するルールグループには、WebACL と同様の WCU の上限があります。</p>
+<h2 is-upgraded>ログ</h2>
+<h3 is-upgraded>ログ出力</h3>
+<p>ログ記録を有効にすることで、CloudWatch Logs ロググループ、S3、 Kinesis Data Firehose に送信することができます。</p>
+<h3 is-upgraded>ログフィールド</h3>
+<p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/logging-fields.html" target="_blank">ログフィールド</a></p>
+<p>出力されるログフィールドの主なものは次のとおりです。</p>
+<ul>
+<li>action <ul>
+<li>終了アクション</li>
+</ul>
+</li>
+<li>terminatingRule <ul>
+<li>リクエストを終了したルール。追加情報によって、どういう理由で Block されたのかが分かる。 <ul>
+<li>ruleMatchDetails</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>terminatingRuleMatchDetails <ul>
+<li>リクエストに一致した終了ルールに関する詳細情報</li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>ログの分析</h3>
+<p>WAF のログは Athena を使うことで分析がしやすくなります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/waf-logs.html" target="_blank">AWS WAF ログのクエリ</a></p>
+<p>次のようなクエリを実行することでデータを抽出することができます。</p>
+<ul>
+<li>BLOCK されたアクセスを検索する</li>
+</ul>
+<pre><code language="language-sql" class="language-sql">SELECT from_unixtime(timestamp/1000) as date, *
+FROM waf_logs_partitioned
+WHERE action = &#39;BLOCK&#39;
+ORDER BY timestamp desc
+</code></pre>
+<ul>
+<li>期間を限定して検索する</li>
+</ul>
+<pre><code language="language-sql" class="language-sql">SELECT from_unixtime(timestamp/1000) as date, *
+FROM waf_logs_partitioned
+WHERE action = &#39;BLOCK&#39;
+  AND from_unixtime(timestamp/1000)
+     BETWEEN parse_datetime(&#39;2022-06-22-02:00:00&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;) 
+     AND parse_datetime(&#39;2022-06-22-02:59:59&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;) 
+ORDER BY timestamp desc
+</code></pre>
+<h2 is-upgraded>WAF のまとめ</h2>
+<p class="image-container"><img alt="waf" src="img\\2778c674c312a50a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Shield の機能" duration="1">
+        <p>AWS Shield は、 Standard と Advanced の２つがあります。 Standard はデフォルトで有効になっており、追加料金なしで利用できます。 Elastic Load Balancing (ELB)、Application Load Balancer、Amazon CloudFront、Amazon Route 53 を利用する際には効果を発揮します。</p>
+<p>Advanced は有料サービスで、有効化すると月額 3,000 USD です。</p>
+<p>主な違いは次のとおりです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>Standard</p>
+</td><td colspan="1" rowspan="1"><p>Advanced</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>料金</p>
+</td><td colspan="1" rowspan="1"><p>無料</p>
+</td><td colspan="1" rowspan="1"><p>有料</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>保護レイヤー</p>
+</td><td colspan="1" rowspan="1"><p>L3/4</p>
+</td><td colspan="1" rowspan="1"><p>L3/4/7</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>保護可能 DDoS 攻撃</p>
+</td><td colspan="1" rowspan="1"><p>一般的な</p>
+</td><td colspan="1" rowspan="1"><p>大規模</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>DDoS コスト保護</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>オートスケール発動のコスト還元あり</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>異常検知</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>統計情報から異常検知</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レポート</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>攻撃をリアルタイムで通知、過去13カ月の履歴保持</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>サポート</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>専門家（SRT）による24時間365日。英語</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>その他</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>AWS WAF の一部が無料利用可</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>適用サービス</p>
+</td><td colspan="1" rowspan="1"><p>CloudFront, Route 53 など</p>
+</td><td colspan="1" rowspan="1"><p>CloudFront,Route53,ELB,ALB,Global Accelerator,EC2</p>
+</td></tr>
+</table>
+<h2 is-upgraded>Global threat dashboard</h2>
+<p>全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが</p>
+<p class="image-container"><img alt="shield-console-global-activity" src="img\\4374de5f8d138a0f.png"></p>
+<h2 is-upgraded>Shield のまとめ</h2>
+<p class="image-container"><img alt="shield" src="img\\332e0f95e4d7f791.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

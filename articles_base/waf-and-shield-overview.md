@@ -6,13 +6,52 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+## Contents
+
+Duration: 00:01:00
+
+- [AWS WAF \& Shield](#aws-waf--shield)
+  - [はじめに](#はじめに)
+  - [Contents](#contents)
+  - [AWS WAF とは](#aws-waf-とは)
+  - [AWS Shield とは](#aws-shield-とは)
+  - [OSI モデルとは](#osi-モデルとは)
+  - [AWS WAF の機能](#aws-waf-の機能)
+    - [Web ACL](#web-acl)
+    - [WCU(web ACL Capacity Units)](#wcuweb-acl-capacity-units)
+    - [ルールとルールグループ](#ルールとルールグループ)
+      - [ルール](#ルール)
+        - [アクション](#アクション)
+      - [AWS マネージドルールグループ](#aws-マネージドルールグループ)
+        - [AWS マネージドルールグループの適用例](#aws-マネージドルールグループの適用例)
+      - [AWS Marketplace マネージドルールグループ](#aws-marketplace-マネージドルールグループ)
+      - [独自のルールグループ](#独自のルールグループ)
+    - [ログ](#ログ)
+      - [ログ出力](#ログ出力)
+      - [ログフィールド](#ログフィールド)
+      - [ログの分析](#ログの分析)
+    - [WAF のまとめ](#waf-のまとめ)
+  - [AWS Shield の機能](#aws-shield-の機能)
+    - [Global threat dashboard](#global-threat-dashboard)
+    - [Shield のまとめ](#shield-のまとめ)
+
 ## AWS WAF とは
+
+Duration: 1:58:37
 
 AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAFは、HTTP / HTTPSリクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAFは、XSS（クロスサイトスクリプティング）、SQLインジェクション、CSRF（クロスサイトリクエストフォージェリ）などのWebアプリケーション攻撃を検出および防止するための機能を提供します。
 
-【AWS Black Belt Online Seminar】[xx(YouTube)](xxx)(1:00:33)
+【AWS Black Belt Online Seminar】[AWS Managed Rules for AWS WAF の活用(YouTube)](https://youtu.be/ceQ7eU_jkD4)(0:32:28)
 
-![](/images/waf/)
+![blackbelt-waf-rule](/images/blackbelt/blackbelt-waf-rule-320.jpg)
+
+【AWS Black Belt Online Seminar】[AWS WAF アップデート(YouTube)](https://youtu.be/4KbCJAjiA3A)(1:01:15)
+
+![blackbelt-waf-update](/images/blackbelt/blackbelt-waf-update-320.jpg)
+
+【AWS Black Belt Online Seminar】[AWS WAF でできる Bot 対策(YouTube)](https://youtu.be/x11kHIESSGA)(0:24:54)
+
+![blackbelt-waf-bot](/images/blackbelt/blackbelt-waf-bot-320.jpg)
 
 [AWS WAF サービス概要](https://aws.amazon.com/jp/waf/)
 
@@ -24,7 +63,13 @@ AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆
 
 ## AWS Shield とは
 
+Duration: 1:00:33
+
 AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。
+
+【AWS Black Belt Online Seminar】[AWS Shield Advanced(YouTube)](https://youtu.be/qKNsYWHWOiYxx)(1:00:33)
+
+![blackbelt-shield](/images/blackbelt/blackbelt-shield-320.jpg)
 
 [AWS Shield サービス概要](https://aws.amazon.com/jp/shield/)
 
@@ -37,6 +82,8 @@ AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃�
 [DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)
 
 ## OSI モデルとは
+
+Duration: 0:1:00
 
 | 層 | 名称 | プロトコル |
 | --- | --- | --- |
@@ -52,11 +99,11 @@ AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃�
 
 ## AWS WAF の機能
 
-Duration: 0:01:30
+Duration: 0:15:00
 
 ### Web ACL
 
-WAF を利用する際に作成する同一の制御ルールを含んだ論理的なグループのことです。
+Web ACL(ウェブアクセスコントロールリスト：web access control list)は、WAF を利用する際に作成する同一の制御ルールを含んだ論理的なグループのことです。
 Web ACL は作成した直後から課金対象となります。
 料金は月額固定で、１か月に満たない場合は案分されます。
 
@@ -117,7 +164,6 @@ WCU の加算ルールは下記を参照してください。
   - CAPTCHA パズルおよびサイレントチャレンジを使用して、ボットかどうかを判定します。
   - 判定結果によって、終了アクションか非終了アクションとなります。
 
-
 #### AWS マネージドルールグループ
 
 AWS が用意しているいくつかのルールをまとめて用途ごとに定義したものです。
@@ -163,6 +209,7 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
   | Linux operating system | 200 |
 
 分類の記号の意味は次のとおりです。
+
 - ◎：導入を推奨
 - △：OSの種類によって導入を検討
 - ▲：アプリケーションの性質によって導入を検討
@@ -192,7 +239,6 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 *4 [Account Creation Fraud Prevention(ACFP)(Jun 13, 2023)](https://aws.amazon.com/jp/about-aws/whats-new/2023/06/aws-waf-fraud-control-account-creation-prevention-pricing/)
 
-
 #### AWS Marketplace マネージドルールグループ
 
 セキュリティベンダーが提供するルールセットです。それぞれのルールセットごとに料金が異なります。
@@ -201,14 +247,69 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 ![waf-marketplace-rules-2](/images/waf/waf-marketplace-rules-2.JPG)
 
-#### 独自のルールグループ 
+#### 独自のルールグループ
   
 独自のルールをまとめて名前を付けておくことで、再利用可能にしたものです。
 作成するルールグループには、WebACL と同様の WCU の上限があります。
 
+### ログ
+
+Duration: 0:05:00
+
+#### ログ出力
+
+ログ記録を有効にすることで、CloudWatch Logs ロググループ、S3、 Kinesis Data Firehose に送信することができます。
+
+#### ログフィールド
+
+[ログフィールド](https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/logging-fields.html)
+
+出力されるログフィールドの主なものは次のとおりです。
+
+- action
+  - 終了アクション
+- terminatingRule
+  - リクエストを終了したルール。追加情報によって、どういう理由で Block されたのかが分かる。
+    - ruleMatchDetails
+- terminatingRuleMatchDetails
+  - リクエストに一致した終了ルールに関する詳細情報
+
+#### ログの分析
+
+WAF のログは Athena を使うことで分析がしやすくなります。
+
+[AWS WAF ログのクエリ](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/waf-logs.html)
+
+次のようなクエリを実行することでデータを抽出することができます。
+
+- BLOCK されたアクセスを検索する
+
+```sql
+SELECT from_unixtime(timestamp/1000) as date, *
+FROM waf_logs_partitioned
+WHERE action = 'BLOCK'
+ORDER BY timestamp desc
+```
+
+- 期間を限定して検索する
+
+```sql
+SELECT from_unixtime(timestamp/1000) as date, *
+FROM waf_logs_partitioned
+WHERE action = 'BLOCK'
+  AND from_unixtime(timestamp/1000)
+     BETWEEN parse_datetime('2022-06-22-02:00:00','yyyy-MM-dd-HH:mm:ss') 
+     AND parse_datetime('2022-06-22-02:59:59','yyyy-MM-dd-HH:mm:ss') 
+ORDER BY timestamp desc
+```
+
 ### WAF のまとめ
 
+![waf](/images/all/waf.png)
+
 ## AWS Shield の機能
+
+Duration: 0:05:00
 
 AWS Shield は、 Standard と Advanced の２つがあります。
 Standard はデフォルトで有効になっており、追加料金なしで利用できます。
@@ -230,6 +331,14 @@ Advanced は有料サービスで、有効化すると月額 3,000 USD です。
 | その他 | 無 | AWS WAF の一部が無料利用可 |
 | 適用サービス | CloudFront, Route 53 など | CloudFront,Route53,ELB,ALB,Global Accelerator,EC2 |
 
-## Global threat dashboard
+### Global threat dashboard
+
+Duration: 0:01:00
+
+全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが
+
+![shield-console-global-activity](/images/shield/shield-console-global-activity.png)
 
 ### Shield のまとめ
+
+![shield](/images/all/shield.png)

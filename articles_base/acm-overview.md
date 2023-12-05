@@ -6,13 +6,29 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+## Contents
+
+Duration: 00:01:00
+
+- [AWS Certificae Manager (ACM)](#aws-certificae-manager-acm)
+  - [はじめに](#はじめに)
+  - [Contents](#contents)
+  - [AWS Certificae Manager とは](#aws-certificae-manager-とは)
+  - [リージョナルサービスであること](#リージョナルサービスであること)
+  - [使用可能なサービス](#使用可能なサービス)
+  - [パブリック証明書とプライベート証明書](#パブリック証明書とプライベート証明書)
+  - [インポートされた証明書](#インポートされた証明書)
+  - [まとめ](#まとめ)
+
 ## AWS Certificae Manager とは
+
+Duration: 00:57:12
 
 AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続リソースで使用するパブリックおよびプライベート SSL/TLS 証明書をプロビジョニング、管理するサービスです。
 
-【AWS Black Belt Online Seminar】[xx(YouTube)](xxx)(1:00:33)
+【AWS Black Belt Online Seminar】[AWS Certificate Manager(YouTube)](https://youtu.be/d-zsi1ZRwLs)(0:57:12)
 
-![xx](/images/xx/)
+![blackbelt-acm](/images/blackbelt/blackbelt-acm-320.jpg)
 
 [AWS Certificae Manager サービス概要](https://aws.amazon.com/jp/certificate-manager/)
 
@@ -23,6 +39,8 @@ AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続�
 [AWS Certificae Manager の料金](https://aws.amazon.com/jp/certificate-manager/pricing/)
 
 ## リージョナルサービスであること
+
+Duration: 00:01:00
 
 ACM はリージョンごとのサービスであるということを意識する必要があります。
 他の AWS サービスで利用する場合は、リージョンの関係を意識しないといけません。
@@ -39,6 +57,8 @@ ALB に使用する場合は、ALB のリージョンで発行します。
 
 ## 使用可能なサービス
 
+Duration: 00:01:00
+
 Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner、API Gateway、CloudFormationなどで利用できます。
 
 詳細は、[サービスと AWS Certificate Manager の統合](https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/acm-services.html) を参照します。
@@ -49,10 +69,13 @@ Duration: 0:01:30
 
 FAQ の [Q: パブリック証明書とプライベート証明書の違いは何ですか?](https://aws.amazon.com/jp/certificate-manager/faqs/) に記載があります。
 
-
 パブリック証明書は厳しい審査をクリアしているパブリック認証局から発行しているのに対し、プライベート証明書は審査を受けていない認証局から発行するもので、ざっくりいうと、インターネットからアクセスするようなサービスの場合は、パブリック証明書で、組織内などのプライベートネットワークの場合は、プライベート証明書という使い分けです。
 
+パブリック証明書とプライベート証明書は有効期限が近づくと、自動更新されます。
+
 ## インポートされた証明書
+
+Duration: 00:01:00
 
 サードパーティーの証明書を使う場合はインポートすることで、CloudFront、ELB、API Gatewayで利用することができます。
 ただし、自動更新は行われないため、証明書が切れる前に手動でインポートする必要があります。
@@ -61,3 +84,7 @@ FAQ の [Q: パブリック証明書とプライベート証明書の違いは�
 `DaysToExpiry` は証明書が切れるまでの残り日数になっているので、このように減少していきます。
 
 ![DaysToExpiry](/images/acm/acm-cw-daytoexpiry.JPG)
+
+## まとめ
+
+![acm](/images/all/acm.png)
