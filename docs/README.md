@@ -49,6 +49,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - セキュリティ、アイデンティティ、コンプライアンス
   - <a href="./iam-overview/index.html" target="_blank">AWS IAM</a>
   - <a href="./kms-overview/index.html" target="_blank">AWS KMS</a>
+  - <a href="./acm-overview/index.html" target="_blank">AWS Certificate Manager</a>
+  - <a href="./waf-and-shield-overview/index.html" target="_blank">AWS WAF & Shield</a>
 
 ## AWS 認定資格勉強資料
 
