@@ -65,7 +65,7 @@ AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆
 
 Duration: 1:00:33
 
-AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。
+AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,[DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。
 
 【AWS Black Belt Online Seminar】[AWS Shield Advanced(YouTube)](https://youtu.be/qKNsYWHWOiYxx)(1:00:33)
 
@@ -78,8 +78,6 @@ AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃�
 [AWS Shield よくある質問](https://aws.amazon.com/jp/shield/faqs/)
 
 [AWS Shield 料金](https://aws.amazon.com/jp/shield/pricing/)
-
-[DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)
 
 ## OSI モデルとは
 
@@ -110,7 +108,7 @@ Web ACL は作成した直後から課金対象となります。
 ![webacl](/images/waf/waf-webacl.JPG)
 
 WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。
-すべてのルールが通った場合のデフォルトの動作を指定することができます。
+すべてのルールが通った場合のデフォルトの動作（許可か拒否）を指定することができます。
 
 ![waf-rules](/images/waf/waf-rules.JPG)
 
@@ -148,7 +146,8 @@ WCU の加算ルールは下記を参照してください。
 ##### アクション
 
 アクションには、終了アクションと非終了アクションがあります。
-終了アクションは、残りのルールを実施しないアクションです。
+終了アクションは、残りのルールがあったとしてもそこで検査を中断するアクションです。非終了アクションは、残りのルールによる検査を継続します。
+
 ルールのアクションは次のとおりです。
 
 - ALLOW
@@ -162,6 +161,7 @@ WCU の加算ルールは下記を参照してください。
   - 非終了アクション
 - CAPTCHA および Challenge
   - CAPTCHA パズルおよびサイレントチャレンジを使用して、ボットかどうかを判定します。
+  - 要するに「私はロボットではありません」を実装してくれるもの。
   - 判定結果によって、終了アクションか非終了アクションとなります。
 
 #### AWS マネージドルールグループ
