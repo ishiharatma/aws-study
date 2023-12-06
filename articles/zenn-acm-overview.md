@@ -1,11 +1,11 @@
 ---
-title: "【初心者向け】AWS Certificae Manager(ACM) について改めて整理してみた" # 記事のタイトル
+title: "【初心者向け】AWS Certificate Manager(ACM) について改めて整理してみた" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
 ---
 
-# AWS Certificae Manager (ACM)
+# AWS Certificate Manager (ACM)
 
 ## はじめに
 
@@ -17,17 +17,17 @@ published: false
 
 Duration: 00:01:00
 
-- [AWS Certificae Manager (ACM)](#aws-certificae-manager-acm)
+- [AWS Certificate Manager (ACM)](#aws-certificate-manager-acm)
   - [はじめに](#はじめに)
   - [Contents](#contents)
-  - [AWS Certificae Manager とは](#aws-certificae-manager-とは)
+  - [AWS Certificate Manager とは](#aws-certificate-manager-とは)
   - [リージョナルサービスであること](#リージョナルサービスであること)
   - [使用可能なサービス](#使用可能なサービス)
   - [パブリック証明書とプライベート証明書](#パブリック証明書とプライベート証明書)
   - [インポートされた証明書](#インポートされた証明書)
   - [まとめ](#まとめ)
 
-## AWS Certificae Manager とは
+## AWS Certificate Manager とは
 
 Duration: 00:57:12
 
@@ -37,13 +37,13 @@ AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続�
 
 ![blackbelt-acm](/images/blackbelt/blackbelt-acm-320.jpg)
 
-[AWS Certificae Manager サービス概要](https://aws.amazon.com/jp/certificate-manager/)
+[AWS Certificate Manager サービス概要](https://aws.amazon.com/jp/certificate-manager/)
 
-[AWS Certificae Manager ドキュメント](https://docs.aws.amazon.com/ja_jp/acm/?id=docs_gateway)
+[AWS Certificate Manager ドキュメント](https://docs.aws.amazon.com/ja_jp/acm/?id=docs_gateway)
 
-[AWS Certificae Manager よくある質問](https://aws.amazon.com/jp/certificate-manager/faqs/)
+[AWS Certificate Manager よくある質問](https://aws.amazon.com/jp/certificate-manager/faqs/)
 
-[AWS Certificae Manager の料金](https://aws.amazon.com/jp/certificate-manager/pricing/)
+[AWS Certificate Manager の料金](https://aws.amazon.com/jp/certificate-manager/pricing/)
 
 ## リージョナルサービスであること
 
