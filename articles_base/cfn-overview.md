@@ -1,4 +1,4 @@
-# xx（xx）
+# AWS CloudFormation
 
 ## はじめに
 
@@ -10,7 +10,7 @@
 
 Duration: 00:01:00
 
-- [xx（xx）](#xxxx)
+- [AWS CloudFormation](#aws-cloudformation)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [xx とは](#xx-とは)

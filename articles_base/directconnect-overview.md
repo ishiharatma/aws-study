@@ -1,4 +1,4 @@
-# xx（xx）
+# AWS Direct Connect
 
 ## はじめに
 
@@ -10,7 +10,7 @@
 
 Duration: 00:01:00
 
-- [xx（xx）](#xxxx)
+- [AWS Direct Connect](#aws-direct-connect)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [xx とは](#xx-とは)

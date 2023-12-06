@@ -1,4 +1,4 @@
-# xx（xx）
+# AWS Transit Gateway
 
 ## はじめに
 
@@ -10,7 +10,7 @@
 
 Duration: 00:01:00
 
-- [xx（xx）](#xxxx)
+- [AWS Transit Gateway](#aws-transit-gateway)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [xx とは](#xx-とは)

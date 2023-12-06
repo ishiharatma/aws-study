@@ -1,4 +1,4 @@
-# xx（xx）
+# AWS CDK
 
 ## はじめに
 
@@ -10,7 +10,7 @@
 
 Duration: 00:01:00
 
-- [xx（xx）](#xxxx)
+- [AWS CDK](#aws-cdk)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [xx とは](#xx-とは)

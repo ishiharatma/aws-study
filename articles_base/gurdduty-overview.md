@@ -1,4 +1,4 @@
-# xx（xx）
+# Aamazon GurdDuty
 
 ## はじめに
 
@@ -10,12 +10,11 @@
 
 Duration: 00:01:00
 
-- [xx（xx）](#xxxx)
+- [Aamazon GurdDuty](#aamazon-gurdduty)
   - [はじめに](#はじめに)
   - [Contents](#contents)
   - [xx とは](#xx-とは)
   - [xx の基本](#xx-の基本)
-
 ## xx とは
 
 【AWS Black Belt Online Seminar】[xx(YouTube)](xxx)(1:00:33)
