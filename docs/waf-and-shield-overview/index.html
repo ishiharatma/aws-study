@@ -96,14 +96,13 @@
       </google-codelab-step>
     
       <google-codelab-step label="AWS Shield とは" duration="61">
-        <p>AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。</p>
+        <p>AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,<a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a>）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/qKNsYWHWOiYxx" target="_blank">AWS Shield Advanced(YouTube)</a>(1:00:33)</p>
 <p class="image-container"><img alt="blackbelt-shield" src="img\\498e741a485f9d0a.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/shield/" target="_blank">AWS Shield サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway" target="_blank">AWS Shield ドキュメント</a></p>
 <p><a href="https://aws.amazon.com/jp/shield/faqs/" target="_blank">AWS Shield よくある質問</a></p>
 <p><a href="https://aws.amazon.com/jp/shield/pricing/" target="_blank">AWS Shield 料金</a></p>
-<p><a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a></p>
 
 
       </google-codelab-step>
@@ -152,7 +151,7 @@
         <h2 is-upgraded>Web ACL</h2>
 <p>Web ACL(ウェブアクセスコントロールリスト：web access control list)は、WAF を利用する際に作成する同一の制御ルールを含んだ論理的なグループのことです。 Web ACL は作成した直後から課金対象となります。 料金は月額固定で、１か月に満たない場合は案分されます。</p>
 <p class="image-container"><img alt="webacl" src="img\\22cca25d8f6d6bf1.JPG"></p>
-<p>WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。 すべてのルールが通った場合のデフォルトの動作を指定することができます。</p>
+<p>WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。 すべてのルールが通った場合のデフォルトの動作（許可か拒否）を指定することができます。</p>
 <p class="image-container"><img alt="waf-rules" src="img\\9eb4cb736c7f5ab1.JPG"></p>
 <p class="image-container"><img alt="default-action" src="img\\fe4bc4f3f21a6ad6.JPG"></p>
 <h2 is-upgraded>WCU(web ACL Capacity Units)</h2>
@@ -169,7 +168,8 @@
 <p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-rule-statements-logical.html" target="_blank">論理ルールステートメント</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-rule-statement-type-rate-based.html" target="_blank">レートベースのルールステートメント</a></p>
 <h4 is-upgraded>アクション</h4>
-<p>アクションには、終了アクションと非終了アクションがあります。 終了アクションは、残りのルールを実施しないアクションです。 ルールのアクションは次のとおりです。</p>
+<p>アクションには、終了アクションと非終了アクションがあります。 終了アクションは、残りのルールがあったとしてもそこで検査を中断するアクションです。非終了アクションは、残りのルールによる検査を継続します。</p>
+<p>ルールのアクションは次のとおりです。</p>
 <ul>
 <li>ALLOW <ul>
 <li>リクエストの転送を許可します。</li>
@@ -188,6 +188,7 @@
 </li>
 <li>CAPTCHA および Challenge <ul>
 <li>CAPTCHA パズルおよびサイレントチャレンジを使用して、ボットかどうかを判定します。</li>
+<li>要するに「私はロボットではありません」を実装してくれるもの。</li>
 <li>判定結果によって、終了アクションか非終了アクションとなります。</li>
 </ul>
 </li>
