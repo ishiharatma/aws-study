@@ -20,10 +20,14 @@ Duration: 00:01:00
 - [AWS WAF \& Shield](#aws-waf--shield)
   - [はじめに](#はじめに)
   - [Contents](#contents)
-  - [AWS WAF とは](#aws-waf-とは)
-  - [AWS Shield とは](#aws-shield-とは)
   - [OSI モデルとは](#osi-モデルとは)
+  - [AWS Shield とは](#aws-shield-とは)
+  - [AWS WAF とは](#aws-waf-とは)
+  - [AWS Shield の機能](#aws-shield-の機能)
+    - [Global threat dashboard](#global-threat-dashboard)
+    - [Shield のまとめ](#shield-のまとめ)
   - [AWS WAF の機能](#aws-waf-の機能)
+    - [なぜ Web Application Firewall が必要か](#なぜ-web-application-firewall-が必要か)
     - [Web ACL](#web-acl)
     - [WCU(web ACL Capacity Units)](#wcuweb-acl-capacity-units)
     - [ルールとルールグループ](#ルールとルールグループ)
@@ -38,9 +42,40 @@ Duration: 00:01:00
       - [ログフィールド](#ログフィールド)
       - [ログの分析](#ログの分析)
     - [WAF のまとめ](#waf-のまとめ)
-  - [AWS Shield の機能](#aws-shield-の機能)
-    - [Global threat dashboard](#global-threat-dashboard)
-    - [Shield のまとめ](#shield-のまとめ)
+
+## OSI モデルとは
+
+Duration: 0:1:00
+
+| 層 | 名称 | プロトコル |
+| --- | --- | --- |
+| 7 | アプリケーション層 | HTTP/HTTPS,FTP,DNS.. |  
+| 6 | プレゼンテーション層 | TLS,SSL,FTP(Ascii)... |  
+| 5 | セッション層 | TLS,NetBIOS... |
+| 4 | トランスポート層 | TCP,UDP... |  
+| 3 | ネットワーク層 | IP,ICMP,ARP,RARP... |  
+| 2 | データリンク層 | PPP,Ethernet |  
+| 1 | 物理層 | RS-232,UTP,無線 |  
+
+詳しくは、[OSI参照モデル(Wikipedia)](https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB)
+
+## AWS Shield とは
+
+Duration: 1:00:33
+
+AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,[DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。
+
+【AWS Black Belt Online Seminar】[AWS Shield Advanced(YouTube)](https://youtu.be/qKNsYWHWOiYxx)(1:00:33)
+
+![blackbelt-shield](/images/blackbelt/blackbelt-shield-320.jpg)
+
+[AWS Shield サービス概要](https://aws.amazon.com/jp/shield/)
+
+[AWS Shield ドキュメント](https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway)
+
+[AWS Shield よくある質問](https://aws.amazon.com/jp/shield/faqs/)
+
+[AWS Shield 料金](https://aws.amazon.com/jp/shield/pricing/)
 
 ## AWS WAF とは
 
@@ -68,43 +103,57 @@ AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆
 
 [AWS WAF 料金](https://aws.amazon.com/jp/waf/pricing/)
 
-## AWS Shield とは
+## AWS Shield の機能
 
-Duration: 1:00:33
+Duration: 0:05:00
 
-AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,[DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。
+AWS Shield は、 Standard と Advanced の２つがあります。
+Standard はデフォルトで有効になっており、追加料金なしで利用できます。
+Elastic Load Balancing (ELB)、Application Load Balancer、Amazon CloudFront、Amazon Route 53 を利用する際には効果を発揮します。
 
-【AWS Black Belt Online Seminar】[AWS Shield Advanced(YouTube)](https://youtu.be/qKNsYWHWOiYxx)(1:00:33)
+Advanced は有料サービスで、有効化すると月額 3,000 USD です。
 
-![blackbelt-shield](/images/blackbelt/blackbelt-shield-320.jpg)
+主な違いは次のとおりです。
 
-[AWS Shield サービス概要](https://aws.amazon.com/jp/shield/)
+| 項目 | Standard | Advanced |
+| ---- | --- | --- |
+| 料金 | 無料 | 有料 |
+| 保護レイヤー | L3/4 | L3/4/7 |
+| 保護可能 DDoS 攻撃 | 一般的な | 大規模 |
+| DDoS コスト保護 | 無 | オートスケール発動のコスト還元あり |
+| 異常検知 | 無 | 統計情報から異常検知 |
+| レポート | 無 | 攻撃をリアルタイムで通知、過去13カ月の履歴保持 |
+| サポート | 無 | 専門家（SRT）による24時間365日。英語 |
+| その他 | 無 | AWS WAF の一部が無料利用可 |
+| 適用サービス | CloudFront, Route 53 など | CloudFront,Route53,ELB,ALB,Global Accelerator,EC2 |
 
-[AWS Shield ドキュメント](https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway)
+### Global threat dashboard
 
-[AWS Shield よくある質問](https://aws.amazon.com/jp/shield/faqs/)
+Duration: 0:01:00
 
-[AWS Shield 料金](https://aws.amazon.com/jp/shield/pricing/)
+全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが
 
-## OSI モデルとは
+![shield-console-global-activity](/images/shield/shield-console-global-activity.png)
 
-Duration: 0:1:00
+### Shield のまとめ
 
-| 層 | 名称 | プロトコル |
-| --- | --- | --- |
-| 7 | アプリケーション層 | HTTP/HTTPS,FTP,DNS.. |  
-| 6 | プレゼンテーション層 | TLS,SSL,FTP(Ascii)... |  
-| 5 | セッション層 | TLS,NetBIOS... |
-| 4 | トランスポート層 | TCP,UDP... |  
-| 3 | ネットワーク層 | IP,ICMP,ARP,RARP... |  
-| 2 | データリンク層 | PPP,Ethernet |  
-| 1 | 物理層 | RS-232,UTP,無線 |  
-
-詳しくは、[OSI参照モデル(Wikipedia)](https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB)
+![shield](/images/all/shield.png)
 
 ## AWS WAF の機能
 
 Duration: 0:15:00
+
+### なぜ Web Application Firewall が必要か
+
+OSI モデルのレイヤー３，４については Shield のようなファイアウォールによって悪意のあるトラフィックを遮断することができます。
+しかし、アプリケーションの HTTP リクエストに発生する SQL インジェクションやクロスサイトスクリプティングのようなものはどうでしょうか。
+これらはレイヤー７で動作するため、パケットの中身を読み取ることができず、遮断することが出来ません。
+また、この部分には様々な情報が含まれるため攻撃手段も多様です。
+そのため、レイヤー７で動作する内容を読み取り、攻撃からアプリケーションを保護するファイアウォールが必要になりました。
+
+Webアプリケーション・セキュリティに関する最も重大な10のリスクについては下記サイトを参考にしてください。
+
+[OWASP Top Ten Project](https://owasp.org/www-project-top-ten/)
 
 ### Web ACL
 
@@ -313,39 +362,3 @@ ORDER BY timestamp desc
 ### WAF のまとめ
 
 ![waf](/images/all/waf.png)
-
-## AWS Shield の機能
-
-Duration: 0:05:00
-
-AWS Shield は、 Standard と Advanced の２つがあります。
-Standard はデフォルトで有効になっており、追加料金なしで利用できます。
-Elastic Load Balancing (ELB)、Application Load Balancer、Amazon CloudFront、Amazon Route 53 を利用する際には効果を発揮します。
-
-Advanced は有料サービスで、有効化すると月額 3,000 USD です。
-
-主な違いは次のとおりです。
-
-| 項目 | Standard | Advanced |
-| ---- | --- | --- |
-| 料金 | 無料 | 有料 |
-| 保護レイヤー | L3/4 | L3/4/7 |
-| 保護可能 DDoS 攻撃 | 一般的な | 大規模 |
-| DDoS コスト保護 | 無 | オートスケール発動のコスト還元あり |
-| 異常検知 | 無 | 統計情報から異常検知 |
-| レポート | 無 | 攻撃をリアルタイムで通知、過去13カ月の履歴保持 |
-| サポート | 無 | 専門家（SRT）による24時間365日。英語 |
-| その他 | 無 | AWS WAF の一部が無料利用可 |
-| 適用サービス | CloudFront, Route 53 など | CloudFront,Route53,ELB,ALB,Global Accelerator,EC2 |
-
-### Global threat dashboard
-
-Duration: 0:01:00
-
-全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが
-
-![shield-console-global-activity](/images/shield/shield-console-global-activity.png)
-
-### Shield のまとめ
-
-![shield](/images/all/shield.png)
