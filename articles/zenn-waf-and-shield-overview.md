@@ -7,25 +7,25 @@ published: false
 
 # AWS WAF & Shield
 
-## :shamrock: はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## :eyes: Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS WAF \& Shield](#aws-waf--shield)
-  - [:shamrock: はじめに](#shamrock-はじめに)
-  - [:eyes: Contents](#eyes-contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [OSI モデルとは](#osi-モデルとは)
   - [AWS Shield とは](#aws-shield-とは)
   - [AWS WAF とは](#aws-waf-とは)
   - [AWS Shield の機能](#aws-shield-の機能)
     - [Global threat dashboard](#global-threat-dashboard)
-    - [:book: Shield のまとめ](#book-shield-のまとめ)
+    - [📖 Shield のまとめ](#-shield-のまとめ)
   - [AWS WAF の機能](#aws-waf-の機能)
     - [なぜ Web Application Firewall が必要か](#なぜ-web-application-firewall-が必要か)
     - [Web ACL](#web-acl)
@@ -41,7 +41,7 @@ Duration: 00:01:00
       - [ログ出力](#ログ出力)
       - [ログフィールド](#ログフィールド)
       - [ログの分析](#ログの分析)
-    - [:book: WAF のまとめ](#book-waf-のまとめ)
+    - [📖 WAF のまとめ](#-waf-のまとめ)
 
 ## OSI モデルとは
 
@@ -135,7 +135,7 @@ Duration: 0:01:00
 
 ![shield-console-global-activity](/images/shield/shield-console-global-activity.png)
 
-### :book: Shield のまとめ
+### 📖 Shield のまとめ
 
 ![shield](/images/all/shield.png)
 
@@ -359,6 +359,6 @@ WHERE action = 'BLOCK'
 ORDER BY timestamp desc
 ```
 
-### :book: WAF のまとめ
+### 📖 WAF のまとめ
 
 ![waf](/images/all/waf.png)
