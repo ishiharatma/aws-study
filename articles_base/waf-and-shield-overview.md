@@ -18,7 +18,7 @@ Duration: 00:01:00
   - [AWS WAF とは](#aws-waf-とは)
   - [AWS Shield の機能](#aws-shield-の機能)
     - [Global threat dashboard](#global-threat-dashboard)
-    - [📖 Shield のまとめ](#-shield-のまとめ)
+  - [📖 AWS Shield のまとめ](#-aws-shield-のまとめ)
   - [AWS WAF の機能](#aws-waf-の機能)
     - [なぜ Web Application Firewall が必要か](#なぜ-web-application-firewall-が必要か)
     - [Web ACL](#web-acl)
@@ -34,7 +34,7 @@ Duration: 00:01:00
       - [ログ出力](#ログ出力)
       - [ログフィールド](#ログフィールド)
       - [ログの分析](#ログの分析)
-    - [📖 WAF のまとめ](#-waf-のまとめ)
+  - [📖 AWS WAF のまとめ](#-aws-waf-のまとめ)
 
 ## OSI モデルとは
 
@@ -128,7 +128,7 @@ Duration: 0:01:00
 
 ![shield-console-global-activity](/images/shield/shield-console-global-activity.png)
 
-### 📖 Shield のまとめ
+## 📖 AWS Shield のまとめ
 
 ![shield](/images/all/shield.png)
 
@@ -141,16 +141,16 @@ Duration: 0:15:00
 OSI モデルのレイヤー３，４については Shield のようなファイアウォールによって悪意のあるトラフィックを遮断することができます。
 しかし、アプリケーションの HTTP リクエストに発生する SQL インジェクションやクロスサイトスクリプティングのようなものはどうでしょうか。
 これらはレイヤー７で動作するため、パケットの中身を読み取ることができず、遮断することが出来ません。
-また、この部分には様々な情報が含まれるため攻撃手段も多様です。
+この部分には様々な情報を含むことができるため、攻撃手段も多様です。
 そのため、レイヤー７で動作する内容を読み取り、攻撃からアプリケーションを保護するファイアウォールが必要になりました。
 
-Webアプリケーション・セキュリティに関する最も重大な10のリスクについては下記サイトを参考にしてください。
+攻撃によって Webアプリケーションが受けるセキュリティに関する最も重大な10のリスクについては下記サイトを参考にしてください。
 
 [OWASP Top Ten Project](https://owasp.org/www-project-top-ten/)
 
 ### Web ACL
 
-Web ACL(ウェブアクセスコントロールリスト：web access control list)は、WAF を利用する際に作成する同一の制御ルールを含んだ論理的なグループのことです。
+AWS WAF の利用を開始するときに最初に作成するのが、Web ACL(ウェブアクセスコントロールリスト：web access control list)です。 Web ACL は同一の制御ルールを含んだ論理的なグループのことです。
 Web ACL は作成した直後から課金対象となります。
 料金は月額固定で、１か月に満たない場合は案分されます。
 
@@ -352,6 +352,6 @@ WHERE action = 'BLOCK'
 ORDER BY timestamp desc
 ```
 
-### 📖 WAF のまとめ
+## 📖 AWS WAF のまとめ
 
 ![waf](/images/all/waf.png)
