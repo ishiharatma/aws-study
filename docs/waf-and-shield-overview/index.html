@@ -27,22 +27,28 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="1">
         <ul>
 <li><a href="#aws-waf--shield" target="_blank">AWS WAF &amp; Shield</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
-<li><a href="#aws-waf-%E3%81%A8%E3%81%AF" target="_blank">AWS WAF とは</a></li>
-<li><a href="#aws-shield-%E3%81%A8%E3%81%AF" target="_blank">AWS Shield とは</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#osi-%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E3%81%AF" target="_blank">OSI モデルとは</a></li>
+<li><a href="#aws-shield-%E3%81%A8%E3%81%AF" target="_blank">AWS Shield とは</a></li>
+<li><a href="#aws-waf-%E3%81%A8%E3%81%AF" target="_blank">AWS WAF とは</a></li>
+<li><a href="#aws-shield-%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">AWS Shield の機能</a><ul>
+<li><a href="#global-threat-dashboard" target="_blank">Global threat dashboard</a></li>
+</ul>
+</li>
+<li><a href="#-aws-shield-%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 AWS Shield のまとめ</a></li>
 <li><a href="#aws-waf-%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">AWS WAF の機能</a><ul>
+<li><a href="#%E3%81%AA%E3%81%9C-web-application-firewall-%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%8B" target="_blank">なぜ Web Application Firewall が必要か</a></li>
 <li><a href="#web-acl" target="_blank">Web ACL</a></li>
 <li><a href="#wcuweb-acl-capacity-units" target="_blank">WCU(web ACL Capacity Units)</a></li>
 <li><a href="#%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%A8%E3%83%AB%E3%83%BC%E3%83%AB%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">ルールとルールグループ</a><ul>
@@ -64,45 +70,12 @@
 <li><a href="#%E3%83%AD%E3%82%B0%E3%81%AE%E5%88%86%E6%9E%90" target="_blank">ログの分析</a></li>
 </ul>
 </li>
-<li><a href="#waf-%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">WAF のまとめ</a></li>
 </ul>
 </li>
-<li><a href="#aws-shield-%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">AWS Shield の機能</a><ul>
-<li><a href="#global-threat-dashboard" target="_blank">Global threat dashboard</a></li>
-<li><a href="#shield-%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">Shield のまとめ</a></li>
+<li><a href="#-aws-waf-%E3%81%AE%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 AWS WAF のまとめ</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="AWS WAF とは" duration="119">
-        <p>AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAFは、HTTP / HTTPSリクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAFは、XSS（クロスサイトスクリプティング）、SQLインジェクション、CSRF（クロスサイトリクエストフォージェリ）などのWebアプリケーション攻撃を検出および防止するための機能を提供します。</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/ceQ7eU_jkD4" target="_blank">AWS Managed Rules for AWS WAF の活用(YouTube)</a>(0:32:28)</p>
-<p class="image-container"><img alt="blackbelt-waf-rule" src="img\\2075acc0a5ea132a.jpg"></p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/4KbCJAjiA3A" target="_blank">AWS WAF アップデート(YouTube)</a>(1:01:15)</p>
-<p class="image-container"><img alt="blackbelt-waf-update" src="img\\6f7c6524a7efa8f2.jpg"></p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/x11kHIESSGA" target="_blank">AWS WAF でできる Bot 対策(YouTube)</a>(0:24:54)</p>
-<p class="image-container"><img alt="blackbelt-waf-bot" src="img\\165a393ad8192f67.jpg"></p>
-<p><a href="https://aws.amazon.com/jp/waf/" target="_blank">AWS WAF サービス概要</a></p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/waf/?id=docs_gateway" target="_blank">AWS WAF ドキュメント</a></p>
-<p><a href="https://aws.amazon.com/jp/waf/faqs/" target="_blank">AWS WAF よくある質問</a></p>
-<p><a href="https://aws.amazon.com/jp/waf/pricing/" target="_blank">AWS WAF 料金</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="AWS Shield とは" duration="61">
-        <p>AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,<a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a>）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/qKNsYWHWOiYxx" target="_blank">AWS Shield Advanced(YouTube)</a>(1:00:33)</p>
-<p class="image-container"><img alt="blackbelt-shield" src="img\\498e741a485f9d0a.jpg"></p>
-<p><a href="https://aws.amazon.com/jp/shield/" target="_blank">AWS Shield サービス概要</a></p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway" target="_blank">AWS Shield ドキュメント</a></p>
-<p><a href="https://aws.amazon.com/jp/shield/faqs/" target="_blank">AWS Shield よくある質問</a></p>
-<p><a href="https://aws.amazon.com/jp/shield/pricing/" target="_blank">AWS Shield 料金</a></p>
 
 
       </google-codelab-step>
@@ -147,9 +120,100 @@
 
       </google-codelab-step>
     
+      <google-codelab-step label="AWS Shield とは" duration="61">
+        <p>AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,<a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a>）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/qKNsYWHWOiYxx" target="_blank">AWS Shield Advanced(YouTube)</a>(1:00:33)</p>
+<p class="image-container"><img alt="blackbelt-shield" src="img\\498e741a485f9d0a.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/shield/" target="_blank">AWS Shield サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/shield/?id=docs_gateway" target="_blank">AWS Shield ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/shield/faqs/" target="_blank">AWS Shield よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/shield/pricing/" target="_blank">AWS Shield 料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS WAF とは" duration="119">
+        <p>AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAFは、HTTP / HTTPSリクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAFは、XSS（クロスサイトスクリプティング）、SQLインジェクション、CSRF（クロスサイトリクエストフォージェリ）などのWebアプリケーション攻撃を検出および防止するための機能を提供します。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/ceQ7eU_jkD4" target="_blank">AWS Managed Rules for AWS WAF の活用(YouTube)</a>(0:32:28)</p>
+<p class="image-container"><img alt="blackbelt-waf-rule" src="img\\2075acc0a5ea132a.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/4KbCJAjiA3A" target="_blank">AWS WAF アップデート(YouTube)</a>(1:01:15)</p>
+<p class="image-container"><img alt="blackbelt-waf-update" src="img\\6f7c6524a7efa8f2.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/x11kHIESSGA" target="_blank">AWS WAF でできる Bot 対策(YouTube)</a>(0:24:54)</p>
+<p class="image-container"><img alt="blackbelt-waf-bot" src="img\\165a393ad8192f67.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/waf/" target="_blank">AWS WAF サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/waf/?id=docs_gateway" target="_blank">AWS WAF ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/waf/faqs/" target="_blank">AWS WAF よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/waf/pricing/" target="_blank">AWS WAF 料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Shield の機能" duration="1">
+        <p>AWS Shield は、 Standard と Advanced の２つがあります。 Standard はデフォルトで有効になっており、追加料金なしで利用できます。 Elastic Load Balancing (ELB)、Application Load Balancer、Amazon CloudFront、Amazon Route 53 を利用する際には効果を発揮します。</p>
+<p>Advanced は有料サービスで、有効化すると月額 3,000 USD です。</p>
+<p>主な違いは次のとおりです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>Standard</p>
+</td><td colspan="1" rowspan="1"><p>Advanced</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>料金</p>
+</td><td colspan="1" rowspan="1"><p>無料</p>
+</td><td colspan="1" rowspan="1"><p>有料</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>保護レイヤー</p>
+</td><td colspan="1" rowspan="1"><p>L3/4</p>
+</td><td colspan="1" rowspan="1"><p>L3/4/7</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>保護可能 DDoS 攻撃</p>
+</td><td colspan="1" rowspan="1"><p>一般的な</p>
+</td><td colspan="1" rowspan="1"><p>大規模</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>DDoS コスト保護</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>オートスケール発動のコスト還元あり</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>異常検知</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>統計情報から異常検知</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レポート</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>攻撃をリアルタイムで通知、過去13カ月の履歴保持</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>サポート</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>専門家（SRT）による24時間365日。英語</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>その他</p>
+</td><td colspan="1" rowspan="1"><p>無</p>
+</td><td colspan="1" rowspan="1"><p>AWS WAF の一部が無料利用可</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>適用サービス</p>
+</td><td colspan="1" rowspan="1"><p>CloudFront, Route 53 など</p>
+</td><td colspan="1" rowspan="1"><p>CloudFront,Route53,ELB,ALB,Global Accelerator,EC2</p>
+</td></tr>
+</table>
+<h2 is-upgraded>Global threat dashboard</h2>
+<p>全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが</p>
+<p class="image-container"><img alt="shield-console-global-activity" src="img\\4374de5f8d138a0f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 AWS Shield のまとめ" duration="0">
+        <p class="image-container"><img alt="shield" src="img\\332e0f95e4d7f791.png"></p>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="AWS WAF の機能" duration="5">
-        <h2 is-upgraded>Web ACL</h2>
-<p>Web ACL(ウェブアクセスコントロールリスト：web access control list)は、WAF を利用する際に作成する同一の制御ルールを含んだ論理的なグループのことです。 Web ACL は作成した直後から課金対象となります。 料金は月額固定で、１か月に満たない場合は案分されます。</p>
+        <h2 is-upgraded>なぜ Web Application Firewall が必要か</h2>
+<p>OSI モデルのレイヤー３，４については Shield のようなファイアウォールによって悪意のあるトラフィックを遮断することができます。 しかし、アプリケーションの HTTP リクエストに発生する SQL インジェクションやクロスサイトスクリプティングのようなものはどうでしょうか。 これらはレイヤー７で動作するため、パケットの中身を読み取ることができず、遮断することが出来ません。 この部分には様々な情報を含むことができるため、攻撃手段も多様です。 そのため、レイヤー７で動作する内容を読み取り、攻撃からアプリケーションを保護するファイアウォールが必要になりました。</p>
+<p>攻撃によって Webアプリケーションが受けるセキュリティに関する最も重大な10のリスクについては下記サイトを参考にしてください。</p>
+<p><a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Project</a></p>
+<h2 is-upgraded>Web ACL</h2>
+<p>AWS WAF の利用を開始するときに最初に作成するのが、Web ACL(ウェブアクセスコントロールリスト：web access control list)です。 Web ACL は同一の制御ルールを含んだ論理的なグループのことです。 Web ACL は作成した直後から課金対象となります。 料金は月額固定で、１か月に満たない場合は案分されます。</p>
 <p class="image-container"><img alt="webacl" src="img\\22cca25d8f6d6bf1.JPG"></p>
 <p>WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。 すべてのルールが通った場合のデフォルトの動作（許可か拒否）を指定することができます。</p>
 <p class="image-container"><img alt="waf-rules" src="img\\9eb4cb736c7f5ab1.JPG"></p>
@@ -379,63 +443,12 @@ WHERE action = &#39;BLOCK&#39;
      AND parse_datetime(&#39;2022-06-22-02:59:59&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;) 
 ORDER BY timestamp desc
 </code></pre>
-<h2 is-upgraded>WAF のまとめ</h2>
-<p class="image-container"><img alt="waf" src="img\\2778c674c312a50a.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Shield の機能" duration="1">
-        <p>AWS Shield は、 Standard と Advanced の２つがあります。 Standard はデフォルトで有効になっており、追加料金なしで利用できます。 Elastic Load Balancing (ELB)、Application Load Balancer、Amazon CloudFront、Amazon Route 53 を利用する際には効果を発揮します。</p>
-<p>Advanced は有料サービスで、有効化すると月額 3,000 USD です。</p>
-<p>主な違いは次のとおりです。</p>
-<table>
-<tr><td colspan="1" rowspan="1"><p>項目</p>
-</td><td colspan="1" rowspan="1"><p>Standard</p>
-</td><td colspan="1" rowspan="1"><p>Advanced</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>料金</p>
-</td><td colspan="1" rowspan="1"><p>無料</p>
-</td><td colspan="1" rowspan="1"><p>有料</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>保護レイヤー</p>
-</td><td colspan="1" rowspan="1"><p>L3/4</p>
-</td><td colspan="1" rowspan="1"><p>L3/4/7</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>保護可能 DDoS 攻撃</p>
-</td><td colspan="1" rowspan="1"><p>一般的な</p>
-</td><td colspan="1" rowspan="1"><p>大規模</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>DDoS コスト保護</p>
-</td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>オートスケール発動のコスト還元あり</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>異常検知</p>
-</td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>統計情報から異常検知</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>レポート</p>
-</td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>攻撃をリアルタイムで通知、過去13カ月の履歴保持</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>サポート</p>
-</td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>専門家（SRT）による24時間365日。英語</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>その他</p>
-</td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>AWS WAF の一部が無料利用可</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>適用サービス</p>
-</td><td colspan="1" rowspan="1"><p>CloudFront, Route 53 など</p>
-</td><td colspan="1" rowspan="1"><p>CloudFront,Route53,ELB,ALB,Global Accelerator,EC2</p>
-</td></tr>
-</table>
-<h2 is-upgraded>Global threat dashboard</h2>
-<p>全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが</p>
-<p class="image-container"><img alt="shield-console-global-activity" src="img\\4374de5f8d138a0f.png"></p>
-<h2 is-upgraded>Shield のまとめ</h2>
-<p class="image-container"><img alt="shield" src="img\\332e0f95e4d7f791.png"></p>
+      <google-codelab-step label="📖 AWS WAF のまとめ" duration="0">
+        <p class="image-container"><img alt="waf" src="img\\2778c674c312a50a.png"></p>
 
 
       </google-codelab-step>

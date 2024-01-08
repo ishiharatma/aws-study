@@ -1,0 +1,200 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Aamazon GuardDuty</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="guardduty-overview"
+                  title="Aamazon GuardDuty"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Contents" duration="1">
+        <ul>
+<li><a href="#aamazon-guardduty" target="_blank">Aamazon GuardDuty</a><ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#guardduty-%E3%81%A8%E3%81%AF" target="_blank">GuardDuty とは</a></li>
+<li><a href="#guardduty-%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E7%90%86%E7%94%B1" target="_blank">GuardDuty が必要な理由</a></li>
+<li><a href="#%E7%89%B9%E5%BE%B4" target="_blank">特徴</a></li>
+<li><a href="#%E8%84%85%E5%A8%81%E6%A4%9C%E5%87%BA" target="_blank">脅威検出</a></li>
+<li><a href="#%E6%A4%9C%E5%87%BA%E7%B5%90%E6%9E%9C%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">検出結果タイプ</a><ul>
+<li><a href="#%E4%BF%A1%E9%A0%BC%E3%81%8A%E3%82%88%E3%81%B3%E8%84%85%E5%A8%81ip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%83%AA%E3%82%B9%E3%83%88" target="_blank">信頼および脅威IPアドレスリスト</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E6%A4%9C%E7%9F%A5" target="_blank">マルウェア検知</a><ul>
+<li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" target="_blank">注意事項</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A4%87%E6%95%B0%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E7%AE%A1%E7%90%86" target="_blank">複数アカウントの管理</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="GuardDuty とは" duration="47">
+        <p>AWS 環境のセキュリティを継続的にチェックしてくれるサービスです。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/Tb2Uw4B_Ihw" target="_blank">Amazon GuardDuty(YouTube)</a>(0:46:52)</p>
+<p class="image-container"><img alt="blackbelt-guardduty" src="img\\470e4a520fb45766.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/GwzBiO1jBvU" target="_blank">Amazon GuardDuty Malware Protection(YouTube)</a>(0:43:53)</p>
+<p class="image-container"><img alt="blackbelt-guardduty-malware" src="img\\5f96981244faefca.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/guardduty/" target="_blank">Amazon GuardDuty サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/?id=docs_gateway" target="_blank">Amazon GuardDuty ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/guardduty/faqs/" target="_blank">Amazon GuardDuty よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/guardduty/pricing/" target="_blank">Amazon GuardDuty の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="GuardDuty が必要な理由" duration="2">
+        <p>Well-Architected フレームワークという考え方のうち、「<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/framework/security.html" target="_blank">セキュリティの柱</a>」に、「<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/framework/sec-detection.html" target="_blank">発見的統制</a>」というものがあります。</p>
+<p>これは、セキュリティインシデントが発生しても通知するようにしておき対応する、というものです。</p>
+<p>自力で検知を組み込むのは大変な事ですが、これを自動的に検知して通知してくれるのが Amazon GuardDuty ですので、有効化しておくとよいです。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="特徴" duration="1">
+        <ul>
+<li>30日間は無料</li>
+<li>AWS アカウントレベルで検出</li>
+<li>GuardDutyはリージョンサービス</li>
+<li>全てのリージョンで有効化することを推奨 <ul>
+<li>全リージョンで有効化するには、CLIやCDKなどで効率化する</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="脅威検出" duration="1">
+        <p>ログなどから脅威を検出する機能です。検出する機能なので、通知するには EventBridge と SNS を利用する必要があります。（<a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_findings_cloudwatch.html#guardduty_cloudwatch_severity_notification" target="_blank">GuardDuty の検出結果を通知する CloudWatch Events ルールの作成</a>）</p>
+<p>検出結果 <img alt="result" src="img\\7b35604db9576098.png"><img alt="result-detail" src="img\\fb2ce7835e7018f3.png"></p>
+<p>EventBridge のイベントパターン指定例 <img alt="event-pattern" src="img\\72685c3784307bc1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="検出結果タイプ" duration="2">
+        <p>GuardDuty を有効化したときにデフォルトで次のログを検査します。CloudTrail の有効化や VPC Flow logs や DNS ログの設定がされていなくても GuardDuty によって個別に取得されます。 ただし、調査などの理由から各サービスのログも有効化しておくのを推奨します。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_data-sources.html#guardduty_cloudtrail" target="_blank">AWS CloudTrail イベントログ</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_data-sources.html#guardduty_controlplane" target="_blank">AWS CloudTrail 管理イベント</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_data-sources.html#guardduty_vpc" target="_blank">VPC Flow Logs</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_data-sources.html#guardduty_dns" target="_blank">DNS ログ</a></li>
+</ul>
+<p>これ以外に、個別のサービスに対するモニタリングを有効／無効にすることができます。詳細は <a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_finding-types-active.html" target="_blank">検出結果タイプ</a> を参照してください。</p>
+<ul>
+<li>EKS Protection</li>
+<li>Lambda Protection</li>
+<li>RDS Protection</li>
+<li>S3 Protection</li>
+</ul>
+<p class="image-container"><img alt="plan" src="img\\98595d73c89ec22c.png"></p>
+<h2 is-upgraded>信頼および脅威IPアドレスリスト</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_upload-lists.html" target="_blank">信頼できる IP リストと 脅威リストの使用</a></p>
+<p>IP アドレスまたは CIDR によって脅威の検出を制御できます。</p>
+<ul>
+<li>信頼されている IP リスト(Trusted IP lists) <ul>
+<li>このリストに指定したものを脅威として検出しなくなります。セキュリティテストを行うサーバの IP を指定しておくといったケースが考えられます。</li>
+</ul>
+</li>
+<li>脅威 IPリスト(Threat IP lists) <ul>
+<li>既にある AWS の脅威リストを補完するもので、ユーザーが個別に指定できます。</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="ip-list" src="img\\92e5fa10dfaf15f1.png"></p>
+<p>信頼と脅威に同じものを指定した場合は、信頼リストのほうの判定が優先され、脅威対象と見なされなくなるので注意が必要です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="マルウェア検知" duration="3">
+        <p>インスタンスで動作しているマルウェアを検出できます。 通常、サードパーティ製のマルウェア検知ソフトの場合、インスタンスにエージェントをインストールしなければならないが、GuardDuty を使えばエージェントレスでマルウェアを検知できます。 チェック対象の EC2 にアタッチされた EBS はスナップショットが取得され、そのスナップショットから、DuardDuty が動作する 別の AWS アカウントに EBS が複製され、チェックを実行する　EC2 にアタッチされて検査されます。</p>
+<p class="image-container"><img alt="malware-scan" src="img\\35e9ff7f9130d476.png"></p>
+<p>このため、チェック対象のインスタンスにエージェントのインストールが不要になります。</p>
+<p>スキャンの方法は2種類あります。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/gdu-initiated-malware-scan.html" target="_blank">実行型マルウェアスキャン</a><ul>
+<li>GuardDuty の脅威検出でマルウェアの動作を検知した後にスキャンが実行されます。 <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/gd-findings-initiate-malware-protection-scan.html" target="_blank">GuardDuty 実行型マルウェアスキャンを起動する検出結果</a></li>
+<li>上記を検出後、前回から24時間に1回実行されます。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/on-demand-malware-scan.html" target="_blank">オンデマンドスキャン</a><ul>
+<li>GuardDuty の結果に関係なくスキャンを実行できます。</li>
+<li>前回実行から1時間経過している必要があります。</li>
+<li>ただし、無料期間中は実施できません。</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>注意事項</h2>
+<ul>
+<li>現時点では「スキャンはするが保護、隔離などは実施しない」ので、簡易的なチェックです。Deep Security やCloud Oneなどのように予防的な対策を行ってくれるものではありません。</li>
+<li>スキャン実施時に、一時的とはいえ別の AWS アカウントに EBS が複製されます。スキャン対象の EBS に機密データが含まれるような場合、利用可否をしっかり検討してください。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="複数アカウントの管理" duration="2">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_accounts.html" target="_blank">Amazon GuardDuty での複数のアカウントの管理</a></p>
+<p>結果を集約したい管理者アカウントでメンバーアカウントを招待することで、権威結果を表示することができます。</p>
+<p>メンバーアカウントの管理は次の２つがあります。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_invitations.html" target="_blank">招待による GuardDuty アカウントの管理</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_organizations.html" target="_blank">AWS Organizations を使用した GuardDuty アカウントの管理</a></li>
+</ul>
+<p class="image-container"><img alt="account" src="img\\97ce3e3762168574.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p class="image-container"><img alt="guardduty" src="img\\f7ab9b5631da725d.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
