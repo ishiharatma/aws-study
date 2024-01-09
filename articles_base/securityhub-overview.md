@@ -22,7 +22,7 @@ Duration: 00:01:00
   - [検出結果通知](#検出結果通知)
     - [Compliance](#compliance)
     - [Severity](#severity)
-    - [「基礎セキュリティのベストプラクティス」のみ](#基礎セキュリティのベストプラクティスのみ)
+    - [「AWS Foundational Security Best Practices」のみ](#aws-foundational-security-best-practicesのみ)
   - [Security Hub 自動応答と修復](#security-hub-自動応答と修復)
   - [まとめ](#まとめ)
 
@@ -30,7 +30,7 @@ Duration: 00:01:00
 
 Duration: 1:02:06
 
-AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウドセキュリティの構成ミス、管理不備などへ対応するための仕組み）に相当するサービスで、「AWSリソースのセキュリティ設定がベストプラクティスから逸脱していないか」を自動でチェックします。
+AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウドセキュリティの構成ミス、管理不備などへ対応するための仕組み）に相当するサービスで、「AWS リソースのセキュリティ設定がベストプラクティスから逸脱していないか」を自動でチェックします。
 
 【AWS Black Belt Online Seminar】[AWS Security Hub(YouTube)](https://www.youtube.com/watch?v=1JJw9efXIlw)(1:02:06) [pdf](https://d1.awsstatic.com/webinars/jp/pdf/services/20201013_AWS-BlackBelt-AWSSecurityHub.pdf)
 
@@ -48,11 +48,11 @@ AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウ�
 
 Duration: 0:00:30
 
-- 30日間は無料
-- Security Hubはリージョンサービス
+- 30 日間は無料
+- Security Hub はリージョンサービス
 - 全てのリージョンで有効化することを推奨
   - AWS Config が有効化されている必要がある
-  - 全リージョンで有効化するには、CLIやCDKなどで効率化する
+  - 全リージョンで有効化するには、CLI や CDK などで効率化する
 
 ## Security Hub の有効化
 
@@ -117,7 +117,7 @@ Duration: 0:00:30
 [クロスリージョン集約を停止する](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-stop.html)
 
 Security Hub はリージョンサービスです。そのため、各リージョンの検出結果は各リージョンで確認しなければなりません。
-しかし、クロスリージョン集約を使うことで、1つのリージョンに集約して管理することができます。
+しかし、クロスリージョン集約を使うことで、1 つのリージョンに集約して管理することができます。
 
 ![Aggregation Region](/images/securityhub/aggregation-region.png)
 
@@ -169,7 +169,7 @@ Security Hub から 発信される [EventBridge イベント形式](https://doc
 
 通知対象を限定せずに設定を行うと大量のメールが送信される可能性があるため注意が必要です。
 
-[AWS 基礎セキュリティのベストプラクティス](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/fsbp-standard.html) のいくつかを検出するイベントパターンの例は次のとおりです。
+[AWS Foundational Security Best Practices](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/fsbp-standard.html) のいくつかを検出するイベントパターンの例は次のとおりです。
 
 ```text
 [IAM.4] IAM ルートユーザーアクセスキーが存在してはいけません
@@ -181,33 +181,37 @@ Security Hub から 発信される [EventBridge イベント形式](https://doc
 
 ```json
 {
- 　　 "source": ["aws.securityhub"],
-　　  "detail-type": ["Security Hub Findings - Imported"],
-　　  "detail": {
- 　　   "findings": {
-   　　   "Severity": {
-   　　     "Label": ["HIGH", "CRITICAL"]
-   　　   },
-  　　    "Compliance": {
-  　　      "Status": ["FAILED"]
- 　　     },
-  　　    "Workflow": {
-  　　      "Status": ["NEW"]
-  　　    },
-  　　    "RecordState": ["ACTIVE"],
-  　　    "ProductFields": {
-  　　      "StandardsArn" : [ { "prefix": "arn:aws:securityhub:::standards/aws-foundational-security-best-practices" } ],
-   　　     "ControlId": [
-              "IAM.4",
-              "IAM.6",
-              "S3.2",
-              "CloudTrail.1",
-              "PCI.CloudTrail.4"
-            ]
-  　　    }
- 　　   }
-　　  }
-　　}
+  "source": ["aws.securityhub"],
+  "detail-type": ["Security Hub Findings - Imported"],
+  "detail": {
+    "findings": {
+      "Severity": {
+        "Label": ["HIGH", "CRITICAL"]
+      },
+      "Compliance": {
+        "Status": ["FAILED"]
+      },
+      "Workflow": {
+        "Status": ["NEW"]
+      },
+      "RecordState": ["ACTIVE"],
+      "ProductFields": {
+        "StandardsArn": [
+          {
+            "prefix": "arn:aws:securityhub:::standards/aws-foundational-security-best-practices"
+          }
+        ],
+        "ControlId": [
+          "IAM.4",
+          "IAM.6",
+          "S3.2",
+          "CloudTrail.1",
+          "PCI.CloudTrail.4"
+        ]
+      }
+    }
+  }
+}
 ```
 
 このまま通知すると、JSON 形式の可読性の低いものになりますので、[インプットトランスフォーマー](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-transform-target-input.html)機能をつかって、整形します。
@@ -224,19 +228,19 @@ Security Hub から 発信される [EventBridge イベント形式](https://doc
 
 ```json
 {
-  "accountId":"$.detail.findings[0].AwsAccountId",
-  "region":"$.region",
+  "accountId": "$.detail.findings[0].AwsAccountId",
+  "region": "$.region",
   "FindingId": "$.detail.findings[0].Types[0]",
   "FindingDescription": "$.detail.findings[0].description",
-  "StandardsArn":"$.detail.findings[0].ProductFields.StandardsArn",
-  "ControlId":"$.detail.findings[0].ProductFields.ControlId",
-  "Title":"$.detail.findings[0].Title",
-  "ResourcesId":"$.detail.findings[0].Resources[0].Id",
-  "ResourcesType":"$.detail.findings[0].Resources[0].Type",
-  "Severity":"$.detail.findings[0].Severity.Label",
-  "ComplianceStatus":"$.detail.findings[0].Compliance.Status",
-  "Description":"$.detail.findings[0].Description",
-  "WorkflowStatus":"$.detail.findings[0].Workflow.Status",
+  "StandardsArn": "$.detail.findings[0].ProductFields.StandardsArn",
+  "ControlId": "$.detail.findings[0].ProductFields.ControlId",
+  "Title": "$.detail.findings[0].Title",
+  "ResourcesId": "$.detail.findings[0].Resources[0].Id",
+  "ResourcesType": "$.detail.findings[0].Resources[0].Type",
+  "Severity": "$.detail.findings[0].Severity.Label",
+  "ComplianceStatus": "$.detail.findings[0].Compliance.Status",
+  "Description": "$.detail.findings[0].Description",
+  "WorkflowStatus": "$.detail.findings[0].Workflow.Status",
   "RemediationText": "$.detail.findings[0].Remediation.Recommendation.Text",
   "RemediationUrl": "$.detail.findings[0].Remediation.Recommendation.Url",
   "createdAt": "$.createdAt"
@@ -247,7 +251,7 @@ Security Hub から 発信される [EventBridge イベント形式](https://doc
 
 ```text
 The following non-compliant (Failed) diagnostic items were discovered in SecurityHub's event rules.
-acount: <accountId>
+account: <accountId>
 region: <region>
 Finding Id: <FindingId>
 Finding Description: <FindingDescription>
@@ -270,12 +274,12 @@ https://<region>.console.aws.amazon.com/securityhub/home?region=<region>#/summar
 
 Compliance の Status の意味については、[API_Compliance](https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_Compliance.html) を参照してください。
 
-| Status        | Description                                                     |
-| ------------- | --------------------------------------------------------------- |
-| PASSED        | チェックに合格                                                  |
-| WARNING       | 不足している情報がある or チェックをサポートしていない          |
-| FAILED        | 1つ以上のリソースがチェックに不合格                             |
-| NOT_AVAILABLE | サービス停止もしくはAPIエラーにより、チェックを実行できなかった |
+| Status        | Description                                                       |
+| ------------- | ----------------------------------------------------------------- |
+| PASSED        | チェックに合格                                                    |
+| WARNING       | 不足している情報がある or チェックをサポートしていない            |
+| FAILED        | 1 つ以上のリソースがチェックに不合格                              |
+| NOT_AVAILABLE | サービス停止もしくは API エラーにより、チェックを実行できなかった |
 
 合格しなかったものという条件の場合は次のようにします。
 
@@ -319,9 +323,9 @@ Compliance の Status の意味については、[API_Compliance](https://docs.a
 :
 ```
 
-### 「基礎セキュリティのベストプラクティス」のみ
+### 「AWS Foundational Security Best Practices」のみ
 
-その他のコントロールを指定する場合は、[コントロールの検出結果のサンプル](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/sample-control-findings.html#sample-finding-fsbp)を参考にします。
+その他のセキュリティ標準を指定する場合は、[コントロールの検出結果のサンプル](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/sample-control-findings.html#sample-finding-fsbp)を参考にします。
 
 ```json
   "detail": {

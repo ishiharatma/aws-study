@@ -48,7 +48,7 @@
 <li><a href="#%E6%A4%9C%E5%87%BA%E7%B5%90%E6%9E%9C%E9%80%9A%E7%9F%A5" target="_blank">検出結果通知</a><ul>
 <li><a href="#compliance" target="_blank">Compliance</a></li>
 <li><a href="#severity" target="_blank">Severity</a></li>
-<li><a href="#%E5%9F%BA%E7%A4%8E%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9%E3%81%AE%E3%81%BF" target="_blank">「基礎セキュリティのベストプラクティス」のみ</a></li>
+<li><a href="#aws-foundational-security-best-practices%E3%81%AE%E3%81%BF" target="_blank">「AWS Foundational Security Best Practices」のみ</a></li>
 </ul>
 </li>
 <li><a href="#security-hub-%E8%87%AA%E5%8B%95%E5%BF%9C%E7%AD%94%E3%81%A8%E4%BF%AE%E5%BE%A9" target="_blank">Security Hub 自動応答と修復</a></li>
@@ -61,7 +61,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="AWS Security Hub とは" duration="63">
-        <p>AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウドセキュリティの構成ミス、管理不備などへ対応するための仕組み）に相当するサービスで、「AWSリソースのセキュリティ設定がベストプラクティスから逸脱していないか」を自動でチェックします。</p>
+        <p>AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウドセキュリティの構成ミス、管理不備などへ対応するための仕組み）に相当するサービスで、「AWS リソースのセキュリティ設定がベストプラクティスから逸脱していないか」を自動でチェックします。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=1JJw9efXIlw" target="_blank">AWS Security Hub(YouTube)</a>(1:02:06) <a href="https://d1.awsstatic.com/webinars/jp/pdf/services/20201013_AWS-BlackBelt-AWSSecurityHub.pdf" target="_blank">pdf</a></p>
 <p class="image-container"><img alt="blackbelt-securityhub" src="img\\422d5de145fab42a.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/security-hub/" target="_blank">AWS Security Hub サービス概要</a></p>
@@ -74,11 +74,11 @@
     
       <google-codelab-step label="特徴" duration="1">
         <ul>
-<li>30日間は無料</li>
-<li>Security Hubはリージョンサービス</li>
+<li>30 日間は無料</li>
+<li>Security Hub はリージョンサービス</li>
 <li>全てのリージョンで有効化することを推奨 <ul>
 <li>AWS Config が有効化されている必要がある</li>
-<li>全リージョンで有効化するには、CLIやCDKなどで効率化する</li>
+<li>全リージョンで有効化するには、CLI や CDK などで効率化する</li>
 </ul>
 </li>
 </ul>
@@ -123,7 +123,7 @@
     
       <google-codelab-step label="クロスリージョン集約" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-enable.html" target="_blank">クロスリージョン集約を有効にする</a><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-stop.html" target="_blank">クロスリージョン集約を停止する</a></p>
-<p>Security Hub はリージョンサービスです。そのため、各リージョンの検出結果は各リージョンで確認しなければなりません。 しかし、クロスリージョン集約を使うことで、1つのリージョンに集約して管理することができます。</p>
+<p>Security Hub はリージョンサービスです。そのため、各リージョンの検出結果は各リージョンで確認しなければなりません。 しかし、クロスリージョン集約を使うことで、1 つのリージョンに集約して管理することができます。</p>
 <p class="image-container"><img alt="Aggregation Region" src="img\\189e5f5b2060e95c.png"></p>
 
 
@@ -166,7 +166,7 @@
 }
 </code></pre>
 <p>通知対象を限定せずに設定を行うと大量のメールが送信される可能性があるため注意が必要です。</p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/fsbp-standard.html" target="_blank">AWS 基礎セキュリティのベストプラクティス</a> のいくつかを検出するイベントパターンの例は次のとおりです。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/fsbp-standard.html" target="_blank">AWS Foundational Security Best Practices</a> のいくつかを検出するイベントパターンの例は次のとおりです。</p>
 <pre><code language="language-text" class="language-text">[IAM.4] IAM ルートユーザーアクセスキーが存在してはいけません
 [IAM.6] ルートユーザーに対してハードウェア MFA を有効にする必要があります
 [S3.2] S3 バケットではパブリック読み取りアクセスを禁止する必要があります
@@ -174,33 +174,37 @@
 [PCI.CloudTrail.4] CloudTrail ログファイルの検証を有効にする必要があります
 </code></pre>
 <pre><code language="language-json" class="language-json">{
- 　　 &#34;source&#34;: [&#34;aws.securityhub&#34;],
-　　  &#34;detail-type&#34;: [&#34;Security Hub Findings - Imported&#34;],
-　　  &#34;detail&#34;: {
- 　　   &#34;findings&#34;: {
-   　　   &#34;Severity&#34;: {
-   　　     &#34;Label&#34;: [&#34;HIGH&#34;, &#34;CRITICAL&#34;]
-   　　   },
-  　　    &#34;Compliance&#34;: {
-  　　      &#34;Status&#34;: [&#34;FAILED&#34;]
- 　　     },
-  　　    &#34;Workflow&#34;: {
-  　　      &#34;Status&#34;: [&#34;NEW&#34;]
-  　　    },
-  　　    &#34;RecordState&#34;: [&#34;ACTIVE&#34;],
-  　　    &#34;ProductFields&#34;: {
-  　　      &#34;StandardsArn&#34; : [ { &#34;prefix&#34;: &#34;arn:aws:securityhub:::standards/aws-foundational-security-best-practices&#34; } ],
-   　　     &#34;ControlId&#34;: [
-              &#34;IAM.4&#34;,
-              &#34;IAM.6&#34;,
-              &#34;S3.2&#34;,
-              &#34;CloudTrail.1&#34;,
-              &#34;PCI.CloudTrail.4&#34;
-            ]
-  　　    }
- 　　   }
-　　  }
-　　}
+  &#34;source&#34;: [&#34;aws.securityhub&#34;],
+  &#34;detail-type&#34;: [&#34;Security Hub Findings - Imported&#34;],
+  &#34;detail&#34;: {
+    &#34;findings&#34;: {
+      &#34;Severity&#34;: {
+        &#34;Label&#34;: [&#34;HIGH&#34;, &#34;CRITICAL&#34;]
+      },
+      &#34;Compliance&#34;: {
+        &#34;Status&#34;: [&#34;FAILED&#34;]
+      },
+      &#34;Workflow&#34;: {
+        &#34;Status&#34;: [&#34;NEW&#34;]
+      },
+      &#34;RecordState&#34;: [&#34;ACTIVE&#34;],
+      &#34;ProductFields&#34;: {
+        &#34;StandardsArn&#34;: [
+          {
+            &#34;prefix&#34;: &#34;arn:aws:securityhub:::standards/aws-foundational-security-best-practices&#34;
+          }
+        ],
+        &#34;ControlId&#34;: [
+          &#34;IAM.4&#34;,
+          &#34;IAM.6&#34;,
+          &#34;S3.2&#34;,
+          &#34;CloudTrail.1&#34;,
+          &#34;PCI.CloudTrail.4&#34;
+        ]
+      }
+    }
+  }
+}
 </code></pre>
 <p>このまま通知すると、JSON 形式の可読性の低いものになりますので、<a href="https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-transform-target-input.html" target="_blank">インプットトランスフォーマー</a>機能をつかって、整形します。</p>
 <p class="image-container"><img alt="transform-target-input" src="img\\277f2b175dcfba60.png"></p>
@@ -212,19 +216,19 @@
 </ul>
 <p>入力パス</p>
 <pre><code language="language-json" class="language-json">{
-  &#34;accountId&#34;:&#34;$.detail.findings[0].AwsAccountId&#34;,
-  &#34;region&#34;:&#34;$.region&#34;,
+  &#34;accountId&#34;: &#34;$.detail.findings[0].AwsAccountId&#34;,
+  &#34;region&#34;: &#34;$.region&#34;,
   &#34;FindingId&#34;: &#34;$.detail.findings[0].Types[0]&#34;,
   &#34;FindingDescription&#34;: &#34;$.detail.findings[0].description&#34;,
-  &#34;StandardsArn&#34;:&#34;$.detail.findings[0].ProductFields.StandardsArn&#34;,
-  &#34;ControlId&#34;:&#34;$.detail.findings[0].ProductFields.ControlId&#34;,
-  &#34;Title&#34;:&#34;$.detail.findings[0].Title&#34;,
-  &#34;ResourcesId&#34;:&#34;$.detail.findings[0].Resources[0].Id&#34;,
-  &#34;ResourcesType&#34;:&#34;$.detail.findings[0].Resources[0].Type&#34;,
-  &#34;Severity&#34;:&#34;$.detail.findings[0].Severity.Label&#34;,
-  &#34;ComplianceStatus&#34;:&#34;$.detail.findings[0].Compliance.Status&#34;,
-  &#34;Description&#34;:&#34;$.detail.findings[0].Description&#34;,
-  &#34;WorkflowStatus&#34;:&#34;$.detail.findings[0].Workflow.Status&#34;,
+  &#34;StandardsArn&#34;: &#34;$.detail.findings[0].ProductFields.StandardsArn&#34;,
+  &#34;ControlId&#34;: &#34;$.detail.findings[0].ProductFields.ControlId&#34;,
+  &#34;Title&#34;: &#34;$.detail.findings[0].Title&#34;,
+  &#34;ResourcesId&#34;: &#34;$.detail.findings[0].Resources[0].Id&#34;,
+  &#34;ResourcesType&#34;: &#34;$.detail.findings[0].Resources[0].Type&#34;,
+  &#34;Severity&#34;: &#34;$.detail.findings[0].Severity.Label&#34;,
+  &#34;ComplianceStatus&#34;: &#34;$.detail.findings[0].Compliance.Status&#34;,
+  &#34;Description&#34;: &#34;$.detail.findings[0].Description&#34;,
+  &#34;WorkflowStatus&#34;: &#34;$.detail.findings[0].Workflow.Status&#34;,
   &#34;RemediationText&#34;: &#34;$.detail.findings[0].Remediation.Recommendation.Text&#34;,
   &#34;RemediationUrl&#34;: &#34;$.detail.findings[0].Remediation.Recommendation.Url&#34;,
   &#34;createdAt&#34;: &#34;$.createdAt&#34;
@@ -232,7 +236,7 @@
 </code></pre>
 <p>入力テンプレート</p>
 <pre><code language="language-text" class="language-text">The following non-compliant (Failed) diagnostic items were discovered in SecurityHub&#39;s event rules.
-acount: &lt;accountId&gt;
+account: &lt;accountId&gt;
 region: &lt;region&gt;
 Finding Id: &lt;FindingId&gt;
 Finding Description: &lt;FindingDescription&gt;
@@ -263,10 +267,10 @@ https://&lt;region&gt;.console.aws.amazon.com/securityhub/home?region=&lt;region
 </td><td colspan="1" rowspan="1"><p>不足している情報がある or チェックをサポートしていない</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>FAILED</p>
-</td><td colspan="1" rowspan="1"><p>1つ以上のリソースがチェックに不合格</p>
+</td><td colspan="1" rowspan="1"><p>1 つ以上のリソースがチェックに不合格</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>NOT_AVAILABLE</p>
-</td><td colspan="1" rowspan="1"><p>サービス停止もしくはAPIエラーにより、チェックを実行できなかった</p>
+</td><td colspan="1" rowspan="1"><p>サービス停止もしくは API エラーにより、チェックを実行できなかった</p>
 </td></tr>
 </table>
 <p>合格しなかったものという条件の場合は次のようにします。</p>
@@ -315,8 +319,8 @@ https://&lt;region&gt;.console.aws.amazon.com/securityhub/home?region=&lt;region
         },
 :
 </code></pre>
-<h2 is-upgraded>「基礎セキュリティのベストプラクティス」のみ</h2>
-<p>その他のコントロールを指定する場合は、<a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/sample-control-findings.html#sample-finding-fsbp" target="_blank">コントロールの検出結果のサンプル</a>を参考にします。</p>
+<h2 is-upgraded>「AWS Foundational Security Best Practices」のみ</h2>
+<p>その他のセキュリティ標準を指定する場合は、<a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/sample-control-findings.html#sample-finding-fsbp" target="_blank">コントロールの検出結果のサンプル</a>を参考にします。</p>
 <pre><code language="language-json" class="language-json">  &#34;detail&#34;: {
     &#34;findings&#34;:
       {

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>Aamazon GuardDuty</title>
+  <title>Amazon GuardDuty</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="guardduty-overview"
-                  title="Aamazon GuardDuty"
+                  title="Amazon GuardDuty"
                   environment="web"
                   feedback-link="">
     
@@ -36,21 +36,24 @@
     
       <google-codelab-step label="Contents" duration="1">
         <ul>
-<li><a href="#aamazon-guardduty" target="_blank">Aamazon GuardDuty</a><ul>
+<li><a href="#amazon-guardduty" target="_blank">Amazon GuardDuty</a><ul>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
 <li><a href="#contents" target="_blank">Contents</a></li>
 <li><a href="#guardduty-%E3%81%A8%E3%81%AF" target="_blank">GuardDuty とは</a></li>
 <li><a href="#guardduty-%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E7%90%86%E7%94%B1" target="_blank">GuardDuty が必要な理由</a></li>
 <li><a href="#%E7%89%B9%E5%BE%B4" target="_blank">特徴</a></li>
+<li><a href="#%E5%85%A8%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%A7%E6%9C%89%E5%8A%B9%E5%8C%96%E3%81%99%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">全リージョンで有効化するには</a></li>
 <li><a href="#%E8%84%85%E5%A8%81%E6%A4%9C%E5%87%BA" target="_blank">脅威検出</a></li>
 <li><a href="#%E6%A4%9C%E5%87%BA%E7%B5%90%E6%9E%9C%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">検出結果タイプ</a><ul>
-<li><a href="#%E4%BF%A1%E9%A0%BC%E3%81%8A%E3%82%88%E3%81%B3%E8%84%85%E5%A8%81ip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%83%AA%E3%82%B9%E3%83%88" target="_blank">信頼および脅威IPアドレスリスト</a></li>
+<li><a href="#%E4%BF%A1%E9%A0%BC%E3%81%8A%E3%82%88%E3%81%B3%E8%84%85%E5%A8%81-ip-%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%83%AA%E3%82%B9%E3%83%88" target="_blank">信頼および脅威 IP アドレスリスト</a></li>
 </ul>
 </li>
 <li><a href="#%E3%83%9E%E3%83%AB%E3%82%A6%E3%82%A7%E3%82%A2%E6%A4%9C%E7%9F%A5" target="_blank">マルウェア検知</a><ul>
 <li><a href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" target="_blank">注意事項</a></li>
 </ul>
 </li>
+<li><a href="#%E6%A4%9C%E5%87%BA%E7%B5%90%E6%9E%9C%E9%80%9A%E7%9F%A5" target="_blank">検出結果通知</a></li>
+<li><a href="#%E6%A4%9C%E5%87%BA%E7%B5%90%E6%9E%9C%E3%81%AE%E7%A2%BA%E8%AA%8D" target="_blank">検出結果の確認</a></li>
 <li><a href="#%E8%A4%87%E6%95%B0%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E7%AE%A1%E7%90%86" target="_blank">複数アカウントの管理</a></li>
 <li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
 </ul>
@@ -84,14 +87,74 @@
     
       <google-codelab-step label="特徴" duration="1">
         <ul>
-<li>30日間は無料</li>
+<li>30 日間は無料</li>
 <li>AWS アカウントレベルで検出</li>
-<li>GuardDutyはリージョンサービス</li>
+<li>GuardDuty はリージョンサービス</li>
 <li>全てのリージョンで有効化することを推奨 <ul>
-<li>全リージョンで有効化するには、CLIやCDKなどで効率化する</li>
+<li>全リージョンで有効化するには、CLI や CDK などで効率化する</li>
 </ul>
 </li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="全リージョンで有効化するには" duration="0">
+        <p>AWS CLI を使う場合</p>
+<pre><code language="language-sh" class="language-sh">#!/usr/bin/sh
+# リージョン一覧の取得
+REGIONS=$( \
+    aws ec2 describe-regions \
+        --all-regions \
+        --query &#34;Regions[].RegionName&#34; \
+        --output text \
+        --profile ${profileName} \
+    )
+for region in ${REGIONS[@]}; do
+  # 有効化の確認
+  DETECTOR=$( ¥
+        aws guardduty list-detectors \
+        --region &#34;${REGION}&#34; \
+        --query DetectorIds \
+        --output text \
+        )
+  if [ &#34;${#DETECTOR}&#34; -ne &#34;0&#34; ] ; then
+      # 既に有効化されている
+      echo &#34;GuardDuty is already enabled. ${REGION}:${DETECTOR}&#34;
+  else
+      # finding-publishing-frequency は指定しないとデフォルト 6h
+      aws guardduty create-detector \
+        --region &#34;${REGION}&#34; \
+        --finding-publishing-frequency FIFTEEN_MINUTES \
+        --enable \
+        --profile ${profileName}
+  fi
+done
+</code></pre>
+<p>AWS CDK を使う場合</p>
+<pre><code language="language-ts" class="language-ts"># YAML のパラメータファイルに以下を定義
+# import * as yaml from &#39;js-yaml&#39;; で読み込んでいます。
+# ---------
+# ForceEnabled : true # それぞれの設定に関係なく強制的に有効化する場合 true
+# RegionConfigs :
+#  -  { Region: &#39;us-east-1&#39; , isEnabled: false } # 米国東部（バージニア北部）
+#  -  { Region: &#39;us-east-2&#39; , isEnabled: false } # 米国東部 (オハイオ)
+#  -  { Region: &#39;us-west-1&#39; , isEnabled: false } # 米国西部 (北カリフォルニア)
+#  :
+
+RegionConfigs.forEach((x) =&gt; {
+  if (x.isEnabled || isForceEnabled) {
+    new GuardDutyStack(app, `GuardDutyStack${x.Region}`, {
+      :
+      :
+      env : {
+        account: process.env.CDK_DEFAULT_ACCOUNT,
+        region: x.Region,
+      }
+    }
+  }
+}
+</code></pre>
 
 
       </google-codelab-step>
@@ -120,7 +183,7 @@
 <li>S3 Protection</li>
 </ul>
 <p class="image-container"><img alt="plan" src="img\\98595d73c89ec22c.png"></p>
-<h2 is-upgraded>信頼および脅威IPアドレスリスト</h2>
+<h2 is-upgraded>信頼および脅威 IP アドレスリスト</h2>
 <p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_upload-lists.html" target="_blank">信頼できる IP リストと 脅威リストの使用</a></p>
 <p>IP アドレスまたは CIDR によって脅威の検出を制御できます。</p>
 <ul>
@@ -128,7 +191,7 @@
 <li>このリストに指定したものを脅威として検出しなくなります。セキュリティテストを行うサーバの IP を指定しておくといったケースが考えられます。</li>
 </ul>
 </li>
-<li>脅威 IPリスト(Threat IP lists) <ul>
+<li>脅威 IP リスト(Threat IP lists) <ul>
 <li>既にある AWS の脅威リストを補完するもので、ユーザーが個別に指定できます。</li>
 </ul>
 </li>
@@ -140,31 +203,127 @@
       </google-codelab-step>
     
       <google-codelab-step label="マルウェア検知" duration="3">
-        <p>インスタンスで動作しているマルウェアを検出できます。 通常、サードパーティ製のマルウェア検知ソフトの場合、インスタンスにエージェントをインストールしなければならないが、GuardDuty を使えばエージェントレスでマルウェアを検知できます。 チェック対象の EC2 にアタッチされた EBS はスナップショットが取得され、そのスナップショットから、DuardDuty が動作する 別の AWS アカウントに EBS が複製され、チェックを実行する　EC2 にアタッチされて検査されます。</p>
+        <p>インスタンスで動作しているマルウェアを検出できます。 通常、サードパーティ製のマルウェア検知ソフトの場合、インスタンスにエージェントをインストールしなければならないが、GuardDuty を使えばエージェントレスでマルウェアを検知できます。 チェック対象の EC2 にアタッチされた EBS はスナップショットが取得され、そのスナップショットから、DuardDuty が動作する 別の AWS アカウントに EBS が複製され、チェックを実行する　 EC2 にアタッチされて検査されます。</p>
 <p class="image-container"><img alt="malware-scan" src="img\\35e9ff7f9130d476.png"></p>
 <p>このため、チェック対象のインスタンスにエージェントのインストールが不要になります。</p>
-<p>スキャンの方法は2種類あります。</p>
+<p>スキャンの方法は 2 種類あります。</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/gdu-initiated-malware-scan.html" target="_blank">実行型マルウェアスキャン</a><ul>
 <li>GuardDuty の脅威検出でマルウェアの動作を検知した後にスキャンが実行されます。 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/gd-findings-initiate-malware-protection-scan.html" target="_blank">GuardDuty 実行型マルウェアスキャンを起動する検出結果</a></li>
-<li>上記を検出後、前回から24時間に1回実行されます。</li>
+<li>上記を検出後、前回から 24 時間に 1 回実行されます。</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/on-demand-malware-scan.html" target="_blank">オンデマンドスキャン</a><ul>
 <li>GuardDuty の結果に関係なくスキャンを実行できます。</li>
-<li>前回実行から1時間経過している必要があります。</li>
+<li>前回実行から 1 時間経過している必要があります。</li>
 <li>ただし、無料期間中は実施できません。</li>
 </ul>
 </li>
 </ul>
 <h2 is-upgraded>注意事項</h2>
 <ul>
-<li>現時点では「スキャンはするが保護、隔離などは実施しない」ので、簡易的なチェックです。Deep Security やCloud Oneなどのように予防的な対策を行ってくれるものではありません。</li>
+<li>現時点では「スキャンはするが保護、隔離などは実施しない」ので、簡易的なチェックです。Deep Security や Cloud One などのように予防的な対策を行ってくれるものではありません。</li>
 <li>スキャン実施時に、一時的とはいえ別の AWS アカウントに EBS が複製されます。スキャン対象の EBS に機密データが含まれるような場合、利用可否をしっかり検討してください。</li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="検出結果通知" duration="5">
+        <p>検出結果通知は、GuardDuty から Amazon EventBridge に発信されるイベントを検出し、SNS と連携することで実現できます。</p>
+<p>GuardDuty から 発信される <a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_findings-summary.html" target="_blank">検出結果の詳細</a> は次のようになります。</p>
+<pre><code language="language-json" class="language-json">        {
+         &#34;version&#34;: &#34;0&#34;,
+         &#34;id&#34;: &#34;cd2d702e-ab31-411b-9344-793ce56b1bc7&#34;,
+         &#34;detail-type&#34;: &#34;GuardDuty Finding&#34;,
+         &#34;source&#34;: &#34;aws.guardduty&#34;,
+         &#34;account&#34;: &#34;111122223333&#34;,
+         &#34;time&#34;: &#34;1970-01-01T00:00:00Z&#34;,
+         &#34;region&#34;: &#34;us-east-1&#34;,
+         &#34;resources&#34;: [],
+         &#34;detail&#34;: {GUARDDUTY_FINDING_JSON_OBJECT}
+        }
+</code></pre>
+<p>上記のようなイベントを検出できるように、EventBridge の<a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_findings_cloudwatch.html#guardduty_findings_cloudwatch_format" target="_blank">イベントパターン</a>を定義します。定義の雛形は次のとおりです。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;source&#34;: [
+    &#34;aws.guardduty&#34;
+  ],
+  &#34;detail-type&#34;: [
+    &#34;GuardDuty Finding&#34;
+  ],
+  &#34;detail&#34;: {
+    &#34;severity&#34;: [
+      :
+    ]
+  }
+}
+</code></pre>
+<p>通知対象を限定せずに設定を行うと大量のメールが送信される可能性があるため注意が必要です。</p>
+<p>[Medium] (中)〜[High] (高) を検出するイベントパターンの例は次のとおりです。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;source&#34;: [&#34;aws.guardduty&#34;],
+  &#34;detail-type&#34;: [&#34;GuardDuty Finding&#34;],
+  &#34;detail&#34;: {
+    &#34;severity&#34;: [
+      4, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5, 5.0, 5.1, 5.2,
+      5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6,
+      6.7, 6.8, 6.9, 7, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 7.6, 7.7, 7.8, 7.9, 8,
+      8.0, 8.1, 8.2, 8.3, 8.4, 8.5, 8.6, 8.7, 8.8, 8.9
+    ]
+  }
+}
+</code></pre>
+<p>severity は GuardDuty で定義されている重要度レベルを示しており、数値と重要度は以下の通りです。</p>
+<ul>
+<li>高： 7.0〜8.9 の範囲</li>
+<li>中： 4.0〜6.9 の範囲</li>
+<li>低： 0.1〜3.9 の範囲</li>
+</ul>
+<p>または、次のようにも定義できます。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;source&#34;: [&#34;aws.guardduty&#34;],
+  &#34;detail-type&#34;: [&#34;GuardDuty Finding&#34;],
+  &#34;detail&#34;: {
+    &#34;severity&#34;: [{ &#34;numeric&#34;: [&#34;&gt;=&#34;, 4] }]
+  }
+}
+</code></pre>
+<p>このまま通知すると、JSON 形式の可読性の低いものになりますので、<a href="https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-transform-target-input.html" target="_blank">インプットトランスフォーマー</a>機能をつかって、整形します。</p>
+<p class="image-container"><img alt="transform-target-input" src="img\\277f2b175dcfba60.png"></p>
+<p>&#34;入力パス&#34; で定義する項目は、次を参考にします。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/securityhub-findings-format-syntax.html" target="_blank">AWS Security Finding 形式</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/asff-required-attributes.html" target="_blank">必須属性</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/asff-top-level-attributes.html" target="_blank">オプションの最上位属性</a></li>
+</ul>
+<p>入力パス</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;severity&#34;: &#34;$.detail.severity&#34;,
+  &#34;Account_ID&#34;: &#34;$.detail.accountId&#34;,
+  &#34;Finding_ID&#34;: &#34;$.detail.id&#34;,
+  &#34;Finding_Type&#34;: &#34;$.detail.type&#34;,
+  &#34;region&#34;: &#34;$.region&#34;,
+  &#34;Finding_description&#34;: &#34;$.detail.description&#34;
+}
+</code></pre>
+<p>入力テンプレート</p>
+<pre><code language="language-text" class="language-text">&#34;AWS &lt;Account_ID&gt; has a severity &lt;severity&gt; GuardDuty finding type &lt;Finding_Type&gt; in the &lt;region&gt; region.&#34;
+&#34;Finding Description:&#34;
+&#34;&lt;Finding_description&gt;. &#34;
+&#34;For more details open the GuardDuty console at https://console.aws.amazon.com/guardduty/home?region=&lt;region&gt;#/findings?search=id%3D&lt;Finding_ID&gt;&#34;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="検出結果の確認" duration="0">
+        <p>通知のテストを行うために、サンプルイベントの発行機能があります。GuardDuty のコンソールから実行することでサンプルイベントを発行できます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/sample_findings.html" target="_blank">GuardDuty のサンプルの検出結果生成</a></p>
+<p class="image-container"><img alt="result-sample" src="img\\87c8cd8435a4f113.png"></p>
 
 
       </google-codelab-step>
@@ -178,6 +337,25 @@
 <li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_organizations.html" target="_blank">AWS Organizations を使用した GuardDuty アカウントの管理</a></li>
 </ul>
 <p class="image-container"><img alt="account" src="img\\97ce3e3762168574.png"></p>
+<p>メンバーアカウントを追加した場合、EventBridge が次のような設定だと管理者アカウントとメンバーアカウントの両方の検出結果が通知されます。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;source&#34;: [&#34;aws.guardduty&#34;],
+  &#34;detail-type&#34;: [&#34;GuardDuty Finding&#34;],
+  &#34;detail&#34;: {
+    &#34;severity&#34;: [{ &#34;numeric&#34;: [&#34;&gt;=&#34;, 4] }]
+  }
+}
+</code></pre>
+<p>メンバーアカウントのアカウント ID を追加することでフィルタリングすることができます。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;source&#34;: [&#34;aws.guardduty&#34;],
+  &#34;detail-type&#34;: [&#34;GuardDuty Finding&#34;],
+  &#34;detail&#34;: {
+    &#34;accountId&#34;: [&#34;123456789012&#34;],
+    &#34;severity&#34;: [{ &#34;numeric&#34;: [&#34;&gt;=&#34;, 4] }]
+  }
+}
+</code></pre>
 
 
       </google-codelab-step>
