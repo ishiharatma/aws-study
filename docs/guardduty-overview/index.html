@@ -324,6 +324,35 @@ RegionConfigs.forEach((x) =&gt; {
         <p>通知のテストを行うために、サンプルイベントの発行機能があります。GuardDuty のコンソールから実行することでサンプルイベントを発行できます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/sample_findings.html" target="_blank">GuardDuty のサンプルの検出結果生成</a></p>
 <p class="image-container"><img alt="result-sample" src="img\\87c8cd8435a4f113.png"></p>
+<p>サンプルが簡単に生成できるのは便利ですが、様々な<a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_finding-types-active.html" target="_blank">検出結果タイプ</a>のサンプルイベントを生成するため、通知が大量に配信されます。</p>
+<p>AWS CLI を使うことで 1 件ずつイベントを発行できます。</p>
+<pre><code language="language-sh" class="language-sh"># 重要度「高」
+# EC2 インスタンスが、TCP ポートで UDP プロトコルを使用したサービス拒否 (DoS) 攻撃の実行に利用されている可能性があります。
+# https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_finding-types-ec2.html#backdoor-ec2-denialofserviceudpontcpports
+aws guardduty create-sample-findings \
+--detector-id $(aws guardduty list-detectors --query &#39;DetectorIds&#39; --output text) \
+--finding-types Backdoor:EC2/DenialOfService.UdpOnTcpPorts
+# 重要度「中」
+# EC2 インスタンスがポート 25 でリモートホストと通信して異常な動作を示しています
+# https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_finding-types-ec2.html#backdoor-ec2-spambot
+aws guardduty create-sample-findings \
+  --detector-id $(aws guardduty list-detectors --query &#39;DetectorIds[0]&#39; --output text) \
+  --finding-types &#34;Backdoor:EC2/Spambot&#34;
+# 重要度「低」
+# EC2 インスタンスが SSH ブルートフォース攻撃に巻き込まれています。
+# https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_finding-types-ec2.html#unauthorizedaccess-ec2-sshbruteforce
+aws guardduty create-sample-findings \
+  --detector-id $(aws guardduty list-detectors --query &#39;DetectorIds[0]&#39; --output text) \
+  --finding-types &#34;UnauthorizedAccess:EC2/SSHBruteForce&#34;
+</code></pre>
+<p>全てのリージョンの場合は、リージョンのリストを取得してから実施します。</p>
+<pre><code language="language-sh" class="language-sh">aws ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; --output text \
+| while read region; do
+aws guardduty create-sample-findings \
+  --detector-id $(aws guardduty list-detectors --region ${region} --query &#39;DetectorIds[0]&#39; --output text) \
+  --finding-types &#34;UnauthorizedAccess:EC2/SSHBruteForce&#34;
+done
+</code></pre>
 
 
       </google-codelab-step>
