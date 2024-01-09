@@ -1,24 +1,24 @@
 # AWS Certificate Manager (ACM)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Certificate Manager (ACM)](#aws-certificate-manager-acm)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [AWS Certificate Manager とは](#aws-certificate-manager-とは)
   - [リージョナルサービスであること](#リージョナルサービスであること)
   - [使用可能なサービス](#使用可能なサービス)
   - [パブリック証明書とプライベート証明書](#パブリック証明書とプライベート証明書)
   - [インポートされた証明書](#インポートされた証明書)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## AWS Certificate Manager とは
 
@@ -59,7 +59,7 @@ ALB に使用する場合は、ALB のリージョンで発行します。
 
 Duration: 00:01:00
 
-Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner、API Gateway、CloudFormationなどで利用できます。
+Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner、API Gateway、CloudFormation などで利用できます。
 
 詳細は、[サービスと AWS Certificate Manager の統合](https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/acm-services.html) を参照します。
 
@@ -77,7 +77,7 @@ FAQ の [Q: パブリック証明書とプライベート証明書の違いは�
 
 Duration: 00:01:00
 
-サードパーティーの証明書を使う場合はインポートすることで、CloudFront、ELB、API Gatewayで利用することができます。
+サードパーティーの証明書を使う場合はインポートすることで、CloudFront、ELB、API Gateway で利用することができます。
 ただし、自動更新は行われないため、証明書が切れる前に手動でインポートする必要があります。
 自動更新は行われませんが、[ACM CloudWatch メトリクス](https://docs.amazonaws.cn/en_us/acm/latest/userguide/cloudwatch-metrics.html)で証明書の有効期限を監視することはできます。
 
@@ -85,6 +85,6 @@ Duration: 00:01:00
 
 ![DaysToExpiry](/images/acm/acm-cw-daytoexpiry.JPG)
 
-## まとめ
+## 📖 まとめ
 
 ![acm](/images/all/acm.png)

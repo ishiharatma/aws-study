@@ -1,18 +1,18 @@
 # AWS Systems Manager（SSM）:アプリケーション管理
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Systems Manager（SSM）:アプリケーション管理](#aws-systems-managerssmアプリケーション管理)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [アプリケーション管理の機能](#アプリケーション管理の機能)
   - [パラメータストア](#パラメータストア)
     - [パラメータ階層](#パラメータ階層)
@@ -47,6 +47,7 @@ Duration: 00:20:00
   - 任意の文字列です。
   - 文字列ならば何でも格納できます。中身に `JSON` 文字列を格納することも可能です。
 - 文字列のリスト（StringList）
+
   - カンマ区切りの文字列を格納できます。
   - AWS マネジメントコンソールで改行を入れた場合のみ、カンマ区切りに変換されます。CLI の場合は改行コードがそのまま保存されます。ただし、AWS マネジメントコンソールで開いて保存すると、改行がカンマ区切りに変換されてしまいます。
   - 参照するときの動作は、文字列（String）と違いがありません。カンマ区切りの文字列が返ってきます。
@@ -119,7 +120,7 @@ print(sampleparams3)
 ```json
 {
   "username": "hoge",
-  "password":"fuga",
+  "password": "fuga",
   "database_name": "piyo"
 }
 ```
@@ -176,7 +177,7 @@ aws ssm get-parameters-by-path --path /prod/db --with-decryption
 }
 ```
 
-キーと値のみを取得したい場合は--queryオプションを使って以下のようにします。
+キーと値のみを取得したい場合は--query オプションを使って以下のようにします。
 
 ```sh
 aws ssm get-parameters-by-path --path /prod/db --with-decryption --query "Parameters[].[Name,Value]"
@@ -197,7 +198,7 @@ aws ssm get-parameters-by-path --path /prod/db --with-decryption --query "Parame
 ]
 ```
 
-`--recursive` を指定すると階層を再帰的に取得します。指定しない場合や `--no-recursive` を指定した場合は、1階層のみの取得になります。
+`--recursive` を指定すると階層を再帰的に取得します。指定しない場合や `--no-recursive` を指定した場合は、1 階層のみの取得になります。
 
 ```sh
 # recursive を指定しないまたは、no-recursive を指定した場合
@@ -242,7 +243,7 @@ Duration: 00:10:00
 AppConfig はアプリケーションの設定を管理、保存、デプロイすることが出来るサービスです。
 つまり、アプリケーションの設定をコードの外に出して別管理して、設定の変更のデプロイまで簡単に出来るサービスです。
 
-[Amazon Web Services ブログ>AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ - 02 12月 2019](https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/)
+[Amazon Web Services ブログ>AWS AppConfig を使用したアプリケーション構成設定の安全なデプロイ - 02 12 月 2019](https://aws.amazon.com/jp/blogs/news/safe-deployment-of-application-configuration-settings-with-aws-appconfig/)
 
 よくある質問には以下のように記載があります。
 
@@ -268,13 +269,13 @@ AWS AppConfig はランタイムに更新されたアプリケーションを安
 デプロイできる複雑なセットのアプリケーション構成をモデル化する必要がある場合、AWS AppConfig を使用する必要があります。
 ```
 
-パラメータストアに比べて、AppConfig ではDeployment や Environment という概念を持っており、複数のパラメータをまとまった単位（configuration profile）で管理できるなどパラメータストアに比べて、アプリケーション向けになっていると言えます。
+パラメータストアに比べて、AppConfig では Deployment や Environment という概念を持っており、複数のパラメータをまとまった単位（configuration profile）で管理できるなどパラメータストアに比べて、アプリケーション向けになっていると言えます。
 
 ### ECS で利用する
 
 [AWS AppConfig integration with Amazon ECS and Amazon EKS](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html)
 
-ECS に `AppConfig agent`（AppConfigの値をアプリケーションの代わりに自動でポーリング・データのキャッシュを行ってくれるプログラム） をインストールしたコンテナをサイドカーとして構成します。コンテナのポートは `2772` です。
+ECS に `AppConfig agent`（AppConfig の値をアプリケーションの代わりに自動でポーリング・データのキャッシュを行ってくれるプログラム） をインストールしたコンテナをサイドカーとして構成します。コンテナのポートは `2772` です。
 
 次のコマンドで取得することができるようになります。[Retrieving configuration data](https://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-integration-containers-agent.html#appconfig-integration-containers-agent-retrieving-data)
 
@@ -286,7 +287,7 @@ curl "http://localhost:2772/applications/<application_name>/environments/<enviro
 
 EC2 もサポートされるようになりました。
 
-[AWS AppConfig エージェントが Amazon EC2 の機能フラグと設定の使用を簡素化 -  Jul 21, 2023](https://aws.amazon.com/jp/about-aws/whats-new/2023/07/aws-appconfig-agent-feature-flag-configuration-amazon-ec2/)
+[AWS AppConfig エージェントが Amazon EC2 の機能フラグと設定の使用を簡素化 - Jul 21, 2023](https://aws.amazon.com/jp/about-aws/whats-new/2023/07/aws-appconfig-agent-feature-flag-configuration-amazon-ec2/)
 
 ### AppConfig の料金
 
@@ -299,7 +300,7 @@ Duration: 00:10:00
 [AWS Systems Manager Application Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/application-manager.html)
 
 AWS 上で運用している各サービスを１つの画面で俯瞰・対応できるサービスで、追加料金なしで利用できます。
-以下のようなサービスが1画面で俯瞰することができます。
+以下のようなサービスが 1 画面で俯瞰することができます。
 
 - CloudFormation スタック
 - AWS Resource Groups

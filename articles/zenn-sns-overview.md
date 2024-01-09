@@ -7,17 +7,17 @@ published: true
 
 # Amazon Simple Notification Service (SNS)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Amazon Simple Notification Service (SNS)](#amazon-simple-notification-service-sns)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon Simple Notification Service (SNS) とは](#amazon-simple-notification-service-sns-とは)
   - [SQS とは違うの？](#sqs-とは違うの)
   - [SNS 構成要素](#sns-構成要素)
@@ -28,7 +28,7 @@ published: true
   - [サブスクリプションフィルター](#サブスクリプションフィルター)
   - [デッドレターキュー](#デッドレターキュー)
   - [暗号化](#暗号化)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon Simple Notification Service (SNS) とは
 
@@ -36,7 +36,7 @@ Duration: 0:48:02
 
 A2A および A2P メッセージング用のフルマネージド Pub/Sub サービスです。
 
-- Pub / Subメッセージング
+- Pub / Sub メッセージング
   - メッセージを配信する側（パブリッシャー）とメッセージの受信者（サブスクライバー）が非同期でメッセージをやり取りできるようになります。
 
 【AWS Black Belt Online Seminar】[Amazon Simple Notification Service (SNS)(YouTube)](https://www.youtube.com/watch?v=bPCjOG_jQlc)(48:02)
@@ -87,7 +87,7 @@ Duration: 0:01:00
 ### サブスクリプション
 
 トピックに発行されたメッセージの受信者（サブスクライバー）を複数登録できます。
-サブスクライバーへの配信はデフォルトで3回再試行されます。配信に失敗したメッセージは、後述のデッドレターキューが設定されていない場合は破棄されます。
+サブスクライバーへの配信はデフォルトで 3 回再試行されます。配信に失敗したメッセージは、後述のデッドレターキューが設定されていない場合は破棄されます。
 
 サブスクライバーに指定できるものは以下となります。
 
@@ -101,10 +101,10 @@ Duration: 0:01:00
   - 指定した電話番号にメッセージを送信できます。
   - [https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html]
   - [SMS サンドボックス](https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-sms-sandbox.html)
-    - 追加済みの電話番号宛のみで、10個まで。
+    - 追加済みの電話番号宛のみで、10 個まで。
     - [SMS サンドボックス外への移動](https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-sms-sandbox-moving-to-production.html)
 - プラットフォームアプリケーションのエンドポイント
-  - モバイルPUSH通知が出来ます
+  - モバイル PUSH 通知が出来ます
   - [https://docs.aws.amazon.com/ja_jp/sns/latest/dg/mobile-platform-endpoint.html]
 
 ## サブスクリプションに E メールを登録した場合
@@ -137,7 +137,7 @@ Duration: 0:01:00
 - AWS マネジメントコンソール
 - AWS CLI
 
-どちらの方法を選択する場合でもまずは、[サブスクリプションの確認] メールの`Confirm subscription` の URL をクリックではなく、右クリックして URL をコピーする必要があります。（ここでクリックしてしまった場合は、サブスクリプションの削除→作成からやり直しです。）
+どちらの方法を選択する場合でもまずは、[サブスクリプションの確認] メールの`Confirm subscription` の URL をクリックではなく、右クリックして URL をコピーする必要があります。（ここでクリックしてしまった場合は、サブスクリプションの削除 → 作成からやり直しです。）
 
 ![sns-confirmation](/images/sns/sns-confirmation.png)
 
@@ -148,18 +148,20 @@ https://sns.ap-northeast-1.amazonaws.com/confirmation.html?TopicArn=arn:aws:sns:
 ```
 
 - AWS マネジメントコンソールを利用する場合
+
   - SNS コンソールを開きます
   - サブスクリプションを開き、ステータスが [保留中の確認] を選択します
   - [サブスクリプションの確認] をクリックします
   - コピーした URL を貼り付けて、[サブスクリプションの確認] をクリックします
 
-   ![sns-confirmation-console](/images/sns/sns-confirmation-console.png)
+  ![sns-confirmation-console](/images/sns/sns-confirmation-console.png)
 
   - これで、メール本文から解除できない状態になります。マネジメントコンソールから実行すると、`ConfirmationWasAuthenticated` という属性が [true] になるので、サブスクリプションの解除ができなくなります。
 
 - AWS CLI を利用する場合
 
   - コピーした URL のパラメータを分解すると、次の３つになります。
+
     - TopicArn
     - Topic
     - Endpoint
@@ -227,7 +229,7 @@ MessageAttributes には 次のように Key-Value 形式で登録します。
          "Value": "order_placed"
       },
       "price_usd": {
-         "Type": "Number", 
+         "Type": "Number",
          "Value": "210.75"
       }
    }
@@ -235,13 +237,10 @@ MessageAttributes には 次のように Key-Value 形式で登録します。
 
 ```json
 {
-   "store": ["example_corp"],
-   "event": ["order_cancelled"],
-   "encrypted": [false],
-   "customer_interests": [
-      "basketball",
-      "baseball"
-   ]
+  "store": ["example_corp"],
+  "event": ["order_cancelled"],
+  "encrypted": [false],
+  "customer_interests": ["basketball", "baseball"]
 }
 ```
 
@@ -272,6 +271,6 @@ AWS KMS を利用して、トピック内のメッセージを暗号化するこ
 - [CloudWatch アラームトリガーの SNS 通知を受信しなかったのはなぜですか?](https://repost.aws/ja/knowledge-center/cloudwatch-receive-sns-for-alarm-trigger)
 - [【Amazon EventBridge】ルールは実行されるが、Amazon SNS トピックにいずれのメッセージもパブリッシュされない](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-troubleshooting.html#eb-no-messages-published-sns)
 
-## まとめ
+## 📖 まとめ
 
 ![sns-overview](/images/all/sns.png)

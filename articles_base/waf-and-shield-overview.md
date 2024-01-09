@@ -40,23 +40,23 @@ Duration: 00:01:00
 
 Duration: 0:1:00
 
-| 層 | 名称 | プロトコル |
-| --- | --- | --- |
-| 7 | アプリケーション層 | HTTP/HTTPS,FTP,DNS.. |  
-| 6 | プレゼンテーション層 | TLS,SSL,FTP(Ascii)... |  
-| 5 | セッション層 | TLS,NetBIOS... |
-| 4 | トランスポート層 | TCP,UDP... |  
-| 3 | ネットワーク層 | IP,ICMP,ARP,RARP... |  
-| 2 | データリンク層 | PPP,Ethernet |  
-| 1 | 物理層 | RS-232,UTP,無線 |  
+| 層  | 名称                 | プロトコル            |
+| --- | -------------------- | --------------------- |
+| 7   | アプリケーション層   | HTTP/HTTPS,FTP,DNS..  |
+| 6   | プレゼンテーション層 | TLS,SSL,FTP(Ascii)... |
+| 5   | セッション層         | TLS,NetBIOS...        |
+| 4   | トランスポート層     | TCP,UDP...            |
+| 3   | ネットワーク層       | IP,ICMP,ARP,RARP...   |
+| 2   | データリンク層       | PPP,Ethernet          |
+| 1   | 物理層               | RS-232,UTP,無線       |
 
-詳しくは、[OSI参照モデル(Wikipedia)](https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB)
+詳しくは、[OSI 参照モデル(Wikipedia)](https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB)
 
 ## AWS Shield とは
 
 Duration: 1:00:33
 
-AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,[DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。
+AWS Shield は、AWS リソースを DDoS（分散型サービス拒否,[DDoS 攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)）攻撃から保護するためのサービスです。 Shield は、レイヤー 3 およびレイヤー 4(OSI モデルの項を参照)の攻撃（IP、TCP、UDP レベルでの攻撃）を自動的に検出および防止し、AWS のグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Flood などが含まれます。
 
 【AWS Black Belt Online Seminar】[AWS Shield Advanced(YouTube)](https://youtu.be/qKNsYWHWOiYxx)(1:00:33)
 
@@ -74,7 +74,7 @@ AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,[DDoS攻�
 
 Duration: 1:58:37
 
-AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAFは、HTTP / HTTPSリクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAFは、XSS（クロスサイトスクリプティング）、SQLインジェクション、CSRF（クロスサイトリクエストフォージェリ）などのWebアプリケーション攻撃を検出および防止するための機能を提供します。
+AWS WAF（Web Application Firewall） とは、Web アプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAF は、HTTP / HTTPS リクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAF は、XSS（クロスサイトスクリプティング）、SQL インジェクション、CSRF（クロスサイトリクエストフォージェリ）などの Web アプリケーション攻撃を検出および防止するための機能を提供します。
 
 【AWS Black Belt Online Seminar】[AWS Managed Rules for AWS WAF の活用(YouTube)](https://youtu.be/ceQ7eU_jkD4)(0:32:28)
 
@@ -108,23 +108,23 @@ Advanced は有料サービスで、有効化すると月額 3,000 USD です。
 
 主な違いは次のとおりです。
 
-| 項目 | Standard | Advanced |
-| ---- | --- | --- |
-| 料金 | 無料 | 有料 |
-| 保護レイヤー | L3/4 | L3/4/7 |
-| 保護可能 DDoS 攻撃 | 一般的な | 大規模 |
-| DDoS コスト保護 | 無 | オートスケール発動のコスト還元あり |
-| 異常検知 | 無 | 統計情報から異常検知 |
-| レポート | 無 | 攻撃をリアルタイムで通知、過去13カ月の履歴保持 |
-| サポート | 無 | 専門家（SRT）による24時間365日。英語 |
-| その他 | 無 | AWS WAF の一部が無料利用可 |
-| 適用サービス | CloudFront, Route 53 など | CloudFront,Route53,ELB,ALB,Global Accelerator,EC2 |
+| 項目               | Standard                  | Advanced                                          |
+| ------------------ | ------------------------- | ------------------------------------------------- |
+| 料金               | 無料                      | 有料                                              |
+| 保護レイヤー       | L3/4                      | L3/4/7                                            |
+| 保護可能 DDoS 攻撃 | 一般的な                  | 大規模                                            |
+| DDoS コスト保護    | 無                        | オートスケール発動のコスト還元あり                |
+| 異常検知           | 無                        | 統計情報から異常検知                              |
+| レポート           | 無                        | 攻撃をリアルタイムで通知、過去 13 カ月の履歴保持  |
+| サポート           | 無                        | 専門家（SRT）による 24 時間 365 日。英語          |
+| その他             | 無                        | AWS WAF の一部が無料利用可                        |
+| 適用サービス       | CloudFront, Route 53 など | CloudFront,Route53,ELB,ALB,Global Accelerator,EC2 |
 
 ### Global threat dashboard
 
 Duration: 0:01:00
 
-全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが
+全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが分かります。
 
 ![shield-console-global-activity](/images/shield/shield-console-global-activity.png)
 
@@ -144,7 +144,7 @@ OSI モデルのレイヤー３，４については Shield のようなファ�
 この部分には様々な情報を含むことができるため、攻撃手段も多様です。
 そのため、レイヤー７で動作する内容を読み取り、攻撃からアプリケーションを保護するファイアウォールが必要になりました。
 
-攻撃によって Webアプリケーションが受けるセキュリティに関する最も重大な10のリスクについては下記サイトを参考にしてください。
+攻撃によって Web アプリケーションが受けるセキュリティに関する最も重大な 10 のリスクについては下記サイトを参考にしてください。
 
 [OWASP Top Ten Project](https://owasp.org/www-project-top-ten/)
 
@@ -171,7 +171,7 @@ WebACL に設定できるルールやルールグループにはそれぞれ WCU
 ![waf-wcu](/images/waf/waf-wcu.JPG)
 
 下記アップデート以前は、最大 1,500 WCU となっており、これを超える場合は上限緩和申請が必要でしたが、アップデートにより 5,000 WCU まで上限緩和申請なしで使用できるようになりました。
-ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100万件あたりに追加料金が発生するようになります。
+ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100 万件あたりに追加料金が発生するようになります。
 [AWS WAF でウェブ ACL の容量ユニット制限を引き上げ(Apr 11, 2023)](https://aws.amazon.com/jp/about-aws/whats-new/2023/04/aws-waf-web-acl-capacity-units-limits/)
 
 ### ルールとルールグループ
@@ -240,53 +240,53 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 ##### AWS マネージドルールグループの適用例
 
-- 推奨ルールのみ（◎のみ）：1,175 / 1,500 WCU　残り：325 WCU
+- 推奨ルールのみ（◎ のみ）：1,175 / 1,500 WCU 　残り：325 WCU
 
-  | ルール名 | キャパシティ |
-  | --- | --- |
-  | Core rule set | 700 |
-  | Know bad inputs | 200 |
-  | SQL database | 200 |
-  | Amazon IP reputation list | 25 |
-  | Anonymous IP list | 50 |
+  | ルール名                  | キャパシティ |
+  | ------------------------- | ------------ |
+  | Core rule set             | 700          |
+  | Know bad inputs           | 200          |
+  | SQL database              | 200          |
+  | Amazon IP reputation list | 25           |
+  | Anonymous IP list         | 50           |
 
-- Linuxサーバ：1,375 / 1,500 WCU　残り：125 WCU
+- Linux サーバ：1,375 / 1,500 WCU 　残り：125 WCU
 
-  | ルール名 | キャパシティ |
-  | --- | --- |
-  | 推奨ルール | 1,175 |
-  | Linux operating system | 200 |
+  | ルール名               | キャパシティ |
+  | ---------------------- | ------------ |
+  | 推奨ルール             | 1,175        |
+  | Linux operating system | 200          |
 
 分類の記号の意味は次のとおりです。
 
 - ◎：導入を推奨
-- △：OSの種類によって導入を検討
+- △：OS の種類によって導入を検討
 - ▲：アプリケーションの性質によって導入を検討
 
-| ルール名 | キャパシティ | ルール説明 | 分類 | 
-| --- | --- | --- | --- |
-| Core rule set | 700 | OWASP(Open Web Application Security Project *1) で公開されているWebサイトを狙った攻撃に対して作られたルールで、多くのインジェクション関係の基本的なルールが含まれているため、Webサイトを保護するための基本ルールとして導入することを推奨します。 | ◎ |
-| Admin protection | 100 | 管理画面へのアクセスを制御するためのルールで、公開された管理ページへの外部アクセスをブロックできるルールが含まれています。アプリケーションの性質から導入を検討します。 | ▲ |
-| Know bad inputs | 200 | 既知の脆弱性の悪用または発見に関連付けられている要求パターンをブロックできるルールです。悪意のある攻撃者が脆弱なアプリケーションを発見するリスクを減らすことができるため、Webサイトを保護するための基本ルールとして導入することを推奨します。 | ◎ |
-| SQL database | 200 |  SQLインジェクションなどSQLデータベースに対する脆弱性からアプリケーションを保護するために準備されたルールです。データベースを利用する環境では基本ルールとして導入することを推奨します。 | ◎ |
-| Linux operating system | 200 | ローカルファイルインクルージョンなどLinuxの環境に絞り込んだルールです。Linuxの環境でサーバ上でWebアプリケーションを稼働している場合は導入を検討します。 | △ |
-| POSIX operating system | 100 | ローカルファイルインクルージョンなどPOSIX系のOS向け構成したルールです。Webアプリケーションを稼働している場合、導入を検討します。 | △ |
-| Windows operating system | 200 | Powershell コマンドを利用したコマンドインジェクション攻撃やWindows OSに関連する脆弱性からアプリケーションを保護するために構成されたルールで、Windows OSでアプリケーションを構成している環境では導入を推奨します。 | △ |
-| PHP application | 100 |  PHP に対する脆弱性や攻撃を検知する目的で作られたルールで、アプリケーションの性質から導入を検討します。 | ▲ |
-| Wordpress application | 100 | Wordpress に関連する脆弱性に対応したルールです。Webアプリケーションを WordPress で構築している環境においては実装することを推奨します。 | ▲ |
-| Amazon IP reputation list | 25 | AWSが収集した脅威IPアドレスのリストで、悪質なボットなどを防ぐことができるルールです。Webサイトを保護するための基本ルールとして導入することを推奨します。 | ◎ |
-| Anonymous IP list | 50 | Torや匿名でアクセスするためのプロキシーサービスのIPリストによる攻撃を防ぐことができるルールです。これらのIPリストからのアクセスは攻撃の可能性が高いですが、攻撃を目的としたものではなく、プライバシー保護を目的として利用するユーザーがいる場合もありますので、不特定対数のユーザーがアクセスするサイトでは利用するか検討した方が良い。(*2) | ◎ |
-| Bot Control | 50 | このルールは有償です。サイトに合わせて許可するボット、拒否するボットをコントロールすることができます。 | - |
-| Account Takeover Prevention(ATP)*3 | 50 | このルールは有償です。クレデンシャルスタッフィング攻撃、ブルートフォース試行、その他の異常ログインアクティビティからアプリケーションのログインページを保護することができます。 | - |
-| Account Creation Fraud Prevention(ACFP)*4 | 50 | このルールは有償です。偽アカウントや不正アカウントの作成を防ぐことができます。 | - |
+| ルール名                                   | キャパシティ | ルール説明                                                                                                                                                                                                                                                                                                                                        | 分類 |
+| ------------------------------------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| Core rule set                              | 700          | OWASP(Open Web Application Security Project \*1) で公開されている Web サイトを狙った攻撃に対して作られたルールで、多くのインジェクション関係の基本的なルールが含まれているため、Web サイトを保護するための基本ルールとして導入することを推奨します。                                                                                              | ◎    |
+| Admin protection                           | 100          | 管理画面へのアクセスを制御するためのルールで、公開された管理ページへの外部アクセスをブロックできるルールが含まれています。アプリケーションの性質から導入を検討します。                                                                                                                                                                            | ▲    |
+| Know bad inputs                            | 200          | 既知の脆弱性の悪用または発見に関連付けられている要求パターンをブロックできるルールです。悪意のある攻撃者が脆弱なアプリケーションを発見するリスクを減らすことができるため、Web サイトを保護するための基本ルールとして導入することを推奨します。                                                                                                    | ◎    |
+| SQL database                               | 200          | SQL インジェクションなど SQL データベースに対する脆弱性からアプリケーションを保護するために準備されたルールです。データベースを利用する環境では基本ルールとして導入することを推奨します。                                                                                                                                                         | ◎    |
+| Linux operating system                     | 200          | ローカルファイルインクルージョンなど Linux の環境に絞り込んだルールです。Linux の環境でサーバ上で Web アプリケーションを稼働している場合は導入を検討します。                                                                                                                                                                                      | △    |
+| POSIX operating system                     | 100          | ローカルファイルインクルージョンなど POSIX 系の OS 向け構成したルールです。Web アプリケーションを稼働している場合、導入を検討します。                                                                                                                                                                                                             | △    |
+| Windows operating system                   | 200          | Powershell コマンドを利用したコマンドインジェクション攻撃や Windows OS に関連する脆弱性からアプリケーションを保護するために構成されたルールで、Windows OS でアプリケーションを構成している環境では導入を推奨します。                                                                                                                              | △    |
+| PHP application                            | 100          | PHP に対する脆弱性や攻撃を検知する目的で作られたルールで、アプリケーションの性質から導入を検討します。                                                                                                                                                                                                                                            | ▲    |
+| Wordpress application                      | 100          | Wordpress に関連する脆弱性に対応したルールです。Web アプリケーションを WordPress で構築している環境においては実装することを推奨します。                                                                                                                                                                                                           | ▲    |
+| Amazon IP reputation list                  | 25           | AWS が収集した脅威 IP アドレスのリストで、悪質なボットなどを防ぐことができるルールです。Web サイトを保護するための基本ルールとして導入することを推奨します。                                                                                                                                                                                      | ◎    |
+| Anonymous IP list                          | 50           | Tor や匿名でアクセスするためのプロキシーサービスの IP リストによる攻撃を防ぐことができるルールです。これらの IP リストからのアクセスは攻撃の可能性が高いですが、攻撃を目的としたものではなく、プライバシー保護を目的として利用するユーザーがいる場合もありますので、不特定対数のユーザーがアクセスするサイトでは利用するか検討した方が良い。(\*2) | ◎    |
+| Bot Control                                | 50           | このルールは有償です。サイトに合わせて許可するボット、拒否するボットをコントロールすることができます。                                                                                                                                                                                                                                            | -    |
+| Account Takeover Prevention(ATP)\*3        | 50           | このルールは有償です。クレデンシャルスタッフィング攻撃、ブルートフォース試行、その他の異常ログインアクティビティからアプリケーションのログインページを保護することができます。                                                                                                                                                                    | -    |
+| Account Creation Fraud Prevention(ACFP)\*4 | 50           | このルールは有償です。偽アカウントや不正アカウントの作成を防ぐことができます。                                                                                                                                                                                                                                                                    | -    |
 
-*1 [OWASP Top Ten Project](https://owasp.org/www-project-top-ten/)
+\*1 [OWASP Top Ten Project](https://owasp.org/www-project-top-ten/)
 
-*2 Anonymous IP listを利用すると、その中に含まれる[HostingProviderIPList]というルールによってAWS内からのアクセスも遮断されます（それ以外も悪用されやすいGCPなどのクラウドサービスのIPからも遮断している可能性もあります）。セキュリティテストなどでAWSインスタンスからアクセスさせたい場合、Anonymous IP listのスコープダウンに「ホワイトリストに一致しない場合」というのを付与して除外するとよい。
+\*2 Anonymous IP list を利用すると、その中に含まれる[HostingProviderIPList]というルールによって AWS 内からのアクセスも遮断されます（それ以外も悪用されやすい GCP などのクラウドサービスの IP からも遮断している可能性もあります）。セキュリティテストなどで AWS インスタンスからアクセスさせたい場合、Anonymous IP list のスコープダウンに「ホワイトリストに一致しない場合」というのを付与して除外するとよい。
 
-*3 [Account Takeover Prevention(ATP)(Feb 14, 2022)](https://aws.amazon.com/jp/about-aws/whats-new/2022/02/aws-waf-fraud-control-login-credential-attacks/)
+\*3 [Account Takeover Prevention(ATP)(Feb 14, 2022)](https://aws.amazon.com/jp/about-aws/whats-new/2022/02/aws-waf-fraud-control-login-credential-attacks/)
 
-*4 [Account Creation Fraud Prevention(ACFP)(Jun 13, 2023)](https://aws.amazon.com/jp/about-aws/whats-new/2023/06/aws-waf-fraud-control-account-creation-prevention-pricing/)
+\*4 [Account Creation Fraud Prevention(ACFP)(Jun 13, 2023)](https://aws.amazon.com/jp/about-aws/whats-new/2023/06/aws-waf-fraud-control-account-creation-prevention-pricing/)
 
 #### AWS Marketplace マネージドルールグループ
 
@@ -297,7 +297,7 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 ![waf-marketplace-rules-2](/images/waf/waf-marketplace-rules-2.JPG)
 
 #### 独自のルールグループ
-  
+
 独自のルールをまとめて名前を付けておくことで、再利用可能にしたものです。
 作成するルールグループには、WebACL と同様の WCU の上限があります。
 
@@ -347,8 +347,8 @@ SELECT from_unixtime(timestamp/1000) as date, *
 FROM waf_logs_partitioned
 WHERE action = 'BLOCK'
   AND from_unixtime(timestamp/1000)
-     BETWEEN parse_datetime('2022-06-22-02:00:00','yyyy-MM-dd-HH:mm:ss') 
-     AND parse_datetime('2022-06-22-02:59:59','yyyy-MM-dd-HH:mm:ss') 
+     BETWEEN parse_datetime('2022-06-22-02:00:00','yyyy-MM-dd-HH:mm:ss')
+     AND parse_datetime('2022-06-22-02:59:59','yyyy-MM-dd-HH:mm:ss')
 ORDER BY timestamp desc
 ```
 

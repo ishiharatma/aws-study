@@ -27,9 +27,26 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A" target="_blank">コンテナ</a><ul>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A-%E3%81%A8%E3%81%AF" target="_blank">コンテナ とは</a></li>
+<li><a href="#aws-black-belt-online-seminar" target="_blank">AWS Black Belt Online Seminar</a></li>
+<li><a href="#docker" target="_blank">Docker</a></li>
+<li><a href="#docker-compose" target="_blank">Docker Compose</a></li>
+<li><a href="#kubernetes-k8s" target="_blank">Kubernetes (K8s)</a></li>
+</ul>
+</li>
+</ul>
 
 
       </google-codelab-step>
@@ -43,7 +60,7 @@
 <p>ここでは、簡単に要点だけ記述します。</p>
 <p>アプリケーションは、主に「ランタイム、ライブラリ、プログラムコード、設定ファイル」から構成されます。</p>
 <p class="image-container"><img alt="container-001" src="img\\13cedca4abd3dcd4.png"></p>
-<p>これらを開発のフェーズごとに異なる環境で稼働させるときの問題点として、ローカルでは動いていたけど、××環境では動かないといったことがよくあると思います。 この問題は、それぞれの環境でリリースした手順が異なっていたり、インストールされているランタイムや依存ライブラリが異なっていたり、といったことで発生します。</p>
+<p>これらを開発のフェーズごとに異なる環境で稼働させるときの問題点として、ローカルでは動いていたけど、×× 環境では動かないといったことがよくあると思います。 この問題は、それぞれの環境でリリースした手順が異なっていたり、インストールされているランタイムや依存ライブラリが異なっていたり、といったことで発生します。</p>
 <p class="image-container"><img alt="container-002" src="img\\5ce13929500f737.png"></p>
 <p>これを解決するため、アプリケーションの稼働に必要なものをコンテナという一つのものにパッケージしてしまおうということです。 これによって、どの環境でも動作が保証されることになります。</p>
 <p class="image-container"><img alt="container-003" src="img\\dc9cce3c98fb723b.png"></p>
@@ -58,13 +75,13 @@
 <p class="image-container"><img alt="vm-vs-container" src="img\\75cbd71ba70c4c3f.png"></p>
 <p>仮想マシンもコンテナもライブラリや他の依存関係とアプリケーションをまとめてパッケージ化していますが、コンテナには次のようなメリットがあります。</p>
 <ul>
-<li>ゲストOS がない分、仮想マシンより軽量</li>
+<li>ゲスト OS がない分、仮想マシンより軽量</li>
 <li>軽量なため、高速に起動が可能</li>
 <li>一度ビルドされたコンテナは不変であるため、可搬性が高い（どこでも起動できる）</li>
 </ul>
 <p>また、コンテナはホストと OS のカーネルを共有しているため、セキュリティ上のリスクがあります。これについては、「AWS Black Belt Online Seminar コンテナセキュリティ入門」や、次の資料を参考にしてください。</p>
 <ul>
-<li><a href="https://jpn.nec.com/cybersecurity/blog/210730/index.html" target="_blank">NECセキュリティブログ&gt;特権コンテナの脅威から学ぶコンテナセキュリティ</a></li>
+<li><a href="https://jpn.nec.com/cybersecurity/blog/210730/index.html" target="_blank">NEC セキュリティブログ&gt;特権コンテナの脅威から学ぶコンテナセキュリティ</a></li>
 <li><a href="https://www.ipa.go.jp/security/reports/oversea/nist/ug65p90000019cp4-att/000085279.pdf" target="_blank">【IPA】NIST SP800-190 アプリケーションコンテナセキュリティガイド</a></li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-fargate.html" target="_blank">AWS ドキュメント &gt; AWS Fargate のセキュリティ</a></li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-tasks-containers.html" target="_blank">AWS ドキュメント &gt; タスクとコンテナのセキュリティ</a></li>
@@ -75,10 +92,10 @@
     
       <google-codelab-step label="AWS Black Belt Online Seminar" duration="0">
         <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=fUPyxos7Z-k" target="_blank">CON141 コンテナ入門</a>(0:10:00)</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=CGfRsyQW1rE" target="_blank">CON142 Docker入門</a>(0:14:11)</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=pAGW0MdNGj4" target="_blank">CON120 AWSコンテナ全体概要</a>(0:17:29)</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=CGfRsyQW1rE" target="_blank">CON142 Docker 入門</a>(0:14:11)</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=pAGW0MdNGj4" target="_blank">CON120 AWS コンテナ全体概要</a>(0:17:29)</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=-xqg95QBK2M" target="_blank">CON110 なぜ今コンテナなのか</a>(0:09:00)</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=jA63YPmkQ8I" target="_blank">CON130 コンテナセキュリティ100</a>(0:16:34)</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=jA63YPmkQ8I" target="_blank">CON130 コンテナセキュリティ 100</a>(0:16:34)</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=I1o01lkQNHY" target="_blank">CON231 コンテナセキュリティ入門 Part.1</a>(0:13:51)</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=OTwC6zpgZjc" target="_blank">CON232 コンテナセキュリティ入門 Part.2</a>(0:10:26)</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=drWE7enGFvo" target="_blank">CON233 コンテナセキュリティ入門 Part.3</a>(0:13:26)</p>
@@ -88,9 +105,9 @@
     
       <google-codelab-step label="Docker" duration="0">
         <p><a href="https://www.docker.com/" target="_blank">Docker</a></p>
-<p>Docker社（旧 dotCloud）が開発するコンテナのアプリケーション実行環境を管理するオープンソースソフトウェア（OSS）です。</p>
+<p>Docker 社（旧 dotCloud）が開発するコンテナのアプリケーション実行環境を管理するオープンソースソフトウェア（OSS）です。</p>
 <p>ドッカー と読みます(<a href="https://ja.wikipedia.org/wiki/Docker" target="_blank">Wikipedia</a>)。</p>
-<p>2021年9月に有料化されましたが、個人利用、スモールビジネス、教育機関、非商用のオープンソースプロジェクトでは引き続き無料で利用できます。 有償化の猶予期間は、2022年1月31日までした。</p>
+<p>2021 年 9 月に有料化されましたが、個人利用、スモールビジネス、教育機関、非商用のオープンソースプロジェクトでは引き続き無料で利用できます。 有償化の猶予期間は、2022 年 1 月 31 日までした。</p>
 <p><a href="https://www.docker.com/pricing/" target="_blank">Pricing &amp; Subscriptions</a></p>
 <p class="image-container"><img alt="docker-price" src="img\\719d11c434f08c19.jpg"></p>
 <p>コンテナは、Dockerfile というテキストファイルに記述することで利用できます。</p>
@@ -132,11 +149,11 @@ metadata:
   name: busybox-sleep
 spec:
   containers:
-  - name: busybox
-    image: busybox
-    args:
-    - sleep
-    - &#34;1000000&#34;
+    - name: busybox
+      image: busybox
+      args:
+        - sleep
+        - &#34;1000000&#34;
 </code></pre>
 
 

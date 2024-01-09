@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-lambda" target="_blank">AWS Lambda</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#aws-lambda-%E3%81%A8%E3%81%AF" target="_blank">AWS Lambda とは</a></li>
 <li><a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF" target="_blank">ネットワーク</a></li>
 <li><a href="#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83" target="_blank">実行環境</a><ul>
@@ -70,7 +70,7 @@
 <li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">モニタリング</a></li>
 <li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a></li>
 <li><a href="#%E3%82%AF%E3%82%A9%E3%83%BC%E3%82%BF" target="_blank">クォータ</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -99,7 +99,7 @@
     
       <google-codelab-step label="ネットワーク" duration="1">
         <p>Lambda は Lambda サービスが所有する VPC 内で実行されています。 <img alt="lambda-eni.png" src="img\\e2c4164f5219aa49.jpg"></p>
-<p>Lambda を自 VPC に接続すると、Lambda サービスの VPC と自VPC を接続するために Hyperplane ENI(Elastic Network Interface)を作成し、関数に割り当てます。</p>
+<p>Lambda を自 VPC に接続すると、Lambda サービスの VPC と自 VPC を接続するために Hyperplane ENI(Elastic Network Interface)を作成し、関数に割り当てます。</p>
 <p class="image-container"><img alt="lambda-eni.png" src="img\\1183b80c4a3a93ce.jpg"></p>
 
 
@@ -110,11 +110,11 @@
 <p>安全で分離されたランタイムを実行するための環境で、実行環境のライフサイクルは次のようになっています。</p>
 <ul>
 <li>通常 <ul>
-<li>INIT(初期化)  → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）</li>
+<li>INIT(初期化) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）</li>
 </ul>
 </li>
 <li>SnapStart を利用している場合 <ul>
-<li>RESTORE(復元)  → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）</li>
+<li>RESTORE(復元) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）</li>
 </ul>
 </li>
 </ul>
@@ -128,7 +128,7 @@
 </ul>
 </li>
 <li>VPC Lambda は ENI の起動が必要になるため遅い。 <ul>
-<li>ENI は作成までに 10秒以上かかることがある</li>
+<li>ENI は作成までに 10 秒以上かかることがある</li>
 <li>2019/09 以前は、関数ごとに ENI が作成されており、実行環境がスケールしてリクエストが増加するにつれて、多くの ENI が作成されるようになっていました。ENI 数に比例して サブネットに割り当てた IP アドレスを消費してしまいます。 <img alt="many-enis-1024x616-320.jpg" src="img\\9b608b1277d8d79a.jpg"></li>
 <li>現在は、事前に作成した 共通利用する ENI を利用して VPC に接続しているため ENI の作成に関する問題は解消されました。</li>
 </ul>
@@ -141,7 +141,7 @@
 <p>SnapStart の使用に追加コストは発生しませんが、利用するには以下の制約があります。</p>
 <ul>
 <li>サポートしているのは、<code>Java 11</code> のみ</li>
-<li>エフェメラルストレージのサイズが512 MB 以下</li>
+<li>エフェメラルストレージのサイズが 512 MB 以下</li>
 <li>プロビジョニングされた同時実行ではない</li>
 <li>arm 64 アーキテクチャではない</li>
 <li>EFS を利用していない</li>
@@ -156,7 +156,7 @@
 <ul>
 <li>arm64 — AWS Graviton2 プロセッサ用の 64 ビット ARM アーキテクチャ <ul>
 <li>アームろくよん</li>
-<li>x86_64アーキテクチャより34%のコスト効率よく利用できる</li>
+<li>x86_64 アーキテクチャより 34%のコスト効率よく利用できる</li>
 <li>実際のコストは 東京リージョンでは 20%ほど低い。</li>
 <li>利用できる場合は、こちらを選ぶ。</li>
 </ul>
@@ -172,7 +172,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Lambda のアクセス権限" duration="1">
-        <p>Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAMポリシーが含まれます）とリソースベースのポリシーがあります。</p>
+        <p>Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAM ポリシーが含まれます）とリソースベースのポリシーがあります。</p>
 <p>実行ロールでは、Lambda 関数が他のリソースにアクセスできる権限や実行をまかせるための信頼ポリシーを記述するロールで、Lambda 関数を作成する際には必ず付与します。</p>
 <p>リソースポリシーでは、どのサービスやアカウントが Lambda 関数を呼び出せるかを記述します。後述する Push モデルのトリガー（S3, CloudWatch など）を使用する場合に指定します。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_compare-resource-policies.html" target="_blank">IAM ロールとリソースベースのポリシーとの相違点</a></p>
@@ -182,8 +182,8 @@
 </td><td colspan="1" rowspan="1"><p>リソースポリシー</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Resource</p>
-</td><td colspan="1" rowspan="1"><p>適用対象のリソースのARN</p>
-</td><td colspan="1" rowspan="1"><p>適用対象のリソースのARN</p>
+</td><td colspan="1" rowspan="1"><p>適用対象のリソースの ARN</p>
+</td><td colspan="1" rowspan="1"><p>適用対象のリソースの ARN</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Action</p>
 </td><td colspan="1" rowspan="1"><p>オペレーション</p>
@@ -234,7 +234,7 @@
 <li>RequestResponse<ul>
 <li>デフォルト</li>
 <li>同期実行</li>
-<li>直接 Lambda を1回実行し、処理が完了したらレスポンスが返ってきます。</li>
+<li>直接 Lambda を 1 回実行し、処理が完了したらレスポンスが返ってきます。</li>
 </ul>
 <pre><code language="language-sh" class="language-sh">aws lambda invoke --function-name hoge-function \
 --payload .... response.json
@@ -251,7 +251,7 @@
 <li>非同期実行</li>
 <li>Lambda の実行はキューイングされます。</li>
 <li>キューイングされたタイミングでレスポンスが返ってきます。</li>
-<li>失敗した場合自動的に2回までリトライされます。</li>
+<li>失敗した場合自動的に 2 回までリトライされます。</li>
 <li>DLQ（デッドレターキュー）で、失敗した場合の設定が行えます。</li>
 </ul>
 <pre><code language="language-sh" class="language-sh">aws lambda invoke --function-name hoge-function \
@@ -323,8 +323,8 @@
 </ul>
 </li>
 <li>フェーズ２ <ul>
-<li>フェーズ１から少なくとも30日経過したものがフェーズ２になる <ul>
-<li>Python 3.6 の場合、非推奨フェーズ１（2022-7-18）→フェーズ２（2022-8-29）</li>
+<li>フェーズ１から少なくとも 30 日経過したものがフェーズ２になる <ul>
+<li>Python 3.6 の場合、非推奨フェーズ１（2022-7-18）→ フェーズ２（2022-8-29）</li>
 </ul>
 </li>
 <li>新規関数、既存関数ともに作成、更新不可</li>
@@ -333,14 +333,14 @@
 </ul>
 </li>
 </ul>
-<p>サポート終了がスケジュールされている場合、60日以内なったら Eメールで通知が来るようになります。 また、Trusted Advisor では、<a href="https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes" target="_blank">非推奨となる120日の前チェック</a>が出来ます。</p>
+<p>サポート終了がスケジュールされている場合、60 日以内なったら E メールで通知が来るようになります。 また、Trusted Advisor では、<a href="https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes" target="_blank">非推奨となる 120 日の前チェック</a>が出来ます。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Layer" duration="1">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-layers.html</p>
-<p>Lambda 関数で使用するライブラリとその他の依存関係をパッケージ化できる機能です。関数には最大で 5つのレイヤーを含めることができます。 レイヤーを使用することで、デプロイパッケージのサイズを削減し、デプロイスピードを速めることができます。</p>
+<p>Lambda 関数で使用するライブラリとその他の依存関係をパッケージ化できる機能です。関数には最大で 5 つのレイヤーを含めることができます。 レイヤーを使用することで、デプロイパッケージのサイズを削減し、デプロイスピードを速めることができます。</p>
 
 
       </google-codelab-step>
@@ -418,14 +418,14 @@ Function3:
 </code></pre>
 <h2 is-upgraded>AWS SAM</h2>
 <p>AWS Serverless Application Model (AWS SAM) でデプロイするには次のようにします。</p>
-<pre><code language="language-yaml" class="language-yaml">  Function1:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
-      Runtime: python3.9
-      Architectures:
-        - arm64
+<pre><code language="language-yaml" class="language-yaml">Function1:
+  Type: AWS::Serverless::Function
+  Properties:
+    CodeUri: hello_world/
+    Handler: app.lambda_handler
+    Runtime: python3.9
+    Architectures:
+      - arm64
 </code></pre>
 
 
@@ -439,10 +439,10 @@ Function3:
       </google-codelab-step>
     
       <google-codelab-step label="同時実行" duration="1">
-        <p>ある時点で実行されているリクエストの数のことです。 Lambda関数の同時実行数は同一アカウントの同一リージョン内につき、1,000に制限されています。 Lambdaの同時実行数の計測は以下のように考えます。</p>
+        <p>ある時点で実行されているリクエストの数のことです。 Lambda 関数の同時実行数は同一アカウントの同一リージョン内につき、1,000 に制限されています。 Lambda の同時実行数の計測は以下のように考えます。</p>
 <pre><code language="language-text" class="language-text">同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒））
 </code></pre>
-<p>Lambda関数が平均10秒かかり、1秒あたり100個のイベントを発行するとLambda関数を1000同時に実行することになり、制限ぎりぎりとなります。</p>
+<p>Lambda 関数が平均 10 秒かかり、1 秒あたり 100 個のイベントを発行すると Lambda 関数を 1000 同時に実行することになり、制限ぎりぎりとなります。</p>
 
 
       </google-codelab-step>
@@ -473,9 +473,9 @@ Function3:
 <p class="image-container"><img alt="monitoring-320.jpg" src="img\\846474b453a3839d.jpg"></p>
 <p>監視するメトリクスとしては次のようなものがあります。</p>
 <ul>
-<li>Invocations このメトリクスは監視間隔として300秒(5分)若しくは60秒(1分)を設定してください。監視の際には、stasticsとして「Sum」を利用することを推奨します。</li>
-<li>Errors このメトリクスは監視間隔として300秒(5分)若しくは60秒(1分)を設定してください。監視の際には、stasticsとして「Sum」を利用することを推奨します。</li>
-<li>Throttles このメトリクスは監視間隔として300秒(5分)若しくは60秒(1分)を設定してください。監視の際には、stasticsとして「Sum」を利用することを推奨します。</li>
+<li>Invocations このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。</li>
+<li>Errors このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。</li>
+<li>Throttles このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。</li>
 </ul>
 <p>その他、Lambda 関数のメモリをモニタリングするしたい場合は、次のドキュメントを参照します。 https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory-usage-monitoring/</p>
 
@@ -523,7 +523,7 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="lambda" src="img\\2f729c5297aaf1f8.png"></p>
 
 

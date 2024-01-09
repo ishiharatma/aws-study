@@ -7,17 +7,17 @@ published: true
 
 # AWS Key Management Service（KMS）
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [AWS Key Management Service（KMS）](#aws-key-management-servicekms)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [KMS とは](#kms-とは)
   - [基本概念](#基本概念)
   - [マスターキーとデータキー](#マスターキーとデータキー)
@@ -26,13 +26,13 @@ published: true
   - [キーマテリアル](#キーマテリアル)
   - [キーポリシー](#キーポリシー)
   - [マルチリージョンキー](#マルチリージョンキー)
-  - [別のAWSアカウントへの許可](#別のawsアカウントへの許可)
+  - [別の AWS アカウントへの許可](#別の-aws-アカウントへの許可)
   - [キーの削除](#キーの削除)
     - [削除予定または無効化された CMK の使用を通知](#削除予定または無効化された-cmk-の使用を通知)
     - [キーが削除予定または無効化された場合の通知](#キーが削除予定または無効化された場合の通知)
   - [データキーキャッシュ](#データキーキャッシュ)
   - [クライアントサイド暗号化とサーバサイド暗号化](#クライアントサイド暗号化とサーバサイド暗号化)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## KMS とは
 
@@ -69,7 +69,7 @@ KMS のキーに対する操作は CloudTrail に記録されます。詳しく�
 
 Duration: 0:01:30
 
-KMS では、マスターキーとデータキーという2種類の鍵が登場します。
+KMS では、マスターキーとデータキーという 2 種類の鍵が登場します。
 
 - マスターキー(Customer Master Key: CMK)
   - データキーを暗号化するキー
@@ -86,12 +86,12 @@ Duration: 0:01:30
 
 - AWS マネージド型キー
   - AWS サービスが作成・管理する CMK で、キー名が「aws/s3」 のようになっています。
-  - 1年ごとに自動的にローテーションされます
+  - 1 年ごとに自動的にローテーションされます
   - 無効化や削除ができません
 - カスタマー管理型のキー
   - 利用者が作成・管理する CMK です。
-  - 自動ローテーションを有効化することで、1年ごとにローテーションさせることができます。
-  - 1年より短い周期でローテーションしたい場合は手動で新しいキーを作成します。
+  - 自動ローテーションを有効化することで、1 年ごとにローテーションさせることができます。
+  - 1 年より短い周期でローテーションしたい場合は手動で新しいキーを作成します。
   - 無効化や削除ができます。
 - AWS 所有のキー
   - AWS サービスの裏側で使用されるキーで、ユーザーからは見えないため、意識する必要はありません。
@@ -115,9 +115,9 @@ arn:aws:kms:ap-northeast-1:123456789012:alias/aliasName
 
 Duration: 0:03:00
 
-[キーマテリアル](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material)とは、「暗号化キーを生成するために必要な材料」であり「CMK作成時に使用されるデータのこと」をいいます。
+[キーマテリアル](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material)とは、「暗号化キーを生成するために必要な材料」であり「CMK 作成時に使用されるデータのこと」をいいます。
 
-キーマテリアルは、次の3種類が指定できます。
+キーマテリアルは、次の 3 種類が指定できます。
 
 - KMS
   - デフォルト
@@ -126,18 +126,18 @@ Duration: 0:03:00
 - 外部
   - 利用者が作成した共通鍵を指定します
 - カスタムキーストア（CloudHSM）
-  - これを利用するには、[AWS CloudHSMクラスターを事前に作成](https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/create-cluster.html)しておく必要があります。
-  - AWS CloudHSMクラスター とは、ユーザー自身しかアクセスできない 専用 HSM（ハードウェアセキュリティモジュール）インスタンスを作成してデータセキュリティのコンプライアンスを満たすことができるキーストアを作成できるもの。HSM は VPC 内で実行されます。
+  - これを利用するには、[AWS CloudHSM クラスターを事前に作成](https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/create-cluster.html)しておく必要があります。
+  - AWS CloudHSM クラスター とは、ユーザー自身しかアクセスできない 専用 HSM（ハードウェアセキュリティモジュール）インスタンスを作成してデータセキュリティのコンプライアンスを満たすことができるキーストアを作成できるもの。HSM は VPC 内で実行されます。
   - VPC 内に配置しているので、レイテンシーは低い。
-  - 冗長化構成は利用者の責任範囲となる。推奨はAZを跨いだ 2台以上の HSMインスタンス
+  - 冗長化構成は利用者の責任範囲となる。推奨は AZ を跨いだ 2 台以上の HSM インスタンス
   - [AWS CloudHSM の概要](https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/introduction.html)
   - [AWS CloudHSM のよくある質問](https://aws.amazon.com/jp/cloudhsm/faqs/)
-  - 料金は東京リージョンでは、1時間当たり 1.81USD と KMSに比べると高額です。
+  - 料金は東京リージョンでは、1 時間当たり 1.81USD と KMS に比べると高額です。
   - 次のような要件がある場合に利用します。
-    - PCI DSSやその他の特定の縦断的なセキュリティ標準
+    - PCI DSS やその他の特定の縦断的なセキュリティ標準
     - 政府のワークロード
-    - FIPS認可要求ポリシー
-    - RDS Oracleでの[透過的なデータ暗号化](https://docs.oracle.com/cd/E57425_01/121/ASOAG/introduction-to-transparent-data-encryption.htm) (Transparent data encryption: TDE) サポート
+    - FIPS 認可要求ポリシー
+    - RDS Oracle での[透過的なデータ暗号化](https://docs.oracle.com/cd/E57425_01/121/ASOAG/introduction-to-transparent-data-encryption.htm) (Transparent data encryption: TDE) サポート
 
 ## キーポリシー
 
@@ -162,7 +162,7 @@ Duration: 0:01:00
 単一リージョンで作成した CMK はエクスポートのインポートも出来ないため、作成したリージョン以外では使用することができません。
 しかし、[マルチリージョンキー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/multi-region-keys-overview.html)を選択することで、複数のリージョンにレプリケートすることが可能です。
 
-## 別のAWSアカウントへの許可
+## 別の AWS アカウントへの許可
 
 Duration: 0:01:00
 
@@ -180,7 +180,7 @@ Duration: 0:05:00
 [キーの削除](https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html)
 
 CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。
-削除スケジュールは、7日～30日を指定できます。この期間内であれば削除をキャンセルすることができます。
+削除スケジュールは、7 日～ 30 日を指定できます。この期間内であれば削除をキャンセルすることができます。
 削除されると、既存データを二度と復号できなくなるので注意が必要です。
 
 削除ではなく、無効化することもできますのでまずは無効化を行い、本当にキーが使用されていないことを確認することを推奨します。
@@ -197,6 +197,7 @@ CMK は即時削除することはできません。削除スケジュールを�
 CloudTrail に以下のイベントが記録されます。
 
 - 削除予定
+
   - KMSInvalidStateException
 
   ```text
@@ -207,6 +208,7 @@ CloudTrail に以下のイベントが記録されます。
   ```
 
 - 無効化
+
   - DisabledException
 
   ```text
@@ -246,26 +248,26 @@ OR
 
 Duration: 0:00:15
 
-AWS Encryption SDKの機能として、「[データキーキャッシュ](https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html)」があります。
-これを利用することでデータキー取得のAPIコールを減らすことができます。
+AWS Encryption SDK の機能として、「[データキーキャッシュ](https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html)」があります。
+これを利用することでデータキー取得の API コールを減らすことができます。
 
 ## クライアントサイド暗号化とサーバサイド暗号化
 
 Duration: 0:03:00
 
-KMS を利用した暗号化は、次の2種類があります。
+KMS を利用した暗号化は、次の 2 種類があります。
 
 - クライアントサイド暗号化（Client-Side-Encryption: CSE）
   - アプリケーション側で暗号化を実施します。
-  - アプリケーション側で暗号化済みデータを送信するので、AWSまでの通信経路上は暗号化された状態となります。
+  - アプリケーション側で暗号化済みデータを送信するので、AWS までの通信経路上は暗号化された状態となります。
   - クライアントサイドで暗号化/復号の処理が必要なため、実装に手間がかかります
 - サーバサイド暗号化（Server-Side-Encryption: SSE）
-  - AWS の各サービスが提供する暗号化を利用します。（例：S3バケット）
+  - AWS の各サービスが提供する暗号化を利用します。（例：S3 バケット）
   - ![s3-encrypt](/images/kms/s3-encrypt.png)
   - AWS 側で暗号化し、データにアクセスがあった場合は自動的に復号されます。
   - 通信経路上では暗号化されていません。（使用しているプロトコルによる暗号化は別）
   - クライアントサイドでの暗号化/復号の処理が必要ないため、実装が容易になります。
 
-## まとめ
+## 📖 まとめ
 
 ![kms-overview](/images/all/kms.png)

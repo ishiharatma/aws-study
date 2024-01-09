@@ -7,26 +7,26 @@ published: true
 
 # AWS Systems Manager（SSM）:変更管理
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Systems Manager（SSM）:変更管理](#aws-systems-managerssm変更管理)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [変更管理の機能](#変更管理の機能)
   - [メンテナンスウィンドウ](#メンテナンスウィンドウ)
     - [メンテナンスウィンドウの料金](#メンテナンスウィンドウの料金)
   - [オートメーション](#オートメーション)
     - [オートメーションの料金](#オートメーションの料金)
   - [Change Manager](#change-manager)
-    - [Change Managerの料金](#change-managerの料金)
+    - [Change Manager の料金](#change-manager-の料金)
   - [変更カレンダー](#変更カレンダー)
     - [変更カレンダーの料金](#変更カレンダーの料金)
 
@@ -46,7 +46,7 @@ Duration: 00:01:00
 
 [AWS Systems Manager Maintenance Windows](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-maintenance.html)
 
-パッチ適用やソフトウェアのインストール、OSのアップグレードなどの一連のタスクをスケジュール実行できる機能です。
+パッチ適用やソフトウェアのインストール、OS のアップグレードなどの一連のタスクをスケジュール実行できる機能です。
 
 ![maintenance-window](/images/ssm/maintenance-window.png)
 
@@ -63,9 +63,9 @@ Duration: 00:01:00
 [AWS Systems Manager Automation](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-automation.html)
 
 インスタンス上でリモートコマンドを実行できるようにしたものです。
-自動化ではリモート命令以外にも、例えば実行の一部としてAWSのAPIを利用することができます。
-SSM自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。
-なお、SSMサービス上で動作する自動ドキュメントの最大実行時間 AWSアカウントとAWSリージョンあたり、1,000,000秒となります。
+自動化ではリモート命令以外にも、例えば実行の一部として AWS の API を利用することができます。
+SSM 自動化タイプのドキュメントを利用することで、多くの段階を組み合わせて複雑なタスクを完了させることもあります。
+なお、SSM サービス上で動作する自動ドキュメントの最大実行時間 AWS アカウントと AWS リージョンあたり、1,000,000 秒となります。
 
 ### オートメーションの料金
 
@@ -92,11 +92,11 @@ AWS の変更管理といえば、「AWS CloudTrail」や「AWS Config」を利�
 
 他には、`AWS-AttachEBSVolume`や `AWS-StopRdsInstance` などがあります。
 
-### Change Managerの料金
+### Change Manager の料金
 
 「変更リクエスト件数」とそれによって実行された「API リクエスト数」で課金されます。
 
-[Change Managerの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Change_Manager)
+[Change Manager の料金](https://aws.amazon.com/jp/systems-manager/pricing/#Change_Manager)
 
 ## 変更カレンダー
 
@@ -106,7 +106,7 @@ Duration: 00:10:00
 
 重要なイベントや負荷が集中する時間帯、バッチ処理が行われる時間帯などを設定することで、定期実行処理を回避することができます。
 
-作成するカレンダーは次の2種類が選択できます。
+作成するカレンダーは次の 2 種類が選択できます。
 
 - Open by default (デフォルトでオープン)
   - カレンダーに作成されたイベントの期間を休業日、つまり「CLOSE」と扱うカレンダーになります。
@@ -131,9 +131,9 @@ aws ssm get-calendar-state \
 
 ```json
 {
-    "State": "CLOSED",
-    "AtTime": "2023-09-17T15:00:00Z",
-    "NextTransitionTime": "2023-09-18T15:00:00Z"
+  "State": "CLOSED",
+  "AtTime": "2023-09-17T15:00:00Z",
+  "NextTransitionTime": "2023-09-18T15:00:00Z"
 }
 ```
 
@@ -151,7 +151,7 @@ aws ssm get-calendar-state \
   - この判定ロジックの仕様上、カレンダー上は休業日だが、臨時営業日とするといった場合は別のカレンダーのみを使用して判定する必要があります。
 
 また、他のカレンダーをインポートすることもできます。
-Googleの祝日カレンダーの `iCal 形式の公開 URL` から ics ファイルをダウンロードします。
+Google の祝日カレンダーの `iCal 形式の公開 URL` から ics ファイルをダウンロードします。
 
 ```text
 ※ 祝日は自動更新されませんので、手動でインポートするか、自動でインポートできるような仕組みを構築する必要があります。
@@ -182,10 +182,10 @@ X-WR-TIMEZONE:Asia/Tokyo
 
 ![-google-holiday-utc](/images/ssm/change-calendar/change-calendar-google-holiday-utc.png)
 
-「敬老の日」が `Asia/Tokyo` では「2023/09/18 9:00～2023/09/19 9:00」になってしまっています。
+「敬老の日」が `Asia/Tokyo` では「2023/09/18 9:00 ～ 2023/09/19 9:00」になってしまっています。
 ![google-holiday-keirou](/images/ssm/change-calendar/change-calendar-google-holiday-utc-1.png)
 
-これは、ics ファイルで敬老の日は次のように定義されているものを 「2023/09/18 00:00+0:00～2023/09/19 00:00+0:00」として UTC でインポートしてしまうためです。
+これは、ics ファイルで敬老の日は次のように定義されているものを 「2023/09/18 00:00+0:00 ～ 2023/09/19 00:00+0:00」として UTC でインポートしてしまうためです。
 
 ```text
 DTSTART;VALUE=DATE:20230918

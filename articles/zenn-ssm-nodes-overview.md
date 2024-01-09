@@ -7,19 +7,19 @@ published: true
 
 # AWS Systems Manager（SSM）:ノード管理
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Systems Manager（SSM）:ノード管理](#aws-systems-managerssmノード管理)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [ノード管理の機能](#ノード管理の機能)
   - [セッションマネージャー](#セッションマネージャー)
     - [セッションマネージャーの料金](#セッションマネージャーの料金)
@@ -40,7 +40,7 @@ Duration: 00:01:00
     - [コンプライアンスの料金](#コンプライアンスの料金)
   - [イベントリ](#イベントリ)
     - [インベントリの料金](#インベントリの料金)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## ノード管理の機能
 
@@ -71,7 +71,7 @@ Duration: 00:01:00
 
 Duration: 0:05:00
 
-EC2、エッジデバイス、オンプレ、仮想マシンを管理することができる機能です。この機能を利用することで、踏み台サーバを構築したり、SSHキーを管理したりといったことが不要になります。
+EC2、エッジデバイス、オンプレ、仮想マシンを管理することができる機能です。この機能を利用することで、踏み台サーバを構築したり、SSH キーを管理したりといったことが不要になります。
 
 セッションマネージャーの利用で最も簡単なのは、AWS マネジメントコンソールから利用することです。
 
@@ -119,7 +119,7 @@ echo.
 aws ssm start-session --profile profilename ^
 --target %INSTANCE_ID% ^
 --document-name AWS-StartPortForwardingSession ^
---parameters "portNumber=%SERVER_PORT_NO%,localPortNumber=%LOCAL_PORT_NO%" 
+--parameters "portNumber=%SERVER_PORT_NO%,localPortNumber=%LOCAL_PORT_NO%"
 
 echo .
 echo 切断しました。
@@ -155,11 +155,11 @@ AWS マネジメントコンソールまたは AWS CLI で接続を行った場�
 
 ![fm-tool-menu](/images/ssm/fleet-manager/fm-tool-menu.png)
 
-Ｗindows サーバのイベントログの表示例
+Ｗ indows サーバのイベントログの表示例
 
 ![fm-windows-eventlog](/images/ssm/fleet-manager/fm-windows-eventlog.png)
 
-ファイルシステムの表示例（WindowsサーバのCドライブ）
+ファイルシステムの表示例（Windows サーバの C ドライブ）
 
 ![fm-windows-fs](/images/ssm/fleet-manager/fm-windows-fs.png)
 
@@ -183,7 +183,7 @@ AWS マネジメントコンソールまたは AWS CLI で接続を行った場�
 
 ![rc-1](/images/ssm/run-command/run-command-1.png)
 
-SSM　Agent のアップデートを行ったり、CloudWatch エージェントのインストールと設定を行ったりできます。
+SSM 　 Agent のアップデートを行ったり、CloudWatch エージェントのインストールと設定を行ったりできます。
 
 参考：[Run Command を使用して SSM Agent を更新する](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/run-command-tutorial-update-software.html)
 
@@ -212,7 +212,7 @@ Run Command から使用するには、`{{ssm:parameter-name}}` と指定しま�
 同様の機能は、メンテナンスウィンドウでも実現することができますが、メンテナンスウィンドウは指定した期間中に実行する場合に選択するとよいでしょう。
 ステートマネージャーでは、`インスタンスが起動したタイミングに1回だけ` といったことができます。
 
-どちらを選択するかは、AWSドキュメント [State Manager または Maintenance Windows の選択](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html) を参考にします。
+どちらを選択するかは、AWS ドキュメント [State Manager または Maintenance Windows の選択](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html) を参考にします。
 
 ### ステートマネージャーの料金
 
@@ -222,7 +222,7 @@ Run Command から使用するには、`{{ssm:parameter-name}}` と指定しま�
 
 ## パッチマネージャー
 
-EC2 に対する　OS パッチ適用を自動化できる機能です。
+EC2 に対する　 OS パッチ適用を自動化できる機能です。
 サーバーを構築したはいいが、運用を行っていく上で必要だとはわかっていても後回しになりがちなパッチ適用を自動化できます。
 
 ### パッチポリシー
@@ -237,7 +237,7 @@ EC2 に対する　OS パッチ適用を自動化できる機能です。
 
 ![pm-3](/images/ssm/patch-manager/pm-3.png)
 
-暫く待つ（10分程度？）とパッチポリシーが作成されます。
+暫く待つ（10 分程度？）とパッチポリシーが作成されます。
 
 ![pm-4](/images/ssm/patch-manager/pm-4.png)
 
@@ -260,7 +260,6 @@ EC2 に対する　OS パッチ適用を自動化できる機能です。
 無料で利用できます。
 
 [パッチマネージャーの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Patch_Manager)
-
 
 ## ハイブリッドアクティベーション
 
@@ -293,10 +292,9 @@ EC2 に対する　OS パッチ適用を自動化できる機能です。
 
 [コンプライアンスの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Compliance)
 
-
 ## イベントリ
 
-マネージドインスタンスから、OSやアプリケーション、ネットワーク設定などの情報を定期的に取得ができる機能です。定期的に取得するのは、ステートマネージャーによって実行されます。
+マネージドインスタンスから、OS やアプリケーション、ネットワーク設定などの情報を定期的に取得ができる機能です。定期的に取得するのは、ステートマネージャーによって実行されます。
 
 ![inventory](/images/ssm/inventory/inventory-1.png)
 
@@ -306,6 +304,6 @@ EC2 に対する　OS パッチ適用を自動化できる機能です。
 
 [インベントリの料金](https://aws.amazon.com/jp/systems-manager/pricing/#Inventory)
 
-## まとめ
+## 📖 まとめ
 
 ![ssm-nodes-overview](/images/all/ssm-nodes.png)

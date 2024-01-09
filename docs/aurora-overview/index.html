@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="1">
         <ul>
 <li><a href="#amazon-aurora" target="_blank">Amazon Aurora</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">Aurora について知るには</a></li>
 <li><a href="#aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">Aurora について知るには(その他)</a></li>
 <li><a href="#amazon-aurora-%E3%81%A8%E3%81%AF" target="_blank">Amazon Aurora とは</a></li>
@@ -58,7 +58,7 @@
 <li><a href="#serverless" target="_blank">Serverless</a></li>
 <li><a href="#global-database" target="_blank">Global Database</a></li>
 <li><a href="#bluegreen-deploymentsnew-2022-11-27" target="_blank">Blue/Green Deployments(New: 2022-11-27)</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -73,7 +73,7 @@
 <p class="image-container"><img alt="blackbelt-aurora-mysql-usecase" src="img\\b6c3964ce815c10b.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/oJqIzHIMh7Q" target="_blank">Amazon Aurora with PostgreSQL Compatibility(YouTube)</a>(1:03:46)</p>
 <p class="image-container"><img alt="blackbelt-aurora-postgresql" src="img\\c8016177b8680d56.jpg"></p>
-<p><a href="https://youtu.be/8uPU2T5Xj9E" target="_blank">RDS/Aurora Update | 2.5時間で学ぶ！ Amazon Aurora のいま(YouTube)</a>(27:33)</p>
+<p><a href="https://youtu.be/8uPU2T5Xj9E" target="_blank">RDS/Aurora Update | 2.5 時間で学ぶ！ Amazon Aurora のいま(YouTube)</a>(27:33)</p>
 <p class="image-container"><img alt="rds-aurora-updates" src="img\\eb2909ec59c46dfe.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/rds/aurora/" target="_blank">Amazon Aurora サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html" target="_blank">Amazon Aurora ドキュメント</a></p>
@@ -114,7 +114,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Aurora の基本的な構成" duration="5">
-        <p>RDS とは異なり、Aurora では DB インスタンスとストレージが分離されています。これにより、RDS の 2倍の性能を発揮すると言われています。</p>
+        <p>RDS とは異なり、Aurora では DB インスタンスとストレージが分離されています。これにより、RDS の 2 倍の性能を発揮すると言われています。</p>
 <p class="image-container"><img alt="aurora-architecture" src="img\\7f8f6206f56d1ad7.png"></p>
 <p>Aurora を構成する要素は次の通りです。</p>
 <ul>
@@ -143,12 +143,12 @@
         <h2 is-upgraded>単一構成</h2>
 <p>１つの AZ に プライマリインスタンスを構築した最小構成です。 AZ 障害時にはインスタンスが利用できなくなります。</p>
 <p class="image-container"><img alt="aurora-single" src="img\\ceb0278a1815cfed.png"></p>
-<p>開発環境や、可用性を求められない場合にコストを低く抑えることが出来る構成です。インスタンスの障害であれば、同じ AZ 内に新規インスタンスが作成され、10分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。</p>
+<p>開発環境や、可用性を求められない場合にコストを低く抑えることが出来る構成です。インスタンスの障害であれば、同じ AZ 内に新規インスタンスが作成され、10 分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。</p>
 <p>エンドポイントは Writer と Reader のエンドポイントが自動的に作成されますが、レプリカがない場合は、Reader エンドポイントは プライマリインスタンスに接続します。</p>
 <p>読み取りスループットを向上させたい場合は、レプリカを追加します。</p>
 <h2 is-upgraded>レプリカ構成</h2>
 <p>読み取り頻度の高いデータベースのワークロードに対して、スケールアウトすることにより、パフォーマンスを向上させます。また、プライマリインスタンスに障害が発生した場合は、レプリカにフェールオーバーすることで自動的に復旧します。</p>
-<p>レプリカは最大で 15台まで追加することが可能です。</p>
+<p>レプリカは最大で 15 台まで追加することが可能です。</p>
 <p>レプリカへのレプリケーションは非同期で行われます。</p>
 <p>エンドポイントは Writer と Reader のエンドポイントが自動的に作成され、Reader エンドポイントは レプリカに負荷分散します。</p>
 <p>レプリカのインスタンスタイプがプライマリインスタンスよりも小さい場合、負荷に耐えられないことがあります。ベストプラクティスはクラスター内のすべてのインスタンスを同じサイズにすることです。</p>
@@ -156,7 +156,7 @@
 <table>
 <tr><td colspan="1" rowspan="1"><p>DB エンジン</p>
 </td><td colspan="1" rowspan="1"><p>レプリカ作成可？</p>
-</td><td colspan="1" rowspan="1"><p>CRR可能？</p>
+</td><td colspan="1" rowspan="1"><p>CRR 可能？</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>PostgreSQL</p>
 </td><td colspan="2" rowspan="1"><p>○</p>
@@ -244,16 +244,16 @@
 </td><td colspan="1" rowspan="1"><p>Serverless v2</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>GA</p>
-</td><td colspan="1" rowspan="1"><p>2018年10月</p>
-</td><td colspan="1" rowspan="1"><p>2022年4月</p>
+</td><td colspan="1" rowspan="1"><p>2018 年 10 月</p>
+</td><td colspan="1" rowspan="1"><p>2022 年 4 月</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>サポートエンジン</p>
 </td><td colspan="1" rowspan="1"><p>Aurora MySQL 5.6 or 5.7 互換バージョン、Aurora PostgreSQL 10 or 11 互換バージョン</p>
 </td><td colspan="1" rowspan="1"><p>Aurora MySQL バージョン 3、Aurora PostgreSQL 13 or 14</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>ACU</p>
-</td><td colspan="1" rowspan="1"><p>1～128 ACU</p>
-</td><td colspan="1" rowspan="1"><p>0.5～256 ACU（Performance Insights を使用した場合最低でも 2ACU必要 ）</p>
+</td><td colspan="1" rowspan="1"><p>1 ～ 128 ACU</p>
+</td><td colspan="1" rowspan="1"><p>0.5 ～ 256 ACU（Performance Insights を使用した場合最低でも 2ACU 必要 ）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>料金</p>
 </td><td colspan="1" rowspan="1"><p>0.10 USD/ACU</p>
@@ -308,7 +308,7 @@
 <li>スキーマ変更　など。</li>
 </ul>
 </li>
-<li>切り替えは1分以内</li>
+<li>切り替えは 1 分以内</li>
 <li>デーア損失なし</li>
 <li>アプリケーションの変更不要</li>
 </ul>
@@ -316,7 +316,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="1">
+      <google-codelab-step label="📖 まとめ" duration="1">
         <p class="image-container"><img alt="aurora" src="img\\4994a380c22cd178.png"></p>
 
 

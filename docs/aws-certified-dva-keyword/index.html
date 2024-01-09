@@ -27,7 +27,7 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS 認定資格取得に向けて個人的に勉強した各サービスのキーワードを記載しております。AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 <ul>
@@ -42,7 +42,7 @@
       <google-codelab-step label="Lambda" duration="0">
         <ul>
 <li>Java、Go、PowerShell、Node.js、C#、Python、Ruby</li>
-<li>C言語の場合は、カスタムランタイムでレイヤーを作成</li>
+<li>C 言語の場合は、カスタムランタイムでレイヤーを作成</li>
 <li>環境変数の暗号化 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/security-dataprotection.html" target="_blank">保管データ暗号化</a></li>
 <li>保管時はデフォルトで KMS キーによって暗号化されている</li>
@@ -63,8 +63,8 @@
 </ul>
 </li>
 <li>同時実行制御 <ul>
-<li>同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒）） <ul>
-<li>関数が平均10秒かかり、1秒あたり100個のイベントを発行⇒同時実行1000</li>
+<li>同時実行=（1 秒あたりの呼び出し数）x（平均実行時間（秒）） <ul>
+<li>関数が平均 10 秒かかり、1 秒あたり 100 個のイベントを発行 ⇒ 同時実行 1000</li>
 </ul>
 </li>
 </ul>
@@ -88,13 +88,13 @@
         <ul>
 <li>API 統合タイプ <ul>
 <li>AWS <ul>
-<li>Lambda統合</li>
+<li>Lambda 統合</li>
 <li>デフォルトでは、クライアントから連携されたリクエストが Lambda に渡されない。</li>
 <li>マッピングテンプレートでリクエストのパラメータのどれを何という名前で Lambda に渡すかを定義しなければならない</li>
 </ul>
 </li>
 <li>AWS_PROXY <ul>
-<li>Lambdaプロキシ統合ともいう</li>
+<li>Lambda プロキシ統合ともいう</li>
 <li>クライアントから連携されたリクエストを Lambda に渡す</li>
 <li>Lambda からは決められたレスポンス形式を返却する必要がある。</li>
 <li>形式が間違っていると、<code>502: Internal server error</code> となる</li>
@@ -123,8 +123,8 @@
 <li>Latency: API 全体</li>
 </ul>
 </li>
-<li>504: Gateway Timeoutエラーが発生する <ul>
-<li>Lambda の実行時間 29秒を超えていないか</li>
+<li>504: Gateway Timeout エラーが発生する <ul>
+<li>Lambda の実行時間 29 秒を超えていないか</li>
 </ul>
 </li>
 <li>オーソライザー <ul>
@@ -161,7 +161,7 @@
 </ul>
 </li>
 <li>Cognito Sync <ul>
-<li>WEBアプリとモバイルデバイスを同期</li>
+<li>WEB アプリとモバイルデバイスを同期</li>
 <li>デバイスがオフライン時でもローカルにデータキャッシュできる</li>
 <li>AppSync が後継サービス</li>
 </ul>
@@ -201,7 +201,7 @@
 </ul>
 </li>
 <li>サーバーアクセスログ <ul>
-<li>アクセス数に比例してストレージ容量Up</li>
+<li>アクセス数に比例してストレージ容量 Up</li>
 </ul>
 </li>
 <li>IAM ユーザーに S3 の個人スペースを提供する <ul>
@@ -217,7 +217,7 @@
         <ul>
 <li>タスク配置戦略 <ul>
 <li>binpack <ul>
-<li>EC2インスタンス数が最小となるように配置</li>
+<li>EC2 インスタンス数が最小となるように配置</li>
 </ul>
 </li>
 <li>random <ul>
@@ -225,7 +225,7 @@
 </ul>
 </li>
 <li>spread <ul>
-<li>インスタンス、AZに均等に配置</li>
+<li>インスタンス、AZ に均等に配置</li>
 <li>&#34;field&#34;: &#34;attribute:ecs.availability-zone&#34;</li>
 <li>&#34;field&#34;: &#34;instanceId&#34;</li>
 </ul>
@@ -245,7 +245,7 @@
 </ul>
 </li>
 <li>セグメント <ul>
-<li>X-Ray データを送信するサービスや、SDKやX-Rayデーモンを利用した場合に作成される情報の単位</li>
+<li>X-Ray データを送信するサービスや、SDK や X-Ray デーモンを利用した場合に作成される情報の単位</li>
 </ul>
 </li>
 <li>サブセグメント <ul>
@@ -253,9 +253,9 @@
 </ul>
 </li>
 <li>注釈（Annotations） <ul>
-<li>フィルタするときに使うインデックスで、Key-Value形式</li>
-<li>１つのトレースで50個まで</li>
-<li>自動的に追加されるが、SDK利用時には独自に作成可能</li>
+<li>フィルタするときに使うインデックスで、Key-Value 形式</li>
+<li>１つのトレースで 50 個まで</li>
+<li>自動的に追加されるが、SDK 利用時には独自に作成可能</li>
 </ul>
 </li>
 <li>メタデータ <ul>
@@ -305,7 +305,7 @@
 </ul>
 </li>
 <li>API Gateway <ul>
-<li>「X-Rayトレースを有効にする」にチェック</li>
+<li>「X-Ray トレースを有効にする」にチェック</li>
 <li>権限などの設定は不要</li>
 </ul>
 </li>
@@ -337,7 +337,7 @@
 <li>必須</li>
 <li>リソースの定義</li>
 <li>作成したリソースの属性を取得するときは、<code>Fn::GetAtt</code></li>
-<li>アカウントID を参照したいときは、<code>AWS::AccountId</code></li>
+<li>アカウント ID を参照したいときは、<code>AWS::AccountId</code></li>
 <li>Lambda を記述したい場合 <ul>
 <li>コードに依存関係がない場合は直接コードを記述 <ul>
 <li>Code: ZipFile: |　～</li>
@@ -398,8 +398,8 @@
     
       <google-codelab-step label="CodePipeline" duration="0">
         <ul>
-<li>CodeCommitにコミット後、デプロイ前にコードレビューが必要なとき <ul>
-<li>パイプラインに承認ステージを追加し、SNSで通知</li>
+<li>CodeCommit にコミット後、デプロイ前にコードレビューが必要なとき <ul>
+<li>パイプラインに承認ステージを追加し、SNS で通知</li>
 </ul>
 </li>
 </ul>
@@ -411,13 +411,13 @@
         <ul>
 <li>buildspec.yml</li>
 <li>ビルド出力アーティファクトを暗号化するには、</li>
-<li>ECR にプッシュ失敗するときは、CodeBuild サービスロール（IAMロール）を見直し</li>
+<li>ECR にプッシュ失敗するときは、CodeBuild サービスロール（IAM ロール）を見直し</li>
 <li>timeoutInMinutesOverride <ul>
 <li>ビルドをキューに入れてからタイムアウトするまでの時間</li>
 <li>ビルドが長すぎる場合</li>
 </ul>
 </li>
-<li>buildspec.ymlのエラーを確認したい場合、ローカル実行 <ul>
+<li>buildspec.yml のエラーを確認したい場合、ローカル実行 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/use-codebuild-agent.html" target="_blank">AWS CodeBuild エージェントを使用してビルドをローカルで実行</a></li>
 <li>Docker が必要</li>
 </ul>
@@ -447,12 +447,12 @@
 </li>
 <li>Lambda のデプロイ時 <ul>
 <li>BeforeAllowTraffic <ul>
-<li>デプロイされたLambda関数バージョンに移行する前</li>
+<li>デプロイされた Lambda 関数バージョンに移行する前</li>
 <li>新バージョンにシフトする前に SNS 通知が欲しい場合、このイベントを使う</li>
 </ul>
 </li>
 <li>AllowTraffic: 移行実施</li>
-<li>AfterAllowTraffic: デプロイされたLambda関数バージョンに移行した後</li>
+<li>AfterAllowTraffic: デプロイされた Lambda 関数バージョンに移行した後</li>
 </ul>
 </li>
 <li>デプロイグループ <ul>
@@ -502,11 +502,11 @@
 </li>
 <li>キャパシティ <ul>
 <li>1 RCU <ul>
-<li>4 KBの項目に対して、結果整合性のある読み取りの場合 2回/秒、強い整合性のある読み取りの場合 1回/秒</li>
+<li>4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒</li>
 </ul>
 </li>
 <li>1 WCU <ul>
-<li>最大 1KB の項目に対して、1回/秒の書き込み</li>
+<li>最大 1KB の項目に対して、1 回/秒の書き込み</li>
 </ul>
 </li>
 </ul>
@@ -543,8 +543,8 @@
 <li>キャッシュには最低限</li>
 </ul>
 </li>
-<li>ProvisionedThroughputExceededExceptionが発生した <ul>
-<li>アプリケーションからのリクエストでExponential Backoffを使用</li>
+<li>ProvisionedThroughputExceededException が発生した <ul>
+<li>アプリケーションからのリクエストで Exponential Backoff を使用</li>
 <li>Exponential Backoff（エクスポネンシャルバックオフ）とは、連続した衝突を防ぐためにジッター (ランダム化された遅延) を使用する <ul>
 <li>通信装置には古くからあるアルゴリズムでデータ送信時のコリジョン（衝突）を検知したら一定時間待機して再送に使われる</li>
 </ul>
@@ -595,14 +595,14 @@
 <li>メッセージ処理に失敗した後、他のコンシューマーから読み取れないときの対処は？と聞かれたら可視性タイムアウトの時間を調整</li>
 </ul>
 </li>
-<li>デフォルト 30秒</li>
-<li>0秒 ～ 12時間</li>
+<li>デフォルト 30 秒</li>
+<li>0 秒 ～ 12 時間</li>
 </ul>
 </li>
 <li>保持期間 <ul>
 <li>キューにメッセージが保存されている期間</li>
-<li>デフォルト 4日</li>
-<li>1分～14日</li>
+<li>デフォルト 4 日</li>
+<li>1 分～ 14 日</li>
 </ul>
 </li>
 <li>遅延キュー <ul>
@@ -612,20 +612,20 @@
 </ul>
 </li>
 <li>ロングポーリング <ul>
-<li>最大で 20秒間待機する</li>
-<li>0件多発するような場合、ロングポーリングでコスト削減</li>
+<li>最大で 20 秒間待機する</li>
+<li>0 件多発するような場合、ロングポーリングでコスト削減</li>
 </ul>
 </li>
 <li>ショートポーリング <ul>
 <li>ポーリングしたタイミングでデータがなければ終了</li>
-<li>ポーリング回数が増えるのでコスト増、0件多発ならロングポーリングを検討</li>
+<li>ポーリング回数が増えるのでコスト増、0 件多発ならロングポーリングを検討</li>
 </ul>
 </li>
-<li>メッセージ重複削除ID <ul>
-<li>5分以内は同じIDが入らなくなる</li>
+<li>メッセージ重複削除 ID <ul>
+<li>5 分以内は同じ ID が入らなくなる</li>
 </ul>
 </li>
-<li>一度に10件まで取得</li>
+<li>一度に 10 件まで取得</li>
 <li>メッセージは 256KB <ul>
 <li>サイズの大きいメッセージは、SQS 拡張クライアントライブラリ</li>
 </ul>
@@ -637,7 +637,7 @@
     
       <google-codelab-step label="Kinesis Data Streams" duration="0">
         <ul>
-<li>ストリーミングデータを収集されて70〜200ミリ秒以内に、配信できる</li>
+<li>ストリーミングデータを収集されて 70〜200 ミリ秒以内に、配信できる</li>
 <li>シャード <ul>
 <li>ストリーム内のデータレコードの一意に識別されたグループ</li>
 <li>配信データが多い場合はシャードを増やす</li>
@@ -663,7 +663,7 @@
 <li>1000 records/second</li>
 <li>1 MB/second</li>
 <li>レコードの制限 <ul>
-<li>1 MB/record(base64エンコード前)</li>
+<li>1 MB/record(base64 エンコード前)</li>
 <li>5 MB/transaction(PutRecords の場合)</li>
 <li>500 records/transaction(PutRecords の場合)</li>
 </ul>
@@ -691,7 +691,7 @@
     
       <google-codelab-step label="Kinesis Data Firehose" duration="0">
         <ul>
-<li>リアルタイムのストリーミングデータをS3やRedShift、Elasticsearchなどのデータストア、分析ツールに配信する</li>
+<li>リアルタイムのストリーミングデータを S3 や RedShift、Elasticsearch などのデータストア、分析ツールに配信する</li>
 </ul>
 
 
@@ -699,7 +699,7 @@
     
       <google-codelab-step label="Kinesis Data Analytics" duration="0">
         <ul>
-<li>Kinesis Data Streams, Amazon Kinesis Data Firehose ストリーミングソースからのデータ取り込み、標準SQLでストリーミングデータの処理、分析が可能</li>
+<li>Kinesis Data Streams, Amazon Kinesis Data Firehose ストリーミングソースからのデータ取り込み、標準 SQL でストリーミングデータの処理、分析が可能</li>
 </ul>
 
 
@@ -707,7 +707,7 @@
     
       <google-codelab-step label="Elastic Beanstalk" duration="0">
         <ul>
-<li>Java,PHP,Ruby,Python,Node.js,.NET,Docker,Goなどに対応</li>
+<li>Java,PHP,Ruby,Python,Node.js,.NET,Docker,Go などに対応</li>
 <li>アプリケーション <ul>
 <li>最上位の構成単位</li>
 </ul>
@@ -725,7 +725,7 @@
 </ul>
 </li>
 <li>環境設定 <ul>
-<li>.ebextensionsディレクトリに、xxx.conf を配置</li>
+<li>.ebextensions ディレクトリに、xxx.conf を配置</li>
 </ul>
 </li>
 <li>デプロイメント <ul>
@@ -768,7 +768,7 @@
 </li>
 <li>X-Ray 使う <ul>
 <li>Elastic Beanstalk コンソールで　<code>X-Ray デーモン</code> を有効に設定</li>
-<li>.ebextensionsディレクトリに、xxx.conf を配置</li>
+<li>.ebextensions ディレクトリに、xxx.conf を配置</li>
 </ul>
 </li>
 </ul>
@@ -781,7 +781,7 @@
 <li>パラメータストア <ul>
 <li>設定データ管理とシークレット管理のための安全な階層型ストレージ</li>
 <li>無料</li>
-<li>デフォルトのスループット: 40/秒（引き上げ可⇒引き上げ中は課金）</li>
+<li>デフォルトのスループット: 40/秒（引き上げ可 ⇒ 引き上げ中は課金）</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/general/latest/gr/ssm.html#limits_ssm" target="_blank">AWS Systems Manager クォータ</a></li>
 <li>ローテーションが不要で無料範囲のスループットで良い場合は、シークレットよりパラメータストアのほうがコスパがよい。</li>
 </ul>

@@ -7,17 +7,17 @@ published: true
 
 # Amazon Simple Queue Service (SQS)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Amazon Simple Queue Service (SQS)](#amazon-simple-queue-service-sqs)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [SQS とは](#sqs-とは)
   - [SQS 構成要素](#sqs-構成要素)
   - [キュータイプ](#キュータイプ)
@@ -32,7 +32,7 @@ published: true
   - [最大メッセージサイズ](#最大メッセージサイズ)
   - [デッドレターキュー](#デッドレターキュー)
   - [暗号化](#暗号化)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## SQS とは
 
@@ -57,9 +57,9 @@ Duration: 0:58:54
 Duration: 0:01:00
 
 - プロデューサー（Producer）
-  - メッセージをSQSに送信するアプリケーション
+  - メッセージを SQS に送信するアプリケーション
 - コンシューマー（Consumer）
-  - SQSからメッセージを取り出すアプリケーション
+  - SQS からメッセージを取り出すアプリケーション
   - Pull 型（コンシューマー側から一定間隔でデータ有無を確認する）
 - メッセージ（Message）
   - 送受信されるデータ
@@ -73,7 +73,7 @@ Duration: 0:01:00
 Duration: 0:01:00
 
 - 標準キュー
-- FIFOキュー
+- FIFO キュー
 
 違いは、[アプリケーション間連携を疎結合で実現。「Amazon SQS」をグラレコで解説](https://aws.amazon.com/jp/builders-flash/202105/awsgeek-sqs/?awsf.filter-name=*all) の図が分かりやすいです。
 
@@ -100,10 +100,10 @@ aws sqs send-message \
 
 Duration: 0:01:00
 
-[メッセージ重複排除ID の使用](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
+[メッセージ重複排除 ID の使用](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 
-FIFO キューで指定することで、`5分間` は同一の重複排除ID
-IDのメッセージが受け付けられないようになるという機能です。
+FIFO キューで指定することで、`5分間` は同一の重複排除 ID
+ID のメッセージが受け付けられないようになるという機能です。
 
 ```sh
 aws sqs send-message \
@@ -126,15 +126,15 @@ Duration: 0:01:00
 ![sqs-visibilitytimeout](/images/sqs/sqs-visibilitytimeout.png)
 
 SQS ではメッセージを取得しても自動で削除されることはありません。コンシューマー側が処理済みとして削除するか、メッセージの保持期間が過ぎて削除されるかです。
-複数のコンシューマーがメッセージを読み取った場合、重複して処理されてしまう可能性があるため、可視性タイムアウトという処理中のメッセージが他のコンシューマーからは取得できなくする機能があります。0秒から12時間が指定できます。デフォルト値は30秒です。
+複数のコンシューマーがメッセージを読み取った場合、重複して処理されてしまう可能性があるため、可視性タイムアウトという処理中のメッセージが他のコンシューマーからは取得できなくする機能があります。0 秒から 12 時間が指定できます。デフォルト値は 30 秒です。
 コンシューマーは、可視性タイムアウトの時間に取得したメッセージを削除する必要があります。可視性タイムアウトの時間が過ぎると、メッセージを削除できなくなり、他のコンシューマーが取得できる状態になります。
 
-メッセージの処理時間が不明な場合、可視性タイムアウトを1分毎に2分間延長することもできます。
+メッセージの処理時間が不明な場合、可視性タイムアウトを 1 分毎に 2 分間延長することもできます。
 [タイムリーな方法でのメッセージの処理](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/working-with-messages.html#processing-messages-timely-manner)
 [メッセージの可視性タイムアウトの変更](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html#changing-message-visibility-timeout)
 
 標準キューの場合は、メッセージの順序保証がないキューのため、他のコンシューマーがアクセスした場合、次のキューを取り出すことができます。
-FIFOキューの場合は、メッセージの順序が重要であるため、可視性タイムアウト時間が過ぎるか、メッセージが削除されるまで、次のキューを取得することが出来ません。ただし、他のメッセージグループからはメッセージを取得することが出来ます。
+FIFO キューの場合は、メッセージの順序が重要であるため、可視性タイムアウト時間が過ぎるか、メッセージが削除されるまで、次のキューを取得することが出来ません。ただし、他のメッセージグループからはメッセージを取得することが出来ます。
 
 ## 配信遅延（遅延キュー）
 
@@ -142,7 +142,7 @@ Duration: 0:01:30
 
 [遅延キュー](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-delay-queues.html)
 
-プロデューサー側からキューに新しいメッセージが送信された後に、指定した時間が経過してからコンシューマー側にメッセージが表示されるようにする設定です。0秒から15分までの間を指定できます。
+プロデューサー側からキューに新しいメッセージが送信された後に、指定した時間が経過してからコンシューマー側にメッセージが表示されるようにする設定です。0 秒から 15 分までの間を指定できます。
 
 ![sqs-delay](/images/sqs/sqs-delay.png)
 
@@ -150,7 +150,7 @@ Duration: 0:01:30
 
 [メッセージタイマー](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-timers.html)
 
-キュー全体に指定する遅延キュー以外に、メッセージ個別に設定できるメッセージタイマーという機能があります。遅延キューと同時に指定された場合、メッセージに設定されたメッセージタイマーのほうが優先されます。0秒から15分までの間を指定できます。
+キュー全体に指定する遅延キュー以外に、メッセージ個別に設定できるメッセージタイマーという機能があります。遅延キューと同時に指定された場合、メッセージに設定されたメッセージタイマーのほうが優先されます。0 秒から 15 分までの間を指定できます。
 
 ```sh
 aws sqs send-message \
@@ -163,7 +163,7 @@ aws sqs send-message \
 
 Duration: 0:01:30
 
-メッセージ取得までの待機時間です。0秒から20秒まで指定することができます。0秒を指定すると、ショートポーリングになります。
+メッセージ取得までの待機時間です。0 秒から 20 秒まで指定することができます。0 秒を指定すると、ショートポーリングになります。
 
 ![sqs-waitseconts](/images/sqs/sqs-waitseconts.png)
 
@@ -173,7 +173,7 @@ Duration: 0:01:30
 
 - ロングポーリング
   - 通常はこちらを利用する。単一のキューをポーリングする多くのケースで有効。
-  - メッセージが空だった場合、最大20秒の間待機してメッセージの受領を待つ。それでも空だった場合に「空」応答を返す。
+  - メッセージが空だった場合、最大 20 秒の間待機してメッセージの受領を待つ。それでも空だった場合に「空」応答を返す。
   - ショートポーリングに比べて API コール数が減る（コストダウン）
 - ショートポーリング
   - メッセージがなかったら、即座に「空」応答を返す。
@@ -184,7 +184,7 @@ Duration: 0:01:30
 
 Duration: 0:01:00
 
-キューに登録されたメッセージは明示的に削除処理を行われない限りデフォルトで4日間保持、1分から14日設定できます。
+キューに登録されたメッセージは明示的に削除処理を行われない限りデフォルトで 4 日間保持、1 分から 14 日設定できます。
 
 ![sqs-message-retention](/images/sqs/sqs-message-retention.png)
 
@@ -194,13 +194,13 @@ Duration: 0:01:00
 
 Duration: 0:01:00
 
-キューのメッセージサイズで、1KBから256KBの範囲を指定できます。デフォルト値は 256 KBです。
+キューのメッセージサイズで、1KB から 256KB の範囲を指定できます。デフォルト値は 256 KB です。
 
 ![sqs-maxsize](/images/sqs/sqs-maxsize.png)
 
-256 KB を超えるメッセージを送信したい場合、「Java用SQS拡張ライブラリ」と「S3」を利用します。これによって「2 GB」までのメッセージを扱えるようになります。
+256 KB を超えるメッセージを送信したい場合、「Java 用 SQS 拡張ライブラリ」と「S3」を利用します。これによって「2 GB」までのメッセージを扱えるようになります。
 
-[Amazon S3を使用した大量のAmazon SQSメッセージの管理](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-s3-messages.html)
+[Amazon S3 を使用した大量の Amazon SQS メッセージの管理](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-s3-messages.html)
 
 ## デッドレターキュー
 
@@ -224,6 +224,6 @@ AWS KMS を利用して、トピック内のメッセージを暗号化するこ
 
 ![sqs-sse](/images/sqs/sqs-sse.png)
 
-## まとめ
+## 📖 まとめ
 
 ![sqs-overview](/images/all/sqs.png)

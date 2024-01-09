@@ -1,18 +1,18 @@
 # Amazon GuardDuty
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [Amazon GuardDuty](#amazon-guardduty)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [GuardDuty とは](#guardduty-とは)
   - [GuardDuty が必要な理由](#guardduty-が必要な理由)
   - [特徴](#特徴)
@@ -25,7 +25,7 @@ Duration: 00:01:00
   - [検出結果通知](#検出結果通知)
   - [検出結果の確認](#検出結果の確認)
   - [複数アカウントの管理](#複数アカウントの管理)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## GuardDuty とは
 
@@ -402,6 +402,6 @@ Duration: 0:01:30
 }
 ```
 
-## まとめ
+## 📖 まとめ
 
 ![guardduty](/images/all/guardduty.png)

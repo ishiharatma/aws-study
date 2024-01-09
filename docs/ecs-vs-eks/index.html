@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>ECS（Elastic Container Service）とEKS（Elastic Kubernetes Service）</title>
+  <title>ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,22 +23,22 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="ecs-vs-eks"
-                  title="ECS（Elastic Container Service）とEKS（Elastic Kubernetes Service）"
+                  title="ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）"
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
-<li><a href="#ecselastic-container-service%E3%81%A8ekselastic-kubernetes-service" target="_blank">ECS（Elastic Container Service）とEKS（Elastic Kubernetes Service）</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#ecselastic-container-service%E3%81%A8-ekselastic-kubernetes-service" target="_blank">ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）</a><ul>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#ecs-%E3%81%A8-eks-%E3%81%A8%E3%81%AF" target="_blank">ECS と EKS とは</a><ul>
 <li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%AA%E3%83%BC%E3%82%B1%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">コンテナオーケストレーション</a></li>
 <li><a href="#%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3" target="_blank">コントロールプレーン</a></li>
@@ -46,7 +46,7 @@
 <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%83%97%E3%83%AC%E3%83%BC%E3%83%B3-%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">データプレーン の種類</a></li>
 </ul>
 </li>
-<li><a href="#4%E3%81%A4%E3%81%AE%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3" target="_blank">4つのアーキテクチャパターン</a></li>
+<li><a href="#4-%E3%81%A4%E3%81%AE%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3" target="_blank">4 つのアーキテクチャパターン</a></li>
 <li><a href="#ecs-%E3%81%A8-eks-%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E5%88%A9%E7%94%A8%E6%83%B3%E5%AE%9A" target="_blank">ECS と EKS のサービスの利用想定</a></li>
 <li><a href="#%E6%AF%94%E8%BC%83" target="_blank">比較</a></li>
 <li><a href="#%E4%BB%98%E9%8C%B2aws-%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%83%AD%E3%83%BC%E3%83%89%E3%83%9E%E3%83%83%E3%83%97" target="_blank">付録：AWS コンテナロードマップ</a></li>
@@ -66,30 +66,30 @@
 </ul>
 </li>
 <li>ECS（Elastic Container Service） <ul>
-<li>EKS は コンテナオーケストレーション に Kubernetes を利用していますが、ECS は　AWS オリジナルのソフトウェアをベースに構築されている コンテナ化されたアプリケーションのデプロイ、管理、スケーリングを容易にするフルマネージドコンテナオーケストレーションサービスです。</li>
+<li>EKS は コンテナオーケストレーション に Kubernetes を利用していますが、ECS は　 AWS オリジナルのソフトウェアをベースに構築されている コンテナ化されたアプリケーションのデプロイ、管理、スケーリングを容易にするフルマネージドコンテナオーケストレーションサービスです。</li>
 </ul>
 </li>
 </ul>
 <h2 is-upgraded>コンテナオーケストレーション</h2>
 <p>コンテナのワークロードやサービス、ライフサイクル管理やデプロイメント等のコンテナに関わる調整と管理の自動化技術のことで、コントロールプレーンとデータプレーンから成り立っています。</p>
 <p class="image-container"><img alt="container-orchestration" src="img\\f1e40f50fa9e5651.png"></p>
-<p>※ 【AWS Black Belt Online Seminar】CON120 AWSコンテナ全体概要 より引用</p>
+<p>※ 【AWS Black Belt Online Seminar】CON120 AWS コンテナ全体概要 より引用</p>
 <h2 is-upgraded>コントロールプレーン</h2>
-<p>コントロールプレーンとは、コンテナを管理する機能（＝コンテナオーケストレータ）のことを指します。 つまり、ECS、EKSのことです。</p>
+<p>コントロールプレーンとは、コンテナを管理する機能（＝コンテナオーケストレータ）のことを指します。 つまり、ECS、EKS のことです。</p>
 <h2 is-upgraded>データプレーン</h2>
 <p>データプレーンとは、コンテナが実際に稼働するリソース環境を指します。</p>
-<p>AWS が提供するデータプレーンは次の2種類あります。</p>
+<p>AWS が提供するデータプレーンは次の 2 種類あります。</p>
 <ul>
 <li>EC2</li>
 <li>Fargate</li>
 </ul>
 <h2 is-upgraded>データプレーン の種類</h2>
-<p>AWS が提供するデータプレーンは次の2種類あります。</p>
+<p>AWS が提供するデータプレーンは次の 2 種類あります。</p>
 <ul>
 <li>EC2 <ul>
 <li>コンテナが稼働するリソースの管理を利用者自身で行うもの</li>
 <li>メリット <ul>
-<li>スペック（CPUコア数、メモリ、ストレージ 等）が柔軟に選択できる</li>
+<li>スペック（CPU コア数、メモリ、ストレージ 等）が柔軟に選択できる</li>
 <li>実稼働リソースの OS に直接介入することが出来る（カーネルパラメータなどをチューニングする 等）</li>
 <li>コンテナイメージを EC2 内にキャッシュできるので Fargate タイプに比べてデプロイが早い</li>
 </ul>
@@ -107,7 +107,7 @@
 </ul>
 </li>
 <li>デメリット <ul>
-<li>スペック（CPUコア数、メモリ、ストレージ 等）に制限がある（決まった構成からのみ選択可能）</li>
+<li>スペック（CPU コア数、メモリ、ストレージ 等）に制限がある（決まった構成からのみ選択可能）</li>
 <li>実稼働リソースの OS に直接介入することが出来ない（カーネルパラメータなどをチューニングする 等）</li>
 <li>コンテナイメージをキャッシュできないので EC2 タイプに比べてデプロイが遅い <ul>
 <li>ただし、ロードマップ上には、<a href="https://github.com/aws/containers-roadmap/issues/696" target="_blank">[Fargate/ECS] [Image caching]: provide image caching for Fargate.</a> があるので将来的には・・</li>
@@ -124,8 +124,8 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="4つのアーキテクチャパターン" duration="0">
-        <p>コントロールプレーンとデータプレーンの組み合わせで 4つのアーキテクチャパターンがあります。</p>
+      <google-codelab-step label="4 つのアーキテクチャパターン" duration="0">
+        <p>コントロールプレーンとデータプレーンの組み合わせで 4 つのアーキテクチャパターンがあります。</p>
 <p class="image-container"><img alt="pattern-matrix" src="img\\324ff2ad89618a1b.png"></p>
 <p>それぞれのパターンの構成概要図は次の通りです。</p>
 <ul>
@@ -140,7 +140,7 @@
 <li>EKS on Fargate</li>
 </ul>
 <p class="image-container"><img alt="eks-fargate-pattern" src="img\\3c8e510e7d2180cf.png"></p>
-<p>※ 2023年10月現在、Fargate には 1つの Pod しか起動できない制約(<a href="https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/fargate-pod-configuration.html" target="_blank">Fargate Pod の設定</a>)があります。そのため、<a href="https://kubernetes.io/ja/docs/concepts/workloads/controllers/daemonset/" target="_blank">DaemonSet</a> が利用できません。ログ集約などで利用したい場合、サイドカーコンテナを作成する方法があります。（参考：<a href="https://aws.amazon.com/jp/blogs/news/how-to-capture-application-logs-when-using-amazon-eks-on-aws-fargate/" target="_blank">AWS Fargate で Amazon EKS を使用するときにアプリケーションログをキャプチャする方法</a>）</p>
+<p>※ 2023 年 10 月現在、Fargate には 1 つの Pod しか起動できない制約(<a href="https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/fargate-pod-configuration.html" target="_blank">Fargate Pod の設定</a>)があります。そのため、<a href="https://kubernetes.io/ja/docs/concepts/workloads/controllers/daemonset/" target="_blank">DaemonSet</a> が利用できません。ログ集約などで利用したい場合、サイドカーコンテナを作成する方法があります。（参考：<a href="https://aws.amazon.com/jp/blogs/news/how-to-capture-application-logs-when-using-amazon-eks-on-aws-fargate/" target="_blank">AWS Fargate で Amazon EKS を使用するときにアプリケーションログをキャプチャする方法</a>）</p>
 <ul>
 <li>EKS on EC2</li>
 </ul>
@@ -159,7 +159,7 @@
 </li>
 <li>ECS（Elastic Container Service） <ul>
 <li>K8s の運用経験がないか、K8s よりも簡単にコンテナの管理を行いたい <ul>
-<li>K8s は 基本的に 3か月に1回のアップデートが行われるため、アップデートに追従するために運用コストが高くなる傾向があります。</li>
+<li>K8s は 基本的に 3 か月に 1 回のアップデートが行われるため、アップデートに追従するために運用コストが高くなる傾向があります。</li>
 </ul>
 </li>
 <li>AWS のみで利用できればよい</li>
@@ -171,12 +171,12 @@
       </google-codelab-step>
     
       <google-codelab-step label="比較" duration="0">
-        <p>コントロールプレーン（ECS と EKS）×データプレーン（EC2 と Fargate）から、4パターンの選択肢があります。</p>
+        <p>コントロールプレーン（ECS と EKS）× データプレーン（EC2 と Fargate）から、4 パターンの選択肢があります。</p>
 <p class="image-container"><img alt="ecs-eks-ec2-fargate" src="img\\ae130b763ad22246.png"></p>
-<p>※ 【AWS Black Belt Online Seminar】CON120 AWSコンテナ全体概要 より引用</p>
-<p>それぞれのパターンをいくつかの比較項目で、3段階の評価を行い比較した結果は次のとおりです。</p>
+<p>※ 【AWS Black Belt Online Seminar】CON120 AWS コンテナ全体概要 より引用</p>
+<p>それぞれのパターンをいくつかの比較項目で、3 段階の評価を行い比較した結果は次のとおりです。</p>
 <p>※個人的な解釈をベースとザックリと比較した結果となっておりますので、参考程度にお読みください。</p>
-<p>◎・・・3点、○・・・2点、△・・・1点</p>
+<p>◎・・・3 点、○・・・2 点、△・・・1 点</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>比較項目</p>
 </td><td colspan="1" rowspan="1"><p>EKS on EC2</p>
@@ -229,7 +229,7 @@
 </td></tr>
 </table>
 <p>※1 ... アジアパシフィック（東京）リージョンで Linux を利用した場合の比較</p>
-<p>Fargate のほうが EC2 に比べてコストが高いが、3段階評価で差が出るほどではないとの判断。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2019/01/announcing-aws-fargate-price-reduction-by-up-to-50-/" target="_blank">2019年1月</a> に Fargate の大幅な値下げがあったため、以前に比べて利用しやすくなっています。</p>
+<p>Fargate のほうが EC2 に比べてコストが高いが、3 段階評価で差が出るほどではないとの判断。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2019/01/announcing-aws-fargate-price-reduction-by-up-to-50-/" target="_blank">2019 年 1 月</a> に Fargate の大幅な値下げがあったため、以前に比べて利用しやすくなっています。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>スペック</p>
 </td><td colspan="1" rowspan="1"><p>Fargate</p>
@@ -256,17 +256,17 @@
 <p>※2 ... コンテナが稼働するリソース環境にはいくつか制限があります</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/fargate-task-storage.html" target="_blank">エフェメラルストレージは最大 200GB</a></li>
-<li><a href="https://aws.amazon.com/jp/fargate/pricing/" target="_blank">AWS Fargate の料金</a>にもあるとおり、2023年10月現在では 16 vCPU/32~120 GB メモリという上限があります。</li>
+<li><a href="https://aws.amazon.com/jp/fargate/pricing/" target="_blank">AWS Fargate の料金</a>にもあるとおり、2023 年 10 月現在では 16 vCPU/32~120 GB メモリという上限があります。</li>
 <li>EKS on Fargate は Pod を１つしか構成できません。(<a href="https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/fargate-pod-configuration.html" target="_blank">Fargate Pod の設定</a>) <ul>
 <li><a href="https://aws.amazon.com/jp/blogs/news/how-to-capture-application-logs-when-using-amazon-eks-on-aws-fargate/" target="_blank">AWS Fargate で Amazon EKS を使用するときにアプリケーションログをキャプチャする方法</a></li>
 </ul>
 </li>
 </ul>
 <p>※3 ... 以前はコンテナに接続するには自前で sshd を立てるなどしなければならなかったが、「<a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/userguide/ecs-exec.html" target="_blank">Amazon ECS Exec</a>」により障害調査はしやすくなった</p>
-<p>※4 ... EKS on Fargate が一般公開されたのが2019年12月であるため、2023年10月現在では事例も数多く存在し、それぞれのパターンで差がないと判断。</p>
+<p>※4 ... EKS on Fargate が一般公開されたのが 2019 年 12 月であるため、2023 年 10 月現在では事例も数多く存在し、それぞれのパターンで差がないと判断。</p>
 <p>2014/11/13 Amazon ECS</p>
 <p>2018/06/05 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2018/06/amazon-elastic-container-service-for-kubernetes-eks-now-ga/" target="_blank">Amazon Elastic Container Service for Kubernetes が利用可能となりました。</a></p>
-<p>2017/11/30 <a href="https://aws.amazon.com/jp/blogs/news/aws-fargate/" target="_blank">AWS Fargateの紹介 – インフラストラクチャの管理不要でコンテナを起動</a></p>
+<p>2017/11/30 <a href="https://aws.amazon.com/jp/blogs/news/aws-fargate/" target="_blank">AWS Fargate の紹介 – インフラストラクチャの管理不要でコンテナを起動</a></p>
 <p>2019/12/05 <a href="https://aws.amazon.com/jp/blogs/news/amazon-eks-on-aws-fargate-now-generally-available/" target="_blank">AWS Fargate 上の Amazon EKS を一般公開</a></p>
 <p>2021/05/27 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2021/05/amazon-elastic-container-service-anywhere-is-now-generally-available/" target="_blank">Amazon Elastic Container Service Anywhere が利用可能に</a></p>
 <p>2021/09/10 <a href="https://aws.amazon.com/jp/blogs/news/amazon-eks-anywhere-now-generally-available-to-create-and-manage-kubernetes-clusters-on-premises/" target="_blank">Amazon EKS Anywhere — オンプレミスで Kubernetes クラスターの作成と管理が広く利用可能になりました</a></p>
@@ -283,7 +283,7 @@
     
       <google-codelab-step label="付録：コンテナセキュリティ" duration="0">
         <ul>
-<li><a href="https://jpn.nec.com/cybersecurity/blog/210730/index.html" target="_blank">NECセキュリティブログ&gt;特権コンテナの脅威から学ぶコンテナセキュリティ</a></li>
+<li><a href="https://jpn.nec.com/cybersecurity/blog/210730/index.html" target="_blank">NEC セキュリティブログ&gt;特権コンテナの脅威から学ぶコンテナセキュリティ</a></li>
 <li><a href="https://www.ipa.go.jp/security/reports/oversea/nist/ug65p90000019cp4-att/000085279.pdf" target="_blank">【IPA】NIST SP800-190 アプリケーションコンテナセキュリティガイド</a></li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-fargate.html" target="_blank">AWS ドキュメント &gt; AWS Fargate のセキュリティ</a></li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/bestpracticesguide/security-tasks-containers.html" target="_blank">AWS ドキュメント &gt; タスクとコンテナのセキュリティ</a></li>

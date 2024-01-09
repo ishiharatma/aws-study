@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-cloudtrail" target="_blank">AWS CloudTrail</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#cloudtrail-%E3%81%A8%E3%81%AF" target="_blank">CloudTrail とは</a></li>
 <li><a href="#cloudtrail-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">CloudTrail の基本</a></li>
 <li><a href="#%E7%AE%A1%E7%90%86%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88" target="_blank">管理イベント</a></li>
@@ -48,7 +48,7 @@
 <li><a href="#%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B%E4%B8%BB%E8%A6%81%E3%81%AA%E3%83%AD%E3%82%B0" target="_blank">監視する主要なログ</a></li>
 <li><a href="#aws-cloudtrail-%E3%83%AD%E3%82%B0%E3%81%AE%E3%82%AF%E3%82%A8%E3%83%AA%E3%81%AE-athena-%E3%81%AB%E3%82%88%E3%82%8B%E5%88%86%E6%9E%90" target="_blank">AWS CloudTrail ログのクエリの Athena による分析</a></li>
 <li><a href="#cloudtrail-lake" target="_blank">CloudTrail Lake</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -69,27 +69,27 @@
       </google-codelab-step>
     
       <google-codelab-step label="CloudTrail の基本" duration="2">
-        <p>CloudTrailで記録できるイベントは次のとおりです。</p>
+        <p>CloudTrail で記録できるイベントは次のとおりです。</p>
 <ul>
 <li>管理イベント <ul>
-<li>AWS アカウントのリソースで実行される管理およびネットワーク操作のAPIアクティビティ</li>
+<li>AWS アカウントのリソースで実行される管理およびネットワーク操作の API アクティビティ</li>
 <li>例：セキュリティグループの設定をいつ誰が変更したか</li>
 <li>デフォルトで記録されるようになっています</li>
 </ul>
 </li>
 <li>データイベント <ul>
-<li>データリクエスト操作のAPIアクティビティ</li>
-<li>例：S3バケットのデータ操作をいつ誰が行ったか</li>
+<li>データリクエスト操作の API アクティビティ</li>
+<li>例：S3 バケットのデータ操作をいつ誰が行ったか</li>
 <li>デフォルトでは記録が「OFF」になっています</li>
 </ul>
 </li>
 <li>Insights イベント <ul>
-<li>短期間の過剰な API 呼び出しなど、過去の API 使用状況の機械学習によって得られたデータから 管理イベントの異常なAPIアクティビティを検出</li>
+<li>短期間の過剰な API 呼び出しなど、過去の API 使用状況の機械学習によって得られたデータから 管理イベントの異常な API アクティビティを検出</li>
 <li>デフォルトでは記録が「OFF」になっています</li>
 </ul>
 </li>
 </ul>
-<p>これらの管理イベントは、コンソール上から履歴を参照することが可能で、90日間の履歴は無料となっています。 それ以上保存しなければならない要件がある場合は、別途 S3 や CloudWatch Logs へエクスポートする設定を行っておく必要があります。</p>
+<p>これらの管理イベントは、コンソール上から履歴を参照することが可能で、90 日間の履歴は無料となっています。 それ以上保存しなければならない要件がある場合は、別途 S3 や CloudWatch Logs へエクスポートする設定を行っておく必要があります。</p>
 <p>CloudTrail のイベント記録の大部分は、「管理イベント」と「データイベント」になります。</p>
 <p>Insights イベントについては、<a href="https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html" target="_blank">AWS ドキュメント</a> を参照してください。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-tutorial.html" target="_blank">AWS CloudTrail の開始方法のチュートリアル</a> を実施して、理解を深めるのもおすすめです。</p>
@@ -112,7 +112,7 @@
       <google-codelab-step label="CloudTrail ログファイル名の形式" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html#cloudtrail-log-filename-format" target="_blank">CloudTrail ログファイル名の形式</a></p>
 <p>ログファイルは次のような名称で出力されます。</p>
-<pre><code language="language-text" class="language-text">AccountID_CloudTrail_RegionName_YYYYMMDDTHHmmZ_UniqueString.FileNameFormat 
+<pre><code language="language-text" class="language-text">AccountID_CloudTrail_RegionName_YYYYMMDDTHHmmZ_UniqueString.FileNameFormat
 </code></pre>
 <p>S3 にエクスポートした場合は、次のようになります。</p>
 <pre><code language="language-text" class="language-text">111122223333_CloudTrail_us-east-2_20150801T0210Z_Mu0KsOhtH1ar15ZZ.json.gz
@@ -126,41 +126,41 @@
         <p><a href="https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html#cloudtrail-log-file-examples-section" target="_blank">ログファイルの例</a></p>
 <p>ConsoleLogin 時の例です。</p>
 <pre><code language="language-json" class="language-json">{
-    &#34;eventVersion&#34;: &#34;1.08&#34;,
-    &#34;userIdentity&#34;: {
-        &#34;type&#34;: &#34;IAMUser&#34;,
-        &#34;principalId&#34;: &#34;AIDAAAAAAAAAAAAAAAAAA&#34;,
-        &#34;arn&#34;: &#34;arn:aws:iam::111111111111:user/Alice&#34;,
-        &#34;accountId&#34;: &#34;111111111111&#34;,
-        &#34;userName&#34;: &#34;Alice&#34;
-    },
-    &#34;eventTime&#34;: &#34;2023-04-05T01:14:33Z&#34;,
-    &#34;eventSource&#34;: &#34;signin.amazonaws.com&#34;,
-    &#34;eventName&#34;: &#34;ConsoleLogin&#34;,
-    &#34;awsRegion&#34;: &#34;ap-northeast-1&#34;,
-    &#34;sourceIPAddress&#34;: &#34;192.0.2.111&#34;,
-    &#34;userAgent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36&#34;,
-    &#34;requestParameters&#34;: null,
-    &#34;responseElements&#34;: {
-        &#34;ConsoleLogin&#34;: &#34;Success&#34;
-    },
-    &#34;additionalEventData&#34;: {
-        &#34;LoginTo&#34;: &#34;https://ap-northeast-1.console.aws.amazon.com/console/home?xxxxx&#34;,
-        &#34;MobileVersion&#34;: &#34;No&#34;,
-        &#34;MFAIdentifier&#34;: &#34;arn:aws:iam::111111111111:mfa/Alice&#34;,
-        &#34;MFAUsed&#34;: &#34;Yes&#34;
-    },
-    &#34;eventID&#34;: &#34;814cde86-2626-41ab-9557-6c7299981035&#34;,
-    &#34;readOnly&#34;: false,
-    &#34;eventType&#34;: &#34;AwsConsoleSignIn&#34;,
-    &#34;managementEvent&#34;: true,
-    &#34;recipientAccountId&#34;: &#34;111111111111&#34;,
-    &#34;eventCategory&#34;: &#34;Management&#34;,
-    &#34;tlsDetails&#34;: {
-        &#34;tlsVersion&#34;: &#34;TLSv1.2&#34;,
-        &#34;cipherSuite&#34;: &#34;ECDHE-RSA-AES128-GCM-SHA256&#34;,
-        &#34;clientProvidedHostHeader&#34;: &#34;ap-northeast-1.signin.aws.amazon.com&#34;
-    }
+  &#34;eventVersion&#34;: &#34;1.08&#34;,
+  &#34;userIdentity&#34;: {
+    &#34;type&#34;: &#34;IAMUser&#34;,
+    &#34;principalId&#34;: &#34;AIDAAAAAAAAAAAAAAAAAA&#34;,
+    &#34;arn&#34;: &#34;arn:aws:iam::111111111111:user/Alice&#34;,
+    &#34;accountId&#34;: &#34;111111111111&#34;,
+    &#34;userName&#34;: &#34;Alice&#34;
+  },
+  &#34;eventTime&#34;: &#34;2023-04-05T01:14:33Z&#34;,
+  &#34;eventSource&#34;: &#34;signin.amazonaws.com&#34;,
+  &#34;eventName&#34;: &#34;ConsoleLogin&#34;,
+  &#34;awsRegion&#34;: &#34;ap-northeast-1&#34;,
+  &#34;sourceIPAddress&#34;: &#34;192.0.2.111&#34;,
+  &#34;userAgent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36&#34;,
+  &#34;requestParameters&#34;: null,
+  &#34;responseElements&#34;: {
+    &#34;ConsoleLogin&#34;: &#34;Success&#34;
+  },
+  &#34;additionalEventData&#34;: {
+    &#34;LoginTo&#34;: &#34;https://ap-northeast-1.console.aws.amazon.com/console/home?xxxxx&#34;,
+    &#34;MobileVersion&#34;: &#34;No&#34;,
+    &#34;MFAIdentifier&#34;: &#34;arn:aws:iam::111111111111:mfa/Alice&#34;,
+    &#34;MFAUsed&#34;: &#34;Yes&#34;
+  },
+  &#34;eventID&#34;: &#34;814cde86-2626-41ab-9557-6c7299981035&#34;,
+  &#34;readOnly&#34;: false,
+  &#34;eventType&#34;: &#34;AwsConsoleSignIn&#34;,
+  &#34;managementEvent&#34;: true,
+  &#34;recipientAccountId&#34;: &#34;111111111111&#34;,
+  &#34;eventCategory&#34;: &#34;Management&#34;,
+  &#34;tlsDetails&#34;: {
+    &#34;tlsVersion&#34;: &#34;TLSv1.2&#34;,
+    &#34;cipherSuite&#34;: &#34;ECDHE-RSA-AES128-GCM-SHA256&#34;,
+    &#34;clientProvidedHostHeader&#34;: &#34;ap-northeast-1.signin.aws.amazon.com&#34;
+  }
 }
 </code></pre>
 <p>よく使いそうな主な項目は次のとおりです。詳細は<a href="https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-event-reference-record-contents.html" target="_blank">AWS ドキュメント</a>を参照してください。</p>
@@ -193,7 +193,7 @@
 </li>
 <li>additionalEventData <ul>
 <li>リクエストまたはレスポンスの一部ではないイベントに関する追加のデータ</li>
-<li>例えば、MFAを利用したかどうかは <code>MFAUsed</code> に格納されます。</li>
+<li>例えば、MFA を利用したかどうかは <code>MFAUsed</code> に格納されます。</li>
 </ul>
 </li>
 <li>eventType <ul>
@@ -223,19 +223,19 @@
 <li><code>"{ $.eventName = \"ConsoleLogin\" && $.additionalEventData.MFAUsed = \"No\" }"</code></li>
 </ul>
 </li>
-<li>IAMポリシーやポリシーへの変更を監視 <ul>
+<li>IAM ポリシーやポリシーへの変更を監視 <ul>
 <li><code>"{($.eventName=DeleteGroupPolicy)||($.eventName=DeleteRolePolicy)||($.eventName=DeleteUserPolicy)||($.eventName=PutGroupPolicy)||($.eventName=PutRolePolicy)||($.eventName=PutUserPolicy)||($.eventName=CreatePolicy)||($.eventName=DeletePolicy)||($.eventName=CreatePolicyVersion)||($.eventName=DeletePolicyVersion)||($.eventName=AttachRolePolicy)||($.eventName=DetachRolePolicy)||($.eventName=AttachUserPolicy)||($.eventName=DetachUserPolicy)||($.eventName=AttachGroupPolicy)||($.eventName=DetachGroupPolicy)}"</code></li>
 </ul>
 </li>
-<li>IAMユーザの作成を監視 <ul>
+<li>IAM ユーザの作成を監視 <ul>
 <li><code>"{($.eventName=CreateUser)||($.eventName=CreateLoginProfile)}"</code></li>
 </ul>
 </li>
-<li>IAMアクセスキーの作成を監視 <ul>
+<li>IAM アクセスキーの作成を監視 <ul>
 <li><code>"{$.eventName=CreateAccessKey}"</code></li>
 </ul>
 </li>
-<li>SwitchRoleエラーの連続発生を監視 <ul>
+<li>SwitchRole エラーの連続発生を監視 <ul>
 <li><code>"{ $.eventSource = \"signin.amazonaws.com\" && $.eventName = \"SwitchRole\" && $.responseElements.SwitchRole= \"Failure\" }"</code></li>
 </ul>
 </li>
@@ -246,7 +246,7 @@
 </ul>
 </li>
 <li>不正アクセス <ul>
-<li>CloudTrailの変更を監視 <ul>
+<li>CloudTrail の変更を監視 <ul>
 <li><code>"{ ($.eventName = CreateTrail) || ($.eventName = UpdateTrail) || ($.eventName = DeleteTrail) || ($.eventName = StartLogging) || ($.eventName = StopLogging) }"</code></li>
 </ul>
 </li>
@@ -254,11 +254,11 @@
 <li><code>"{ ($.eventSource = \"guardduty.amazonaws.com\") && ($.eventName = \"DeleteDetector\") }"</code></li>
 </ul>
 </li>
-<li>KMSキーの無効またはスケジュールされた削除の発生を監視 <ul>
+<li>KMS キーの無効またはスケジュールされた削除の発生を監視 <ul>
 <li><code>"{ $.eventSource = kms.amazonaws.com && ($.eventName = \"DisableKey\" || $.eventName = \"ScheduleKeyDeletion\") }"</code></li>
 </ul>
 </li>
-<li>無効または削除されたKMSのキー使用時のエラー発生を監視 <ul>
+<li>無効または削除された KMS のキー使用時のエラー発生を監視 <ul>
 <li><code>"{ $.eventSource = kms.amazonaws.com && $.errorCode = \"*Exception\" }"</code></li>
 </ul>
 </li>
@@ -277,7 +277,7 @@
 </ul>
 </li>
 <li>バケット <ul>
-<li>S3バケットポリシーへの変更を監視 <ul>
+<li>S3 バケットポリシーへの変更を監視 <ul>
 <li><code>"{ ($.eventSource = \"s3.amazonaws.com\") && ($.eventName = \"PutBucketPolicy\") }"</code></li>
 </ul>
 </li>
@@ -313,7 +313,7 @@
     
       <google-codelab-step label="AWS CloudTrail ログのクエリの Athena による分析" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/cloudtrail-logs.html" target="_blank">AWS CloudTrail ログのクエリ</a></p>
-<p>CloudTrail のログを Athena を使って分析できます。 CloudTrail の証跡画面を開き、「Athenaテーブルを作成」をクリックします。 <img alt="cloudtrail-athena-00" src="img\\8f7325d268e1fee5.png"></p>
+<p>CloudTrail のログを Athena を使って分析できます。 CloudTrail の証跡画面を開き、「Athena テーブルを作成」をクリックします。 <img alt="cloudtrail-athena-00" src="img\\8f7325d268e1fee5.png"></p>
 <p>対象の S3 バケットを指定します。 <img alt="cloudtrail-athena-01" src="img\\50f67c26befb110b.png"></p>
 <p>これだけで、Athena テーブルが作成されました。 <img alt="cloudtrail-athena-02" src="img\\15fc144943dd1cee.png"></p>
 <p>クエリエディタで、SQL を使って分析できます。 例えば、次のような「ログインレポート」を出力する SQL です。</p>
@@ -342,7 +342,7 @@ LIMIT 10;
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="cloudtrail" src="img\\b36593c63db77694.png"></p>
 
 

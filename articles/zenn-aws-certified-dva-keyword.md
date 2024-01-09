@@ -7,7 +7,7 @@ published: true
 
 # AWS Certified Developer - Associate 認定 (DVA-C01)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS 認定資格取得に向けて個人的に勉強した各サービスのキーワードを記載しております。AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
@@ -20,7 +20,7 @@ published: true
 ## Lambda
 
 - Java、Go、PowerShell、Node.js、C#、Python、Ruby
-- C言語の場合は、カスタムランタイムでレイヤーを作成
+- C 言語の場合は、カスタムランタイムでレイヤーを作成
 - 環境変数の暗号化
   - [保管データ暗号化](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/security-dataprotection.html)
   - 保管時はデフォルトで KMS キーによって暗号化されている
@@ -33,8 +33,8 @@ published: true
   - SQS との連携で複数回失敗した場合に失敗したキューを別のキューに入れて再処理する
   - DeadLetterConfig で設定
 - 同時実行制御
-  - 同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒））
-    - 関数が平均10秒かかり、1秒あたり100個のイベントを発行⇒同時実行1000
+  - 同時実行=（1 秒あたりの呼び出し数）x（平均実行時間（秒））
+    - 関数が平均 10 秒かかり、1 秒あたり 100 個のイベントを発行 ⇒ 同時実行 1000
 - エイリアス
 - ベストプラクティス
   - Lambda ハンドラーをコアロジックから分離
@@ -48,11 +48,11 @@ published: true
 
 - API 統合タイプ
   - AWS
-    - Lambda統合
+    - Lambda 統合
     - デフォルトでは、クライアントから連携されたリクエストが Lambda に渡されない。
     - マッピングテンプレートでリクエストのパラメータのどれを何という名前で Lambda に渡すかを定義しなければならない
   - AWS_PROXY
-    - Lambdaプロキシ統合ともいう
+    - Lambda プロキシ統合ともいう
     - クライアントから連携されたリクエストを Lambda に渡す
     - Lambda からは決められたレスポンス形式を返却する必要がある。
     - 形式が間違っていると、`502: Internal server error` となる
@@ -69,8 +69,8 @@ published: true
 - メトリクス
   - IntegrationLatency: バックエンドの処理時間
   - Latency: API 全体
-- 504: Gateway Timeoutエラーが発生する
-  - Lambda の実行時間 29秒を超えていないか
+- 504: Gateway Timeout エラーが発生する
+  - Lambda の実行時間 29 秒を超えていないか
 - オーソライザー
   - Lambda
     - Lambda 関数を使用してアクセス制御を行う
@@ -89,7 +89,7 @@ published: true
   - ゲストユーザー (未認証) と認証してトークンを受け取ったユーザーに一時的な AWS 認証情報（AWS STS）を提供
   - GetSessionToken
 - Cognito Sync
-  - WEBアプリとモバイルデバイスを同期
+  - WEB アプリとモバイルデバイスを同期
   - デバイスがオフライン時でもローカルにデータキャッシュできる
   - AppSync が後継サービス
 
@@ -111,7 +111,7 @@ published: true
     - x-amz-server-side-encryption-customer-key
     - x-amz-server-side-encryption-customer-key-MD5
 - サーバーアクセスログ
-  - アクセス数に比例してストレージ容量Up
+  - アクセス数に比例してストレージ容量 Up
 - IAM ユーザーに S3 の個人スペースを提供する
   - IAM グループに 動的変数で IAM ポリシーを
 
@@ -119,11 +119,11 @@ published: true
 
 - タスク配置戦略
   - binpack
-    - EC2インスタンス数が最小となるように配置
+    - EC2 インスタンス数が最小となるように配置
   - random
     - ランダムで
   - spread
-    - インスタンス、AZに均等に配置
+    - インスタンス、AZ に均等に配置
     - "field": "attribute:ecs.availability-zone"
     - "field": "instanceId"
 - ECS タスクに IAM ロールを付与するには、`ECS_ENABLE_TASK_IAM_ROLE =True`
@@ -133,13 +133,13 @@ published: true
 - トレース
   - 一連のリクエストの単位
 - セグメント
-  - X-Ray データを送信するサービスや、SDKやX-Rayデーモンを利用した場合に作成される情報の単位
+  - X-Ray データを送信するサービスや、SDK や X-Ray デーモンを利用した場合に作成される情報の単位
 - サブセグメント
   - 独自で X-Ray データを送信できないサービス（DynamoDB）などを呼び出した際に、作成される情報の単位
 - 注釈（Annotations）
-  - フィルタするときに使うインデックスで、Key-Value形式
-  - １つのトレースで50個まで
-  - 自動的に追加されるが、SDK利用時には独自に作成可能
+  - フィルタするときに使うインデックスで、Key-Value 形式
+  - １つのトレースで 50 個まで
+  - 自動的に追加されるが、SDK 利用時には独自に作成可能
 - メタデータ
   - 追加情報
   - インデックスは作成されないので、フィルタに使うことはできない
@@ -151,7 +151,7 @@ published: true
   - コンソールで X-Ray アクティブトレースをオン
   - 実行ロールでトレースデータ送信の権限付与
   - デバッグに必要な環境変数
-    - _X_AMZN_TRACE_ID
+    - \_X_AMZN_TRACE_ID
     - AWS_XRAY_CONTEXT_MISSING
       - 例外のスロー
     - AWS_XRAY_DAEMON_ADDRESS
@@ -167,7 +167,7 @@ published: true
   - 起動時にインストールされるようにするには、ユーザーデータにスクリプト記述
   - インスタンスプロファイルでトレースデータ送信の権限付与
 - API Gateway
-  - 「X-Rayトレースを有効にする」にチェック
+  - 「X-Ray トレースを有効にする」にチェック
   - 権限などの設定は不要
 
 ## CloudFormation
@@ -187,7 +187,7 @@ published: true
     - 必須
     - リソースの定義
     - 作成したリソースの属性を取得するときは、`Fn::GetAtt`
-    - アカウントID を参照したいときは、`AWS::AccountId`
+    - アカウント ID を参照したいときは、`AWS::AccountId`
     - Lambda を記述したい場合
       - コードに依存関係がない場合は直接コードを記述
         - Code: ZipFile: |　～
@@ -218,18 +218,18 @@ published: true
 
 ## CodePipeline
 
-- CodeCommitにコミット後、デプロイ前にコードレビューが必要なとき
-  - パイプラインに承認ステージを追加し、SNSで通知
+- CodeCommit にコミット後、デプロイ前にコードレビューが必要なとき
+  - パイプラインに承認ステージを追加し、SNS で通知
 
 ## CodeBuild
 
 - buildspec.yml
 - ビルド出力アーティファクトを暗号化するには、
-- ECR にプッシュ失敗するときは、CodeBuild サービスロール（IAMロール）を見直し
+- ECR にプッシュ失敗するときは、CodeBuild サービスロール（IAM ロール）を見直し
 - timeoutInMinutesOverride
   - ビルドをキューに入れてからタイムアウトするまでの時間
   - ビルドが長すぎる場合
-- buildspec.ymlのエラーを確認したい場合、ローカル実行
+- buildspec.yml のエラーを確認したい場合、ローカル実行
   - [AWS CodeBuild エージェントを使用してビルドをローカルで実行](https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/use-codebuild-agent.html)
   - Docker が必要
 
@@ -249,10 +249,10 @@ published: true
     - AfterAllowTraffic
 - Lambda のデプロイ時
   - BeforeAllowTraffic
-    - デプロイされたLambda関数バージョンに移行する前
+    - デプロイされた Lambda 関数バージョンに移行する前
     - 新バージョンにシフトする前に SNS 通知が欲しい場合、このイベントを使う
   - AllowTraffic: 移行実施
-  - AfterAllowTraffic: デプロイされたLambda関数バージョンに移行した後
+  - AfterAllowTraffic: デプロイされた Lambda 関数バージョンに移行した後
 - デプロイグループ
   - デプロイ先のインスタンスの集合とデプロイの設定をまとめたもの
 - デプロイ失敗例
@@ -280,9 +280,9 @@ published: true
   - テーブル作成時のみ
 - キャパシティ
   - 1 RCU
-    - 4 KBの項目に対して、結果整合性のある読み取りの場合 2回/秒、強い整合性のある読み取りの場合 1回/秒
+    - 4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒
   - 1 WCU
-    - 最大 1KB の項目に対して、1回/秒の書き込み
+    - 最大 1KB の項目に対して、1 回/秒の書き込み
 - オンデマンドとプロビジョニング済み
   - オンデマンド
     - アクセスが読めない、RCU と WCU の見積が困難
@@ -303,8 +303,8 @@ published: true
 - 遅延読み込み
   - リクエストされたデータだけキャッシュされる
   - キャッシュには最低限
-- ProvisionedThroughputExceededExceptionが発生した
-  - アプリケーションからのリクエストでExponential Backoffを使用
+- ProvisionedThroughputExceededException が発生した
+  - アプリケーションからのリクエストで Exponential Backoff を使用
   - Exponential Backoff（エクスポネンシャルバックオフ）とは、連続した衝突を防ぐためにジッター (ランダム化された遅延) を使用する
     - 通信装置には古くからあるアルゴリズムでデータ送信時のコリジョン（衝突）を検知したら一定時間待機して再送に使われる
 - TTL
@@ -331,31 +331,31 @@ published: true
   - キューから処理された後、一定時間非表示にできる
   - 他のコンシューマーから読み取れない
     - メッセージ処理に失敗した後、他のコンシューマーから読み取れないときの対処は？と聞かれたら可視性タイムアウトの時間を調整
-  - デフォルト 30秒
-  - 0秒 ～ 12時間
+  - デフォルト 30 秒
+  - 0 秒 ～ 12 時間
 - 保持期間
   - キューにメッセージが保存されている期間
-  - デフォルト 4日
-  - 1分～14日
+  - デフォルト 4 日
+  - 1 分～ 14 日
 - 遅延キュー
   - キューが追加された直後、一定時間非表示にできる
   - キューに配信されてからすぐに処理したくない場合
   - コンシューマー側で待機処理をしなくてもよい
 - ロングポーリング
-  - 最大で 20秒間待機する
-  - 0件多発するような場合、ロングポーリングでコスト削減
+  - 最大で 20 秒間待機する
+  - 0 件多発するような場合、ロングポーリングでコスト削減
 - ショートポーリング
   - ポーリングしたタイミングでデータがなければ終了
-  - ポーリング回数が増えるのでコスト増、0件多発ならロングポーリングを検討
-- メッセージ重複削除ID
-  - 5分以内は同じIDが入らなくなる
-- 一度に10件まで取得
+  - ポーリング回数が増えるのでコスト増、0 件多発ならロングポーリングを検討
+- メッセージ重複削除 ID
+  - 5 分以内は同じ ID が入らなくなる
+- 一度に 10 件まで取得
 - メッセージは 256KB
   - サイズの大きいメッセージは、SQS 拡張クライアントライブラリ
 
 ## Kinesis Data Streams
 
-- ストリーミングデータを収集されて70〜200ミリ秒以内に、配信できる
+- ストリーミングデータを収集されて 70〜200 ミリ秒以内に、配信できる
 - シャード
   - ストリーム内のデータレコードの一意に識別されたグループ
   - 配信データが多い場合はシャードを増やす
@@ -373,7 +373,7 @@ published: true
     - 1000 records/second
     - 1 MB/second
     - レコードの制限
-      - 1 MB/record(base64エンコード前)
+      - 1 MB/record(base64 エンコード前)
       - 5 MB/transaction(PutRecords の場合)
       - 500 records/transaction(PutRecords の場合)
     - `PutRecords` でまとめて送信で回避できないか
@@ -387,15 +387,15 @@ published: true
 
 ## Kinesis Data Firehose
 
-- リアルタイムのストリーミングデータをS3やRedShift、Elasticsearchなどのデータストア、分析ツールに配信する
+- リアルタイムのストリーミングデータを S3 や RedShift、Elasticsearch などのデータストア、分析ツールに配信する
 
 ## Kinesis Data Analytics
 
-- Kinesis Data Streams, Amazon Kinesis Data Firehose ストリーミングソースからのデータ取り込み、標準SQLでストリーミングデータの処理、分析が可能
+- Kinesis Data Streams, Amazon Kinesis Data Firehose ストリーミングソースからのデータ取り込み、標準 SQL でストリーミングデータの処理、分析が可能
 
 ## Elastic Beanstalk
 
-- Java,PHP,Ruby,Python,Node.js,.NET,Docker,Goなどに対応
+- Java,PHP,Ruby,Python,Node.js,.NET,Docker,Go などに対応
 - アプリケーション
   - 最上位の構成単位
 - バージョン
@@ -405,7 +405,7 @@ published: true
   - cron.yaml
     - 定期的なジョブ定義
 - 環境設定
-  - .ebextensionsディレクトリに、xxx.conf を配置
+  - .ebextensions ディレクトリに、xxx.conf を配置
 - デプロイメント
   - Rolling Deploy
     - ダウンタイムあり
@@ -428,14 +428,14 @@ published: true
   - Blue/Green Deployment
 - X-Ray 使う
   - Elastic Beanstalk コンソールで　`X-Ray デーモン` を有効に設定
-  - .ebextensionsディレクトリに、xxx.conf を配置
+  - .ebextensions ディレクトリに、xxx.conf を配置
 
 ## AWS Systems Manager
 
 - パラメータストア
   - 設定データ管理とシークレット管理のための安全な階層型ストレージ
   - 無料
-  - デフォルトのスループット: 40/秒（引き上げ可⇒引き上げ中は課金）
+  - デフォルトのスループット: 40/秒（引き上げ可 ⇒ 引き上げ中は課金）
   - [AWS Systems Manager クォータ](https://docs.aws.amazon.com/ja_jp/general/latest/gr/ssm.html#limits_ssm)
   - ローテーションが不要で無料範囲のスループットで良い場合は、シークレットよりパラメータストアのほうがコスパがよい。
 

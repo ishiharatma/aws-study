@@ -1,16 +1,16 @@
 # CloudWatch
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [CloudWatch](#cloudwatch)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [CloudWatch とは](#cloudwatch-とは)
   - [オブザーバビリティ（Observability）とは](#オブザーバビリティobservabilityとは)
   - [CloudWatch Metrics](#cloudwatch-metrics)
@@ -34,7 +34,7 @@
   - [CloudWatch Real-User Monitoring (RUM)](#cloudwatch-real-user-monitoring-rum)
   - [CloudWatch Anomaly Detection](#cloudwatch-anomaly-detection)
   - [One Observability Workshop](#one-observability-workshop)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## CloudWatch とは
 
@@ -70,9 +70,9 @@ Duration: 0:01:00
 
 システムの状態把握に必要なものと、それに対応する AWS サービスは次のとおりです。
 
-- ログ　⇒ CloudWatch Logs
-- メトリクス　⇒ CloudWatch Metrics
-- トレース　⇒ X-Ray
+- ログ　 ⇒ CloudWatch Logs
+- メトリクス　 ⇒ CloudWatch Metrics
+- トレース　 ⇒ X-Ray
 
 ## CloudWatch Metrics
 
@@ -116,7 +116,7 @@ Duration: 0:03:00
 [メトリクスストリームの使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html)
 
 ほぼリアルタイムにメトリクスを Kinesis 経由で送信するサービスです。
-AWS サービスはもちろん、New Relic や Datadog のような外部の SaaS 、HTTPエンドポイントと連携できます。
+AWS サービスはもちろん、New Relic や Datadog のような外部の SaaS 、HTTP エンドポイントと連携できます。
 
 設定は、コンソールから メトリクス＞ストリーム を選択し、[メトリクスストリームの作成]から作成できます。
 
@@ -135,7 +135,7 @@ Duration: 0:03:00
 ![CloudWatchAlarm1](/images/cloudwatch/CloudWatchAlarm1.jpg)
 
 メトリクスを監視し、敷居値を超えた場合にアクションを実行できます。
-アクションには、SNSのトピックや Lambda を呼び出すなどができます
+アクションには、SNS のトピックや Lambda を呼び出すなどができます
 
 ２つ以上のアラームを組み合わせた `複合アラーム` も設定できます。
 
@@ -182,7 +182,7 @@ Duration: 0:01:00
 
 ![CloudWatchDashboards](/images/cloudwatch/CloudWatchDashboards.jpg)
 
-CloudWatchにて収集したデータをグラフなどで表示するサービスです
+CloudWatch にて収集したデータをグラフなどで表示するサービスです
 
 ## CloudWatch Events / EventBridge
 
@@ -223,7 +223,7 @@ Duration: 0:03:00
 [チュートリアル: サンプルクエリを実行および変更する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_RunSampleQuery.html)
 
 クエリ言語を使用して、ロググループを検索、集計できます
-  
+
 ```text
 fields @message
   | parse @message "[*] *" as loggingType, loggingMessage
@@ -241,7 +241,7 @@ Duration: 0:03:00
 
 [Container Insights の使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/ContainerInsights.html)
 
-タスクやコンテナ単位のメトリクスが、Container Insightsによって取得できるようになるサービスです。
+タスクやコンテナ単位のメトリクスが、Container Insights によって取得できるようになるサービスです。
 
 ![CloudWatchContainerInsights1](/images/cloudwatch/CloudWatchContainerInsights4-600.jpg)
 
@@ -286,7 +286,7 @@ Duration: 0:03:00
 ![CloudWatchContributorInsights](/images/cloudwatch/CloudWatchContributorInsights.jpg)
 
 CloudWatch Logs の特定箇所を抽出して、可視化することができます。
-例えば、VPCフローログを CloudWatch Logs に出力している場合、サンプルルールを使用することで簡単に可視化できます。
+例えば、VPC フローログを CloudWatch Logs に出力している場合、サンプルルールを使用することで簡単に可視化できます。
 
 ![CloudWatchContributorInsights2](/images/cloudwatch/CloudWatchContributorInsights2.jpg)
 
@@ -302,7 +302,7 @@ Duration: 0:03:00
 
 特定のリソースのメトリクスだけでなく、リソースグループという単位で Amazon EC2 インスタンスを使用するアプリケーションをまとめて監視、通知できるサービスです。
 
-CloudWatch コンソールから、[Application Insightの使用を開始する] から設定するだけです。
+CloudWatch コンソールから、[Application Insight の使用を開始する] から設定するだけです。
 
 ![CloudWatchApplicationInsights1](/images/cloudwatch/CloudWatchApplicationInsights1.png)
 
@@ -322,7 +322,7 @@ Duration: 0:03:00
 
 ![CloudWatchServiceLens](/images/cloudwatch/CloudWatchServiceLens.jpg)
 
-様々なリソースの情報を1カ所に統合して可視化するサービスで、マイクロサービスなどで特に効果を発揮します。X-Ray と連携します。
+様々なリソースの情報を 1 カ所に統合して可視化するサービスで、マイクロサービスなどで特に効果を発揮します。X-Ray と連携します。
 
 ![CloudWatchServiceLens1](/images/cloudwatch/CloudWatchServiceLens1-600.jpg)
 
@@ -356,7 +356,7 @@ Duration: 0:03:00
 
 [模擬モニターリングの使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html)
 
-WebサイトやURL、REST APIに対してのモニタリングを自動で実行可能なサービスで、Webサイトの死活監視も可能です。
+Web サイトや URL、REST API に対してのモニタリングを自動で実行可能なサービスで、Web サイトの死活監視も可能です。
 同様の機能に、Route53 の HealthCheck がありますが、こちらよりも複雑な条件を設定することができ、実際にユーザーがアクセスするようなパラメータを再現できます。
 
 テンプレートがあるので、簡単に作成することができます。
@@ -389,11 +389,11 @@ Duration: 0:02:00
 
 ![CloudWatchEvidently](/images/cloudwatch/CloudWatchEvidently.jpg)
 
-機能フラグ(フィーチャーフラグ:Feature Flag)とA/Bテストが実施できるサービスです。
+機能フラグ(フィーチャーフラグ:Feature Flag)と A/B テストが実施できるサービスです。
 
 機能フラグとは、「コードを書き換えることなく動的にシステムの振る舞いを変更できる」開発手法です。
 
-たとえば、DBのエンドポイントを渡すことで動的に切り替える、特定のユーザーやある割合のユーザーのみに機能を公開し、徐々に割合を増やしていくといったケースで使われます。
+たとえば、DB のエンドポイントを渡すことで動的に切り替える、特定のユーザーやある割合のユーザーのみに機能を公開し、徐々に割合を増やしていくといったケースで使われます。
 
 ![CloudWatchEvidently1](/images/cloudwatch/CloudWatchEvidently1.jpg)
 
@@ -419,9 +419,9 @@ Duration: 0:03:00
 
 [CloudWatch 異常検出の使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html)
 
-CloudWatchメトリクス上の異常値を自動検出ができるサービスです。
+CloudWatch メトリクス上の異常値を自動検出ができるサービスです。
 
-CloudWatchアラームを作成するときに、適正な閾値を設定するのは容易ではありません。平日・休日、日中・夜間、キャンペーン時期などなど、考慮することが多いです。
+CloudWatch アラームを作成するときに、適正な閾値を設定するのは容易ではありません。平日・休日、日中・夜間、キャンペーン時期などなど、考慮することが多いです。
 
 そのようなときに、利用するのが本サービスです。機械学習により異常値を自動検出できます。
 
@@ -437,12 +437,12 @@ CloudWatchアラームを作成するときに、適正な閾値を設定する�
 
 ## One Observability Workshop
 
-監視系のサービスを学べるワークショップ。3~4時間ほどで終わるが、下記構成図から分かるように様々なサービスを利用するので、ある程度の課金を覚悟して使う。
+監視系のサービスを学べるワークショップ。3~4 時間ほどで終わるが、下記構成図から分かるように様々なサービスを利用するので、ある程度の課金を覚悟して使う。
 
 https://catalog.us-east-1.prod.workshops.aws/workshops/31676d37-bbe9-4992-9cd1-ceae13c5116c/ja-JP
 
 ![One Observability Workshop](/images/cloudwatch/PetAdoptions_architecture.png)
 
-## まとめ
+## 📖 まとめ
 
 ![CloudWatch](/images/all/cloudwatch.png)

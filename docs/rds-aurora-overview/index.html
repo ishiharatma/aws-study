@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="1">
         <ul>
 <li><a href="#amazon-rds-%E3%81%A8-amazon-aurora-%E3%81%AE%E6%AF%94%E8%BC%83" target="_blank">Amazon RDS と Amazon Aurora の比較</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">RDS について知るには</a></li>
 <li><a href="#aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">Aurora について知るには</a></li>
 <li><a href="#rds--aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">RDS / Aurora について知るには(その他)</a></li>
@@ -52,7 +52,7 @@
 <li><a href="#%E6%AF%94%E8%BC%83%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%97%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%BE%A9%E5%85%83" target="_blank">比較ポイント７：データの復元</a></li>
 <li><a href="#%E6%AF%94%E8%BC%83%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%98%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5" target="_blank">比較ポイント８：キャッシュ</a></li>
 <li><a href="#%E6%AF%94%E8%BC%83%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%EF%BC%99%E4%BE%A1%E6%A0%BC" target="_blank">比較ポイント９：価格</a></li>
-<li><a href="#rds-%E3%81%A8-aurora-%E3%81%A9%E3%81%A3%E3%81%A1%E3%82%92%E4%BD%BF%E3%81%86%E3%81%8B%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">RDS と Aurora どっちを使うかフロー</a></li>
+<li><a href="#-rds-%E3%81%A8-aurora-%E3%81%A9%E3%81%A3%E3%81%A1%E3%82%92%E4%BD%BF%E3%81%86%E3%81%8B%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">📖 RDS と Aurora どっちを使うかフロー</a></li>
 </ul>
 </li>
 </ul>
@@ -77,7 +77,7 @@
 <p class="image-container"><img alt="blackbelt-aurora-mysql-usecase" src="img\\b6c3964ce815c10b.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/oJqIzHIMh7Q" target="_blank">Amazon Aurora with PostgreSQL Compatibility(YouTube)</a>(1:03:46)</p>
 <p class="image-container"><img alt="blackbelt-aurora-postgresql" src="img\\c8016177b8680d56.jpg"></p>
-<p><a href="https://youtu.be/8uPU2T5Xj9E" target="_blank">RDS/Aurora Update | 2.5時間で学ぶ！ Amazon Aurora のいま(YouTube)</a>(27:33)</p>
+<p><a href="https://youtu.be/8uPU2T5Xj9E" target="_blank">RDS/Aurora Update | 2.5 時間で学ぶ！ Amazon Aurora のいま(YouTube)</a>(27:33)</p>
 <p class="image-container"><img alt="rds-aurora-updates" src="img\\eb2909ec59c46dfe.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/rds/aurora/" target="_blank">Amazon Aurora サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html" target="_blank">Amazon Aurora ドキュメント</a></p>
@@ -111,7 +111,7 @@
 </td><td colspan="1" rowspan="1"><p>MySQL(互換),PostgreSQL(互換)</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>ストレージアーキテクチャ</p>
-</td><td colspan="1" rowspan="1"><p>EBSがインスタンス付属</p>
+</td><td colspan="1" rowspan="1"><p>EBS がインスタンス付属</p>
 </td><td colspan="1" rowspan="1"><p>Aurora クラスター全体で共有</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>ストレージの自動スケーリング</p>
@@ -119,40 +119,40 @@
 </td><td colspan="1" rowspan="1"><p>デフォルトで自動拡張</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>耐久性</p>
-</td><td colspan="1" rowspan="1"><p>インスタンス付属のミラーリング用EBSで複製</p>
-</td><td colspan="1" rowspan="1"><p>3AZ で6か所に複製</p>
+</td><td colspan="1" rowspan="1"><p>インスタンス付属のミラーリング用 EBS で複製</p>
+</td><td colspan="1" rowspan="1"><p>3AZ で 6 か所に複製</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>可用性</p>
-</td><td colspan="1" rowspan="1"><p>マルチAZのみ</p>
+</td><td colspan="1" rowspan="1"><p>マルチ AZ のみ</p>
 </td><td colspan="1" rowspan="1"><p>Aurora レプリカ</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>自動復旧時間</p>
-</td><td colspan="1" rowspan="1"><p>マルチAZ時60秒、シングルAZでは復旧不可</p>
-</td><td colspan="1" rowspan="1"><p>60秒~120秒、レプリカなしでもAZ障害以外は自動復旧可（10分以内）</p>
+</td><td colspan="1" rowspan="1"><p>マルチ AZ 時 60 秒、シングル AZ では復旧不可</p>
+</td><td colspan="1" rowspan="1"><p>60 秒~120 秒、レプリカなしでも AZ 障害以外は自動復旧可（10 分以内）</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>読み取りスループット向上</p>
-</td><td colspan="1" rowspan="1"><p>リードレプリカ最大5台</p>
-</td><td colspan="1" rowspan="1"><p>Aurora レプリカ最大15台</p>
+</td><td colspan="1" rowspan="1"><p>リードレプリカ最大 5 台</p>
+</td><td colspan="1" rowspan="1"><p>Aurora レプリカ最大 15 台</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>スケーリング</p>
 </td><td colspan="1" rowspan="1"><p>なし</p>
 </td><td colspan="1" rowspan="1"><p>自動で Aurora レプリカを増減可能</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>バックアップ保持期間</p>
-</td><td colspan="1" rowspan="1"><p>0～35日</p>
-</td><td colspan="1" rowspan="1"><p>1～35日</p>
+</td><td colspan="1" rowspan="1"><p>0 ～ 35 日</p>
+</td><td colspan="1" rowspan="1"><p>1 ～ 35 日</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>データの復元</p>
-</td><td colspan="1" rowspan="1"><p>ポイントインタイムリカバリで5分前まで秒単位</p>
-</td><td colspan="1" rowspan="1"><p>ポイントインタイムリカバリで5分前まで秒単位</p>
+</td><td colspan="1" rowspan="1"><p>ポイントインタイムリカバリで 5 分前まで秒単位</p>
+</td><td colspan="1" rowspan="1"><p>ポイントインタイムリカバリで 5 分前まで秒単位</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>キャッシュ</p>
 </td><td colspan="1" rowspan="1"><p>再起動で失われる</p>
-</td><td colspan="1" rowspan="1"><p>DBプロセスとキャッシュが別で管理、再起動後もキャッシュが利用可能</p>
+</td><td colspan="1" rowspan="1"><p>DB プロセスとキャッシュが別で管理、再起動後もキャッシュが利用可能</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>価格</p>
 </td><td colspan="1" rowspan="1"><p>起動時間＋ストレージ料金</p>
-</td><td colspan="1" rowspan="1"><p>起動時間＋ストレージ料金＋ストレージI/O</p>
+</td><td colspan="1" rowspan="1"><p>起動時間＋ストレージ料金＋ストレージ I/O</p>
 </td></tr>
 </table>
 
@@ -185,9 +185,9 @@
 </td><td colspan="2" rowspan="1"><p>○</p>
 </td><td colspan="1" rowspan="1"></td></tr>
 </table>
-<p>*1 Aurora では、MySQLもPostgreSQLも互換であり、AWS によって Aurora のアーキテクチャに合うように改修を加えたものです。</p>
+<p>*1 Aurora では、MySQL も PostgreSQL も互換であり、AWS によって Aurora のアーキテクチャに合うように改修を加えたものです。</p>
 <p>*2 上記*1 の影響もあり、最新バージョンへの対応は RDS より遅い傾向にあります。</p>
-<p>*3 RDS では Oracle RAC がサポートされていません。SQL Server では、sysadminなどのサーバーレベルロールが使用できません。詳細は、「よくある質問」やドキュメントを参照してください。</p>
+<p>*3 RDS では Oracle RAC がサポートされていません。SQL Server では、sysadmin などのサーバーレベルロールが使用できません。詳細は、「よくある質問」やドキュメントを参照してください。</p>
 
 
       </google-codelab-step>
@@ -197,7 +197,7 @@
 <p>RDS の方は EC2 に MySQL や PostgreSQL をインストールする場合と同じように、インスタンスに EBS が紐づいており、マルチ AZ の場合もそれぞれに EBS を持っています。 ミラーリング用の EBS で耐久性を高めています。</p>
 <p class="image-container"><img alt="rds-architecture" src="img\\5f60b1a76add6de1.png"></p>
 <p>https://www.youtube.com/watch?v=oJqIzHIMh7Q&amp;t=24m24s</p>
-<p>Aurora の方は、インスタンスとストレージが分離しています。さらに、3 AZ に6つのデータのコピーが作成され、耐久性が高められています。</p>
+<p>Aurora の方は、インスタンスとストレージが分離しています。さらに、3 AZ に 6 つのデータのコピーが作成され、耐久性が高められています。</p>
 <p class="image-container"><img alt="aurora-architecuture" src="img\\7f8f6206f56d1ad7.png"></p>
 <p>https://www.youtube.com/watch?v=oJqIzHIMh7Q&amp;t=25m49s</p>
 
@@ -212,11 +212,11 @@
 </td><td colspan="1" rowspan="1"><p>Aurora</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>サイズ</p>
-</td><td colspan="1" rowspan="1"><p>20 GiB～64 TiB</p>
-</td><td colspan="1" rowspan="1"><p>10GiB～128TiB(*1)</p>
+</td><td colspan="1" rowspan="1"><p>20 GiB ～ 64 TiB</p>
+</td><td colspan="1" rowspan="1"><p>10GiB ～ 128TiB(*1)</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>スケールアップ</p>
-</td><td colspan="1" rowspan="1"><p>オートスケール設定可(*2)、5GiBまたは割当サイズ10%の大きい方</p>
+</td><td colspan="1" rowspan="1"><p>オートスケール設定可(*2)、5GiB または割当サイズ 10%の大きい方</p>
 </td><td colspan="1" rowspan="1"><p>デフォルトで自動スケール(*3,*4)、10 GiB</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>スケールアップのダウンタイム</p>
@@ -236,9 +236,9 @@
 <p>*2 <a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling" target="_blank">Amazon RDS ストレージの自動スケーリングによる容量の自動管理</a></p>
 <ul>
 <li>ストレージの自動スケーリングの発動条件 <ul>
-<li>空き容量が割り当てられたサイズの10 % 未満</li>
-<li>低ストレージ状態が5分以上継続</li>
-<li>最後のストレージ変更後から6時間経過 <ul>
+<li>空き容量が割り当てられたサイズの 10 % 未満</li>
+<li>低ストレージ状態が 5 分以上継続</li>
+<li>最後のストレージ変更後から 6 時間経過 <ul>
 <li>この制約があるため、RDS の自動スケーリングはストレージ不足状態を完全に防ぐことはできません。</li>
 <li>自動スケーリング後に大量のデータロードが発生した場合に数時間ストレージ容量不足状態になる可能性があります。</li>
 </ul>
@@ -255,7 +255,7 @@
 <p>*3 <a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-growth" target="_blank">Aurora ストレージのサイズを自動的に変更する方法</a></p>
 <p>*4 <a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Performance.html#Aurora.Managing.Performance.StorageScaling" target="_blank">ストレージのスケーリング</a></p>
 <ul>
-<li>Aurora のストレージは1時間ごとに評価されます。</li>
+<li>Aurora のストレージは 1 時間ごとに評価されます。</li>
 </ul>
 <p>*5 <a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-autoscaling-low-free-storage/" target="_blank">ストレージの自動スケーリングをオンにした後に、Amazon RDS の DB インスタンスの空きストレージ容量が少ない状態になったり、storage-full 状態になったりするのはなぜですか?</a></p>
 <ul>
@@ -266,8 +266,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント４：可用性" duration="5">
-        <p>RDS は マルチ AZ の場合のみ、スタンバイにフェールオーバーし、60秒で自動的に復旧します。 シングル AZ の場合、自動的に復旧できないので、スナップショットから手動復旧が必要になります。 マルチAZ は、プライマリインスタンスとスタンバイインスタンスで構成されます。プライマリインスタンスからスタンバイインスタンスには、同期的にレプリケーションされます。 通常、スタンバイインスタンスにはアクセスできません。</p>
-<p>Aurora はレプリカが存在する場合は、レプリカにフェールオーバーし、60秒から120秒で復旧します。 レプリカが存在しない場合、同じ AZ 内に新規インスタンスが作成され、10分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。</p>
+        <p>RDS は マルチ AZ の場合のみ、スタンバイにフェールオーバーし、60 秒で自動的に復旧します。 シングル AZ の場合、自動的に復旧できないので、スナップショットから手動復旧が必要になります。 マルチ AZ は、プライマリインスタンスとスタンバイインスタンスで構成されます。プライマリインスタンスからスタンバイインスタンスには、同期的にレプリケーションされます。 通常、スタンバイインスタンスにはアクセスできません。</p>
+<p>Aurora はレプリカが存在する場合は、レプリカにフェールオーバーし、60 秒から 120 秒で復旧します。 レプリカが存在しない場合、同じ AZ 内に新規インスタンスが作成され、10 分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。</p>
 <p>Aurora レプリカのフェールオーバーは優先順位を設定することが可能です。</p>
 <p>たとえば、バッチ処理やデータのエクスポートなど負荷の高い処理に使用しているレプリカの優先順位を下げておくといったことが可能です。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Concepts.AuroraHighAvailability.html#Aurora.Managing.FaultTolerance" target="_blank">Aurora DB クラスターの耐障害性</a></p>
@@ -287,8 +287,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント６：自動バックアップの保持期間" duration="5">
-        <p>RDS は 0～35日(デフォルトは 7日)で、0日にすることでバックアップを無効化できます。</p>
-<p>Aurora は 1～35日(デフォルトは 1日)となっており、0日に設定できないため、バックアップを無効にすることは出来ません。</p>
+        <p>RDS は 0 ～ 35 日(デフォルトは 7 日)で、0 日にすることでバックアップを無効化できます。</p>
+<p>Aurora は 1 ～ 35 日(デフォルトは 1 日)となっており、0 日に設定できないため、バックアップを無効にすることは出来ません。</p>
 <p>自動バックアップは、インスタンスが起動している間のみ取得されます。ドキュメントには以下の記述があります。</p>
 <pre><code language="language-text" class="language-text">自動バックアップを行うには、DB インスタンスが AVAILABLE 状態になっている必要があります。
 DB インスタンスが AVAILABLEなどの STORAGE_FULL 以外の状態にある間は、自動バックアップは行われません。
@@ -308,7 +308,7 @@ DB インスタンスが AVAILABLEなどの STORAGE_FULL 以外の状態にあ�
 <p><a href="https://aws.amazon.com/jp/rds/faqs/" target="_blank">よくある質問</a></p>
 <p>RDS / Aurora を停止している時間は保持期間の計算に含まれないので、保持期間より多い日数のスナップショットが存在している場合もあります。</p>
 <p>ドキュメントには以下の記述があります。</p>
-<p>7日分保持する設定にしていた場合、24時間 × 7日 = 168 時間になりますが、RDSを夜間に12時間停止していた場合、168 / 12 = 14日となるということでしょうか。</p>
+<p>7 日分保持する設定にしていた場合、24 時間 × 7 日 = 168 時間になりますが、RDS を夜間に 12 時間停止していた場合、168 / 12 = 14 日となるということでしょうか。</p>
 <pre><code language="language-text" class="language-text">DB インスタンスが停止している場合、バックアップ保持期間より長くバックアップを保持できます。
 RDSには、バックアップ保存期間の計算時にstopped状態にあった時間は含まれません。
 </code></pre>
@@ -319,7 +319,7 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント７：データの復元" duration="5">
-        <p>RDS と Aurora のともにポイントインタイムリカバリとして、5分前まで秒単位で復元が可能です。</p>
+        <p>RDS と Aurora のともにポイントインタイムリカバリとして、5 分前まで秒単位で復元が可能です。</p>
 <p>復元といっても「特定地点のデータ状態のデータベースクラスタを再作成する機能」ですので注意が必要です。</p>
 <p>データベースクラスタ内でデータのみをリカバリするわけではありません。</p>
 
@@ -335,12 +335,12 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
       </google-codelab-step>
     
       <google-codelab-step label="比較ポイント９：価格" duration="5">
-        <p>RDS では、リードレプリカもプライマリインスタンス同様に、ストレージ料金も必要になります。 Auroraは、ストレージ I/O の料金が追加で必要になります。ただし、Aurora のレプリカはストレージ料金がかかりません。</p>
+        <p>RDS では、リードレプリカもプライマリインスタンス同様に、ストレージ料金も必要になります。 Aurora は、ストレージ I/O の料金が追加で必要になります。ただし、Aurora のレプリカはストレージ料金がかかりません。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>データベース</p>
 </td><td colspan="1" rowspan="1"><p>インスタンスの起動時間</p>
 </td><td colspan="1" rowspan="1"><p>データベースのストレージ料金</p>
-</td><td colspan="1" rowspan="1"><p>ストレージI/O</p>
+</td><td colspan="1" rowspan="1"><p>ストレージ I/O</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>RDS</p>
 </td><td colspan="1" rowspan="1"><p>○</p>
@@ -360,31 +360,31 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 </td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>○</p>
 </td></tr>
 </table>
-<p>東京リージョンで、データベースエンジンが「MySQL」、インスタンスタイプ「db.r6g.large」、データベース容量が「1,000 GB」 、1秒当たり100ページを読み取る I/O （1か月辺り 3億 I/O）が発生する場合、次のようになります。</p>
-<p>RDS（マルチAZ）は月額「748.30USD」、Aurora（+レプリカ）は月額「720.98USD」となり、今回のケースでは、Auroraのほうがコスト面で割安となりました。 ただし、Aurora はデータ I/O 次第で RDS を上回る可能性もあります。</p>
+<p>東京リージョンで、データベースエンジンが「MySQL」、インスタンスタイプ「db.r6g.large」、データベース容量が「1,000 GB」 、1 秒当たり 100 ページを読み取る I/O （1 か月辺り 3 億 I/O）が発生する場合、次のようになります。</p>
+<p>RDS（マルチ AZ）は月額「748.30USD」、Aurora（+レプリカ）は月額「720.98USD」となり、今回のケースでは、Aurora のほうがコスト面で割安となりました。 ただし、Aurora はデータ I/O 次第で RDS を上回る可能性もあります。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>データベース</p>
 </td><td colspan="1" rowspan="1"><p>インスタンスの起動時間</p>
 </td><td colspan="1" rowspan="1"><p>データベースのストレージ料金</p>
-</td><td colspan="1" rowspan="1"><p>ストレージI/O</p>
+</td><td colspan="1" rowspan="1"><p>ストレージ I/O</p>
 </td><td colspan="1" rowspan="1"><p>月額(USD)</p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p>RDS（マルチAZ）</p>
-</td><td colspan="1" rowspan="1"><p>0.510USD×730時間=372.30USD</p>
+<tr><td colspan="1" rowspan="1"><p>RDS（マルチ AZ）</p>
+</td><td colspan="1" rowspan="1"><p>0.510USD×730 時間=372.30USD</p>
 </td><td colspan="1" rowspan="1"><p>0.276USD/GB×1,000GB=276.00USD</p>
 </td><td colspan="1" rowspan="1"><p>-</p>
 </td><td colspan="1" rowspan="1"><p>510.30USD</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Aurora</p>
-</td><td colspan="1" rowspan="1"><p>0.313USDx730時間=228.49USD</p>
+</td><td colspan="1" rowspan="1"><p>0.313USDx730 時間=228.49USD</p>
 </td><td colspan="1" rowspan="1"><p>0.12USD/GBx1,000GB=120.00USD</p>
-</td><td colspan="1" rowspan="1"><p>0.24USD/100 万リクエストx3億/100万=72.00USD</p>
+</td><td colspan="1" rowspan="1"><p>0.24USD/100 万リクエスト x3 億/100 万=72.00USD</p>
 </td><td colspan="1" rowspan="1"><p>420.49USD</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Aurora（レプリカ）</p>
-</td><td colspan="1" rowspan="1"><p>0.313USDx730時間=228.49USD</p>
+</td><td colspan="1" rowspan="1"><p>0.313USDx730 時間=228.49USD</p>
 </td><td colspan="1" rowspan="1"><p>-</p>
-</td><td colspan="1" rowspan="1"><p>0.24USD/100 万リクエストx3億/100万=72.00USD</p>
+</td><td colspan="1" rowspan="1"><p>0.24USD/100 万リクエスト x3 億/100 万=72.00USD</p>
 </td><td colspan="1" rowspan="1"><p>300.49USD</p>
 </td></tr>
 </table>
@@ -393,19 +393,19 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 <tr><td colspan="1" rowspan="1"><p>データベース</p>
 </td><td colspan="1" rowspan="1"><p>インスタンスの起動時間</p>
 </td><td colspan="1" rowspan="1"><p>データベースのストレージ料金</p>
-</td><td colspan="1" rowspan="1"><p>ストレージI/O</p>
+</td><td colspan="1" rowspan="1"><p>ストレージ I/O</p>
 </td><td colspan="1" rowspan="1"><p>月額(USD)</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>RDS（リードレプリカ）</p>
-</td><td colspan="1" rowspan="1"><p>0.255USD×730時間=186.15USD</p>
+</td><td colspan="1" rowspan="1"><p>0.255USD×730 時間=186.15USD</p>
 </td><td colspan="1" rowspan="1"><p>0.138USD/GB×1,000GB=138.00USD</p>
 </td><td colspan="1" rowspan="1"><p>-</p>
 </td><td colspan="1" rowspan="1"><p>324.15USD</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Aurora（レプリカ）</p>
-</td><td colspan="1" rowspan="1"><p>0.313USDx730時間=228.49USD</p>
+</td><td colspan="1" rowspan="1"><p>0.313USDx730 時間=228.49USD</p>
 </td><td colspan="1" rowspan="1"><p>-</p>
-</td><td colspan="1" rowspan="1"><p>0.24USD/100 万リクエストx3億/100万=72.00USD</p>
+</td><td colspan="1" rowspan="1"><p>0.24USD/100 万リクエスト x3 億/100 万=72.00USD</p>
 </td><td colspan="1" rowspan="1"><p>300.49USD</p>
 </td></tr>
 </table>
@@ -413,7 +413,7 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS と Aurora どっちを使うかフロー" duration="0">
+      <google-codelab-step label="📖 RDS と Aurora どっちを使うかフロー" duration="0">
         <p class="image-container"><img alt="rds-aurora-flow" src="img\\b29de344ae27e538.png"></p>
 
 

@@ -7,17 +7,17 @@ published: true
 
 # Amazon ElastiCache
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Amazon ElastiCache](#amazon-elasticache)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon ElastiCache とは](#amazon-elasticache-とは)
     - [ハンズオン](#ハンズオン)
   - [Memcached と Redis の比較](#memcached-と-redis-の比較)
@@ -27,7 +27,7 @@ published: true
   - [Amazon ElastiCache for Redis](#amazon-elasticache-for-redis)
   - [自動フェイルオーバー](#自動フェイルオーバー)
   - [Amazon ElastiCache for Redis の Global Datastore](#amazon-elasticache-for-redis-の-global-datastore)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon ElastiCache とは
 
@@ -96,8 +96,7 @@ https://aws.amazon.com/jp/elasticache/redis-vs-memcached/
 
 Duration: 0:01:30
 
-- キャッシュは揮発性のあるデータであるため、消えて困るデータは保存しないほうがよいです。
--結果整合性（分散データベース環境でデータが更新された際に、一定時間経過後には最終的な一貫性が担保されること）を前提とした設計を行う必要があります。
+- キャッシュは揮発性のあるデータであるため、消えて困るデータは保存しないほうがよいです。 -結果整合性（分散データベース環境でデータが更新された際に、一定時間経過後には最終的な一貫性が担保されること）を前提とした設計を行う必要があります。
 - TTL（Time to Live, 有効期限）を設定しましょう。データを保存しすぎて、メモリが溢れてしまうといったことが発生します。TTL は長すぎても TTL が切れる前にメモリが溢れることにもなります。また、TTL が切れるタイミングが同じデータが多く存在すると、CPU 使用率が上昇することがあります。
 
 ## DynamoDB で代用できる？
@@ -120,7 +119,7 @@ Duration: 0:01:30
 
 Duration: 0:03:00
 
-クラスタモード有効/無効　×　レプリケーション有/無のパターンがあります。
+クラスタモード有効/無効　 × 　レプリケーション有/無のパターンがあります。
 クラスタモードは複数のシャードにデータを分散させることが出来ます。クラスタモードが有効でもシャードを１つに設定することも可能です。
 
 クラスタもレプリケーションもない単一の構成です。
@@ -153,6 +152,6 @@ https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/Redis-Global-D
 
 Global Datastore for Redis 機能を使用すると、AWS リージョン全体で完全マネージド型、高速、信頼性、安全なレプリケーションを実行できます。
 
-## まとめ
+## 📖 まとめ
 
 ![elasticache](/images/all/elasticache.png)

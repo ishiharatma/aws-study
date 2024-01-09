@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-key-management-servicekms" target="_blank">AWS Key Management Service（KMS）</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#kms-%E3%81%A8%E3%81%AF" target="_blank">KMS とは</a></li>
 <li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5" target="_blank">基本概念</a></li>
 <li><a href="#%E3%83%9E%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%BC%E3%81%A8%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AD%E3%83%BC" target="_blank">マスターキーとデータキー</a></li>
@@ -47,7 +47,7 @@
 <li><a href="#%E3%82%AD%E3%83%BC%E3%83%9E%E3%83%86%E3%83%AA%E3%82%A2%E3%83%AB" target="_blank">キーマテリアル</a></li>
 <li><a href="#%E3%82%AD%E3%83%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">キーポリシー</a></li>
 <li><a href="#%E3%83%9E%E3%83%AB%E3%83%81%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%82%AD%E3%83%BC" target="_blank">マルチリージョンキー</a></li>
-<li><a href="#%E5%88%A5%E3%81%AEaws%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E8%A8%B1%E5%8F%AF" target="_blank">別のAWSアカウントへの許可</a></li>
+<li><a href="#%E5%88%A5%E3%81%AE-aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E8%A8%B1%E5%8F%AF" target="_blank">別の AWS アカウントへの許可</a></li>
 <li><a href="#%E3%82%AD%E3%83%BC%E3%81%AE%E5%89%8A%E9%99%A4" target="_blank">キーの削除</a><ul>
 <li><a href="#%E5%89%8A%E9%99%A4%E4%BA%88%E5%AE%9A%E3%81%BE%E3%81%9F%E3%81%AF%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F-cmk-%E3%81%AE%E4%BD%BF%E7%94%A8%E3%82%92%E9%80%9A%E7%9F%A5" target="_blank">削除予定または無効化された CMK の使用を通知</a></li>
 <li><a href="#%E3%82%AD%E3%83%BC%E3%81%8C%E5%89%8A%E9%99%A4%E4%BA%88%E5%AE%9A%E3%81%BE%E3%81%9F%E3%81%AF%E7%84%A1%E5%8A%B9%E5%8C%96%E3%81%95%E3%82%8C%E3%81%9F%E5%A0%B4%E5%90%88%E3%81%AE%E9%80%9A%E7%9F%A5" target="_blank">キーが削除予定または無効化された場合の通知</a></li>
@@ -55,7 +55,7 @@
 </li>
 <li><a href="#%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AD%E3%83%BC%E3%82%AD%E3%83%A3%E3%83%83%E3%82%B7%E3%83%A5" target="_blank">データキーキャッシュ</a></li>
 <li><a href="#%E3%82%AF%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%83%88%E3%82%B5%E3%82%A4%E3%83%89%E6%9A%97%E5%8F%B7%E5%8C%96%E3%81%A8%E3%82%B5%E3%83%BC%E3%83%90%E3%82%B5%E3%82%A4%E3%83%89%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">クライアントサイド暗号化とサーバサイド暗号化</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -85,7 +85,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="マスターキーとデータキー" duration="2">
-        <p>KMS では、マスターキーとデータキーという2種類の鍵が登場します。</p>
+        <p>KMS では、マスターキーとデータキーという 2 種類の鍵が登場します。</p>
 <ul>
 <li>マスターキー(Customer Master Key: CMK) <ul>
 <li>データキーを暗号化するキー</li>
@@ -108,14 +108,14 @@
         <ul>
 <li>AWS マネージド型キー <ul>
 <li>AWS サービスが作成・管理する CMK で、キー名が「aws/s3」 のようになっています。</li>
-<li>1年ごとに自動的にローテーションされます</li>
+<li>1 年ごとに自動的にローテーションされます</li>
 <li>無効化や削除ができません</li>
 </ul>
 </li>
 <li>カスタマー管理型のキー <ul>
 <li>利用者が作成・管理する CMK です。</li>
-<li>自動ローテーションを有効化することで、1年ごとにローテーションさせることができます。</li>
-<li>1年より短い周期でローテーションしたい場合は手動で新しいキーを作成します。</li>
+<li>自動ローテーションを有効化することで、1 年ごとにローテーションさせることができます。</li>
+<li>1 年より短い周期でローテーションしたい場合は手動で新しいキーを作成します。</li>
 <li>無効化や削除ができます。</li>
 </ul>
 </li>
@@ -140,8 +140,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="キーマテリアル" duration="3">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material" target="_blank">キーマテリアル</a>とは、「暗号化キーを生成するために必要な材料」であり「CMK作成時に使用されるデータのこと」をいいます。</p>
-<p>キーマテリアルは、次の3種類が指定できます。</p>
+        <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material" target="_blank">キーマテリアル</a>とは、「暗号化キーを生成するために必要な材料」であり「CMK 作成時に使用されるデータのこと」をいいます。</p>
+<p>キーマテリアルは、次の 3 種類が指定できます。</p>
 <ul>
 <li>KMS <ul>
 <li>デフォルト</li>
@@ -154,18 +154,18 @@
 </ul>
 </li>
 <li>カスタムキーストア（CloudHSM） <ul>
-<li>これを利用するには、<a href="https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/create-cluster.html" target="_blank">AWS CloudHSMクラスターを事前に作成</a>しておく必要があります。</li>
-<li>AWS CloudHSMクラスター とは、ユーザー自身しかアクセスできない 専用 HSM（ハードウェアセキュリティモジュール）インスタンスを作成してデータセキュリティのコンプライアンスを満たすことができるキーストアを作成できるもの。HSM は VPC 内で実行されます。</li>
+<li>これを利用するには、<a href="https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/create-cluster.html" target="_blank">AWS CloudHSM クラスターを事前に作成</a>しておく必要があります。</li>
+<li>AWS CloudHSM クラスター とは、ユーザー自身しかアクセスできない 専用 HSM（ハードウェアセキュリティモジュール）インスタンスを作成してデータセキュリティのコンプライアンスを満たすことができるキーストアを作成できるもの。HSM は VPC 内で実行されます。</li>
 <li>VPC 内に配置しているので、レイテンシーは低い。</li>
-<li>冗長化構成は利用者の責任範囲となる。推奨はAZを跨いだ 2台以上の HSMインスタンス</li>
+<li>冗長化構成は利用者の責任範囲となる。推奨は AZ を跨いだ 2 台以上の HSM インスタンス</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/cloudhsm/latest/userguide/introduction.html" target="_blank">AWS CloudHSM の概要</a></li>
 <li><a href="https://aws.amazon.com/jp/cloudhsm/faqs/" target="_blank">AWS CloudHSM のよくある質問</a></li>
-<li>料金は東京リージョンでは、1時間当たり 1.81USD と KMSに比べると高額です。</li>
+<li>料金は東京リージョンでは、1 時間当たり 1.81USD と KMS に比べると高額です。</li>
 <li>次のような要件がある場合に利用します。 <ul>
-<li>PCI DSSやその他の特定の縦断的なセキュリティ標準</li>
+<li>PCI DSS やその他の特定の縦断的なセキュリティ標準</li>
 <li>政府のワークロード</li>
-<li>FIPS認可要求ポリシー</li>
-<li>RDS Oracleでの<a href="https://docs.oracle.com/cd/E57425_01/121/ASOAG/introduction-to-transparent-data-encryption.htm" target="_blank">透過的なデータ暗号化</a> (Transparent data encryption: TDE) サポート</li>
+<li>FIPS 認可要求ポリシー</li>
+<li>RDS Oracle での<a href="https://docs.oracle.com/cd/E57425_01/121/ASOAG/introduction-to-transparent-data-encryption.htm" target="_blank">透過的なデータ暗号化</a> (Transparent data encryption: TDE) サポート</li>
 </ul>
 </li>
 </ul>
@@ -195,7 +195,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="別のAWSアカウントへの許可" duration="1">
+      <google-codelab-step label="別の AWS アカウントへの許可" duration="1">
         <p>CMK は別のアカウントに使用を許可することができます。</p>
 <p>次のように使用を許可するアカウントを指定すると、キーポリシーに反映されます。 <img alt="kms-use-other-account" src="img\\1ecedb492d16839c.png"></p>
 <p class="image-container"><img alt="kms-use-other-account-policy" src="img\\d03b8bb27d8906b2.png"></p>
@@ -205,7 +205,7 @@
     
       <google-codelab-step label="キーの削除" duration="5">
         <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html" target="_blank">キーの削除</a></p>
-<p>CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。 削除スケジュールは、7日～30日を指定できます。この期間内であれば削除をキャンセルすることができます。 削除されると、既存データを二度と復号できなくなるので注意が必要です。</p>
+<p>CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。 削除スケジュールは、7 日～ 30 日を指定できます。この期間内であれば削除をキャンセルすることができます。 削除されると、既存データを二度と復号できなくなるので注意が必要です。</p>
 <p>削除ではなく、無効化することもできますのでまずは無効化を行い、本当にキーが使用されていないことを確認することを推奨します。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/enable-and-disable-key.html" target="_blank">キーの有効化と無効化</a></p>
 <p>削除予定の CMK が利用されたら通知させることもできます。</p>
@@ -260,22 +260,22 @@ OR
       </google-codelab-step>
     
       <google-codelab-step label="データキーキャッシュ" duration="1">
-        <p>AWS Encryption SDKの機能として、「<a href="https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html" target="_blank">データキーキャッシュ</a>」があります。 これを利用することでデータキー取得のAPIコールを減らすことができます。</p>
+        <p>AWS Encryption SDK の機能として、「<a href="https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html" target="_blank">データキーキャッシュ</a>」があります。 これを利用することでデータキー取得の API コールを減らすことができます。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="クライアントサイド暗号化とサーバサイド暗号化" duration="3">
-        <p>KMS を利用した暗号化は、次の2種類があります。</p>
+        <p>KMS を利用した暗号化は、次の 2 種類があります。</p>
 <ul>
 <li>クライアントサイド暗号化（Client-Side-Encryption: CSE） <ul>
 <li>アプリケーション側で暗号化を実施します。</li>
-<li>アプリケーション側で暗号化済みデータを送信するので、AWSまでの通信経路上は暗号化された状態となります。</li>
+<li>アプリケーション側で暗号化済みデータを送信するので、AWS までの通信経路上は暗号化された状態となります。</li>
 <li>クライアントサイドで暗号化/復号の処理が必要なため、実装に手間がかかります</li>
 </ul>
 </li>
 <li>サーバサイド暗号化（Server-Side-Encryption: SSE） <ul>
-<li>AWS の各サービスが提供する暗号化を利用します。（例：S3バケット）</li>
+<li>AWS の各サービスが提供する暗号化を利用します。（例：S3 バケット）</li>
 <li><img alt="s3-encrypt" src="img\\6adbbe4b535e7476.png"></li>
 <li>AWS 側で暗号化し、データにアクセスがあった場合は自動的に復号されます。</li>
 <li>通信経路上では暗号化されていません。（使用しているプロトコルによる暗号化は別）</li>
@@ -287,7 +287,7 @@ OR
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="kms-overview" src="img\\881a07d371a06ea2.png"></p>
 
 

@@ -1,16 +1,16 @@
 # Amazon Route 53
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Amazon Route 53](#amazon-route-53)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon Route 53 とは](#amazon-route-53-とは)
   - [ドメインの新規登録](#ドメインの新規登録)
   - [ドメインの移管](#ドメインの移管)
@@ -24,7 +24,7 @@
   - [Amazon Route 53 の料金](#amazon-route-53-の料金)
   - [Route 53 のクォータ](#route-53-のクォータ)
   - [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）](#amazon-route-53-が-dns-リソースレコードセットに対するアクセス許可をサポート2022-9-21)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon Route 53 とは
 
@@ -58,7 +58,7 @@ DNS ？？という人は、[DNS とは](https://aws.amazon.com/jp/route53/what-
 
 Duration: 0:00:30
 
-AWS では　Route53 にて新規ドメインを取得することができます。
+AWS では　 Route53 にて新規ドメインを取得することができます。
 
 [Amazon Route 53 に登録できる最上位ドメイン](https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/registrar-tld-list.html)
 
@@ -93,7 +93,7 @@ Duration: 0:00:30
 
 Duration: 0:00:30
 
-ホストゾーンは次の2種類があります。
+ホストゾーンは次の 2 種類があります。
 
 ![route53_hostedzone](/images/route53/route53_hostedzone-320.jpg)
 
@@ -135,6 +135,7 @@ Duration: 0:05:00
   - ドメイン名と IPv6 の対応
   - example.com → 2001:db8::1
 - CNAME レコード
+
   - ドメインを別のドメインに紐づける
   - `sub1.example.com. IN CNAME sub2.example.com.` とすると、`sub1` を `sub2` に読み替えてくれます。
   - 以下のような同じ定義は NG です。(sub1 を２つのドメインに紐づけている)
@@ -142,6 +143,7 @@ Duration: 0:05:00
     - **sub1.example.com.** IN CNAME www.example.com.
     - 詳細は [RFC1912](https://www.ietf.org/rfc/rfc1912.txt) `A CNAME record is not allowed to coexist with any other data.`
   - 別のタイプのレコードを追加することも出来ません。
+
     - **sub1.example.com.** IN CNAME sub2.example.com.
     - **sub1.example.com.** IN A 192.0.2.1
 
@@ -149,10 +151,11 @@ Duration: 0:05:00
     - `example.com. IN CNAME sub1.example.com.` とするのは NG です
     - Zone Apex には NS レコードが必須であり、CNAME は別のレコードタイプと共存できないという点が矛盾するから。
     - 詳細は [RFC1912](https://www.ietf.org/rfc/rfc1912.txt)
+
 - Alias レコード
   - AWS リソースの FQDN(Fully Qualified Domain Name) を指定できる Route 53 固有の機能
   - CNAME では利用できなかった Zone Apex のレコードを追加することが可能です。
-  - CloudFront, Elastic Beanstalk ,ELB, API Gateway, VPC インターフェースエンドポイント, Global Accelerator, S3の静的ホスティングなど
+  - CloudFront, Elastic Beanstalk ,ELB, API Gateway, VPC インターフェースエンドポイント, Global Accelerator, S3 の静的ホスティングなど
 - MX レコード
   - メールサーバ
 
@@ -161,37 +164,37 @@ Duration: 0:05:00
 Duration: 0:10:00
 
 - シンプルルーティング
-  - レコードセットに事前設定された値のみに基づいてDNSクエリに応答する方式
+  - レコードセットに事前設定された値のみに基づいて DNS クエリに応答する方式
   - デフォルトのルーティングです
-  ![simple_routing](/images/route53/route53_simple.png)
+    ![simple_routing](/images/route53/route53_simple.png)
 - 位置情報ルーティング
-  - ユーザーの位置情報（DNSクエリの発信位置）に基づいてDNSクエリに応答する方式
+  - ユーザーの位置情報（DNS クエリの発信位置）に基づいて DNS クエリに応答する方式
   - デフォルトのルーティングを指定しておかないと、設定した地域以外からは名前解決できないので注意が必要です。（日本と米国のみ定義した場合、それ以外の地域からはアクセスできなくなります）
-  ![geolocation_routing](/images/route53/route53_geolocation.png)
+    ![geolocation_routing](/images/route53/route53_geolocation.png)
 - 地理的近接性ルーティング
-  - ユーザーの位置情報（DNSクエリの発信位置）とサーバが分散配置されている場合、最も近いところに応答する方式
-  ![geoproximity_routing](/images/route53/route53_geoproximity.png)
+  - ユーザーの位置情報（DNS クエリの発信位置）とサーバが分散配置されている場合、最も近いところに応答する方式
+    ![geoproximity_routing](/images/route53/route53_geoproximity.png)
   - 「位置情報ルーティング」との違いが分かり難い
 - レイテンシールーティング
   - サーバが分散配置されている場合、最もレイテンシーが低いところに応答する方式
-  ![latency_routing](/images/route53/route53_latency.png)
+    ![latency_routing](/images/route53/route53_latency.png)
 - 加重ルーティング
-  - 複数のエンドポイントに重みを設定して、重みに応じてDNSクエリに応答する方式
-  ![weighted_routing](/images/route53/route53_weighted.png)
+  - 複数のエンドポイントに重みを設定して、重みに応じて DNS クエリに応答する方式
+    ![weighted_routing](/images/route53/route53_weighted.png)
 - フェイルオーバールーティング
-  - ヘルスチェックに基づいて、利用可能なリソースにDNSクエリを応答する方式
-  ![failover_routing](/images/route53/route53_failover.png)
+  - ヘルスチェックに基づいて、利用可能なリソースに DNS クエリを応答する方式
+    ![failover_routing](/images/route53/route53_failover.png)
   - このルーティングを用いることで、マルチリージョンでのフェイルオーバーを構成できます
-  ![multi_region_failover_routing](/images/route53/route53_multi_region_failover.png)
+    ![multi_region_failover_routing](/images/route53/route53_multi_region_failover.png)
 - 複数値回答ルーティング
-  - ランダムに選ばれた最大８つの正常なレコードにIPアドレスを設定して、複数の値を応答する方式
-  - ≒ELB（ELBに代わるものではないが近い機能）
-  ![multivalue_routing](/images/route53/route53_multivalue.png)
+  - ランダムに選ばれた最大８つの正常なレコードに IP アドレスを設定して、複数の値を応答する方式
+  - ≒ELB（ELB に代わるものではないが近い機能）
+    ![multivalue_routing](/images/route53/route53_multivalue.png)
 - IP ベースルーティング
   - アクセス元の IP アドレス CIDR を元にルーティングする方式
-  - IPv4 は /0～/24、IPv6 は /0～/48を指定できます
+  - IPv4 は /0 ～/24、IPv6 は /0 ～/48 を指定できます
   - 2022-06-01 に利用可能になったものです。[Amazon Route 53 が DNS クエリの IP ベースのルーティングを発表](https://aws.amazon.com/jp/about-aws/whats-new/2022/06/amazon-route-53-ip-based-routing-dns-queries/)
-  ![ip_base_routing](/images/route53/route53_ipbase.png)
+    ![ip_base_routing](/images/route53/route53_ipbase.png)
 
 ## Route 53 Resolver
 
@@ -201,7 +204,7 @@ VPC に標準で配備されている DNS サーバー（フォワーダー＋�
 
 ![route53_resolver](/images/route53/route53_resolver.png)
 
-一般的に、リゾルバ（Resolver）とは、DNSサーバへドメイン名を照会して対応するIPアドレスを調べたり、その逆（IPアドレス→ドメイン名）を調べたりするソフトウェアのことを言います。
+一般的に、リゾルバ（Resolver）とは、DNS サーバへドメイン名を照会して対応する IP アドレスを調べたり、その逆（IP アドレス → ドメイン名）を調べたりするソフトウェアのことを言います。
 
 フォワーダーとは、自身では DNS 非再帰的問い合わせを行わず、別のフルサービスリゾルバーに転送する DNS サーバーのことです。
 
@@ -215,7 +218,7 @@ VPC に標準で配備されている DNS サーバー（フォワーダー＋�
 
 Duration: 0:00:30
 
-オンプレミスとクラウドのリソースによって構成された環境での名前解決を一元化するための Amazon Route53 Resolverの機能拡張です。
+オンプレミスとクラウドのリソースによって構成された環境での名前解決を一元化するための Amazon Route53 Resolver の機能拡張です。
 
 実体は、ENI（Elastic Network Interface）なので、セキュリティグループによるアクセス制御が可能です。
 
@@ -241,12 +244,12 @@ Duration: 0:00:30
 
 ホストゾーン、レコード数、処理されたクエリ数で課金されます。
 
-ホストゾーンの料金は、1か月未満でも日割り計算されませんので注意が必要です
+ホストゾーンの料金は、1 か月未満でも日割り計算されませんので注意が必要です
 
-テスト目的として利用できるように、作成後12時間以内に削除された場合は無料となります。ただし、クエリ数での課金は発生します。
+テスト目的として利用できるように、作成後 12 時間以内に削除された場合は無料となります。ただし、クエリ数での課金は発生します。
 
 - 無料枠
-  - 作成後12時間以内に削除されたホストゾーン
+  - 作成後 12 時間以内に削除されたホストゾーン
 
 ## Route 53 のクォータ
 
@@ -256,8 +259,8 @@ Duration: 0:00:30
 
 | 項目         | Quota               | 引き上げ              |
 | ------------ | ------------------- | --------------------- |
-| ドメイン数   | 20個                | Yes                   |
-| ホストゾーン | 500個               | Yes                   |
+| ドメイン数   | 20 個               | Yes                   |
+| ホストゾーン | 500 個              | Yes                   |
 | レコード数   | 10,000/ホストゾーン | Yes（ただし追加料金） |
 
 それ以外については、ドキュメントを参照してください。
@@ -270,7 +273,7 @@ Duration: 00:01:00
 
 [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート](https://aws.amazon.com/jp/about-aws/whats-new/2022/09/amazon-route-53-support-dns-resource-record-set-permissions/)
 
-今までは、IAM ポリシーでRoute 53のホストゾーンに対するレコード操作を制限することができましたが、特定のレコードだけという制限は出来ませんでした。
+今までは、IAM ポリシーで Route 53 のホストゾーンに対するレコード操作を制限することができましたが、特定のレコードだけという制限は出来ませんでした。
 
 ```json
 {
@@ -289,19 +292,22 @@ Duration: 00:01:00
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "route53:ChangeResourceRecordSets",
-            "Resource": "arn:aws:route53:::hostedzone/Z11111112222222333333",
-            "Condition": {
-                "ForAllValues:StringEquals":{
-                    "route53:ChangeResourceRecordSetsNormalizedRecordNames": ["example.com", "marketing.example.com"]
-                }
-            }
-          }
-        ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "route53:ChangeResourceRecordSets",
+      "Resource": "arn:aws:route53:::hostedzone/Z11111112222222333333",
+      "Condition": {
+        "ForAllValues:StringEquals": {
+          "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+            "example.com",
+            "marketing.example.com"
+          ]
+        }
+      }
+    }
+  ]
 }
 ```
 
@@ -309,19 +315,21 @@ Duration: 00:01:00
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": "route53:ChangeResourceRecordSets",
-            "Resource": "arn:aws:route53:::hostedzone/Z11111112222222333333",
-            "Condition": {
-                "ForAllValues:StringLike":{
-                     "route53:ChangeResourceRecordSetsNormalizedRecordNames": ["*-beta.example.com"]
-                }
-            }
-          }
-        ]
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "route53:ChangeResourceRecordSets",
+      "Resource": "arn:aws:route53:::hostedzone/Z11111112222222333333",
+      "Condition": {
+        "ForAllValues:StringLike": {
+          "route53:ChangeResourceRecordSetsNormalizedRecordNames": [
+            "*-beta.example.com"
+          ]
+        }
+      }
+    }
+  ]
 }
 ```
 
@@ -329,7 +337,7 @@ Duration: 00:01:00
 
 [きめ細かなアクセスコントロールのための IAM ポリシー条件を使用してリソースレコードセットを管理する](https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/specifying-rrset-conditions.html#route53_rrset_conditionkeys-examples)
 
-## まとめ
+## 📖 まとめ
 
 Duration: 00:01:00
 

@@ -1,18 +1,18 @@
 # Amazon Relational Database Service(RDS)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [Amazon Relational Database Service(RDS)](#amazon-relational-database-servicerds)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [RDS について知るには](#rds-について知るには)
   - [RDS について知るには(その他)](#rds-について知るにはその他)
   - [Amazon RDS とは](#amazon-rds-とは)
@@ -32,7 +32,7 @@ Duration: 00:01:00
   - [ストレージの自動スケーリング](#ストレージの自動スケーリング)
   - [RDS のログ](#rds-のログ)
   - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## RDS について知るには
 
@@ -95,7 +95,6 @@ Duration: 00:01:00
 - MariaDB
   - [Amazon RDS for MariaDB](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/CHAP_MariaDB.html#MariaDB.Concepts.Storage)
 
-
 ## RDS の基本的な構成
 
 Duration: 00:05:00
@@ -139,8 +138,8 @@ AZ 障害時にはインスタンスが利用できなくなります。
 
 シングル AZ で構成された RDS を後からマルチ AZ に変更することも可能です。ダウンタイムは発生しません。マルチ AZ 変更後は、シングル AZ に比べてトランザクションスループットは若干低下します。これは同期的レプリケーションが行われるようになるからです。
 
->シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか?
-[https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/](https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/)
+> シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか?
+> [https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/](https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/)
 
 ### マルチ AZ
 
@@ -149,7 +148,7 @@ AZ 障害時にはインスタンスが利用できなくなります。
 同一リージョンの２つの AZ に プライマリインスタンスとスタンバイインスタンスを構築し、プライマリからスタンバイに同期的にレプリケーションされています。
 スタンバイインスタンスには、読み取りのみでもアクセスは出来ません。
 
-プライマリ障害時には、60秒ほどで自動的にスタンバイに切り替わります。エンドポイントの DNS が切り替わることで行われます。
+プライマリ障害時には、60 秒ほどで自動的にスタンバイに切り替わります。エンドポイントの DNS が切り替わることで行われます。
 
 読み取りスループットを向上させたい場合は、リードレプリカを追加します。
 
@@ -159,14 +158,14 @@ AZ 障害時にはインスタンスが利用できなくなります。
 2. フェールオーバー実行
 3. 旧プライマリインスタンスに変更を適用
 
-アプリケーションの構成が DNS をキャッシュする環境の場合、フェールオーバー後すぐに上手く切り替わらない場合もあります。その場合は、有効期限（TTL）を短くする（30秒未満）といった対応が必要です。アプリケーション側ではリトライを入れるなど、アクセスできないケースを想定しておく必要があります。
+アプリケーションの構成が DNS をキャッシュする環境の場合、フェールオーバー後すぐに上手く切り替わらない場合もあります。その場合は、有効期限（TTL）を短くする（30 秒未満）といった対応が必要です。アプリケーション側ではリトライを入れるなど、アクセスできないケースを想定しておく必要があります。
 
 RDS の自動バックアップは、スタンバイインスタンスから取得されます。そのため、プライマリインスタンスの I/O に影響を与えません。ただし、RDS for SQL Server については、プライマリインスタンスの I/O が一時的に中断されます。
 
 マルチ AZ 構成をシングル AZ に戻すことも可能です。ダウンタイムは発生しません。
 
->シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか?
-[https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/](https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/)
+> シングル AZ Amazon RDS インスタンスをマルチ AZ インスタンス、またはその逆に変換すると、どのような影響がありますか?
+> [https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/](https://aws.amazon.com/jp/premiumsupport/knowledge-center/rds-convert-single-az-multi-az/)
 
 ### マルチ AZ（２つの読み取り可能なスタンバイ）
 
@@ -174,13 +173,13 @@ RDS の自動バックアップは、スタンバイインスタンスから取�
 
 以前からあるマルチ AZ を拡張したもので、スタンバイインスタンスは読み取りアクセスが可能となります。そのため、「従来のマルチ AZ + リードレプリカ」構成よりも読み取りスループット向上できます。
 
-自動フェールオーバーは 従来のマルチ AZ より早い、35秒となっています。トランザクションスループットも従来のマルチ AZ と比べて最大で2倍高速となっています。
+自動フェールオーバーは 従来のマルチ AZ より早い、35 秒となっています。トランザクションスループットも従来のマルチ AZ と比べて最大で 2 倍高速となっています。
 
-従来のマルチ AZ にリードレプリカを1台以上追加する場合は、こちらのマルチ AZを利用するほうがよいです。
+従来のマルチ AZ にリードレプリカを 1 台以上追加する場合は、こちらのマルチ AZ を利用するほうがよいです。
 
 また、３つの AZ で構成されるため、AZ 障害にも強い構成と言えます。２つの AZ が同時に障害になっても継続できます。
 
-ただし、利用可能なデータベースエンジンは、2022年12月現在では MySQL と PostgreSQL のみとなっていますので注意が必要です。
+ただし、利用可能なデータベースエンジンは、2022 年 12 月現在では MySQL と PostgreSQL のみとなっていますので注意が必要です。
 
 参考>[Readable standby instances in Amazon RDS Multi-AZ deployments: A new high availability option](https://aws.amazon.com/blogs/database/readable-standby-instances-in-amazon-rds-multi-az-deployments-a-new-high-availability-option/)
 
@@ -200,13 +199,13 @@ Duration: 00:05:00
 
 ![rds-crr](/images/rds/rds-crr.png)
 
-| DB エンジン          | リードレプリカ作成可？ | CRR可能？ |
-| -------------------- | ---------------------- | --------- |
-| PostgreSQL           | ○                      | ○         |
-| MySQL                | ○                      | ○         |
-| Oracle               | ○                      | ○         |
-| Microsoft SQL Server | ○                      |           |
-| MariaDB              | ○                      | ○         |
+| DB エンジン          | リードレプリカ作成可？ | CRR 可能？ |
+| -------------------- | ---------------------- | ---------- |
+| PostgreSQL           | ○                      | ○          |
+| MySQL                | ○                      | ○          |
+| Oracle               | ○                      | ○          |
+| Microsoft SQL Server | ○                      |            |
+| MariaDB              | ○                      | ○          |
 
 [Amazon RDS リードレプリカ](https://aws.amazon.com/jp/rds/features/read-replicas/)
 
@@ -247,26 +246,26 @@ RDS のクロスリージョン自動バックアップは、レプリケーシ�
 日本に存在するリージョンでは、東京リージョンはサポートするリージョンは多いですが、大阪リージョンでは東京のみとなっています。
 
 - アジアパシフィック (東京)
-  - ⇒アジアパシフィック (大阪)
-  - ⇒アジアパシフィック (ソウル)
-  - ⇒アジアパシフィック (シンガポール)
-  - ⇒米国東部 (バージニア北部)
-  - ⇒米国東部 (オハイオ)
-  - ⇒米国西部 (オレゴン)
+  - ⇒ アジアパシフィック (大阪)
+  - ⇒ アジアパシフィック (ソウル)
+  - ⇒ アジアパシフィック (シンガポール)
+  - ⇒ 米国東部 (バージニア北部)
+  - ⇒ 米国東部 (オハイオ)
+  - ⇒ 米国西部 (オレゴン)
 - アジアパシフィック (大阪)
-  - ⇒アジアパシフィック (東京)
+  - ⇒ アジアパシフィック (東京)
 
 参考＞[送信元と送信先 AWS リージョン サポート](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html#USER_ReplicateBackups.RegionVersionAvailability)
 
 クロスリージョン自動バックアップがサポートされているデータベースエンジンは以下の通りです。
 
-| DB エンジン          | CR自動バックアップ作成可？ |
-| -------------------- | -------------------------- |
-| PostgreSQL           | ○                          |
-| MySQL                |                            |
-| Oracle               | ○                          |
-| Microsoft SQL Server | ○                          |
-| MariaDB              |                            |
+| DB エンジン          | CR 自動バックアップ作成可？ |
+| -------------------- | --------------------------- |
+| PostgreSQL           | ○                           |
+| MySQL                |                             |
+| Oracle               | ○                           |
+| Microsoft SQL Server | ○                           |
+| MariaDB              |                             |
 
 参考＞[クロスリージョン自動バックアップ](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionAutomatedBackups.html)
 
@@ -300,7 +299,7 @@ RDS で選択できるストレージクラスは次の通りです。
 
 - 汎用 SSD
   - 一般的な用途
-  - MariaDB、MySQL、Oracle、PostgreSQL データベースインスタンス: 20～64 TiB
+  - MariaDB、MySQL、Oracle、PostgreSQL データベースインスタンス: 20 ～ 64 TiB
   - SQL Server Enterprise、Standard、Web、および Express エディション: 20 GiB-16 TiB
 - プロビジョンド IOPS
   - 低レイテンシー、高 I/O スループットが必要な場合
@@ -333,7 +332,7 @@ RDS で使用するストレージは、DB インスタンス作成時にサイ�
 
 [[すぐに適用] で使用できる設定](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.Settings)
 
-また、ストレージ追加後は「ストレージの最適化」というステータスになり、数時間かかる場合があります。さらにその後の6時間（ストレージの最適化がそれ以上かかる場合は、完了まで）は、ストレージを新たに追加することができなくなります。
+また、ストレージ追加後は「ストレージの最適化」というステータスになり、数時間かかる場合があります。さらにその後の 6 時間（ストレージの最適化がそれ以上かかる場合は、完了まで）は、ストレージを新たに追加することができなくなります。
 
 このように、ストレージ追加には手動での作業が必要なことと、次の割り当ての制約があることから、最初からある程度多めの容量を割り当て、CloudWatch のメトリクスにより空き容量を監視していました。
 
@@ -343,9 +342,9 @@ RDS で使用するストレージは、DB インスタンス作成時にサイ�
 
 自動拡張の発動条件は次の通りです。
 
-- 空き容量が割り当てられたサイズの10 % 未満
-- 低ストレージ状態が5分以上継続
-- 最後のストレージ変更後から6時間経過
+- 空き容量が割り当てられたサイズの 10 % 未満
+- 低ストレージ状態が 5 分以上継続
+- 最後のストレージ変更後から 6 時間経過
   - この制約があるため、RDS の自動スケーリングはストレージ不足状態を完全に防ぐことはできません。
   - 自動スケーリング後に大量のデータロードが発生した場合に数時間ストレージ容量不足状態になる可能性があります。
 
@@ -411,11 +410,11 @@ Duration: 00:01:00
   - データベースのメジャーバージョンのアップグレード
   - データベースパラメータ変更
   - スキーマ変更　など。
-- 切り替えは1分以内
+- 切り替えは 1 分以内
 - デーア損失なし
 - アプリケーションの変更不要
 
-## まとめ
+## 📖 まとめ
 
 Duration: 00:01:00
 

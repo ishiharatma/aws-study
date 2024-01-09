@@ -115,13 +115,13 @@
 </td><td colspan="1" rowspan="1"><p>RS-232,UTP,無線</p>
 </td></tr>
 </table>
-<p>詳しくは、<a href="https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB" target="_blank">OSI参照モデル(Wikipedia)</a></p>
+<p>詳しくは、<a href="https://ja.wikipedia.org/wiki/OSI%E5%8F%82%E7%85%A7%E3%83%A2%E3%83%87%E3%83%AB" target="_blank">OSI 参照モデル(Wikipedia)</a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="AWS Shield とは" duration="61">
-        <p>AWS Shieldは、AWSリソースを DDoS（分散型サービス拒否,<a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a>）攻撃から保護するためのサービスです。 Shieldは、レイヤー3およびレイヤー4(OSIモデルの項を参照)の攻撃（IP、TCP、UDPレベルでの攻撃）を自動的に検出および防止し、AWSのグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Floodなどが含まれます。</p>
+        <p>AWS Shield は、AWS リソースを DDoS（分散型サービス拒否,<a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS 攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a>）攻撃から保護するためのサービスです。 Shield は、レイヤー 3 およびレイヤー 4(OSI モデルの項を参照)の攻撃（IP、TCP、UDP レベルでの攻撃）を自動的に検出および防止し、AWS のグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Flood などが含まれます。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/qKNsYWHWOiYxx" target="_blank">AWS Shield Advanced(YouTube)</a>(1:00:33)</p>
 <p class="image-container"><img alt="blackbelt-shield" src="img\\498e741a485f9d0a.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/shield/" target="_blank">AWS Shield サービス概要</a></p>
@@ -133,7 +133,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="AWS WAF とは" duration="119">
-        <p>AWS WAF（Web Application Firewall） とは、Webアプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAFは、HTTP / HTTPSリクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAFは、XSS（クロスサイトスクリプティング）、SQLインジェクション、CSRF（クロスサイトリクエストフォージェリ）などのWebアプリケーション攻撃を検出および防止するための機能を提供します。</p>
+        <p>AWS WAF（Web Application Firewall） とは、Web アプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAF は、HTTP / HTTPS リクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAF は、XSS（クロスサイトスクリプティング）、SQL インジェクション、CSRF（クロスサイトリクエストフォージェリ）などの Web アプリケーション攻撃を検出および防止するための機能を提供します。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/ceQ7eU_jkD4" target="_blank">AWS Managed Rules for AWS WAF の活用(YouTube)</a>(0:32:28)</p>
 <p class="image-container"><img alt="blackbelt-waf-rule" src="img\\2075acc0a5ea132a.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/4KbCJAjiA3A" target="_blank">AWS WAF アップデート(YouTube)</a>(1:01:15)</p>
@@ -179,11 +179,11 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>レポート</p>
 </td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>攻撃をリアルタイムで通知、過去13カ月の履歴保持</p>
+</td><td colspan="1" rowspan="1"><p>攻撃をリアルタイムで通知、過去 13 カ月の履歴保持</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>サポート</p>
 </td><td colspan="1" rowspan="1"><p>無</p>
-</td><td colspan="1" rowspan="1"><p>専門家（SRT）による24時間365日。英語</p>
+</td><td colspan="1" rowspan="1"><p>専門家（SRT）による 24 時間 365 日。英語</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>その他</p>
 </td><td colspan="1" rowspan="1"><p>無</p>
@@ -195,7 +195,7 @@
 </td></tr>
 </table>
 <h2 is-upgraded>Global threat dashboard</h2>
-<p>全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが</p>
+<p>全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが分かります。</p>
 <p class="image-container"><img alt="shield-console-global-activity" src="img\\4374de5f8d138a0f.png"></p>
 
 
@@ -210,7 +210,7 @@
       <google-codelab-step label="AWS WAF の機能" duration="5">
         <h2 is-upgraded>なぜ Web Application Firewall が必要か</h2>
 <p>OSI モデルのレイヤー３，４については Shield のようなファイアウォールによって悪意のあるトラフィックを遮断することができます。 しかし、アプリケーションの HTTP リクエストに発生する SQL インジェクションやクロスサイトスクリプティングのようなものはどうでしょうか。 これらはレイヤー７で動作するため、パケットの中身を読み取ることができず、遮断することが出来ません。 この部分には様々な情報を含むことができるため、攻撃手段も多様です。 そのため、レイヤー７で動作する内容を読み取り、攻撃からアプリケーションを保護するファイアウォールが必要になりました。</p>
-<p>攻撃によって Webアプリケーションが受けるセキュリティに関する最も重大な10のリスクについては下記サイトを参考にしてください。</p>
+<p>攻撃によって Web アプリケーションが受けるセキュリティに関する最も重大な 10 のリスクについては下記サイトを参考にしてください。</p>
 <p><a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Project</a></p>
 <h2 is-upgraded>Web ACL</h2>
 <p>AWS WAF の利用を開始するときに最初に作成するのが、Web ACL(ウェブアクセスコントロールリスト：web access control list)です。 Web ACL は同一の制御ルールを含んだ論理的なグループのことです。 Web ACL は作成した直後から課金対象となります。 料金は月額固定で、１か月に満たない場合は案分されます。</p>
@@ -221,7 +221,7 @@
 <h2 is-upgraded>WCU(web ACL Capacity Units)</h2>
 <p>WebACL に設定できるルールやルールグループにはそれぞれ WCU(web ACL Capacity Units) という処理コストの定義があり、複雑なルールほど WCU が多くなっています。 １つの WebACL に設定できる WCU に上限をつけることで、適用できるルール数を制限しています。</p>
 <p class="image-container"><img alt="waf-wcu" src="img\\6857c2219c9721da.JPG"></p>
-<p>下記アップデート以前は、最大 1,500 WCU となっており、これを超える場合は上限緩和申請が必要でしたが、アップデートにより 5,000 WCU まで上限緩和申請なしで使用できるようになりました。 ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100万件あたりに追加料金が発生するようになります。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/04/aws-waf-web-acl-capacity-units-limits/" target="_blank">AWS WAF でウェブ ACL の容量ユニット制限を引き上げ(Apr 11, 2023)</a></p>
+<p>下記アップデート以前は、最大 1,500 WCU となっており、これを超える場合は上限緩和申請が必要でしたが、アップデートにより 5,000 WCU まで上限緩和申請なしで使用できるようになりました。 ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100 万件あたりに追加料金が発生するようになります。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/04/aws-waf-web-acl-capacity-units-limits/" target="_blank">AWS WAF でウェブ ACL の容量ユニット制限を引き上げ(Apr 11, 2023)</a></p>
 <h2 is-upgraded>ルールとルールグループ</h2>
 <h3 is-upgraded>ルール</h3>
 <p>リクエストに対する検査基準(ステートメント：Statement)と、検査基準に一致した場合のアクション(Action)を定義したものです。</p>
@@ -270,7 +270,7 @@
 <p class="image-container"><img alt="managed-versionup" src="img\\6effcd5a17cf9362.JPG"></p>
 <h4 is-upgraded>AWS マネージドルールグループの適用例</h4>
 <ul>
-<li>推奨ルールのみ（◎のみ）：1,175 / 1,500 WCU　残り：325 WCU<table>
+<li>推奨ルールのみ（◎ のみ）：1,175 / 1,500 WCU 　残り：325 WCU<table>
 <tr><td colspan="1" rowspan="1"><p>ルール名</p>
 </td><td colspan="1" rowspan="1"><p>キャパシティ</p>
 </td></tr>
@@ -291,7 +291,7 @@
 </td></tr>
 </table>
 </li>
-<li>Linuxサーバ：1,375 / 1,500 WCU　残り：125 WCU<table>
+<li>Linux サーバ：1,375 / 1,500 WCU 　残り：125 WCU<table>
 <tr><td colspan="1" rowspan="1"><p>ルール名</p>
 </td><td colspan="1" rowspan="1"><p>キャパシティ</p>
 </td></tr>
@@ -307,7 +307,7 @@
 <p>分類の記号の意味は次のとおりです。</p>
 <ul>
 <li>◎：導入を推奨</li>
-<li>△：OSの種類によって導入を検討</li>
+<li>△：OS の種類によって導入を検討</li>
 <li>▲：アプリケーションの性質によって導入を検討</li>
 </ul>
 <table>
@@ -318,7 +318,7 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Core rule set</p>
 </td><td colspan="1" rowspan="1"><p>700</p>
-</td><td colspan="1" rowspan="1"><p>OWASP(Open Web Application Security Project *1) で公開されているWebサイトを狙った攻撃に対して作られたルールで、多くのインジェクション関係の基本的なルールが含まれているため、Webサイトを保護するための基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>OWASP(Open Web Application Security Project *1) で公開されている Web サイトを狙った攻撃に対して作られたルールで、多くのインジェクション関係の基本的なルールが含まれているため、Web サイトを保護するための基本ルールとして導入することを推奨します。</p>
 </td><td colspan="1" rowspan="1"><p>◎</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Admin protection</p>
@@ -328,27 +328,27 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Know bad inputs</p>
 </td><td colspan="1" rowspan="1"><p>200</p>
-</td><td colspan="1" rowspan="1"><p>既知の脆弱性の悪用または発見に関連付けられている要求パターンをブロックできるルールです。悪意のある攻撃者が脆弱なアプリケーションを発見するリスクを減らすことができるため、Webサイトを保護するための基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>既知の脆弱性の悪用または発見に関連付けられている要求パターンをブロックできるルールです。悪意のある攻撃者が脆弱なアプリケーションを発見するリスクを減らすことができるため、Web サイトを保護するための基本ルールとして導入することを推奨します。</p>
 </td><td colspan="1" rowspan="1"><p>◎</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>SQL database</p>
 </td><td colspan="1" rowspan="1"><p>200</p>
-</td><td colspan="1" rowspan="1"><p>SQLインジェクションなどSQLデータベースに対する脆弱性からアプリケーションを保護するために準備されたルールです。データベースを利用する環境では基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>SQL インジェクションなど SQL データベースに対する脆弱性からアプリケーションを保護するために準備されたルールです。データベースを利用する環境では基本ルールとして導入することを推奨します。</p>
 </td><td colspan="1" rowspan="1"><p>◎</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Linux operating system</p>
 </td><td colspan="1" rowspan="1"><p>200</p>
-</td><td colspan="1" rowspan="1"><p>ローカルファイルインクルージョンなどLinuxの環境に絞り込んだルールです。Linuxの環境でサーバ上でWebアプリケーションを稼働している場合は導入を検討します。</p>
+</td><td colspan="1" rowspan="1"><p>ローカルファイルインクルージョンなど Linux の環境に絞り込んだルールです。Linux の環境でサーバ上で Web アプリケーションを稼働している場合は導入を検討します。</p>
 </td><td colspan="1" rowspan="1"><p>△</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>POSIX operating system</p>
 </td><td colspan="1" rowspan="1"><p>100</p>
-</td><td colspan="1" rowspan="1"><p>ローカルファイルインクルージョンなどPOSIX系のOS向け構成したルールです。Webアプリケーションを稼働している場合、導入を検討します。</p>
+</td><td colspan="1" rowspan="1"><p>ローカルファイルインクルージョンなど POSIX 系の OS 向け構成したルールです。Web アプリケーションを稼働している場合、導入を検討します。</p>
 </td><td colspan="1" rowspan="1"><p>△</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Windows operating system</p>
 </td><td colspan="1" rowspan="1"><p>200</p>
-</td><td colspan="1" rowspan="1"><p>Powershell コマンドを利用したコマンドインジェクション攻撃やWindows OSに関連する脆弱性からアプリケーションを保護するために構成されたルールで、Windows OSでアプリケーションを構成している環境では導入を推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>Powershell コマンドを利用したコマンドインジェクション攻撃や Windows OS に関連する脆弱性からアプリケーションを保護するために構成されたルールで、Windows OS でアプリケーションを構成している環境では導入を推奨します。</p>
 </td><td colspan="1" rowspan="1"><p>△</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>PHP application</p>
@@ -358,17 +358,17 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Wordpress application</p>
 </td><td colspan="1" rowspan="1"><p>100</p>
-</td><td colspan="1" rowspan="1"><p>Wordpress に関連する脆弱性に対応したルールです。Webアプリケーションを WordPress で構築している環境においては実装することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>Wordpress に関連する脆弱性に対応したルールです。Web アプリケーションを WordPress で構築している環境においては実装することを推奨します。</p>
 </td><td colspan="1" rowspan="1"><p>▲</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Amazon IP reputation list</p>
 </td><td colspan="1" rowspan="1"><p>25</p>
-</td><td colspan="1" rowspan="1"><p>AWSが収集した脅威IPアドレスのリストで、悪質なボットなどを防ぐことができるルールです。Webサイトを保護するための基本ルールとして導入することを推奨します。</p>
+</td><td colspan="1" rowspan="1"><p>AWS が収集した脅威 IP アドレスのリストで、悪質なボットなどを防ぐことができるルールです。Web サイトを保護するための基本ルールとして導入することを推奨します。</p>
 </td><td colspan="1" rowspan="1"><p>◎</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Anonymous IP list</p>
 </td><td colspan="1" rowspan="1"><p>50</p>
-</td><td colspan="1" rowspan="1"><p>Torや匿名でアクセスするためのプロキシーサービスのIPリストによる攻撃を防ぐことができるルールです。これらのIPリストからのアクセスは攻撃の可能性が高いですが、攻撃を目的としたものではなく、プライバシー保護を目的として利用するユーザーがいる場合もありますので、不特定対数のユーザーがアクセスするサイトでは利用するか検討した方が良い。(*2)</p>
+</td><td colspan="1" rowspan="1"><p>Tor や匿名でアクセスするためのプロキシーサービスの IP リストによる攻撃を防ぐことができるルールです。これらの IP リストからのアクセスは攻撃の可能性が高いですが、攻撃を目的としたものではなく、プライバシー保護を目的として利用するユーザーがいる場合もありますので、不特定対数のユーザーがアクセスするサイトでは利用するか検討した方が良い。(*2)</p>
 </td><td colspan="1" rowspan="1"><p>◎</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Bot Control</p>
@@ -388,7 +388,7 @@
 </td></tr>
 </table>
 <p>*1 <a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Project</a></p>
-<p>*2 Anonymous IP listを利用すると、その中に含まれる[HostingProviderIPList]というルールによってAWS内からのアクセスも遮断されます（それ以外も悪用されやすいGCPなどのクラウドサービスのIPからも遮断している可能性もあります）。セキュリティテストなどでAWSインスタンスからアクセスさせたい場合、Anonymous IP listのスコープダウンに「ホワイトリストに一致しない場合」というのを付与して除外するとよい。</p>
+<p>*2 Anonymous IP list を利用すると、その中に含まれる[HostingProviderIPList]というルールによって AWS 内からのアクセスも遮断されます（それ以外も悪用されやすい GCP などのクラウドサービスの IP からも遮断している可能性もあります）。セキュリティテストなどで AWS インスタンスからアクセスさせたい場合、Anonymous IP list のスコープダウンに「ホワイトリストに一致しない場合」というのを付与して除外するとよい。</p>
 <p>*3 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2022/02/aws-waf-fraud-control-login-credential-attacks/" target="_blank">Account Takeover Prevention(ATP)(Feb 14, 2022)</a></p>
 <p>*4 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/06/aws-waf-fraud-control-account-creation-prevention-pricing/" target="_blank">Account Creation Fraud Prevention(ACFP)(Jun 13, 2023)</a></p>
 <h3 is-upgraded>AWS Marketplace マネージドルールグループ</h3>
@@ -439,8 +439,8 @@ ORDER BY timestamp desc
 FROM waf_logs_partitioned
 WHERE action = &#39;BLOCK&#39;
   AND from_unixtime(timestamp/1000)
-     BETWEEN parse_datetime(&#39;2022-06-22-02:00:00&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;) 
-     AND parse_datetime(&#39;2022-06-22-02:59:59&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;) 
+     BETWEEN parse_datetime(&#39;2022-06-22-02:00:00&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;)
+     AND parse_datetime(&#39;2022-06-22-02:59:59&#39;,&#39;yyyy-MM-dd-HH:mm:ss&#39;)
 ORDER BY timestamp desc
 </code></pre>
 

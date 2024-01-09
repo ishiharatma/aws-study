@@ -7,19 +7,19 @@ published: true
 
 # AWS Systems Manager（SSM）
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Systems Manager（SSM）](#aws-systems-managerssm)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Systems Manager とは](#systems-manager-とは)
     - [Black Belt](#black-belt)
     - [ドキュメント](#ドキュメント)
@@ -84,7 +84,7 @@ Systems Manager を使ってサーバーを管理するには、マネージド�
 マネージドノードとは・・・
 
 1. SSM Agent が導入されていること。
-  オンプレミスサーバにも導入できます。
+   オンプレミスサーバにも導入できます。
 
 2. インスタンスのアウトバンドが確保されていること。具体的には、以下のエンドポイントに対して HTTPS 通信が行える必要があります。
 

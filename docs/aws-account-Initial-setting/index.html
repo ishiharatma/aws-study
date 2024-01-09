@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>これをやっておけば大丈夫！AWSアカウント作成後にやること！</title>
+  <title>これをやっておけば大丈夫！AWS アカウント作成後にやること！</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,22 +23,22 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="aws-account-Initial-setting"
-                  title="これをやっておけば大丈夫！AWSアカウント作成後にやること！"
+                  title="これをやっておけば大丈夫！AWS アカウント作成後にやること！"
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="1">
+      <google-codelab-step label="☘️ はじめに" duration="1">
         <p>AWS アカウントは簡単に作成でき、手軽に利用できます。しかし、初期設定ではセキュリティ設定が弱いため、第三者に悪用される危険があります。</p>
 <p>安全に利用するために、適切な設定を実施しましょう。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
-<li><a href="#%E3%81%93%E3%82%8C%E3%82%92%E3%82%84%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%91%E3%81%B0%E5%A4%A7%E4%B8%88%E5%A4%ABaws%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90%E5%BE%8C%E3%81%AB%E3%82%84%E3%82%8B%E3%81%93%E3%81%A8" target="_blank">これをやっておけば大丈夫！AWSアカウント作成後にやること！</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%E3%81%93%E3%82%8C%E3%82%92%E3%82%84%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%91%E3%81%B0%E5%A4%A7%E4%B8%88%E5%A4%ABaws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90%E5%BE%8C%E3%81%AB%E3%82%84%E3%82%8B%E3%81%93%E3%81%A8" target="_blank">これをやっておけば大丈夫！AWS アカウント作成後にやること！</a><ul>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AB%E5%A4%9A%E8%A6%81%E7%B4%A0%E8%AA%8D%E8%A8%BCmfa%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">ルートユーザーに多要素認証（MFA）を設定する</a></li>
 <li><a href="#aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E4%BB%A3%E6%9B%BF%E3%81%AE%E9%80%A3%E7%B5%A1%E5%85%88%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">AWS アカウントの代替の連絡先を設定する</a></li>
 <li><a href="#aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E7%A7%98%E5%AF%86%E3%81%AE%E8%B3%AA%E5%95%8F%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">AWS アカウントの秘密の質問を設定する</a></li>
@@ -104,7 +104,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="1">
-        <p>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678の場合、+81 3-1234-5678） 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</p>
+        <p>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678 の場合、+81 3-1234-5678） 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
 <li>アカウント設定を開きます <ul>
@@ -121,7 +121,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="AWS Artifact にアクセスして、「日本準拠法」に変更する" duration="1">
-        <p>※ 2022年 2月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。</p>
+        <p>※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。</p>
 <p>AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。</p>
 
 
@@ -147,7 +147,7 @@
     
       <google-codelab-step label="コスト異常検知" duration="1">
         <p>予算アラートは、設定した予算額に対してある敷居値を超えるときに通知するサービスでした。実際に超過しなければ通知されないため、異常な兆候は検出できません。</p>
-<p>コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常なAWSコストの発生を検出することができるサービスです。 AWSコスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。</p>
+<p>コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常な AWS コストの発生を検出することができるサービスです。 AWS コスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。</p>
 <p><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html" target="_blank">https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html</a></p>
 
 
@@ -181,15 +181,15 @@
 <li>Amazon Virtual Private Cloud (VPC) の変更を監視</li>
 <li>ネットワークゲートウェイの変更を監視</li>
 <li>セキュリティグループへの変更を監視</li>
-<li>IAMポリシーへの変更を監視</li>
-<li>IAMロールの変更を監視</li>
-<li>IAMユーザの作成を監視</li>
-<li>IAMアクセスキーの作成を監視</li>
-<li>CloudTrailの変更を監視</li>
-<li>SwitchRoleエラーの連続発生を監視</li>
-<li>S3バケットポリシーへの変更を監視</li>
-<li>KMSキーの無効またはスケジュールされた削除の発生を監視</li>
-<li>無効または削除されたKMSのキー使用時のエラー発生を監視</li>
+<li>IAM ポリシーへの変更を監視</li>
+<li>IAM ロールの変更を監視</li>
+<li>IAM ユーザの作成を監視</li>
+<li>IAM アクセスキーの作成を監視</li>
+<li>CloudTrail の変更を監視</li>
+<li>SwitchRole エラーの連続発生を監視</li>
+<li>S3 バケットポリシーへの変更を監視</li>
+<li>KMS キーの無効またはスケジュールされた削除の発生を監視</li>
+<li>無効または削除された KMS のキー使用時のエラー発生を監視</li>
 <li>不正な API 呼び出しの発生を監視</li>
 </ul>
 <p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html" target="_blank">https://docs.aws.amazon.com/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html</a></p>

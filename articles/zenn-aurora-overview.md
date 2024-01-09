@@ -7,19 +7,19 @@ published: true
 
 # Amazon Aurora
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [Amazon Aurora](#amazon-aurora)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Aurora について知るには](#aurora-について知るには)
   - [Aurora について知るには(その他)](#aurora-について知るにはその他)
   - [Amazon Aurora とは](#amazon-aurora-とは)
@@ -37,7 +37,7 @@ Duration: 00:01:00
   - [Serverless](#serverless)
   - [Global Database](#global-database)
   - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## Aurora について知るには
 
@@ -55,7 +55,7 @@ Duration: 03:22:41
 
 ![blackbelt-aurora-postgresql](/images/aurora/blackbelt-aurora-postgresql-320.jpg)
 
-[RDS/Aurora Update | 2.5時間で学ぶ！ Amazon Aurora のいま(YouTube)](https://youtu.be/8uPU2T5Xj9E)(27:33)
+[RDS/Aurora Update | 2.5 時間で学ぶ！ Amazon Aurora のいま(YouTube)](https://youtu.be/8uPU2T5Xj9E)(27:33)
 
 ![rds-aurora-updates](/images/aurora/rds-aurora-updates-320.jpg)
 
@@ -108,7 +108,7 @@ Duration: 00:01:00
 
 Duration: 00:05:00
 
-RDS とは異なり、Aurora では DB インスタンスとストレージが分離されています。これにより、RDS の 2倍の性能を発揮すると言われています。
+RDS とは異なり、Aurora では DB インスタンスとストレージが分離されています。これにより、RDS の 2 倍の性能を発揮すると言われています。
 
 ![aurora-architecture](/images/aurora/aurora-architecture.png)
 
@@ -144,7 +144,7 @@ AZ 障害時にはインスタンスが利用できなくなります。
 
 ![aurora-single](/images/aurora/aurora-single.png)
 
-開発環境や、可用性を求められない場合にコストを低く抑えることが出来る構成です。インスタンスの障害であれば、同じ AZ 内に新規インスタンスが作成され、10分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。
+開発環境や、可用性を求められない場合にコストを低く抑えることが出来る構成です。インスタンスの障害であれば、同じ AZ 内に新規インスタンスが作成され、10 分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。
 
 エンドポイントは Writer と Reader のエンドポイントが自動的に作成されますが、レプリカがない場合は、Reader エンドポイントは プライマリインスタンスに接続します。
 
@@ -154,7 +154,7 @@ AZ 障害時にはインスタンスが利用できなくなります。
 
 読み取り頻度の高いデータベースのワークロードに対して、スケールアウトすることにより、パフォーマンスを向上させます。また、プライマリインスタンスに障害が発生した場合は、レプリカにフェールオーバーすることで自動的に復旧します。
 
-レプリカは最大で 15台まで追加することが可能です。
+レプリカは最大で 15 台まで追加することが可能です。
 
 レプリカへのレプリケーションは非同期で行われます。
 
@@ -164,10 +164,10 @@ AZ 障害時にはインスタンスが利用できなくなります。
 
 リードレプリカは一部のデータベースエンジンを除いて、別リージョンでも作成することができます。（クロスリージョンレプリカ：CRR）
 
-| DB エンジン | レプリカ作成可？ | CRR可能？ |
-| ----------- | ---------------- | --------- |
-| PostgreSQL  | ○                |           |
-| MySQL       | ○                | ○         |
+| DB エンジン | レプリカ作成可？ | CRR 可能？ |
+| ----------- | ---------------- | ---------- |
+| PostgreSQL  | ○                |            |
+| MySQL       | ○                | ○          |
 
 [Aurora レプリカ](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Replication.html#Aurora.Replication.Replicas)
 
@@ -227,10 +227,10 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 
 データベースエンジンごとの保存できるログファイルの種類は次の通りです。
 
-| DB エンジン          | ログファイル                                                     |
-| -------------------- | ---------------------------------------------------------------- |
-| PostgreSQL           | Postgresql ログ、アップグレードログ                              |
-| MySQL                | 監査ログ、全般ログ、スロークエリログ                             |
+| DB エンジン | ログファイル                         |
+| ----------- | ------------------------------------ |
+| PostgreSQL  | Postgresql ログ、アップグレードログ  |
+| MySQL       | 監査ログ、全般ログ、スロークエリログ |
 
 ## Serverless
 
@@ -245,19 +245,19 @@ Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユー
 
 基本的にどちらも、開発とテストを主なユースケースとしつつ、一部本番アプリケーションも想定されています。
 
-| 項目                 | Serverless v1                                                                     | Serverless v2                                                         |
-| -------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| GA                   | 2018年10月                                                                        | 2022年4月                                                             |
-| サポートエンジン     | Aurora MySQL 5.6 or 5.7 互換バージョン、Aurora PostgreSQL 10 or 11 互換バージョン | Aurora MySQL バージョン 3、Aurora PostgreSQL 13 or 14                 |
-| ACU                  | 1～128 ACU                                                                        | 0.5～256 ACU（Performance Insights を使用した場合最低でも 2ACU必要 ） |
-| 料金                 | 0.10 USD/ACU                                                                      | 0.20 USD/ACU                                                          |
-| マルチ AZ            |                                                                                   | ○                                                                     |
-| 一時停止             | ○                                                                                 |                                                                       |
-| Data API             | ○                                                                                 |                                                                       |
-| クエリエディタ       | ○                                                                                 |                                                                       |
-| Global Database      |                                                                                   | ○                                                                     |
-| Performance Insights |                                                                                   | ○ |
-| RDS Proxy |                                                                                   | ○ |
+| 項目                 | Serverless v1                                                                     | Serverless v2                                                            |
+| -------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| GA                   | 2018 年 10 月                                                                     | 2022 年 4 月                                                             |
+| サポートエンジン     | Aurora MySQL 5.6 or 5.7 互換バージョン、Aurora PostgreSQL 10 or 11 互換バージョン | Aurora MySQL バージョン 3、Aurora PostgreSQL 13 or 14                    |
+| ACU                  | 1 ～ 128 ACU                                                                      | 0.5 ～ 256 ACU（Performance Insights を使用した場合最低でも 2ACU 必要 ） |
+| 料金                 | 0.10 USD/ACU                                                                      | 0.20 USD/ACU                                                             |
+| マルチ AZ            |                                                                                   | ○                                                                        |
+| 一時停止             | ○                                                                                 |                                                                          |
+| Data API             | ○                                                                                 |                                                                          |
+| クエリエディタ       | ○                                                                                 |                                                                          |
+| Global Database      |                                                                                   | ○                                                                        |
+| Performance Insights |                                                                                   | ○                                                                        |
+| RDS Proxy            |                                                                                   | ○                                                                        |
 
 [Amazon Aurora Serverless v1 の使用](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html)
 
@@ -289,11 +289,11 @@ Duration: 00:01:00
   - データベースのメジャーバージョンのアップグレード
   - データベースパラメータ変更
   - スキーマ変更　など。
-- 切り替えは1分以内
+- 切り替えは 1 分以内
 - デーア損失なし
 - アプリケーションの変更不要
 
-## まとめ
+## 📖 まとめ
 
 Duration: 00:01:00
 

@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="1">
         <ul>
 <li><a href="#amazon-api-gateway" target="_blank">Amazon API Gateway</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#amazon-api-gateway-%E3%81%A8%E3%81%AF" target="_blank">Amazon API Gateway とは</a></li>
 <li><a href="#api-gateway-%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">API Gateway の種類</a></li>
 <li><a href="#api-gateway-%E3%81%AE%E6%96%99%E9%87%91" target="_blank">API Gateway の料金</a></li>
@@ -52,7 +52,7 @@
 <li><a href="#rest-api-%E3%81%AE%E3%82%A8%E3%83%B3%E3%83%89%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">REST API のエンドポイントタイプ</a></li>
 <li><a href="#api-gateway-%E3%81%AE%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9" target="_blank">API Gateway のメトリクス</a></li>
 <li><a href="#x-ray-%E3%81%A7%E3%81%AE%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B9" target="_blank">X-Ray でのトレース</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -188,7 +188,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="REST API のエンドポイントタイプ" duration="0">
-        <p>REST API は、3種類のエンドポイントタイプが選択できます。</p>
+        <p>REST API は、3 種類のエンドポイントタイプが選択できます。</p>
 <p class="image-container"><img alt="apigw_endpoint" src="img\\a2a9fe7b84a23ac5.png"></p>
 <ul>
 <li>エッジ最適化 <ul>
@@ -200,7 +200,7 @@
 <li>直接リージョンにルーティングされます。同一リージョンの場合、エッジロケーションを経由しない分、レイテンシを削減できます。</li>
 <li>デフォルトのエンドポイントタイプです。</li>
 <li>自前の CloudFront と組み合わせることでエッジ最適化の構成にすることもできます。既に CloudFront を利用しているシステムの場合にこのような構成になります。 <img alt="apigw_endpoint-2" src="img\\bc4879628d82728e.png"></li>
-<li>自前の CloudFront を利用する場合は、API Gateway のエンドポイントを <code>リージョン</code> にしておきます。<code>エッジ最適化</code> を選択していると、自前の CloudFront から、AWS が管理する CloudFront を経由して、API Gateway にアクセスすることになり、不要なレイテンシが発生したり、ＨTTP ヘッダーが予期しない値となったりするので注意が必要です。CloudFront を経由すると一部のヘッダーを書き換えます。自前の CloudFront はこれを回避することができますが、AWS が管理する CloudFront は設定を行うことが出来ません。 <img alt="apigw_endpoint-3" src="img\\f1f72e90a9bb0c21.png"></li>
+<li>自前の CloudFront を利用する場合は、API Gateway のエンドポイントを <code>リージョン</code> にしておきます。<code>エッジ最適化</code> を選択していると、自前の CloudFront から、AWS が管理する CloudFront を経由して、API Gateway にアクセスすることになり、不要なレイテンシが発生したり、Ｈ TTP ヘッダーが予期しない値となったりするので注意が必要です。CloudFront を経由すると一部のヘッダーを書き換えます。自前の CloudFront はこれを回避することができますが、AWS が管理する CloudFront は設定を行うことが出来ません。 <img alt="apigw_endpoint-3" src="img\\f1f72e90a9bb0c21.png"></li>
 </ul>
 </li>
 <li>プライベート <ul>
@@ -239,7 +239,7 @@
 <li>エラーの把握 <ul>
 <li>4XXError</li>
 <li>5XXError</li>
-<li>上記メトリクスは、<code>Average</code> にすると、エラー率になります。つまり、期間内のエラー数をCount メトリクスで割ったものです。</li>
+<li>上記メトリクスは、<code>Average</code> にすると、エラー率になります。つまり、期間内のエラー数を Count メトリクスで割ったものです。</li>
 </ul>
 </li>
 </ul>
@@ -260,7 +260,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="1">
+      <google-codelab-step label="📖 まとめ" duration="1">
         <p class="image-container"><img alt="apigateway" src="img\\e13696a733089a05.png"></p>
 
 

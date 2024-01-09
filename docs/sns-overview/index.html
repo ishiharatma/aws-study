@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#amazon-simple-notification-service-sns" target="_blank">Amazon Simple Notification Service (SNS)</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#amazon-simple-notification-service-sns-%E3%81%A8%E3%81%AF" target="_blank">Amazon Simple Notification Service (SNS) とは</a></li>
 <li><a href="#sqs-%E3%81%A8%E3%81%AF%E9%81%95%E3%81%86%E3%81%AE" target="_blank">SQS とは違うの？</a></li>
 <li><a href="#sns-%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">SNS 構成要素</a><ul>
@@ -51,7 +51,7 @@
 <li><a href="#%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC" target="_blank">サブスクリプションフィルター</a></li>
 <li><a href="#%E3%83%87%E3%83%83%E3%83%89%E3%83%AC%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%BC" target="_blank">デッドレターキュー</a></li>
 <li><a href="#%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">暗号化</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -62,7 +62,7 @@
       <google-codelab-step label="Amazon Simple Notification Service (SNS) とは" duration="49">
         <p>A2A および A2P メッセージング用のフルマネージド Pub/Sub サービスです。</p>
 <ul>
-<li>Pub / Subメッセージング <ul>
+<li>Pub / Sub メッセージング <ul>
 <li>メッセージを配信する側（パブリッシャー）とメッセージの受信者（サブスクライバー）が非同期でメッセージをやり取りできるようになります。</li>
 </ul>
 </li>
@@ -109,7 +109,7 @@
 <h2 is-upgraded>パブリッシュ</h2>
 <p>メッセージをトピックに発行することです。</p>
 <h2 is-upgraded>サブスクリプション</h2>
-<p>トピックに発行されたメッセージの受信者（サブスクライバー）を複数登録できます。 サブスクライバーへの配信はデフォルトで3回再試行されます。配信に失敗したメッセージは、後述のデッドレターキューが設定されていない場合は破棄されます。</p>
+<p>トピックに発行されたメッセージの受信者（サブスクライバー）を複数登録できます。 サブスクライバーへの配信はデフォルトで 3 回再試行されます。配信に失敗したメッセージは、後述のデッドレターキューが設定されていない場合は破棄されます。</p>
 <p>サブスクライバーに指定できるものは以下となります。</p>
 <ul>
 <li>Kinesis Data Firehose</li>
@@ -124,14 +124,14 @@
 <li>指定した電話番号にメッセージを送信できます。</li>
 <li>[https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html]</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-sms-sandbox.html" target="_blank">SMS サンドボックス</a><ul>
-<li>追加済みの電話番号宛のみで、10個まで。</li>
+<li>追加済みの電話番号宛のみで、10 個まで。</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/sns/latest/dg/sns-sms-sandbox-moving-to-production.html" target="_blank">SMS サンドボックス外への移動</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li>プラットフォームアプリケーションのエンドポイント <ul>
-<li>モバイルPUSH通知が出来ます</li>
+<li>モバイル PUSH 通知が出来ます</li>
 <li>[https://docs.aws.amazon.com/ja_jp/sns/latest/dg/mobile-platform-endpoint.html]</li>
 </ul>
 </li>
@@ -159,7 +159,7 @@
 <li>AWS マネジメントコンソール</li>
 <li>AWS CLI</li>
 </ul>
-<p>どちらの方法を選択する場合でもまずは、[サブスクリプションの確認] メールの<code>Confirm subscription</code> の URL をクリックではなく、右クリックして URL をコピーする必要があります。（ここでクリックしてしまった場合は、サブスクリプションの削除→作成からやり直しです。）</p>
+<p>どちらの方法を選択する場合でもまずは、[サブスクリプションの確認] メールの<code>Confirm subscription</code> の URL をクリックではなく、右クリックして URL をコピーする必要があります。（ここでクリックしてしまった場合は、サブスクリプションの削除 → 作成からやり直しです。）</p>
 <p class="image-container"><img alt="sns-confirmation" src="img\\1bbadffced7d908e.png"></p>
 <p>コピーした URL は次のような構造になっています。</p>
 <pre><code language="language-text" class="language-text">https://sns.ap-northeast-1.amazonaws.com/confirmation.html?TopicArn=arn:aws:sns:ap-northeast-1:123456789012:トピック名&amp;Token=トークン&amp;Endpoint=メールアドレス
@@ -237,19 +237,16 @@
          &#34;Value&#34;: &#34;order_placed&#34;
       },
       &#34;price_usd&#34;: {
-         &#34;Type&#34;: &#34;Number&#34;, 
+         &#34;Type&#34;: &#34;Number&#34;,
          &#34;Value&#34;: &#34;210.75&#34;
       }
    }
 </code></pre>
 <pre><code language="language-json" class="language-json">{
-   &#34;store&#34;: [&#34;example_corp&#34;],
-   &#34;event&#34;: [&#34;order_cancelled&#34;],
-   &#34;encrypted&#34;: [false],
-   &#34;customer_interests&#34;: [
-      &#34;basketball&#34;,
-      &#34;baseball&#34;
-   ]
+  &#34;store&#34;: [&#34;example_corp&#34;],
+  &#34;event&#34;: [&#34;order_cancelled&#34;],
+  &#34;encrypted&#34;: [false],
+  &#34;customer_interests&#34;: [&#34;basketball&#34;, &#34;baseball&#34;]
 }
 </code></pre>
 <p>この例の場合、&#34;MessageAttributes&#34; 内に &#34;encrypted&#34; プロパティが存在していないため、その他の値に関わらず拒否されるポリシーとなっています。 存在しないポリシーを指定して、一時的に配信を止める場合に利用することもできます。</p>
@@ -276,7 +273,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="sns-overview" src="img\\1d3acd88f007c115.png"></p>
 
 

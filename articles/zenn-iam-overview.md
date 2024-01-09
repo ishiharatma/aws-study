@@ -7,17 +7,17 @@ published: true
 
 # AWS Identity and Access Management(IAM)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [AWS Identity and Access Management(IAM)](#aws-identity-and-access-managementiam)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [IAM とは](#iam-とは)
   - [認証・認可とは](#認証認可とは)
   - [IAM ユーザー](#iam-ユーザー)
@@ -34,7 +34,7 @@ published: true
   - [IAM Access Advisor](#iam-access-advisor)
   - [IAM Access Analyzer](#iam-access-analyzer)
   - [ベストプラクティス](#ベストプラクティス)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## IAM とは
 
@@ -70,10 +70,10 @@ IAM を理解する前に、「認証・認可」について把握しておく�
 
 - 認証
   - 相手が誰（何）であるかを確認すること
-  - [Wikipedia-認証 (セキュリティ)](https://ja.wikipedia.org/wiki/%E8%AA%8D%E8%A8%BC#%E8%AA%8D%E8%A8%BC_(%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3))
+  - [Wikipedia-認証 (セキュリティ)](<https://ja.wikipedia.org/wiki/%E8%AA%8D%E8%A8%BC#%E8%AA%8D%E8%A8%BC_(%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3)>)
 - 認可
   - リソースアクセスの権限を与えること
-  - [Wikipedia-認可 (セキュリティ)](https://ja.wikipedia.org/wiki/%E8%AA%8D%E5%8F%AF_(%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3))
+  - [Wikipedia-認可 (セキュリティ)](<https://ja.wikipedia.org/wiki/%E8%AA%8D%E5%8F%AF_(%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3)>)
 
 ## IAM ユーザー
 
@@ -140,37 +140,37 @@ Duration: 0:05:00
 
 ```json
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "ec2:AttachVolume",
-                "ec2:DetachVolume"
-            ],
-            "Resource": [
-                "arn:aws:ec2:*:*:volume/*",
-                "arn:aws:ec2:*:*:instance/*"
-            ],
-            "Condition": {
-                "ArnEquals": {"ec2:SourceInstanceARN": "arn:aws:ec2:*:*:instance/instance-id"}
-            }
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": ["ec2:AttachVolume", "ec2:DetachVolume"],
+      "Resource": ["arn:aws:ec2:*:*:volume/*", "arn:aws:ec2:*:*:instance/*"],
+      "Condition": {
+        "ArnEquals": {
+          "ec2:SourceInstanceARN": "arn:aws:ec2:*:*:instance/instance-id"
         }
-    ]
+      }
+    }
+  ]
 }
 ```
 
 ポリシーには次の３つがあります。
 
 - AWS 管理ポリシー
+
   - AWS が提供しているポリシーです。各サービスを利用したり、職責のパターンで提供されています。
   - AWS 管理ポリシーには、次の２つがあります。
+
     - サービスの利用を想定した管理ポリシー
-      - AmazonS3FullAccess や　AmazonS3ReadOnlyAccess　など
+
+      - AmazonS3FullAccess や　 AmazonS3ReadOnlyAccess 　など
 
       ![iam-policy-aws](/images/iam/iam-policy-aws.png)
 
     - 職責を想定した管理ポリシー（ジョブ機能）
+
       - AdministratorAccess や PowerUserAccess など
 
       ![iam-policy-aws-job](/images/iam/iam-policy-aws-job.png)
@@ -226,13 +226,13 @@ Duration: 0:03:00
 }
 ```
 
-ロールには、[セッション期間](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/howtosessionduration.html)が設定できます。セッション期間に指定した時間が経過すると、セッションからサインアウトします。以前は 1時間しか設定できませんでしたが、現在では 12 時間まで設定できます。あまり短くすると、マネジメントコンソールで作業していると、何度も「再ロード」画面がでますので作業内容を鑑みて設定しましょう。
+ロールには、[セッション期間](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/howtosessionduration.html)が設定できます。セッション期間に指定した時間が経過すると、セッションからサインアウトします。以前は 1 時間しか設定できませんでしたが、現在では 12 時間まで設定できます。あまり短くすると、マネジメントコンソールで作業していると、何度も「再ロード」画面がでますので作業内容を鑑みて設定しましょう。
 
-マネジメントコンソールで変更する場合は、「1時間 / 2時間 / 4時間 / 8時間 / 12時間 / カスタム期間」が選択できます。
+マネジメントコンソールで変更する場合は、「1 時間 / 2 時間 / 4 時間 / 8 時間 / 12 時間 / カスタム期間」が選択できます。
 
 ![iam-role-sessionduration](/images/iam/iam-role-sessionduration.png)
 
-カスタム期間では、秒数で 1時間～ 12時間を指定できます。AWS CLI を使った場合と同じです。
+カスタム期間では、秒数で 1 時間～ 12 時間を指定できます。AWS CLI を使った場合と同じです。
 ![iam-role-sessionduration-custom](/images/iam/iam-role-sessionduration-custom.png)
 
 [update-role](https://docs.aws.amazon.com/cli/latest/reference/iam/update-role.html)
@@ -262,7 +262,7 @@ IAM ユーザーのパスワードポリシーを設定することができま�
 
 ![iam password policy](/images/iam/iam-account-password-policy.png)
 
-[ZDNET Japan-よくあるパスワード、約半数がAIツールで1分以内に解読可能](https://japan.zdnet.com/article/35202432/#:~:text=%E3%81%82%E3%82%89%E3%82%86%E3%82%8B%E6%96%87%E5%AD%97%E7%A8%AE%E3%82%92%E5%90%AB%E3%82%8010,%E3%81%AF600%E4%BA%AC%E5%B9%B4%E3%81%A0%E3%80%82&text=PassGAN%E3%81%AF%E3%81%AA%E3%81%9C%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE,%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%A0%E3%82%8D%E3%81%86%E3%81%8B%E3%80%82) という記事に、パスワードポリシー別の解析時間が記載されています。
+[ZDNET Japan-よくあるパスワード、約半数が AI ツールで 1 分以内に解読可能](https://japan.zdnet.com/article/35202432/#:~:text=%E3%81%82%E3%82%89%E3%82%86%E3%82%8B%E6%96%87%E5%AD%97%E7%A8%AE%E3%82%92%E5%90%AB%E3%82%8010,%E3%81%AF600%E4%BA%AC%E5%B9%B4%E3%81%A0%E3%80%82&text=PassGAN%E3%81%AF%E3%81%AA%E3%81%9C%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE,%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%A0%E3%82%8D%E3%81%86%E3%81%8B%E3%80%82) という記事に、パスワードポリシー別の解析時間が記載されています。
 
 この記事の引用元である、[こちらのサイト](https://www.homesecurityheroes.com/ai-password-cracking/)では、パスワードの長さから解析にどれくらいかかるか判定してくれます。
 
@@ -304,7 +304,7 @@ Duration: 0:01:30
 
 [AWS Identity and Access Management Access Analyzer を使用する](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/what-is-access-analyzer.html)
 
-AWSリソースに紐付いているポリシーを検査し、他AWSアカウントや外部のインターネット等からのアクセスを可能とするような設定がされているかどうかを検出および可視化してくれる機能です。
+AWS リソースに紐付いているポリシーを検査し、他 AWS アカウントや外部のインターネット等からのアクセスを可能とするような設定がされているかどうかを検出および可視化してくれる機能です。
 
 ![iam-access-analyzer-result](/images/iam/iam-access-analyzer-result.png)
 
@@ -324,6 +324,6 @@ https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html
 - 未使用のロールは定期的に棚卸を
 - IAM Access Analyzer を活用しよう
 
-## まとめ
+## 📖 まとめ
 
 ![iam](/images/all/iam.png)

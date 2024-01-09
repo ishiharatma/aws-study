@@ -5,9 +5,9 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# これをやっておけば大丈夫！AWSアカウント作成後にやること！
+# これをやっておけば大丈夫！AWS アカウント作成後にやること！
 
-## はじめに
+## ☘️ はじめに
 
 Duration: 00:00:10
 
@@ -15,11 +15,11 @@ AWS アカウントは簡単に作成でき、手軽に利用できます。し�
 
 安全に利用するために、適切な設定を実施しましょう。
 
-## Contents
+## 👀 Contents
 
-- [これをやっておけば大丈夫！AWSアカウント作成後にやること！](#これをやっておけば大丈夫awsアカウント作成後にやること)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+- [これをやっておけば大丈夫！AWS アカウント作成後にやること！](#これをやっておけば大丈夫aws-アカウント作成後にやること)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [ルートユーザーに多要素認証（MFA）を設定する](#ルートユーザーに多要素認証mfaを設定する)
   - [AWS アカウントの代替の連絡先を設定する](#aws-アカウントの代替の連絡先を設定する)
   - [AWS アカウントの秘密の質問を設定する](#aws-アカウントの秘密の質問を設定する)
@@ -51,9 +51,9 @@ AWS アカウント登録時の連絡先以外にも連絡してくれるよう�
 <設定方法>
 
 1. アカウント設定を開きます
-    - <https://console.aws.amazon.com/billing/home#/account>
+   - <https://console.aws.amazon.com/billing/home#/account>
 2. 「代替の連絡先」の横にある「編集」リンクをクリックして連絡先を設定します
-    - ![alternate_contacts](/images/aws-account-Initial-setting/alternate_contacts.png)
+   - ![alternate_contacts](/images/aws-account-Initial-setting/alternate_contacts.png)
 
 <https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html>
 
@@ -69,9 +69,9 @@ Duration: 00:00:30
 <設定方法>
 
 1. アカウント設定を開きます
-    - <https://console.aws.amazon.com/billing/home#/account>
+   - <https://console.aws.amazon.com/billing/home#/account>
 2. 「秘密の質問の設定」の横にある「編集」リンクをクリックして連絡先を設定します
-    - ![security_challenge_questions](/images/aws-account-Initial-setting/security_challenge_questions.png)
+   - ![security_challenge_questions](/images/aws-account-Initial-setting/security_challenge_questions.png)
 
 <https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html>
 
@@ -79,21 +79,21 @@ Duration: 00:00:30
 
 Duration: 00:00:30
 
-MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678の場合、+81 3-1234-5678）
+MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678 の場合、+81 3-1234-5678）
 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。
 
 <設定方法>
 
 1. アカウント設定を開きます
-    - <https://console.aws.amazon.com/billing/home#/account>
+   - <https://console.aws.amazon.com/billing/home#/account>
 2. 「連絡先情報」の横にある「編集」リンクをクリックして連絡先を設定します
-    - ![contact](/images/aws-account-Initial-setting/contact.png)
+   - ![contact](/images/aws-account-Initial-setting/contact.png)
 
 ## [AWS Artifact](https://console.aws.amazon.com/artifact/home) にアクセスして、「日本準拠法」に変更する
 
 Duration: 00:00:30
 
-※ 2022年 2月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。
+※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。
 
 AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。
 
@@ -106,10 +106,9 @@ Duration: 00:00:30
 <設定方法>
 
 1. Billing コンソールの予算を開きます
-    - <https://console.aws.amazon.com/billing/home#/budgets/overview>
+   - <https://console.aws.amazon.com/billing/home#/budgets/overview>
 2. 「予讃を作成」ボタンをクリックして予算アラートを設定します
-    - ![budgets_alert](/images/aws-account-Initial-setting/budgets_alert.png)
-
+   - ![budgets_alert](/images/aws-account-Initial-setting/budgets_alert.png)
 
 <https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html>
 
@@ -119,8 +118,8 @@ Duration: 00:00:30
 
 予算アラートは、設定した予算額に対してある敷居値を超えるときに通知するサービスでした。実際に超過しなければ通知されないため、異常な兆候は検出できません。
 
-コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常なAWSコストの発生を検出することができるサービスです。
-AWSコスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。
+コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常な AWS コストの発生を検出することができるサービスです。
+AWS コスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。
 
 <https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html>
 
@@ -135,7 +134,7 @@ CloudTrail のログ保存先の S3 は、ライフサイクルルールも設�
 <設定方法>
 
 1. CloudTrail コンソールを開きます
-    - <https://console.aws.amazon.com/cloudtrail/>
+   - <https://console.aws.amazon.com/cloudtrail/>
 2. [証跡の作成]ボタンをクリックします
 
 <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html>
@@ -156,15 +155,15 @@ CloudTrail のログを監視し、少なくとも以下を監視してアラー
 - Amazon Virtual Private Cloud (VPC) の変更を監視
 - ネットワークゲートウェイの変更を監視
 - セキュリティグループへの変更を監視
-- IAMポリシーへの変更を監視
-- IAMロールの変更を監視
-- IAMユーザの作成を監視
-- IAMアクセスキーの作成を監視
-- CloudTrailの変更を監視
-- SwitchRoleエラーの連続発生を監視
-- S3バケットポリシーへの変更を監視
-- KMSキーの無効またはスケジュールされた削除の発生を監視
-- 無効または削除されたKMSのキー使用時のエラー発生を監視
+- IAM ポリシーへの変更を監視
+- IAM ロールの変更を監視
+- IAM ユーザの作成を監視
+- IAM アクセスキーの作成を監視
+- CloudTrail の変更を監視
+- SwitchRole エラーの連続発生を監視
+- S3 バケットポリシーへの変更を監視
+- KMS キーの無効またはスケジュールされた削除の発生を監視
+- 無効または削除された KMS のキー使用時のエラー発生を監視
 - 不正な API 呼び出しの発生を監視
 
 <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html>
@@ -179,7 +178,7 @@ Duration: 00:00:30
 <設定方法>
 
 1. EventBridge コンソールを開きます
-    - <https://console.aws.amazon.com/events/>
+   - <https://console.aws.amazon.com/events/>
 2. ナビゲーションペインで [ルール]を選択します。
 3. [ルールを作成] を選択します。
 
@@ -202,7 +201,6 @@ Duration: 00:00:30
 ```
 
 <https://docs.aws.amazon.com/ja_jp/health/latest/ug/cloudwatch-events-health.html>
-
 
 ## IAM パスワードポリシーを変更する
 
@@ -230,10 +228,10 @@ MFA を利用しない場合は、以下の追加も検討しましょう。
 <設定方法>
 
 1. IAM コンソールを開きます
-    - <https://console.aws.amazon.com/iam/home#/account_settings>
+   - <https://console.aws.amazon.com/iam/home#/account_settings>
 2. ナビゲーションペインで [アカウント設定]を選択します
 3. [Change]ボタンをクリックして変更します
-    - ![iam_password_policy](/images/aws-account-Initial-setting/iam_password_policy.png)
+   - ![iam_password_policy](/images/aws-account-Initial-setting/iam_password_policy.png)
 
 <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html>
 

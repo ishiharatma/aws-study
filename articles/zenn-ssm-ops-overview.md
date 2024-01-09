@@ -7,26 +7,26 @@ published: true
 
 # AWS Systems Manager（SSM）:運用管理
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Systems Manager（SSM）:運用管理](#aws-systems-managerssm運用管理)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [運用管理の機能](#運用管理の機能)
   - [エクスプローラー](#エクスプローラー)
     - [エクスプローラーの料金](#エクスプローラーの料金)
   - [インシデントマネージャー](#インシデントマネージャー)
     - [インシデントマネージャーの料金](#インシデントマネージャーの料金)
   - [OpsCenter](#opscenter)
-    - [OpsCenterの料金](#opscenterの料金)
+    - [OpsCenter の料金](#opscenter-の料金)
 
 ## 運用管理の機能
 
@@ -97,7 +97,7 @@ Duration: 00:03:00
 
 [AWS Systems Manager OpsCenter](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/OpsCenter.html)
 
-CloudWatch Events と連携して AWS リソースの運用上の問題、イベント、アラート等をOpsItems として集中管理する機能を提供しています。
+CloudWatch Events と連携して AWS リソースの運用上の問題、イベント、アラート等を OpsItems として集中管理する機能を提供しています。
 
 AWS リソースに関する運用項目を `OpsItem` として管理します。
 
@@ -105,6 +105,6 @@ AWS リソースに関する運用項目を `OpsItem` として管理します�
 
 詳しくは、【AWS Black Belt Online Seminar】[AWS Systems Manager Explorer / OpsCenter 編(YouTube)](https://www.youtube.com/watch?v=XXG88mXS6_E) を参照します。
 
-### OpsCenterの料金
+### OpsCenter の料金
 
-[OpsCenterの料金](https://aws.amazon.com/jp/systems-manager/pricing/#OpsCenter)
+[OpsCenter の料金](https://aws.amazon.com/jp/systems-manager/pricing/#OpsCenter)

@@ -1,16 +1,16 @@
 # Amazon DynamoDB
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Amazon DynamoDB](#amazon-dynamodb)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon DynamoDB とは](#amazon-dynamodb-とは)
   - [Amazon DynamoDB のユースケース](#amazon-dynamodb-のユースケース)
   - [Amazon DynamoDB の料金](#amazon-dynamodb-の料金)
@@ -32,22 +32,21 @@
   - [バックアップ](#バックアップ)
   - [DynamoDB 用の NoSQL Workbench](#dynamodb-用の-nosql-workbench)
   - [設計](#設計)
-  - [まとめ](#まとめ)
-
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon DynamoDB とは
 
 Duration: 1:31:15
 
-1桁ミリ秒単位で規模に応じたパフォーマンスを実現する高速で柔軟な NoSQL データベースのフルマネージドサービスです。
+1 桁ミリ秒単位で規模に応じたパフォーマンスを実現する高速で柔軟な NoSQL データベースのフルマネージドサービスです。
 
-CAP定理という、「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」をすべて達成することはできない、という決まりがあります。
+CAP 定理という、「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」をすべて達成することはできない、という決まりがあります。
 
 DynamoDB は、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視して開発されています。
 
 DynamoDB は、「値」とそれを取得するための「キー」だけを格納するというシンプルな機能を持った「キーバリュー型」の形式でデータを格納します。
 
-【AWS Black Belt Online Seminar】[Amazon DocumentDB (with MongoDB Compatibility)(YouTube)]([xxx](https://www.youtube.com/watch?v=RTfCVlo1EoA))(41:38)
+【AWS Black Belt Online Seminar】[Amazon DocumentDB (with MongoDB Compatibility)(YouTube)](<[xxx](https://www.youtube.com/watch?v=RTfCVlo1EoA)>)(41:38)
 
 ![DocumentDB](/images/dynamodb/blackbelt-dynamodb_1-320.jpg)
 
@@ -55,7 +54,7 @@ DynamoDB は、「値」とそれを取得するための「キー」だけを�
 
 ![Advanced Design Pattern](/images/dynamodb/blackbelt-dynamodb_2-320.jpg)
 
-[【AWS Tech 再演】AWS の NoSQL 入門 〜Amazon ElastiCache, Amazon DynamoDB〜｜AWS Summit Tokyo 2017](https://www.youtube.com/watch?v=cEl4TMM9oYw)(40:01)
+[【AWS Tech 再演】AWS の NoSQL 入門 〜Amazon ElastiCache, Amazon DynamoDB〜｜ AWS Summit Tokyo 2017](https://www.youtube.com/watch?v=cEl4TMM9oYw)(40:01)
 
 ![aws summit 2017](/images/dynamodb/aws-summit-2017-dynamodb-320.jpg)
 
@@ -75,7 +74,7 @@ Duration: 0:01:30
 - 広告やゲームなどのユーザー行動履歴
 - モバイルアプリのバックエンド
 - クリックストリーム
-- IoTデータの蓄積
+- IoT データの蓄積
 - RDB のキャッシュ
 
 よくある構成は、「API Gateway / Lambda / DynamoDB」の組み合わせです。
@@ -106,7 +105,7 @@ Duration: 0:05:00
   - テーブルに１つしか設定できません
   - 各パーティションへのアクセスが均一になるような設計を行う
   - [パーティションキーを効率的に設計し、使用するためのベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-partition-key-design.html)
-  - 偏った状態では、「ホットパーティション問題」が発生します。DynamoDBでは、スループットはテーブル全体の設定でパーティションごとに均等に割り当てられる。パーティションに偏りがある場合、アクセスが集中しているパーティションのスループットが枯渇してしまいます。
+  - 偏った状態では、「ホットパーティション問題」が発生します。DynamoDB では、スループットはテーブル全体の設定でパーティションごとに均等に割り当てられる。パーティションに偏りがある場合、アクセスが集中しているパーティションのスループットが枯渇してしまいます。
 - ソートキー
   - 範囲の指定やソートを行うために必要なキー
   - パーティション内でソートされ物理的に近い位置に配置されます
@@ -116,15 +115,15 @@ Duration: 0:05:00
   - 「パーティションキー」または、「パーティションキーとソートキーの複合キー」のこと。
 - グローバルセカンダリインデックス（GSI）
   - テーブルとパーティションキーまたはパーティション/ソートキーが異なるインデックスです。
-  - 例えば、プライマリパーティションキーがCustomerID で、GSI のパーティションキーが郵便番号
-  - 1 テーブルあたり最大で 5つの GSI を作成できます。
+  - 例えば、プライマリパーティションキーが CustomerID で、GSI のパーティションキーが郵便番号
+  - 1 テーブルあたり最大で 5 つの GSI を作成できます。
   - 既存テーブルに追加・削除ができます。
   - スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。
   - GSI に依存するテーブル設計であれば、RDS の利用も検討したほうがよい。
   - [DynamoDB でセカンダリインデックスを使用するためのベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-indexes.html)
 - ローカルセカンダリインデックス（LSI）
   - テーブルとパーティションキーは同じですが、ソートキーが異なるインデックスです。
-  - 1 テーブルあたり最大で 5つの LSI を作成できます。
+  - 1 テーブルあたり最大で 5 つの LSI を作成できます。
   - スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。
   - GSI と違い、既存テーブルに追加・削除ができません。
   - [セカンダリインデックスを使用したデータアクセス性の向上](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/SecondaryIndexes.html)
@@ -137,9 +136,9 @@ DynamoDB のストレージは、容量制限がありません。自動的に�
 
 東京リージョンでは、0.285 USD/GB （標準ストレージクラス）です。
 
-同じデータベースサービスである Aurora は 0.11 USD/GB ですので、2倍です。
+同じデータベースサービスである Aurora は 0.11 USD/GB ですので、2 倍です。
 
-S3（Standard） は、0.025 USD/GB ですので 10倍となります。
+S3（Standard） は、0.025 USD/GB ですので 10 倍となります。
 
 ストレージ料金としては、決して安くないサービスであるので大容量のデータ保管には向いていないと言えます。
 
@@ -161,17 +160,17 @@ Duration: 0:00:30
 
 3 つの AZ にデータがレプリケートされることで冗長化されます。書き込みについては、少なくとも 2AZ に書き込みが完了した時点で、応答（Ack）が返却されます。
 
-最終的に、全てのAZに反映されます。
+最終的に、全ての AZ に反映されます。
 
 ## Amazon DynamoDB の読み込み整合性
 
 Duration: 0:01:30
 
-先に述べたように、DynamoDBは CAP定理「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」のうち、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視した設計となっているため、リレーショナルデータベースのような「一貫性」は保証されておらず、データはいつか必ず書き込まれる（通常は 1秒以内）という動作になります。
+先に述べたように、DynamoDB は CAP 定理「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」のうち、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視した設計となっているため、リレーショナルデータベースのような「一貫性」は保証されておらず、データはいつか必ず書き込まれる（通常は 1 秒以内）という動作になります。
 
 そのため、デフォルトでは `結果整合性のある読み込み` となります。この読み取りでは、最新の書き込み結果が反映されていない場合がある読み込みです。
 
-もう一つの読み込みとして、`強い整合性のある読み込み` があります。Consistent Readオプションを付けたリクエストでは、この読み込みが行われ、リクエストを受け取る前までの最新のデータを読み取ることができます。Consistent Readオプションを付けられるのは、「GetItem, Query, Scan」です。
+もう一つの読み込みとして、`強い整合性のある読み込み` があります。Consistent Read オプションを付けたリクエストでは、この読み込みが行われ、リクエストを受け取る前までの最新のデータを読み取ることができます。Consistent Read オプションを付けられるのは、「GetItem, Query, Scan」です。
 
 また、`強い整合性のある読み込み` は、`結果整合性のある読み込み` に比べてスループットキャパシティ（後述）の消費が大きくなります。
 
@@ -183,22 +182,22 @@ Duration: 0:03:00
 
 テーブルにパーティションがある場合は、読み取り、書き込みはパーティションごとに均等に割り当てられます。
 
-読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KBの項目に対して、結果整合性のある読み取りの場合 2回/秒、強い整合性のある読み取りの場合 1回/秒、といった読み取り性能を表す単位です。
+読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒、といった読み取り性能を表す単位です。
 
-書き込みのスループットは、WCU(Write Capacity Unit)という単位で割り当てます。1 WCU は、最大 1KB の項目に対して、1回/秒の書き込み性能を表す単位です。
+書き込みのスループットは、WCU(Write Capacity Unit)という単位で割り当てます。1 WCU は、最大 1KB の項目に対して、1 回/秒の書き込み性能を表す単位です。
 
 DynamoDB を利用する場合は、テーブルごとに RCU と WCU を設計する必要があります。ただし、どれだけ必要か事前に見積もることが困難な場合が多いです。
 
 そのような用途のために、「オンデマンド」と「プロビジョニング済み」という 2 種類のキャパシティーモードがあります。
 
-キャパシティモードは24時間に1回だけ相互に変更することができます。
+キャパシティモードは 24 時間に 1 回だけ相互に変更することができます。
 
 「プロビジョニング済み」から「オンデマンド」に変更すると、Auto Scaling の設定が削除されるので、もう一度「プロビジョニング済み」に戻す場合は注意が必要です。
 
 - オンデマンドキャパシティモード
   - アクセスのピークが予測困難な場合に適したモードで、事前のキャパシティの設定が不要です
   - 使用したユニット数に応じた従量課金となるため、要求が多いとコストが増加します
-  - 自動的にキャパシティが調整されますが、一度キャパシティが自動調整されたのち、30分以内に前回のピークの2倍を超えるトラフィックが発生するとスロットリング（一時的なキャパシティ不足）が発生します
+  - 自動的にキャパシティが調整されますが、一度キャパシティが自動調整されたのち、30 分以内に前回のピークの 2 倍を超えるトラフィックが発生するとスロットリング（一時的なキャパシティ不足）が発生します
 - プロビジョニング済みキャパシティーモード
   - 安定したアクセスが見込まれる場合に適したモードで、事前に予想されるキャパシティを設定しておきます
   - 設定したキャパシティを超えた場合は、スロットリングが発生します
@@ -512,9 +511,9 @@ Duration: 0:01:30
 
 テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。
 
-削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは48時間以内に削除されます。
+削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは 48 時間以内に削除されます。
 
-TTLとして指定する属性は、Number型のUnixtime（ミリ秒無し）である必要があります。
+TTL として指定する属性は、Number 型の Unixtime（ミリ秒無し）である必要があります。
 
 ## トランザクション
 
@@ -530,9 +529,9 @@ RDB のようなトランザクションまでは期待できないが、複数�
 
 [DynamoDB のトランザクション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/ServiceQuotas.html#limits-dynamodb-transactions)
 
-- トランザクションには、100件を超えるアクションを含めることはできない
+- トランザクションには、100 件を超えるアクションを含めることはできない
 - トランザクションに 4MB を超えるデータを含めることはできない
-- 同一テーブルに2つのアクションを実行できない　など
+- 同一テーブルに 2 つのアクションを実行できない　など
 
 ## DynamoDB ストリーム
 
@@ -540,7 +539,7 @@ Duration: 0:01:00
 
 [DynamoDB Streams の変更データキャプチャ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html)
 
-テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24時間保存されます。
+テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24 時間保存されます。
 
 DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。
 
@@ -593,8 +592,8 @@ aws dynamodb update-item \
 
 ```json
 {
-    ":newval":{"N":"8"},
-    ":currval":{"N":"10"}
+  ":newval": { "N": "8" },
+  ":currval": { "N": "10" }
 }
 ```
 
@@ -676,6 +675,6 @@ Duration: 0:01:00
 
 ベストプラクティスのドキュメントを読み、 NoSQL に最適な設計をしましょう。
 
-## まとめ
+## 📖 まとめ
 
 ![dynamodb](/images/all/dynamodb.png)

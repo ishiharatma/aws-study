@@ -1,10 +1,29 @@
 # AWS コスト管理
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+
+## 👀 Contents
+
+- [AWS コスト管理](#aws-コスト管理)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
+  - [AWS コスト管理 とは](#aws-コスト管理-とは)
+  - [ワークロードの特性を把握する](#ワークロードの特性を把握する)
+  - [料金体系を理解する](#料金体系を理解する)
+  - [想定外のコストが発生する要因を理解する](#想定外のコストが発生する要因を理解する)
+  - [コストの可視化](#コストの可視化)
+    - [AWS Cost Explorer で可視化する](#aws-cost-explorer-で可視化する)
+    - [AWS Cost and Usage Report で可視化する](#aws-cost-and-usage-report-で可視化する)
+    - [コスト異常を検出する](#コスト異常を検出する)
+    - [予算を作成して把握する](#予算を作成して把握する)
+    - [Amazon Athena を利用して可視化する](#amazon-athena-を利用して可視化する)
+    - [AWS Cost Categories](#aws-cost-categories)
+    - [コスト分配タグ](#コスト分配タグ)
+  - [コスト削減ポイント](#コスト削減ポイント)
 
 ## AWS コスト管理 とは
 
@@ -68,7 +87,7 @@ Duration: 0:01:30
 
 [AWS Cost Explorer](https://aws.amazon.com/jp/aws-cost-management/aws-cost-explorer/)
 
-AWS アカウント作成後は、IAM ユーザーが Cost Explorer にアクセスできません。このままではルートユーザーでしか確認できません。IAM ユーザーの利用が推奨されているので、AWS アカウント作成後すぐに「IAMユーザー/ロールによる請求情報へのアクセス」を有効化しましょう。
+AWS アカウント作成後は、IAM ユーザーが Cost Explorer にアクセスできません。このままではルートユーザーでしか確認できません。IAM ユーザーの利用が推奨されているので、AWS アカウント作成後すぐに「IAM ユーザー/ロールによる請求情報へのアクセス」を有効化しましょう。
 
 [アカウントで請求データへのアクセスを有効にする](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/tutorial_billing.html#tutorial-billing-step1)
 
@@ -172,7 +191,7 @@ ORDER BY  cost desc
 
 - line_item_usage_account_id: AWS アカウント ID
 - line_item_product_code: AWS サービス名
-- line_item_resource_id: リソースID
+- line_item_resource_id: リソース ID
 - line_item_operation: コストが発生した API 操作
 - line_item_type: 料金タイプ
 - line_item_unblended_cost: 実コスト
@@ -198,5 +217,3 @@ ORDER BY  cost desc
 [AWS コスト配分タグの使用](https://docs.aws.amazon.com/ja_jp/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 
 ## コスト削減ポイント
-
-

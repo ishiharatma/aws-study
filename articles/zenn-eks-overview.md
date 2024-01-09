@@ -5,21 +5,22 @@ topics: ["aws", "study"]
 published: false
 ---
 
-# Amazon Elastic Container Service (Amazon ECS)
+# Amazon Elastic Kubernetes Service (Amazon EKS)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
-- [Amazon Elastic Container Service (Amazon ECS)](#amazon-elastic-container-service-amazon-ecs)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+- [Amazon Elastic Kubernetes Service (Amazon EKS)](#amazon-elastic-kubernetes-service-amazon-eks)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon ECS とは](#amazon-ecs-とは)
   - [xx の基本](#xx-の基本)
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon ECS とは
 
@@ -41,7 +42,7 @@ published: false
 
 【AWS Black Belt Online Seminar】 [CON316 Amazon EKS における EC2 スポットインスタンスをもっと身近に](https://www.youtube.com/watch?v=_hgWoHhmdlM)(0:19:52)
 
-[AWS Black Belt Online Seminar] [CON222 Amazon Elastic Kubernetes Service (Amazon EKS) でのData Plane管理](https://www.youtube.com/watch?v=WzCxHW0wNBo)(0:21:37)
+[AWS Black Belt Online Seminar] [CON222 Amazon Elastic Kubernetes Service (Amazon EKS) での Data Plane 管理](https://www.youtube.com/watch?v=WzCxHW0wNBo)(0:21:37)
 
 [Amazon Elastic Kubernetes Service サービス概要](https://aws.amazon.com/jp/eks/)
 
@@ -54,3 +55,5 @@ published: false
 ## xx の基本
 
 Duration: 0:01:30
+
+## 📖 まとめ

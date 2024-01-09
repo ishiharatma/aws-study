@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#elastic-load-balancingelb" target="_blank">Elastic Load Balancing(ELB)</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#elb-%E3%81%A8%E3%81%AF" target="_blank">ELB とは</a></li>
 <li><a href="#elb-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">ELB の基本</a></li>
 <li><a href="#elb-%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">ELB の種類</a><ul>
@@ -55,7 +55,7 @@
 <li><a href="#%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%BE%E3%83%BC%E3%83%B3%E8%B2%A0%E8%8D%B7%E5%88%86%E6%95%A3" target="_blank">クロスゾーン負荷分散</a></li>
 <li><a href="#connection-draining" target="_blank">Connection Draining</a></li>
 <li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%AD%E3%82%B0" target="_blank">アクセスログ</a></li>
-<li><a href="#%E4%BB%96%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">他のサービスとの連携</a></li>
+<li><a href="#-%E4%BB%96%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">📖 他のサービスとの連携</a></li>
 </ul>
 </li>
 </ul>
@@ -80,7 +80,7 @@
     
       <google-codelab-step label="ELB の基本" duration="2">
         <ul>
-<li>Internet-Facing（インターネットからアクセス可）とInternal（VPC内など）の2種類があります。 <ul>
+<li>Internet-Facing（インターネットからアクセス可）と Internal（VPC 内など）の 2 種類があります。 <ul>
 <li>Internet-Facing はパブリックサブネットのみ配置可</li>
 <li>Internal はプライベートサブネットにも配置可</li>
 <li><img alt="create_elb" src="img\\8e36dee03cd33a1a.png"></li>
@@ -100,17 +100,17 @@
 <li><img alt="elb_scale_2" src="img\\3b4868334c639848.png"></li>
 </ul>
 </li>
-<li>ELBが拡張されたり縮小すると応答するIPアドレスの数が変わります。</li>
+<li>ELB が拡張されたり縮小すると応答する IP アドレスの数が変わります。</li>
 <li>ただし、負荷のスパイク（負荷急増）が発生すると自動スケーリングが間に合わず <code>503</code> を返す可能性があります。</li>
-<li>その場合、暖機運転申請（Pre-Warming ※サポートプランがBussiness以上必要）か自前で段階的に負荷をあげていく仕組みを構築する必要があります。</li>
+<li>その場合、暖機運転申請（Pre-Warming ※サポートプランが Bussiness 以上必要）か自前で段階的に負荷をあげていく仕組みを構築する必要があります。</li>
 </ul>
 </li>
-<li>ELB で SSL 終端することができます。つまり、クライアント⇔ELB間はSSL通信で、ELB⇔バックエンド間はSSLなしの通信ができます。これにより、バックエンド側での SSL 処理の負荷を軽減できます。 <ul>
+<li>ELB で SSL 終端することができます。つまり、クライアント ⇔ELB 間は SSL 通信で、ELB⇔ バックエンド間は SSL なしの通信ができます。これにより、バックエンド側での SSL 処理の負荷を軽減できます。 <ul>
 <li><img alt="elb_ssl" src="img\\40c2542f5dcaafc7.png"></li>
 </ul>
 </li>
-<li>起動している時間（1時間単位）＋LCU（ロードバランサーキャパシティーユニット）で課金されます。 <ul>
-<li>東京リージョンだと最低でも月額 $ 25程度は必要になります。</li>
+<li>起動している時間（1 時間単位）＋ LCU（ロードバランサーキャパシティーユニット）で課金されます。 <ul>
+<li>東京リージョンだと最低でも月額 $ 25 程度は必要になります。</li>
 </ul>
 </li>
 </ul>
@@ -138,18 +138,18 @@
 </li>
 <li>L7(アプリケーション層) で負荷分散（URL や HTTP ヘッダーで負荷分散が可能）</li>
 <li>クライアントと ALB 間は、HTTP/2 に対応していましたが、暫くの間は ALB とターゲット間の通信は、HTTP/1.1 に変換されていました。現在は、「HTTP/1.1」「HTTP/2」「gRPC」に対応 <ul>
-<li>※ gRPC とは、RPC (Remote Procedure Call) を実現するためにGoogleが開発したプロトコルの1つです。RPCを使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。</li>
+<li>※ gRPC とは、RPC (Remote Procedure Call) を実現するために Google が開発したプロトコルの 1 つです。RPC を使うことでリモート（Remote）にある関数/手続き（Procedure）を呼ぶ（Call）ことができます。</li>
 <li><a href="https://ja.wikipedia.org/wiki/GRPC" target="_blank">https://ja.wikipedia.org/wiki/GRPC</a></li>
 </ul>
 </li>
 <li>利用するには、2 AZ 以上が必要（1 AZ では起動できない）、3 AZ 構成が望ましい。選択する AZ 数は ALB 自体のコストに影響ありません。ただし、AZ 数が増えるということは、ロードバランサー配下のノード数も増えるので、その分のコストは発生します。</li>
-<li>IP固定不可 <ul>
-<li>固定したい場合は、NLBやAWS Global Acceleratorを前段に配置する</li>
+<li>IP 固定不可 <ul>
+<li>固定したい場合は、NLB や AWS Global Accelerator を前段に配置する</li>
 </ul>
 </li>
 <li>Web アプリケーションを実行するサーバでは最も利用されているロードバランサーです</li>
-<li>ターゲットは、インスタンスID、IPアドレス、Lambda</li>
-<li>URL、リクエストヘッダー、リクエスト元IPでターゲットグループで振り分け可能</li>
+<li>ターゲットは、インスタンス ID、IP アドレス、Lambda</li>
+<li>URL、リクエストヘッダー、リクエスト元 IP でターゲットグループで振り分け可能</li>
 <li>ルーティングアルゴリズムは、ラウンドロビン</li>
 <li>クロスゾーン負荷分散がデフォルトで有効</li>
 <li>スティッキーセッション（sticky session） <ul>
@@ -157,7 +157,7 @@
 </ul>
 </li>
 <li>セキュリティグループでアクセスを制御します</li>
-<li>AWS WAF を関連付けて、Webアプリケーションの脆弱性を保護することができます。</li>
+<li>AWS WAF を関連付けて、Web アプリケーションの脆弱性を保護することができます。</li>
 <li>MTU=9,001(ジャンボフレーム)、変更不可</li>
 </ul>
 <h2 is-upgraded>NLB:Network Load Balancer</h2>
@@ -167,13 +167,13 @@
 <li><img src="img\\426483cf3359124a.png"></li>
 </ul>
 </li>
-<li>L4（トランスポート層） で負荷分散（IPアドレスとポート番号による負荷分散が可能）</li>
+<li>L4（トランスポート層） で負荷分散（IP アドレスとポート番号による負荷分散が可能）</li>
 <li>HTTP(S) 以外、TCP、UDP</li>
-<li>1AZ以上</li>
-<li>IP固定可</li>
+<li>1AZ 以上</li>
+<li>IP 固定可</li>
 <li>超低遅延で高スループットを維持しながら、秒間何百万リクエストをさばける様に設計</li>
-<li>大量のアクセスがあり、非常に高度なパフォーマンスが要求されるサーバーや、アプリケーションで静的IPが必要な場合に向いているロードバランサー</li>
-<li>ターゲットは、インスタンスID、IPアドレス</li>
+<li>大量のアクセスがあり、非常に高度なパフォーマンスが要求されるサーバーや、アプリケーションで静的 IP が必要な場合に向いているロードバランサー</li>
+<li>ターゲットは、インスタンス ID、IP アドレス</li>
 <li>ルーティングアルゴリズムは、フローハッシュアルゴリズム</li>
 <li>ALB とは違い、クロスゾーン負荷分散はデフォルトで無効</li>
 <li>スティッキーセッション（sticky session）</li>
@@ -190,7 +190,7 @@
 <li><img alt="glb" src="img\\ce3f01266ecabe92.jpg"></li>
 </ul>
 </li>
-<li>2021年に発表された、セキュリティアプライアンス（ファイアウォールなど）をデプロイしたり、スケール、管理ができるようにするサービス</li>
+<li>2021 年に発表された、セキュリティアプライアンス（ファイアウォールなど）をデプロイしたり、スケール、管理ができるようにするサービス</li>
 <li>従来、トラフィックの監査を行う場合、EC2 上にサードパーティ製の仮想アプライアンスを構築する必要があり、それに対して冗長化は大変だったが、この課題を解消することができるサービス</li>
 <li>L3（ネットワーク層）で負荷分散</li>
 <li>クロスゾーン負荷分散はデフォルトで無効</li>
@@ -227,7 +227,7 @@
 <ul>
 <li>1 秒あたり 25 個の新しい接続</li>
 <li>1 分あたり 3,000 個のアクティブ接続</li>
-<li>ターゲットとしての Amazon Elastic Compute Cloud (EC2) インスタンス、コンテナおよび IP アドレスの場合は 1 時間あたり 1 GB、ターゲットとしての Lambda 関数の場合は 1 時間あたり 0.4 GBです。</li>
+<li>ターゲットとしての Amazon Elastic Compute Cloud (EC2) インスタンス、コンテナおよび IP アドレスの場合は 1 時間あたり 1 GB、ターゲットとしての Lambda 関数の場合は 1 時間あたり 0.4 GB です。</li>
 <li>1 秒あたり 1,000 個のルール評価</li>
 </ul>
 <p>詳しい計算方法は、<a href="https://aws.amazon.com/jp/elasticloadbalancing/pricing/" target="_blank">Elastic Load Balancing 料金表</a>の料金の例を参照してください。</p>
@@ -237,7 +237,7 @@
     
       <google-codelab-step label="サブネットに必要な CIDR" duration="1">
         <p>AWS ドキュメント &gt; Elastic Load Balancing &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer" target="_blank">ロードバランサーのサブネット</a></p>
-<p>ELB を配置するサブネットの CIDR は最小で 「27」が必要であり、8個以上の IP アドレスの空きが必要です。</p>
+<p>ELB を配置するサブネットの CIDR は最小で 「27」が必要であり、8 個以上の IP アドレスの空きが必要です。</p>
 <p class="image-container"><img alt="ELB_CIDR" src="img\\bff93f45807a995a.png"></p>
 
 
@@ -247,7 +247,7 @@
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/sticky-sessions.html" target="_blank">Application Load Balancer のスティッキーセッション</a></p>
 <p>AWS ドキュメント &gt; Network Load Balancer &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/network/load-balancer-target-groups.html#sticky-sessions" target="_blank">スティッキーセッション</a></p>
 <p>ロードバランサーが生成した Cookie（AWSALB）を使用して同じターゲットにルーティングする機能です。クロスオリジンリソース共有 (CORS) リクエストの場合、「AWSALBCORS」を生成します。 ロードバランサーが生成する AWSALB は、ローテーションキーを使用して暗号化されており、復号することは出来ません。また、中身が同じ内容なのかも分かりません。</p>
-<p>ロードバランサーが生成する Cookie の他に、アプリケーションによって生成する Cookie を指定することも可能です。Cookie 名は自由に指定することができますが、ロードバランサーが予約している名称は使用できません（AWSALB、AWSALBAPP、または AWSALBTGなど）</p>
+<p>ロードバランサーが生成する Cookie の他に、アプリケーションによって生成する Cookie を指定することも可能です。Cookie 名は自由に指定することができますが、ロードバランサーが予約している名称は使用できません（AWSALB、AWSALBAPP、または AWSALBTG など）</p>
 <p>可能であれば、セッション管理などは、Amazon ElastiCache や Amazon Aurora などのデータベースで保持しておくほうが ELB が振り分けるノードに障害があった場合にも影響を受けにくくなります。</p>
 
 
@@ -257,13 +257,13 @@
         <p>複数 AZ に跨るノードに対しても均等にトラフィックを分散するようにできるオプションです。</p>
 <p>どういうことかというと、 ELB が２つの AZ に配置されている場合は、ラウンドロビンルーティングによって、それぞれの ELB に 50%のトラフィックが分散されます。 次のようにノードが等しくなるような構成の場合、それぞれのノードは 25%のトラフィックを処理します。</p>
 <p class="image-container"><img alt="elb_normal" src="img\\c170db7c37f0176d.png"></p>
-<p>ELB 配下にあるノードが異なっている場合には以下のようにトラフィックが偏ります。 この例の場合は、1台のノードが50%のトラフィックを処理している状態になります。</p>
+<p>ELB 配下にあるノードが異なっている場合には以下のようにトラフィックが偏ります。 この例の場合は、1 台のノードが 50%のトラフィックを処理している状態になります。</p>
 <p class="image-container"><img alt="xz_off_1" src="img\\e9709c5b6ddea14f.png"></p>
-<p>実際は、各 AZ に1台ずつ ELB が存在し、ELB に対してはラウンドロビンルーティングによって、50％ずつに振り分けられます。ELB は、自身と同じ AZ に存在するノードのみに振り分けを行うことからこのような偏りが発生します。</p>
+<p>実際は、各 AZ に 1 台ずつ ELB が存在し、ELB に対してはラウンドロビンルーティングによって、50％ずつに振り分けられます。ELB は、自身と同じ AZ に存在するノードのみに振り分けを行うことからこのような偏りが発生します。</p>
 <p class="image-container"><img alt="xz_off_2" src="img\\f8adeb2478194bfb.png"></p>
 <p>これを解消し、以下のように均等にトラフィックを分散させるためのオプションが、<strong>クロースゾーン負荷分散</strong>です。クロースゾーン負荷分散が有効になっている場合、全てのノードの数に応じて均等に分散されます。ALB ではデフォルトで有効になっているため、意識しないで利用しています。</p>
 <p class="image-container"><img alt="xz_on_1" src="img\\750791b24151aa03.png"></p>
-<p>実際は、以下のようになっており、各 ELB がAZ を跨いだノードに対して分散させるためトラフィックが均等になります。</p>
+<p>実際は、以下のようになっており、各 ELB が AZ を跨いだノードに対して分散させるためトラフィックが均等になります。</p>
 <p class="image-container"><img alt="xz_on_2" src="img\\65eba4646c3f27c7.png"></p>
 <p>ただし、<strong>赤色の線は、AZ を跨いだ通信となっており、データ容量で課金される部分です。</strong> この課金有無は、ELB の種類で異なっています。 「よくある質問」にも以下のように記載があり、ALB のみ課金されません。</p>
 <p class="image-container"><img alt="xz_faq" src="img\\970b62f0dcfc9fe9.png"></p>
@@ -272,18 +272,18 @@
       </google-codelab-step>
     
       <google-codelab-step label="Connection Draining" duration="1">
-        <p>ELB の配下のノードを切り離す場合、いきなり切り離されると、ノードで実行中だった場合にアプリケーション側でエラーが出てしまいます。 そのため、切り離し対象のノードへのリクエストが終わるまで一定時間切り離しを待機してくれる機能です。 この機能は、デフォルトで有効化されています。 待機時間のデフォルトで 300秒となっており、最大で 3,600 秒まで設定できます。 指定された待機時間に達した場合は、強制的に切り離しが実施されます。</p>
+        <p>ELB の配下のノードを切り離す場合、いきなり切り離されると、ノードで実行中だった場合にアプリケーション側でエラーが出てしまいます。 そのため、切り離し対象のノードへのリクエストが終わるまで一定時間切り離しを待機してくれる機能です。 この機能は、デフォルトで有効化されています。 待機時間のデフォルトで 300 秒となっており、最大で 3,600 秒まで設定できます。 指定された待機時間に達した場合は、強制的に切り離しが実施されます。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="アクセスログ" duration="2">
-        <p>ELB のアクセスログは、S3に出力することができます。アクセスログは5分ごとに出力されます。</p>
+        <p>ELB のアクセスログは、S3 に出力することができます。アクセスログは 5 分ごとに出力されます。</p>
 <p>出力されるログファイルのキーは、次のようになっています。</p>
 <pre><code language="language-text" class="language-text">bucket[/prefix]/AWSLogs/aws-account-id/elasticloadbalancing/region/yyyy/mm/dd/aws-account-id_elasticloadbalancing_region_app.load-balancer-id_end-time_ip-address_random-string.log.gz
 </code></pre>
-<p>ロードバランサーのアクセスログを出力する AWS アカウントIDはリージョンで異なるため、S3 バケットのバケットポリシーを設定する場合は注意が必要です。 リージョンとアカウント ID の対応は次のドキュメントを参照します。</p>
-<p>東京リージョンの場合は、アカウントID「582318560864」を指定して、次のように記述します。</p>
+<p>ロードバランサーのアクセスログを出力する AWS アカウント ID はリージョンで異なるため、S3 バケットのバケットポリシーを設定する場合は注意が必要です。 リージョンとアカウント ID の対応は次のドキュメントを参照します。</p>
+<p>東京リージョンの場合は、アカウント ID「582318560864」を指定して、次のように記述します。</p>
 <pre><code language="language-json" class="language-json">{
   &#34;Version&#34;: &#34;2012-10-17&#34;,
   &#34;Statement&#34;: [
@@ -308,7 +308,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="他のサービスとの連携" duration="1">
+      <google-codelab-step label="📖 他のサービスとの連携" duration="1">
         <ul>
 <li>独自ドメインを使いたい <ul>
 <li>Amazon Route 53</li>

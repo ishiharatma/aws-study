@@ -7,17 +7,17 @@ published: true
 
 # Amazon Elastic Container Service (Amazon ECS)
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Amazon Elastic Container Service (Amazon ECS)](#amazon-elastic-container-service-amazon-ecs)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon ECS とは](#amazon-ecs-とは)
   - [ハンズオン](#ハンズオン)
   - [ECS の構成要素](#ecs-の構成要素)
@@ -25,10 +25,10 @@ published: true
   - [サービス：実行中のタスクを管理する単位](#サービス実行中のタスクを管理する単位)
   - [タスク：起動する１つ以上のコンテナの集合](#タスク起動する１つ以上のコンテナの集合)
   - [タスク定義：タスクを作成する定義テンプレート](#タスク定義タスクを作成する定義テンプレート)
-    - [memoryReservation（ソフト制限）とmemory（ハード制限）の組み合わせ](#memoryreservationソフト制限とmemoryハード制限の組み合わせ)
+    - [memoryReservation（ソフト制限）と memory（ハード制限）の組み合わせ](#memoryreservationソフト制限と-memoryハード制限の組み合わせ)
   - [ECS クラスタ作成手順](#ecs-クラスタ作成手順)
   - [AWS Copilot](#aws-copilot)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon ECS とは
 
@@ -40,11 +40,11 @@ Duration: 2:45:12
 
 ![blackbelt-ecs](/images/ecs/blackbelt-ecs-s.jpg)
 
-【AWS Black Belt Online Seminar】[CON201 ECS入門(YouTube)](https://www.youtube.com/watch?v=XAyrpXj4TVA)(0:20:28)
+【AWS Black Belt Online Seminar】[CON201 ECS 入門(YouTube)](https://www.youtube.com/watch?v=XAyrpXj4TVA)(0:20:28)
 
 ![blackbelt-ecs-start](/images/ecs/blackbelt-ecs-start-s.jpg)
 
-【AWS Black Belt Online Seminar】[CON202 ECS Fargate入門(YouTube)](https://www.youtube.com/watch?v=5fXwkTgWrjw)(0:16:29)
+【AWS Black Belt Online Seminar】[CON202 ECS Fargate 入門(YouTube)](https://www.youtube.com/watch?v=5fXwkTgWrjw)(0:16:29)
 
 ![blackbelt-ecs-fargate](/images/ecs/blackbelt-ecs-fargate-start-s.jpg)
 
@@ -58,7 +58,7 @@ Duration: 2:45:12
 
 ![blackbelt-ecs-cp](/images/ecs/blackbelt-ecs-cp-s.jpg)
 
-【AWS Black Belt Online Seminar】 [CON303 Amazon Elastic Container Service − EC２ / Fargate Spot ことはじめ](https://www.youtube.com/watch?v=fvzbLMrteZg)(0:20:34)
+【AWS Black Belt Online Seminar】 [CON303 Amazon Elastic Container Service − EC ２ / Fargate Spot ことはじめ](https://www.youtube.com/watch?v=fvzbLMrteZg)(0:20:34)
 
 ![blackbelt-ecs-ec2-spot](/images/ecs/blackbelt-ecs-ec2-spot-s.jpg)
 
@@ -102,7 +102,7 @@ Fargate の場合は、どのインスタンスで動いているかは隠ぺい
 
 [Amazon ECS のサービスクォータ](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/service-quotas.html) の制限もあるので、クラスターを分けることで、クォータの制限を回避できる場合があります。
 
-また、「Container Insights」を有効化したクラスタと無効化したクラスタを作成することで、CloudWatchのカスタムメトリクスの不要なコストを削減することもできます。
+また、「Container Insights」を有効化したクラスタと無効化したクラスタを作成することで、CloudWatch のカスタムメトリクスの不要なコストを削減することもできます。
 
 ## サービス：実行中のタスクを管理する単位
 
@@ -127,7 +127,7 @@ Duration: 0:01:00
 
 Duration: 0:05:00
 
-[Amazon ECSの タスク定義](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html)
+[Amazon ECS の タスク定義](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html)
 
 ![ecs-components-4](/images/ecs/ecs-components_no-4.jpg)
 
@@ -135,46 +135,41 @@ Duration: 0:05:00
 
 ```json
 {
-   "containerDefinitions": [ 
-      { 
-         "command": [
-            "/bin/sh -c \"echo '<html> <head> <title>Amazon ECS Sample App</title> <style>body {margin-top: 40px; background-color: #333;} </style> </head><body> <div style=color:white;text-align:center> <h1>Amazon ECS Sample App</h1> <h2>Congratulations!</h2> <p>Your application is now running on a container in Amazon ECS.</p> </div></body></html>' >  /usr/local/apache2/htdocs/index.html && httpd-foreground\""
-         ],
-         "entryPoint": [
-            "sh",
-            "-c"
-         ],
-         "essential": true,
-         "image": "httpd:2.4",
-         "logConfiguration": { 
-            "logDriver": "awslogs",
-            "options": { 
-               "awslogs-group" : "/ecs/fargate-task-definition",
-               "awslogs-region": "us-east-1",
-               "awslogs-stream-prefix": "ecs"
-            }
-         },
-         "name": "sample-fargate-app",
-         "portMappings": [ 
-            { 
-               "containerPort": 80,
-               "hostPort": 80,
-               "protocol": "tcp"
-            }
-         ]
-      }
-   ],
-   "cpu": "256",
-   "executionRoleArn": "arn:aws:iam::012345678910:role/ecsTaskExecutionRole",
-   "family": "fargate-task-definition",
-   "memory": "512",
-   "networkMode": "awsvpc",
-   "runtimePlatform": {
-        "operatingSystemFamily": "LINUX"
-    },
-   "requiresCompatibilities": [ 
-       "FARGATE" 
-    ]
+  "containerDefinitions": [
+    {
+      "command": [
+        "/bin/sh -c \"echo '<html> <head> <title>Amazon ECS Sample App</title> <style>body {margin-top: 40px; background-color: #333;} </style> </head><body> <div style=color:white;text-align:center> <h1>Amazon ECS Sample App</h1> <h2>Congratulations!</h2> <p>Your application is now running on a container in Amazon ECS.</p> </div></body></html>' >  /usr/local/apache2/htdocs/index.html && httpd-foreground\""
+      ],
+      "entryPoint": ["sh", "-c"],
+      "essential": true,
+      "image": "httpd:2.4",
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/fargate-task-definition",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "name": "sample-fargate-app",
+      "portMappings": [
+        {
+          "containerPort": 80,
+          "hostPort": 80,
+          "protocol": "tcp"
+        }
+      ]
+    }
+  ],
+  "cpu": "256",
+  "executionRoleArn": "arn:aws:iam::012345678910:role/ecsTaskExecutionRole",
+  "family": "fargate-task-definition",
+  "memory": "512",
+  "networkMode": "awsvpc",
+  "runtimePlatform": {
+    "operatingSystemFamily": "LINUX"
+  },
+  "requiresCompatibilities": ["FARGATE"]
 }
 ```
 
@@ -187,7 +182,7 @@ Duration: 0:05:00
   - EC2
   - 外部
 - [ランタイムプラットフォーム](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html#runtime-platform)
-  - Fargate では必須のパラメータで、operatingSystemFamily とcpuArchitectureを指定します。デフォルトは、Linux/X86_64 です。
+  - Fargate では必須のパラメータで、operatingSystemFamily と cpuArchitecture を指定します。デフォルトは、Linux/X86_64 です。
   - Linux/X86_64
   - Linux/ARM64
   - Windows
@@ -196,13 +191,13 @@ Duration: 0:05:00
   - 起動タイプが `EC2` の場合は省略可能です。省略した場合は、EC2 インスタンスのスペックが上限となります。
   - 起動タイプが `Fargate` の場合は特定の組み合わせのみ指定可能です。
 - [ネットワークモード](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html#network_mode)
-  - awsvpc（タスクにENIが割り当てられる）
-  - host（ホストのENIに直接マッピング）
+  - awsvpc（タスクに ENI が割り当てられる）
+  - host（ホストの ENI に直接マッピング）
   - bridge（ホスト内でのみ）
   - none(外部へ接続できない)
   - 詳細はこちら [Amazon ECS タスクネットワーキング](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 - [タスク実行ロール](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html#execution_role_arn)
-  - [Amazon ECS タスク実行IAM ロール](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_execution_IAM_role.html) とは、タスクを起動する際に必要となる権限を設定したロールです。主に次のようなものを設定しておきます。  
+  - [Amazon ECS タスク実行 IAM ロール](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_execution_IAM_role.html) とは、タスクを起動する際に必要となる権限を設定したロールです。主に次のようなものを設定しておきます。
     - ECR から コンテナイメージを Pull するための権限
     - CloudWatch Logs にログを記録するための権限
 - [タスクロール](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definition_parameters.html#task_role_arn)
@@ -223,17 +218,17 @@ Duration: 0:05:00
   - cpu
     - タスク内のコンテナの総 cpu は、タスクサイズ で指定した cpu を超えることはできません。
 
-### memoryReservation（ソフト制限）とmemory（ハード制限）の組み合わせ
+### memoryReservation（ソフト制限）と memory（ハード制限）の組み合わせ
 
 Duration: 0:01:00
 
 `memoryReservation` と `memory` のパラメータは指定有無などの組み合わせによって割り当てが異なります。
 
-| memoryReservation（ソフト制限） | memory（ハード制限） | 予約メモリ～上限メモリ                          |
-| ------------------------------- | -------------------- | ----------------------------------------------- |
-| 未指定                          | 3072 MiB             | 3072 MiB ～ 3072 MiB                            |
-| 2048 MiB                        | 未指定               | 2048 MiB ～  タスクサイズのmemory / EC2のメモリ |
-| 2048 MiB                        | 3072 MiB             | 2048 MiB ～ 3072 MiB                            |
+| memoryReservation（ソフト制限） | memory（ハード制限） | 予約メモリ～上限メモリ                           |
+| ------------------------------- | -------------------- | ------------------------------------------------ |
+| 未指定                          | 3072 MiB             | 3072 MiB ～ 3072 MiB                             |
+| 2048 MiB                        | 未指定               | 2048 MiB ～ タスクサイズの memory / EC2 のメモリ |
+| 2048 MiB                        | 3072 MiB             | 2048 MiB ～ 3072 MiB                             |
 
 ## ECS クラスタ作成手順
 
@@ -254,7 +249,7 @@ Duration: 0:00:30
    ```sh
    aws ecs register-task-definition --cli-input-json file://$HOME/tasks/fargate-task.json
    ```
-   
+
    ![ecs-create-01-taskdef](/images/ecs/ecs-create-01-taskdef-s.jpg)
 
 5. サービスの作成
@@ -281,6 +276,6 @@ AWS Cpilot(コパイロット)とは、Amazon ECS CLI の後継にあたるも�
 詳しい使い方はこちら。
 https://aws.github.io/copilot-cli/ja/
 
-## まとめ
+## 📖 まとめ
 
 ![ecs](/images/all/ecs.png)

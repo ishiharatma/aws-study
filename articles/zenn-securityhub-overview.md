@@ -7,19 +7,19 @@ published: false
 
 # AWS Security Hub
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [AWS Security Hub](#aws-security-hub)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [AWS Security Hub とは](#aws-security-hub-とは)
   - [特徴](#特徴)
   - [Security Hub の有効化](#security-hub-の有効化)
@@ -31,7 +31,7 @@ Duration: 00:01:00
     - [Severity](#severity)
     - [「AWS Foundational Security Best Practices」のみ](#aws-foundational-security-best-practicesのみ)
   - [Security Hub 自動応答と修復](#security-hub-自動応答と修復)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## AWS Security Hub とは
 
@@ -363,6 +363,6 @@ Amazon EventBridge を使用して、つぎのようなリソースを自動的�
 
 ![automated-security-response-on-aws_architecture_diagram.png](/images/securityhub/automated-security-response-on-aws_architecture_diagram.png)
 
-## まとめ
+## 📖 まとめ
 
 ![security-hub](/images/all/securityhub.png)

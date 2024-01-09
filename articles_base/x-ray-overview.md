@@ -1,15 +1,35 @@
 # AWS X-Ray
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+## 👀 Contents
+
+- [AWS X-Ray](#aws-x-ray)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
+  - [AWS X-Ray とは](#aws-x-ray-とは)
+  - [AWS X-Ray の構造](#aws-x-ray-の構造)
+    - [トレース](#トレース)
+    - [セグメント](#セグメント)
+    - [サブセグメント](#サブセグメント)
+    - [トレースヘッダー](#トレースヘッダー)
+    - [フィルタ式](#フィルタ式)
+    - [注釈とメタデータ](#注釈とメタデータ)
+  - [利用パターン](#利用パターン)
+  - [サービスマップ](#サービスマップ)
+  - [X-Ray API でのデータ送信と取得](#x-ray-api-でのデータ送信と取得)
+  - [X-Ray Analytics](#x-ray-analytics)
+  - [X-Ray Insights](#x-ray-insights)
+  - [サンプリング](#サンプリング)
+
 ## AWS X-Ray とは
 
 AWS X-Ray はアプリケーションが処理するリクエストに関するデータを収集するサービスです。 データを表示、フィルタリング、洞察を取得して問題の識別や最適化の機会を識別するために使用するツールを提供します。
-Amazon EC2、Amazon ECS、AWS Lambda、AWS Elastic Beanstalk、API Gatewayなどで実行しているアプリケーションで使用できるデバッグツールです。
+Amazon EC2、Amazon ECS、AWS Lambda、AWS Elastic Beanstalk、API Gateway などで実行しているアプリケーションで使用できるデバッグツールです。
 
 【AWS Black Belt Online Seminar】[AWS X-Ray(YouTube)](https://www.youtube.com/watch?v=oVVTS1NgWSQ)(54:47)
 
@@ -39,11 +59,11 @@ X-Ray の送信を行うサービス、X-Ray SDK、X-Ray デーモンを使用�
 
 ```json
 {
-  "name" : "example.com",
-  "id" : "70de5b6f19ff9a0a",
-  "start_time" : 1.478293361271E9,
-  "trace_id" : "1-581cf771-a006649127e371903a2de979",
-  "end_time" : 1.478293361449E9
+  "name": "example.com",
+  "id": "70de5b6f19ff9a0a",
+  "start_time": 1.478293361271e9,
+  "trace_id": "1-581cf771-a006649127e371903a2de979",
+  "end_time": 1.478293361449e9
 }
 ```
 
@@ -76,15 +96,15 @@ DynamoDB のような X-Ray の送信を直接行わないサービスは、呼�
 
 ### トレースヘッダー
 
- X-Ray SDK が、ＨTTP リクエスト に不要するヘッダー（X-Amzn-Trace-Id）です。
+X-Ray SDK が、Ｈ TTP リクエスト に不要するヘッダー（X-Amzn-Trace-Id）です。
 
- ```text
- X-Amzn-Trace-Id: Root=1-57…93;Parent=53…d8;Sampled=1
+```text
+X-Amzn-Trace-Id: Root=1-57…93;Parent=53…d8;Sampled=1
 
- // Root: トレースID
- // Parent: 親セグメントID
- // Sampled: サンプリング対象かどうか
- ```
+// Root: トレースID
+// Parent: 親セグメントID
+// Sampled: サンプリング対象かどうか
+```
 
 ### フィルタ式
 
@@ -107,7 +127,7 @@ http.url CONTAINS "/api/game/"
 
 「注釈（Annotations）」とは、フィルタ式で使用されるインデックス化されたキーと値のペアのことです。
 AWS サービスによってセグメントに追加されていますが、独自の注釈も セグメントドキュメントに追加することで使用できます。
-トレースごとに最大50のインデックスを保持します。
+トレースごとに最大 50 のインデックスを保持します。
 
 以下のように追加することができます。
 
@@ -155,15 +175,15 @@ AWS サービスによってセグメントに追加されていますが、独�
   - ![xray-lambda](/images/xray/xray-lambda.png)
   - コンソールでアクティブトレースを設定すると実行ロールに `AWSXRayDaemonWriteAccess` が追加されます。
   - ローカル環境で動作確認を行う場合は、環境変数に以下が必要です。実環境では設定されています。
-    - _X_AMZN_TRACE_ID
+    - \_X_AMZN_TRACE_ID
       - Root=1-5adffa5a-fff4d301c626fcc26d6336b5;Parent=0bba66737cd163b4;Sampled=0
     - AWS_XRAY_CONTEXT_MISSING
       - LOG_ERROR
     - AWS_XRAY_DAEMON_ADDRESS
       - 169.254.79.2:2000
 - Amazon API Gateway
-  - [Amazon API GatewayのアクティブトレーシングサポートAWS X-Ray](https://docs.aws.amazon.com/ja_jp/xray/latest/devguide/xray-services-apigateway.html)
-  - API Gateway コンソールから、対象ステージを選択し、ログ/トレースから、「X-Rayトレースを有効にする」にチェックを入れます。
+  - [Amazon API Gateway のアクティブトレーシングサポート AWS X-Ray](https://docs.aws.amazon.com/ja_jp/xray/latest/devguide/xray-services-apigateway.html)
+  - API Gateway コンソールから、対象ステージを選択し、ログ/トレースから、「X-Ray トレースを有効にする」にチェックを入れます。
   - ![xray-apigw](/images/xray/xray-apigw.png)
 - その他 AWS サービスと統合されているもの
   - [AWS X-Ray と他の AWS のサービスの統合](https://docs.aws.amazon.com/ja_jp/xray/latest/devguide/xray-services.html)

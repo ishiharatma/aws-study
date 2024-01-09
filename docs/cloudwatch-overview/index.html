@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#cloudwatch" target="_blank">CloudWatch</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#cloudwatch-%E3%81%A8%E3%81%AF" target="_blank">CloudWatch とは</a></li>
 <li><a href="#%E3%82%AA%E3%83%96%E3%82%B6%E3%83%BC%E3%83%90%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3observability%E3%81%A8%E3%81%AF" target="_blank">オブザーバビリティ（Observability）とは</a></li>
 <li><a href="#cloudwatch-metrics" target="_blank">CloudWatch Metrics</a></li>
@@ -62,7 +62,7 @@
 <li><a href="#cloudwatch-real-user-monitoring-rum" target="_blank">CloudWatch Real-User Monitoring (RUM)</a></li>
 <li><a href="#cloudwatch-anomaly-detection" target="_blank">CloudWatch Anomaly Detection</a></li>
 <li><a href="#one-observability-workshop" target="_blank">One Observability Workshop</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -90,9 +90,9 @@
         <p>「可観測性」といい、システムの外部から、システム内部の状態が推測・把握できるかという意味です。</p>
 <p>システムの状態把握に必要なものと、それに対応する AWS サービスは次のとおりです。</p>
 <ul>
-<li>ログ　⇒ CloudWatch Logs</li>
-<li>メトリクス　⇒ CloudWatch Metrics</li>
-<li>トレース　⇒ X-Ray</li>
+<li>ログ　 ⇒ CloudWatch Logs</li>
+<li>メトリクス　 ⇒ CloudWatch Metrics</li>
+<li>トレース　 ⇒ X-Ray</li>
 </ul>
 
 
@@ -131,7 +131,7 @@
     
       <google-codelab-step label="CloudWatch Metric Streams" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html" target="_blank">メトリクスストリームの使用</a></p>
-<p>ほぼリアルタイムにメトリクスを Kinesis 経由で送信するサービスです。 AWS サービスはもちろん、New Relic や Datadog のような外部の SaaS 、HTTPエンドポイントと連携できます。</p>
+<p>ほぼリアルタイムにメトリクスを Kinesis 経由で送信するサービスです。 AWS サービスはもちろん、New Relic や Datadog のような外部の SaaS 、HTTP エンドポイントと連携できます。</p>
 <p>設定は、コンソールから メトリクス＞ストリーム を選択し、[メトリクスストリームの作成]から作成できます。</p>
 <p class="image-container"><img alt="CloudWatchMetricStreams1" src="img\\4198b0070f9c684d.png"></p>
 <p class="image-container"><img alt="CloudWatchMetricStreams2" src="img\\63426e31bf197c0f.png"></p>
@@ -143,7 +143,7 @@
       <google-codelab-step label="CloudWatch Alarms" duration="3">
         <p class="image-container"><img alt="CloudWatchAlarm" src="img\\b3cdf707a1686368.png"></p>
 <p class="image-container"><img alt="CloudWatchAlarm1" src="img\\8b39a54229bf483e.jpg"></p>
-<p>メトリクスを監視し、敷居値を超えた場合にアクションを実行できます。 アクションには、SNSのトピックや Lambda を呼び出すなどができます</p>
+<p>メトリクスを監視し、敷居値を超えた場合にアクションを実行できます。 アクションには、SNS のトピックや Lambda を呼び出すなどができます</p>
 <p>２つ以上のアラームを組み合わせた <code>複合アラーム</code> も設定できます。</p>
 <pre><code language="language-text" class="language-text">ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh)
 </code></pre>
@@ -178,7 +178,7 @@
     
       <google-codelab-step label="CloudWatch Dashboards" duration="1">
         <p class="image-container"><img alt="CloudWatchDashboards" src="img\\a403a8a5f867c98c.jpg"></p>
-<p>CloudWatchにて収集したデータをグラフなどで表示するサービスです</p>
+<p>CloudWatch にて収集したデータをグラフなどで表示するサービスです</p>
 
 
       </google-codelab-step>
@@ -223,7 +223,7 @@ FROM namespace | SCHEMA(...)
       <google-codelab-step label="CloudWatch Container Insights" duration="3">
         <p class="image-container"><img alt="CloudWatchContainerInsights" src="img\\6ec2f468c76c5611.jpg"></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/ContainerInsights.html" target="_blank">Container Insights の使用</a></p>
-<p>タスクやコンテナ単位のメトリクスが、Container Insightsによって取得できるようになるサービスです。</p>
+<p>タスクやコンテナ単位のメトリクスが、Container Insights によって取得できるようになるサービスです。</p>
 <p class="image-container"><img alt="CloudWatchContainerInsights1" src="img\\a9e998c79a93db4.jpg"></p>
 <p class="image-container"><img alt="CloudWatchContainerInsights1" src="img\\45cf78abac2ab5d1.jpg"></p>
 <p>ECS コンテナのクラスター設定で <code>有効</code> にすることで利用できます。</p>
@@ -250,7 +250,7 @@ FROM namespace | SCHEMA(...)
       <google-codelab-step label="CloudWatch Contributor Insights" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/ContributorInsights.html" target="_blank">Contributor Insights を使用した高カーディナリティデータの分析</a></p>
 <p class="image-container"><img alt="CloudWatchContributorInsights" src="img\\3208b4e1fd8a555.jpg"></p>
-<p>CloudWatch Logs の特定箇所を抽出して、可視化することができます。 例えば、VPCフローログを CloudWatch Logs に出力している場合、サンプルルールを使用することで簡単に可視化できます。</p>
+<p>CloudWatch Logs の特定箇所を抽出して、可視化することができます。 例えば、VPC フローログを CloudWatch Logs に出力している場合、サンプルルールを使用することで簡単に可視化できます。</p>
 <p class="image-container"><img alt="CloudWatchContributorInsights2" src="img\\14760e06e37da476.jpg"></p>
 <p class="image-container"><img alt="CloudWatchContributorInsights3" src="img\\1af2a125d8930f55.jpg"></p>
 <p>他にも CloudWatch Logs にログを出力していれば、アプリケーションのログを分析することが可能です。</p>
@@ -261,7 +261,7 @@ FROM namespace | SCHEMA(...)
       <google-codelab-step label="CloudWatch Application Insights" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html" target="_blank">Amazon CloudWatch Application Insights</a></p>
 <p>特定のリソースのメトリクスだけでなく、リソースグループという単位で Amazon EC2 インスタンスを使用するアプリケーションをまとめて監視、通知できるサービスです。</p>
-<p>CloudWatch コンソールから、[Application Insightの使用を開始する] から設定するだけです。</p>
+<p>CloudWatch コンソールから、[Application Insight の使用を開始する] から設定するだけです。</p>
 <p class="image-container"><img alt="CloudWatchApplicationInsights1" src="img\\563da58f705c6da4.png"></p>
 <p class="image-container"><img alt="CloudWatchApplicationInsights2" src="img\\78c9880e807640e5.png"></p>
 <p>セットアップ後、アラームも自動で作成されています。</p>
@@ -274,7 +274,7 @@ FROM namespace | SCHEMA(...)
     
       <google-codelab-step label="CloudWatch ServiceLens" duration="3">
         <p class="image-container"><img alt="CloudWatchServiceLens" src="img\\296df2be71e4ecb2.jpg"></p>
-<p>様々なリソースの情報を1カ所に統合して可視化するサービスで、マイクロサービスなどで特に効果を発揮します。X-Ray と連携します。</p>
+<p>様々なリソースの情報を 1 カ所に統合して可視化するサービスで、マイクロサービスなどで特に効果を発揮します。X-Ray と連携します。</p>
 <p class="image-container"><img alt="CloudWatchServiceLens1" src="img\\78db531f2f6bdc60.jpg"></p>
 <p class="image-container"><img alt="CloudWatchServiceLens2" src="img\\64fcd73aec2b4b6.jpg"></p>
 
@@ -296,7 +296,7 @@ FROM namespace | SCHEMA(...)
       <google-codelab-step label="CloudWatch Synthetics" duration="3">
         <p class="image-container"><img alt="CloudWatchSynthetics" src="img\\629a3935c3cc6b4a.jpg"></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries.html" target="_blank">模擬モニターリングの使用</a></p>
-<p>WebサイトやURL、REST APIに対してのモニタリングを自動で実行可能なサービスで、Webサイトの死活監視も可能です。 同様の機能に、Route53 の HealthCheck がありますが、こちらよりも複雑な条件を設定することができ、実際にユーザーがアクセスするようなパラメータを再現できます。</p>
+<p>Web サイトや URL、REST API に対してのモニタリングを自動で実行可能なサービスで、Web サイトの死活監視も可能です。 同様の機能に、Route53 の HealthCheck がありますが、こちらよりも複雑な条件を設定することができ、実際にユーザーがアクセスするようなパラメータを再現できます。</p>
 <p>テンプレートがあるので、簡単に作成することができます。</p>
 <p class="image-container"><img alt="CloudWatchSynthetics1" src="img\\1bf2b56957c530a0.jpg"></p>
 <p>失敗した場合はこのようになります。</p>
@@ -315,9 +315,9 @@ FROM namespace | SCHEMA(...)
     
       <google-codelab-step label="CloudWatch Evidently" duration="2">
         <p class="image-container"><img alt="CloudWatchEvidently" src="img\\49e11afd177d1769.jpg"></p>
-<p>機能フラグ(フィーチャーフラグ:Feature Flag)とA/Bテストが実施できるサービスです。</p>
+<p>機能フラグ(フィーチャーフラグ:Feature Flag)と A/B テストが実施できるサービスです。</p>
 <p>機能フラグとは、「コードを書き換えることなく動的にシステムの振る舞いを変更できる」開発手法です。</p>
-<p>たとえば、DBのエンドポイントを渡すことで動的に切り替える、特定のユーザーやある割合のユーザーのみに機能を公開し、徐々に割合を増やしていくといったケースで使われます。</p>
+<p>たとえば、DB のエンドポイントを渡すことで動的に切り替える、特定のユーザーやある割合のユーザーのみに機能を公開し、徐々に割合を増やしていくといったケースで使われます。</p>
 <p class="image-container"><img alt="CloudWatchEvidently1" src="img\\c07222bc9f3fa89a.jpg"></p>
 <p class="image-container"><img alt="CloudWatchEvidently2" src="img\\93c08d8e0ef5e49.jpg"></p>
 <p class="image-container"><img alt="CloudWatchEvidently3" src="img\\4431b8cf446343b3.jpg"></p>
@@ -336,8 +336,8 @@ FROM namespace | SCHEMA(...)
     
       <google-codelab-step label="CloudWatch Anomaly Detection" duration="3">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html" target="_blank">CloudWatch 異常検出の使用</a></p>
-<p>CloudWatchメトリクス上の異常値を自動検出ができるサービスです。</p>
-<p>CloudWatchアラームを作成するときに、適正な閾値を設定するのは容易ではありません。平日・休日、日中・夜間、キャンペーン時期などなど、考慮することが多いです。</p>
+<p>CloudWatch メトリクス上の異常値を自動検出ができるサービスです。</p>
+<p>CloudWatch アラームを作成するときに、適正な閾値を設定するのは容易ではありません。平日・休日、日中・夜間、キャンペーン時期などなど、考慮することが多いです。</p>
 <p>そのようなときに、利用するのが本サービスです。機械学習により異常値を自動検出できます。</p>
 <p class="image-container"><img alt="CloudWatchAnomalyDetection" src="img\\d25e247824fe929c.png"></p>
 <p>自動検出を有効にしたメトリクスでは、予想される範囲がグレーで表示され、異常値と判定したところが赤線になっています。</p>
@@ -349,14 +349,14 @@ FROM namespace | SCHEMA(...)
       </google-codelab-step>
     
       <google-codelab-step label="One Observability Workshop" duration="0">
-        <p>監視系のサービスを学べるワークショップ。3~4時間ほどで終わるが、下記構成図から分かるように様々なサービスを利用するので、ある程度の課金を覚悟して使う。</p>
+        <p>監視系のサービスを学べるワークショップ。3~4 時間ほどで終わるが、下記構成図から分かるように様々なサービスを利用するので、ある程度の課金を覚悟して使う。</p>
 <p>https://catalog.us-east-1.prod.workshops.aws/workshops/31676d37-bbe9-4992-9cd1-ceae13c5116c/ja-JP</p>
 <p class="image-container"><img alt="One Observability Workshop" src="img\\5ae4f1084ef39979.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="CloudWatch" src="img\\2c3814a586d5e484.png"></p>
 
 

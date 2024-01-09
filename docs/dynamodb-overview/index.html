@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#amazon-dynamodb" target="_blank">Amazon DynamoDB</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#amazon-dynamodb-%E3%81%A8%E3%81%AF" target="_blank">Amazon DynamoDB とは</a></li>
 <li><a href="#amazon-dynamodb-%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">Amazon DynamoDB のユースケース</a></li>
 <li><a href="#amazon-dynamodb-%E3%81%AE%E6%96%99%E9%87%91" target="_blank">Amazon DynamoDB の料金</a></li>
@@ -60,7 +60,7 @@
 <li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">バックアップ</a></li>
 <li><a href="#dynamodb-%E7%94%A8%E3%81%AE-nosql-workbench" target="_blank">DynamoDB 用の NoSQL Workbench</a></li>
 <li><a href="#%E8%A8%AD%E8%A8%88" target="_blank">設計</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -69,15 +69,15 @@
       </google-codelab-step>
     
       <google-codelab-step label="Amazon DynamoDB とは" duration="92">
-        <p>1桁ミリ秒単位で規模に応じたパフォーマンスを実現する高速で柔軟な NoSQL データベースのフルマネージドサービスです。</p>
-<p>CAP定理という、「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」をすべて達成することはできない、という決まりがあります。</p>
+        <p>1 桁ミリ秒単位で規模に応じたパフォーマンスを実現する高速で柔軟な NoSQL データベースのフルマネージドサービスです。</p>
+<p>CAP 定理という、「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」をすべて達成することはできない、という決まりがあります。</p>
 <p>DynamoDB は、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視して開発されています。</p>
 <p>DynamoDB は、「値」とそれを取得するための「キー」だけを格納するというシンプルな機能を持った「キーバリュー型」の形式でデータを格納します。</p>
 <p>【AWS Black Belt Online Seminar】<a href="%5Bxxx%5D(https://www.youtube.com/watch?v=RTfCVlo1EoA)" target="_blank">Amazon DocumentDB (with MongoDB Compatibility)(YouTube)</a>(41:38)</p>
 <p class="image-container"><img alt="DocumentDB" src="img\\9ec4b8eabac6441b.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=Wd5gbLQ2a1E" target="_blank">Amazon DynamoDB Advanced Design Pattern(YouTube)</a>(49:37)</p>
 <p class="image-container"><img alt="Advanced Design Pattern" src="img\\ae4b12d8e7bb12eb.jpg"></p>
-<p><a href="https://www.youtube.com/watch?v=cEl4TMM9oYw" target="_blank">【AWS Tech 再演】AWS の NoSQL 入門 〜Amazon ElastiCache, Amazon DynamoDB〜｜AWS Summit Tokyo 2017</a>(40:01)</p>
+<p><a href="https://www.youtube.com/watch?v=cEl4TMM9oYw" target="_blank">【AWS Tech 再演】AWS の NoSQL 入門 〜Amazon ElastiCache, Amazon DynamoDB〜｜ AWS Summit Tokyo 2017</a>(40:01)</p>
 <p class="image-container"><img alt="aws summit 2017" src="img\\2c20c4481783e340.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/dynamodb/" target="_blank">Amazon DynamoDB サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/dynamodb/?id=docs_gateway" target="_blank">Amazon DynamoDB ドキュメント</a></p>
@@ -93,7 +93,7 @@
 <li>広告やゲームなどのユーザー行動履歴</li>
 <li>モバイルアプリのバックエンド</li>
 <li>クリックストリーム</li>
-<li>IoTデータの蓄積</li>
+<li>IoT データの蓄積</li>
 <li>RDB のキャッシュ</li>
 </ul>
 <p>よくある構成は、「API Gateway / Lambda / DynamoDB」の組み合わせです。</p>
@@ -120,7 +120,7 @@
 <li>テーブルに１つしか設定できません</li>
 <li>各パーティションへのアクセスが均一になるような設計を行う</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-partition-key-design.html" target="_blank">パーティションキーを効率的に設計し、使用するためのベストプラクティス</a></li>
-<li>偏った状態では、「ホットパーティション問題」が発生します。DynamoDBでは、スループットはテーブル全体の設定でパーティションごとに均等に割り当てられる。パーティションに偏りがある場合、アクセスが集中しているパーティションのスループットが枯渇してしまいます。</li>
+<li>偏った状態では、「ホットパーティション問題」が発生します。DynamoDB では、スループットはテーブル全体の設定でパーティションごとに均等に割り当てられる。パーティションに偏りがある場合、アクセスが集中しているパーティションのスループットが枯渇してしまいます。</li>
 </ul>
 </li>
 <li>ソートキー <ul>
@@ -136,8 +136,8 @@
 </li>
 <li>グローバルセカンダリインデックス（GSI） <ul>
 <li>テーブルとパーティションキーまたはパーティション/ソートキーが異なるインデックスです。</li>
-<li>例えば、プライマリパーティションキーがCustomerID で、GSI のパーティションキーが郵便番号</li>
-<li>1 テーブルあたり最大で 5つの GSI を作成できます。</li>
+<li>例えば、プライマリパーティションキーが CustomerID で、GSI のパーティションキーが郵便番号</li>
+<li>1 テーブルあたり最大で 5 つの GSI を作成できます。</li>
 <li>既存テーブルに追加・削除ができます。</li>
 <li>スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。</li>
 <li>GSI に依存するテーブル設計であれば、RDS の利用も検討したほうがよい。</li>
@@ -146,7 +146,7 @@
 </li>
 <li>ローカルセカンダリインデックス（LSI） <ul>
 <li>テーブルとパーティションキーは同じですが、ソートキーが異なるインデックスです。</li>
-<li>1 テーブルあたり最大で 5つの LSI を作成できます。</li>
+<li>1 テーブルあたり最大で 5 つの LSI を作成できます。</li>
 <li>スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。</li>
 <li>GSI と違い、既存テーブルに追加・削除ができません。</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank">セカンダリインデックスを使用したデータアクセス性の向上</a></li>
@@ -160,8 +160,8 @@
       <google-codelab-step label="Amazon DynamoDB のストレージ" duration="2">
         <p>DynamoDB のストレージは、容量制限がありません。自動的に拡張していきます。1GB 単位で課金されていきます。</p>
 <p>東京リージョンでは、0.285 USD/GB （標準ストレージクラス）です。</p>
-<p>同じデータベースサービスである Aurora は 0.11 USD/GB ですので、2倍です。</p>
-<p>S3（Standard） は、0.025 USD/GB ですので 10倍となります。</p>
+<p>同じデータベースサービスである Aurora は 0.11 USD/GB ですので、2 倍です。</p>
+<p>S3（Standard） は、0.025 USD/GB ですので 10 倍となります。</p>
 <p>ストレージ料金としては、決して安くないサービスであるので大容量のデータ保管には向いていないと言えます。</p>
 <p>ただ、ストレージクラスは以下の２つが選択できますので、利用用途によってはかなり料金を抑えられる可能性があります。</p>
 <ul>
@@ -183,15 +183,15 @@
       <google-codelab-step label="Amazon DynamoDB の耐久性" duration="1">
         <p class="image-container"><img alt="3az" src="img\\30690d8ee5b6e6e3.png"></p>
 <p>3 つの AZ にデータがレプリケートされることで冗長化されます。書き込みについては、少なくとも 2AZ に書き込みが完了した時点で、応答（Ack）が返却されます。</p>
-<p>最終的に、全てのAZに反映されます。</p>
+<p>最終的に、全ての AZ に反映されます。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Amazon DynamoDB の読み込み整合性" duration="2">
-        <p>先に述べたように、DynamoDBは CAP定理「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」のうち、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視した設計となっているため、リレーショナルデータベースのような「一貫性」は保証されておらず、データはいつか必ず書き込まれる（通常は 1秒以内）という動作になります。</p>
+        <p>先に述べたように、DynamoDB は CAP 定理「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」のうち、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視した設計となっているため、リレーショナルデータベースのような「一貫性」は保証されておらず、データはいつか必ず書き込まれる（通常は 1 秒以内）という動作になります。</p>
 <p>そのため、デフォルトでは <code>結果整合性のある読み込み</code> となります。この読み取りでは、最新の書き込み結果が反映されていない場合がある読み込みです。</p>
-<p>もう一つの読み込みとして、<code>強い整合性のある読み込み</code> があります。Consistent Readオプションを付けたリクエストでは、この読み込みが行われ、リクエストを受け取る前までの最新のデータを読み取ることができます。Consistent Readオプションを付けられるのは、「GetItem, Query, Scan」です。</p>
+<p>もう一つの読み込みとして、<code>強い整合性のある読み込み</code> があります。Consistent Read オプションを付けたリクエストでは、この読み込みが行われ、リクエストを受け取る前までの最新のデータを読み取ることができます。Consistent Read オプションを付けられるのは、「GetItem, Query, Scan」です。</p>
 <p>また、<code>強い整合性のある読み込み</code> は、<code>結果整合性のある読み込み</code> に比べてスループットキャパシティ（後述）の消費が大きくなります。</p>
 
 
@@ -200,17 +200,17 @@
       <google-codelab-step label="Amazon DynamoDB のパフォーマンス" duration="3">
         <p>スループットキャパシティといった、読み取り、書き込みに必要なスループットキャパシティをテーブル単位で割り当てることができます。</p>
 <p>テーブルにパーティションがある場合は、読み取り、書き込みはパーティションごとに均等に割り当てられます。</p>
-<p>読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KBの項目に対して、結果整合性のある読み取りの場合 2回/秒、強い整合性のある読み取りの場合 1回/秒、といった読み取り性能を表す単位です。</p>
-<p>書き込みのスループットは、WCU(Write Capacity Unit)という単位で割り当てます。1 WCU は、最大 1KB の項目に対して、1回/秒の書き込み性能を表す単位です。</p>
+<p>読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒、といった読み取り性能を表す単位です。</p>
+<p>書き込みのスループットは、WCU(Write Capacity Unit)という単位で割り当てます。1 WCU は、最大 1KB の項目に対して、1 回/秒の書き込み性能を表す単位です。</p>
 <p>DynamoDB を利用する場合は、テーブルごとに RCU と WCU を設計する必要があります。ただし、どれだけ必要か事前に見積もることが困難な場合が多いです。</p>
 <p>そのような用途のために、「オンデマンド」と「プロビジョニング済み」という 2 種類のキャパシティーモードがあります。</p>
-<p>キャパシティモードは24時間に1回だけ相互に変更することができます。</p>
+<p>キャパシティモードは 24 時間に 1 回だけ相互に変更することができます。</p>
 <p>「プロビジョニング済み」から「オンデマンド」に変更すると、Auto Scaling の設定が削除されるので、もう一度「プロビジョニング済み」に戻す場合は注意が必要です。</p>
 <ul>
 <li>オンデマンドキャパシティモード <ul>
 <li>アクセスのピークが予測困難な場合に適したモードで、事前のキャパシティの設定が不要です</li>
 <li>使用したユニット数に応じた従量課金となるため、要求が多いとコストが増加します</li>
-<li>自動的にキャパシティが調整されますが、一度キャパシティが自動調整されたのち、30分以内に前回のピークの2倍を超えるトラフィックが発生するとスロットリング（一時的なキャパシティ不足）が発生します</li>
+<li>自動的にキャパシティが調整されますが、一度キャパシティが自動調整されたのち、30 分以内に前回のピークの 2 倍を超えるトラフィックが発生するとスロットリング（一時的なキャパシティ不足）が発生します</li>
 </ul>
 </li>
 <li>プロビジョニング済みキャパシティーモード <ul>
@@ -509,8 +509,8 @@ aws dynamodb delete-item \
       <google-codelab-step label="TTL" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/TTL.html" target="_blank">DynamoDB の有効期限 (TTL) を使用して項目を期限切れにする</a></p>
 <p>テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。</p>
-<p>削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは48時間以内に削除されます。</p>
-<p>TTLとして指定する属性は、Number型のUnixtime（ミリ秒無し）である必要があります。</p>
+<p>削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは 48 時間以内に削除されます。</p>
+<p>TTL として指定する属性は、Number 型の Unixtime（ミリ秒無し）である必要があります。</p>
 
 
       </google-codelab-step>
@@ -522,9 +522,9 @@ aws dynamodb delete-item \
 <p>また、制約もあるため、利用する場合は確認しておきます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/ServiceQuotas.html#limits-dynamodb-transactions" target="_blank">DynamoDB のトランザクション</a></p>
 <ul>
-<li>トランザクションには、100件を超えるアクションを含めることはできない</li>
+<li>トランザクションには、100 件を超えるアクションを含めることはできない</li>
 <li>トランザクションに 4MB を超えるデータを含めることはできない</li>
-<li>同一テーブルに2つのアクションを実行できない　など</li>
+<li>同一テーブルに 2 つのアクションを実行できない　など</li>
 </ul>
 
 
@@ -532,7 +532,7 @@ aws dynamodb delete-item \
     
       <google-codelab-step label="DynamoDB ストリーム" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html" target="_blank">DynamoDB Streams の変更データキャプチャ</a></p>
-<p>テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24時間保存されます。</p>
+<p>テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24 時間保存されます。</p>
 <p>DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。</p>
 <p>ストリームの設定は、テーブル作成時、既存テーブルに対してもいつでも有効または無効にすることができます。</p>
 <p>ストリームは非同期的に動作するため、テーブルのパフォーマンスへの影響はありません。</p>
@@ -570,8 +570,8 @@ aws dynamodb delete-item \
     --expression-attribute-values file://values.json
 </code></pre>
 <pre><code language="language-json" class="language-json">{
-    &#34;:newval&#34;:{&#34;N&#34;:&#34;8&#34;},
-    &#34;:currval&#34;:{&#34;N&#34;:&#34;10&#34;}
+  &#34;:newval&#34;: { &#34;N&#34;: &#34;8&#34; },
+  &#34;:currval&#34;: { &#34;N&#34;: &#34;10&#34; }
 }
 </code></pre>
 <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Expressions.ConditionExpressions.html" target="_blank">条件式</a></p>
@@ -639,7 +639,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="dynamodb" src="img\\93755de0b8f5b28d.png"></p>
 
 

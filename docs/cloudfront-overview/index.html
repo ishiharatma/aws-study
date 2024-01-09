@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#amazon-cloudfront" target="_blank">Amazon CloudFront</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#amazon-cloudfront-%E3%81%A8%E3%81%AF" target="_blank">Amazon CloudFront とは</a></li>
 <li><a href="#cloudfront-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">CloudFront の基本</a><ul>
 <li><a href="#%E3%83%87%E3%82%A3%E3%82%B9%E3%83%88%E3%83%AA%E3%83%93%E3%83%A5%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">ディストリビューション</a></li>
@@ -56,13 +56,13 @@
 <li><a href="#alb-%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%B3%E3%81%B8%E3%81%AE%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E5%88%B6%E9%99%90" target="_blank">ALB オリジンへのアクセス制限</a></li>
 <li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%82%92%E5%9C%B0%E7%90%86%E7%9A%84%E3%81%AB%E5%88%B6%E9%99%90" target="_blank">コンテンツを地理的に制限</a></li>
 <li><a href="#aws-shield" target="_blank">AWS Shield</a></li>
-<li><a href="#aws-waf%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB" target="_blank">AWS WAFによるアクセスコントロール</a></li>
+<li><a href="#aws-waf-%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%B3%E3%83%B3%E3%83%88%E3%83%AD%E3%83%BC%E3%83%AB" target="_blank">AWS WAF によるアクセスコントロール</a></li>
 <li><a href="#cloudfront-origin-shield" target="_blank">CloudFront Origin Shield</a></li>
 <li><a href="#aws-lambdaedge" target="_blank">AWS Lambda@Edge</a></li>
 <li><a href="#%E3%83%AD%E3%82%B0%E8%A8%98%E9%8C%B2" target="_blank">ログ記録</a></li>
 <li><a href="#%E7%9B%A3%E8%A6%96" target="_blank">監視</a></li>
 <li><a href="#use-cloudfront-continuous-deployment-to-safely-validate-cdn-changesnew-2022-11-18" target="_blank">Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -74,13 +74,13 @@
         <p>CloudFront とは、大容量キャパシティを持つ地理的に分散したサーバー群（エッジロケーション）にコンテンツをキャッシュしたり、代理配信をするコンテンツ配信ネットワーク (CDN（Content Delivery Network）) サービスです。</p>
 <p>CDN を導入することによって、ユーザーに一番近いエッジロケーションから配信することによる高速化と、エッジサーバーでコンテンツをキャッシュすることによるオリジンの負荷軽減ができるというメリットがあります。</p>
 <p>CloudFront は従量課金のサービスであるため、使った分だけの支払でよいため安価に始められます。</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=mmRKzzOvJJY" target="_blank">Amazon CloudFrontの概要(YouTube)</a>(52:26)</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=mmRKzzOvJJY" target="_blank">Amazon CloudFront の概要(YouTube)</a>(52:26)</p>
 <p class="image-container"><img alt="blackbelt-cloudfront_1" src="img\\f22b919324c647d1.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=C9SnQibtY0A" target="_blank">Amazon CloudFront deep dive(YouTube)</a>(44:42)</p>
 <p class="image-container"><img alt="blackbelt-cloudfront_2" src="img\\b3257da259aac370.jpg"></p>
-<p><a href="https://www.youtube.com/watch?v=-RldYeiMu2k" target="_blank">AmazonCloudFrontのこの機能使えてますか(YouTube)</a>(27:31)</p>
+<p><a href="https://www.youtube.com/watch?v=-RldYeiMu2k" target="_blank">AmazonCloudFront のこの機能使えてますか(YouTube)</a>(27:31)</p>
 <p class="image-container"><img alt="blackbelt-cloudfront_3" src="img\\d11b61eb607c16fe.jpg"></p>
-<p><a href="https://www.youtube.com/watch?v=Ce4bEWDN5b0" target="_blank">AWSで実践するCDNセキュリティ(YouTube)</a>(25:58)</p>
+<p><a href="https://www.youtube.com/watch?v=Ce4bEWDN5b0" target="_blank">AWS で実践する CDN セキュリティ(YouTube)</a>(25:58)</p>
 <p class="image-container"><img alt="blackbelt-cloudfront_4" src="img\\c8c1608aba97c5b3.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/cloudfront/" target="_blank">Amazon CloudFront サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/cloudfront/?id=docs_gateway" target="_blank">Amazon CloudFront ドキュメント</a></p>
@@ -107,7 +107,7 @@
 <li>キャッシュ</li>
 <li>TTL（Time To Live）</li>
 <li>圧縮（gzip および Brotli）</li>
-<li>アクセス制限（署名付きURL、Cookie）</li>
+<li>アクセス制限（署名付き URL、Cookie）</li>
 </ul>
 <h2 is-upgraded>キャッシュ無効化（Invalidation）</h2>
 <p>コンテンツの有効期限が切れる前に、エッジキャッシュからファイルを削除することが出来る機能です。</p>
@@ -116,7 +116,7 @@
 <p class="image-container"><img alt="cloudfront-invalidation" src="img\\7a2990e083af4a8b.png"></p>
 <p>複数パスの指定も可能ですが、パスの単位でリクエストが発生することになります。</p>
 <p class="image-container"><img alt="cloudfront-invalidation-any" src="img\\b77cf2126112370f.png"></p>
-<p>1か月 1000 リクエストまでは無料ですが、それ以上は 0.005USD / リクエストで課金されますので頻繁に実施する場合は、注意が必要です。</p>
+<p>1 か月 1000 リクエストまでは無料ですが、それ以上は 0.005USD / リクエストで課金されますので頻繁に実施する場合は、注意が必要です。</p>
 <h2 is-upgraded>圧縮機能</h2>
 <p>CloudFront エッジでコンテンツを gzip および Brotli 圧縮することで高速にコンテンツを配信することができる機能です。</p>
 <p class="image-container"><img alt="cloudfront-compress" src="img\\36fe13ed10658229.png"></p>
@@ -137,7 +137,7 @@
 <li>料金クラス 100</li>
 </ul>
 <p>高コストなエッジロケーションを使用しないようにすることで、コストを抑えることができます。 この料金クラスによって、ユーザーへの配信速度に影響がでる可能性があります。</p>
-<p>この中で、日本が含まれるのは「料金クラス ALL」と「料金クラス 200」のみです。 日本リージョンの HTTPS リクエスト（1万件あたり）の料金は、0.0120 USD です。「料金クラス 100」を選択して北米リージョンに限定した場合の料金は、0.0100 USD となります。</p>
+<p>この中で、日本が含まれるのは「料金クラス ALL」と「料金クラス 200」のみです。 日本リージョンの HTTPS リクエスト（1 万件あたり）の料金は、0.0120 USD です。「料金クラス 100」を選択して北米リージョンに限定した場合の料金は、0.0100 USD となります。</p>
 <p>高コストな南米やオーストラリアリージョンからのアクセスを想定しておらず、アクセスがあった場合でもレイテンシーの増加を許容できるならば、「料金クラス 200」を選択しておくとよいでしょう。</p>
 
 
@@ -167,7 +167,7 @@
   --private-key file://./private_key.pem \
   --date-less-than $((`date &#34;+%s&#34;` + 3600))
 </code></pre>
-<p>有効期限切れの URL にアクセスすると、ステータスコード403 と下記レスポンスが返却されます。</p>
+<p>有効期限切れの URL にアクセスすると、ステータスコード 403 と下記レスポンスが返却されます。</p>
 <pre><code language="language-xml" class="language-xml">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;&lt;Error&gt;&lt;Code&gt;AccessDenied&lt;/Code&gt;&lt;Message&gt;Access denied&lt;/Message&gt;&lt;/Error&gt;
 </code></pre>
 
@@ -176,14 +176,14 @@
     
       <google-codelab-step label="S3 オリジンへのアクセス制限" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html" target="_blank">Amazon S3 オリジンへのアクセスの制限</a></p>
-<p>S3 をオリジンに設定する場合、オリジンアクセスコントロール (OAC、旧オリジンアクセスアイデンティティ (OAI)) を設定することで、S3バケットをパブリックアクセス可能にすることなく、意図しない 別の CloudFront ディストリビューション経由のアクセスを制限することができます。</p>
+<p>S3 をオリジンに設定する場合、オリジンアクセスコントロール (OAC、旧オリジンアクセスアイデンティティ (OAI)) を設定することで、S3 バケットをパブリックアクセス可能にすることなく、意図しない 別の CloudFront ディストリビューション経由のアクセスを制限することができます。</p>
 <p>新しい OAC では、OAI で対応していなかった以下に対応できるようになっています。</p>
 <ul>
 <li>細かなポリシー設定</li>
 <li>AWS Signature Version 4（SigV4） を必要とする AWS リージョンでの POST メソッド</li>
 <li>SSE-KMS を使用したバケット</li>
 </ul>
-<p>OAI は引き続き使用することができますが、2022年12月以降に新たに作成されるリージョンでは、OAC のみのサポートとなります。</p>
+<p>OAI は引き続き使用することができますが、2022 年 12 月以降に新たに作成されるリージョンでは、OAC のみのサポートとなります。</p>
 <p><a href="https://aws.amazon.com/jp/blogs/news/amazon-cloudfront-introduces-origin-access-control-oac/" target="_blank">Amazon CloudFront オリジンアクセスコントロール（OAC）のご紹介-2022/8/31</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html#migrate-from-oai-to-oac" target="_blank">オリジンアクセスアイデンティティ (OAI) からオリジンアクセスコントロール (OAC) への移行</a></p>
 
@@ -192,7 +192,7 @@
     
       <google-codelab-step label="ALB オリジンへのアクセス制限" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/restrict-access-to-load-balancer.html" target="_blank">Application Load Balancers へのアクセスを制限する</a></p>
-<p>CloudFront のオリジンには ALB が設定できます。オリジンに設定するリソースは、パブリック IP によるアクセスができる必要があるため、ALBは インターネット向け（internet-facing）で作成します。</p>
+<p>CloudFront のオリジンには ALB が設定できます。オリジンに設定するリソースは、パブリック IP によるアクセスができる必要があるため、ALB は インターネット向け（internet-facing）で作成します。</p>
 <p>この状態ですと、CloudFront を経由しなくてもアクセスが可能になっています。これでは、CloudFront のメリットを生かすことができません。</p>
 <p>ALB を CloudFront 経由のアクセスに限定することで、CloudFront のメリットを生かすことができるようになります。</p>
 <p>※ ALB を Internal で構築した場合、オリジンに指定することはできますが、<code>403</code> エラーとなります。</p>
@@ -213,13 +213,13 @@
       <google-codelab-step label="AWS Shield" duration="1">
         <p>CloudFront は、AWS Shield Standard によって追加料金なしで保護されています。</p>
 <p>AWS Shield Advanced によってさらに高レベルの保護が可能になります。</p>
-<p>ただし、1年のサブスクリプションで固定月額 3,000 USD と、さらにデータ転送量による課金が発生します。</p>
+<p>ただし、1 年のサブスクリプションで固定月額 3,000 USD と、さらにデータ転送量による課金が発生します。</p>
 <p>この固定月額料金は、AWS Organizations を利用している場合は組織全体で共有され、アカウント単位で支払う必要はありません。ただし、データ転送量分はアカウント単位で支払う必要があります。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS WAFによるアクセスコントロール" duration="1">
+      <google-codelab-step label="AWS WAF によるアクセスコントロール" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html" target="_blank">AWS WAF を使用してコンテンツへのアクセスの管理</a></p>
 <p>CDN は様々な脅威に晒されています。AWS WAF を利用して、それらのアクセスから保護することができます。</p>
 <p>適用できるものは バージニア北部リージョンで作成した Web ACL のみです。</p>
@@ -246,7 +246,7 @@
 <p>クライアントのロケーションに近い場所でコードを実行することができます。</p>
 <p class="image-container"><img alt="cloudfront-lambda@edge_1" src="img\\202d2fbdea9d5a7f.png"></p>
 <p class="image-container"><img alt="cloudfront-lambda@edge_2" src="img\\eda9cffc5bdcc11f.png"></p>
-<p>ただし、以下のような制約が存在するので注意が必要です（2023年1月時点）。詳しくは、<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/edge-functions-restrictions.html#lambda-at-edge-function-restrictions" target="_blank">Lambda@Edge に対する制限</a>を参照してください。</p>
+<p>ただし、以下のような制約が存在するので注意が必要です（2023 年 1 月時点）。詳しくは、<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/edge-functions-restrictions.html#lambda-at-edge-function-restrictions" target="_blank">Lambda@Edge に対する制限</a>を参照してください。</p>
 <ul>
 <li>関数のバージョン指定に <code>$LATEST</code> が使用できず、バージョン番号を指定しなければならない</li>
 <li>Lambda@Edge に指定できる Lambda は北米リージョンで作成したもののみ</li>
@@ -261,26 +261,26 @@
     
       <google-codelab-step label="ログ記録" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html" target="_blank">標準ログ (アクセスログ) の設定および使用</a></p>
-<p>ログは S3 へエクスポートすることができます（標準ログ）。ログはログ発生から 1時間以内にまたは、最大で 24時間遅延することがあります。</p>
+<p>ログは S3 へエクスポートすることができます（標準ログ）。ログはログ発生から 1 時間以内にまたは、最大で 24 時間遅延することがあります。</p>
 <p>標準ログは追加料金が発生しませんが、S3 のアクセスと保管料金がかかります。（<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsCharges" target="_blank">標準ログの料金</a>）</p>
 <p>エクスポートされるログファイルは、次の形式で保存されます。</p>
 <pre><code language="language-text" class="language-text">&lt;optional prefix&gt;/&lt;distribution ID&gt;.YYYY-MM-DD-HH.unique-ID.gz
 
 ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 </code></pre>
-<p>ログファイルは、2行のヘッダー（#Version と #Fields）が含まれたタブ区切りです。（<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#LogFileFormat" target="_blank">標準ログファイル形式</a>） エクスポートされたログは、Amazon Athena を使って分析する方法が簡単です。（<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/cloudfront-logs.html" target="_blank">Amazon CloudFront ログのクエリ</a>）</p>
+<p>ログファイルは、2 行のヘッダー（#Version と #Fields）が含まれたタブ区切りです。（<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#LogFileFormat" target="_blank">標準ログファイル形式</a>） エクスポートされたログは、Amazon Athena を使って分析する方法が簡単です。（<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/cloudfront-logs.html" target="_blank">Amazon CloudFront ログのクエリ</a>）</p>
 <pre><code language="language-log" class="language-log">#Version: 1.0
 #Fields: date time x-edge-location sc-bytes c-ip cs-method cs(Host) cs-uri-stem sc-status cs(Referer) cs(User-Agent) cs-uri-query cs(Cookie) x-edge-result-type x-edge-request-id x-host-header cs-protocol cs-bytes time-taken x-forwarded-for ssl-protocol ssl-cipher x-edge-response-result-type cs-protocol-version fle-status fle-encrypted-fields c-port time-to-first-byte x-edge-detailed-result-type sc-content-type sc-content-len sc-range-start sc-range-end
 2019-12-04	21:02:31	LAX1	392	192.0.2.100	GET	d111111abcdef8.cloudfront.net	/index.html	200	-	Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/78.0.3904.108%20Safari/537.36	-	-	Hit	SOX4xwn4XV6Q4rgb7XiVGOHms_BGlTAC4KyHmureZmBNrjGdRLiNIQ==	d111111abcdef8.cloudfront.net	https	23	0.001	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit	HTTP/2.0	-	-	11040	0.001	Hit	text/html	78	-	-
 2019-12-04	21:02:31	LAX1	392	192.0.2.100	GET	d111111abcdef8.cloudfront.net	/index.html	200	-	Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/78.0.3904.108%20Safari/537.36	-	-	Hit	k6WGMNkEzR5BEM_SaF47gjtX9zBDO2m349OY2an0QPEaUum1ZOLrow==	d111111abcdef8.cloudfront.net	https	23	0.000	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit	HTTP/2.0	-	-	11040	0.000	Hit	text/html	78	-	-
-2019-12-04	21:02:31	LAX1	392	192.0.2.100	GET	d111111abcdef8.cloudfront.net	/index.html	200	-	Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/78.0.3904.108%20Safari/537.36	-	-	Hit	f37nTMVvnKvV2ZSvEsivup_c2kZ7VXzYdjC-GUQZ5qNs-89BlWazbw==	d111111abcdef8.cloudfront.net	https	23	0.001	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit	HTTP/2.0	-	-	11040	0.001	Hit	text/html	78	-	-	
+2019-12-04	21:02:31	LAX1	392	192.0.2.100	GET	d111111abcdef8.cloudfront.net	/index.html	200	-	Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/78.0.3904.108%20Safari/537.36	-	-	Hit	f37nTMVvnKvV2ZSvEsivup_c2kZ7VXzYdjC-GUQZ5qNs-89BlWazbw==	d111111abcdef8.cloudfront.net	https	23	0.001	-	TLSv1.2	ECDHE-RSA-AES128-GCM-SHA256	Hit	HTTP/2.0	-	-	11040	0.001	Hit	text/html	78	-	-
 2019-12-13	22:36:27	SEA19-C1	900	192.0.2.200	GET	d111111abcdef8.cloudfront.net	/favicon.ico	502	http://www.example.com/	Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/78.0.3904.108%20Safari/537.36	-	-	Error	1pkpNfBQ39sYMnjjUQjmH2w1wdJnbHYTbag21o_3OfcQgPzdL2RSSQ==	www.example.com	http	675	0.102	-	-	-	Error	HTTP/1.1	-	-	25260	0.102	OriginDnsError	text/html	507	-	-
 2019-12-13	22:36:26	SEA19-C1	900	192.0.2.200	GET	d111111abcdef8.cloudfront.net	/	502	-	Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/78.0.3904.108%20Safari/537.36	-	-	Error	3AqrZGCnF_g0-5KOvfA7c9XLcf4YGvMFSeFdIetR1N_2y8jSis8Zxg==	www.example.com	http	735	0.107	-	-	-	Error	HTTP/1.1	-	-	3802	0.107	OriginDnsError	text/html	507	-	-
 2019-12-13	22:37:02	SEA19-C2	900	192.0.2.200	GET	d111111abcdef8.cloudfront.net	/	502	-	curl/7.55.1	-	-	Error	kBkDzGnceVtWHqSCqBUqtA_cEs2T3tFUBbnBNkB9El_uVRhHgcZfcw==	www.example.com	http	387	0.103	-	-	-	Error	HTTP/1.1	-	-	12644	0.103	OriginDnsError	text/html	507	-	-
 </code></pre>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html" target="_blank">リアルタイムログ</a></p>
 <p>標準ログとは別に、リアルタイムログという機能があります。これは、Kinesis Data Streams を利用してログが配信されるようになる機能です。ただし、サポートするのは Kinesis Data Streams までですので、そこからログを取り出す Kiesis Data Firehose のようなコンシューマーが必要です。</p>
-<p>Kiesis Data Firehose を使用した場合、インターバルが 60 ～900 秒ですので、リアルタイムといっても 最低 60秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。</p>
+<p>Kiesis Data Firehose を使用した場合、インターバルが 60 ～ 900 秒ですので、リアルタイムといっても 最低 60 秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。</p>
 
 
       </google-codelab-step>
@@ -303,7 +303,7 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
       </google-codelab-step>
     
       <google-codelab-step label="Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)" duration="2">
-        <p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html" target="_blank">Using CloudFront continuous deployment to safely test CDN configuration changes</a>（2023年1月時点で英語のみ）</p>
+        <p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html" target="_blank">Using CloudFront continuous deployment to safely test CDN configuration changes</a>（2023 年 1 月時点で英語のみ）</p>
 <p>現在の設定に影響を与えることなく、新しい設定のディストリビューションの動作確認を Staging で行うことができます。動作確認ができたら、Staging を昇格させて変更を適用します。</p>
 <p class="image-container"><img alt="cloudfront-cd_1" src="img\\a7bc49ebed27a5f6.png"></p>
 <p class="image-container"><img alt="cloudfront-cd_2" src="img\\ffa4890b601a7983.png"></p>
@@ -313,7 +313,7 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="cloudfront" src="img\\e39ff37580a30ef3.png"></p>
 
 

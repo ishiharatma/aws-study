@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="1">
         <ul>
 <li><a href="#aws-systems-managerssm%E3%83%8E%E3%83%BC%E3%83%89%E7%AE%A1%E7%90%86" target="_blank">AWS Systems Manager（SSM）:ノード管理</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#%E3%83%8E%E3%83%BC%E3%83%89%E7%AE%A1%E7%90%86%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">ノード管理の機能</a></li>
 <li><a href="#%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC" target="_blank">セッションマネージャー</a><ul>
 <li><a href="#%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%9E%E3%83%8D%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%BC%E3%81%AE%E6%96%99%E9%87%91" target="_blank">セッションマネージャーの料金</a></li>
@@ -77,7 +77,7 @@
 <li><a href="#%E3%82%A4%E3%83%B3%E3%83%99%E3%83%B3%E3%83%88%E3%83%AA%E3%81%AE%E6%96%99%E9%87%91" target="_blank">インベントリの料金</a></li>
 </ul>
 </li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -111,7 +111,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="セッションマネージャー" duration="5">
-        <p>EC2、エッジデバイス、オンプレ、仮想マシンを管理することができる機能です。この機能を利用することで、踏み台サーバを構築したり、SSHキーを管理したりといったことが不要になります。</p>
+        <p>EC2、エッジデバイス、オンプレ、仮想マシンを管理することができる機能です。この機能を利用することで、踏み台サーバを構築したり、SSH キーを管理したりといったことが不要になります。</p>
 <p>セッションマネージャーの利用で最も簡単なのは、AWS マネジメントコンソールから利用することです。</p>
 <p class="image-container"><img alt="session-manager-console" src="img\\4fd027c7f353bcba.jpg"></p>
 <p>Windows サーバーに接続した場合（CUI のみ）</p>
@@ -147,7 +147,7 @@ echo.
 aws ssm start-session --profile profilename ^
 --target %INSTANCE_ID% ^
 --document-name AWS-StartPortForwardingSession ^
---parameters &#34;portNumber=%SERVER_PORT_NO%,localPortNumber=%LOCAL_PORT_NO%&#34; 
+--parameters &#34;portNumber=%SERVER_PORT_NO%,localPortNumber=%LOCAL_PORT_NO%&#34;
 
 echo .
 echo 切断しました。
@@ -174,9 +174,9 @@ echo .
         <p>マネジメントコンソールから、インスタンスを管理出来る機能です。</p>
 <p>ログやパフォーマンスカウンタなどを取得したり、リモートデスクトップに接続できるようになります。</p>
 <p class="image-container"><img alt="fm-tool-menu" src="img\\e8e856a3eb76062d.png"></p>
-<p>Ｗindows サーバのイベントログの表示例</p>
+<p>Ｗ indows サーバのイベントログの表示例</p>
 <p class="image-container"><img alt="fm-windows-eventlog" src="img\\24c2756e7076b24.png"></p>
-<p>ファイルシステムの表示例（WindowsサーバのCドライブ）</p>
+<p>ファイルシステムの表示例（Windows サーバの C ドライブ）</p>
 <p class="image-container"><img alt="fm-windows-fs" src="img\\fbd51a1a4801dfcf.png"></p>
 <p>リモートデスクトップで接続した場合は、Session Manager の接続と同様に CloudTrail によってセッションの開始と終了が記録されます。</p>
 <p>リモートデスクトップ接続の表示例</p>
@@ -192,7 +192,7 @@ echo .
       <google-codelab-step label="Run Command" duration="0">
         <p>マネジメントコンソール上から各種コマンドをインスタンスに接続することなく実行できる機能です。</p>
 <p class="image-container"><img alt="rc-1" src="img\\51a3cf188d5648a1.png"></p>
-<p>SSM　Agent のアップデートを行ったり、CloudWatch エージェントのインストールと設定を行ったりできます。</p>
+<p>SSM 　 Agent のアップデートを行ったり、CloudWatch エージェントのインストールと設定を行ったりできます。</p>
 <p>参考：<a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/run-command-tutorial-update-software.html" target="_blank">Run Command を使用して SSM Agent を更新する</a></p>
 <p>参考：<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/installing-cloudwatch-agent-ssm.html" target="_blank">AWS Systems Manager を使用した CloudWatch エージェントのインストール</a></p>
 <p>実行したコマンドは実行履歴として残っているので、一回実行したコマンドを再実行することも可能です。 コマンドが実行履歴として残りますので、例えば サーバーのユーザー作成などを Run Command から実行した場合、ユーザーのパスフレーズも履歴に残ってしまいます。これを避けるには、パラメータストアを利用することで、実行履歴に残らないようにすることもできます。 Run Command から使用するには、<code>&#123;&#123;ssm:parameter-name}}</code> と指定します。</p>
@@ -212,7 +212,7 @@ echo .
 <li>スクリプトを実行する</li>
 </ul>
 <p>同様の機能は、メンテナンスウィンドウでも実現することができますが、メンテナンスウィンドウは指定した期間中に実行する場合に選択するとよいでしょう。 ステートマネージャーでは、<code>インスタンスが起動したタイミングに1回だけ</code> といったことができます。</p>
-<p>どちらを選択するかは、AWSドキュメント <a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html" target="_blank">State Manager または Maintenance Windows の選択</a> を参考にします。</p>
+<p>どちらを選択するかは、AWS ドキュメント <a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/state-manager-vs-maintenance-windows.html" target="_blank">State Manager または Maintenance Windows の選択</a> を参考にします。</p>
 <h2 is-upgraded>ステートマネージャーの料金</h2>
 <p>無料で利用できます。</p>
 <p><a href="https://aws.amazon.com/jp/systems-manager/pricing/#State_Manager" target="_blank">ステートマネージャーの料金</a></p>
@@ -221,14 +221,14 @@ echo .
       </google-codelab-step>
     
       <google-codelab-step label="パッチマネージャー" duration="0">
-        <p>EC2 に対する　OS パッチ適用を自動化できる機能です。 サーバーを構築したはいいが、運用を行っていく上で必要だとはわかっていても後回しになりがちなパッチ適用を自動化できます。</p>
+        <p>EC2 に対する　 OS パッチ適用を自動化できる機能です。 サーバーを構築したはいいが、運用を行っていく上で必要だとはわかっていても後回しになりがちなパッチ適用を自動化できます。</p>
 <h2 is-upgraded>パッチポリシー</h2>
 <p>以前は、パッチベースライン と パッチグループといった設定が必要でしたが、簡素化されたパッチポリシーによって素早く利用を開始することができます。</p>
 <p>「使用を開始」からいくつかの設定を選択するだけで簡単に作成できます。</p>
 <p class="image-container"><img alt="pm-1" src="img\\9f19d90abe072c44.png"></p>
 <p class="image-container"><img alt="pm-2" src="img\\2333d28b2c1db8f5.png"></p>
 <p class="image-container"><img alt="pm-3" src="img\\611c6c27b88cd814.png"></p>
-<p>暫く待つ（10分程度？）とパッチポリシーが作成されます。</p>
+<p>暫く待つ（10 分程度？）とパッチポリシーが作成されます。</p>
 <p class="image-container"><img alt="pm-4" src="img\\8b13a50d6a0b0a28.png"></p>
 <p class="image-container"><img alt="pm-5" src="img\\5fce9b17d1f2e0b0.png"></p>
 <p>実行されると、状況を確認できます。</p>
@@ -272,7 +272,7 @@ echo .
       </google-codelab-step>
     
       <google-codelab-step label="イベントリ" duration="0">
-        <p>マネージドインスタンスから、OSやアプリケーション、ネットワーク設定などの情報を定期的に取得ができる機能です。定期的に取得するのは、ステートマネージャーによって実行されます。</p>
+        <p>マネージドインスタンスから、OS やアプリケーション、ネットワーク設定などの情報を定期的に取得ができる機能です。定期的に取得するのは、ステートマネージャーによって実行されます。</p>
 <p class="image-container"><img alt="inventory" src="img\\cf3e10e00b4dff15.png"></p>
 <h2 is-upgraded>インベントリの料金</h2>
 <p>無料で利用できます。</p>
@@ -281,7 +281,7 @@ echo .
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="ssm-nodes-overview" src="img\\218a4d053e453f34.png"></p>
 
 

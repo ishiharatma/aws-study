@@ -1,18 +1,18 @@
 # Amazon API Gateway
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 Duration: 00:01:00
 
 - [Amazon API Gateway](#amazon-api-gateway)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Amazon API Gateway とは](#amazon-api-gateway-とは)
   - [API Gateway の種類](#api-gateway-の種類)
   - [API Gateway の料金](#api-gateway-の料金)
@@ -24,7 +24,7 @@ Duration: 00:01:00
   - [REST API のエンドポイントタイプ](#rest-api-のエンドポイントタイプ)
   - [API Gateway のメトリクス](#api-gateway-のメトリクス)
   - [X-Ray でのトレース](#x-ray-でのトレース)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## Amazon API Gateway とは
 
@@ -98,50 +98,49 @@ Duration: 00:01:00
 
 ### HTTP API
 
-| 項目                   | Quota      | 引き上げ |
-|------------------------|------------|--------|
-| 最大統合タイムアウト         | 30 秒      | いいえ    |
-| リクエスト行とヘッダー値の合計サイズ | 10,240 バイト | いいえ    |
-| ペイロードサイズ               | 10 MB      | いいえ    |
+| 項目                                 | Quota         | 引き上げ |
+| ------------------------------------ | ------------- | -------- |
+| 最大統合タイムアウト                 | 30 秒         | いいえ   |
+| リクエスト行とヘッダー値の合計サイズ | 10,240 バイト | いいえ   |
+| ペイロードサイズ                     | 10 MB         | いいえ   |
 
 ### REST API
 
-| 項目               | Quota         | 引き上げ              |
-|--------------------|---------------|---------------------|
-| 統合のタイムアウト        | 50 ミリ秒〜29 秒 | 下限または上限には適用外 |
-| すべてのヘッダー値の合計サイズ | 10,240 バイト    | いいえ                 |
-| ペイロードサイズ           | 10 MB         | いいえ                 |
+| 項目                           | Quota            | 引き上げ                 |
+| ------------------------------ | ---------------- | ------------------------ |
+| 統合のタイムアウト             | 50 ミリ秒〜29 秒 | 下限または上限には適用外 |
+| すべてのヘッダー値の合計サイズ | 10,240 バイト    | いいえ                   |
+| ペイロードサイズ               | 10 MB            | いいえ                   |
 
 ### WebSocket API
 
-| 項目                    | Quota  | 引き上げ |
-|-------------------------|--------|--------|
-| WebSocket API の接続時間 | 2 時間 | いいえ    |
-| アイドル接続のタイムアウト         | 10 分  | いいえ    |
-| WebSocket のフレームサイズ      | 32 KB  | いいえ    |
-| メッセージのペイロードサイズ          | 128 KB | いいえ    |
-
+| 項目                         | Quota  | 引き上げ |
+| ---------------------------- | ------ | -------- |
+| WebSocket API の接続時間     | 2 時間 | いいえ   |
+| アイドル接続のタイムアウト   | 10 分  | いいえ   |
+| WebSocket のフレームサイズ   | 32 KB  | いいえ   |
+| メッセージのペイロードサイズ | 128 KB | いいえ   |
 
 ## REST API のエンドポイントタイプ
 
-REST API は、3種類のエンドポイントタイプが選択できます。
+REST API は、3 種類のエンドポイントタイプが選択できます。
 
 ![apigw_endpoint](/images/apigw/apigw_endpoint.png)
 
 - エッジ最適化
   - CloudFront のエッジローケーションを経由して、最適なリージョンにルーティングされます。エッジロケーションからリージョンまでは AWS 内のネットワークが利用されるので高速です。
   - エッジロケーションは AWS が管理します。
-  ![apigw_endpoint-1](/images/apigw/apigw_endpoint-1.png)
+    ![apigw_endpoint-1](/images/apigw/apigw_endpoint-1.png)
 - リージョン
   - 直接リージョンにルーティングされます。同一リージョンの場合、エッジロケーションを経由しない分、レイテンシを削減できます。
   - デフォルトのエンドポイントタイプです。
   - 自前の CloudFront と組み合わせることでエッジ最適化の構成にすることもできます。既に CloudFront を利用しているシステムの場合にこのような構成になります。
-  ![apigw_endpoint-2](/images/apigw/apigw_endpoint-2.png)
-  - 自前の CloudFront を利用する場合は、API Gateway のエンドポイントを `リージョン` にしておきます。`エッジ最適化` を選択していると、自前の CloudFront から、AWS が管理する CloudFront を経由して、API Gateway にアクセスすることになり、不要なレイテンシが発生したり、ＨTTP ヘッダーが予期しない値となったりするので注意が必要です。CloudFront を経由すると一部のヘッダーを書き換えます。自前の CloudFront はこれを回避することができますが、AWS が管理する CloudFront は設定を行うことが出来ません。
-  ![apigw_endpoint-3](/images/apigw/apigw_endpoint-3.png)
+    ![apigw_endpoint-2](/images/apigw/apigw_endpoint-2.png)
+  - 自前の CloudFront を利用する場合は、API Gateway のエンドポイントを `リージョン` にしておきます。`エッジ最適化` を選択していると、自前の CloudFront から、AWS が管理する CloudFront を経由して、API Gateway にアクセスすることになり、不要なレイテンシが発生したり、Ｈ TTP ヘッダーが予期しない値となったりするので注意が必要です。CloudFront を経由すると一部のヘッダーを書き換えます。自前の CloudFront はこれを回避することができますが、AWS が管理する CloudFront は設定を行うことが出来ません。
+    ![apigw_endpoint-3](/images/apigw/apigw_endpoint-3.png)
 - プライベート
   - VPC 内から AWS PrivateLink でのみアクセスできるエンドポイントです。
-  ![apigw_endpoint-4](/images/apigw/apigw_endpoint-4.png)
+    ![apigw_endpoint-4](/images/apigw/apigw_endpoint-4.png)
 
 ## API Gateway のメトリクス
 
@@ -163,7 +162,7 @@ Duration: 00:03:00
 - エラーの把握
   - 4XXError
   - 5XXError
-  - 上記メトリクスは、`Average` にすると、エラー率になります。つまり、期間内のエラー数をCount メトリクスで割ったものです。
+  - 上記メトリクスは、`Average` にすると、エラー率になります。つまり、期間内のエラー数を Count メトリクスで割ったものです。
 
 その他、API Gateway の種類によって異なるメトリクスを取得できるので、必要に応じて監視を検討します。
 
@@ -187,7 +186,7 @@ Duration: 00:01:00
 
 ![apigateway-xray-traceview-1](/images/apigw/apigateway-xray-traceview-1.png)
 
-## まとめ
+## 📖 まとめ
 
 Duration: 00:01:00
 

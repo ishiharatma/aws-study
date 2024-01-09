@@ -1,16 +1,16 @@
 # Code 兄弟
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [Code 兄弟](#code-兄弟)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [Code 兄弟 とは](#code-兄弟-とは)
     - [AWS CodeCommit](#aws-codecommit)
     - [AWS CodeBuild](#aws-codebuild)
@@ -100,7 +100,6 @@ AWS の Code がつくサービス CodeCommit、CodeDeploy CodeBuild CodePipelin
 [AWS CodePipeline よくある質問](https://aws.amazon.com/jp/codepipeline/faqs/)
 [AWS CodePipeline の料金](https://aws.amazon.com/jp/codepipeline/pricing/)
 
-
 [NEW LAUNCH! AWS CodeStar: The Central Experience to Quickly Start Developing Applications on AWS(YouTube)](https://youtu.be/pIaB7wSSReU)(30:55)
 
 ![codestar-awssummit](/images/codexx/codestar-awssummit-320.jpg)
@@ -130,8 +129,8 @@ Duration: 0:05:00
 
 リポジトリへの接続は IAM ユーザーを使用し、認証は IAM ユーザーで作成する Git 認証情報を使用します。
 
-複数の AWS アカウントで同一リージョンのリポジトリを扱う場合は、`credential.namespace` で使い分けましょう。初めて CodeCommit を利用する場合でも、今後を考えて `credential.namespace` を指定しておくと、HTTPステータスコード 403 が返ってくることを回避できます。
-もし、別のアカウントの認証情報が残っていて 403 が出た場合は、OSの認証情報のキャッシュを削除しましょう。
+複数の AWS アカウントで同一リージョンのリポジトリを扱う場合は、`credential.namespace` で使い分けましょう。初めて CodeCommit を利用する場合でも、今後を考えて `credential.namespace` を指定しておくと、HTTP ステータスコード 403 が返ってくることを回避できます。
+もし、別のアカウントの認証情報が残っていて 403 が出た場合は、OS の認証情報のキャッシュを削除しましょう。
 
 ```sh
 git -c credential.namespace=hoge clone git-codecommit.ap-northeast-1.amazonaws.com/v1/repos/xxxxx
@@ -143,7 +142,7 @@ https://aws.amazon.com/jp/codeguru/
 
 機械学習を使用して、ソースコードの問題を検知してくれるサービスです。
 
-2023年4月現在、Java と Python に対応しています。
+2023 年 4 月現在、Java と Python に対応しています。
 
 リポジトリを関連付けすると、プルリクエストに対して自動的に推奨事項をコメントしてくれます。
 
@@ -151,7 +150,7 @@ https://aws.amazon.com/jp/codeguru/
 
 ![coreguru-reviewer-result](/images/codexx/codeguru-reviewer-result.png)
 
-90日間、100,000行のコードまでは無料で利用できます。90日経過または、100,000行のコードを超えた場合に料金が発生します。
+90 日間、100,000 行のコードまでは無料で利用できます。90 日経過または、100,000 行のコードを超えた場合に料金が発生します。
 
 ### AWS CodeArtifact
 
@@ -207,7 +206,7 @@ phases:
 build:
     # ビルド
     commands:
-      - echo Build started on `date` 
+      - echo Build started on `date`
       - npm run build
   post_build:
     # ビルド後に実行する
@@ -272,40 +271,46 @@ cache:
 
 ![codebuild-phase](/images/codexx/codebuild-phase.png)
 
-- BuildKitの有効化
-  - 「Dockerのランタイムバージョンが18.09以上」の場合、依存関係のないレイヤを並列実行させたり、キャッシュを有効利用できるようにしたりと大幅な実行時間短縮が期待できます。
-  - buildspec.ymlへのDOCKER_BUILDKITの有効化設定
+- BuildKit の有効化
+
+  - 「Docker のランタイムバージョンが 18.09 以上」の場合、依存関係のないレイヤを並列実行させたり、キャッシュを有効利用できるようにしたりと大幅な実行時間短縮が期待できます。
+  - buildspec.yml への DOCKER_BUILDKIT の有効化設定
 
     ```yaml
     env:
-        variables:
-            DOCKER_BUILDKIT: "1"
+      variables:
+        DOCKER_BUILDKIT: "1"
     ```
 
 - S3 キャッシュの利用
+
   - S3 バケットに保存する方式
   - 複数の CodeBuild でキャッシュすることができます。
   - S3 との通信が発生するため、キャッシュ対象が少ないとキャッシュの復元自体のコストが上回り、利点が失われます。
 
 - ローカルキャッシュ利用
+
   - ローカルキャッシュはビルドホストのみが利用できるキャッシュです。ビルド頻度が高い場合、同じビルドホストが再利用されることがあるため、キャッシュを有効に利用できます。
   - 逆に、ビルド頻度が低い場合はキャッシュの恩恵を受けることが出来ません。
   - ローカルキャッシュの種類
+
     - DockerLayerCache
       - BUILD フェーズの実行時間が短縮されます。
     - SourceCache
       - DOWNLOAD_SOURCE フェーズの実行時間が短縮されます。
     - CustomCache
-      - buidspec.ymlのcache/pathsで指定したディレクトリ配下のパスに存在するファイル群がキャッシュされるようになります。
+
+      - buidspec.yml の cache/paths で指定したディレクトリ配下のパスに存在するファイル群がキャッシュされるようになります。
 
       ```yaml
       cache:
-          paths:
-          - './node_modules/**/*'
+        paths:
+          - "./node_modules/**/*"
       ```
 
 - 必要なライブラリなどをインストール済の Docker イメージを使用する
-  - CodeBuildで毎回インストールするより高速化ができます。
+
+  - CodeBuild で毎回インストールするより高速化ができます。
 
 - CodeBuild のホスト環境をスケールアップします。
   - 次の[コンピューティングタイプ](https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/build-env-ref-compute-types.html)があります。
@@ -337,7 +342,7 @@ CodeBuild では通常 VPC 内のリソースにはアクセスできません�
 Duration: 0:05:00
 
 デプロイを実行してくれるサービスです。
-デプロイ先として下記3タイプのリソースがサポートされます。
+デプロイ先として下記 3 タイプのリソースがサポートされます。
 
 - EC2/オンプレミス
 - Lambda
@@ -354,7 +359,8 @@ CodeDeploy を使用するには、デプロイの仕様を決めるファイル
 appspec.yml の構成は次の通りです。
 
 ```yaml
-version: 0.0
+version:
+  0.0
   # 現在許容されている値は、0.0 のみ
 Resources:
   - TargetService:
@@ -393,7 +399,7 @@ CodeCommit、CodeBuild、CodeDeploy を組み合わせたパイプラインを�
 
 Duration: 0:05:00
 
-アプリケーションを開発および構築してAWSにデプロイするために必要なツールを備えたクラウドベースの開発サービスです。
+アプリケーションを開発および構築して AWS にデプロイするために必要なツールを備えたクラウドベースの開発サービスです。
 
 テンプレートを使用して、「Amazon EC2、AWS Lambda、AWS Elastic Beanstalk」を使った開発プロジェクトを始めることができます。
 開発に使える言語は、「Java、JavaScript、PHP、Ruby、Python」の５つがサポートされています。
@@ -407,15 +413,14 @@ Duration: 0:05:00
 Duration: 2:00:00
 
 > AWS Hands-on for Beginners
-AWS Code サービス群を活用して、CI/CD のための構成を構築しよう！
-https://aws.amazon.com/jp/blogs/news/aws-hands-on-for-beginners-10/
-https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-cicd-2020-reg-event-LP.html?trk=aws_blog_k
+> AWS Code サービス群を活用して、CI/CD のための構成を構築しよう！
+> https://aws.amazon.com/jp/blogs/news/aws-hands-on-for-beginners-10/ > https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-cicd-2020-reg-event-LP.html?trk=aws_blog_k
 
 ![h4b-codexx.png](/images/codexx/h4b-codexx.png)
 
 - Agenda
   - 今回のハンズオンので構築する構成の紹介 + ハンズオンで登場するサービスの紹介
-  - S3 をデプロイ先とした、CI/CD 環境を構築する【事前準備 + CodeCommit編】
+  - S3 をデプロイ先とした、CI/CD 環境を構築する【事前準備 + CodeCommit 編】
   - S3 をデプロイ先とした、CI/CD 環境を構築する【CodePipeline 編】
   - EC2 インスタンスをデプロイ先とした、CI/CD 環境を構築する【事前準備編】
   - EC2 インスタンスをデプロイ先とした、CI/CD 環境を構築する【CodeBuild 編】

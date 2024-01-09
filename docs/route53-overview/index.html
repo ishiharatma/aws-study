@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#amazon-route-53" target="_blank">Amazon Route 53</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#amazon-route-53-%E3%81%A8%E3%81%AF" target="_blank">Amazon Route 53 とは</a></li>
 <li><a href="#%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E6%96%B0%E8%A6%8F%E7%99%BB%E9%8C%B2" target="_blank">ドメインの新規登録</a></li>
 <li><a href="#%E3%83%89%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E7%A7%BB%E7%AE%A1" target="_blank">ドメインの移管</a></li>
@@ -52,7 +52,7 @@
 <li><a href="#amazon-route-53-%E3%81%AE%E6%96%99%E9%87%91" target="_blank">Amazon Route 53 の料金</a></li>
 <li><a href="#route-53-%E3%81%AE%E3%82%AF%E3%82%A9%E3%83%BC%E3%82%BF" target="_blank">Route 53 のクォータ</a></li>
 <li><a href="#amazon-route-53-%E3%81%8C-dns-%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89%E3%82%BB%E3%83%83%E3%83%88%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E3%82%92%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%882022-9-21" target="_blank">Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -78,7 +78,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="ドメインの新規登録" duration="1">
-        <p>AWS では　Route53 にて新規ドメインを取得することができます。</p>
+        <p>AWS では　 Route53 にて新規ドメインを取得することができます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/registrar-tld-list.html" target="_blank">Amazon Route 53 に登録できる最上位ドメイン</a></p>
 
 
@@ -125,7 +125,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="ホストゾーン" duration="1">
-        <p>ホストゾーンは次の2種類があります。</p>
+        <p>ホストゾーンは次の 2 種類があります。</p>
 <p class="image-container"><img alt="route53_hostedzone" src="img\\644e92014b5b3908.jpg"></p>
 <ul>
 <li>パブリックホストゾーン <ul>
@@ -164,17 +164,17 @@
 </ul>
 <p>システムに応じて、ユーザーが追加するレコード</p>
 <ul>
-<li>A レコード <ul>
+<li>A レコード<ul>
 <li>ドメイン名と IPv4 の対応</li>
 <li>example.com → 192.0.2.1</li>
 </ul>
 </li>
-<li>AAAA レコード <ul>
+<li>AAAA レコード<ul>
 <li>ドメイン名と IPv6 の対応</li>
 <li>example.com → 2001:db8::1</li>
 </ul>
 </li>
-<li>CNAME レコード <ul>
+<li>CNAME レコード<ul>
 <li>ドメインを別のドメインに紐づける</li>
 <li><code>sub1.example.com. IN CNAME sub2.example.com.</code> とすると、<code>sub1</code> を <code>sub2</code> に読み替えてくれます。</li>
 <li>以下のような同じ定義は NG です。(sub1 を２つのドメインに紐づけている)<ul>
@@ -196,13 +196,13 @@
 </li>
 </ul>
 </li>
-<li>Alias レコード <ul>
+<li>Alias レコード<ul>
 <li>AWS リソースの FQDN(Fully Qualified Domain Name) を指定できる Route 53 固有の機能</li>
 <li>CNAME では利用できなかった Zone Apex のレコードを追加することが可能です。</li>
-<li>CloudFront, Elastic Beanstalk ,ELB, API Gateway, VPC インターフェースエンドポイント, Global Accelerator, S3の静的ホスティングなど</li>
+<li>CloudFront, Elastic Beanstalk ,ELB, API Gateway, VPC インターフェースエンドポイント, Global Accelerator, S3 の静的ホスティングなど</li>
 </ul>
 </li>
-<li>MX レコード <ul>
+<li>MX レコード<ul>
 <li>メールサーバ</li>
 </ul>
 </li>
@@ -214,17 +214,17 @@
       <google-codelab-step label="DNS ルーティング" duration="10">
         <ul>
 <li>シンプルルーティング <ul>
-<li>レコードセットに事前設定された値のみに基づいてDNSクエリに応答する方式</li>
+<li>レコードセットに事前設定された値のみに基づいて DNS クエリに応答する方式</li>
 <li>デフォルトのルーティングです <img alt="simple_routing" src="img\\1cb3e3adf24ace73.png"></li>
 </ul>
 </li>
 <li>位置情報ルーティング <ul>
-<li>ユーザーの位置情報（DNSクエリの発信位置）に基づいてDNSクエリに応答する方式</li>
+<li>ユーザーの位置情報（DNS クエリの発信位置）に基づいて DNS クエリに応答する方式</li>
 <li>デフォルトのルーティングを指定しておかないと、設定した地域以外からは名前解決できないので注意が必要です。（日本と米国のみ定義した場合、それ以外の地域からはアクセスできなくなります） <img alt="geolocation_routing" src="img\\62c67bf88ce20bac.png"></li>
 </ul>
 </li>
 <li>地理的近接性ルーティング <ul>
-<li>ユーザーの位置情報（DNSクエリの発信位置）とサーバが分散配置されている場合、最も近いところに応答する方式 <img alt="geoproximity_routing" src="img\\2a39ddb0a7a2a1cd.png"></li>
+<li>ユーザーの位置情報（DNS クエリの発信位置）とサーバが分散配置されている場合、最も近いところに応答する方式 <img alt="geoproximity_routing" src="img\\2a39ddb0a7a2a1cd.png"></li>
 <li>「位置情報ルーティング」との違いが分かり難い</li>
 </ul>
 </li>
@@ -233,22 +233,22 @@
 </ul>
 </li>
 <li>加重ルーティング <ul>
-<li>複数のエンドポイントに重みを設定して、重みに応じてDNSクエリに応答する方式 <img alt="weighted_routing" src="img\\85aaca4d41cb9506.png"></li>
+<li>複数のエンドポイントに重みを設定して、重みに応じて DNS クエリに応答する方式 <img alt="weighted_routing" src="img\\85aaca4d41cb9506.png"></li>
 </ul>
 </li>
 <li>フェイルオーバールーティング <ul>
-<li>ヘルスチェックに基づいて、利用可能なリソースにDNSクエリを応答する方式 <img alt="failover_routing" src="img\\1ea98ccef7a82218.png"></li>
+<li>ヘルスチェックに基づいて、利用可能なリソースに DNS クエリを応答する方式 <img alt="failover_routing" src="img\\1ea98ccef7a82218.png"></li>
 <li>このルーティングを用いることで、マルチリージョンでのフェイルオーバーを構成できます <img alt="multi_region_failover_routing" src="img\\987cfe66d4b5b717.png"></li>
 </ul>
 </li>
 <li>複数値回答ルーティング <ul>
-<li>ランダムに選ばれた最大８つの正常なレコードにIPアドレスを設定して、複数の値を応答する方式</li>
-<li>≒ELB（ELBに代わるものではないが近い機能） <img alt="multivalue_routing" src="img\\d39b96d40674cc59.png"></li>
+<li>ランダムに選ばれた最大８つの正常なレコードに IP アドレスを設定して、複数の値を応答する方式</li>
+<li>≒ELB（ELB に代わるものではないが近い機能） <img alt="multivalue_routing" src="img\\d39b96d40674cc59.png"></li>
 </ul>
 </li>
 <li>IP ベースルーティング <ul>
 <li>アクセス元の IP アドレス CIDR を元にルーティングする方式</li>
-<li>IPv4 は /0～/24、IPv6 は /0～/48を指定できます</li>
+<li>IPv4 は /0 ～/24、IPv6 は /0 ～/48 を指定できます</li>
 <li>2022-06-01 に利用可能になったものです。<a href="https://aws.amazon.com/jp/about-aws/whats-new/2022/06/amazon-route-53-ip-based-routing-dns-queries/" target="_blank">Amazon Route 53 が DNS クエリの IP ベースのルーティングを発表</a><img alt="ip_base_routing" src="img\\1ec40eca7706ce09.png"></li>
 </ul>
 </li>
@@ -260,7 +260,7 @@
       <google-codelab-step label="Route 53 Resolver" duration="1">
         <p>VPC に標準で配備されている DNS サーバー（フォワーダー＋フルサービスリゾルバ）のことで、以前は、「.2 Resolver」や「Amazon Provided DNS」と呼ばれていたものです。</p>
 <p class="image-container"><img alt="route53_resolver" src="img\\a863b052b4377646.png"></p>
-<p>一般的に、リゾルバ（Resolver）とは、DNSサーバへドメイン名を照会して対応するIPアドレスを調べたり、その逆（IPアドレス→ドメイン名）を調べたりするソフトウェアのことを言います。</p>
+<p>一般的に、リゾルバ（Resolver）とは、DNS サーバへドメイン名を照会して対応する IP アドレスを調べたり、その逆（IP アドレス → ドメイン名）を調べたりするソフトウェアのことを言います。</p>
 <p>フォワーダーとは、自身では DNS 非再帰的問い合わせを行わず、別のフルサービスリゾルバーに転送する DNS サーバーのことです。</p>
 <p>フルサービスリゾルバとは、非再帰的問い合わせを行い、名前解決を行う DNS サーバーのことです。</p>
 <p>非再帰的問い合わせとは、知っている情報のみを回答してもらうリクエストです。再帰的問い合わせは、答えが分かるまで繰り返して問い合わせを行わせるリクエストです。</p>
@@ -270,7 +270,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="Route 53 Resolver for Hybrid Clouds" duration="1">
-        <p>オンプレミスとクラウドのリソースによって構成された環境での名前解決を一元化するための Amazon Route53 Resolverの機能拡張です。</p>
+        <p>オンプレミスとクラウドのリソースによって構成された環境での名前解決を一元化するための Amazon Route53 Resolver の機能拡張です。</p>
 <p>実体は、ENI（Elastic Network Interface）なので、セキュリティグループによるアクセス制御が可能です。</p>
 <p class="image-container"><img alt="route53_resolver_hybrid" src="img\\9a9684d072b27d27.png"></p>
 
@@ -289,11 +289,11 @@
       <google-codelab-step label="Amazon Route 53 の料金" duration="1">
         <p><a href="https://aws.amazon.com/jp/route53/pricing/" target="_blank">Amazon Route 53 料金表</a></p>
 <p>ホストゾーン、レコード数、処理されたクエリ数で課金されます。</p>
-<p>ホストゾーンの料金は、1か月未満でも日割り計算されませんので注意が必要です</p>
-<p>テスト目的として利用できるように、作成後12時間以内に削除された場合は無料となります。ただし、クエリ数での課金は発生します。</p>
+<p>ホストゾーンの料金は、1 か月未満でも日割り計算されませんので注意が必要です</p>
+<p>テスト目的として利用できるように、作成後 12 時間以内に削除された場合は無料となります。ただし、クエリ数での課金は発生します。</p>
 <ul>
 <li>無料枠 <ul>
-<li>作成後12時間以内に削除されたホストゾーン</li>
+<li>作成後 12 時間以内に削除されたホストゾーン</li>
 </ul>
 </li>
 </ul>
@@ -309,11 +309,11 @@
 </td><td colspan="1" rowspan="1"><p>引き上げ</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>ドメイン数</p>
-</td><td colspan="1" rowspan="1"><p>20個</p>
+</td><td colspan="1" rowspan="1"><p>20 個</p>
 </td><td colspan="1" rowspan="1"><p>Yes</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>ホストゾーン</p>
-</td><td colspan="1" rowspan="1"><p>500個</p>
+</td><td colspan="1" rowspan="1"><p>500 個</p>
 </td><td colspan="1" rowspan="1"><p>Yes</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>レコード数</p>
@@ -329,7 +329,7 @@
     
       <google-codelab-step label="Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）" duration="1">
         <p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2022/09/amazon-route-53-support-dns-resource-record-set-permissions/" target="_blank">Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート</a></p>
-<p>今までは、IAM ポリシーでRoute 53のホストゾーンに対するレコード操作を制限することができましたが、特定のレコードだけという制限は出来ませんでした。</p>
+<p>今までは、IAM ポリシーで Route 53 のホストゾーンに対するレコード操作を制限することができましたが、特定のレコードだけという制限は出来ませんでした。</p>
 <pre><code language="language-json" class="language-json">{
   &#34;Version&#34;: &#34;2012-10-17&#34;,
   &#34;Statement&#34;: [
@@ -343,36 +343,41 @@
 </code></pre>
 <p>アップデートにより、特定の名前の DNS レコードへのアクセス制限ができるようになりました。</p>
 <pre><code language="language-json" class="language-json">{
-    &#34;Version&#34;: &#34;2012-10-17&#34;,
-    &#34;Statement&#34;: [
-        {
-            &#34;Effect&#34;: &#34;Allow&#34;,
-            &#34;Action&#34;: &#34;route53:ChangeResourceRecordSets&#34;,
-            &#34;Resource&#34;: &#34;arn:aws:route53:::hostedzone/Z11111112222222333333&#34;,
-            &#34;Condition&#34;: {
-                &#34;ForAllValues:StringEquals&#34;:{
-                    &#34;route53:ChangeResourceRecordSetsNormalizedRecordNames&#34;: [&#34;example.com&#34;, &#34;marketing.example.com&#34;]
-                }
-            }
-          }
-        ]
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Action&#34;: &#34;route53:ChangeResourceRecordSets&#34;,
+      &#34;Resource&#34;: &#34;arn:aws:route53:::hostedzone/Z11111112222222333333&#34;,
+      &#34;Condition&#34;: {
+        &#34;ForAllValues:StringEquals&#34;: {
+          &#34;route53:ChangeResourceRecordSetsNormalizedRecordNames&#34;: [
+            &#34;example.com&#34;,
+            &#34;marketing.example.com&#34;
+          ]
+        }
+      }
+    }
+  ]
 }
 </code></pre>
 <p>特定のサフィックスに対して制御する場合は次のようになります。</p>
 <pre><code language="language-json" class="language-json">{
-    &#34;Version&#34;: &#34;2012-10-17&#34;,
-    &#34;Statement&#34;: [
-        {
-            &#34;Effect&#34;: &#34;Allow&#34;,
-            &#34;Action&#34;: &#34;route53:ChangeResourceRecordSets&#34;,
-            &#34;Resource&#34;: &#34;arn:aws:route53:::hostedzone/Z11111112222222333333&#34;,
-            &#34;Condition&#34;: {
-                &#34;ForAllValues:StringLike&#34;:{
-                     &#34;route53:ChangeResourceRecordSetsNormalizedRecordNames&#34;: [&#34;*-beta.example.com&#34;]
-                }
-            }
-          }
-        ]
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Action&#34;: &#34;route53:ChangeResourceRecordSets&#34;,
+      &#34;Resource&#34;: &#34;arn:aws:route53:::hostedzone/Z11111112222222333333&#34;,
+      &#34;Condition&#34;: {
+        &#34;ForAllValues:StringLike&#34;: {
+          &#34;route53:ChangeResourceRecordSetsNormalizedRecordNames&#34;: [
+            &#34;*-beta.example.com&#34;
+          ]
+        }
+      }
+    }
+  ]
 }
 </code></pre>
 <p>詳細については、ドキュメントを参照してください。</p>
@@ -381,7 +386,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="1">
+      <google-codelab-step label="📖 まとめ" duration="1">
         <p class="image-container"><img alt="route53" src="img\\399fb9d2a83b7246.png"></p>
 
 

@@ -1,16 +1,16 @@
 # AWS Lambda
 
-## はじめに
+## ☘️ はじめに
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## Contents
+## 👀 Contents
 
 - [AWS Lambda](#aws-lambda)
-  - [はじめに](#はじめに)
-  - [Contents](#contents)
+  - [☘️ はじめに](#️-はじめに)
+  - [👀 Contents](#-contents)
   - [AWS Lambda とは](#aws-lambda-とは)
   - [ネットワーク](#ネットワーク)
   - [実行環境](#実行環境)
@@ -36,7 +36,7 @@
   - [モニタリング](#モニタリング)
   - [ベストプラクティス](#ベストプラクティス)
   - [クォータ](#クォータ)
-  - [まとめ](#まとめ)
+  - [📖 まとめ](#-まとめ)
 
 ## AWS Lambda とは
 
@@ -79,7 +79,7 @@ Duration: 0:01:00
 Lambda は Lambda サービスが所有する VPC 内で実行されています。
 ![lambda-eni.png](/images/lambda/invoke-path-320.jpg)
 
-Lambda を自 VPC に接続すると、Lambda サービスの VPC と自VPC を接続するために Hyperplane ENI(Elastic Network Interface)を作成し、関数に割り当てます。
+Lambda を自 VPC に接続すると、Lambda サービスの VPC と自 VPC を接続するために Hyperplane ENI(Elastic Network Interface)を作成し、関数に割り当てます。
 
 ![lambda-eni.png](/images/lambda/lambda-eni-320.jpg)
 
@@ -92,9 +92,9 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.ht
 安全で分離されたランタイムを実行するための環境で、実行環境のライフサイクルは次のようになっています。
 
 - 通常
-  - INIT(初期化)  → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）
+  - INIT(初期化) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）
 - SnapStart を利用している場合
-  - RESTORE(復元)  → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）
+  - RESTORE(復元) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）
 
 ### コールドスタート問題
 
@@ -106,9 +106,9 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.ht
   - 「プロビジョニングされた同時実行」という機能がなかったときは、定期実行をして、コールドスタートの発生確率を下げる方法でした。
   - 「プロビジョニングされた同時実行」にすることで、予めプロビジョニングされた状態にできます。ただし、Lambda の特徴である「関数が実行された時間だけ」課金されるメリットが失われ、「プロビジョニングされていた時間」の課金となります。
 - VPC Lambda は ENI の起動が必要になるため遅い。
-  - ENI は作成までに 10秒以上かかることがある
+  - ENI は作成までに 10 秒以上かかることがある
   - 2019/09 以前は、関数ごとに ENI が作成されており、実行環境がスケールしてリクエストが増加するにつれて、多くの ENI が作成されるようになっていました。ENI 数に比例して サブネットに割り当てた IP アドレスを消費してしまいます。
-  ![many-enis-1024x616-320.jpg](/images/lambda/many-enis-1024x616-320.jpg)
+    ![many-enis-1024x616-320.jpg](/images/lambda/many-enis-1024x616-320.jpg)
   - 現在は、事前に作成した 共通利用する ENI を利用して VPC に接続しているため ENI の作成に関する問題は解消されました。
 
 ### SnapStart for Java
@@ -123,7 +123,7 @@ Lambda の起動時のレイテンシー（主に、コールドスタート時�
 SnapStart の使用に追加コストは発生しませんが、利用するには以下の制約があります。
 
 - サポートしているのは、`Java 11` のみ
-- エフェメラルストレージのサイズが512 MB 以下
+- エフェメラルストレージのサイズが 512 MB 以下
 - プロビジョニングされた同時実行ではない
 - arm 64 アーキテクチャではない
 - EFS を利用していない
@@ -137,7 +137,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html
 
 - arm64 — AWS Graviton2 プロセッサ用の 64 ビット ARM アーキテクチャ
   - アームろくよん
-  - x86_64アーキテクチャより34%のコスト効率よく利用できる
+  - x86_64 アーキテクチャより 34%のコスト効率よく利用できる
   - 実際のコストは 東京リージョンでは 20%ほど低い。
   - 利用できる場合は、こちらを選ぶ。
 - x86_64 — x86 ベースプロセッサ用の 64 ビット x86 アーキテクチャ
@@ -150,7 +150,7 @@ ARM と x86：その違い：https://www.redhat.com/ja/topics/linux/ARM-vs-x86
 
 Duration: 0:01:00
 
-Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAMポリシーが含まれます）とリソースベースのポリシーがあります。
+Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAM ポリシーが含まれます）とリソースベースのポリシーがあります。
 
 実行ロールでは、Lambda 関数が他のリソースにアクセスできる権限や実行をまかせるための信頼ポリシーを記述するロールで、Lambda 関数を作成する際には必ず付与します。
 
@@ -158,12 +158,12 @@ Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ば
 
 [IAM ロールとリソースベースのポリシーとの相違点](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_compare-resource-policies.html)
 
-| Key          | IAM ポリシー            | リソースポリシー                                             |
-| ------------ | ----------------------- | ------------------------------------------------------------ |
-| Resource     | 適用対象のリソースのARN | 適用対象のリソースのARN                                      |
-| Action   | オペレーション          | オペレーション                                               |
-| Effect         | Allow or Deny           | Allow or Deny                                                |
-| Principal | ×                       | 権限を受け取りたいエンティティ(サービス、アカウント、ユーザ) |
+| Key       | IAM ポリシー             | リソースポリシー                                             |
+| --------- | ------------------------ | ------------------------------------------------------------ |
+| Resource  | 適用対象のリソースの ARN | 適用対象のリソースの ARN                                     |
+| Action    | オペレーション           | オペレーション                                               |
+| Effect    | Allow or Deny            | Allow or Deny                                                |
+| Principal | ×                        | 権限を受け取りたいエンティティ(サービス、アカウント、ユーザ) |
 
 ## トリガー
 
@@ -203,10 +203,11 @@ Duration: 0:01:30
 AWS SDK や CLI から実行する際に、`InvocationType` を指定することでコントロールできます。
 
 - RequestResponse
+
   - デフォルト
   - 同期実行
-  - 直接 Lambda を1回実行し、処理が完了したらレスポンスが返ってきます。
-  
+  - 直接 Lambda を 1 回実行し、処理が完了したらレスポンスが返ってきます。
+
   ```sh
   aws lambda invoke --function-name hoge-function \
   --payload .... response.json
@@ -220,10 +221,11 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
   ```
 
 - Event
+
   - 非同期実行
   - Lambda の実行はキューイングされます。
   - キューイングされたタイミングでレスポンスが返ってきます。
-  - 失敗した場合自動的に2回までリトライされます。
+  - 失敗した場合自動的に 2 回までリトライされます。
   - DLQ（デッドレターキュー）で、失敗した場合の設定が行えます。
 
   ```sh
@@ -237,6 +239,7 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
   ```
 
 - DryRun
+
   - 関数を実行しないで必要な権限が付いているか確認できます。
 
   ```sh
@@ -278,14 +281,14 @@ Duration: 0:01:30
   - 既存関数は更新可能
   - 新規関数は作成不可
 - フェーズ２
-  - フェーズ１から少なくとも30日経過したものがフェーズ２になる
-    - Python 3.6 の場合、非推奨フェーズ１（2022-7-18）→フェーズ２（2022-8-29）
+  - フェーズ１から少なくとも 30 日経過したものがフェーズ２になる
+    - Python 3.6 の場合、非推奨フェーズ１（2022-7-18）→ フェーズ２（2022-8-29）
   - 新規関数、既存関数ともに作成、更新不可
   - ただし、既存関数は継続して実行可能
   - サポートされているランタイムに移行が必要
 
-サポート終了がスケジュールされている場合、60日以内なったら Eメールで通知が来るようになります。
-また、Trusted Advisor では、[非推奨となる120日の前チェック](https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes)が出来ます。
+サポート終了がスケジュールされている場合、60 日以内なったら E メールで通知が来るようになります。
+また、Trusted Advisor では、[非推奨となる 120 日の前チェック](https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes)が出来ます。
 
 ## Layer
 
@@ -293,7 +296,7 @@ Duration: 0:01:00
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-layers.html
 
-Lambda 関数で使用するライブラリとその他の依存関係をパッケージ化できる機能です。関数には最大で 5つのレイヤーを含めることができます。
+Lambda 関数で使用するライブラリとその他の依存関係をパッケージ化できる機能です。関数には最大で 5 つのレイヤーを含めることができます。
 レイヤーを使用することで、デプロイパッケージのサイズを削減し、デプロイスピードを速めることができます。
 
 ## デプロイパッケージ
@@ -344,7 +347,7 @@ CLoudFormation で関数をデプロイするには、次の方法がありま�
             import boto3
             import json
             import os
-            
+
             def lambda_handler(event, context):
             :
   ```
@@ -391,14 +394,14 @@ CLoudFormation で関数をデプロイするには、次の方法がありま�
 AWS Serverless Application Model (AWS SAM) でデプロイするには次のようにします。
 
 ```yaml
-  Function1:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: hello_world/
-      Handler: app.lambda_handler
-      Runtime: python3.9
-      Architectures:
-        - arm64
+Function1:
+  Type: AWS::Serverless::Function
+  Properties:
+    CodeUri: hello_world/
+    Handler: app.lambda_handler
+    Runtime: python3.9
+    Architectures:
+      - arm64
 ```
 
 ## エフェメラルストレージ(一時領域)
@@ -415,14 +418,14 @@ https://aws.amazon.com/jp/blogs/news/aws-lambda-now-supports-up-to-10-gb-ephemer
 Duration: 0:00:30
 
 ある時点で実行されているリクエストの数のことです。
-Lambda関数の同時実行数は同一アカウントの同一リージョン内につき、1,000に制限されています。
-Lambdaの同時実行数の計測は以下のように考えます。
+Lambda 関数の同時実行数は同一アカウントの同一リージョン内につき、1,000 に制限されています。
+Lambda の同時実行数の計測は以下のように考えます。
 
 ```text
 同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒））
 ```
 
-Lambda関数が平均10秒かかり、1秒あたり100個のイベントを発行するとLambda関数を1000同時に実行することになり、制限ぎりぎりとなります。
+Lambda 関数が平均 10 秒かかり、1 秒あたり 100 個のイベントを発行すると Lambda 関数を 1000 同時に実行することになり、制限ぎりぎりとなります。
 
 ## Qualifier
 
@@ -469,11 +472,11 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-monitoring.html
 監視するメトリクスとしては次のようなものがあります。
 
 - Invocations
-  このメトリクスは監視間隔として300秒(5分)若しくは60秒(1分)を設定してください。監視の際には、stasticsとして「Sum」を利用することを推奨します。
+  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。
 - Errors
-  このメトリクスは監視間隔として300秒(5分)若しくは60秒(1分)を設定してください。監視の際には、stasticsとして「Sum」を利用することを推奨します。
+  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。
 - Throttles
-  このメトリクスは監視間隔として300秒(5分)若しくは60秒(1分)を設定してください。監視の際には、stasticsとして「Sum」を利用することを推奨します。
+  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。
 
 その他、Lambda 関数のメモリをモニタリングするしたい場合は、次のドキュメントを参照します。
 https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory-usage-monitoring/
@@ -508,6 +511,6 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/gettingstarted-limits.html
 
 主に、同時実行数を引き上げたいなど。
 
-## まとめ
+## 📖 まとめ
 
 ![lambda](/images/all/lambda.png)

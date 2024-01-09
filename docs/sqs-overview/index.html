@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#amazon-simple-queue-service-sqs" target="_blank">Amazon Simple Queue Service (SQS)</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#sqs-%E3%81%A8%E3%81%AF" target="_blank">SQS とは</a></li>
 <li><a href="#sqs-%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">SQS 構成要素</a></li>
 <li><a href="#%E3%82%AD%E3%83%A5%E3%83%BC%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">キュータイプ</a></li>
@@ -57,7 +57,7 @@
 <li><a href="#%E6%9C%80%E5%A4%A7%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%82%B5%E3%82%A4%E3%82%BA" target="_blank">最大メッセージサイズ</a></li>
 <li><a href="#%E3%83%87%E3%83%83%E3%83%89%E3%83%AC%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%A5%E3%83%BC" target="_blank">デッドレターキュー</a></li>
 <li><a href="#%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">暗号化</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -80,11 +80,11 @@
       <google-codelab-step label="SQS 構成要素" duration="1">
         <ul>
 <li>プロデューサー（Producer） <ul>
-<li>メッセージをSQSに送信するアプリケーション</li>
+<li>メッセージを SQS に送信するアプリケーション</li>
 </ul>
 </li>
 <li>コンシューマー（Consumer） <ul>
-<li>SQSからメッセージを取り出すアプリケーション</li>
+<li>SQS からメッセージを取り出すアプリケーション</li>
 <li>Pull 型（コンシューマー側から一定間隔でデータ有無を確認する）</li>
 </ul>
 </li>
@@ -105,7 +105,7 @@
       <google-codelab-step label="キュータイプ" duration="1">
         <ul>
 <li>標準キュー</li>
-<li>FIFOキュー</li>
+<li>FIFO キュー</li>
 </ul>
 <p>違いは、<a href="https://aws.amazon.com/jp/builders-flash/202105/awsgeek-sqs/?awsf.filter-name=*all" target="_blank">アプリケーション間連携を疎結合で実現。「Amazon SQS」をグラレコで解説</a> の図が分かりやすいです。</p>
 <p class="image-container"><img alt="sns-queuetype" src="img\\4aa6488460ee9a95.png"></p>
@@ -127,8 +127,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="メッセージ重複排除" duration="1">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html" target="_blank">メッセージ重複排除ID の使用</a></p>
-<p>FIFO キューで指定することで、<code>5分間</code> は同一の重複排除ID IDのメッセージが受け付けられないようになるという機能です。</p>
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html" target="_blank">メッセージ重複排除 ID の使用</a></p>
+<p>FIFO キューで指定することで、<code>5分間</code> は同一の重複排除 ID ID のメッセージが受け付けられないようになるという機能です。</p>
 <pre><code language="language-sh" class="language-sh">aws sqs send-message \
     --queue-url ${QUEUE_URL} \
     --message-body &#39;{&#34;message&#34;: &#34;test&#34;}&#39; \
@@ -144,20 +144,20 @@
       <google-codelab-step label="可視性タイムアウト" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html" target="_blank">可視性タイムアウト</a></p>
 <p class="image-container"><img alt="sqs-visibilitytimeout" src="img\\a9abb1dd1bfb215b.png"></p>
-<p>SQS ではメッセージを取得しても自動で削除されることはありません。コンシューマー側が処理済みとして削除するか、メッセージの保持期間が過ぎて削除されるかです。 複数のコンシューマーがメッセージを読み取った場合、重複して処理されてしまう可能性があるため、可視性タイムアウトという処理中のメッセージが他のコンシューマーからは取得できなくする機能があります。0秒から12時間が指定できます。デフォルト値は30秒です。 コンシューマーは、可視性タイムアウトの時間に取得したメッセージを削除する必要があります。可視性タイムアウトの時間が過ぎると、メッセージを削除できなくなり、他のコンシューマーが取得できる状態になります。</p>
-<p>メッセージの処理時間が不明な場合、可視性タイムアウトを1分毎に2分間延長することもできます。 <a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/working-with-messages.html#processing-messages-timely-manner" target="_blank">タイムリーな方法でのメッセージの処理</a><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html#changing-message-visibility-timeout" target="_blank">メッセージの可視性タイムアウトの変更</a></p>
-<p>標準キューの場合は、メッセージの順序保証がないキューのため、他のコンシューマーがアクセスした場合、次のキューを取り出すことができます。 FIFOキューの場合は、メッセージの順序が重要であるため、可視性タイムアウト時間が過ぎるか、メッセージが削除されるまで、次のキューを取得することが出来ません。ただし、他のメッセージグループからはメッセージを取得することが出来ます。</p>
+<p>SQS ではメッセージを取得しても自動で削除されることはありません。コンシューマー側が処理済みとして削除するか、メッセージの保持期間が過ぎて削除されるかです。 複数のコンシューマーがメッセージを読み取った場合、重複して処理されてしまう可能性があるため、可視性タイムアウトという処理中のメッセージが他のコンシューマーからは取得できなくする機能があります。0 秒から 12 時間が指定できます。デフォルト値は 30 秒です。 コンシューマーは、可視性タイムアウトの時間に取得したメッセージを削除する必要があります。可視性タイムアウトの時間が過ぎると、メッセージを削除できなくなり、他のコンシューマーが取得できる状態になります。</p>
+<p>メッセージの処理時間が不明な場合、可視性タイムアウトを 1 分毎に 2 分間延長することもできます。 <a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/working-with-messages.html#processing-messages-timely-manner" target="_blank">タイムリーな方法でのメッセージの処理</a><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html#changing-message-visibility-timeout" target="_blank">メッセージの可視性タイムアウトの変更</a></p>
+<p>標準キューの場合は、メッセージの順序保証がないキューのため、他のコンシューマーがアクセスした場合、次のキューを取り出すことができます。 FIFO キューの場合は、メッセージの順序が重要であるため、可視性タイムアウト時間が過ぎるか、メッセージが削除されるまで、次のキューを取得することが出来ません。ただし、他のメッセージグループからはメッセージを取得することが出来ます。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="配信遅延（遅延キュー）" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-delay-queues.html" target="_blank">遅延キュー</a></p>
-<p>プロデューサー側からキューに新しいメッセージが送信された後に、指定した時間が経過してからコンシューマー側にメッセージが表示されるようにする設定です。0秒から15分までの間を指定できます。</p>
+<p>プロデューサー側からキューに新しいメッセージが送信された後に、指定した時間が経過してからコンシューマー側にメッセージが表示されるようにする設定です。0 秒から 15 分までの間を指定できます。</p>
 <p class="image-container"><img alt="sqs-delay" src="img\\294579d5c9a1a3fd.png"></p>
 <h2 is-upgraded>メッセージタイマー</h2>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-timers.html" target="_blank">メッセージタイマー</a></p>
-<p>キュー全体に指定する遅延キュー以外に、メッセージ個別に設定できるメッセージタイマーという機能があります。遅延キューと同時に指定された場合、メッセージに設定されたメッセージタイマーのほうが優先されます。0秒から15分までの間を指定できます。</p>
+<p>キュー全体に指定する遅延キュー以外に、メッセージ個別に設定できるメッセージタイマーという機能があります。遅延キューと同時に指定された場合、メッセージに設定されたメッセージタイマーのほうが優先されます。0 秒から 15 分までの間を指定できます。</p>
 <pre><code language="language-sh" class="language-sh">aws sqs send-message \
     --queue-url ${QUEUE_URL} \
     --message-body &#39;{&#34;message&#34;: &#34;test&#34;}&#39; \
@@ -168,14 +168,14 @@
       </google-codelab-step>
     
       <google-codelab-step label="メッセージ受信待機時間" duration="2">
-        <p>メッセージ取得までの待機時間です。0秒から20秒まで指定することができます。0秒を指定すると、ショートポーリングになります。</p>
+        <p>メッセージ取得までの待機時間です。0 秒から 20 秒まで指定することができます。0 秒を指定すると、ショートポーリングになります。</p>
 <p class="image-container"><img alt="sqs-waitseconts" src="img\\d63afa09fa5a1713.png"></p>
 <h2 is-upgraded>ショートポーリングとロングポーリング</h2>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-short-and-long-polling.html" target="_blank">ショートポーリングとロングポーリング</a></p>
 <ul>
 <li>ロングポーリング <ul>
 <li>通常はこちらを利用する。単一のキューをポーリングする多くのケースで有効。</li>
-<li>メッセージが空だった場合、最大20秒の間待機してメッセージの受領を待つ。それでも空だった場合に「空」応答を返す。</li>
+<li>メッセージが空だった場合、最大 20 秒の間待機してメッセージの受領を待つ。それでも空だった場合に「空」応答を返す。</li>
 <li>ショートポーリングに比べて API コール数が減る（コストダウン）</li>
 </ul>
 </li>
@@ -191,7 +191,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="メッセージ保持期間" duration="1">
-        <p>キューに登録されたメッセージは明示的に削除処理を行われない限りデフォルトで4日間保持、1分から14日設定できます。</p>
+        <p>キューに登録されたメッセージは明示的に削除処理を行われない限りデフォルトで 4 日間保持、1 分から 14 日設定できます。</p>
 <p class="image-container"><img alt="sqs-message-retention" src="img\\b5acfa3c6bb304c9.png"></p>
 <p>コンシューマーアプリケーションに障害があった場合、この保持期間内に復旧できれば、キューに貯まったメッセージを処理することができます。しかし、期間を過ぎてしまうと処理することが出来なくなってしまうので注意が必要です。</p>
 
@@ -199,10 +199,10 @@
       </google-codelab-step>
     
       <google-codelab-step label="最大メッセージサイズ" duration="1">
-        <p>キューのメッセージサイズで、1KBから256KBの範囲を指定できます。デフォルト値は 256 KBです。</p>
+        <p>キューのメッセージサイズで、1KB から 256KB の範囲を指定できます。デフォルト値は 256 KB です。</p>
 <p class="image-container"><img alt="sqs-maxsize" src="img\\417aa4fd6dfc6422.png"></p>
-<p>256 KB を超えるメッセージを送信したい場合、「Java用SQS拡張ライブラリ」と「S3」を利用します。これによって「2 GB」までのメッセージを扱えるようになります。</p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-s3-messages.html" target="_blank">Amazon S3を使用した大量のAmazon SQSメッセージの管理</a></p>
+<p>256 KB を超えるメッセージを送信したい場合、「Java 用 SQS 拡張ライブラリ」と「S3」を利用します。これによって「2 GB」までのメッセージを扱えるようになります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-s3-messages.html" target="_blank">Amazon S3 を使用した大量の Amazon SQS メッセージの管理</a></p>
 
 
       </google-codelab-step>
@@ -223,7 +223,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="sqs-overview" src="img\\c34be98d5bdf5a.png"></p>
 
 

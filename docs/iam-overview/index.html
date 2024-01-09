@@ -27,18 +27,18 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="はじめに" duration="0">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
 <p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Contents" duration="0">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-identity-and-access-managementiam" target="_blank">AWS Identity and Access Management(IAM)</a><ul>
-<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#contents" target="_blank">Contents</a></li>
+<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
+<li><a href="#-contents" target="_blank">👀 Contents</a></li>
 <li><a href="#iam-%E3%81%A8%E3%81%AF" target="_blank">IAM とは</a></li>
 <li><a href="#%E8%AA%8D%E8%A8%BC%E8%AA%8D%E5%8F%AF%E3%81%A8%E3%81%AF" target="_blank">認証・認可とは</a></li>
 <li><a href="#iam-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC" target="_blank">IAM ユーザー</a><ul>
@@ -59,7 +59,7 @@
 <li><a href="#iam-access-advisor" target="_blank">IAM Access Advisor</a></li>
 <li><a href="#iam-access-analyzer" target="_blank">IAM Access Analyzer</a></li>
 <li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a></li>
-<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 </li>
 </ul>
@@ -141,23 +141,19 @@
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies.html" target="_blank">IAM でのポリシーとアクセス許可</a></p>
 <p>ポリシーとは、AWS リソースへのアクセス権限を定義した JSON ドキュメントです。</p>
 <pre><code language="language-json" class="language-json">{
-    &#34;Version&#34;: &#34;2012-10-17&#34;,
-    &#34;Statement&#34;: [
-        {
-            &#34;Effect&#34;: &#34;Allow&#34;,
-            &#34;Action&#34;: [
-                &#34;ec2:AttachVolume&#34;,
-                &#34;ec2:DetachVolume&#34;
-            ],
-            &#34;Resource&#34;: [
-                &#34;arn:aws:ec2:*:*:volume/*&#34;,
-                &#34;arn:aws:ec2:*:*:instance/*&#34;
-            ],
-            &#34;Condition&#34;: {
-                &#34;ArnEquals&#34;: {&#34;ec2:SourceInstanceARN&#34;: &#34;arn:aws:ec2:*:*:instance/instance-id&#34;}
-            }
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Action&#34;: [&#34;ec2:AttachVolume&#34;, &#34;ec2:DetachVolume&#34;],
+      &#34;Resource&#34;: [&#34;arn:aws:ec2:*:*:volume/*&#34;, &#34;arn:aws:ec2:*:*:instance/*&#34;],
+      &#34;Condition&#34;: {
+        &#34;ArnEquals&#34;: {
+          &#34;ec2:SourceInstanceARN&#34;: &#34;arn:aws:ec2:*:*:instance/instance-id&#34;
         }
-    ]
+      }
+    }
+  ]
 }
 </code></pre>
 <p>ポリシーには次の３つがあります。</p>
@@ -166,7 +162,7 @@
 <li>AWS が提供しているポリシーです。各サービスを利用したり、職責のパターンで提供されています。</li>
 <li>AWS 管理ポリシーには、次の２つがあります。<ul>
 <li>サービスの利用を想定した管理ポリシー<ul>
-<li>AmazonS3FullAccess や　AmazonS3ReadOnlyAccess　など</li>
+<li>AmazonS3FullAccess や　 AmazonS3ReadOnlyAccess 　など</li>
 </ul>
 <img alt="iam-policy-aws" src="img\\a9cefca04cb41ad5.png"></li>
 <li>職責を想定した管理ポリシー（ジョブ機能）<ul>
@@ -229,10 +225,10 @@
   }
 }
 </code></pre>
-<p>ロールには、<a href="https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/howtosessionduration.html" target="_blank">セッション期間</a>が設定できます。セッション期間に指定した時間が経過すると、セッションからサインアウトします。以前は 1時間しか設定できませんでしたが、現在では 12 時間まで設定できます。あまり短くすると、マネジメントコンソールで作業していると、何度も「再ロード」画面がでますので作業内容を鑑みて設定しましょう。</p>
-<p>マネジメントコンソールで変更する場合は、「1時間 / 2時間 / 4時間 / 8時間 / 12時間 / カスタム期間」が選択できます。</p>
+<p>ロールには、<a href="https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/howtosessionduration.html" target="_blank">セッション期間</a>が設定できます。セッション期間に指定した時間が経過すると、セッションからサインアウトします。以前は 1 時間しか設定できませんでしたが、現在では 12 時間まで設定できます。あまり短くすると、マネジメントコンソールで作業していると、何度も「再ロード」画面がでますので作業内容を鑑みて設定しましょう。</p>
+<p>マネジメントコンソールで変更する場合は、「1 時間 / 2 時間 / 4 時間 / 8 時間 / 12 時間 / カスタム期間」が選択できます。</p>
 <p class="image-container"><img alt="iam-role-sessionduration" src="img\\1fbbd95ebe887dc9.png"></p>
-<p>カスタム期間では、秒数で 1時間～ 12時間を指定できます。AWS CLI を使った場合と同じです。 <img alt="iam-role-sessionduration-custom" src="img\\db613e4bf93cec63.png"></p>
+<p>カスタム期間では、秒数で 1 時間～ 12 時間を指定できます。AWS CLI を使った場合と同じです。 <img alt="iam-role-sessionduration-custom" src="img\\db613e4bf93cec63.png"></p>
 <p><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/update-role.html" target="_blank">update-role</a></p>
 <pre><code language="language-sh" class="language-sh"># 12時間にする場合
 aws iam update-role --max-session-duration 43200
@@ -253,7 +249,7 @@ aws iam update-role --max-session-duration 43200
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html" target="_blank">IAM ユーザー用のアカウントパスワードポリシーの設定</a></p>
 <p>IAM ユーザーのパスワードポリシーを設定することができます。</p>
 <p class="image-container"><img alt="iam password policy" src="img\\c2766ff6d8b13fbc.png"></p>
-<p><a href="https://japan.zdnet.com/article/35202432/#:~:text=%E3%81%82%E3%82%89%E3%82%86%E3%82%8B%E6%96%87%E5%AD%97%E7%A8%AE%E3%82%92%E5%90%AB%E3%82%8010,%E3%81%AF600%E4%BA%AC%E5%B9%B4%E3%81%A0%E3%80%82&text=PassGAN%E3%81%AF%E3%81%AA%E3%81%9C%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE,%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%A0%E3%82%8D%E3%81%86%E3%81%8B%E3%80%82" target="_blank">ZDNET Japan-よくあるパスワード、約半数がAIツールで1分以内に解読可能</a> という記事に、パスワードポリシー別の解析時間が記載されています。</p>
+<p><a href="https://japan.zdnet.com/article/35202432/#:~:text=%E3%81%82%E3%82%89%E3%82%86%E3%82%8B%E6%96%87%E5%AD%97%E7%A8%AE%E3%82%92%E5%90%AB%E3%82%8010,%E3%81%AF600%E4%BA%AC%E5%B9%B4%E3%81%A0%E3%80%82&text=PassGAN%E3%81%AF%E3%81%AA%E3%81%9C%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%81%AE,%E3%81%A6%E3%81%84%E3%82%8B%E3%81%AE%E3%81%A0%E3%82%8D%E3%81%86%E3%81%8B%E3%80%82" target="_blank">ZDNET Japan-よくあるパスワード、約半数が AI ツールで 1 分以内に解読可能</a> という記事に、パスワードポリシー別の解析時間が記載されています。</p>
 <p>この記事の引用元である、<a href="https://www.homesecurityheroes.com/ai-password-cracking/" target="_blank">こちらのサイト</a>では、パスワードの長さから解析にどれくらいかかるか判定してくれます。</p>
 <p>画像は、 <code>password</code> と入れた例です。当然ですが、実際に使用しているパスワードを入れないようにしましょう。</p>
 <p class="image-container"><img alt="password policy" src="img\\8921337e37a89213.png"></p>
@@ -282,7 +278,7 @@ aws iam update-role --max-session-duration 43200
     
       <google-codelab-step label="IAM Access Analyzer" duration="2">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank">AWS Identity and Access Management Access Analyzer を使用する</a></p>
-<p>AWSリソースに紐付いているポリシーを検査し、他AWSアカウントや外部のインターネット等からのアクセスを可能とするような設定がされているかどうかを検出および可視化してくれる機能です。</p>
+<p>AWS リソースに紐付いているポリシーを検査し、他 AWS アカウントや外部のインターネット等からのアクセスを可能とするような設定がされているかどうかを検出および可視化してくれる機能です。</p>
 <p class="image-container"><img alt="iam-access-analyzer-result" src="img\\204f5c0cc2ef60b9.png"></p>
 <p class="image-container"><img alt="iam-access-analyzer-result-detail" src="img\\c1c4016ed4c5cbdb.png"></p>
 
@@ -304,7 +300,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="まとめ" duration="0">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="iam" src="img\\8858c219d2025ff3.png"></p>
 
 
