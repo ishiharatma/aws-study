@@ -51,6 +51,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./kms-overview/index.html" target="_blank">AWS KMS</a>
   - <a href="./acm-overview/index.html" target="_blank">AWS Certificate Manager</a>
   - <a href="./waf-and-shield-overview/index.html" target="_blank">AWS WAF & Shield</a>
+  - <a href="./guardduty-overview/index.html" target="_blank">Amazon GuardDuty</a>
+  - <a href="./securityhub-overview/index.html" target="_blank">AWS Security Hub</a>
 
 ## AWS 認定資格勉強資料
 

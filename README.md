@@ -81,6 +81,8 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 [AWS KMS](/articles_base/kms-overview.md)
 [AWS Certificate Manager](/articles_base/acm-overview.md)
 [AWS WAF & Shield](/articles_base/waf-and-shield-overview.md)
+[Amazon GuardDuty](/articles_base/guardduty-overview.md)
+[AWS Security Hub](/articles_base/securityhub-overview.md)
 
 ## 目次: 認定資格
 
