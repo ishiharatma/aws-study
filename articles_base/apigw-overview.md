@@ -136,7 +136,7 @@ REST API は、3 種類のエンドポイントタイプが選択できます。
   - デフォルトのエンドポイントタイプです。
   - 自前の CloudFront と組み合わせることでエッジ最適化の構成にすることもできます。既に CloudFront を利用しているシステムの場合にこのような構成になります。
     ![apigw_endpoint-2](/images/apigw/apigw_endpoint-2.png)
-  - 自前の CloudFront を利用する場合は、API Gateway のエンドポイントを `リージョン` にしておきます。`エッジ最適化` を選択していると、自前の CloudFront から、AWS が管理する CloudFront を経由して、API Gateway にアクセスすることになり、不要なレイテンシが発生したり、Ｈ TTP ヘッダーが予期しない値となったりするので注意が必要です。CloudFront を経由すると一部のヘッダーを書き換えます。自前の CloudFront はこれを回避することができますが、AWS が管理する CloudFront は設定を行うことが出来ません。
+  - 自前の CloudFront を利用する場合は、API Gateway のエンドポイントを `リージョン` にしておきます。`エッジ最適化` を選択していると、自前の CloudFront から、AWS が管理する CloudFront を経由して、API Gateway にアクセスすることになり、不要なレイテンシが発生したり、HTTP ヘッダーが予期しない値となったりするので注意が必要です。CloudFront を経由すると一部のヘッダーを書き換えます。自前の CloudFront はこれを回避することができますが、AWS が管理する CloudFront は設定を行うことが出来ません。
     ![apigw_endpoint-3](/images/apigw/apigw_endpoint-3.png)
 - プライベート
   - VPC 内から AWS PrivateLink でのみアクセスできるエンドポイントです。
