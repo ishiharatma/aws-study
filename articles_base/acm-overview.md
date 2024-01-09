@@ -83,7 +83,7 @@ Duration: 00:01:00
 
 `DaysToExpiry` は証明書が切れるまでの残り日数になっているので、このように減少していきます。
 
-![DaysToExpiry](/images/acm/acm-cw-daytoexpiry.JPG)
+![DaysToExpiry](/images/acm/acm-cw-daytoexpiry.jpg)
 
 ## 📖 まとめ
 

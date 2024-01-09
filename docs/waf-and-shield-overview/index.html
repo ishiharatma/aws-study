@@ -214,18 +214,18 @@
 <p><a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Project</a></p>
 <h2 is-upgraded>Web ACL</h2>
 <p>AWS WAF の利用を開始するときに最初に作成するのが、Web ACL(ウェブアクセスコントロールリスト：web access control list)です。 Web ACL は同一の制御ルールを含んだ論理的なグループのことです。 Web ACL は作成した直後から課金対象となります。 料金は月額固定で、１か月に満たない場合は案分されます。</p>
-<p class="image-container"><img alt="webacl" src="img\\22cca25d8f6d6bf1.JPG"></p>
+<p class="image-container"><img alt="webacl" src="img\\22cca25d8f6d6bf1.jpg"></p>
 <p>WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。 すべてのルールが通った場合のデフォルトの動作（許可か拒否）を指定することができます。</p>
-<p class="image-container"><img alt="waf-rules" src="img\\9eb4cb736c7f5ab1.JPG"></p>
-<p class="image-container"><img alt="default-action" src="img\\fe4bc4f3f21a6ad6.JPG"></p>
+<p class="image-container"><img alt="waf-rules" src="img\\9eb4cb736c7f5ab1.jpg"></p>
+<p class="image-container"><img alt="default-action" src="img\\fe4bc4f3f21a6ad6.jpg"></p>
 <h2 is-upgraded>WCU(web ACL Capacity Units)</h2>
 <p>WebACL に設定できるルールやルールグループにはそれぞれ WCU(web ACL Capacity Units) という処理コストの定義があり、複雑なルールほど WCU が多くなっています。 １つの WebACL に設定できる WCU に上限をつけることで、適用できるルール数を制限しています。</p>
-<p class="image-container"><img alt="waf-wcu" src="img\\6857c2219c9721da.JPG"></p>
+<p class="image-container"><img alt="waf-wcu" src="img\\6857c2219c9721da.jpg"></p>
 <p>下記アップデート以前は、最大 1,500 WCU となっており、これを超える場合は上限緩和申請が必要でしたが、アップデートにより 5,000 WCU まで上限緩和申請なしで使用できるようになりました。 ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100 万件あたりに追加料金が発生するようになります。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/04/aws-waf-web-acl-capacity-units-limits/" target="_blank">AWS WAF でウェブ ACL の容量ユニット制限を引き上げ(Apr 11, 2023)</a></p>
 <h2 is-upgraded>ルールとルールグループ</h2>
 <h3 is-upgraded>ルール</h3>
 <p>リクエストに対する検査基準(ステートメント：Statement)と、検査基準に一致した場合のアクション(Action)を定義したものです。</p>
-<p class="image-container"><img alt="waf-rule" src="img\\dfdb66a06f8f9113.JPG"></p>
+<p class="image-container"><img alt="waf-rule" src="img\\dfdb66a06f8f9113.jpg"></p>
 <p>いろいろな検査基準を作成できますが、処理が複雑になると WCU も増加していきます。</p>
 <p>WCU の加算ルールは下記を参照してください。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-rule-statements-match.html" target="_blank">一致ルールステートメント</a></p>
@@ -260,14 +260,14 @@
 <h3 is-upgraded>AWS マネージドルールグループ</h3>
 <p>AWS が用意しているいくつかのルールをまとめて用途ごとに定義したものです。 WordPress や PHP など特定タイプのアプリケーションを保護するように設計されたものもあります。</p>
 <p>ほとんどが無料で利用できますが、一部有料なルールグループも存在します。</p>
-<p class="image-container"><img alt="managed-paid" src="img\\1d1bd3e2249c0c2d.JPG"></p>
-<p class="image-container"><img alt="managed-free" src="img\\647010d81af69df2.JPG"></p>
+<p class="image-container"><img alt="managed-paid" src="img\\1d1bd3e2249c0c2d.jpg"></p>
+<p class="image-container"><img alt="managed-free" src="img\\647010d81af69df2.jpg"></p>
 <p>マネージドルールは、AWS によって随時アップデートされ、バージョンが上がっていきます。 マネージドルールを使用する際は、バージョン固定で利用するか、推奨されてるバージョンに自動的にアップデートするかを選択できます。</p>
-<p class="image-container"><img alt="managed-version" src="img\\f27017b15602f9d1.JPG"></p>
+<p class="image-container"><img alt="managed-version" src="img\\f27017b15602f9d1.jpg"></p>
 <p>推奨されているバージョンに自動的にアップデートする場合、運用コストは下がりますが、アップデートにより予期せぬブロックが発生するリスクがあります。</p>
 <p>バージョンを固定する場合、新しいバージョンを検証し適用する運用コストが上がりますが、予期せぬブロックが発生するリスクは回避できます。 どちらが適しているかはしっかり検討するのがよいでしょう。</p>
 <p>ルールグループがアップデートされることを検知するには、<a href="https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-using-managed-rule-groups-sns-topic.html" target="_blank">マネージドルールグループに対する新しいバージョンと更新の通知を受け取る</a>を参考にします。</p>
-<p class="image-container"><img alt="managed-versionup" src="img\\6effcd5a17cf9362.JPG"></p>
+<p class="image-container"><img alt="managed-versionup" src="img\\6effcd5a17cf9362.jpg"></p>
 <h4 is-upgraded>AWS マネージドルールグループの適用例</h4>
 <ul>
 <li>推奨ルールのみ（◎ のみ）：1,175 / 1,500 WCU 　残り：325 WCU<table>
@@ -393,8 +393,8 @@
 <p>*4 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/06/aws-waf-fraud-control-account-creation-prevention-pricing/" target="_blank">Account Creation Fraud Prevention(ACFP)(Jun 13, 2023)</a></p>
 <h3 is-upgraded>AWS Marketplace マネージドルールグループ</h3>
 <p>セキュリティベンダーが提供するルールセットです。それぞれのルールセットごとに料金が異なります。</p>
-<p class="image-container"><img alt="waf-marketplace-rules-1" src="img\\8624a549a4ff4651.JPG"></p>
-<p class="image-container"><img alt="waf-marketplace-rules-2" src="img\\5a6369906c517c27.JPG"></p>
+<p class="image-container"><img alt="waf-marketplace-rules-1" src="img\\8624a549a4ff4651.jpg"></p>
+<p class="image-container"><img alt="waf-marketplace-rules-2" src="img\\5a6369906c517c27.jpg"></p>
 <h3 is-upgraded>独自のルールグループ</h3>
 <p>独自のルールをまとめて名前を付けておくことで、再利用可能にしたものです。 作成するルールグループには、WebACL と同様の WCU の上限があります。</p>
 <h2 is-upgraded>ログ</h2>

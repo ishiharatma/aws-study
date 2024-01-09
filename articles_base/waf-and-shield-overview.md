@@ -154,21 +154,21 @@ AWS WAF の利用を開始するときに最初に作成するのが、Web ACL(�
 Web ACL は作成した直後から課金対象となります。
 料金は月額固定で、１か月に満たない場合は案分されます。
 
-![webacl](/images/waf/waf-webacl.JPG)
+![webacl](/images/waf/waf-webacl.jpg)
 
 WebACL には複数の制御ルールを設定し、通信を許可したり、拒否したりすることができます。
 すべてのルールが通った場合のデフォルトの動作（許可か拒否）を指定することができます。
 
-![waf-rules](/images/waf/waf-rules.JPG)
+![waf-rules](/images/waf/waf-rules.jpg)
 
-![default-action](/images/waf/waf-webacl-default-action.JPG)
+![default-action](/images/waf/waf-webacl-default-action.jpg)
 
 ### WCU(web ACL Capacity Units)
 
 WebACL に設定できるルールやルールグループにはそれぞれ WCU(web ACL Capacity Units) という処理コストの定義があり、複雑なルールほど WCU が多くなっています。
 １つの WebACL に設定できる WCU に上限をつけることで、適用できるルール数を制限しています。
 
-![waf-wcu](/images/waf/waf-wcu.JPG)
+![waf-wcu](/images/waf/waf-wcu.jpg)
 
 下記アップデート以前は、最大 1,500 WCU となっており、これを超える場合は上限緩和申請が必要でしたが、アップデートにより 5,000 WCU まで上限緩和申請なしで使用できるようになりました。
 ただし、1,500 WCU を超えると 500 WCU 単位でリクエスト 100 万件あたりに追加料金が発生するようになります。
@@ -180,7 +180,7 @@ WebACL に設定できるルールやルールグループにはそれぞれ WCU
 
 リクエストに対する検査基準(ステートメント：Statement)と、検査基準に一致した場合のアクション(Action)を定義したものです。
 
-![waf-rule](/images/waf/waf-rule.JPG)
+![waf-rule](/images/waf/waf-rule.jpg)
 
 いろいろな検査基準を作成できますが、処理が複雑になると WCU も増加していきます。
 
@@ -220,14 +220,14 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 ほとんどが無料で利用できますが、一部有料なルールグループも存在します。
 
-![managed-paid](/images/waf/waf-managedrules-paid.JPG)
+![managed-paid](/images/waf/waf-managedrules-paid.jpg)
 
-![managed-free](/images/waf/waf-managedrules-free.JPG)
+![managed-free](/images/waf/waf-managedrules-free.jpg)
 
 マネージドルールは、AWS によって随時アップデートされ、バージョンが上がっていきます。
 マネージドルールを使用する際は、バージョン固定で利用するか、推奨されてるバージョンに自動的にアップデートするかを選択できます。
 
-![managed-version](/images/waf/waf-managedrules-version.JPG)
+![managed-version](/images/waf/waf-managedrules-version.jpg)
 
 推奨されているバージョンに自動的にアップデートする場合、運用コストは下がりますが、アップデートにより予期せぬブロックが発生するリスクがあります。
 
@@ -236,7 +236,7 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 ルールグループがアップデートされることを検知するには、[マネージドルールグループに対する新しいバージョンと更新の通知を受け取る](https://docs.aws.amazon.com/ja_jp/waf/latest/developerguide/waf-using-managed-rule-groups-sns-topic.html)を参考にします。
 
-![managed-versionup](/images/waf/waf-managedrules-verup.JPG)
+![managed-versionup](/images/waf/waf-managedrules-verup.jpg)
 
 ##### AWS マネージドルールグループの適用例
 
@@ -292,9 +292,9 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 セキュリティベンダーが提供するルールセットです。それぞれのルールセットごとに料金が異なります。
 
-![waf-marketplace-rules-1](/images/waf/waf-marketplace-rules-1.JPG)
+![waf-marketplace-rules-1](/images/waf/waf-marketplace-rules-1.jpg)
 
-![waf-marketplace-rules-2](/images/waf/waf-marketplace-rules-2.JPG)
+![waf-marketplace-rules-2](/images/waf/waf-marketplace-rules-2.jpg)
 
 #### 独自のルールグループ
 
