@@ -79,36 +79,6 @@ Certified Cloud Practitioner → Associate → Professional → Specialty
       - 第 6 分野: セキュリティとコンプライアンス 17%
 - SPECIALTY
   - 試験ガイドで指定された Specialty 分野に関する技術的な AWS クラウドでの経験
-  - 【ANS】[AWS Certified Advanced Networking - Specialty](https://aws.amazon.com/jp/certification/certified-advanced-networking-specialty/)
-    - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
-    - 試験分野
-      - 第 1 分野: ネットワーク設計 30%
-      - 第 2 分野: ネットワーク実装 26%
-      - 第 3 分野: ネットワークの管理と運用 20%
-      - 第 4 分野: ネットワークセキュリティ、コンプライアンス、ガバナンス 24%
-  - 【DAS】[AWS Certified Data Analytics - Specialty](https://aws.amazon.com/jp/certification/certified-data-analytics-specialty/)
-    - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
-    - 試験分野
-      - 第 1 分野: 収集 18%
-      - 第 2 分野: ストレージとデータ管理 22%
-      - 第 3 分野: 処理 24%
-      - 第 4 分野: 分析と可視化 18%
-      - 第 5 分野: セキュリティ 18%
-  - 【DBS】[AWS Certified Database - Specialty](https://aws.amazon.com/jp/certification/certified-database-specialty/)
-    - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
-    - 試験分野
-      - 第 1 分野: ワークロード固有のデータベース設計 26%
-      - 第 2 分野: デプロイと移行 20%
-      - 第 3 分野: マネジメントとオペレーション 18%
-      - 第 4 分野: モニタリングとトラブルシューティング 18%
-      - 第 5 分野: データベースセキュリティ 18%
-  - 【MLS】[AWS Certified Machine Learning - Specialty](https://aws.amazon.com/jp/certification/certified-machine-learning-specialty/)
-    - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
-    - 試験分野
-      - 第 1 分野: データエンジニアリング 20%
-      - 第 2 分野: 探索的データ分析 24%
-      - 第 3 分野: モデリング 36%
-      - 第 4 分野: 機械学習の実装とその運用 20%
   - 【SCS】[AWS Certified Security - Specialty](https://aws.amazon.com/jp/certification/certified-security-specialty/)
     - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
     - 試験分野
@@ -117,6 +87,36 @@ Certified Cloud Practitioner → Associate → Professional → Specialty
       - 第 3 分野: インフラストラクチャのセキュリティ 26%
       - 第 4 分野: アイデンティティ管理とアクセス管理 20%
       - 第 5 分野: データ保護 22%
+  - 【DBS】[AWS Certified Database - Specialty](https://aws.amazon.com/jp/certification/certified-database-specialty/)
+    - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
+    - 試験分野
+      - 第 1 分野: ワークロード固有のデータベース設計 26%
+      - 第 2 分野: デプロイと移行 20%
+      - 第 3 分野: マネジメントとオペレーション 18%
+      - 第 4 分野: モニタリングとトラブルシューティング 18%
+      - 第 5 分野: データベースセキュリティ 18%
+  - 【DAS】[AWS Certified Data Analytics - Specialty](https://aws.amazon.com/jp/certification/certified-data-analytics-specialty/)
+    - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
+    - 試験分野
+      - 第 1 分野: 収集 18%
+      - 第 2 分野: ストレージとデータ管理 22%
+      - 第 3 分野: 処理 24%
+      - 第 4 分野: 分析と可視化 18%
+      - 第 5 分野: セキュリティ 18%
+  - 【ANS】[AWS Certified Advanced Networking - Specialty](https://aws.amazon.com/jp/certification/certified-advanced-networking-specialty/)
+    - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
+    - 試験分野
+      - 第 1 分野: ネットワーク設計 30%
+      - 第 2 分野: ネットワーク実装 26%
+      - 第 3 分野: ネットワークの管理と運用 20%
+      - 第 4 分野: ネットワークセキュリティ、コンプライアンス、ガバナンス 24%
+  - 【MLS】[AWS Certified Machine Learning - Specialty](https://aws.amazon.com/jp/certification/certified-machine-learning-specialty/)
+    - 300 USD(\30,000) / 180 分 / 65 問 / 合格基準 750/1000 点
+    - 試験分野
+      - 第 1 分野: データエンジニアリング 20%
+      - 第 2 分野: 探索的データ分析 24%
+      - 第 3 分野: モデリング 36%
+      - 第 4 分野: 機械学習の実装とその運用 20%
   - 【PAS】[AWS Certified SAP on AWS - Specialty](https://aws.amazon.com/jp/certification/certified-sap-on-aws-specialty/)
     - 300 USD(\30,000) / 170 分 / 65 問 / 合格基準 750/1000 点
     - 試験分野
