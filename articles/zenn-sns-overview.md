@@ -163,7 +163,7 @@ https://sns.ap-northeast-1.amazonaws.com/confirmation.html?TopicArn=arn:aws:sns:
   - コピーした URL のパラメータを分解すると、次の３つになります。
 
     - TopicArn
-    - Topic
+    - Token
     - Endpoint
 
   - 次のコマンドを実行します。`authenticate-on-unsubscribe true` を付けるのがポイントです。
@@ -171,7 +171,7 @@ https://sns.ap-northeast-1.amazonaws.com/confirmation.html?TopicArn=arn:aws:sns:
     ```sh
     aws sns confirm-subscription \
     > --topic-arn <TopicArnのパラメータ値を指定します> \
-    > --token <Topicのパラメータ値を指定します> \
+    > --token <Tokenのパラメータ値を指定します> \
     > --authenticate-on-unsubscribe true \
     > --region <Topicのリージョンを指定します>
 

@@ -178,13 +178,13 @@
 <li>AWS CLI を利用する場合<ul>
 <li>コピーした URL のパラメータを分解すると、次の３つになります。<ul>
 <li>TopicArn</li>
-<li>Topic</li>
+<li>Token</li>
 <li>Endpoint</li>
 </ul>
 </li>
 <li>次のコマンドを実行します。<code>authenticate-on-unsubscribe true</code> を付けるのがポイントです。<pre><code language="language-sh" class="language-sh">aws sns confirm-subscription \
 &gt; --topic-arn &lt;TopicArnのパラメータ値を指定します&gt; \
-&gt; --token &lt;Topicのパラメータ値を指定します&gt; \
+&gt; --token &lt;Tokenのパラメータ値を指定します&gt; \
 &gt; --authenticate-on-unsubscribe true \
 &gt; --region &lt;Topicのリージョンを指定します&gt;
 
