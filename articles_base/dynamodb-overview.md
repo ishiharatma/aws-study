@@ -736,7 +736,7 @@ Duration: 0:01:00
 
 ## DynamoDB のポイントインタイムリカバリ(PITR)
 
-[PIRT](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/PointInTimeRecovery.html)を使用すれば、過去 35 日間の任意の時点にテーブルを復元することができます。
+[PITR](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/PointInTimeRecovery.html)を使用すれば、過去 35 日間の任意の時点にテーブルを復元することができます。
 
 PITR で復元する場合、新しいテーブルに復元されます。
 
