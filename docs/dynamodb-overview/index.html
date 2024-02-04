@@ -46,7 +46,13 @@
 <li><a href="#amazon-dynamodb-%E3%81%AE%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8" target="_blank">Amazon DynamoDB のストレージ</a></li>
 <li><a href="#amazon-dynamodb-%E3%81%AE%E8%80%90%E4%B9%85%E6%80%A7" target="_blank">Amazon DynamoDB の耐久性</a></li>
 <li><a href="#amazon-dynamodb-%E3%81%AE%E8%AA%AD%E3%81%BF%E8%BE%BC%E3%81%BF%E6%95%B4%E5%90%88%E6%80%A7" target="_blank">Amazon DynamoDB の読み込み整合性</a></li>
-<li><a href="#amazon-dynamodb-%E3%81%AE%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9" target="_blank">Amazon DynamoDB のパフォーマンス</a></li>
+<li><a href="#amazon-dynamodb-%E3%81%AE%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9" target="_blank">Amazon DynamoDB のパフォーマンス</a><ul>
+<li><a href="#%E3%82%AD%E3%83%A3%E3%83%91%E3%82%B7%E3%83%86%E3%82%A3%E3%83%A2%E3%83%BC%E3%83%89" target="_blank">キャパシティモード</a></li>
+<li><a href="#%E3%82%A2%E3%83%80%E3%83%96%E3%83%86%E3%82%A3%E3%83%96%E3%82%AD%E3%83%A3%E3%83%91%E3%82%B7%E3%83%86%E3%82%A3" target="_blank">アダブティブキャパシティ</a></li>
+<li><a href="#%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E3%82%AD%E3%83%A3%E3%83%91%E3%82%B7%E3%83%86%E3%82%A3" target="_blank">バーストキャパシティ</a></li>
+<li><a href="#auto-scaling" target="_blank">Auto Scaling</a></li>
+</ul>
+</li>
 <li><a href="#dynamodb-%E3%81%AE%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E6%93%8D%E4%BD%9C" target="_blank">DynamoDB のテーブル操作</a></li>
 <li><a href="#dynamodb-%E3%81%AE%E9%A0%85%E7%9B%AE%E6%93%8D%E4%BD%9C" target="_blank">DynamoDB の項目操作</a></li>
 <li><a href="#ttl" target="_blank">TTL</a></li>
@@ -140,15 +146,17 @@
 <li>1 テーブルあたり最大で 5 つの GSI を作成できます。</li>
 <li>既存テーブルに追加・削除ができます。</li>
 <li>スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。</li>
+<li>GSI は結果整合性の読み取りのみサポートします。</li>
 <li>GSI に依存するテーブル設計であれば、RDS の利用も検討したほうがよい。</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-indexes.html" target="_blank">DynamoDB でセカンダリインデックスを使用するためのベストプラクティス</a></li>
 </ul>
 </li>
 <li>ローカルセカンダリインデックス（LSI） <ul>
 <li>テーブルとパーティションキーは同じですが、ソートキーが異なるインデックスです。</li>
+<li>LSI への読み込み・書き込みはテーブルのキャパシティが消費されます。</li>
 <li>1 テーブルあたり最大で 5 つの LSI を作成できます。</li>
-<li>スループットやストレージ容量を追加で必要となります。インデックスが増えると書き込みコストが上がります。</li>
-<li>GSI と違い、既存テーブルに追加・削除ができません。</li>
+<li>GSI と違い、テーブル作成時にしか追加できず、既存テーブルに追加・削除ができません。</li>
+<li>GIS と違い、LSI は強い結果整合性をサポートします。<code>ConsistentRead</code> を <code>true</code> にすることで強い結果整合性の読み取りができます。</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/SecondaryIndexes.html" target="_blank">セカンダリインデックスを使用したデータアクセス性の向上</a></li>
 </ul>
 </li>
@@ -198,12 +206,14 @@
       </google-codelab-step>
     
       <google-codelab-step label="Amazon DynamoDB のパフォーマンス" duration="3">
-        <p>スループットキャパシティといった、読み取り、書き込みに必要なスループットキャパシティをテーブル単位で割り当てることができます。</p>
-<p>テーブルにパーティションがある場合は、読み取り、書き込みはパーティションごとに均等に割り当てられます。</p>
-<p>読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒、といった読み取り性能を表す単位です。</p>
-<p>書き込みのスループットは、WCU(Write Capacity Unit)という単位で割り当てます。1 WCU は、最大 1KB の項目に対して、1 回/秒の書き込み性能を表す単位です。</p>
+        <p>スループットキャパシティといった、1 秒間の読み取り、書き込みに必要なスループットキャパシティをテーブル単位で割り当てることができます。</p>
+<ul>
+<li>読み取りキャパシティ（RCU:Read Capacity Unit）読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒、といった読み取り性能を表す単位です。</li>
+<li>書き込みキャパシティ（WCU:Write Capacity Unit）書き込みのスループットは、WCU(Write Capacity Unit)という単位で割り当てます。1 WCU は、最大 1KB の項目に対して、1 回/秒の書き込み性能を表す単位です。</li>
+</ul>
 <p>DynamoDB を利用する場合は、テーブルごとに RCU と WCU を設計する必要があります。ただし、どれだけ必要か事前に見積もることが困難な場合が多いです。</p>
 <p>そのような用途のために、「オンデマンド」と「プロビジョニング済み」という 2 種類のキャパシティーモードがあります。</p>
+<h2 is-upgraded>キャパシティモード</h2>
 <p>キャパシティモードは 24 時間に 1 回だけ相互に変更することができます。</p>
 <p>「プロビジョニング済み」から「オンデマンド」に変更すると、Auto Scaling の設定が削除されるので、もう一度「プロビジョニング済み」に戻す場合は注意が必要です。</p>
 <ul>
@@ -215,11 +225,32 @@
 </li>
 <li>プロビジョニング済みキャパシティーモード <ul>
 <li>安定したアクセスが見込まれる場合に適したモードで、事前に予想されるキャパシティを設定しておきます</li>
-<li>設定したキャパシティを超えた場合は、スロットリングが発生します</li>
-<li>Auto Scaling を使用することで利用率に応じてキャパシティを自動調整でき、スロットリングの発生を回避できます。ただし、即応性はないので急激な負荷には対応できない場合もあります</li>
+<li>テーブルにパーティションがある場合は、読み取り、書き込みはパーティションごとに均等に割り当てられます。</li>
+<li>設定したキャパシティを超えた場合は、スロットリングが発生します <ul>
+<li>スロットリングの発生を回避する仕組みとして、<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-partition-key-design.html#bp-partition-key-partitions-adaptive" target="_blank">アダプティブキャパシティ</a>と<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/bp-partition-key-design.html#bp-partition-key-throughput-bursting" target="_blank">バーストキャパシティ</a>があります。</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/AutoScaling.html" target="_blank">Auto Scaling</a> を使用することで利用率に応じてキャパシティを自動調整でき、スロットリングの発生を回避できます。ただし、即応性はないので急激な負荷には対応できない場合もあります</li>
 </ul>
 </li>
 </ul>
+<h2 is-upgraded>アダブティブキャパシティ</h2>
+<p>パーティション分割されているテーブルの場合、キャパシティは均一に割り当てられますが、アクセスが常に均一であるとは限りません。 ホットパーティションという、他に比べてアクセスが集中するパーティションが発生する可能性があります。</p>
+<p>そのような場合にスループットを発生させないようにする仕組みとして、「アダブティブキャパシティ」があります。</p>
+<p>次のように 3 つのパーティションに分かれているテーブルで、テーブルに割り当てられているキャパシティは 600 WCU だったとします。</p>
+<p>パーティション１つずつのキャパシティは 600÷3 ＝＝ 200 WCU になります。</p>
+<p>瞬間的にパーティション「P3」のトラフィックが増えて、パーティションに割り当てられたキャパシティを超えたとします。 この時、他のパーティションは 50 WCU しか使っておらず、余力があります。</p>
+<p>このようなとき、余力分を使用することでパーティション「P3」でスロットリングの発生を抑止することができます。</p>
+<p>ただし、余力以上のトラフィックが発生したときには、スロットリングが発生してしまいます。</p>
+<p class="image-container"><img alt="adaptive" src="img\\42ee00205890d38a.png"></p>
+<h2 is-upgraded>バーストキャパシティ</h2>
+<p>直近 5 分（300 秒）間の未使用分を使用して、急激なトラフィックの増加に対応する機能です。 テーブルに 150 RCU がプロビジョニングされており、5 分間全く使用されなかった場合は、150 × 300 = 45,000 RCU の容量があります。 その状態で 200 RCU のトラフィックが発生した場合、最大で 15 分間トラフィックを処理することができるようになります。</p>
+<p>45,000 RCU ÷ [実際のトラフィック 200 RCU - テーブルキャパシティ 150 RCU) = 900 秒 = 15 分 (参考:<a href="https://repost.aws/ja/knowledge-center/dynamodb-spiky-workloads-short-intervals" target="_blank">Amazon DynamoDB はスパイクな負荷を短い間隔でどのように処理しますか?|re:Post</a>）</p>
+<p>ただし、バーストキャパシティはベストエフォートで提供されるもので、保証はありません。そのため、バーストキャパシティを期待した設計は行わないようにします。</p>
+<p class="image-container"><img alt="bursting" src="img\\156c7eac676c367.png"></p>
+<h2 is-upgraded>Auto Scaling</h2>
+<p>EC2 の Auto Scaling と同じで、RCU、WCU を増減させてくれる。EC2 と同じように、即座に拡大するわけではないので、瞬間的にスパイクには対応できず、スロットリングが発生する可能性があります。 オンデマンドモードか、DynamoDB Accelerator (DAX)を使用したアーキテクチャを検討します。</p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/amazon-dynamodb-auto-scaling-performance-and-cost-optimization-at-any-scale/" target="_blank">Amazon DynamoDB Auto Scaling: 規模を問わないパフォーマンスとコストの最適化|AWS Blog</a></p>
 
 
       </google-codelab-step>
