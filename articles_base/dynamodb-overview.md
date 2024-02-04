@@ -23,17 +23,21 @@
     - [アダブティブキャパシティ](#アダブティブキャパシティ)
     - [バーストキャパシティ](#バーストキャパシティ)
     - [Auto Scaling](#auto-scaling)
+  - [暗号化](#暗号化)
+    - [保管データの暗号化(サーバサイド暗号化)](#保管データの暗号化サーバサイド暗号化)
+    - [転送データの暗号化](#転送データの暗号化)
   - [DynamoDB のテーブル操作](#dynamodb-のテーブル操作)
   - [DynamoDB の項目操作](#dynamodb-の項目操作)
-  - [TTL](#ttl)
-  - [トランザクション](#トランザクション)
   - [DynamoDB ストリーム](#dynamodb-ストリーム)
+  - [TTL（Time to Live）](#ttltime-to-live)
+  - [トランザクション](#トランザクション)
   - [グローバルテーブル](#グローバルテーブル)
   - [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
   - [条件付き書き込み](#条件付き書き込み)
   - [アトミックカウンター](#アトミックカウンター)
   - [並列スキャン](#並列スキャン)
   - [バックアップ](#バックアップ)
+  - [DynamoDB のポイントインタイムリカバリ(PITR)](#dynamodb-のポイントインタイムリカバリpitr)
   - [DynamoDB 用の NoSQL Workbench](#dynamodb-用の-nosql-workbench)
   - [設計](#設計)
   - [📖 まとめ](#-まとめ)
@@ -253,6 +257,18 @@ EC2 の Auto Scaling と同じで、RCU、WCU を増減させてくれる。EC2 
 オンデマンドモードか、DynamoDB Accelerator (DAX)を使用したアーキテクチャを検討します。
 
 [Amazon DynamoDB Auto Scaling: 規模を問わないパフォーマンスとコストの最適化|AWS Blog](https://aws.amazon.com/jp/blogs/news/amazon-dynamodb-auto-scaling-performance-and-cost-optimization-at-any-scale/)
+
+## 暗号化
+
+### 保管データの暗号化(サーバサイド暗号化)
+
+DynamoDB はサーバサイド暗号化がデフォルトで有効になってます。
+作成時にデフォルトのままだと、[AWS 所有の KMS キー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#aws-owned-cmk)で暗号化されます。
+これ以外は、[AWS マネージドキー（aws/dynamodb）や CMK](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-mgmt) を使用することができます。
+
+### 転送データの暗号化
+
+DynamoDB は SSL/TLS で接続するため、常に暗号化されています。
 
 ## DynamoDB のテーブル操作
 
@@ -554,7 +570,28 @@ aws dynamodb scan \
 
 ```
 
-## TTL
+## DynamoDB ストリーム
+
+Duration: 0:01:00
+
+[DynamoDB Streams の変更データキャプチャ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html)
+
+テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24 時間保存されます。
+
+DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。
+ストリームは非同期的に動作するため、テーブルのパフォーマンスへの影響はありません。
+
+ストリームの設定は、テーブル作成時、既存テーブルに対してもいつでも有効または無効にすることができます。
+
+![dynamodb-streams-01](/images/dynamodb/dynamodb-streams-01.png)
+
+![dynamodb-streams-02](/images/dynamodb/dynamodb-streams-02.png)
+
+DynamoDB ストリームから「Lambda」や「Kinesis Firehose」を呼び出したりする用途が考えられます。
+
+![dynamodb-streams-00](/images/dynamodb/dynamodb-streams-00.png)
+
+## TTL（Time to Live）
 
 Duration: 0:01:30
 
@@ -563,8 +600,17 @@ Duration: 0:01:30
 テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。
 
 削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは 48 時間以内に削除されます。
+そのため、API リクエストの結果、期限切れになっているが削除されていないレコードも返ってくることがあります。「[スキャンのフィルタ式](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression)」で、フィルタする必要があります。
 
-TTL として指定する属性は、Number 型の Unixtime（ミリ秒無し）である必要があります。
+TTL を使用するには、有効期限切れと判定する項目が必要になります。項目の属性は、Number 型で、格納する値は Unixtime（ミリ秒無し）である必要があります。
+
+TTL の項目を追加したら、「追加の設定」から有効化することができます。
+
+![ttl](/images/dynamodb/ttl.png)
+
+DynamoDB ストリームを使うことで、有効期限切れのデータをアーカイブすることもできます。
+
+![ttl-archiving](/images/dynamodb/ttl-archiving.png)
 
 ## トランザクション
 
@@ -583,22 +629,6 @@ RDB のようなトランザクションまでは期待できないが、複数�
 - トランザクションには、100 件を超えるアクションを含めることはできない
 - トランザクションに 4MB を超えるデータを含めることはできない
 - 同一テーブルに 2 つのアクションを実行できない　など
-
-## DynamoDB ストリーム
-
-Duration: 0:01:00
-
-[DynamoDB Streams の変更データキャプチャ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html)
-
-テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24 時間保存されます。
-
-DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。
-
-ストリームの設定は、テーブル作成時、既存テーブルに対してもいつでも有効または無効にすることができます。
-
-ストリームは非同期的に動作するため、テーブルのパフォーマンスへの影響はありません。
-
-DynamoDB ストリームから「Lambda」や「Kinesis Firehose」を呼び出したりする用途が考えられます。
 
 ## グローバルテーブル
 
@@ -701,6 +731,14 @@ Duration: 0:01:00
 
 - DynamoDB の標準機能
 - AWS Backup
+
+バックアップからリストアする場合、新しいテーブルにリストアされます。
+
+## DynamoDB のポイントインタイムリカバリ(PITR)
+
+[PIRT](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/PointInTimeRecovery.html)を使用すれば、過去 35 日間の任意の時点にテーブルを復元することができます。
+
+PITR で復元する場合、新しいテーブルに復元されます。
 
 ## DynamoDB 用の NoSQL Workbench
 
