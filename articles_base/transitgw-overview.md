@@ -10,18 +10,21 @@
 
 Duration: 00:01:00
 
-- [xx（xx）](#xxxx)
+- [AWS Transit Gateway](#aws-transit-gateway)
   - [☘️ はじめに](#️-はじめに)
   - [👀 Contents](#-contents)
-  - [xx とは](#xx-とは)
-  - [xx の基本](#xx-の基本)
+  - [AWS Transit Gateway とは](#aws-transit-gateway-とは)
+  - [メリット](#メリット)
+  - [Transit Gateway の構造](#transit-gateway-の構造)
   - [📖 まとめ](#-まとめ)
 
-## xx とは
+## AWS Transit Gateway とは
+
+クラウドネットワークを管理するための重要なサービスの一つです。企業が複数の VPC（Virtual Private Cloud）やオンプレミスのネットワークを統合し、効率的かつセキュアな通信を確立するのに役立ちます。
 
 【AWS Black Belt Online Seminar】[AWS Transit Gateway(YouTube)](https://youtu.be/Yhe2jYzFmfs)(0:55:33)
 
-![xx](/images/xx/)
+![blackbelt-transitgw](/images/blackbelt/blackbelt-transitgw-320.jpg)
 
 [AWS Transit Gateway サービス概要](https://aws.amazon.com/jp/transit-gateway/)
 
@@ -31,8 +34,14 @@ Duration: 00:01:00
 
 [AWS Transit Gateway の料金](https://aws.amazon.com/jp/transit-gateway/pricing/)
 
-## xx の基本
+## メリット
 
 Duration: 0:01:30
+
+- VPC ピアリングを集約できる
+- VPN 接続を集約できる
+- Direct Connect との接続を集約できる
+
+## Transit Gateway の構造
 
 ## 📖 まとめ
