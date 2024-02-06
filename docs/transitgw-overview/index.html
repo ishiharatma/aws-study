@@ -1,0 +1,190 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Transit Gateway</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="transitgw-overview"
+                  title="AWS Transit Gateway"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="1">
+        <ul>
+<li><a href="#aws-transit-gateway-%E3%81%A8%E3%81%AF" target="_blank">AWS Transit Gateway とは</a></li>
+<li><a href="#%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">メリット</a></li>
+<li><a href="#transit-gateway-%E3%81%AE%E6%A7%8B%E9%80%A0" target="_blank">Transit Gateway の構造</a></li>
+<li><a href="#transit-gateway-%E3%81%AE%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9%E4%BE%8B" target="_blank">Transit Gateway のユースケース例</a></li>
+<li><a href="#%E3%83%8F%E3%83%B3%E3%82%BA%E3%82%AA%E3%83%B3" target="_blank">ハンズオン</a></li>
+<li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a></li>
+<li><a href="#%E6%A7%8B%E6%88%90%E3%81%AE%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB" target="_blank">構成のサンプル</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Transit Gateway とは" duration="56">
+        <p>クラウドネットワークを管理するための重要なサービスの一つです。企業が複数の VPC（Virtual Private Cloud）やオンプレミスのネットワークを統合し、効率的かつセキュアな通信を確立するのに役立ちます。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/Yhe2jYzFmfs" target="_blank">AWS Transit Gateway(YouTube)</a>(0:55:33)</p>
+<p class="image-container"><img alt="blackbelt-transitgw" src="img\\7d291db60e30d259.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/transit-gateway/" target="_blank">AWS Transit Gateway サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/#aws-transit-gateway" target="_blank">AWS Transit Gateway ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/transit-gateway/faqs/" target="_blank">AWS Transit Gateway よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/transit-gateway/pricing/" target="_blank">AWS Transit Gateway の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="メリット" duration="2">
+        <pre><code language="language-text" class="language-text">AWS Transit Gateway は、クラウドルーターとして機能することで、大規模な
+ネットワークの設計と実装を支援します。ネットワークが拡大しても、増分接続
+の管理が複雑であることが原因で速度が低下する可能性があります。
+AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネットワーク
+を接続します。
+</code></pre>
+<p>https://aws.amazon.com/jp/transit-gateway/?whats-new-cards.sort-by=item.additionalFields.postDateTime&amp;whats-new-cards.sort-order=desc</p>
+<p>次のような集約が可能になります。集約以外にも、Transit Gateway を介してそれぞれが通信できようになるメリットもあります。</p>
+<ul>
+<li>VPC ピアリングを集約できる <img alt="merit-vpc-peering" src="img\\fb00a4961fc67740.jpg"></li>
+<li>VPN 接続を集約できる <img alt="merit-site2site-vpn" src="img\\9b23888ebcef790a.jpg"></li>
+<li>Direct Connect Gateway との接続を集約できる <img alt="merit-directconnect" src="img\\764b419beb4d089f.jpg"></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Transit Gateway の構造" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/what-is-transit-gateway.html#concepts" target="_blank">Transit Gateway の概念</a></p>
+<p>Transit Gateway は主に次の要素から構成されています。</p>
+<p class="image-container"><img alt="transitgateway-concepts" src="img\\6098de5d11b84d2d.png"></p>
+<ul>
+<li>アタッチメント <ul>
+<li>Transit Gateway と接続する先 <ul>
+<li>VPC/Direct Connect Gateway/Site-to-Site VPN</li>
+</ul>
+</li>
+<li>サブネットに紐づけて、ENI が割り当てられる</li>
+</ul>
+</li>
+<li>Transit Gateway ルートテーブル <ul>
+<li>紐づけたネットワークのルートを管理する</li>
+</ul>
+</li>
+<li>アソシエーション <ul>
+<li>アタッチメントと Transit Gateway ルートテーブルを関連付ける</li>
+</ul>
+</li>
+<li>プロパゲーション <ul>
+<li>Transit Gateway ルートテーブルにルートを動的伝達する</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Transit Gateway のユースケース例" duration="3">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/TGW_Scenarios.html" target="_blank">ユースケース例</a>では次のようなものが記載されています。</p>
+<ul>
+<li>集中型ルーター <ul>
+<li><img alt="transit-gateway-three-vpcs" src="img\\4a300cc47ecba67a.png"></li>
+</ul>
+</li>
+<li>分離された VPC <ul>
+<li><img alt="transit-gateway-isolated" src="img\\a9bafa9f9fbc1ee5.png"></li>
+</ul>
+</li>
+<li>共有サービスによる分離された VPC <ul>
+<li><img alt="transit-gateway-isolated_shared" src="img\\d803b9d355b0f48a.png"></li>
+</ul>
+</li>
+<li>ピア接続 <ul>
+<li><img alt="transit-gateway-peering" src="img\\ae4579e2a6bfc5ec.png"></li>
+</ul>
+</li>
+<li>一元的な発信ルーティング <ul>
+<li><img alt="tgw-centralized-nat-igw" src="img\\64b1e0eb648ef3ab.png"></li>
+</ul>
+</li>
+<li>アプライアンス VPC <ul>
+<li><img alt="transit-gateway-appliance" src="img\\5b5570745d2cdcd4.png"></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ハンズオン" duration="30">
+        <p><a href="https://develop.d1xrg9ubdspdie.amplifyapp.com/" target="_blank">TransitGateway ハンズオン</a>があります。 実際に操作をしてみると理解が深まると思います。</p>
+<p>ハンズオンでは次のような構成を構築します。</p>
+<p class="image-container"><img alt="Chapter1_1.png" src="img\\1ddeb23a4d718f57.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ベストプラクティス" duration="5">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/tgw-best-design-practices.html" target="_blank">Transit Gateway 設計のベストプラクティス</a></p>
+<pre><code language="language-text" class="language-text">各 Transit Gateway VPC アタッチメントに個別のサブネットを使用します。
+各サブネットに対して、小さな CIDR (/28 など) を使用して、EC2 リソースの
+アドレスが増えるようにします。
+</code></pre>
+<p>アタッチメントをサブネットに作成すると ENI が作成されます。同じサブネット内に EC2 リソースが存在するとアタッチメントの ENI の通信と、サブネット内の EC2 リソースの通信が意図しないものにならないよう専用のサブネットに配置するのが良さそうです。</p>
+<pre><code language="language-text" class="language-text">ネットワーク ACL を 1 つ作成し、Transit Gateway に関連付けられたすべての
+サブネットに関連付けます。ネットワーク ACL は、インバウンド方向とアウトバウンド
+方向の両方で開いたままにします。
+</code></pre>
+<p>アタッチメントと EC2 リソースは通信が必要なので、ネットワーク ACL で通信先の CIDR のみ許可していると Transit Gateway 経由で疎通が行えないようになります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="構成のサンプル" duration="1">
+        <p>ハンズオンの構成よりもベストプラクティスにもあるように、Transit Gateway のアタッチメントに個別のサブネットを作成したサンプル構成です。</p>
+<p class="image-container"><img alt="transitgateway-sample" src="img\\6a7a43f48d13ae20.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p class="image-container"><img alt="transitgateway-overview" src="img\\225cfb0598b21b2c.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
