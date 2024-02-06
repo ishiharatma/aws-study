@@ -604,6 +604,8 @@ Duration: 0:01:30
 
 TTL を使用するには、有効期限切れと判定する項目が必要になります。項目の属性は、Number 型で、格納する値は Unixtime（ミリ秒無し）である必要があります。
 
+![dynamodb-ttl](/images/dynamodb/dynamodb-ttl.png)
+
 TTL の項目を追加したら、「追加の設定」から有効化することができます。
 
 ![ttl](/images/dynamodb/ttl.png)
@@ -638,6 +640,12 @@ Duration: 0:01:00
 
 指定したリージョンに DynamoDB テーブルを自動的にレプリケートする機能です。グローバルに分散したユーザーがいる場合など、大規模にスケールされたアプリケーションを使用する場合に最適です。
 
+レプリケーションは全てのテーブルに 1 秒以内に行われます。近いリージョンはそれ以下になることもあります。
+また、同じ項目が複数のリージョンからほぼ同時に行われた場合、1 回目の書き込みよりも 2 回目の書き込みが「優先」されます。
+これを回避するためには、最終書き込みタイムスタンプを使って、最初に取得した時点より大きい場合に書き込みを行わないように制御することが推奨されます。詳しくは、「[条件付きの書き込み](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate)」を参照してください。
+
+![dynamodb-global](/images/dynamodb/dynamodb-global.png)
+
 ## DynamoDB Accelerator (DAX)
 
 Duration: 0:01:00
@@ -647,6 +655,8 @@ Duration: 0:01:00
 DynamoDB と互換性のある高可用性インメモリキャッシュを提供するフルマネージドサービスで、VPC 内に DynamoDB のキャッシュクラスターを作成します。
 
 レスポンスをミリ秒単位からマイクロ秒単位まで高速化することが可能になります。
+
+![dynamdb-dax](/images/dynamodb/dynamdb-dax.png)
 
 ## 条件付き書き込み
 
@@ -729,16 +739,29 @@ Duration: 0:01:00
 
 バックアップのオプションは次の２つです。
 
-- DynamoDB の標準機能
-- AWS Backup
+- [DynamoDB の標準機能（オンデマンドバックアップ）](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/backuprestore_HowItWorks.html)
+- [DynamoDB での AWS Backup の使用](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/backuprestore_HowItWorksAWS.html)
 
 バックアップからリストアする場合、新しいテーブルにリストアされます。
+
+また、この方法で復元されたテーブルには手動で下記の項目を設定しなければなりません。詳しくは[復元](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GettingStartedBackupsAWS.html#GettingStartedBackupsAWS-restore)を参照してください。
+
+- Auto Scaling ポリシー
+- AWS Identity and Access Management (IAM) ポリシー
+- Amazon CloudWatch メトリクスおよびアラーム
+- タグ
+- ストリーム設定
+- 有効期限 (TTL) 設定
+- 削除保護設定
+- ポイントインタイムリカバリ (PITR) 設定
 
 ## DynamoDB のポイントインタイムリカバリ(PITR)
 
 [PITR](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/PointInTimeRecovery.html)を使用すれば、過去 35 日間の任意の時点にテーブルを復元することができます。
 
 PITR で復元する場合、新しいテーブルに復元されます。
+
+それ以上の期間を保持したい場合は、AWS Backup を利用してバックアップすることで 35 日を超えたデータを使って復元することができます。
 
 ## DynamoDB 用の NoSQL Workbench
 

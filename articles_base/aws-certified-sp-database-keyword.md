@@ -376,3 +376,142 @@
   - `generate-db-auth-token` で取得したトークンを password に指定する
   - [Use IAM authentication to connect with SQL Workbench/J to Amazon Aurora MySQL or Amazon RDS for MySQL](https://aws.amazon.com/jp/blogs/database/use-iam-authentication-to-connect-with-sql-workbenchj-to-amazon-aurora-mysql-or-amazon-rds-for-mysql/)
   - [Using IAM authentication to connect with pgAdmin Amazon Aurora PostgreSQL or Amazon RDS for PostgreSQL](https://aws.amazon.com/jp/blogs/database/using-iam-authentication-to-connect-with-pgadmin-amazon-aurora-postgresql-or-amazon-rds-for-postgresql/)
+
+## 詳細
+
+### Amazon Aurora (PostgreSQL, MySQL, Serverless)
+
+MySQL や PostgreSQL と互換性のあるリレーショナルデータベース
+
+フェイルオーバーしたときアプリケーション側の TTL で古いエンドポイントに接続する問題
+
+Serverless v1 の Data API
+[Data API (AWS PrivateLink) 用に Amazon VPC エンドポイントを作成する](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/data-api.html#data-api.vpc-endpoint)
+
+[Aurora クラスターの削除保護](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/USER_DeleteCluster.html#USER_DeletionProtection)
+
+### Amazon DocumentDB (MongoDB 互換)
+
+ネイティブ JSON ドキュメントデータベース,MongoDB 互換
+
+クエリの実行速度が予想よりも遅い理由を判断するには、[Explain()](https://docs.aws.amazon.com/ja_jp/documentdb/latest/developerguide/querying.html#querying.queryplan)を使う
+
+変更の管理 ⇒AWS CloudTrail 、イベント サブスクリプション
+
+### Amazon DynamoDB
+
+サーバーレス key-value NoSQL データベース
+
+VPC エンドポイントで内部接続に。
+
+### Amazon DynamoDB Accelerator (DAX)
+
+DynamoDB 用高可用性インメモリキャッシュサービス
+
+### Amazon ElastiCache (Redis, Memcached)
+
+キャッシングサービス
+
+### （範囲外）Amazon MemoryDB for Redis
+
+[Amazon MemoryDB for Redis【AWS Black Belt】](https://www.youtube.com/watch?v=d518N7kzSpE)
+
+- ElastiCache For Redis と比べるとクラスターが必須になっている
+- 耐久性に優れている
+
+### Amazon Keyspaces (Apache Cassandra 向け)
+
+サーバーレス Apache Cassandra 互換のデータベース
+
+[PITR](https://docs.aws.amazon.com/ja_jp/keyspaces/latest/devguide/PointInTimeRecovery.html)で過去 35 日以内の任意の時点の状態にテーブルデータを復元することができる。
+
+[Amazon Keyspaces の有効期限 (TTL) を使用してデータを期限切れにする](https://docs.aws.amazon.com/ja_jp/keyspaces/latest/devguide/TTL.html)
+
+### Amazon Neptune
+
+グラフデータベース,プロビジョンドとサーバーレスが提供される
+
+- Neptune Bulk Loader（Amazon Neptune 一括ローダ）
+  - https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/bulk-load.html
+  - [前提条件: IAM ロールと Amazon S3 アクセス](https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/bulk-load-tutorial-IAM.html)
+- [SPARQL](https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/access-graph-sparql.html)
+  - ウェブ用に設計されたグラフデータ形式であるリソース記述フレームワーク (RDF) のためのクエリ言語
+  - SPARQL UPDATE INSERT は小さなデータセットに対しては有効だが、大量データをロードするときは、Neptune Bulk Loader を使う
+- [Gremlin クエリ](https://docs.aws.amazon.com/ja_jp/neptune/latest/userguide/access-graph-gremlin.html)
+  - グラフ DB の操作を統一的に行えるようにする仕組み
+
+### Amazon Quantum Ledger Database (Amazon QLDB)
+
+台帳管理専用データベース
+
+### Amazon RDS (Oracle, PostgreSQL, MySQL, SQLServer, DB2(Nov 27, 2023))
+
+リレーショナルデータベース
+
+ストレージを減らすには ⇒ 新しい DB インスタンスを小さいサイズで作成し、そちらにデータを移行
+イベント中のメンテナンスを回避するには ⇒[DB インスタンスの適切なメンテナンスウィンドウの調整](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow)
+
+[Amazon RDS API とインターフェイス VPC エンドポイント (AWS PrivateLink)](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/vpc-interface-endpoints.html)
+
+異なる地理的リージョン間で高可用性を確保するには、リードレプリカを実装する必要
+⇒ ク[ロスリージョンリードレプリカ](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.CrossRegionReadReplicas.html)
+
+[RDS for PostgreSQL のリードレプリカ](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PostgreSQL.Replication.ReadReplicas.html)　 ⇒PostgreSQL のネイティブ レプリケーションを使用している
+
+[RDS for MySQL でのカスケードリードレプリカの使用](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_MySQL.Replication.ReadReplicas.html#USER_MySQL.Replication.ReadReplicas.Cascading)
+
+### Amazon Redshift
+
+データウェアハウスサービス
+
+[ワークロード管理 (WLM)](https://docs.aws.amazon.com/ja_jp/redshift/latest/dg/cm-c-wlm-queue-assignment-rules.html)
+
+### Amazon Timestream
+
+サーバーレス時系列データベース
+
+[初めての Amazon Timestream 入門](https://aws.amazon.com/jp/blogs/news/getting-started-with-timestream/)
+
+[Amazon Timestream](https://aws.amazon.com/jp/timestream/)
+
+データライフサイクル
+メモリストア ⇒（保持期限 1 時間～ 12 か月）⇒ マグネティックストア ⇒（保持期限 1 日～ 200 年）⇒ 削除
+
+- メモリストア
+  - 新しいデータを保存するためのストレージ
+  - ある時点のデータを高速に抽出するようなクエリに最適化されている
+- 将来的にはこの 2 つの中間に位置する SSD ストアの追加が予定
+- マグネティックストア
+  - データを長期間保存するためのストレージ
+  - 分析クエリをサポートするように最適化されている
+
+DynamoDB に比べると集計処理や検索、時系列が得意
+ただし、レコードの削除が主動では行えず、データライフサイクルのみ
+エクスポートできない
+バックアップリストアできない
+過去データ投入不可
+トランザクションがない
+データ型が少ない
+東京リージョン不可 ⇒https://aws.amazon.com/jp/about-aws/whats-new/2022/08/amazon-timestream-available-asia-pacific-sydney-tokyo-regions/
+
+### AWS Database Migration Service (AWS DMS)
+
+AWS データベース移行サービス
+
+modify-replication-instance
+DMS Schema Conversion
+AWS Schema Conversion Tool (AWS SCT)
+
+### CloudFormation
+
+データベースが変更されないようにするには
+UpdateReplacePolicy:Retain ⇒ 削除されずに保持、新しいインスタンス作成
+UpdateReplacePolicy:Snapshot ⇒ スナップショットを取得して削除、置き換え
+データベースが削除されないようにするには、`DeletionPolicy: Retain`
+データベースを削除前にバックアップするには、`DeletionPolicy: Snapshot`、これがデフォルト
+
+スタックポリシー
+
+- Update:Modify 　 ⇒ リソースで中断が発生しない更新アクションまたはなんらかの中断が発生する更新アクション
+- Update:Replace ⇒ リソースが再作成される更新アクション
+- Update:Delete 　 ⇒ リソースが削除される更新アクション
