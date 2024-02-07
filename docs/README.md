@@ -33,6 +33,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./route53-overview/index.html" target="_blank">Amazon Route 53 概要</a>
   - <a href="./cloudfront-overview/index.html" target="_blank">Amazon CloudFront 概要</a>
   - <a href="./apigw-overview/index.html" target="_blank">Amazon API Gateway 概要</a>
+  - <a href="./directconnect-overview/index.html" target="_blank">AWS Direct Connect 概要</a>
+  - <a href="./transitgw-overview/index.html" target="_blank">AWS Transit Gateway 概要</a>
 - マネジメントとガバナンス
   - <a href="./cloudwatch-overview/index.html" target="_blank">Amazon CloudWatch 概要</a>
   - <a href="./cloudtrail-overview/index.html" target="_blank">AWS CloudTrail 概要</a>

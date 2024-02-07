@@ -49,6 +49,10 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [Amazon CloudFront 概要](/articles_base/cloudfront-overview.md)
 
+[AWS Direct Connect 概要](/articles_base/directconnect-overview.md)
+
+[AWS Transit Gateway 概要](/articles_base/transitgw-overview.md)
+
 ### マネジメントとガバナンス
 
 [Amazon CloudWatch 概要](/articles_base/cloudwatch-overview.md)
