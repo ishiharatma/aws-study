@@ -570,10 +570,11 @@ aws dynamodb delete-item \
 <p>テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。</p>
 <p>削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは 48 時間以内に削除されます。 そのため、API リクエストの結果、期限切れになっているが削除されていないレコードも返ってくることがあります。「<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression" target="_blank">スキャンのフィルタ式</a>」で、フィルタする必要があります。</p>
 <p>TTL を使用するには、有効期限切れと判定する項目が必要になります。項目の属性は、Number 型で、格納する値は Unixtime（ミリ秒無し）である必要があります。</p>
+<p class="image-container"><img alt="dynamodb-ttl" src="img\\2a180e154172988a.png"></p>
 <p>TTL の項目を追加したら、「追加の設定」から有効化することができます。</p>
 <p class="image-container"><img alt="ttl" src="img\\9d424d97ae332e84.png"></p>
 <p>DynamoDB ストリームを使うことで、有効期限切れのデータをアーカイブすることもできます。</p>
-<p class="image-container"><img alt="ttl-archiving" src="img\\6289c470801b068f.png"></p>
+<p class="image-container"><img alt="ttl-archiving" src="img\\4baad88529cd7f2.png"></p>
 
 
       </google-codelab-step>
@@ -596,6 +597,8 @@ aws dynamodb delete-item \
       <google-codelab-step label="グローバルテーブル" duration="1">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GlobalTables.html" target="_blank">グローバルテーブル – DynamoDB の複数リージョンレプリケーション</a></p>
 <p>指定したリージョンに DynamoDB テーブルを自動的にレプリケートする機能です。グローバルに分散したユーザーがいる場合など、大規模にスケールされたアプリケーションを使用する場合に最適です。</p>
+<p>レプリケーションは全てのテーブルに 1 秒以内に行われます。近いリージョンはそれ以下になることもあります。 また、同じ項目が複数のリージョンからほぼ同時に行われた場合、1 回目の書き込みよりも 2 回目の書き込みが「優先」されます。 これを回避するためには、最終書き込みタイムスタンプを使って、最初に取得した時点より大きい場合に書き込みを行わないように制御することが推奨されます。詳しくは、「<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate" target="_blank">条件付きの書き込み</a>」を参照してください。</p>
+<p class="image-container"><img alt="dynamodb-global" src="img\\8b97f150f749f7f.png"></p>
 
 
       </google-codelab-step>
@@ -604,6 +607,7 @@ aws dynamodb delete-item \
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DAX.html" target="_blank">DynamoDB Accelerator (DAX) とインメモリアクセラレーション</a></p>
 <p>DynamoDB と互換性のある高可用性インメモリキャッシュを提供するフルマネージドサービスで、VPC 内に DynamoDB のキャッシュクラスターを作成します。</p>
 <p>レスポンスをミリ秒単位からマイクロ秒単位まで高速化することが可能になります。</p>
+<p class="image-container"><img alt="dynamdb-dax" src="img\\233f07b7c70bdd65.png"></p>
 
 
       </google-codelab-step>
@@ -666,10 +670,21 @@ aws dynamodb delete-item \
 <p>バックアップ機能を使用し、バックアップを保存することができます。バックアップは Management コンソールか、API を使うことで、バックアップおよび復元することができます。バックアップや復元はテーブルのパフォーマンスや可用性に影響を与えません。</p>
 <p>バックアップのオプションは次の２つです。</p>
 <ul>
-<li>DynamoDB の標準機能</li>
-<li>AWS Backup</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/backuprestore_HowItWorks.html" target="_blank">DynamoDB の標準機能（オンデマンドバックアップ）</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/backuprestore_HowItWorksAWS.html" target="_blank">DynamoDB での AWS Backup の使用</a></li>
 </ul>
 <p>バックアップからリストアする場合、新しいテーブルにリストアされます。</p>
+<p>また、この方法で復元されたテーブルには手動で下記の項目を設定しなければなりません。詳しくは<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GettingStartedBackupsAWS.html#GettingStartedBackupsAWS-restore" target="_blank">復元</a>を参照してください。</p>
+<ul>
+<li>Auto Scaling ポリシー</li>
+<li>AWS Identity and Access Management (IAM) ポリシー</li>
+<li>Amazon CloudWatch メトリクスおよびアラーム</li>
+<li>タグ</li>
+<li>ストリーム設定</li>
+<li>有効期限 (TTL) 設定</li>
+<li>削除保護設定</li>
+<li>ポイントインタイムリカバリ (PITR) 設定</li>
+</ul>
 
 
       </google-codelab-step>
@@ -677,6 +692,7 @@ aws dynamodb delete-item \
       <google-codelab-step label="DynamoDB のポイントインタイムリカバリ(PITR)" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/PointInTimeRecovery.html" target="_blank">PITR</a>を使用すれば、過去 35 日間の任意の時点にテーブルを復元することができます。</p>
 <p>PITR で復元する場合、新しいテーブルに復元されます。</p>
+<p>それ以上の期間を保持したい場合は、AWS Backup を利用してバックアップすることで 35 日を超えたデータを使って復元することができます。</p>
 
 
       </google-codelab-step>
