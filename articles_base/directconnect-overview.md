@@ -70,7 +70,7 @@ Duration: 0:01:30
   - 専用線のため帯域幅が確保され、安定した通信速度で接続できる
   - AWS からのデータ送信料金が VPN に比べて 50％ほど割安である
 - デメリット
-  - Direct Connect は、「①AWS <> ②Direct Connect ロケーション <> ③ ユーザー拠点」という接続になり、①-② 間は AWS が提供しますが、②-③ 間はユーザーが用意しなければならず、契約と初期設定のリードタイムがかかる。
+  - Direct Connect は、「①AWS ⇔ ②Direct Connect ロケーション ⇔ ③ ユーザー拠点」という接続になり、①-② 間は AWS が提供しますが、②-③ 間はユーザーが用意しなければならず、契約と初期設定のリードタイムがかかる。
   - 単一回線では AWS メンテナンス時に通信できなくなるので、回線の冗長化が必須となる。
 
 ## 利用開始方法
@@ -123,6 +123,7 @@ Duration: 0:03:00
 Duration: 0:01:30
 
 高い回復性と通信の安定性を求めるのであれば、Direct Connect を複数接続する冗長化が望ましいです。
+
 ![directconnect-double](/images/directconnect/directconnect-double.png)
 
 ただ、そこまでのコストを掛けられないが冗長化したい場合があります。そのような場合には、Site-to-Site VPN を利用した方法もあります。
@@ -139,12 +140,16 @@ Duration: 0:01:30
 - [専用接続](https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/dedicated_connection.html)
 
   - 1 Gbps、10 Gbps または 100 Gbps
+
     ![dedicated_connection](/images/directconnect/dedicated_connection.png)
 
 - [ホスト型接続](https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/hosted_connection.html)
+
   - 50 Mbps から 10 Gbp の範囲で決められた通信速度を選択可能
-  - 50/100/200/300/400/500Mbps, 1/2/5/10Gbps
+  - 50／100／200／300／400／500 Mbps, 1／2／5／10 Gbps
+
     ![hosted_connection](/images/directconnect/hosted_connection.png)
+
   - 仮想インターフェースの作成と速度の設定は、APN パートナーのみが実施できます。
 
 ## 仮想インターフェース（VIF）
@@ -219,9 +224,9 @@ Duration: 0:00:30
 
 こういうのもあります。
 
-https://aws.amazon.com/jp/dx_labo/
+[https://aws.amazon.com/jp/dx_labo/](https://aws.amazon.com/jp/dx_labo/)
 
-![dx_labo](https://d1.awsstatic.com/webinars/jp/pdf/services/images/20201119_dx_labo_main4.27c08b26ef6e1a116feba269dc78587a169b9b5a.png)
+![dx_labo](/images/directconnect/dx_lab.png)
 
 ## 📖 まとめ
 

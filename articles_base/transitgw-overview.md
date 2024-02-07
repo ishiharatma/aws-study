@@ -49,7 +49,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 を接続します。
 ```
 
-https://aws.amazon.com/jp/transit-gateway/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc
+[https://aws.amazon.com/jp/transit-gateway/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc](https://aws.amazon.com/jp/transit-gateway/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc)
 
 次のような集約が可能になります。集約以外にも、Transit Gateway を介してそれぞれが通信できようになるメリットもあります。
 
