@@ -32,4 +32,26 @@ Duration: 00:01:00
 
 ## xx の基本
 
-Duration: 0:01:30
+## Resources
+## Parameters
+## Mappings
+## Outputs
+## Condistions
+## Rollbacks
+## ChangeSets
+## Drift
+## NEsted Stacks
+## StackSet
+## Secrets Manager
+## CloudFormation デザイナー
+## CloudFormation IaC Generator
+
+create-generated-template — AWS CLI 1.32.32 Command Reference
+https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-generated-template.html
+describe-generated-template — AWS CLI 1.32.33 Command Reference
+https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-generated-template.html
+get-generated-template — AWS CLI 1.32.33 Command Reference
+https://docs.aws.amazon.com/cli/latest/reference/cloudformation/get-generated-template.html
+
+既存のリソースからのスタックの作成
+https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/resource-import-new-stack.html#resource-import-new-stack-cli
