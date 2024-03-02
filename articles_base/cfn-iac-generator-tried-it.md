@@ -62,7 +62,7 @@ AWS CloudFormation コンソールにログインします。[IaC ジェネレ�
 
 ![](/images/cfn_iac_generator/iac_generator_6_resource_select_3.jpg)
 
-無心で全選択 → ページ移動を繰り返すと、「AWS::Logs::LogsStream」ばかりになってきました。スキャンしたリソース数が多かったのはこれが原因です。
+無心で全選択 → ページ移動を繰り返すと、「AWS::Logs::LogStream」ばかりになってきました。スキャンしたリソース数が多かったのはこれが原因です。
 今回はお試しなので、これくらいでやめてテンプレートを生成しようと思います。
 
 ![](/images/cfn_iac_generator/iac_generator_6_resource_select_4.jpg)
