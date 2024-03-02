@@ -233,7 +233,7 @@ Duration: 0:00:30
 
 [https://aws.amazon.com/jp/dx_labo/](https://aws.amazon.com/jp/dx_labo/)
 
-![dx_labo](https://d1.awsstatic.com/webinars/jp/pdf/services/images/20201119_dx_labo_main4.27c08b26ef6e1a116feba269dc78587a169b9b5a.png)
+![dx_labo](/images/directconnect/dx_lab.png)
 
 ## 📖 まとめ
 
