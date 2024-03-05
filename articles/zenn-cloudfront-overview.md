@@ -347,6 +347,9 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 
 Kiesis Data Firehose を使用した場合、インターバルが 60 ～ 900 秒ですので、リアルタイムといっても 最低 60 秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。
 
+※ただし、下記アップデートにより数秒（5秒以内）で配信が可能になりました。
+[(Dec 26, 2023)Amazon Kinesis Data Firehose がゼロバッファリングのサポートを開始](https://aws.amazon.com/jp/about-aws/whats-new/2023/12/amazon-kinesis-data-firehose-zero-buffering/)
+
 ## 監視
 
 Duration: 0:01:30

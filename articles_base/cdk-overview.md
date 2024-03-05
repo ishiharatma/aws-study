@@ -304,3 +304,182 @@ cdk.json に ```"versionReporting": false,``` を追加します。
 ![](images/cdk/versionReporting.png)
 
 
+## AWS CDK での開発方法
+
+### ディレクトリ構造
+
+`cdk init --typescript` を実行すると初期ディレクトリが作成されます。
+通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] のディレクトリを追加しています。
+今後、必要になったら [lib] 内にサブディレクトリを作成していきます。
+'*' が付いているディレクトリが新たに追加したディレクトリです。
+
+```
+プロジェクトルートディレクトリ
+    ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
+    ├─ [lib]
+        ├─ *[stacks]           // スタック定義
+        ├─ *[resources]           // スタック定義
+        ├─ *[utils]            // 共通使用するものを格納
+    ├─ *[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
+    ├─ *[src]                  // Lambda や HTML などのソースを格納
+    ├─ [test]                  // テスト
+    ├─ [node_modules]
+    ├─ cdk.context.json        // 環境依存情報(context)
+    ├─ cdk.json                // デフォルトのappなどが入る
+    ├─ cdk.out                 // cfnなどの出力先。コンパイルされたjsを動かすと出力される
+    ├─ jest.config.js          // テストの設定ファイル
+    ├─ package-lock.json
+    ├─ package.json
+    ├─ tsconfig.json
+    ├─ README.md
+```
+
+### スタック定義ファイルの基本構造
+
+`lib/stacks` に配置するスタック定義ファイルです。
+
+```
+import { Stack, StackProps , CfnMapping} from 'aws-cdk-lib';
+import { Construct } from 'constructs';
+import * as cdk from 'aws-cdk-lib';
+import { // ここにリソース作成に必要なモジュールを列挙します
+  aws_ec2 as ec2,
+  aws_s3 as s3,
+    :
+} from 'aws-cdk-lib';
+
+interface IMyStackProps extends StackProps {
+  // スタック実行時のパラメータを指定
+  readonly PJName: string;
+  readonly EnvName: string;
+   :
+}
+
+export class MyStack extends Stack {
+  // 別のスタックで参照
+  public readonly xxx: string;
+
+  constructor(scope: Construct, id: string, props: IMyStackProps) {
+    super(scope, id, props);
+
+
+    // タグを付与する -> ここを指定しておくと全てにタグ付けしてくれます。
+    cdk.Tags.of(this).add('Project', props.PJName);
+    cdk.Tags.of(this).add('Environment', props.EnvName);
+
+  }
+}
+
+```
+
+### App定義
+
+`bin` に配置するスタックの依存関係を定義しておくファイルです。
+
+```
+#!/usr/bin/env node
+import 'source-map-support/register';
+import * as cdk from 'aws-cdk-lib';
+import { MyStack } from '../lib/stacks/cdk-my-stack';
+
+const app = new cdk.App();
+
+// 環境識別子の指定 -> 環境識別子はコマンド実行時に '-c env=xxx' と指定する
+const envname: string = app.node.tryGetContext('env')
+// 環境識別子のチェック
+if (!envname.match(/^(dev|test|stage|prod)$/)) {
+  console.warn('Invalid context. envname must be [dev , test, stage, prod].')
+  process.exit(1)
+}
+
+// スタック
+const myStack = new MyStack (app, 'MyStack ', {
+  stackName: "ここにスタック名を記述", // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできる。
+  description: "ここにスタックの説明を記述",
+  // ここからスタックのパラメータ
+  PJName: conf.PJName,
+  EnvName: conf.EnvName,
+  :
+  // ここまでスタックのパラメータ
+
+  // 以下は基本的にどのスタックでも固定で指定する
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: "us-east-1" // リージョンを固定したい場合、デフォルトでよい場合はprocess.env.CDK_DEFAULT_REGION とする
+  },
+  terminationProtection: true, // 削除保護の有効化 -> スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できない
+
+});
+```
+
+### App定義にリリースミス防止策
+
+デプロイするときは、`cdk deploy MyStack -c env=dev --profile xxxxx` として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、特に初回リリース時は、間違った環境にデプロイされてしまう危険があります。（2回目以降のデプロイではスタック名などの紐付けでエラーになるはずだが、それでも）
+
+これを回避するために、設定が少々煩雑だが parameters に作成する環境定義ファイルに `MyAccountId` というパラメータを記載するようにしています。
+
+これで、コマンド実行時のプロファイルから参照する AWS アカウント ID と環境定義ファイルに定義したアカウント ID が一致しているかどうかをチェックできるので、ミスを防止できます。
+
+環境定義の YAML ファイル読み込みは、`js-yaml` を使用した自作の loadConfig を使用しています。
+
+```
+import { loadConfig} from '../lib/utils/load-config';
+
+const conf = loadConfig(`./parameters/${envname}.yaml`);
+
+// 誤った環境にリリースしないために、プロファイルのアカウントIDと設定ファイルのアカウントIDでチェックします
+if (conf.MyAccountId != process.env.CDK_DEFAULT_ACCOUNT) {
+  console.error(`Invalid configuration. The target account ID is ${process.env.CDK_DEFAULT_ACCOUNT}, but the account ID in the configuration file is ${conf.MyAccountId}.`)
+  process.exit(1)
+}
+```
+
+これを組み込んだ最終的な App 定義は以下のようになります。
+```
+
+#!/usr/bin/env node
+import 'source-map-support/register';
+import * as cdk from 'aws-cdk-lib';
+import { loadConfig} from '../lib/utils/load-config';
+import { MyStack } from '../lib/stacks/cdk-my-stack';
+
+const app = new cdk.App();
+
+// 環境識別子の指定 -> 環境識別子はコマンド実行時に '-c env=xxx' と指定する
+const envname: string = app.node.tryGetContext('env')
+// 環境識別子のチェック
+if (!envname.match(/^(dev|test|stage|prod)$/)) {
+  console.warn('Invalid context. envname must be [dev , test, stage, prod].')
+  process.exit(1)
+}
+
+// 環境定義ファイルの読み込み
+const conf = loadConfig(`./parameters/${envname}.yaml`);
+
+// 誤った環境にリリースしないために、プロファイルのアカウントIDと設定ファイルのアカウントIDでチェックします
+
+if (conf.MyAccountId != process.env.CDK_DEFAULT_ACCOUNT) {
+  console.error(`Invalid configuration. The target account ID is ${process.env.CDK_DEFAULT_ACCOUNT}, but the account ID in the configuration file is ${conf.MyAccountId}.`)
+  process.exit(1)
+}
+
+// スタック
+const myStack = new MyStack (app, 'MyStack ', {
+  stackName: "ここにスタック名を記述", // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできる。
+  description: "ここにスタックの説明を記述",
+  // ここからスタックのパラメータ
+  PJName: conf.PJName,
+  EnvName: conf.EnvName,
+  :
+  // ここまでスタックのパラメータ
+
+
+  // 以下は基本的にどのスタックでも固定で指定する
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: "us-east-1" // リージョンを固定したい場合、デフォルトでよい場合はprocess.env.CDK_DEFAULT_REGION とする
+  },
+  terminationProtection: true, // 削除保護の有効化 -> スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できない
+
+});
+```
