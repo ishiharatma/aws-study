@@ -1,0 +1,470 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS CDK</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="cdk-overview"
+                  title="AWS CDK"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-cdk-%E3%81%A8%E3%81%AF" target="_blank">AWS CDK とは</a></li>
+<li><a href="#cdk-v2" target="_blank">CDK v2</a></li>
+<li><a href="#%E5%AF%BE%E5%BF%9C%E8%A8%80%E8%AA%9E" target="_blank">対応言語</a></li>
+<li><a href="#cdk-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">CDK ワークショップ</a></li>
+<li><a href="#cdk-%E3%81%AE%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">CDK の構成要素</a><ul>
+<li><a href="#app" target="_blank">App</a></li>
+<li><a href="#stacks" target="_blank">Stack(s)</a></li>
+<li><a href="#construct" target="_blank">Construct</a><ul>
+<li><a href="#l1-construct--l2-construct" target="_blank">L1 Construct / L2 Construct</a></li>
+<li><a href="#patterns" target="_blank">Patterns</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#unit-test" target="_blank">Unit Test</a></li>
+<li><a href="#cdk-%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89" target="_blank">CDK のコマンド</a></li>
+<li><a href="#cdk-%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE-metadata-%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">CDK 作成時の Metadata を削除したい場合</a></li>
+<li><a href="#aws-cdk-%E3%81%A7%E3%81%AE%E9%96%8B%E7%99%BA%E6%96%B9%E6%B3%95" target="_blank">AWS CDK での開発方法</a><ul>
+<li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0" target="_blank">ディレクトリ構造</a></li>
+<li><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0" target="_blank">スタック定義ファイルの基本構造</a></li>
+<li><a href="#app-%E5%AE%9A%E7%BE%A9" target="_blank">App 定義</a></li>
+<li><a href="#app-%E5%AE%9A%E7%BE%A9%E3%81%AB%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%9F%E3%82%B9%E9%98%B2%E6%AD%A2%E7%AD%96" target="_blank">App 定義にリリースミス防止策</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS CDK とは" duration="152">
+        <p>AWS Cloud Development Kit のことで、使い慣れたプログラミング言語を使用してクラウドアプリケーションのリソースを定義するためのオープンソースのソフトウェア開発フレームワークです。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/1i7kWqpqtoY" target="_blank">AWS Cloud Development Kit (CDK)(YouTube)</a>(1:01:23)</p>
+<p class="image-container"><img alt="blackbelt-cdk_3" src="img\\bb9079791b0424f.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/BmCpa44rAXI" target="_blank">AWS CDK 概要 (Basic #1)(YouTube)</a>(0:33:07)<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-1-Overview_0731_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-cdk_1" src="img\\342c70ecd496531a.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/aqa2bFFzcjs" target="_blank">AWS CDK の基本的なコンポーネントと機能 (Basic #2)(YouTube)</a>(0:28:13)<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-2-Features_0831_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-cdk_2" src="img\\c3170cfd7e8108f7.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/z3Mst77p-aU" target="_blank">AWS CDK の開発を効率化する機能 (Basic #3)(YouTube)</a>(0:29:20)<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-3-AppDev_0831_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-cdk_3" src="img\\381bea663448dd31.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/cdk/" target="_blank">AWS クラウド開発キット</a></p>
+<p><a href="https://docs.aws.amazon.com/cdk/api/v2/" target="_blank">AWS CDK Reference Documentation</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" target="_blank">AWS CDK DEVELOPER GUIDE</a></p>
+<p><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html" target="_blank">AWS CDK API REFERENCE</a></p>
+<p><a href="https://aws.amazon.com/jp/cdk/faqs/" target="_blank">AWS Cloud Development Kit のよくある質問</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CDK v2" duration="2">
+        <p>CDK の v2 は、2021 年 5 月のプレビューが実施され、 2021 年 12 月 2 日に GA されました。</p>
+<p>AWS Cloud Development Kit v2 開発者プレビューのお知らせ https://aws.amazon.com/jp/blogs/news/announcing-aws-cloud-development-kit-v2-developer-preview/</p>
+<p>AWS Cloud Development Kit (AWS CDK) v2 の一般提供開始 https://aws.amazon.com/jp/about-aws/whats-new/2021/12/aws-cloud-development-kit-cdk-generally-available/</p>
+<p>v2 では Construct ライブラリが aws-cdk-lib に単一化されたため、v1 で実施していた個々のパッケージインストールが不要になりました。</p>
+<p>v1 では個別にパッケージをインストールする必要があったため、後からインストールしたパッケージはバージョンを指定しないとバージョンが異なってしまうことがあります。バージョンを合わせるために、「npm install @aws-cdk/aws-lambda@1.111.0」とする必要がありました。</p>
+<pre><code language="language-ts" class="language-ts">npm install @aws-cdk/aws-lambda
+npm install @aws-cdk/aws-cloudfront
+npm install @aws-cdk/aws-iam
+npm install @aws-cdk/aws-s3
+
+
+import * as cdk from &#34;@aws-cdk/core&#34;;
+import * as cloudfront from &#34;@aws-cdk/aws-cloudfront&#34;;
+import * as s3 from &#34;@aws-cdk/aws-s3&#34;;
+import * as iam from &#34;@aws-cdk/aws-iam&#34;;
+</code></pre>
+<p>v2 では単一のパッケージに統合されたため、個別パッケージをインストールすることなく使用できます。</p>
+<pre><code language="language-ts" class="language-ts">npm install aws-cdk-lib
+
+import {
+  aws_s3 as s3,
+  aws_iam as iam,
+  aws_cloudfront as cloudfront,
+from &#34;aws-cdk-lib&#34;;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="対応言語" duration="0">
+        <ul>
+<li>TypeScript</li>
+<li>JavaScript</li>
+<li>Python</li>
+<li>Java</li>
+<li>C#/.NET</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CDK ワークショップ" duration="0">
+        <p>手を動かして学ぶことができます。</p>
+<p>https://cdkworkshop.com/</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CDK の構成要素" duration="0">
+        <p class="image-container"><img alt="AppStacks.png" src="img\\e3686a243fe5e33.png"></p>
+<p>引用：<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" target="_blank">開発者ガイド&gt;CDK とは</a></p>
+<h2 is-upgraded>App</h2>
+<p>CDK の最上位層で、複数のスタックの依存関係などを定義します。</p>
+<h2 is-upgraded>Stack(s)</h2>
+<p>CloudFormation のスタックに対応します。AWS へのデプロイはこのスタック単位で行います。</p>
+<h2 is-upgraded>Construct</h2>
+<p>Stack 層に AWS リソースの定義を作成します。</p>
+<p>Construct には 3 つの種類があります。</p>
+<ul>
+<li>L1 Construct(Low Level Construct)</li>
+<li>L2 Construct(High Level Construct)</li>
+<li>L3 Construct(Patterns)</li>
+</ul>
+<h3 is-upgraded>L1 Construct / L2 Construct</h3>
+<p>L1 Construct とは、Low Level Construct のことです。CloudFormation の各リソースと 1:1 の関係になっています。<code>Cfn</code>で始まるものが L1 です。</p>
+<p>CloudFormation で定義するのと同じレベルでの記載になります。L2 Construct が存在するリソースは、L2 Construct を利用することを推奨しますが、要件に応じた細かい設定が必要な場合は、L1 Construct を利用します。</p>
+<p>https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/constructs.html#constructs_l1_using</p>
+<pre><code language="language-ts" class="language-ts">const bucket = new s3.CfnBucket(this, &#34;MyBucket&#34;, {
+  bucketName: &#34;MyBucket&#34;,
+});
+</code></pre>
+<p>L2 Construct とは、High Level Construct と呼ばれるもので、L1 Construct をラップした Construct です。</p>
+<p>https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/constructs.html#constructs_using</p>
+<pre><code language="language-ts" class="language-ts">import * as s3 from &#34;aws-cdk-lib/aws-s3&#34;;
+
+const bucket = new s3.Bucket(this, &#34;MyBucket&#34;, {
+  versioned: true,
+});
+</code></pre>
+<p>TypeScript を使用して、VPC を作る場合は下記のようにするだけで、VPC、ルートテーブル、インターネットゲートウェイ、NAT ゲートウェイ、サブネット 6 つ（3 種類 × maxAzs 数分） の CloudFormation 定義を作成してくれます。CloudFormation で記述すると 430 行にもなる定義が 12 行だけで完了します。</p>
+<p>cidrMask の数字だけ指定しているので、サブネットの CIDR ブロックは自動的に生成されます。CIDR ブロックを特定の値で指定したい場合は、L1 Construct を使用します。</p>
+<pre><code language="language-ts" class="language-ts">const vpc = new ec2.Vpc(this, &#34;vpc&#34;, {
+  vpcName: &#34;vpc&#34;,
+  cidr: &#34;10.0.0.0/16&#34;,
+  natGateways: 2,
+  natGatewaySubnets: { subnetType: ec2.SubnetType.PUBLIC },
+  maxAzs: 2,
+  subnetConfiguration: [
+    { subnetType: ec2.SubnetType.PUBLIC, name: &#34;public&#34;, cidrMask: 20 },
+    {
+      subnetType: ec2.SubnetType.PRIVATE_WITH_NAT,
+      name: &#34;private&#34;,
+      cidrMask: 19,
+    },
+    {
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      name: &#34;protected&#34;,
+      cidrMask: 21,
+    },
+  ],
+});
+</code></pre>
+<p>この定義を実行した場合に生成される CloudFormation のコードは次の通りです。</p>
+<p><img alt="vpc_cfn_00" src="img\\b6f6b7c87e4c41a8.png"> ： ： <img alt="vpc_cfn_01" src="img\\da9f8ff5f3dfb02c.png"></p>
+<h3 is-upgraded>Patterns</h3>
+<p>L3 Construct として、ECS Patterns のように ECS 関連のリソースを簡単に生成できるものがあります。</p>
+<p>次のようにするだけで、ECS サービス、ALB、関連するセキュリティグループ、タスク用の IAM ロールなど 200 ～ 300 行の CloudFormation のコードを出力してくれます。</p>
+<pre><code language="language-ts" class="language-ts">// クラスタを作成
+const cluster = new ecs.Cluster(this, &#34;MyCluster&#34;, {
+  vpc: props.vpc,
+});
+
+const loadBalancedFargateService =
+  new ecs_patterns.ApplicationLoadBalancedFargateService(
+    this,
+    &#34;MyFargateService&#34;,
+    {
+      cluster: cluster,
+      cpu: 4096,
+      memoryLimitMiB: 30720,
+      publicLoadBalancer: true,
+      desiredCount: 6,
+      taskImageOptions: {
+        image: ecs.ContainerImage.fromRegistry(&#34;amazon/amazon-ecs-sample&#34;),
+      },
+    }
+  );
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Unit Test" duration="0">
+        <p>Jest を使った Unit Test も実施できます。VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。</p>
+<p>ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。</p>
+<pre><code language="language-ts" class="language-ts">test(&#34;create the vpc&#34;, () =&gt; {
+  // GIVEN
+  const app = new App({
+    context: {
+      PJName: &#34;junit&#34;,
+      EnvName: &#34;prod&#34;,
+      CidrBlock: &#34;10.0.0.0/16&#34;,
+    },
+  });
+  const stack = new VPCStack(app, &#34;testing-vpcstack&#34;, {});
+  // WHEN
+  const template = Template.fromStack(stack);
+
+  // THEN
+  // VPC
+  template.resourceCountIs(&#34;AWS::EC2::VPC&#34;, 1);
+  template.hasResourceProperties(&#34;AWS::EC2::VPC&#34;, {
+    CidrBlock: &#34;10.0.0.0/16&#34;,
+  });
+
+  // Subnet
+  template.resourceCountIs(&#34;AWS::EC2::Subnet&#34;, 6);
+  // Internet Gateway
+  template.resourceCountIs(&#34;AWS::EC2::InternetGateway&#34;, 1);
+  template.resourceCountIs(&#34;AWS::EC2::VPCGatewayAttachment&#34;, 1);
+  template.hasResourceProperties(&#34;AWS::EC2::VPCGatewayAttachment&#34;, {
+    VpcId: Match.anyValue(),
+    InternetGatewayId: Match.anyValue(),
+  });
+  // Elastic IP
+  template.resourceCountIs(&#34;AWS::EC2::EIP&#34;, 2);
+  // NatGateway
+  template.resourceCountIs(&#34;AWS::EC2::NatGateway&#34;, 2);
+  template.hasResourceProperties(&#34;AWS::EC2::NatGateway&#34;, {
+    AllocationId: Match.anyValue(),
+    SubnetId: Match.anyValue(),
+  });
+  template.hasResourceProperties(&#34;AWS::EC2::NatGateway&#34;, {
+    AllocationId: Match.anyValue(),
+    SubnetId: Match.anyValue(),
+  });
+  // Route Table
+  template.resourceCountIs(&#34;AWS::EC2::RouteTable&#34;, 6);
+  template.resourceCountIs(&#34;AWS::EC2::Route&#34;, 4);
+  template.hasResourceProperties(&#34;AWS::EC2::Route&#34;, {
+    RouteTableId: Match.anyValue(),
+    DestinationCidrBlock: &#34;0.0.0.0/0&#34;,
+    GatewayId: Match.anyValue(),
+  });
+  template.hasResourceProperties(&#34;AWS::EC2::Route&#34;, {
+    RouteTableId: Match.anyValue(),
+    DestinationCidrBlock: &#34;0.0.0.0/0&#34;,
+    NatGatewayId: Match.anyValue(),
+  });
+  template.resourceCountIs(&#34;AWS::EC2::SubnetRouteTableAssociation&#34;, 6);
+  template.hasResourceProperties(&#34;AWS::EC2::SubnetRouteTableAssociation&#34;, {
+    RouteTableId: Match.anyValue(),
+    SubnetId: Match.anyValue(),
+  });
+});
+</code></pre>
+<p>テストを実行した結果は次のようになります。</p>
+<p class="image-container"><img alt="jest" src="img\\6367ef8e8b0ae858.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CDK のコマンド" duration="0">
+        <ul>
+<li>cdk deploy https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-deploy CDK で定義されたリソースを AWS 環境にデプロイするコマンドです。 すべてのスタックをデプロイしたい場合は、<code>--all</code> オプションを指定します。 指定したスタックをデプロイしたい場合は、deploy の後にスタック名を指定します。</li>
+<li>cdk diff https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-diff 現在の CDK とすでにデプロイされているバージョンとの差分を確認し、変更点を一覧で取得するコマンドです。</li>
+<li>cdk synth https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-synth CDK で定義されたスタックを CloudFormation テンプレートにするコマンドです。 リソースに付与される Metadata を削除したい場合は、<code>--path-metadata false</code> オプションを付与します。 テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 <code>--quit</code> または <code>-q</code> オプションを付与します。</li>
+<li>cdk ls https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-list 現在の CDK アプリに含まれるスタックの一覧を確認するコマンドです。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CDK 作成時の Metadata を削除したい場合" duration="0">
+        <p>CDK で作成される CloudFormation テンプレートファイルには、メタデータが含まれます。</p>
+<pre><code language="language-yaml" class="language-yaml">Resources:
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAAEzPUMzQw0TNQdEgsL9ZNTsnWT84vStWrDi5JTM7Wcc7PKy4pKk0u0XFOywtKLc4vLUpOBbGBEimZJZn5ebU6efkpqXpZxfplhmZ6hkCDsoozM3WLSvNKMnNT9YIgNAAtXENFZQAAAA==
+    Metadata:
+      aws:cdk:path: DevioStack/CDKMetadata/Default
+    Condition: CDKMetadataAvailable
+Conditions:
+  CDKMetadataAvailable:
+    Fn::Or:
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - af-south-1
+:
+</code></pre>
+<p>これは、次のような目的で付与される内容です。</p>
+<p class="image-container"><img alt="cdk-metadata.png" src="img\\c196590b479360d9.png"></p>
+<p>これを付与したくない場合は、cdk コマンドに以下のオプションを追加して実行します。</p>
+<pre><code language="language-sh" class="language-sh">cdk synth --no-version-reporting --path-metadata false
+</code></pre>
+<p>cdk.json に <code>"versionReporting": false,</code> を追加します。</p>
+<p class="image-container"><img alt="versionReporting" src="img\\d33ef30652cc0c8b.png"></p>
+<p>GitHub などからダウンロードしてきた CloudFormation テンプレートにこのような Metadata の記載がある場合は、消しても問題ありません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS CDK での開発方法" duration="0">
+        <h2 is-upgraded>ディレクトリ構造</h2>
+<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加しています。必要になったら [lib] 内にサブディレクトリを作成していきます。 ‘*&#39; が付いているディレクトリが追加したディレクトリです。</p>
+<pre><code language="language-text" class="language-text">プロジェクトルートディレクトリ
+    ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
+    ├─ [lib]
+        ├─ *[stacks]           // スタック定義
+        ├─ *[resources]        // 各リソースごとの定義。スタックから呼ばれる
+        ├─ *[utils]            // 共通使用するものを格納
+    ├─ *[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
+    ├─ *[src]                  // Lambda や HTML などのソースを格納
+    ├─ [test]                  // テスト
+    ├─ [node_modules]
+    ├─ cdk.context.json        // 環境依存情報(context)
+    ├─ cdk.json                // デフォルトのappなどが入る
+    ├─ cdk.out                 // cfnなどの出力先。コンパイルされたjsを動かすと出力される
+    ├─ jest.config.js          // テストの設定ファイル
+    ├─ package-lock.json
+    ├─ package.json
+    ├─ tsconfig.json
+    ├─ README.md
+</code></pre>
+<h2 is-upgraded>スタック定義ファイルの基本構造</h2>
+<p><code>lib/stacks</code> に配置するスタック定義ファイルです。</p>
+<pre><code language="language-ts" class="language-ts">import { Stack, StackProps , CfnMapping} from &#39;aws-cdk-lib&#39;;
+import { Construct } from &#39;constructs&#39;;
+import * as cdk from &#39;aws-cdk-lib&#39;;
+import { // ここにリソース作成に必要なモジュールを列挙します
+  aws_ec2 as ec2,
+  aws_s3 as s3,
+    :
+} from &#39;aws-cdk-lib&#39;;
+
+interface IMyStackProps extends StackProps {
+  // スタック実行時のパラメータを指定
+  readonly PJName: string;
+  readonly EnvName: string;
+   :
+}
+
+export class MyStack extends Stack {
+  // 別のスタックで参照
+  public readonly xxx: string;
+
+  constructor(scope: Construct, id: string, props: IMyStackProps) {
+    super(scope, id, props);
+
+
+    // タグを付与する -&gt; ここを指定しておくと全てにタグ付けしてくれます。
+    cdk.Tags.of(this).add(&#39;Project&#39;, props.PJName);
+    cdk.Tags.of(this).add(&#39;Environment&#39;, props.EnvName);
+
+  }
+}
+
+</code></pre>
+<h2 is-upgraded>App 定義</h2>
+<p><code>bin</code> に配置するスタックの依存関係を定義しておくファイルです。</p>
+<pre><code language="language-ts" class="language-ts">#!/usr/bin/env node
+import &#39;source-map-support/register&#39;;
+import * as cdk from &#39;aws-cdk-lib&#39;;
+import { MyStack } from &#39;../lib/stacks/cdk-my-stack&#39;;
+
+const app = new cdk.App();
+
+// 環境識別子の指定 -&gt; 環境識別子はコマンド実行時に &#39;-c env=xxx&#39; と指定する
+const envname: string = app.node.tryGetContext(&#39;env&#39;)
+// 環境識別子のチェック
+if (!envname.match(/^(dev|test|stage|prod)$/)) {
+  console.warn(&#39;Invalid context. envname must be [dev , test, stage, prod].&#39;)
+  process.exit(1)
+}
+
+// スタック
+const myStack = new MyStack (app, &#39;MyStack &#39;, {
+  stackName: &#34;ここにスタック名を記述&#34;, // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできる。
+  description: &#34;ここにスタックの説明を記述&#34;,
+  // ここからスタックのパラメータ
+  PJName: conf.PJName,
+  EnvName: conf.EnvName,
+  :
+  // ここまでスタックのパラメータ
+
+  // 以下は基本的にどのスタックでも固定で指定する
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: &#34;us-east-1&#34; // リージョンを固定したい場合、デフォルトでよい場合はprocess.env.CDK_DEFAULT_REGION とする
+  },
+  terminationProtection: true, // 削除保護の有効化 -&gt; スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できない
+
+});
+</code></pre>
+<h2 is-upgraded>App 定義にリリースミス防止策</h2>
+<p>デプロイするときは、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code> として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。</p>
+<p>コンソール上で注意喚起のメッセージがあると、それだけで気付くことがありミス防止にもなります。</p>
+<p>その方法は、env で与えられる環境によって、メッセージを追加する方法です。</p>
+<p><code>prod</code> とした環境の場合には、次のようにコンソールに表示されます。</p>
+<p class="image-container"><img alt="CAUTION" src="img\\2af251baa121141b.png"></p>
+<pre><code language="language-text" class="language-text">// 文字色
+const color_red: string = &#34;\u001b[31m&#34;;
+const color_green: string = &#34;\u001b[32m&#34;;
+const color_yellow: string = &#34;\u001b[33m&#34;;
+const color_white: string = &#34;\u001b[37m&#34;;
+const color_reset: string = &#34;\u001b[0m&#34;;
+
+console.log();
+console.log(`${color_yellow}##########################################${color_reset}`);
+console.log(`${color_yellow}  sample プロジェクト${color_reset}`);
+console.log(`${color_yellow}  リリース環境：${color_reset} ${color_red}${envname}${color_reset}`);
+console.log(`${color_yellow}##########################################${color_reset}`);
+console.log();
+
+// 環境識別子のチェック
+if (!envname.match(/^(dev|test|stage|prod|jump)$/)) {
+  console.warn(&#39;Invalid context. envname must be [dev , test, stage, prod, jump].&#39;);
+  process.exit(1);
+}
+
+const isProduction:boolean = envname.match(/^(prod)$/) ? true: false;
+if (isProduction) {
+  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
+  console.log(`${color_red}   本番環境へのリリースです。${color_reset}`);
+  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
+};
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

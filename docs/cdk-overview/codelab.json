@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2024-03-05T20:22:11+09:00",
-  "id": "cloudfront-overview",
-  "duration": 169,
-  "title": "Amazon CloudFront",
+  "id": "cdk-overview",
+  "duration": 154,
+  "title": "AWS CDK",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_cloudfront-overview.md",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_cdk-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "amazoncloudfront"
+    "awscdk"
   ],
-  "url": "cloudfront-overview"
+  "url": "cdk-overview"
 }

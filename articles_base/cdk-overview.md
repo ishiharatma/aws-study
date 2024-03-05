@@ -12,9 +12,9 @@
 - [CDK v2](#cdk-v2)
 - [対応言語](#対応言語)
 - [CDK ワークショップ](#cdk-ワークショップ)
-- [構成要素](#構成要素)
+- [CDK の構成要素](#cdk-の構成要素)
   - [App](#app)
-  - [Stack](#stack)
+  - [Stack(s)](#stacks)
   - [Construct](#construct)
     - [L1 Construct / L2 Construct](#l1-construct--l2-construct)
     - [Patterns](#patterns)
@@ -33,21 +33,21 @@ Duration: 2:31:03
 
 AWS Cloud Development Kit のことで、使い慣れたプログラミング言語を使用してクラウドアプリケーションのリソースを定義するためのオープンソースのソフトウェア開発フレームワークです。
 
-【AWS Black Belt Online Seminar】[AWS CDK の開発を効率化する機能 (Basic #3)(YouTube)](https://youtu.be/z3Mst77p-aU)(0:29:20)[PDF](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-3-AppDev_0831_v1.pdf)
+【AWS Black Belt Online Seminar】[AWS Cloud Development Kit (CDK)(YouTube)](https://youtu.be/1i7kWqpqtoY)(1:01:23)
 
-![xx](/images/blackbelt/)
-
-【AWS Black Belt Online Seminar】[AWS CDK の基本的なコンポーネントと機能 (Basic #2)(YouTube)](https://youtu.be/aqa2bFFzcjs)(0:28:13)[PDF](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-2-Features_0831_v1.pdf)
-
-![xx](/images/blackbelt/)
+![blackbelt-cdk_3](/images/blackbelt/blackbelt-cdk_4-320.jpg)
 
 【AWS Black Belt Online Seminar】[AWS CDK 概要 (Basic #1)(YouTube)](https://youtu.be/BmCpa44rAXI)(0:33:07)[PDF](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-1-Overview_0731_v1.pdf)
 
-![xx](/images/blackbelt/)
+![blackbelt-cdk_1](/images/blackbelt/blackbelt-cdk_1-320.jpg)
 
-【AWS Black Belt Online Seminar】[AWS Cloud Development Kit (CDK)(YouTube)](https://youtu.be/1i7kWqpqtoY)(1:01:23)
+【AWS Black Belt Online Seminar】[AWS CDK の基本的なコンポーネントと機能 (Basic #2)(YouTube)](https://youtu.be/aqa2bFFzcjs)(0:28:13)[PDF](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-2-Features_0831_v1.pdf)
 
-![xx](/images/blackbelt/)
+![blackbelt-cdk_2](/images/blackbelt/blackbelt-cdk_2-320.jpg)
+
+【AWS Black Belt Online Seminar】[AWS CDK の開発を効率化する機能 (Basic #3)(YouTube)](https://youtu.be/z3Mst77p-aU)(0:29:20)[PDF](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-3-AppDev_0831_v1.pdf)
+
+![blackbelt-cdk_3](/images/blackbelt/blackbelt-cdk_3-320.jpg)
 
 [AWS クラウド開発キット](https://aws.amazon.com/jp/cdk/)
 
@@ -114,13 +114,17 @@ from "aws-cdk-lib";
 
 https://cdkworkshop.com/
 
-## 構成要素
+## CDK の構成要素
+
+![AppStacks.png](/images/cdk/AppStacks.png)
+
+引用：[開発者ガイド>CDK とは](https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html)
 
 ### App
 
 CDK の最上位層で、複数のスタックの依存関係などを定義します。
 
-### Stack
+### Stack(s)
 
 CloudFormation のスタックに対応します。AWS へのデプロイはこのスタック単位で行います。
 
@@ -136,7 +140,7 @@ Construct には 3 つの種類があります。
 
 #### L1 Construct / L2 Construct
 
-L1 Construct とは、Low Level Construct のことです。CloudFormation の各リソースと 1:1 の関係になっています。
+L1 Construct とは、Low Level Construct のことです。CloudFormation の各リソースと 1:1 の関係になっています。`Cfn`で始まるものが L1 です。
 
 CloudFormation で定義するのと同じレベルでの記載になります。L2 Construct が存在するリソースは、L2 Construct を利用することを推奨しますが、要件に応じた細かい設定が必要な場合は、L1 Construct を利用します。
 
@@ -189,10 +193,10 @@ const vpc = new ec2.Vpc(this, "vpc", {
 
 この定義を実行した場合に生成される CloudFormation のコードは次の通りです。
 
-![](images/cdk/vpc_cfn_00.png)
+![vpc_cfn_00](/images/cdk/vpc_cfn_00.png)
 ：
 ：
-![](images/cdk/vpc_cfn_01.png)
+![vpc_cfn_01](/images/cdk/vpc_cfn_01.png)
 
 #### Patterns
 
@@ -294,7 +298,7 @@ test("create the vpc", () => {
 
 テストを実行した結果は次のようになります。
 
-![](images/cdk/jest.png)
+![jest](/images/cdk/jest.png)
 
 ## CDK のコマンド
 
@@ -317,25 +321,57 @@ test("create the vpc", () => {
 
 ## CDK 作成時の Metadata を削除したい場合
 
+CDK で作成される CloudFormation テンプレートファイルには、メタデータが含まれます。
+
+```yaml
+Resources:
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAAEzPUMzQw0TNQdEgsL9ZNTsnWT84vStWrDi5JTM7Wcc7PKy4pKk0u0XFOywtKLc4vLUpOBbGBEimZJZn5ebU6efkpqXpZxfplhmZ6hkCDsoozM3WLSvNKMnNT9YIgNAAtXENFZQAAAA==
+    Metadata:
+      aws:cdk:path: DevioStack/CDKMetadata/Default
+    Condition: CDKMetadataAvailable
+Conditions:
+  CDKMetadataAvailable:
+    Fn::Or:
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - af-south-1
+:
+```
+
+これは、次のような目的で付与される内容です。
+
+![cdk-metadata.png](/images/cdk/cdk-metadata.png)
+
+これを付与したくない場合は、cdk コマンドに以下のオプションを追加して実行します。
+
+```sh
+cdk synth --no-version-reporting --path-metadata false
+```
+
 cdk.json に `"versionReporting": false,` を追加します。
 
-![](images/cdk/versionReporting.png)
+![versionReporting](/images/cdk/versionReporting.png)
+
+GitHub などからダウンロードしてきた CloudFormation テンプレートにこのような Metadata の記載がある場合は、消しても問題ありません。
 
 ## AWS CDK での開発方法
 
 ### ディレクトリ構造
 
 `cdk init --typescript` を実行すると初期ディレクトリが作成されます。
-通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] のディレクトリを追加しています。
-今後、必要になったら [lib] 内にサブディレクトリを作成していきます。
-'\*' が付いているディレクトリが新たに追加したディレクトリです。
+通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加しています。必要になったら [lib] 内にサブディレクトリを作成していきます。
+'\*' が付いているディレクトリが追加したディレクトリです。
 
-```
+```text
 プロジェクトルートディレクトリ
     ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
     ├─ [lib]
         ├─ *[stacks]           // スタック定義
-        ├─ *[resources]           // スタック定義
+        ├─ *[resources]        // 各リソースごとの定義。スタックから呼ばれる
         ├─ *[utils]            // 共通使用するものを格納
     ├─ *[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
     ├─ *[src]                  // Lambda や HTML などのソースを格納
@@ -355,7 +391,7 @@ cdk.json に `"versionReporting": false,` を追加します。
 
 `lib/stacks` に配置するスタック定義ファイルです。
 
-```
+```ts
 import { Stack, StackProps , CfnMapping} from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as cdk from 'aws-cdk-lib';
@@ -393,7 +429,7 @@ export class MyStack extends Stack {
 
 `bin` に配置するスタックの依存関係を定義しておくファイルです。
 
-```
+```ts
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
@@ -431,73 +467,41 @@ const myStack = new MyStack (app, 'MyStack ', {
 
 ### App 定義にリリースミス防止策
 
-デプロイするときは、`cdk deploy MyStack -c env=dev --profile xxxxx` として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、特に初回リリース時は、間違った環境にデプロイされてしまう危険があります。（2 回目以降のデプロイではスタック名などの紐付けでエラーになるはずだが、それでも）
+デプロイするときは、`cdk deploy MyStack -c env=dev --profile xxxxx` として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。
 
-これを回避するために、設定が少々煩雑だが parameters に作成する環境定義ファイルに `MyAccountId` というパラメータを記載するようにしています。
+コンソール上で注意喚起のメッセージがあると、それだけで気付くことがありミス防止にもなります。
 
-これで、コマンド実行時のプロファイルから参照する AWS アカウント ID と環境定義ファイルに定義したアカウント ID が一致しているかどうかをチェックできるので、ミスを防止できます。
+その方法は、env で与えられる環境によって、メッセージを追加する方法です。
 
-環境定義の YAML ファイル読み込みは、`js-yaml` を使用した自作の loadConfig を使用しています。
+`prod` とした環境の場合には、次のようにコンソールに表示されます。
 
-```
-import { loadConfig} from '../lib/utils/load-config';
+![CAUTION](/images/cdk/cdk-CAUTION.png)
 
-const conf = loadConfig(`./parameters/${envname}.yaml`);
+```text
+// 文字色
+const color_red: string = "\u001b[31m";
+const color_green: string = "\u001b[32m";
+const color_yellow: string = "\u001b[33m";
+const color_white: string = "\u001b[37m";
+const color_reset: string = "\u001b[0m";
 
-// 誤った環境にリリースしないために、プロファイルのアカウントIDと設定ファイルのアカウントIDでチェックします
-if (conf.MyAccountId != process.env.CDK_DEFAULT_ACCOUNT) {
-  console.error(`Invalid configuration. The target account ID is ${process.env.CDK_DEFAULT_ACCOUNT}, but the account ID in the configuration file is ${conf.MyAccountId}.`)
-  process.exit(1)
-}
-```
+console.log();
+console.log(`${color_yellow}##########################################${color_reset}`);
+console.log(`${color_yellow}  sample プロジェクト${color_reset}`);
+console.log(`${color_yellow}  リリース環境：${color_reset} ${color_red}${envname}${color_reset}`);
+console.log(`${color_yellow}##########################################${color_reset}`);
+console.log();
 
-これを組み込んだ最終的な App 定義は以下のようになります。
-
-```
-
-#!/usr/bin/env node
-import 'source-map-support/register';
-import * as cdk from 'aws-cdk-lib';
-import { loadConfig} from '../lib/utils/load-config';
-import { MyStack } from '../lib/stacks/cdk-my-stack';
-
-const app = new cdk.App();
-
-// 環境識別子の指定 -> 環境識別子はコマンド実行時に '-c env=xxx' と指定する
-const envname: string = app.node.tryGetContext('env')
 // 環境識別子のチェック
-if (!envname.match(/^(dev|test|stage|prod)$/)) {
-  console.warn('Invalid context. envname must be [dev , test, stage, prod].')
-  process.exit(1)
+if (!envname.match(/^(dev|test|stage|prod|jump)$/)) {
+  console.warn('Invalid context. envname must be [dev , test, stage, prod, jump].');
+  process.exit(1);
 }
 
-// 環境定義ファイルの読み込み
-const conf = loadConfig(`./parameters/${envname}.yaml`);
-
-// 誤った環境にリリースしないために、プロファイルのアカウントIDと設定ファイルのアカウントIDでチェックします
-
-if (conf.MyAccountId != process.env.CDK_DEFAULT_ACCOUNT) {
-  console.error(`Invalid configuration. The target account ID is ${process.env.CDK_DEFAULT_ACCOUNT}, but the account ID in the configuration file is ${conf.MyAccountId}.`)
-  process.exit(1)
-}
-
-// スタック
-const myStack = new MyStack (app, 'MyStack ', {
-  stackName: "ここにスタック名を記述", // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできる。
-  description: "ここにスタックの説明を記述",
-  // ここからスタックのパラメータ
-  PJName: conf.PJName,
-  EnvName: conf.EnvName,
-  :
-  // ここまでスタックのパラメータ
-
-
-  // 以下は基本的にどのスタックでも固定で指定する
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: "us-east-1" // リージョンを固定したい場合、デフォルトでよい場合はprocess.env.CDK_DEFAULT_REGION とする
-  },
-  terminationProtection: true, // 削除保護の有効化 -> スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できない
-
-});
+const isProduction:boolean = envname.match(/^(prod)$/) ? true: false;
+if (isProduction) {
+  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
+  console.log(`${color_red}   本番環境へのリリースです。${color_reset}`);
+  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
+};
 ```
