@@ -281,6 +281,7 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html" target="_blank">リアルタイムログ</a></p>
 <p>標準ログとは別に、リアルタイムログという機能があります。これは、Kinesis Data Streams を利用してログが配信されるようになる機能です。ただし、サポートするのは Kinesis Data Streams までですので、そこからログを取り出す Kiesis Data Firehose のようなコンシューマーが必要です。</p>
 <p>Kiesis Data Firehose を使用した場合、インターバルが 60 ～ 900 秒ですので、リアルタイムといっても 最低 60 秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。</p>
+<p>※ただし、下記アップデートにより数秒（5秒以内）で配信が可能になりました。 <a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/12/amazon-kinesis-data-firehose-zero-buffering/" target="_blank">(Dec 26, 2023)Amazon Kinesis Data Firehose がゼロバッファリングのサポートを開始</a></p>
 
 
       </google-codelab-step>

@@ -1,20 +1,31 @@
-# AWS CDK
+# AWS CDK<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
-
-- [AWS CDK](#aws-cdk)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [xx とは](#xx-とは)
-  - [xx の基本](#xx-の基本)
+- [AWS CDK とは](#aws-cdk-とは)
+- [CDK v2](#cdk-v2)
+- [対応言語](#対応言語)
+- [CDK ワークショップ](#cdk-ワークショップ)
+- [構成要素](#構成要素)
+  - [App](#app)
+  - [Stack](#stack)
+  - [Construct](#construct)
+    - [L1 Construct / L2 Construct](#l1-construct--l2-construct)
+    - [Patterns](#patterns)
+- [Unit Test](#unit-test)
+- [CDK のコマンド](#cdk-のコマンド)
+- [CDK 作成時の Metadata を削除したい場合](#cdk-作成時の-metadata-を削除したい場合)
+- [AWS CDK での開発方法](#aws-cdk-での開発方法)
+  - [ディレクトリ構造](#ディレクトリ構造)
+  - [スタック定義ファイルの基本構造](#スタック定義ファイルの基本構造)
+  - [App 定義](#app-定義)
+  - [App 定義にリリースミス防止策](#app-定義にリリースミス防止策)
 
 ## AWS CDK とは
 
@@ -38,7 +49,6 @@ AWS Cloud Development Kit のことで、使い慣れたプログラミング言
 
 ![xx](/images/blackbelt/)
 
-
 [AWS クラウド開発キット](https://aws.amazon.com/jp/cdk/)
 
 [AWS CDK Reference Documentation](https://docs.aws.amazon.com/cdk/api/v2/)
@@ -49,12 +59,11 @@ AWS Cloud Development Kit のことで、使い慣れたプログラミング言
 
 [AWS Cloud Development Kit のよくある質問](https://aws.amazon.com/jp/cdk/faqs/)
 
-
 ## CDK v2
 
 Duration: 0:01:30
 
-CDK の v2 は、2021年 5月のプレビューが実施され、 2021年 12月 2日に GA されました。
+CDK の v2 は、2021 年 5 月のプレビューが実施され、 2021 年 12 月 2 日に GA されました。
 
 AWS Cloud Development Kit v2 開発者プレビューのお知らせ
 https://aws.amazon.com/jp/blogs/news/announcing-aws-cloud-development-kit-v2-developer-preview/
@@ -62,7 +71,7 @@ https://aws.amazon.com/jp/blogs/news/announcing-aws-cloud-development-kit-v2-dev
 AWS Cloud Development Kit (AWS CDK) v2 の一般提供開始
 https://aws.amazon.com/jp/about-aws/whats-new/2021/12/aws-cloud-development-kit-cdk-generally-available/
 
-v2 ではConstruct ライブラリが aws-cdk-lib に単一化されたため、v1 で実施していた個々のパッケージインストールが不要になりました。
+v2 では Construct ライブラリが aws-cdk-lib に単一化されたため、v1 で実施していた個々のパッケージインストールが不要になりました。
 
 v1 では個別にパッケージをインストールする必要があったため、後からインストールしたパッケージはバージョンを指定しないとバージョンが異なってしまうことがあります。バージョンを合わせるために、「npm install @aws-cdk/aws-lambda@1.111.0」とする必要がありました。
 
@@ -113,13 +122,13 @@ CDK の最上位層で、複数のスタックの依存関係などを定義し�
 
 ### Stack
 
-CloudFormation のスタックに対応します。AWSへのデプロイはこのスタック単位で行います。
+CloudFormation のスタックに対応します。AWS へのデプロイはこのスタック単位で行います。
 
 ### Construct
 
 Stack 層に AWS リソースの定義を作成します。
 
-Construct には3つの種類があります。
+Construct には 3 つの種類があります。
 
 - L1 Construct(Low Level Construct)
 - L2 Construct(High Level Construct)
@@ -135,7 +144,7 @@ https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/constructs.html#constructs_l1_usi
 
 ```ts
 const bucket = new s3.CfnBucket(this, "MyBucket", {
-  bucketName: "MyBucket"
+  bucketName: "MyBucket",
 });
 ```
 
@@ -144,34 +153,41 @@ L2 Construct とは、High Level Construct と呼ばれるもので、L1 Constru
 https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/constructs.html#constructs_using
 
 ```ts
-import * as s3 from 'aws-cdk-lib/aws-s3';
+import * as s3 from "aws-cdk-lib/aws-s3";
 
-const bucket = new s3.Bucket(this, 'MyBucket', {
-  versioned: true
+const bucket = new s3.Bucket(this, "MyBucket", {
+  versioned: true,
 });
 ```
 
-TypeScript を使用して、VPC を作る場合は下記のようにするだけで、VPC、ルートテーブル、インターネットゲートウェイ、NAT ゲートウェイ、サブネット 6つ（3種類 × maxAzs数分） の CloudFormation 定義を作成してくれます。CloudFormation で記述すると 430 行にもなる定義が 12 行だけで完了します。
+TypeScript を使用して、VPC を作る場合は下記のようにするだけで、VPC、ルートテーブル、インターネットゲートウェイ、NAT ゲートウェイ、サブネット 6 つ（3 種類 × maxAzs 数分） の CloudFormation 定義を作成してくれます。CloudFormation で記述すると 430 行にもなる定義が 12 行だけで完了します。
 
 cidrMask の数字だけ指定しているので、サブネットの CIDR ブロックは自動的に生成されます。CIDR ブロックを特定の値で指定したい場合は、L1 Construct を使用します。
 
 ```ts
-const vpc = new ec2.Vpc(this, 'vpc', {
-  vpcName: 'vpc',
-  cidr: '10.0.0.0/16',
+const vpc = new ec2.Vpc(this, "vpc", {
+  vpcName: "vpc",
+  cidr: "10.0.0.0/16",
   natGateways: 2,
-  natGatewaySubnets: {subnetType: ec2.SubnetType.PUBLIC},
+  natGatewaySubnets: { subnetType: ec2.SubnetType.PUBLIC },
   maxAzs: 2,
   subnetConfiguration: [
-    {subnetType: ec2.SubnetType.PUBLIC, name:'public', cidrMask: 20},
-    {subnetType: ec2.SubnetType.PRIVATE_WITH_NAT, name:'private', cidrMask: 19},
-    {subnetType: ec2.SubnetType.PRIVATE_ISOLATED, name:'protected', cidrMask: 21},
+    { subnetType: ec2.SubnetType.PUBLIC, name: "public", cidrMask: 20 },
+    {
+      subnetType: ec2.SubnetType.PRIVATE_WITH_NAT,
+      name: "private",
+      cidrMask: 19,
+    },
+    {
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      name: "protected",
+      cidrMask: 21,
+    },
   ],
 });
 ```
 
 この定義を実行した場合に生成される CloudFormation のコードは次の通りです。
-
 
 ![](images/cdk/vpc_cfn_00.png)
 ：
@@ -180,27 +196,31 @@ const vpc = new ec2.Vpc(this, 'vpc', {
 
 #### Patterns
 
-L3 Constructとして、ECS PatternsのようにECS関連のリソースを簡単に生成できるものがあります。
+L3 Construct として、ECS Patterns のように ECS 関連のリソースを簡単に生成できるものがあります。
 
-次のようにするだけで、ECSサービス、ALB、関連するセキュリティグループ、タスク用のIAMロールなど 200～300行の CloudFormation のコードを出力してくれます。
+次のようにするだけで、ECS サービス、ALB、関連するセキュリティグループ、タスク用の IAM ロールなど 200 ～ 300 行の CloudFormation のコードを出力してくれます。
 
 ```ts
 // クラスタを作成
-const cluster = new ecs.Cluster(this, 'MyCluster', {
+const cluster = new ecs.Cluster(this, "MyCluster", {
   vpc: props.vpc,
 });
 
-const loadBalancedFargateService =new ecs_patterns.ApplicationLoadBalancedFargateService(this, 'MyFargateService',{
-  cluster: cluster,
-  cpu: 4096,
-  memoryLimitMiB: 30720,
-  publicLoadBalancer: true,
-  desiredCount: 6,
-  taskImageOptions:
-  {
-    image: ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample"),
-  },
-});
+const loadBalancedFargateService =
+  new ecs_patterns.ApplicationLoadBalancedFargateService(
+    this,
+    "MyFargateService",
+    {
+      cluster: cluster,
+      cpu: 4096,
+      memoryLimitMiB: 30720,
+      publicLoadBalancer: true,
+      desiredCount: 6,
+      taskImageOptions: {
+        image: ecs.ContainerImage.fromRegistry("amazon/amazon-ecs-sample"),
+      },
+    }
+  );
 ```
 
 ## Unit Test
@@ -210,66 +230,65 @@ Jest を使った Unit Test も実施できます。VPC の場合は、以下の
 ただ、"AWS::EC2::VPC" のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。
 
 ```ts
-test('create the vpc', () => {
-    // GIVEN
-    const app = new App({
-        context : {
-            'PJName': 'junit',
-            'EnvName': 'prod',
-            'CidrBlock': '10.0.0.0/16',
-        }
-    });
-    const stack = new VPCStack(app, 'testing-vpcstack', {});
-    // WHEN
-    const template = Template.fromStack(stack);
+test("create the vpc", () => {
+  // GIVEN
+  const app = new App({
+    context: {
+      PJName: "junit",
+      EnvName: "prod",
+      CidrBlock: "10.0.0.0/16",
+    },
+  });
+  const stack = new VPCStack(app, "testing-vpcstack", {});
+  // WHEN
+  const template = Template.fromStack(stack);
 
-    // THEN
-    // VPC
-    template.resourceCountIs('AWS::EC2::VPC', 1);
-    template.hasResourceProperties('AWS::EC2::VPC', {
-        CidrBlock: '10.0.0.0/16',
-    });
+  // THEN
+  // VPC
+  template.resourceCountIs("AWS::EC2::VPC", 1);
+  template.hasResourceProperties("AWS::EC2::VPC", {
+    CidrBlock: "10.0.0.0/16",
+  });
 
-    // Subnet
-    template.resourceCountIs('AWS::EC2::Subnet', 6);
-    // Internet Gateway
-    template.resourceCountIs('AWS::EC2::InternetGateway', 1);
-    template.resourceCountIs('AWS::EC2::VPCGatewayAttachment', 1);
-    template.hasResourceProperties('AWS::EC2::VPCGatewayAttachment', {
-        VpcId: Match.anyValue(),
-        InternetGatewayId: Match.anyValue()
-    });
-    // Elastic IP
-    template.resourceCountIs('AWS::EC2::EIP', 2);
-    // NatGateway
-    template.resourceCountIs('AWS::EC2::NatGateway', 2);
-    template.hasResourceProperties('AWS::EC2::NatGateway', {
-        AllocationId: Match.anyValue(),
-        SubnetId: Match.anyValue(),
-    });
-    template.hasResourceProperties('AWS::EC2::NatGateway', {
-        AllocationId: Match.anyValue(),
-        SubnetId: Match.anyValue(),
-    });
-    // Route Table
-    template.resourceCountIs('AWS::EC2::RouteTable', 6);
-    template.resourceCountIs('AWS::EC2::Route', 4);
-    template.hasResourceProperties('AWS::EC2::Route', {
-        RouteTableId: Match.anyValue(),
-        DestinationCidrBlock: '0.0.0.0/0',
-        GatewayId: Match.anyValue()
-    });
-    template.hasResourceProperties('AWS::EC2::Route', {
-        RouteTableId: Match.anyValue(),
-        DestinationCidrBlock: '0.0.0.0/0',
-        NatGatewayId: Match.anyValue()
-    });
-    template.resourceCountIs('AWS::EC2::SubnetRouteTableAssociation', 6);
-    template.hasResourceProperties('AWS::EC2::SubnetRouteTableAssociation', {
-        RouteTableId: Match.anyValue(),
-        SubnetId: Match.anyValue()
-    });
-
+  // Subnet
+  template.resourceCountIs("AWS::EC2::Subnet", 6);
+  // Internet Gateway
+  template.resourceCountIs("AWS::EC2::InternetGateway", 1);
+  template.resourceCountIs("AWS::EC2::VPCGatewayAttachment", 1);
+  template.hasResourceProperties("AWS::EC2::VPCGatewayAttachment", {
+    VpcId: Match.anyValue(),
+    InternetGatewayId: Match.anyValue(),
+  });
+  // Elastic IP
+  template.resourceCountIs("AWS::EC2::EIP", 2);
+  // NatGateway
+  template.resourceCountIs("AWS::EC2::NatGateway", 2);
+  template.hasResourceProperties("AWS::EC2::NatGateway", {
+    AllocationId: Match.anyValue(),
+    SubnetId: Match.anyValue(),
+  });
+  template.hasResourceProperties("AWS::EC2::NatGateway", {
+    AllocationId: Match.anyValue(),
+    SubnetId: Match.anyValue(),
+  });
+  // Route Table
+  template.resourceCountIs("AWS::EC2::RouteTable", 6);
+  template.resourceCountIs("AWS::EC2::Route", 4);
+  template.hasResourceProperties("AWS::EC2::Route", {
+    RouteTableId: Match.anyValue(),
+    DestinationCidrBlock: "0.0.0.0/0",
+    GatewayId: Match.anyValue(),
+  });
+  template.hasResourceProperties("AWS::EC2::Route", {
+    RouteTableId: Match.anyValue(),
+    DestinationCidrBlock: "0.0.0.0/0",
+    NatGatewayId: Match.anyValue(),
+  });
+  template.resourceCountIs("AWS::EC2::SubnetRouteTableAssociation", 6);
+  template.hasResourceProperties("AWS::EC2::SubnetRouteTableAssociation", {
+    RouteTableId: Match.anyValue(),
+    SubnetId: Match.anyValue(),
+  });
 });
 ```
 
@@ -277,13 +296,12 @@ test('create the vpc', () => {
 
 ![](images/cdk/jest.png)
 
-
 ## CDK のコマンド
 
 - cdk deploy
   https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-deploy
   CDK で定義されたリソースを AWS 環境にデプロイするコマンドです。
-  すべてのスタックをデプロイしたい場合は、```--all``` オプションを指定します。
+  すべてのスタックをデプロイしたい場合は、`--all` オプションを指定します。
   指定したスタックをデプロイしたい場合は、deploy の後にスタック名を指定します。
 - cdk diff
   https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-diff
@@ -291,18 +309,17 @@ test('create the vpc', () => {
 - cdk synth
   https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-synth
   CDK で定義されたスタックを CloudFormation テンプレートにするコマンドです。
-  リソースに付与される Metadata を削除したい場合は、```--path-metadata false``` オプションを付与します。
-  テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 ```--quit``` または ```-q``` オプションを付与します。
+  リソースに付与される Metadata を削除したい場合は、`--path-metadata false` オプションを付与します。
+  テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 `--quit` または `-q` オプションを付与します。
 - cdk ls
   https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-list
   現在の CDK アプリに含まれるスタックの一覧を確認するコマンドです。
 
 ## CDK 作成時の Metadata を削除したい場合
 
-cdk.json に ```"versionReporting": false,``` を追加します。
+cdk.json に `"versionReporting": false,` を追加します。
 
 ![](images/cdk/versionReporting.png)
-
 
 ## AWS CDK での開発方法
 
@@ -311,7 +328,7 @@ cdk.json に ```"versionReporting": false,``` を追加します。
 `cdk init --typescript` を実行すると初期ディレクトリが作成されます。
 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] のディレクトリを追加しています。
 今後、必要になったら [lib] 内にサブディレクトリを作成していきます。
-'*' が付いているディレクトリが新たに追加したディレクトリです。
+'\*' が付いているディレクトリが新たに追加したディレクトリです。
 
 ```
 プロジェクトルートディレクトリ
@@ -372,7 +389,7 @@ export class MyStack extends Stack {
 
 ```
 
-### App定義
+### App 定義
 
 `bin` に配置するスタックの依存関係を定義しておくファイルです。
 
@@ -412,9 +429,9 @@ const myStack = new MyStack (app, 'MyStack ', {
 });
 ```
 
-### App定義にリリースミス防止策
+### App 定義にリリースミス防止策
 
-デプロイするときは、`cdk deploy MyStack -c env=dev --profile xxxxx` として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、特に初回リリース時は、間違った環境にデプロイされてしまう危険があります。（2回目以降のデプロイではスタック名などの紐付けでエラーになるはずだが、それでも）
+デプロイするときは、`cdk deploy MyStack -c env=dev --profile xxxxx` として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、特に初回リリース時は、間違った環境にデプロイされてしまう危険があります。（2 回目以降のデプロイではスタック名などの紐付けでエラーになるはずだが、それでも）
 
 これを回避するために、設定が少々煩雑だが parameters に作成する環境定義ファイルに `MyAccountId` というパラメータを記載するようにしています。
 
@@ -435,6 +452,7 @@ if (conf.MyAccountId != process.env.CDK_DEFAULT_ACCOUNT) {
 ```
 
 これを組み込んだ最終的な App 定義は以下のようになります。
+
 ```
 
 #!/usr/bin/env node
