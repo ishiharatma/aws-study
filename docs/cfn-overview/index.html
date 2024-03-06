@@ -1,0 +1,471 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS CloudFormation</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="cfn-overview"
+                  title="AWS CloudFormation"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#cloudformation-%E3%81%A8%E3%81%AF" target="_blank">CloudFormation とは</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB%E3%81%A7%E3%81%AE%E8%A1%A8%E7%A4%BA" target="_blank">コンソールでの表示</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E8%AA%9E" target="_blank">基本用語</a></li>
+<li><a href="#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%AE%E6%A7%8B%E6%88%90" target="_blank">テンプレートの構成</a><ul>
+<li><a href="#%E5%BF%85%E9%A0%88awstemplateformatversion" target="_blank">【必須】AWSTemplateFormatVersion</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8Fdescription" target="_blank">【任意】Description</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8Fmetadata" target="_blank">【任意】Metadata</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8Fparameters" target="_blank">【任意】Parameters</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8Fconditions" target="_blank">【任意】Conditions</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8Fmappings" target="_blank">【任意】Mappings</a></li>
+<li><a href="#%E5%BF%85%E9%A0%88resources" target="_blank">【必須】Resources</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8Foutputs" target="_blank">【任意】Outputs</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B5%84%E3%81%BF%E8%BE%BC%E3%81%BF%E9%96%A2%E6%95%B0" target="_blank">組み込み関数</a><ul>
+<li><a href="#%E6%9D%A1%E4%BB%B6%E9%96%A2%E6%95%B0" target="_blank">条件関数</a></li>
+<li><a href="#%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">その他</a><ul>
+<li><a href="#sub-%E3%81%A8-importvalue-%E3%82%92%E7%B5%84%E3%81%BF%E5%90%88%E3%82%8F%E3%81%9B%E3%82%8B%E4%BE%8B" target="_blank">Sub と ImportValue を組み合わせる例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%A7%E3%81%8D%E3%82%8B%E5%85%B1%E9%80%9A%E5%A4%89%E6%95%B0" target="_blank">テンプレートで利用できる共通変数</a></li>
+<li><a href="#rollbacks" target="_blank">Rollbacks</a></li>
+<li><a href="#changesets%E5%A4%89%E6%9B%B4%E3%82%BB%E3%83%83%E3%83%88" target="_blank">ChangeSets（変更セット）</a></li>
+<li><a href="#drift" target="_blank">Drift</a></li>
+<li><a href="#nested-stacks" target="_blank">Nested Stacks</a></li>
+<li><a href="#stackset" target="_blank">StackSet</a></li>
+<li><a href="#secrets-manager" target="_blank">Secrets Manager</a></li>
+<li><a href="#cloudformation-%E3%83%87%E3%82%B6%E3%82%A4%E3%83%8A%E3%83%BC" target="_blank">CloudFormation デザイナー</a></li>
+<li><a href="#iac-%E3%82%B8%E3%82%A7%E3%83%8D%E3%83%AC%E3%83%BC%E3%82%BF" target="_blank">IaC ジェネレータ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CloudFormation とは" duration="0">
+        <p>リソースを簡単にモデル化、プロビジョニング、管理することができる Infrastructure as Code (IaC) サービスです。 リソースをテンプレート（JSON または YAML 形式）で管理することができます。 CloudFormation 自体は基本的には無料で利用できますが、プロビジョニングしたリソースにはコストが発生します。（料金については下記を参照してください。）</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/Viyqh9fNBjw" target="_blank">AWS CloudFormation(YouTube)</a>(0:56:03)</p>
+<p class="image-container"><img alt="cfn_1" src="img\\678755c0453faba3.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/XOuhtEIdf0k" target="_blank">AWS CloudFormation deep dive(YouTube)</a>(1:06:10)</p>
+<p class="image-container"><img alt="cfn_2" src="img\\63299ea4cec1b02a.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/4dyiPsYXG8I" target="_blank">AWS CloudFormation#1 基礎編(YouTube)</a>(0:15:15)</p>
+<p class="image-container"><img alt="cfn_3" src="img\\7905a11df01bbe96.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=3-rOuhahaDI" target="_blank">AWS CloudFormation CloudFormation レジストリ編(YouTube)</a>(0:23:43)</p>
+<p class="image-container"><img alt="cfn_4" src="img\\a7bbb2940e97e28e.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=FHFfWMddd-0" target="_blank">AWS CloudFormation よくあるユースケースと質問編(YouTube)</a>(0:29:05)</p>
+<p class="image-container"><img alt="cfn_5" src="img\\ff4f42993688b588.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/cloudformation/" target="_blank">AWS CloudFormation サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cloudformation/?icmpid=docs_homepage_mgmtgov" target="_blank">AWS CloudFormation ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/cloudformation/faqs/" target="_blank">AWS CloudFormation よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/cloudformation/pricing/" target="_blank">AWS CloudFormation の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コンソールでの表示" duration="0">
+        <p>テンプレート管理してリリースしたものはこのような画面で確認することができます。</p>
+<p class="image-container"><img alt="cfn-console" src="img\\9d0388f0ae6b071c.png"></p>
+<p>エラーがあった場合はこのようにエラー内容が表示されます。「根本原因を検出」ボタンを押すと、原因となったエラーメッセージ部分にフォーカスされます。</p>
+<p class="image-container"><img alt="cfn-console-error" src="img\\207be6ca74ccd418.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="基本用語" duration="0">
+        <ul>
+<li>テンプレート <ul>
+<li>リソースの設定などを記述した YAML(xxx.yaml) か JSON(xxx.json)のテキストファイルのことです。</li>
+<li>※ 本ドキュメントでは、基本的に YAML で表記します。</li>
+</ul>
+</li>
+<li>スタック <ul>
+<li>テンプレートファイルと１：１となるリソースのコレクションです。</li>
+<li>後述するテンプレートのネストを使うことで複数テンプレートをまとめて管理することもできます。</li>
+<li>スタックの単位でリソースを管理します。</li>
+</ul>
+</li>
+<li>テンプレートのアップロード <ul>
+<li>スタックを新規作成する、または更新するときにテンプレートファイルをローカルから送信することです。</li>
+<li>S3 バケットに保存したものを指定または、コンソールから直接アップロードすることができます。</li>
+<li><a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/11/aws-cloudformation-git-management-stacks/" target="_blank">Git と同期</a><ul>
+<li>Nov 26, 2023 に使えるようになった機能で、従来のアップロードではなく Git リポジトリと同期して、Push したら自動的にスタックが更新されるようにできます。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="テンプレートの構成" duration="0">
+        <p>テンプレートファイルは、以下の構成になっています。</p>
+<pre><code language="language-yaml" class="language-yaml">AWSTemplateFormatVersion:
+Description:
+Metadata:
+Parameters:
+Conditions:
+Mappings:
+Resources:
+Outputs:
+</code></pre>
+<h2 is-upgraded>【必須】AWSTemplateFormatVersion</h2>
+<p>ここは固定です。2024 年 3 月時点で有効な値は <code>2010-09-09</code> のみです。 詳しくは下記を参照してください。 https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/format-version-structure.html</p>
+<pre><code language="language-yaml" class="language-yaml">AWSTemplateFormatVersion: &#34;2010-09-09&#34;
+</code></pre>
+<h2 is-upgraded>【任意】Description</h2>
+<p>テンプレートの説明を記述します。スタックの画面で説明を見ることができます。スタック名で判断できるのであれば無くてもよいです。</p>
+<pre><code language="language-yaml" class="language-yaml">Description: &gt;
+  Here are some
+  details about
+  the template.
+</code></pre>
+<h2 is-upgraded>【任意】Metadata</h2>
+<p>テンプレートに対する追加情報を記述します。 よく使うのは、<code>AWS::CloudFormation::Interface</code> で、パラメータの量が多い場合、グループ化し変数のソート順を指定して画面表示することができるので、作業が分かりやすくなります。</p>
+<p>グループ化されていないパラメータ入力画面です。</p>
+<p class="image-container"><img alt="image.png" src="img\\8f8d824af5bca673.png"></p>
+<p>グループ化されたパラメータ入力画面です。グループ化単位でラベルが付与でき、強調表示されます。 <img alt="image.png" src="img\\5857c5208e57d5ee.png"></p>
+<h2 is-upgraded>【任意】Parameters</h2>
+<p>実行時に変更したい値をパラメータとして定義することで、１つのテンプレートファイルで環境に合わせた構築ができます。</p>
+<pre><code language="language-yaml" class="language-yaml">  パラメータ名：
+    Type: パラメータの型を指定します。指定できる型は、String,Number,List&lt;Number&gt;,CommaDelimitedList,AWS 固有のパラメーター型
+    Default: パラメータのデフォルト値を設定しておくことができます。
+    Description: パラメータの説明文を設定できます。
+    :
+</code></pre>
+<p>指定できるプロパティは以下を参照してください。String 型の場合、AllowedPattern で正規表現による入力制限を行ったり、Number 型は、最小～最大値を指定できるなど様々なオプションがあります。</p>
+<p>https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/parameters-section-structure.html#parameters-section-structure-properties</p>
+<h2 is-upgraded>【任意】Conditions</h2>
+<p>入力されたパラメータに、分岐するフラグを作成することができます。例えば、EnvName に test が設定された場合に、 IsTest というフラグを True にし、Resources セクションでは、このパラメータでリソース作成を制御したり、名称を変更したりすることができます。</p>
+<p>パターン ①：パラメータによって条件に利用する</p>
+<pre><code language="language-yaml" class="language-yaml">Parameters:
+  EnvName:
+    Type: String
+    Default: true
+    AllowedValues:
+      - dev
+      - prod
+      - stage
+      - test
+Conditions:
+  IsTest: # 環境名が test の場合、true
+    !Equals [&#34;test&#34;, !Ref EnvName]
+</code></pre>
+<p>パターン ②：パラメータの入力有無による条件に利用する</p>
+<pre><code language="language-yaml" class="language-yaml">Parameters:
+  ManagementAccountId:
+    Type: String
+Conditions:
+  EnableManagementAccount: # 管理アカウントID が指定されていたら true
+    !Not [!Equals [!Ref ManagementAccountId, &#34;&#34;]]
+</code></pre>
+<p>パターン ③：いくつかの条件を組み合わせる</p>
+<pre><code language="language-yaml" class="language-yaml">Conditions:
+  IsSupportedRegion:
+    !Or [
+      !Equals [!Ref &#34;AWS::Region&#34;, us-east-1],
+      !Equals [!Ref &#34;AWS::Region&#34;, us-east-2],
+      !Equals [!Ref &#34;AWS::Region&#34;, us-west-1],
+      !Equals [!Ref &#34;AWS::Region&#34;, us-west-2],
+      !Equals [!Ref &#34;AWS::Region&#34;, ap-northeast-1],
+      !Equals [!Ref &#34;AWS::Region&#34;, ap-northeast-2],
+      !Equals [!Ref &#34;AWS::Region&#34;, ap-southeast-2],
+      !Equals [!Ref &#34;AWS::Region&#34;, eu-west-1],
+      !Equals [!Ref &#34;AWS::Region&#34;, eu-west-2],
+      !Equals [!Ref &#34;AWS::Region&#34;, eu-north-1],
+    ]
+</code></pre>
+<h2 is-upgraded>【任意】Mappings</h2>
+<p>パラメータでは対応できないようなキーと値の組み合わせを記述するときに利用します。 リージョンが ap-northeast-1 の場合、ELBAccountID が xxxx、ap-northeast-3 の場合 ELBAccountID が zzzz といった変換ができるようになります。</p>
+<p>ロードバランサの AWS アカウント ID はリージョンで異なりますので、<code>[ "arn:aws:iam::${AccountId}:root", { AccountId: !FindInMap [ RegionMap, !Ref AWS::Region , LBAWSAccount]}]</code> とすることでリージョンが変更されてもテンプレートを修正する必要がありません。</p>
+<pre><code language="language-yaml" class="language-yaml">RegionMap:
+  us-east-1: # 米国東部（バージニア北部）
+    LBAWSAccount: 127311923021
+  us-east-2: # 米国東部 (オハイオ)
+    LBAWSAccount: 33677994240
+  us-west-1: # 米国西部 (北カリフォルニア)
+    LBAWSAccount: 27434742980
+  us-west-2: # 米国西部 (オレゴン)
+    LBAWSAccount: 797873946194
+</code></pre>
+<p>また、dev と test で VPC やサブネットの CIDR が異なる場合、<code>!Sub [ "${VPCCIDRBASE}${Subnet}", { Subnet: !FindInMap [ VpcConfig, !Ref EnvName, Vpc ]}]</code> と指定することで環境ごとに変更でき、一か所に記述してあるため確認がしやすくなります。</p>
+<pre><code language="language-yaml" class="language-yaml">VpcConfig:
+  dev:
+    Vpc: .0.0/16
+    BastionSubnet1: .0.0/24
+    DbSubnet1: .1.0/24
+    DbSubnet2: .2.0/24
+  test:
+    Vpc: .0.0/16
+    BastionSubnet1: .10.0/24
+    DbSubnet1: .11.0/24
+    DbSubnet2: .12.0/24
+</code></pre>
+<h2 is-upgraded>【必須】Resources</h2>
+<p>AWS の各種リソースを作成する部分です。リソースに合わせて必要なパラメータが異なりますので、ドキュメントを参照して記述していきます。記述が間違っている場合のエラーメッセージはあまり親切とはいえないので、何がエラーか分からないで苦労する場合もあります。</p>
+<pre><code language="language-yaml" class="language-yaml">テンプレート内で識別するID:
+  Type: AWS リソースのタイプ
+  Properties: リソース毎のパラメータ
+</code></pre>
+<p>S3 を作成する場合は以下のようにします。<code>DeletionPolicy: Retain</code> というパラメータを指定すると、テンプレートを削除してもリソースを残すことができるオプションです。（スタックを削除したあと同じテンプレートを再実行する場合は、リソースが残っているので手動で削除する必要があります。）</p>
+<pre><code language="language-yaml" class="language-yaml">S3Bucket:
+  Type: AWS::S3::Bucket
+  DeletionPolicy: Retain
+  Properties:
+    BucketName: &#34;example-bucket&#34;
+    AccessControl: Private
+    PublicAccessBlockConfiguration:
+      BlockPublicAcls: True
+      BlockPublicPolicy: True
+      IgnorePublicAcls: True
+      RestrictPublicBuckets: True
+</code></pre>
+<h2 is-upgraded>【任意】Outputs</h2>
+<p>スタック内で作成したリソースの名やリソース ARN を出力することができます。出力したパラメータは、<strong>同一リージョンにある</strong>別のスタックで <code>!ImportValue 変数名</code> として利用することができます。</p>
+<pre><code language="language-yaml" class="language-yaml">出力するパラメータID（リソースで指定したIDと同じでもよい）:
+  Value: 出力するパラメータの値
+  Export:
+    Name: 出力するパラメータに名前を付けたい場合に指定します。指定しなかった場合は、パラメータIDとなります。組み込み関数を利用して柔軟な名前を作成することができます。
+</code></pre>
+<p>出力するパラメータの値は、<code>!Ref S3Bucket</code> と Resources 内の ID を指定するとリソース毎のデフォルトの値が設定されます。リソースによって、リソースの名前や ARN が設定されます。他の属性は、<code>!GetAtt  S3Bucket.Arn</code> と指定すると取得できます。リソースによってサポートしている属性が異なるので、詳しくは AWS ドキュメントを参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="組み込み関数" duration="0">
+        <h2 is-upgraded>条件関数</h2>
+<p>条件関数に、<code>Fn::If</code> <code>Fn::Equals</code> <code>Fn::Not</code> などを利用してリソース名やリソースの削除を制御できます。詳しくは、以下のドキュメントを参照してください。</p>
+<p>https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-conditions.html#intrinsic-function-reference-conditions-if</p>
+<h2 is-upgraded>その他</h2>
+<p>条件関数以外には、<code>Sub</code> 、 <code>ImportValue</code> 、 <code>Join</code> といったものを使うことができます。これらを使えば、他のテンプレートの変数を利用したり、文字列を結合したりといった操作ができるようになり、柔軟なリソース作成ができます。</p>
+<p>詳しくは、以下のドキュメントを参照してください。 https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference.html</p>
+<h3 is-upgraded>Sub と ImportValue を組み合わせる例</h3>
+<p>個人的には、次の使い方が便利なので紹介します。</p>
+<p>Sub の基本的な使い方としては、以下のように動的に名称をつけたり、Arn を指定したりします。</p>
+<pre><code language="language-yaml" class="language-yaml">!Sub &#34;arn:aws:iam::${AWS::AccountId}:root&#34;
+</code></pre>
+<p>CloudFormation を使っていると外部テンプレートで Output した変数を使いたい場合があります。外部テンプレートの変数は <code>ImportValue</code> を使う必要があるので、<code>${変数名}</code> では参照できません。このときは、Sub の変数マップを使います。これを使うことで、<code>ImportValue</code> や <code>GetAtt</code> の値を利用することが可能になります。</p>
+<pre><code language="language-yaml" class="language-yaml">!Sub
+- !Sub &#34;arn:aws:iam::${AWS::AccountId}:role/{PjName}-{EnvName}-{XXXXArn}&#34;
+- {
+    PjName: !ImportValue PjName,
+    EnvName: !ImportValue EnvName,
+    XXXXArn: !GetAtt XXXX.Outputs.XXXXArn,
+  }
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="テンプレートで利用できる共通変数" duration="0">
+        <p>CloudFormation では予め利用できる変数が存在します。</p>
+<p>https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/pseudo-parameter-reference.html</p>
+<p>変数をテンプレート内で利用するには、<code>!Ref 'AWS::AccountId'</code> や、<code>!Sub '${AWS::AccountId}'</code> と記述します。</p>
+<pre><code language="language-yaml" class="language-yaml"># 使用例
+Policy:
+  - Version: 2012-10-17
+    Statement:
+      - Effect: Allow
+        Principal: &#34;*&#34;
+        Action: execute-api:Invoke
+        Resource:
+          !Join [
+            &#34;:&#34;,
+            [
+              &#34;arn:aws:execute-api&#34;,
+              !Ref &#34;AWS::Region&#34;,
+              !Ref &#34;AWS::AccountId&#34;,
+              &#34;*&#34;,
+            ],
+          ]
+</code></pre>
+<table>
+<tr><td colspan="1" rowspan="1"><p>変数名</p>
+</td><td colspan="1" rowspan="1"><p>利用頻度</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::AccountId</p>
+</td><td colspan="1" rowspan="1"><p>高</p>
+</td><td colspan="1" rowspan="1"><p>AWS のアカウント ID である 12 桁の数値 (123456789012)が取得できます。</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::Region</p>
+</td><td colspan="1" rowspan="1"><p>高</p>
+</td><td colspan="1" rowspan="1"><p><code>ap-northeast-1</code> といったリージョン名が取得できます。</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::NoValue</p>
+</td><td colspan="1" rowspan="1"><p>高</p>
+</td><td colspan="1" rowspan="1"><p>Conditions で指定した条件と組み合わせて、パラメータの有無を制御したい場合に利用します。</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::StackName</p>
+</td><td colspan="1" rowspan="1"><p>中</p>
+</td><td colspan="1" rowspan="1"><p>スタック名が取得できます。リソース名などに利用したいといった用途で使うことができます。</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::StackId</p>
+</td><td colspan="1" rowspan="1"><p>低</p>
+</td><td colspan="1" rowspan="1"><p>スタックの ID が取得できます。リソース名などに利用したいといった用途で使うことができます。</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::Partition</p>
+</td><td colspan="1" rowspan="1"><p>低</p>
+</td><td colspan="1" rowspan="1"><p>AWS リソースを一意にする ARN <code>arn:aws:iam::aws:policy/AdministratorAccess</code> の <code>aws</code> というパーティションを取得することができます。 中国や一部のリージョンを除いて、基本的に <code>aws</code> となっているため、あまり利用することはありません。</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::NotificationARNs</p>
+</td><td colspan="1" rowspan="1"><p>低</p>
+</td><td colspan="1" rowspan="1"><p>スタックに設定した通知用の SNS トピック ARN のリストを取得することができます。複数設定した場合は、組込関数である Fn::Select で絞り込みます</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS::URLSuffix</p>
+</td><td colspan="1" rowspan="1"><p>低</p>
+</td><td colspan="1" rowspan="1"><p>ドメインのサフィックスを取得します。通常は、<code>amazonaws.com</code> なので、一部のリージョンを除いてはあまり利用することはありません。</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Rollbacks" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-continueupdaterollback.html" target="_blank">更新のロールバックを続ける</a></p>
+<p>スタック更新中にエラーが発生した場合は、スタック更新前の状態に自動的に戻ります。その場合、スタックのステータスは <code>UPDATE_ROLLBACK_COMPLETE</code> になります。 自動的に戻らない場合は、スタックのステータスが<code>UPDATE_ROLLBACK_FAILED</code>になりますので対処が必要になります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ChangeSets（変更セット）" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html" target="_blank">変更セット</a></p>
+<p>現在適用されているテンプレートと、これから適用するテンプレートの差分をチェックして表示してくれるものです。 スタックを更新する途中でも同じようにチェックしてくれるものと同じです。</p>
+<p class="image-container"><img alt="changeset" src="img\\2ef99d1037bc184f.jpg"></p>
+<p>スタック更新とは別に作成することもできます。作成した変更セットは、その後、実行（スタック更新）することができます。 スタック更新途中でも確認できますが、誤ってスタック更新してしまわないので、安全に確認するのであれば事前に変更セットを作成するのがよいでしょう。</p>
+<p class="image-container"><img alt="cfn-changeset-create" src="img\\619d0dfe988638a3.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Drift" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/detect-drift-stack.html" target="_blank">CloudFormation スタック全体のドリフトを検出する</a></p>
+<p>テンプレートと実際のリソースの状態をチェックして差分を検出してくれる機能です。 テンプレートによるスタック管理を行っていたが、何らかの理由で手動による修正を行ったものが検出できます。</p>
+<p class="image-container"><img alt="drift" src="img\\c467ba3171eda889.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Nested Stacks" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-nested-stacks.html" target="_blank">ネストされたスタックの操作</a></p>
+<p>利用する AWS リソースが多くなると、テンプレートの記述量が増えてきて可読性を低下させてしまったり、同じリソースを作る場合には記述が冗長になってしまったりします。</p>
+<p>巨大なテンプレートになってしまった場合、サービスや機能ごとにテンプレートを分割して複数のスタックにしてもよいのですが、そうすると依存関係による実行順序を管理しにくくなります。 そんなときに、スタックのネストを行うことで親スタックから呼び出すことができます。</p>
+<p>次の例では、それぞれの機能ごとに分割したテンプレートを特定の S3 バケットに格納し、親スタックから呼び出しています。</p>
+<p>他のスタックの出力値を使用したい場合は、<code>!GetAtt スタック名.Outputs.出力パラメータ名</code> のように指定することで使用できます。</p>
+<pre><code language="language-yaml" class="language-yaml">  IamGroup:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Join [&#34;&#34;, [!Ref CfnTemplateBucketUrl, &#34;IAMGroups.yaml&#34;]]
+      Parameters:
+        ：
+  NetworkSecurity:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Join [&#34;&#34;, [!Ref CfnTemplateBucketUrl, &#34;NetworkSecurity.yaml&#34;]]
+      Parameters:
+        paramxxx: !GetAtt IamGroup.Outputs.xxxxx
+        ：
+  ApiGatewayExternal:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Join [&#34;&#34;, [!Ref CfnTemplateBucketUrl, &#34;ApiGateway.yaml&#34;]]
+        IsPrivate: false
+        ：
+  ApiGatewayInternal:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: !Join [&#34;&#34;, [!Ref CfnTemplateBucketUrl, &#34;ApiGateway.yaml&#34;]]
+      Parameters:
+        IsPrivate: true
+        ：
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="StackSet" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html" target="_blank">AWS CloudFormation StackSets の操作</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Secrets Manager" duration="0">
+        <p>CloudFormation で Secrets Manager の値を使用する方法です。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-secretsmanager" target="_blank">Secrets Manager のシークレット</a></p>
+<p>次のようにすることで、テンプレートにシークレットの情報を残さずに MasterUsername や MasterUserPassword を取得できます。</p>
+<pre><code language="language-yaml" class="language-yaml">MyRDSInstance:
+  Type: &#34;AWS::RDS::DBInstance&#34;
+  Properties:
+    DBName: MyRDSInstance
+    AllocatedStorage: &#34;20&#34;
+    DBInstanceClass: db.t2.micro
+    Engine: mysql
+    MasterUsername: &#34;&#123;&#123;resolve:secretsmanager:MyRDSSecret:SecretString:username}}&#34;
+    MasterUserPassword: &#34;&#123;&#123;resolve:secretsmanager:MyRDSSecret:SecretString:password}}&#34;
+</code></pre>
+<p>その他、SSM パラメータストアなどの使用は次のドキュメントを参照してください。 <a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/dynamic-references.html#dynamic-references-pattern" target="_blank">スタックテンプレートでの動的な参照の指定</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CloudFormation デザイナー" duration="0">
+        <p>GUI と、YAML または JSON で記述することができます。</p>
+<p>実際に操作してみたい場合は、チュートリアルの <a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/working-with-templates-cfn-designer-additional-info.html" target="_blank">デザイナー の開始方法</a> をやってみるとよいです。</p>
+<p class="image-container"><img alt="cfn-designer" src="img\\2438f92f6df46ca1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IaC ジェネレータ" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/generate-IaC.html" target="_blank">既存のリソースのテンプレートを生成</a></p>
+<p>既存のリソースをスキャンして、テンプレート化できる機能です。 テンプレート化できるのは、スタック管理されていないものだけのようです。</p>
+<p>同じような機能に、<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/resource-import-new-stack.html#resource-import-new-stack-console" target="_blank">既存のリソースからのスタックの作成</a>というのがありますが、こちらはテンプレートにリソース用のコードを追加した状態で、既存リソースとテンプレートを紐づけてスタック管理できるようにするものです。</p>
+<p><a href="./cfn-iac-generator-tried-it.md" target="_blank">IaC ジェネレータで既存リソースからテンプレートを生成してみた記事はこちら</a></p>
+<p>このように生成することができます。 <img alt="iac_generator_9_finish_5" src="img\\956cbcc42a1708c8.png"></p>
+<p>IaC ジェネレータで生成したものを CloudFormation デザイナーに貼り付けても表示できました。行数が多いと応答がなくなるので注意が必要かもしれません。 <img alt="cfn-designer" src="img\\c45c6b62da4f5dc5.png"></p>
+<p>CLI で実行する場合はこちら。<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/generate-IaC.html#generate-template-cli" target="_blank">テンプレートを生成 (AWS CLI)</a></p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/create-generated-template.html" target="_blank">create-generated-template — AWS CLI 1.32.32 Command Reference</a><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-generated-template.html" target="_blank">describe-generated-template — AWS CLI 1.32.33 Command Reference</a><a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/get-generated-template.html" target="_blank">get-generated-template — AWS CLI 1.32.33 Command Reference</a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

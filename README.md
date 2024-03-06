@@ -69,6 +69,9 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [AWS Systems Manager ⑤変更管理機能編](/articles_base/ssm-changes-overview.md)
 
+[AWS CloudFormation 概要](/articles_base/cfn-overview.md)
+
+
 ### アプリケーション統合
 
 [Amazon SNS 概要](/articles_base/sns-overview.md)
@@ -78,6 +81,7 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 ### デベロッパーツール
 
 [AWS Code 兄弟概要](/articles_base/codexx-overview.md)
+[AWS CDK 概要](/articles_base/cdk-overview.md)
 
 ### セキュリティ、アイデンティティ、コンプライアンス
 
