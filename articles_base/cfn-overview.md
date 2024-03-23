@@ -434,6 +434,8 @@ Policy:
 
 [AWS CloudFormation StackSets の操作](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)
 
+CloudFormation StackSets を使うことで、1 つのテンプレートから複数の AWS アカウント、リージョンに対し Stack を作成することが可能になります。
+
 ## Secrets Manager
 
 CloudFormation で Secrets Manager の値を使用する方法です。

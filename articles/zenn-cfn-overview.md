@@ -2,7 +2,7 @@
 title: "【初心者向け】AWS CloudFormation について改めて整理してみた" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 # AWS CloudFormation<!-- omit in toc -->
@@ -440,6 +440,8 @@ Policy:
 ## StackSet
 
 [AWS CloudFormation StackSets の操作](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/what-is-cfnstacksets.html)
+
+CloudFormation StackSets を使うことで、1 つのテンプレートから複数の AWS アカウント、リージョンに対し Stack を作成することが可能になります。
 
 ## Secrets Manager
 

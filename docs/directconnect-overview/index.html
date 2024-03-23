@@ -38,18 +38,28 @@
         <ul>
 <li><a href="#aws-direct-connect-%E3%81%A8%E3%81%AF" target="_blank">AWS Direct Connect とは</a></li>
 <li><a href="#aws-%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95" target="_blank">AWS への接続方法</a></li>
-<li><a href="#direct-connect-%E3%82%92%E4%BD%BF%E3%81%86%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">Direct Connect を使うメリットとデメリット</a></li>
+<li><a href="#direct-connect-%E3%82%92%E4%BD%BF%E3%81%86%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">Direct Connect を使うメリットとデメリット</a><ul>
+<li><a href="#%E8%BB%A2%E9%80%81%E4%B8%AD%E3%81%AE%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">転送中の暗号化</a></li>
+</ul>
+</li>
 <li><a href="#%E5%88%A9%E7%94%A8%E9%96%8B%E5%A7%8B%E6%96%B9%E6%B3%95" target="_blank">利用開始方法</a></li>
 <li><a href="#apn-%E3%83%91%E3%83%BC%E3%83%88%E3%83%8A%E3%83%BC%E3%81%A8%E3%81%AF" target="_blank">APN パートナーとは</a></li>
-<li><a href="#%E5%9B%9E%E5%BE%A9%E6%80%A7%E3%83%A2%E3%83%87%E3%83%AB" target="_blank">回復性モデル</a></li>
-<li><a href="#direct-connect-%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE-aws-site-to-site-vpn-%E6%8E%A5%E7%B6%9A" target="_blank">Direct Connect のバックアップとしての AWS Site to Site VPN 接続</a></li>
 <li><a href="#%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95" target="_blank">接続方法</a></li>
 <li><a href="#%E4%BB%AE%E6%83%B3%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9vif" target="_blank">仮想インターフェース（VIF）</a></li>
 <li><a href="#link-aggregation-group-lag" target="_blank">Link Aggregation Group (LAG)</a></li>
 <li><a href="#%E8%A8%AD%E5%AE%9A%E6%96%B9%E6%B3%95" target="_blank">設定方法</a></li>
+<li><a href="#%E5%9B%9E%E5%BE%A9%E6%80%A7%E3%83%A2%E3%83%87%E3%83%AB" target="_blank">回復性モデル</a><ul>
+<li><a href="#%E6%9C%80%E5%A4%A7%E3%81%AE%E5%9B%9E%E5%BE%A9%E6%80%A7" target="_blank">最大の回復性</a></li>
+<li><a href="#%E9%AB%98%E3%81%84%E5%9B%9E%E5%BE%A9%E6%80%A7" target="_blank">高い回復性</a></li>
+<li><a href="#%E9%96%8B%E7%99%BA%E3%81%A8%E3%83%86%E3%82%B9%E3%83%88" target="_blank">開発とテスト</a></li>
+</ul>
+</li>
+<li><a href="#direct-connect-%E3%81%AE%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%A8%E3%81%97%E3%81%A6%E3%81%AE-aws-site-to-site-vpn-%E6%8E%A5%E7%B6%9A" target="_blank">Direct Connect のバックアップとしての AWS Site to Site VPN 接続</a></li>
 <li><a href="#direct-connect-gateway" target="_blank">Direct Connect Gateway</a></li>
-<li><a href="#transit-gateway-%E6%8E%A5%E7%B6%9A%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3" target="_blank">Transit Gateway 接続パターン</a></li>
+<li><a href="#%E6%8E%A5%E7%B6%9A%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3" target="_blank">接続パターン</a></li>
 <li><a href="#aws-%E5%B0%82%E7%94%A8%E7%B7%9A%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E4%BD%93%E9%A8%93%E3%83%A9%E3%83%9C%E3%83%88%E3%83%AC%E3%83%BC%E3%83%8B%E3%83%B3%E3%82%B0" target="_blank">AWS 専用線アクセス体験ラボトレーニング</a></li>
+<li><a href="#mtu-%E3%81%A8%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%9C%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0" target="_blank">MTU とジャンボフレーム</a></li>
+<li><a href="#bfdbidirectional-forwarding-detection-%E5%8F%8C%E6%96%B9%E5%90%91%E3%83%95%E3%82%A9%E3%83%AF%E3%83%BC%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E6%A4%9C%E5%87%BA" target="_blank">BFD（Bidirectional Forwarding Detection 　＝双方向フォワーディング検出）</a></li>
 <li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 
@@ -96,13 +106,26 @@
         <ul>
 <li>メリット <ul>
 <li>インターネット回線を使用せず、専用のプライベートなネットワークで接続するためセキュリティが高い</li>
-<li>専用線のため帯域幅が確保され、安定した通信速度で接続できる</li>
-<li>AWS からのデータ送信料金が VPN に比べて 50％ほど割安である</li>
+<li>専用線のため帯域幅が確保され、安定した通信速度で接続できます</li>
+<li>AWS からのデータ送信料金が VPN に比べて 50％ほど割安です</li>
 </ul>
 </li>
 <li>デメリット <ul>
-<li>Direct Connect は、「①AWS ⇔ ②Direct Connect ロケーション ⇔ ③ ユーザー拠点」という接続になり、①-② 間は AWS が提供しますが、②-③ 間はユーザーが用意しなければならず、契約と初期設定のリードタイムがかかる。</li>
-<li>単一回線では AWS メンテナンス時に通信できなくなるので、回線の冗長化が必須となる。</li>
+<li>Direct Connect は、「①AWS ⇔ ②Direct Connect ロケーション ⇔ ③ ユーザー拠点」という接続になり、①-② 間は AWS が提供しますが、②-③ 間はユーザーが用意しなければならず、契約と初期設定のリードタイムがかかります</li>
+<li>単一回線では AWS メンテナンス時に通信できなくなるので、回線の冗長化が必須となります</li>
+<li>デメリットというわけではないが、VPN 接続と違い Direct Connect 接続は転送中の暗号化は行われていません。そのため、転送中に何らかの暗号化を行う必要があります。</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>転送中の暗号化</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/encryption-in-transit.html" target="_blank">AWS Direct Connect での暗号化</a></p>
+<ul>
+<li>レイヤー 3 <ul>
+<li>IPsec（Security Architecture for Internet Protocol）</li>
+</ul>
+</li>
+<li>レイヤー 2 <ul>
+<li>MACsec（MAC Security）</li>
 </ul>
 </li>
 </ul>
@@ -113,12 +136,12 @@
       <google-codelab-step label="利用開始方法" duration="1">
         <ul>
 <li>AWS に 直接申し込む <ul>
-<li>申し込みとそれに伴うやりとり、自拠点のネットワーク機器設定など全て実施することになる</li>
-<li>選択プランが少なくコストが高額になる</li>
+<li>申し込みとそれに伴うやりとり、自拠点のネットワーク機器設定など全て実施することになります</li>
+<li>選択プランが少なくコストが高額になります</li>
 </ul>
 </li>
 <li>APN パートナーと契約する <ul>
-<li>AWS に直接申し込む際のデメリットを解消することができる。</li>
+<li>AWS に直接申し込む際のデメリットを解消することができます</li>
 </ul>
 </li>
 </ul>
@@ -139,34 +162,6 @@
 </ul>
 <p>APN パートナーと契約すると、これらの対応が不要になり、回線や機器の保守を一任でき、短期間で構築できるようになります。</p>
 <p class="image-container"><img alt="directconnect-setup" src="img\\42a8fdf31b48a2a.png"></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="回復性モデル" duration="3">
-        <ul>
-<li><img alt="resiliency_01" src="img\\934c271bc8109c54.png"><ul>
-<li>クリティカルなワークロードの場合に使用します。</li>
-</ul>
-</li>
-<li><img alt="resiliency_02" src="img\\2d1ce75c745eac70.png"><ul>
-<li>クリティカルなワークロードの場合に使用します。</li>
-</ul>
-</li>
-<li><img alt="resiliency_03" src="img\\53080becad26e3f2.png"><ul>
-<li>非クリティカルなワークロードの場合に使用します。</li>
-</ul>
-</li>
-</ul>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Direct Connect のバックアップとしての AWS Site to Site VPN 接続" duration="2">
-        <p>高い回復性と通信の安定性を求めるのであれば、Direct Connect を複数接続する冗長化が望ましいです。</p>
-<p class="image-container"><img alt="directconnect-double" src="img\\6e19031730595d7c.png"></p>
-<p>ただ、そこまでのコストを掛けられないが冗長化したい場合があります。そのような場合には、Site-to-Site VPN を利用した方法もあります。 最大帯域幅が 1.25 Gbps なので、フェイルオーバー時にパフォーマンスが低下する可能性があります。</p>
-<p class="image-container"><img alt="directconnect-vpn" src="img\\c2d60ebe52dd8fce.png"></p>
 
 
       </google-codelab-step>
@@ -198,20 +193,22 @@
 </li>
 <li>プライベート VIF <ul>
 <li>プライベート IP アドレスを使用してアクセスする</li>
-<li>S3 などにアクセスする場合は VPN エンドポイントを使う</li>
+<li>S3 などにアクセスする場合は インターフェース VPC エンドポイントを使う</li>
+<li>※ゲートウェイ VPC エンドポイントには接続できないので注意</li>
 </ul>
 </li>
 <li>トランジット VIF <ul>
-<li>Transit Gateway にアクセスする</li>
+<li>Transit Gateway と接続するときに使います</li>
 </ul>
 </li>
 </ul>
+<p class="image-container"><img alt="dx_vif" src="img\\9f14432d6c7e6043.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Link Aggregation Group (LAG)" duration="1">
-        <p>専用接続の場合に設定できます。ポートスピードが 1 Gbps、10 Gbps または 100 Gbps であることが必要です。 また、同じ帯域を使用する必要があります。「1 Gbps + 10 Gbps」という設定は不可。 100 Gbps の場合は最大２つの接続、100Gbps 未満の場合は最大で４つの接続となります。</p>
+        <p>専用接続の場合に設定できます。ポートスピードが 1 Gbps、10 Gbps または 100 Gbps であることが必要です。 また、同じ帯域を使用する必要があります。「1 Gbps + 10 Gbps」という設定は不可となります。 100 Gbps の場合は最大２つの接続、100Gbps 未満の場合は最大で４つの接続となります。</p>
 <p>1Gbps のポートの場合、最大で 1 Gbps × 4 = 4 Gbps 50Gbps のポートの場合、最大で 50 Gbps × 4 = 200 Gbps 100Gbps のポートの場合、最大で 100 Gbps × 2 = 200 Gbps</p>
 <p class="image-container"><img alt="lag" src="img\\1700eeeb506d968d.png"></p>
 
@@ -225,20 +222,63 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Direct Connect Gateway" duration="1">
-        <p>Direct Connect の仮想インターフェース（VIF）は 1 本で１つの VPC にしか接続できません。複数の VPC に接続したい場合は、VIF を複数用意しなければなりません。 この問題を解決してくれるのが、<a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/direct-connect-gateways-intro.html" target="_blank">Direct Connect ゲートウェイ</a>です。 Direct Connect ゲートウェイを使用することで、複数の異なるリージョンや AWS アカウントにまたがる VPC への接続を可能にします。</p>
-<p>しかし、Direct Connect ゲートウェイにも制約があります。</p>
+      <google-codelab-step label="回復性モデル" duration="3">
+        <p>要件に応じた回復性の高いネットワーク接続を実現できます。 <a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/resiliency_toolkit.html" target="_blank">AWS Direct Connect Resiliency Toolkit を使用した使用の開始</a></p>
+<h2 is-upgraded>最大の回復性</h2>
+<p>クリティカルなワークロードの場合に使用します。</p>
+<p class="image-container"><img alt="resiliency_01" src="img\\26b936529954d10a.png"></p>
 <ul>
-<li>最大で 20 個までの VPC しか接続できません。</li>
-<li>Direct Connect ゲートウェイで接続した VPC 同士は相互に接続できません。</li>
+<li><img src="img\\69f6f0fa9ba1a500.png">接続、デバイスの障害があっても回復できる</li>
+<li><img src="img\\69f6f0fa9ba1a500.png">ロケーション障害があっても回復できる</li>
+<li><img src="img\\69f6f0fa9ba1a500.png">ロケーション障害でも、冗長性が保たれる</li>
+</ul>
+<h2 is-upgraded>高い回復性</h2>
+<p>クリティカルなワークロードの場合に使用します。</p>
+<p class="image-container"><img alt="resiliency_02" src="img\\4f768840c977c3ac.png"></p>
+<ul>
+<li><img src="img\\69f6f0fa9ba1a500.png">接続、デバイスの障害があっても回復できる</li>
+<li><img src="img\\69f6f0fa9ba1a500.png">ロケーション障害があっても回復できる</li>
+<li><img src="img\\aa0eb7dd51e7544d.png">ロケーション障害で、冗長性が失われる</li>
+</ul>
+<h2 is-upgraded>開発とテスト</h2>
+<p>非クリティカルなワークロードの場合に使用します。</p>
+<p class="image-container"><img alt="resiliency_03" src="img\\4a44b5ad71ee7db2.png"></p>
+<ul>
+<li><img src="img\\69f6f0fa9ba1a500.png">接続、デバイスの障害があっても回復できる</li>
+<li><img src="img\\9bab6848322d5dac.png">ロケーション障害で、接続できない</li>
 </ul>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Transit Gateway 接続パターン" duration="1">
-        <p>20 を超える VPC を接続したい、VPC 間も接続したいといった場合、Transit Gateway を接続する方法があります。</p>
-<p>次のようなパターンをまとめてみました。</p>
+      <google-codelab-step label="Direct Connect のバックアップとしての AWS Site to Site VPN 接続" duration="2">
+        <p>高い回復性と通信の安定性を求めるのであれば、Direct Connect を複数接続する冗長化が望ましいです。</p>
+<p class="image-container"><img alt="directconnect-double" src="img\\6e19031730595d7c.png"></p>
+<p>ただ、そこまでのコストを掛けられないが冗長化したい場合があります。そのような場合には、Site-to-Site VPN を利用した方法もあります。 最大帯域幅が 1.25 Gbps なので、フェイルオーバー時にパフォーマンスが低下する可能性があります。</p>
+<p class="image-container"><img alt="directconnect-vpn" src="img\\c2d60ebe52dd8fce.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Direct Connect Gateway" duration="1">
+        <p>Direct Connect の仮想インターフェース（VIF）は 1 本で１つの VPC にしか接続できません。複数の VPC に接続したい場合は、VIF を複数用意しなければなりません。また、他のリージョンには接続することができません。</p>
+<p class="image-container"><img alt="direct-connect-gw-1" src="img\\1e2994edcf2c8769.png"></p>
+<p>この問題を解決してくれるのが、<a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/direct-connect-gateways-intro.html" target="_blank">Direct Connect ゲートウェイ</a>です。 Direct Connect ゲートウェイを使用することで、複数の異なるリージョンや AWS アカウントにまたがる VPC への接続を可能にします。</p>
+<p class="image-container"><img alt="direct-connect-gw-2" src="img\\79e92356590112e2.png"></p>
+<p>しかし、Direct Connect ゲートウェイにも制約があります。</p>
+<ul>
+<li>最大で 20 個までの VPC しか接続できません。</li>
+<li>Direct Connect ゲートウェイで接続した VPC 同士は相互に接続できません。</li>
+</ul>
+<p>Direct Connect ゲートウェイに接続する VPC の数を制限したい場合は次のように VIF を 2 つ使用するアーキテクチャも有効です。</p>
+<p class="image-container"><img alt="direct-connect-gw-3" src="img\\6f922f0855d6b963.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="接続パターン" duration="1">
+        <p>次のようなパターンをまとめてみました。 多数の VPC を接続したい、VPC 間も接続したい、今後も VPC が追加される予定があるといった場合は、Transit Gateway との接続を採用したほうシンプルになります。 ただし、Direct Connect に接続できる Transit Gateway は 6 個までとなります。 また、VPC の CIDR は重複しないように注意してください。</p>
+<p>逆に、VPC 数が限られており、今後も増える予定がないといった場合、②VPC Peering パターンで構築するほうが良いということもあります。 今後の拡張性を十分に考慮して接続パターンを選択します。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>接続パターン</p>
 </td><td colspan="1" rowspan="1"><p>複数 VPC</p>
@@ -265,7 +305,6 @@
 </td><td colspan="1" rowspan="1"></td></tr>
 </table>
 <p class="image-container"><img alt="directconnect-pattern" src="img\\979bd8761d0c5058.png"></p>
-<p>ただし、Direct Connect に接続できる Transit Gateway は 6 個までとなります。 また、VPC の CIDR は重複しないように注意してください。</p>
 
 
       </google-codelab-step>
@@ -274,6 +313,39 @@
         <p>こういうのもあります。</p>
 <p><a href="https://aws.amazon.com/jp/dx_labo/" target="_blank">https://aws.amazon.com/jp/dx_labo/</a></p>
 <p class="image-container"><img alt="dx_labo" src="img\\e4d27c771c1f7cdb.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="MTU とジャンボフレーム" duration="0">
+        <p>MTU とは、Maximum Transmission Unit の略で、ネットワークで一回に送信できる最大のデータサイズ（バイト）のことです。 イーサネットでは、最大フレームサイズが 1518 バイトとなっており、これには、イーサネットヘッダ（14 バイト）と FCS（4 バイト）が含まれるので、MTU=1500 となっています。</p>
+<p>ジャンボフレームとはイーサネットの MTU を超えるサイズのことで、一般的には 9000 バイトとなっているが、これ以下、以上も存在するので注意が必要である。</p>
+<pre><code language="language-text" class="language-text">AWS Direct Connect は 1522 バイトまたは 9023 バイトのイーサーネットフレームサイズ
+(14 バイトイーサーネットヘッダー + 4 バイト VLAN タグ + IP データグラム用バイト + 4 バイト FCS) を
+リンクレイヤーでサポートします。
+</code></pre>
+<p><a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/set-jumbo-frames-vif.html" target="_blank">プライベート仮想インターフェイスまたはトランジット仮想インターフェイスのネットワーク MTU の設定</a></p>
+<ul>
+<li>パブリック VIF <ul>
+<li>MTU 1500</li>
+<li>ジャンボフレーム ×</li>
+</ul>
+</li>
+<li>プライベート VIF <ul>
+<li>MTU 1500 or 9001</li>
+</ul>
+</li>
+<li>トランジット VIF <ul>
+<li>MTU 1500 or 8500</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="BFD（Bidirectional Forwarding Detection 　＝双方向フォワーディング検出）" duration="0">
+        <p>2 台の隣接するルータ間でヘルスチェックを行い高速に障害を検知してルーティングプロトコルに通知する機能です。これを使うには、BFD 対応ルータを用意することが必要になります。 BFD を使わない場合、BGP が接続障害を検知するのには最大で 90 秒かかります。 そのため、冗長接続の場合は BFD 対応ルータを用意することはフェイルオーバー時間を短縮するのに効果的です。最短で 1 秒（300 ミリ秒間隔のチェック 3 回で検出）まで短縮が可能になります。</p>
 
 
       </google-codelab-step>
