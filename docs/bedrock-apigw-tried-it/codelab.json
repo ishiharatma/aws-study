@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2024-03-29T14:14:01+09:00",
+  "id": "bedrock-apigw-tried-it",
+  "duration": 0,
+  "title": "Amazon Bedrock を利用した画像生成アプリケーションを AWS CDK で開発してみた！",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_bedrock-apigw-tried-it.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "amazonbedrock"
+  ],
+  "url": "bedrock-apigw-tried-it"
+}

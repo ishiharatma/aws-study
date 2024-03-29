@@ -1,0 +1,180 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon Bedrock を利用した画像生成アプリケーションを AWS CDK で開発してみた！</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="bedrock-apigw-tried-it"
+                  title="Amazon Bedrock を利用した画像生成アプリケーションを AWS CDK で開発してみた！"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#%E5%8F%82%E8%80%83%E3%81%AB%E3%81%97%E3%81%9F%E3%82%B5%E3%82%A4%E3%83%88" target="_blank">参考にしたサイト</a></li>
+<li><a href="#%E3%83%A2%E3%83%87%E3%83%AB%E3%81%AE%E6%9C%89%E5%8A%B9%E5%8C%96" target="_blank">モデルの有効化</a></li>
+<li><a href="#api-gateway--lambda-%E3%81%AE-rest-api" target="_blank">API Gateway + Lambda の REST API</a><ul>
+<li><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%81%AF%E3%81%93%E3%81%A1%E3%82%89" target="_blank">ソースはこちら</a></li>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E8%A7%A3%E8%AA%AC" target="_blank">コードの解説</a></li>
+<li><a href="#%E5%AE%9F%E8%A1%8C" target="_blank">実行</a></li>
+</ul>
+</li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="参考にしたサイト" duration="0">
+        <p>このサイトの内容を参考にして、AWS CDK で実装してみました。 <a href="https://aws.amazon.com/jp/builders-flash/202402/bedrock-image-generation/?awsf.filter-name=*all" target="_blank">Amazon Bedrock を利用して、画像生成アプリケーションを開発してみた！ | builders.flash</a></p>
+<p>全体の構成は次のとおりです。</p>
+<p class="image-container"><img alt="overview" src="img\\ceda78dca67a8447.png"></p>
+<p>参考にしたサイトでは、簡易的なフロントエンドを実装していますが、今回 CDK で実装するのは API Gateway までとしています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="モデルの有効化" duration="0">
+        <p>まずはモデルの有効化をします。</p>
+<ol type="1">
+<li>AWS コンソールにログインし、「Bedrock」を選択します。</li>
+<li>バージニア北部リージョンに変更します。 ※東京リージョンは、執筆時点（2023.3.29）で利用できる画像生成モデルがありません。</li>
+<li>左側メニューから「モデルアクセス＞モデルアクセスを管理」をクリックします。<img alt="model-access" src="img\\2554288e386ee5bb.png"></li>
+<li>Stability AI の SDXL1.0 にチェックを入れて「変更を保存」をクリックします。<img alt="model-access" src="img\\a21a724b994670d3.png">暫くすると、アクセスが付与されます。<img alt="model-access" src="img\\fa78b7ef01b0f9ed.png"><img alt="model-access" src="img\\e9a65ed5a76bcfbf.png"></li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="API Gateway &#43; Lambda の REST API" duration="0">
+        <h2 is-upgraded>ソースはこちら</h2>
+<p><a href="https://github.com/ishiharatma/aws-handson-apigw-bedrock" target="_blank">aws-handson-apigw-bedrock | GitHub</a></p>
+<h2 is-upgraded>コードの解説</h2>
+<ul>
+<li>画像保存用の S3 作成</li>
+</ul>
+<pre><code language="language-ts" class="language-ts">// lib/aws-handson-apigw-bedrock-stack.ts
+const resultS3Bucket = new s3.Bucket(this, &#34;BedrockResultBucket&#34;, {
+  bucketName: [props.pjName, props.envName, baseName, accountId].join(&#34;.&#34;),
+  accessControl: s3.BucketAccessControl.PRIVATE,
+  blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+  removalPolicy: cdk.RemovalPolicy.DESTROY,
+  autoDeleteObjects: true,
+  encryption: s3.BucketEncryption.KMS_MANAGED,
+});
+</code></pre>
+<ul>
+<li>Lambda の作成</li>
+</ul>
+<p><code>src/lambda/handson-bedrock</code> にあるソースをまるごとデプロイします。 環境変数で、結果を格納する S3 バケット名を渡しています。</p>
+<pre><code language="language-ts" class="language-ts">const bedrockLambdaFunction = new lambda.Function(
+  this,
+  &#34;bedrockLambdaFunction&#34;,
+  {
+    functionName: [props.pjName, props.envName, baseName].join(&#34;-&#34;),
+    code: lambda.Code.fromAsset(
+      path.join(__dirname, `${srcLambdaDirBase}/handson-bedrock`)
+    ),
+    handler: &#34;index.lambda_handler&#34;,
+    runtime: lambda.Runtime.PYTHON_3_12,
+    timeout: cdk.Duration.seconds(25),
+    architecture: lambda.Architecture.ARM_64, //X86_64,
+    environment: {
+      S3_BUCKET_NAME: resultS3Bucket.bucketName,
+      LOG_LEVEL: &#34;INFO&#34;,
+    },
+    role: bedrockLambdaFunctionRole,
+    //tracing: lambda.Tracing.ACTIVE,
+  }
+);
+</code></pre>
+<p>Lambda 内で実際に Bedrock へリクエストを行っている部分は下記です。</p>
+<pre><code language="language-python" class="language-python"># Amazon Bedrockで用意した基盤モデルへAPIリクエストし、画像を生成する
+response = bedrock_runtime.invoke_model(
+    body=&#39;{&#34;text_prompts&#34;: [{&#34;text&#34;:&#34;&#39;+input_text+&#39;&#34;}]}&#39;,
+    contentType=&#39;application/json&#39;,
+    accept=&#39;image/png&#39;,
+    modelId=&#39;stability.stable-diffusion-xl-v1&#39;
+    )
+</code></pre>
+<ul>
+<li>Rest API の作成</li>
+</ul>
+<pre><code language="language-ts" class="language-ts">// lib/aws-handson-apigw-bedrock-stack.ts
+const restApi = new apigw.RestApi(this, &#39;APIGateway&#39;, {
+    restApiName: restApiName,
+    policy: resourcePolicy,
+    endpointTypes: [apigw.EndpointType.REGIONAL],
+    :
+    },
+});
+//API Gatewayにリクエスト先のリソースを追加
+const restApiBedrock = restApi.root.addResource(&#39;bedrock&#39;);
+restApiBedrock.addMethod(
+  &#39;POST&#39;,
+  new apigw.LambdaIntegration(bedrockLambdaFunction)
+);
+</code></pre>
+<h2 is-upgraded>実行</h2>
+<p>実行してみます。</p>
+<pre><code language="language-bat" class="language-bat">curl -X POST https://xxxxx.execute-api.us-east-1.amazonaws.com/v1/bedrock ^
+-H &#34;Content-Type: application/json&#34; -d &#34;{\&#34;input_text\&#34;:\&#34;an image of cat\&#34;}&#34;
+</code></pre>
+<p>レスポンスに署名付き URL が返ってきますので、アクセスすると画像が生成されていました。</p>
+<pre><code language="language-text" class="language-text">{&#34;presigned_url&#34;: &#34;https://s3.amazonaws.com/xxxxxx&#34;}
+</code></pre>
+<p>ただし、絵画っぽいです。</p>
+<p class="image-container"><img alt="result1" src="img\\8caa89d096592873.jpg"></p>
+<p>参考にしたサイトではもっとリアルな猫になっています。</p>
+<p class="image-container"><img alt="handson-image" src="img\\99e5f9407c021674.jpg"></p>
+<p>いろいろ調べていると、もう少し指示を増やした方が良いということが分かったので付け足してみます。 「with a photo-realistic」というのを最後に付け足します。</p>
+<pre><code language="language-bat" class="language-bat">curl -X POST https://xxxxx.execute-api.us-east-1.amazonaws.com/v1/bedrock ^
+-H &#34;Content-Type: application/json&#34; -d &#34;{\&#34;input_text\&#34;:\&#34;an image of cat with a photo-realistic.\&#34;}&#34;
+</code></pre>
+<p>リアルな猫の画像が生成されました。</p>
+<p class="image-container"><img alt="result2" src="img\\18a04ecbac0d4b33.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p>参考にしたサイトでは、手作業で作成していますが、CDK を使うことで実際のシステム構築時に近いことを実習することができました。 ただ、Amazon Bedrock 自体に対する知識はまだまだ足りていないので、これからもっと勉強していろいろなことに挑戦しようと思います。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
