@@ -1,6 +1,6 @@
 # デフォルト IMDS を設定できるようになりました
 
-## [[アップデート：2024/3/2]IMDSv2 を、アカウントで新しく起動されるすべてのインスタンスのデフォルトとして設定する](https://aws.amazon.com/jp/about-aws/whats-new/2024/03/set-imdsv2-default-new-instance-launches/)
+## [[アップデート：2024/3/25]IMDSv2 を、アカウントで新しく起動されるすべてのインスタンスのデフォルトとして設定する](https://aws.amazon.com/jp/about-aws/whats-new/2024/03/set-imdsv2-default-new-instance-launches/)
 
 2024/3/25 のアップデートでリージョン毎に、インスタンスメタデータサービス (IMDS) のデフォルトを設定可能になりました。さらに、**CloudWatch メトリクス `MetadataNoTokenRejected` によって拒否された IMDSv1 の呼び出しを確認できるようになりました。**
 
