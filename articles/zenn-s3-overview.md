@@ -5,42 +5,39 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# Amazon Simple Storage Service（S3）
+# Amazon Simple Storage Service（S3）<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon Simple Storage Service（S3）](#amazon-simple-storage-services3)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon S3 とは](#amazon-s3-とは)
-  - [Amazon S3 の基本](#amazon-s3-の基本)
-    - [1.EC2（パブリックサブネット）\> Internet Gateway](#1ec2パブリックサブネット-internet-gateway)
-    - [2.EC2（プライベートサブネット）\> NAT Gateway](#2ec2プライベートサブネット-nat-gateway)
-    - [3.EC2（プライベートサブネット）\> VPC Endpoint(Gateway タイプ)](#3ec2プライベートサブネット-vpc-endpointgateway-タイプ)
-    - [4.EC2（プライベートサブネット）\> VPC Endpoint(Interface タイプ)](#4ec2プライベートサブネット-vpc-endpointinterface-タイプ)
-    - [コスト比較](#コスト比較)
-  - [バケットポリシー](#バケットポリシー)
-  - [アクセスコントロールリスト（ACL）](#アクセスコントロールリストacl)
-  - [ライフサイクル](#ライフサイクル)
-  - [ストレージタイプ](#ストレージタイプ)
-  - [バージョニング](#バージョニング)
-  - [暗号化](#暗号化)
-  - [静的ウェブサイトのホスティング](#静的ウェブサイトのホスティング)
-  - [S3 Transfer Acceleration](#s3-transfer-acceleration)
-    - [Amazon S3 Transfer Acceleration の速度比較ツール](#amazon-s3-transfer-acceleration-の速度比較ツール)
-  - [アクセスログ](#アクセスログ)
-  - [S3 Select](#s3-select)
-  - [Storage Lens](#storage-lens)
-  - [リクエスタ支払いバケット](#リクエスタ支払いバケット)
-  - [アクセスポイント](#アクセスポイント)
-  - [パフォーマンスの最適化](#パフォーマンスの最適化)
-  - [📖 他のサービスとの連携](#-他のサービスとの連携)
+- [Amazon S3 とは](#amazon-s3-とは)
+- [Amazon S3 の基本](#amazon-s3-の基本)
+  - [1.EC2（パブリックサブネット）\> Internet Gateway](#1ec2パブリックサブネット-internet-gateway)
+  - [2.EC2（プライベートサブネット）\> NAT Gateway](#2ec2プライベートサブネット-nat-gateway)
+  - [3.EC2（プライベートサブネット）\> VPC Endpoint(Gateway タイプ)](#3ec2プライベートサブネット-vpc-endpointgateway-タイプ)
+  - [4.EC2（プライベートサブネット）\> VPC Endpoint(Interface タイプ)](#4ec2プライベートサブネット-vpc-endpointinterface-タイプ)
+  - [コスト比較](#コスト比較)
+- [バケットポリシー](#バケットポリシー)
+- [アクセスコントロールリスト（ACL）](#アクセスコントロールリストacl)
+- [ライフサイクル](#ライフサイクル)
+- [ストレージタイプ](#ストレージタイプ)
+- [バージョニング](#バージョニング)
+- [暗号化](#暗号化)
+- [静的ウェブサイトのホスティング](#静的ウェブサイトのホスティング)
+- [S3 Transfer Acceleration](#s3-transfer-acceleration)
+  - [Amazon S3 Transfer Acceleration の速度比較ツール](#amazon-s3-transfer-acceleration-の速度比較ツール)
+- [アクセスログ](#アクセスログ)
+- [S3 Select](#s3-select)
+- [Storage Lens](#storage-lens)
+- [リクエスタ支払いバケット](#リクエスタ支払いバケット)
+- [アクセスポイント](#アクセスポイント)
+- [パフォーマンスの最適化](#パフォーマンスの最適化)
+- [📖 他のサービスとの連携](#-他のサービスとの連携)
 
 ## Amazon S3 とは
 

@@ -5,28 +5,25 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# AWS Systems Manager（SSM）
+# AWS Systems Manager（SSM）<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
 Duration: 00:01:00
 
-- [AWS Systems Manager（SSM）](#aws-systems-managerssm)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Systems Manager とは](#systems-manager-とは)
-    - [Black Belt](#black-belt)
-    - [ドキュメント](#ドキュメント)
-  - [SSM？](#ssm)
-    - [前提条件](#前提条件)
-    - [SSM Agent の使用](#ssm-agent-の使用)
-  - [機能分類](#機能分類)
+- [Systems Manager とは](#systems-manager-とは)
+  - [Black Belt](#black-belt)
+  - [ドキュメント](#ドキュメント)
+- [SSM？](#ssm)
+  - [前提条件](#前提条件)
+  - [SSM Agent の使用](#ssm-agent-の使用)
+- [機能分類](#機能分類)
 
 ## Systems Manager とは
 

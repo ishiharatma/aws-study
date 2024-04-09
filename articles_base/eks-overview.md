@@ -1,19 +1,16 @@
-# Amazon Elastic Kubernetes Service (Amazon EKS)
+# Amazon Elastic Kubernetes Service (Amazon EKS)<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon Elastic Kubernetes Service (Amazon EKS)](#amazon-elastic-kubernetes-service-amazon-eks)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon ECS とは](#amazon-ecs-とは)
-  - [xx の基本](#xx-の基本)
-  - [📖 まとめ](#-まとめ)
+- [Amazon ECS とは](#amazon-ecs-とは)
+- [xx の基本](#xx-の基本)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon ECS とは
 

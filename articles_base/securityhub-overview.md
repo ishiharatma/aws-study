@@ -1,30 +1,27 @@
-# AWS Security Hub
+# AWS Security Hub<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
 Duration: 00:01:00
 
-- [AWS Security Hub](#aws-security-hub)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [AWS Security Hub とは](#aws-security-hub-とは)
-  - [特徴](#特徴)
-  - [Security Hub の有効化](#security-hub-の有効化)
-  - [検出項目（コントロール）](#検出項目コントロール)
-  - [サービスリンクロール](#サービスリンクロール)
-  - [クロスリージョン集約](#クロスリージョン集約)
-  - [検出結果通知](#検出結果通知)
-    - [Compliance](#compliance)
-    - [Severity](#severity)
-    - [「AWS Foundational Security Best Practices」のみ](#aws-foundational-security-best-practicesのみ)
-  - [Security Hub 自動応答と修復](#security-hub-自動応答と修復)
-  - [📖 まとめ](#-まとめ)
+- [AWS Security Hub とは](#aws-security-hub-とは)
+- [特徴](#特徴)
+- [Security Hub の有効化](#security-hub-の有効化)
+- [検出項目（コントロール）](#検出項目コントロール)
+- [サービスリンクロール](#サービスリンクロール)
+- [クロスリージョン集約](#クロスリージョン集約)
+- [検出結果通知](#検出結果通知)
+  - [Compliance](#compliance)
+  - [Severity](#severity)
+  - [「AWS Foundational Security Best Practices」のみ](#aws-foundational-security-best-practicesのみ)
+- [Security Hub 自動応答と修復](#security-hub-自動応答と修復)
+- [📖 まとめ](#-まとめ)
 
 ## AWS Security Hub とは
 

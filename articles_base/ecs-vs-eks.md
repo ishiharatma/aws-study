@@ -1,26 +1,23 @@
-# ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）
+# ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）](#ecselastic-container-serviceと-ekselastic-kubernetes-service)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [ECS と EKS とは](#ecs-と-eks-とは)
-    - [コンテナオーケストレーション](#コンテナオーケストレーション)
-    - [コントロールプレーン](#コントロールプレーン)
-    - [データプレーン](#データプレーン)
-    - [データプレーン の種類](#データプレーン-の種類)
-  - [4 つのアーキテクチャパターン](#4-つのアーキテクチャパターン)
-  - [ECS と EKS のサービスの利用想定](#ecs-と-eks-のサービスの利用想定)
-  - [比較](#比較)
-  - [付録：AWS コンテナロードマップ](#付録aws-コンテナロードマップ)
-  - [付録：コンテナセキュリティ](#付録コンテナセキュリティ)
+- [ECS と EKS とは](#ecs-と-eks-とは)
+  - [コンテナオーケストレーション](#コンテナオーケストレーション)
+  - [コントロールプレーン](#コントロールプレーン)
+  - [データプレーン](#データプレーン)
+  - [データプレーン の種類](#データプレーン-の種類)
+- [4 つのアーキテクチャパターン](#4-つのアーキテクチャパターン)
+- [ECS と EKS のサービスの利用想定](#ecs-と-eks-のサービスの利用想定)
+- [比較](#比較)
+- [付録：AWS コンテナロードマップ](#付録aws-コンテナロードマップ)
+- [付録：コンテナセキュリティ](#付録コンテナセキュリティ)
 
 ## ECS と EKS とは
 

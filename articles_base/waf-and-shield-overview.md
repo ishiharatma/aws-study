@@ -1,40 +1,37 @@
-# AWS WAF & Shield
+# AWS WAF & Shield<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
 Duration: 00:01:00
 
-- [AWS WAF \& Shield](#aws-waf--shield)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [OSI モデルとは](#osi-モデルとは)
-  - [AWS Shield とは](#aws-shield-とは)
-  - [AWS WAF とは](#aws-waf-とは)
-  - [AWS Shield の機能](#aws-shield-の機能)
-    - [Global threat dashboard](#global-threat-dashboard)
-  - [📖 AWS Shield のまとめ](#-aws-shield-のまとめ)
-  - [AWS WAF の機能](#aws-waf-の機能)
-    - [なぜ Web Application Firewall が必要か](#なぜ-web-application-firewall-が必要か)
-    - [Web ACL](#web-acl)
-    - [WCU(web ACL Capacity Units)](#wcuweb-acl-capacity-units)
-    - [ルールとルールグループ](#ルールとルールグループ)
-      - [ルール](#ルール)
-        - [アクション](#アクション)
-      - [AWS マネージドルールグループ](#aws-マネージドルールグループ)
-        - [AWS マネージドルールグループの適用例](#aws-マネージドルールグループの適用例)
-      - [AWS Marketplace マネージドルールグループ](#aws-marketplace-マネージドルールグループ)
-      - [独自のルールグループ](#独自のルールグループ)
-    - [ログ](#ログ)
-      - [ログ出力](#ログ出力)
-      - [ログフィールド](#ログフィールド)
-      - [ログの分析](#ログの分析)
-  - [📖 AWS WAF のまとめ](#-aws-waf-のまとめ)
+- [OSI モデルとは](#osi-モデルとは)
+- [AWS Shield とは](#aws-shield-とは)
+- [AWS WAF とは](#aws-waf-とは)
+- [AWS Shield の機能](#aws-shield-の機能)
+  - [Global threat dashboard](#global-threat-dashboard)
+- [📖 AWS Shield のまとめ](#-aws-shield-のまとめ)
+- [AWS WAF の機能](#aws-waf-の機能)
+  - [なぜ Web Application Firewall が必要か](#なぜ-web-application-firewall-が必要か)
+  - [Web ACL](#web-acl)
+  - [WCU(web ACL Capacity Units)](#wcuweb-acl-capacity-units)
+  - [ルールとルールグループ](#ルールとルールグループ)
+    - [ルール](#ルール)
+      - [アクション](#アクション)
+    - [AWS マネージドルールグループ](#aws-マネージドルールグループ)
+      - [AWS マネージドルールグループの適用例](#aws-マネージドルールグループの適用例)
+    - [AWS Marketplace マネージドルールグループ](#aws-marketplace-マネージドルールグループ)
+    - [独自のルールグループ](#独自のルールグループ)
+  - [ログ](#ログ)
+    - [ログ出力](#ログ出力)
+    - [ログフィールド](#ログフィールド)
+    - [ログの分析](#ログの分析)
+- [📖 AWS WAF のまとめ](#-aws-waf-のまとめ)
 
 ## OSI モデルとは
 

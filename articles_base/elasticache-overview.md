@@ -1,26 +1,23 @@
-# Amazon ElastiCache
+# Amazon ElastiCache<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon ElastiCache](#amazon-elasticache)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon ElastiCache とは](#amazon-elasticache-とは)
-    - [ハンズオン](#ハンズオン)
-  - [Memcached と Redis の比較](#memcached-と-redis-の比較)
-  - [どのように利用したらよいか？](#どのように利用したらよいか)
-  - [DynamoDB で代用できる？](#dynamodb-で代用できる)
-  - [Amazon ElastiCache for Memcached](#amazon-elasticache-for-memcached)
-  - [Amazon ElastiCache for Redis](#amazon-elasticache-for-redis)
-  - [自動フェイルオーバー](#自動フェイルオーバー)
-  - [Amazon ElastiCache for Redis の Global Datastore](#amazon-elasticache-for-redis-の-global-datastore)
-  - [📖 まとめ](#-まとめ)
+- [Amazon ElastiCache とは](#amazon-elasticache-とは)
+  - [ハンズオン](#ハンズオン)
+- [Memcached と Redis の比較](#memcached-と-redis-の比較)
+- [どのように利用したらよいか？](#どのように利用したらよいか)
+- [DynamoDB で代用できる？](#dynamodb-で代用できる)
+- [Amazon ElastiCache for Memcached](#amazon-elasticache-for-memcached)
+- [Amazon ElastiCache for Redis](#amazon-elasticache-for-redis)
+- [自動フェイルオーバー](#自動フェイルオーバー)
+- [Amazon ElastiCache for Redis の Global Datastore](#amazon-elasticache-for-redis-の-global-datastore)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon ElastiCache とは
 
