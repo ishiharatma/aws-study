@@ -1,27 +1,24 @@
-# Amazon Simple Notification Service (SNS)
+# Amazon Simple Notification Service (SNS)<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon Simple Notification Service (SNS)](#amazon-simple-notification-service-sns)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon Simple Notification Service (SNS) とは](#amazon-simple-notification-service-sns-とは)
-  - [SQS とは違うの？](#sqs-とは違うの)
-  - [SNS 構成要素](#sns-構成要素)
-    - [トピック](#トピック)
-    - [パブリッシュ](#パブリッシュ)
-    - [サブスクリプション](#サブスクリプション)
-  - [サブスクリプションに E メールを登録した場合](#サブスクリプションに-e-メールを登録した場合)
-  - [サブスクリプションフィルター](#サブスクリプションフィルター)
-  - [デッドレターキュー](#デッドレターキュー)
-  - [暗号化](#暗号化)
-  - [📖 まとめ](#-まとめ)
+- [Amazon Simple Notification Service (SNS) とは](#amazon-simple-notification-service-sns-とは)
+- [SQS とは違うの？](#sqs-とは違うの)
+- [SNS 構成要素](#sns-構成要素)
+  - [トピック](#トピック)
+  - [パブリッシュ](#パブリッシュ)
+  - [サブスクリプション](#サブスクリプション)
+- [サブスクリプションに E メールを登録した場合](#サブスクリプションに-e-メールを登録した場合)
+- [サブスクリプションフィルター](#サブスクリプションフィルター)
+- [デッドレターキュー](#デッドレターキュー)
+- [暗号化](#暗号化)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon Simple Notification Service (SNS) とは
 

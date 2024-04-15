@@ -5,33 +5,30 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# Amazon API Gateway
+# Amazon API Gateway<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
 Duration: 00:01:00
 
-- [Amazon API Gateway](#amazon-api-gateway)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon API Gateway とは](#amazon-api-gateway-とは)
-  - [API Gateway の種類](#api-gateway-の種類)
-  - [API Gateway の料金](#api-gateway-の料金)
-  - [OpenAPI を使用した REST API の設定](#openapi-を使用した-rest-api-の設定)
-  - [Amazon API Gateway のクォータ](#amazon-api-gateway-のクォータ)
-    - [HTTP API](#http-api)
-    - [REST API](#rest-api)
-    - [WebSocket API](#websocket-api)
-  - [REST API のエンドポイントタイプ](#rest-api-のエンドポイントタイプ)
-  - [API Gateway のメトリクス](#api-gateway-のメトリクス)
-  - [X-Ray でのトレース](#x-ray-でのトレース)
-  - [📖 まとめ](#-まとめ)
+- [Amazon API Gateway とは](#amazon-api-gateway-とは)
+- [API Gateway の種類](#api-gateway-の種類)
+- [API Gateway の料金](#api-gateway-の料金)
+- [OpenAPI を使用した REST API の設定](#openapi-を使用した-rest-api-の設定)
+- [Amazon API Gateway のクォータ](#amazon-api-gateway-のクォータ)
+  - [HTTP API](#http-api)
+  - [REST API](#rest-api)
+  - [WebSocket API](#websocket-api)
+- [REST API のエンドポイントタイプ](#rest-api-のエンドポイントタイプ)
+- [API Gateway のメトリクス](#api-gateway-のメトリクス)
+- [X-Ray でのトレース](#x-ray-でのトレース)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon API Gateway とは
 

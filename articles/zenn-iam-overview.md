@@ -5,36 +5,33 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# AWS Identity and Access Management(IAM)
+# AWS Identity and Access Management(IAM)<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [AWS Identity and Access Management(IAM)](#aws-identity-and-access-managementiam)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [IAM とは](#iam-とは)
-  - [認証・認可とは](#認証認可とは)
-  - [IAM ユーザー](#iam-ユーザー)
-    - [MFA](#mfa)
-    - [アクセスキー](#アクセスキー)
-    - [SSH 公開鍵](#ssh-公開鍵)
-    - [Git 認証情報](#git-認証情報)
-  - [IAM ポリシー](#iam-ポリシー)
-    - [ポリシーの論理評価](#ポリシーの論理評価)
-  - [IAM ロール](#iam-ロール)
-  - [IAM Permissions boundary（アクセス権限の境界）](#iam-permissions-boundaryアクセス権限の境界)
-  - [パスワードポリシー](#パスワードポリシー)
-  - [IAM Policy Simulator](#iam-policy-simulator)
-  - [IAM Access Advisor](#iam-access-advisor)
-  - [IAM Access Analyzer](#iam-access-analyzer)
-  - [ベストプラクティス](#ベストプラクティス)
-  - [📖 まとめ](#-まとめ)
+- [IAM とは](#iam-とは)
+- [認証・認可とは](#認証認可とは)
+- [IAM ユーザー](#iam-ユーザー)
+  - [MFA](#mfa)
+  - [アクセスキー](#アクセスキー)
+  - [SSH 公開鍵](#ssh-公開鍵)
+  - [Git 認証情報](#git-認証情報)
+- [IAM ポリシー](#iam-ポリシー)
+  - [ポリシーの論理評価](#ポリシーの論理評価)
+- [IAM ロール](#iam-ロール)
+- [IAM Permissions boundary（アクセス権限の境界）](#iam-permissions-boundaryアクセス権限の境界)
+- [パスワードポリシー](#パスワードポリシー)
+- [IAM Policy Simulator](#iam-policy-simulator)
+- [IAM Access Advisor](#iam-access-advisor)
+- [IAM Access Analyzer](#iam-access-analyzer)
+- [ベストプラクティス](#ベストプラクティス)
+- [📖 まとめ](#-まとめ)
 
 ## IAM とは
 

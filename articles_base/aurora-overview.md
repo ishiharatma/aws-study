@@ -1,36 +1,33 @@
-# Amazon Aurora
+# Amazon Aurora<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
 Duration: 00:01:00
 
-- [Amazon Aurora](#amazon-aurora)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Aurora について知るには](#aurora-について知るには)
-  - [Aurora について知るには(その他)](#aurora-について知るにはその他)
-  - [Amazon Aurora とは](#amazon-aurora-とは)
-  - [サポートされているデータベースエンジン](#サポートされているデータベースエンジン)
-  - [Aurora の基本的な構成](#aurora-の基本的な構成)
-  - [SLA](#sla)
-  - [可用性](#可用性)
-    - [単一構成](#単一構成)
-    - [レプリカ構成](#レプリカ構成)
-  - [レプリカの昇格](#レプリカの昇格)
-  - [インスタンスタイプ](#インスタンスタイプ)
-  - [スケールアップ/ダウン](#スケールアップダウン)
-  - [ストレージの自動スケーリング](#ストレージの自動スケーリング)
-  - [Aurora のログ](#aurora-のログ)
-  - [Serverless](#serverless)
-  - [Global Database](#global-database)
-  - [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
-  - [📖 まとめ](#-まとめ)
+- [Aurora について知るには](#aurora-について知るには)
+- [Aurora について知るには(その他)](#aurora-について知るにはその他)
+- [Amazon Aurora とは](#amazon-aurora-とは)
+- [サポートされているデータベースエンジン](#サポートされているデータベースエンジン)
+- [Aurora の基本的な構成](#aurora-の基本的な構成)
+- [SLA](#sla)
+- [可用性](#可用性)
+  - [単一構成](#単一構成)
+  - [レプリカ構成](#レプリカ構成)
+- [レプリカの昇格](#レプリカの昇格)
+- [インスタンスタイプ](#インスタンスタイプ)
+- [スケールアップ/ダウン](#スケールアップダウン)
+- [ストレージの自動スケーリング](#ストレージの自動スケーリング)
+- [Aurora のログ](#aurora-のログ)
+- [Serverless](#serverless)
+- [Global Database](#global-database)
+- [Blue/Green Deployments(New: 2022-11-27)](#bluegreen-deploymentsnew-2022-11-27)
+- [📖 まとめ](#-まとめ)
 
 ## Aurora について知るには
 

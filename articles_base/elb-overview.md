@@ -1,31 +1,28 @@
-# Elastic Load Balancing(ELB)
+# Elastic Load Balancing(ELB)<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Elastic Load Balancing(ELB)](#elastic-load-balancingelb)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [ELB とは](#elb-とは)
-  - [ELB の基本](#elb-の基本)
-  - [ELB の種類](#elb-の種類)
-    - [CLB:Classic Load Balancer](#clbclassic-load-balancer)
-    - [ALB:Application Load Balancer](#albapplication-load-balancer)
-    - [NLB:Network Load Balancer](#nlbnetwork-load-balancer)
-    - [GLB:Gateway Load Balancer](#glbgateway-load-balancer)
-  - [ELB の料金](#elb-の料金)
-  - [ロードバランサーキャパシティーユニット (LCU) とは](#ロードバランサーキャパシティーユニット-lcu-とは)
-  - [サブネットに必要な CIDR](#サブネットに必要な-cidr)
-  - [スティッキーセッション](#スティッキーセッション)
-  - [クロスゾーン負荷分散](#クロスゾーン負荷分散)
-  - [Connection Draining](#connection-draining)
-  - [アクセスログ](#アクセスログ)
-  - [📖 他のサービスとの連携](#-他のサービスとの連携)
+- [ELB とは](#elb-とは)
+- [ELB の基本](#elb-の基本)
+- [ELB の種類](#elb-の種類)
+  - [CLB:Classic Load Balancer](#clbclassic-load-balancer)
+  - [ALB:Application Load Balancer](#albapplication-load-balancer)
+  - [NLB:Network Load Balancer](#nlbnetwork-load-balancer)
+  - [GLB:Gateway Load Balancer](#glbgateway-load-balancer)
+- [ELB の料金](#elb-の料金)
+- [ロードバランサーキャパシティーユニット (LCU) とは](#ロードバランサーキャパシティーユニット-lcu-とは)
+- [サブネットに必要な CIDR](#サブネットに必要な-cidr)
+- [スティッキーセッション](#スティッキーセッション)
+- [クロスゾーン負荷分散](#クロスゾーン負荷分散)
+- [Connection Draining](#connection-draining)
+- [アクセスログ](#アクセスログ)
+- [📖 他のサービスとの連携](#-他のサービスとの連携)
 
 ## ELB とは
 

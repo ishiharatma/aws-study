@@ -1,6 +1,6 @@
-# これをやっておけば大丈夫！AWS アカウント作成後にやること！
+# これをやっておけば大丈夫！AWS アカウント作成後にやる 11 のこと！<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 Duration: 00:00:10
 
@@ -8,32 +8,47 @@ AWS アカウントは簡単に作成でき、手軽に利用できます。し�
 
 安全に利用するために、適切な設定を実施しましょう。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [これをやっておけば大丈夫！AWS アカウント作成後にやること！](#これをやっておけば大丈夫aws-アカウント作成後にやること)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [ルートユーザーに多要素認証（MFA）を設定する](#ルートユーザーに多要素認証mfaを設定する)
-  - [AWS アカウントの代替の連絡先を設定する](#aws-アカウントの代替の連絡先を設定する)
-  - [AWS アカウントの秘密の質問を設定する](#aws-アカウントの秘密の質問を設定する)
-  - [ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する](#ルートユーザーの連絡先に設定した電話番号に国際電話識別番号が設定してあるかを確認する)
+- [１．ルートユーザーは封印する](#１ルートユーザーは封印する)
+- [２．ルートユーザーに多要素認証（MFA）を設定する](#２ルートユーザーに多要素認証mfaを設定する)
+- [３．AWS アカウントの代替の連絡先を設定する](#３aws-アカウントの代替の連絡先を設定する)
+- [４．ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する](#４ルートユーザーの連絡先に設定した電話番号に国際電話識別番号が設定してあるかを確認する)
+- [５．予算アラートを設定する](#５予算アラートを設定する)
+- [６．コスト異常検知](#６コスト異常検知)
+- [７．CloudTrail のログ記録を有効にする](#７cloudtrail-のログ記録を有効にする)
+- [８．CloudTrail のログを監視する](#８cloudtrail-のログを監視する)
+- [９．Personal Service Dashboard のイベント検知を設定する](#９personal-service-dashboard-のイベント検知を設定する)
+- [１０．IAM パスワードポリシーを変更する](#１０iam-パスワードポリシーを変更する)
+- [１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する](#１１ルートユーザーの代わりになる-iam-ユーザとグループを作成する)
+- [不要になったもの](#不要になったもの)
   - [AWS Artifact にアクセスして、「日本準拠法」に変更する](#aws-artifact-にアクセスして日本準拠法に変更する)
-  - [予算アラートを設定する](#予算アラートを設定する)
-  - [コスト異常検知](#コスト異常検知)
-  - [CloudTrail のログ記録を有効にする](#cloudtrail-のログ記録を有効にする)
-  - [CloudTrail のログを監視する](#cloudtrail-のログを監視する)
-  - [Personal Service Dashboard のイベント検知を設定する](#personal-service-dashboard-のイベント検知を設定する)
-  - [IAM パスワードポリシーを変更する](#iam-パスワードポリシーを変更する)
-  - [ルートユーザーの代わりになる IAM ユーザとグループを作成する](#ルートユーザーの代わりになる-iam-ユーザとグループを作成する)
-  - [ルートユーザーは封印する](#ルートユーザーは封印する)
+  - [\[2024 年 1 月 5 日廃止\]AWS アカウントの秘密の質問を設定する](#2024-年-1-月-5-日廃止aws-アカウントの秘密の質問を設定する)
 
-## ルートユーザーに多要素認証（MFA）を設定する
+## １．ルートユーザーは封印する
 
 Duration: 00:00:30
 
-ルートユーザーの乗っ取りを防止する意味でも MFA を設定しましょう。
+ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。
 
-## AWS アカウントの代替の連絡先を設定する
+ルートユーザーでしか出来ない作業が必要になった場合のみ利用するようにしましょう。
+
+- 請求情報とコスト管理コンソールへの IAM アクセスを有効にする
+- AWS サポートプランの変更
+- 支払オプションの変更、削除
+- AWS アカウントの解約
+
+詳しくは、以下の URL を参照してください。
+
+<https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html>
+
+## ２．ルートユーザーに多要素認証（MFA）を設定する
+
+Duration: 00:00:30
+
+ルートユーザーの乗っ取りを防止する意味でも アカウントを作成したらすぐにでも MFA を設定しましょう。
+
+## ３．AWS アカウントの代替の連絡先を設定する
 
 Duration: 00:00:30
 
@@ -50,25 +65,7 @@ AWS アカウント登録時の連絡先以外にも連絡してくれるよう�
 
 <https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-update-contact-alternate.html>
 
-## AWS アカウントの秘密の質問を設定する
-
-Duration: 00:00:30
-
-ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。
-ただし、一度設定すると変更は可能ですが削除することはできません。
-
-秘密の質問は、設定した本人が忘れることが多いので、安易に設定するのはお勧めしません。設定する場合はよく検討しましょう。（参考記事: <https://japan.zdnet.com/article/35065000/>）
-
-<設定方法>
-
-1. アカウント設定を開きます
-   - <https://console.aws.amazon.com/billing/home#/account>
-2. 「秘密の質問の設定」の横にある「編集」リンクをクリックして連絡先を設定します
-   - ![security_challenge_questions](/images/aws-account-Initial-setting/security_challenge_questions.png)
-
-<https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html>
-
-## ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する
+## ４．ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する
 
 Duration: 00:00:30
 
@@ -82,15 +79,7 @@ MFA デバイスの紛失時などに電話番号認証を行う場合、国際�
 2. 「連絡先情報」の横にある「編集」リンクをクリックして連絡先を設定します
    - ![contact](/images/aws-account-Initial-setting/contact.png)
 
-## [AWS Artifact](https://console.aws.amazon.com/artifact/home) にアクセスして、「日本準拠法」に変更する
-
-Duration: 00:00:30
-
-※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。
-
-AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。
-
-## 予算アラートを設定する
+## ５．予算アラートを設定する
 
 Duration: 00:00:30
 
@@ -105,7 +94,7 @@ Duration: 00:00:30
 
 <https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-create.html>
 
-## コスト異常検知
+## ６．コスト異常検知
 
 Duration: 00:00:30
 
@@ -116,7 +105,7 @@ AWS コスト異常検出を使うことで、想定外のコストが発生す�
 
 <https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html>
 
-## CloudTrail のログ記録を有効にする
+## ７．CloudTrail のログ記録を有効にする
 
 Duration: 00:00:30
 
@@ -132,7 +121,7 @@ CloudTrail のログ保存先の S3 は、ライフサイクルルールも設�
 
 <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html>
 
-## CloudTrail のログを監視する
+## ８．CloudTrail のログを監視する
 
 Duration: 00:00:30
 
@@ -161,7 +150,7 @@ CloudTrail のログを監視し、少なくとも以下を監視してアラー
 
 <https://docs.aws.amazon.com/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html>
 
-## Personal Service Dashboard のイベント検知を設定する
+## ９．Personal Service Dashboard のイベント検知を設定する
 
 Duration: 00:00:30
 
@@ -195,7 +184,7 @@ Duration: 00:00:30
 
 <https://docs.aws.amazon.com/ja_jp/health/latest/ug/cloudwatch-events-health.html>
 
-## IAM パスワードポリシーを変更する
+## １０．IAM パスワードポリシーを変更する
 
 Duration: 00:00:30
 
@@ -228,26 +217,44 @@ MFA を利用しない場合は、以下の追加も検討しましょう。
 
 <https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html>
 
-## ルートユーザーの代わりになる IAM ユーザとグループを作成する
+## １１．ルートユーザーの代わりになる IAM ユーザとグループを作成する
 
 Duration: 00:00:30
 
-AdministratorAccess の権限を付与したグループを作成します。IAM ユーザーを作成し、グループに登録します。
+ルートユーザーの代わりとなる全般的な管理を行う IAM ユーザーとグループを作成します。
+
+作成した管理用グループに IAM ユーザーを追加します。
+
+次に、AdministratorAccess の権限のロールとスイッチングロールを許可したポリシーを作成し、作成したグループに付与します。安全のために、ロール切り替え時には MFA が有効になっていることを条件としましょう。
+
 作成した IAM ユーザには MFA を設定しましょう。
 
-## ルートユーザーは封印する
+## 不要になったもの
+
+### [AWS Artifact](https://console.aws.amazon.com/artifact/home) にアクセスして、「日本準拠法」に変更する
 
 Duration: 00:00:30
 
-ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。
+※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。
 
-ルートユーザーでしか出来ない作業が必要になった場合のみ利用するようにしましょう。
+AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。
 
-- 請求情報とコスト管理コンソールへの IAM アクセスを有効にする
-- AWS サポートプランの変更
-- 支払オプションの変更、削除
-- AWS アカウントの解約
+### [2024 年 1 月 5 日廃止]AWS アカウントの秘密の質問を設定する
 
-詳しくは、以下の URL を参照してください。
+Duration: 00:00:30
 
-<https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html>
+[AWS アカウントはセキュリティチャレンジ質問の使用を中止します](https://aws.amazon.com/jp/about-aws/whats-new/2024/01/aws-accounts-discontinues-security-challenge-questions/)
+
+ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。
+ただし、一度設定すると変更は可能ですが削除することはできません。
+
+秘密の質問は、設定した本人が忘れることが多いので、安易に設定するのはお勧めしません。設定する場合はよく検討しましょう。（参考記事: <https://japan.zdnet.com/article/35065000/>）
+
+<設定方法>
+
+1. アカウント設定を開きます
+   - <https://console.aws.amazon.com/billing/home#/account>
+2. 「秘密の質問の設定」の横にある「編集」リンクをクリックして連絡先を設定します
+   - ![security_challenge_questions](/images/aws-account-Initial-setting/security_challenge_questions.png)
+
+<https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html>

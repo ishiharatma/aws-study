@@ -1,24 +1,21 @@
-# AWS Certificate Manager (ACM)
+# AWS Certificate Manager (ACM)<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
 Duration: 00:01:00
 
-- [AWS Certificate Manager (ACM)](#aws-certificate-manager-acm)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [AWS Certificate Manager とは](#aws-certificate-manager-とは)
-  - [リージョナルサービスであること](#リージョナルサービスであること)
-  - [使用可能なサービス](#使用可能なサービス)
-  - [パブリック証明書とプライベート証明書](#パブリック証明書とプライベート証明書)
-  - [インポートされた証明書](#インポートされた証明書)
-  - [📖 まとめ](#-まとめ)
+- [AWS Certificate Manager とは](#aws-certificate-manager-とは)
+- [リージョナルサービスであること](#リージョナルサービスであること)
+- [使用可能なサービス](#使用可能なサービス)
+- [パブリック証明書とプライベート証明書](#パブリック証明書とプライベート証明書)
+- [インポートされた証明書](#インポートされた証明書)
+- [📖 まとめ](#-まとめ)
 
 ## AWS Certificate Manager とは
 

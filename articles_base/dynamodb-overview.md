@@ -1,46 +1,43 @@
-# Amazon DynamoDB
+# Amazon DynamoDB<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon DynamoDB](#amazon-dynamodb)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon DynamoDB とは](#amazon-dynamodb-とは)
-  - [Amazon DynamoDB のユースケース](#amazon-dynamodb-のユースケース)
-  - [Amazon DynamoDB の料金](#amazon-dynamodb-の料金)
-  - [Amazon DynamoDB の基本](#amazon-dynamodb-の基本)
-  - [Amazon DynamoDB のストレージ](#amazon-dynamodb-のストレージ)
-  - [Amazon DynamoDB の耐久性](#amazon-dynamodb-の耐久性)
-  - [Amazon DynamoDB の読み込み整合性](#amazon-dynamodb-の読み込み整合性)
-  - [Amazon DynamoDB のパフォーマンス](#amazon-dynamodb-のパフォーマンス)
-    - [キャパシティモード](#キャパシティモード)
-    - [アダブティブキャパシティ](#アダブティブキャパシティ)
-    - [バーストキャパシティ](#バーストキャパシティ)
-    - [Auto Scaling](#auto-scaling)
-  - [暗号化](#暗号化)
-    - [保管データの暗号化(サーバサイド暗号化)](#保管データの暗号化サーバサイド暗号化)
-    - [転送データの暗号化](#転送データの暗号化)
-  - [DynamoDB のテーブル操作](#dynamodb-のテーブル操作)
-  - [DynamoDB の項目操作](#dynamodb-の項目操作)
-  - [DynamoDB ストリーム](#dynamodb-ストリーム)
-  - [TTL（Time to Live）](#ttltime-to-live)
-  - [トランザクション](#トランザクション)
-  - [グローバルテーブル](#グローバルテーブル)
-  - [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
-  - [条件付き書き込み](#条件付き書き込み)
-  - [アトミックカウンター](#アトミックカウンター)
-  - [並列スキャン](#並列スキャン)
-  - [バックアップ](#バックアップ)
-  - [DynamoDB のポイントインタイムリカバリ(PITR)](#dynamodb-のポイントインタイムリカバリpitr)
-  - [DynamoDB 用の NoSQL Workbench](#dynamodb-用の-nosql-workbench)
-  - [設計](#設計)
-  - [📖 まとめ](#-まとめ)
+- [Amazon DynamoDB とは](#amazon-dynamodb-とは)
+- [Amazon DynamoDB のユースケース](#amazon-dynamodb-のユースケース)
+- [Amazon DynamoDB の料金](#amazon-dynamodb-の料金)
+- [Amazon DynamoDB の基本](#amazon-dynamodb-の基本)
+- [Amazon DynamoDB のストレージ](#amazon-dynamodb-のストレージ)
+- [Amazon DynamoDB の耐久性](#amazon-dynamodb-の耐久性)
+- [Amazon DynamoDB の読み込み整合性](#amazon-dynamodb-の読み込み整合性)
+- [Amazon DynamoDB のパフォーマンス](#amazon-dynamodb-のパフォーマンス)
+  - [キャパシティモード](#キャパシティモード)
+  - [アダブティブキャパシティ](#アダブティブキャパシティ)
+  - [バーストキャパシティ](#バーストキャパシティ)
+  - [Auto Scaling](#auto-scaling)
+- [暗号化](#暗号化)
+  - [保管データの暗号化(サーバサイド暗号化)](#保管データの暗号化サーバサイド暗号化)
+  - [転送データの暗号化](#転送データの暗号化)
+- [DynamoDB のテーブル操作](#dynamodb-のテーブル操作)
+- [DynamoDB の項目操作](#dynamodb-の項目操作)
+- [DynamoDB ストリーム](#dynamodb-ストリーム)
+- [TTL（Time to Live）](#ttltime-to-live)
+- [トランザクション](#トランザクション)
+- [グローバルテーブル](#グローバルテーブル)
+- [DynamoDB Accelerator (DAX)](#dynamodb-accelerator-dax)
+- [条件付き書き込み](#条件付き書き込み)
+- [アトミックカウンター](#アトミックカウンター)
+- [並列スキャン](#並列スキャン)
+- [バックアップ](#バックアップ)
+- [DynamoDB のポイントインタイムリカバリ(PITR)](#dynamodb-のポイントインタイムリカバリpitr)
+- [DynamoDB 用の NoSQL Workbench](#dynamodb-用の-nosql-workbench)
+- [設計](#設計)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon DynamoDB とは
 

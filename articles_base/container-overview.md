@@ -1,21 +1,18 @@
-# コンテナ
+# コンテナ<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [コンテナ](#コンテナ)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [コンテナ とは](#コンテナ-とは)
-  - [AWS Black Belt Online Seminar](#aws-black-belt-online-seminar)
-  - [Docker](#docker)
-  - [Docker Compose](#docker-compose)
-  - [Kubernetes (K8s)](#kubernetes-k8s)
+- [コンテナ とは](#コンテナ-とは)
+- [AWS Black Belt Online Seminar](#aws-black-belt-online-seminar)
+- [Docker](#docker)
+- [Docker Compose](#docker-compose)
+- [Kubernetes (K8s)](#kubernetes-k8s)
 
 ## コンテナ とは
 

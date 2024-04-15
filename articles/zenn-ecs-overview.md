@@ -5,30 +5,27 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# Amazon Elastic Container Service (Amazon ECS)
+# Amazon Elastic Container Service (Amazon ECS)<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon Elastic Container Service (Amazon ECS)](#amazon-elastic-container-service-amazon-ecs)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon ECS とは](#amazon-ecs-とは)
-  - [ハンズオン](#ハンズオン)
-  - [ECS の構成要素](#ecs-の構成要素)
-  - [クラスター：サービスとタスクを実行する基盤](#クラスターサービスとタスクを実行する基盤)
-  - [サービス：実行中のタスクを管理する単位](#サービス実行中のタスクを管理する単位)
-  - [タスク：起動する１つ以上のコンテナの集合](#タスク起動する１つ以上のコンテナの集合)
-  - [タスク定義：タスクを作成する定義テンプレート](#タスク定義タスクを作成する定義テンプレート)
-    - [memoryReservation（ソフト制限）と memory（ハード制限）の組み合わせ](#memoryreservationソフト制限と-memoryハード制限の組み合わせ)
-  - [ECS クラスタ作成手順](#ecs-クラスタ作成手順)
-  - [AWS Copilot](#aws-copilot)
-  - [📖 まとめ](#-まとめ)
+- [Amazon ECS とは](#amazon-ecs-とは)
+- [ハンズオン](#ハンズオン)
+- [ECS の構成要素](#ecs-の構成要素)
+- [クラスター：サービスとタスクを実行する基盤](#クラスターサービスとタスクを実行する基盤)
+- [サービス：実行中のタスクを管理する単位](#サービス実行中のタスクを管理する単位)
+- [タスク：起動する１つ以上のコンテナの集合](#タスク起動する１つ以上のコンテナの集合)
+- [タスク定義：タスクを作成する定義テンプレート](#タスク定義タスクを作成する定義テンプレート)
+  - [memoryReservation（ソフト制限）と memory（ハード制限）の組み合わせ](#memoryreservationソフト制限と-memoryハード制限の組み合わせ)
+- [ECS クラスタ作成手順](#ecs-クラスタ作成手順)
+- [AWS Copilot](#aws-copilot)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon ECS とは
 

@@ -5,33 +5,30 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# Amazon Route 53
+# Amazon Route 53<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon Route 53](#amazon-route-53)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon Route 53 とは](#amazon-route-53-とは)
-  - [ドメインの新規登録](#ドメインの新規登録)
-  - [ドメインの移管](#ドメインの移管)
-  - [Route 53 を構成する要素](#route-53-を構成する要素)
-  - [ホストゾーン](#ホストゾーン)
-  - [DNS レコードタイプ](#dns-レコードタイプ)
-  - [DNS ルーティング](#dns-ルーティング)
-  - [Route 53 Resolver](#route-53-resolver)
-  - [Route 53 Resolver for Hybrid Clouds](#route-53-resolver-for-hybrid-clouds)
-  - [DNS ヘルスチェック](#dns-ヘルスチェック)
-  - [Amazon Route 53 の料金](#amazon-route-53-の料金)
-  - [Route 53 のクォータ](#route-53-のクォータ)
-  - [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）](#amazon-route-53-が-dns-リソースレコードセットに対するアクセス許可をサポート2022-9-21)
-  - [📖 まとめ](#-まとめ)
+- [Amazon Route 53 とは](#amazon-route-53-とは)
+- [ドメインの新規登録](#ドメインの新規登録)
+- [ドメインの移管](#ドメインの移管)
+- [Route 53 を構成する要素](#route-53-を構成する要素)
+- [ホストゾーン](#ホストゾーン)
+- [DNS レコードタイプ](#dns-レコードタイプ)
+- [DNS ルーティング](#dns-ルーティング)
+- [Route 53 Resolver](#route-53-resolver)
+- [Route 53 Resolver for Hybrid Clouds](#route-53-resolver-for-hybrid-clouds)
+- [DNS ヘルスチェック](#dns-ヘルスチェック)
+- [Amazon Route 53 の料金](#amazon-route-53-の料金)
+- [Route 53 のクォータ](#route-53-のクォータ)
+- [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）](#amazon-route-53-が-dns-リソースレコードセットに対するアクセス許可をサポート2022-9-21)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon Route 53 とは
 

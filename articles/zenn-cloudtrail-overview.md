@@ -5,29 +5,26 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# AWS CloudTrail
+# AWS CloudTrail<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [AWS CloudTrail](#aws-cloudtrail)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [CloudTrail とは](#cloudtrail-とは)
-  - [CloudTrail の基本](#cloudtrail-の基本)
-  - [管理イベント](#管理イベント)
-  - [データイベント](#データイベント)
-  - [CloudTrail ログファイル名の形式](#cloudtrail-ログファイル名の形式)
-  - [ログのフォーマット](#ログのフォーマット)
-  - [監視する主要なログ](#監視する主要なログ)
-  - [AWS CloudTrail ログのクエリの Athena による分析](#aws-cloudtrail-ログのクエリの-athena-による分析)
-  - [CloudTrail Lake](#cloudtrail-lake)
-  - [📖 まとめ](#-まとめ)
+- [CloudTrail とは](#cloudtrail-とは)
+- [CloudTrail の基本](#cloudtrail-の基本)
+- [管理イベント](#管理イベント)
+- [データイベント](#データイベント)
+- [CloudTrail ログファイル名の形式](#cloudtrail-ログファイル名の形式)
+- [ログのフォーマット](#ログのフォーマット)
+- [監視する主要なログ](#監視する主要なログ)
+- [AWS CloudTrail ログのクエリの Athena による分析](#aws-cloudtrail-ログのクエリの-athena-による分析)
+- [CloudTrail Lake](#cloudtrail-lake)
+- [📖 まとめ](#-まとめ)
 
 ## CloudTrail とは
 

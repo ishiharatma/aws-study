@@ -5,43 +5,40 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# CloudWatch
+# CloudWatch<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [CloudWatch](#cloudwatch)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [CloudWatch とは](#cloudwatch-とは)
-  - [オブザーバビリティ（Observability）とは](#オブザーバビリティobservabilityとは)
-  - [CloudWatch Metrics](#cloudwatch-metrics)
-  - [CloudWatch Metric Math](#cloudwatch-metric-math)
-  - [CloudWatch Metric Streams](#cloudwatch-metric-streams)
-  - [CloudWatch Alarms](#cloudwatch-alarms)
-  - [CloudWatch Logs](#cloudwatch-logs)
-  - [CloudWatch エージェント](#cloudwatch-エージェント)
-  - [CloudWatch Dashboards](#cloudwatch-dashboards)
-  - [CloudWatch Events / EventBridge](#cloudwatch-events--eventbridge)
-  - [CloudWatch Metrics Insights](#cloudwatch-metrics-insights)
-  - [CloudWatch Logs Insights](#cloudwatch-logs-insights)
-  - [CloudWatch Container Insights](#cloudwatch-container-insights)
-  - [CloudWatch Lambda Insights](#cloudwatch-lambda-insights)
-  - [CloudWatch Contributor Insights](#cloudwatch-contributor-insights)
-  - [CloudWatch Application Insights](#cloudwatch-application-insights)
-  - [CloudWatch ServiceLens](#cloudwatch-servicelens)
-  - [CloudWatch Resource Health](#cloudwatch-resource-health)
-  - [CloudWatch Synthetics](#cloudwatch-synthetics)
-  - [CloudWatch Evidently](#cloudwatch-evidently)
-  - [CloudWatch Real-User Monitoring (RUM)](#cloudwatch-real-user-monitoring-rum)
-  - [CloudWatch Anomaly Detection](#cloudwatch-anomaly-detection)
-  - [One Observability Workshop](#one-observability-workshop)
-  - [📖 まとめ](#-まとめ)
+- [CloudWatch とは](#cloudwatch-とは)
+- [オブザーバビリティ（Observability）とは](#オブザーバビリティobservabilityとは)
+- [CloudWatch Metrics](#cloudwatch-metrics)
+- [CloudWatch Metric Math](#cloudwatch-metric-math)
+- [CloudWatch Metric Streams](#cloudwatch-metric-streams)
+- [CloudWatch Alarms](#cloudwatch-alarms)
+- [CloudWatch Logs](#cloudwatch-logs)
+- [CloudWatch エージェント](#cloudwatch-エージェント)
+- [CloudWatch Dashboards](#cloudwatch-dashboards)
+- [CloudWatch Events / EventBridge](#cloudwatch-events--eventbridge)
+- [CloudWatch Metrics Insights](#cloudwatch-metrics-insights)
+- [CloudWatch Logs Insights](#cloudwatch-logs-insights)
+- [CloudWatch Container Insights](#cloudwatch-container-insights)
+- [CloudWatch Lambda Insights](#cloudwatch-lambda-insights)
+- [CloudWatch Contributor Insights](#cloudwatch-contributor-insights)
+- [CloudWatch Application Insights](#cloudwatch-application-insights)
+- [CloudWatch ServiceLens](#cloudwatch-servicelens)
+- [CloudWatch Resource Health](#cloudwatch-resource-health)
+- [CloudWatch Synthetics](#cloudwatch-synthetics)
+- [CloudWatch Evidently](#cloudwatch-evidently)
+- [CloudWatch Real-User Monitoring (RUM)](#cloudwatch-real-user-monitoring-rum)
+- [CloudWatch Anomaly Detection](#cloudwatch-anomaly-detection)
+- [One Observability Workshop](#one-observability-workshop)
+- [📖 まとめ](#-まとめ)
 
 ## CloudWatch とは
 

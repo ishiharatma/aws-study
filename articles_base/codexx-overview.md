@@ -1,36 +1,33 @@
-# Code 兄弟
+# Code 兄弟<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Code 兄弟](#code-兄弟)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Code 兄弟 とは](#code-兄弟-とは)
-    - [AWS CodeCommit](#aws-codecommit)
-    - [AWS CodeBuild](#aws-codebuild)
-    - [AWS CodeDeploy](#aws-codedeploy)
-    - [AWS CodePipeline](#aws-codepipeline)
-  - [AWS CodeCommit の基本](#aws-codecommit-の基本)
-    - [Amazon CodeGuru Reviewer との連携](#amazon-codeguru-reviewer-との連携)
-    - [AWS CodeArtifact](#aws-codeartifact)
-  - [AWS CodeBuild の基本](#aws-codebuild-の基本)
-    - [buildspec.yml](#buildspecyml)
-    - [ビルド環境で利用できる環境変数](#ビルド環境で利用できる環境変数)
-    - [ビルドのフェーズ](#ビルドのフェーズ)
-    - [ビルドを高速化する方法](#ビルドを高速化する方法)
-    - [ローカルでビルド](#ローカルでビルド)
-    - [VPC での利用](#vpc-での利用)
-  - [AWS CodeDeploy の基本](#aws-codedeploy-の基本)
-    - [appspec.yml](#appspecyml)
-  - [AWS CodePipeline の基本](#aws-codepipeline-の基本)
-  - [AWS CodeStar](#aws-codestar)
-  - [ハンズオン](#ハンズオン)
+- [Code 兄弟 とは](#code-兄弟-とは)
+  - [AWS CodeCommit](#aws-codecommit)
+  - [AWS CodeBuild](#aws-codebuild)
+  - [AWS CodeDeploy](#aws-codedeploy)
+  - [AWS CodePipeline](#aws-codepipeline)
+- [AWS CodeCommit の基本](#aws-codecommit-の基本)
+  - [Amazon CodeGuru Reviewer との連携](#amazon-codeguru-reviewer-との連携)
+  - [AWS CodeArtifact](#aws-codeartifact)
+- [AWS CodeBuild の基本](#aws-codebuild-の基本)
+  - [buildspec.yml](#buildspecyml)
+  - [ビルド環境で利用できる環境変数](#ビルド環境で利用できる環境変数)
+  - [ビルドのフェーズ](#ビルドのフェーズ)
+  - [ビルドを高速化する方法](#ビルドを高速化する方法)
+  - [ローカルでビルド](#ローカルでビルド)
+  - [VPC での利用](#vpc-での利用)
+- [AWS CodeDeploy の基本](#aws-codedeploy-の基本)
+  - [appspec.yml](#appspecyml)
+- [AWS CodePipeline の基本](#aws-codepipeline-の基本)
+- [AWS CodeStar](#aws-codestar)
+- [ハンズオン](#ハンズオン)
 
 ## Code 兄弟 とは
 

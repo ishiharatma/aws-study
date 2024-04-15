@@ -1,38 +1,35 @@
-# Amazon CloudFront
+# Amazon CloudFront<!-- omit in toc -->
 
-## ☘️ はじめに
+## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-## 👀 Contents
+## 👀 Contents<!-- omit in toc -->
 
-- [Amazon CloudFront](#amazon-cloudfront)
-  - [☘️ はじめに](#️-はじめに)
-  - [👀 Contents](#-contents)
-  - [Amazon CloudFront とは](#amazon-cloudfront-とは)
-  - [CloudFront の基本](#cloudfront-の基本)
-    - [ディストリビューション](#ディストリビューション)
-    - [オリジン](#オリジン)
-    - [エッジロケーション](#エッジロケーション)
-    - [リージョン別エッジキャッシュ](#リージョン別エッジキャッシュ)
-    - [ビヘイビア（Behavior）](#ビヘイビアbehavior)
-    - [キャッシュ無効化（Invalidation）](#キャッシュ無効化invalidation)
-    - [圧縮機能](#圧縮機能)
-  - [料金クラス](#料金クラス)
-  - [署名付き URL と署名付き Cookie](#署名付き-url-と署名付き-cookie)
-  - [S3 オリジンへのアクセス制限](#s3-オリジンへのアクセス制限)
-  - [ALB オリジンへのアクセス制限](#alb-オリジンへのアクセス制限)
-  - [コンテンツを地理的に制限](#コンテンツを地理的に制限)
-  - [AWS Shield](#aws-shield)
-  - [AWS WAF によるアクセスコントロール](#aws-waf-によるアクセスコントロール)
-  - [CloudFront Origin Shield](#cloudfront-origin-shield)
-  - [AWS Lambda@Edge](#aws-lambdaedge)
-  - [ログ記録](#ログ記録)
-  - [監視](#監視)
-  - [Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)](#use-cloudfront-continuous-deployment-to-safely-validate-cdn-changesnew-2022-11-18)
-  - [📖 まとめ](#-まとめ)
+- [Amazon CloudFront とは](#amazon-cloudfront-とは)
+- [CloudFront の基本](#cloudfront-の基本)
+  - [ディストリビューション](#ディストリビューション)
+  - [オリジン](#オリジン)
+  - [エッジロケーション](#エッジロケーション)
+  - [リージョン別エッジキャッシュ](#リージョン別エッジキャッシュ)
+  - [ビヘイビア（Behavior）](#ビヘイビアbehavior)
+  - [キャッシュ無効化（Invalidation）](#キャッシュ無効化invalidation)
+  - [圧縮機能](#圧縮機能)
+- [料金クラス](#料金クラス)
+- [署名付き URL と署名付き Cookie](#署名付き-url-と署名付き-cookie)
+- [S3 オリジンへのアクセス制限](#s3-オリジンへのアクセス制限)
+- [ALB オリジンへのアクセス制限](#alb-オリジンへのアクセス制限)
+- [コンテンツを地理的に制限](#コンテンツを地理的に制限)
+- [AWS Shield](#aws-shield)
+- [AWS WAF によるアクセスコントロール](#aws-waf-によるアクセスコントロール)
+- [CloudFront Origin Shield](#cloudfront-origin-shield)
+- [AWS Lambda@Edge](#aws-lambdaedge)
+- [ログ記録](#ログ記録)
+- [監視](#監視)
+- [Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)](#use-cloudfront-continuous-deployment-to-safely-validate-cdn-changesnew-2022-11-18)
+- [📖 まとめ](#-まとめ)
 
 ## Amazon CloudFront とは
 
@@ -340,7 +337,7 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 
 Kiesis Data Firehose を使用した場合、インターバルが 60 ～ 900 秒ですので、リアルタイムといっても 最低 60 秒は遅延します。これよりも短い間隔が必要な場合は独自のコンシューマーを構築する必要があります。
 
-※ただし、下記アップデートにより数秒（5秒以内）で配信が可能になりました。
+※ただし、下記アップデートにより数秒（5 秒以内）で配信が可能になりました。
 [(Dec 26, 2023)Amazon Kinesis Data Firehose がゼロバッファリングのサポートを開始](https://aws.amazon.com/jp/about-aws/whats-new/2023/12/amazon-kinesis-data-firehose-zero-buffering/)
 
 ## 監視

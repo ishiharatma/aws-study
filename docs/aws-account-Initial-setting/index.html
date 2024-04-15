@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>これをやっておけば大丈夫！AWS アカウント作成後にやること！</title>
+  <title>これをやっておけば大丈夫！AWS アカウント作成後にやる 11 のこと！</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="aws-account-Initial-setting"
-                  title="これをやっておけば大丈夫！AWS アカウント作成後にやること！"
+                  title="これをやっておけば大丈夫！AWS アカウント作成後にやる 11 のこと！"
                   environment="web"
                   feedback-link="">
     
@@ -36,22 +36,20 @@
     
       <google-codelab-step label="👀 Contents" duration="0">
         <ul>
-<li><a href="#%E3%81%93%E3%82%8C%E3%82%92%E3%82%84%E3%81%A3%E3%81%A6%E3%81%8A%E3%81%91%E3%81%B0%E5%A4%A7%E4%B8%88%E5%A4%ABaws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E4%BD%9C%E6%88%90%E5%BE%8C%E3%81%AB%E3%82%84%E3%82%8B%E3%81%93%E3%81%A8" target="_blank">これをやっておけば大丈夫！AWS アカウント作成後にやること！</a><ul>
-<li><a href="#%EF%B8%8F-%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">☘️ はじめに</a></li>
-<li><a href="#-contents" target="_blank">👀 Contents</a></li>
-<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AB%E5%A4%9A%E8%A6%81%E7%B4%A0%E8%AA%8D%E8%A8%BCmfa%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">ルートユーザーに多要素認証（MFA）を設定する</a></li>
-<li><a href="#aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E4%BB%A3%E6%9B%BF%E3%81%AE%E9%80%A3%E7%B5%A1%E5%85%88%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">AWS アカウントの代替の連絡先を設定する</a></li>
-<li><a href="#aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E7%A7%98%E5%AF%86%E3%81%AE%E8%B3%AA%E5%95%8F%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">AWS アカウントの秘密の質問を設定する</a></li>
-<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E9%80%A3%E7%B5%A1%E5%85%88%E3%81%AB%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%9F%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%E3%81%AB%E5%9B%BD%E9%9A%9B%E9%9B%BB%E8%A9%B1%E8%AD%98%E5%88%A5%E7%95%AA%E5%8F%B7%E3%81%8C%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%82%E3%82%8B%E3%81%8B%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する</a></li>
+<li><a href="#%EF%BC%91%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AF%E5%B0%81%E5%8D%B0%E3%81%99%E3%82%8B" target="_blank">１．ルートユーザーは封印する</a></li>
+<li><a href="#%EF%BC%92%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AB%E5%A4%9A%E8%A6%81%E7%B4%A0%E8%AA%8D%E8%A8%BCmfa%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">２．ルートユーザーに多要素認証（MFA）を設定する</a></li>
+<li><a href="#%EF%BC%93aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E4%BB%A3%E6%9B%BF%E3%81%AE%E9%80%A3%E7%B5%A1%E5%85%88%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">３．AWS アカウントの代替の連絡先を設定する</a></li>
+<li><a href="#%EF%BC%94%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E9%80%A3%E7%B5%A1%E5%85%88%E3%81%AB%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%9F%E9%9B%BB%E8%A9%B1%E7%95%AA%E5%8F%B7%E3%81%AB%E5%9B%BD%E9%9A%9B%E9%9B%BB%E8%A9%B1%E8%AD%98%E5%88%A5%E7%95%AA%E5%8F%B7%E3%81%8C%E8%A8%AD%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%82%E3%82%8B%E3%81%8B%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">４．ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する</a></li>
+<li><a href="#%EF%BC%95%E4%BA%88%E7%AE%97%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">５．予算アラートを設定する</a></li>
+<li><a href="#%EF%BC%96%E3%82%B3%E3%82%B9%E3%83%88%E7%95%B0%E5%B8%B8%E6%A4%9C%E7%9F%A5" target="_blank">６．コスト異常検知</a></li>
+<li><a href="#%EF%BC%97cloudtrail-%E3%81%AE%E3%83%AD%E3%82%B0%E8%A8%98%E9%8C%B2%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">７．CloudTrail のログ記録を有効にする</a></li>
+<li><a href="#%EF%BC%98cloudtrail-%E3%81%AE%E3%83%AD%E3%82%B0%E3%82%92%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B" target="_blank">８．CloudTrail のログを監視する</a></li>
+<li><a href="#%EF%BC%99personal-service-dashboard-%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E6%A4%9C%E7%9F%A5%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">９．Personal Service Dashboard のイベント検知を設定する</a></li>
+<li><a href="#%EF%BC%91%EF%BC%90iam-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">１０．IAM パスワードポリシーを変更する</a></li>
+<li><a href="#%EF%BC%91%EF%BC%91%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BB%A3%E3%82%8F%E3%82%8A%E3%81%AB%E3%81%AA%E3%82%8B-iam-%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B" target="_blank">１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する</a></li>
+<li><a href="#%E4%B8%8D%E8%A6%81%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE" target="_blank">不要になったもの</a><ul>
 <li><a href="#aws-artifact-%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%97%E3%81%A6%E6%97%A5%E6%9C%AC%E6%BA%96%E6%8B%A0%E6%B3%95%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">AWS Artifact にアクセスして、「日本準拠法」に変更する</a></li>
-<li><a href="#%E4%BA%88%E7%AE%97%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">予算アラートを設定する</a></li>
-<li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E7%95%B0%E5%B8%B8%E6%A4%9C%E7%9F%A5" target="_blank">コスト異常検知</a></li>
-<li><a href="#cloudtrail-%E3%81%AE%E3%83%AD%E3%82%B0%E8%A8%98%E9%8C%B2%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">CloudTrail のログ記録を有効にする</a></li>
-<li><a href="#cloudtrail-%E3%81%AE%E3%83%AD%E3%82%B0%E3%82%92%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B" target="_blank">CloudTrail のログを監視する</a></li>
-<li><a href="#personal-service-dashboard-%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E6%A4%9C%E7%9F%A5%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">Personal Service Dashboard のイベント検知を設定する</a></li>
-<li><a href="#iam-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">IAM パスワードポリシーを変更する</a></li>
-<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BB%A3%E3%82%8F%E3%82%8A%E3%81%AB%E3%81%AA%E3%82%8B-iam-%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B" target="_blank">ルートユーザーの代わりになる IAM ユーザとグループを作成する</a></li>
-<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AF%E5%B0%81%E5%8D%B0%E3%81%99%E3%82%8B" target="_blank">ルートユーザーは封印する</a></li>
+<li><a href="#2024-%E5%B9%B4-1-%E6%9C%88-5-%E6%97%A5%E5%BB%83%E6%AD%A2aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E7%A7%98%E5%AF%86%E3%81%AE%E8%B3%AA%E5%95%8F%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">[2024 年 1 月 5 日廃止]AWS アカウントの秘密の質問を設定する</a></li>
 </ul>
 </li>
 </ul>
@@ -59,13 +57,28 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ルートユーザーに多要素認証（MFA）を設定する" duration="1">
-        <p>ルートユーザーの乗っ取りを防止する意味でも MFA を設定しましょう。</p>
+      <google-codelab-step label="１．ルートユーザーは封印する" duration="1">
+        <p>ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。</p>
+<p>ルートユーザーでしか出来ない作業が必要になった場合のみ利用するようにしましょう。</p>
+<ul>
+<li>請求情報とコスト管理コンソールへの IAM アクセスを有効にする</li>
+<li>AWS サポートプランの変更</li>
+<li>支払オプションの変更、削除</li>
+<li>AWS アカウントの解約</li>
+</ul>
+<p>詳しくは、以下の URL を参照してください。</p>
+<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS アカウントの代替の連絡先を設定する" duration="1">
+      <google-codelab-step label="２．ルートユーザーに多要素認証（MFA）を設定する" duration="1">
+        <p>ルートユーザーの乗っ取りを防止する意味でも アカウントを作成したらすぐにでも MFA を設定しましょう。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="３．AWS アカウントの代替の連絡先を設定する" duration="1">
         <p>AWS アカウント登録時の連絡先以外にも連絡してくれるようになります。</p>
 <p>請求、オペレーション、セキュリティの３つに対して代替の連絡先を指定できます。必要に応じて設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
@@ -84,26 +97,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS アカウントの秘密の質問を設定する" duration="1">
-        <p>ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。 ただし、一度設定すると変更は可能ですが削除することはできません。</p>
-<p>秘密の質問は、設定した本人が忘れることが多いので、安易に設定するのはお勧めしません。設定する場合はよく検討しましょう。（参考記事: <a href="https://japan.zdnet.com/article/35065000/" target="_blank">https://japan.zdnet.com/article/35065000/</a>）</p>
-<p>&lt;設定方法&gt;</p>
-<ol type="1">
-<li>アカウント設定を開きます <ul>
-<li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
-</ul>
-</li>
-<li>「秘密の質問の設定」の横にある「編集」リンクをクリックして連絡先を設定します <ul>
-<li><img alt="security_challenge_questions" src="img\\6c6974266ad82234.png"></li>
-</ul>
-</li>
-</ol>
-<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="1">
+      <google-codelab-step label="４．ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="1">
         <p>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678 の場合、+81 3-1234-5678） 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -120,14 +114,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Artifact にアクセスして、「日本準拠法」に変更する" duration="1">
-        <p>※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。</p>
-<p>AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="予算アラートを設定する" duration="1">
+      <google-codelab-step label="５．予算アラートを設定する" duration="1">
         <p>アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -145,7 +132,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="コスト異常検知" duration="1">
+      <google-codelab-step label="６．コスト異常検知" duration="1">
         <p>予算アラートは、設定した予算額に対してある敷居値を超えるときに通知するサービスでした。実際に超過しなければ通知されないため、異常な兆候は検出できません。</p>
 <p>コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常な AWS コストの発生を検出することができるサービスです。 AWS コスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。</p>
 <p><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html" target="_blank">https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html</a></p>
@@ -153,7 +140,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="CloudTrail のログ記録を有効にする" duration="1">
+      <google-codelab-step label="７．CloudTrail のログ記録を有効にする" duration="1">
         <p>アカウント内で不正な操作を記録、検知するためにも有効にしましょう。 CloudTrail のログ保存先の S3 は、ライフサイクルルールも設定しましょう。 後述するログ監視を実施するために、CloudWatch Logs にも配信しましょう。CloudWatch のロググループには適切な保持期限を設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -168,7 +155,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="CloudTrail のログを監視する" duration="1">
+      <google-codelab-step label="８．CloudTrail のログを監視する" duration="1">
         <p>CloudTrail のログを監視し、少なくとも以下を監視してアラートされるようにしましょう。</p>
 <ul>
 <li>ルートアカウントの使用を監視</li>
@@ -197,7 +184,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Personal Service Dashboard のイベント検知を設定する" duration="1">
+      <google-codelab-step label="９．Personal Service Dashboard のイベント検知を設定する" duration="1">
         <p><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時確認し、監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -226,7 +213,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM パスワードポリシーを変更する" duration="1">
+      <google-codelab-step label="１０．IAM パスワードポリシーを変更する" duration="1">
         <p>デフォルトの IAM ユーザーのパスワードポリシーは脆弱です。そのため、アカウントを作成したら忘れないうちに強力なポリシーに変更しましょう。</p>
 <p>推奨は、以下です。</p>
 <pre><code language="language-text" class="language-text">- パスワードの最小長「12」以上
@@ -256,23 +243,35 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="1">
-        <p>AdministratorAccess の権限を付与したグループを作成します。IAM ユーザーを作成し、グループに登録します。 作成した IAM ユーザには MFA を設定しましょう。</p>
+      <google-codelab-step label="１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="1">
+        <p>ルートユーザーの代わりとなる全般的な管理を行う IAM ユーザーとグループを作成します。</p>
+<p>作成した管理用グループに IAM ユーザーを追加します。</p>
+<p>次に、AdministratorAccess の権限のロールとスイッチングロールを許可したポリシーを作成し、作成したグループに付与します。安全のために、ロール切り替え時には MFA が有効になっていることを条件としましょう。</p>
+<p>作成した IAM ユーザには MFA を設定しましょう。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="ルートユーザーは封印する" duration="1">
-        <p>ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。</p>
-<p>ルートユーザーでしか出来ない作業が必要になった場合のみ利用するようにしましょう。</p>
-<ul>
-<li>請求情報とコスト管理コンソールへの IAM アクセスを有効にする</li>
-<li>AWS サポートプランの変更</li>
-<li>支払オプションの変更、削除</li>
-<li>AWS アカウントの解約</li>
+      <google-codelab-step label="不要になったもの" duration="1">
+        <h2 is-upgraded><a href="https://console.aws.amazon.com/artifact/home" target="_blank">AWS Artifact</a> にアクセスして、「日本準拠法」に変更する</h2>
+<p>※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。</p>
+<p>AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。</p>
+<h2 is-upgraded>[2024 年 1 月 5 日廃止]AWS アカウントの秘密の質問を設定する</h2>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2024/01/aws-accounts-discontinues-security-challenge-questions/" target="_blank">AWS アカウントはセキュリティチャレンジ質問の使用を中止します</a></p>
+<p>ルートユーザーの多要素認証の解除など、カスタマーサービスに問い合わせを行うときに AWS アカウントの所有者であることを確認するために使うことができ、本人確認をする手間が楽になります。 ただし、一度設定すると変更は可能ですが削除することはできません。</p>
+<p>秘密の質問は、設定した本人が忘れることが多いので、安易に設定するのはお勧めしません。設定する場合はよく検討しましょう。（参考記事: <a href="https://japan.zdnet.com/article/35065000/" target="_blank">https://japan.zdnet.com/article/35065000/</a>）</p>
+<p>&lt;設定方法&gt;</p>
+<ol type="1">
+<li>アカウント設定を開きます <ul>
+<li><a href="https://console.aws.amazon.com/billing/home#/account" target="_blank">https://console.aws.amazon.com/billing/home#/account</a></li>
 </ul>
-<p>詳しくは、以下の URL を参照してください。</p>
-<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/root-user-tasks.html</a></p>
+</li>
+<li>「秘密の質問の設定」の横にある「編集」リンクをクリックして連絡先を設定します <ul>
+<li><img alt="security_challenge_questions" src="img\\6c6974266ad82234.png"></li>
+</ul>
+</li>
+</ol>
+<p><a href="https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html" target="_blank">https://docs.aws.amazon.com/accounts/latest/reference/manage-acct-security-challenge.html</a></p>
 
 
       </google-codelab-step>
