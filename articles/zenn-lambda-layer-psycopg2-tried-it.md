@@ -38,7 +38,10 @@ This follows Python 3.8 End-Of-Life (EOL) which is scheduled for October, 2024
 
 CloudShell 上で次の手順を実施します。
 
-1.Docker ファイルを作成 2.イメージをビルドして、zip ファイルを生成
+1.Docker ファイルを作
+
+2.イメージをビルドして、zip ファイルを生成
+
 3.Lambda レイヤーを登録
 
 ### 1.Docker ファイルを作成
