@@ -88,7 +88,7 @@ aws lambda publish-layer-version \
 
 マネジメントコンソールでも登録されていることが確認できました。（画像では 2 回目なのでバージョン 2 が生成されています）
 
-![result-console](/images/lambda-layer-psycopg2//result-console.jpg)
+![result-console](/images/lambda-layer-psycopg2/result-console.jpg)
 
 ## まとめ
 
