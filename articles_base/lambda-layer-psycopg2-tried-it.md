@@ -69,7 +69,7 @@ psycopg2-3.12.zip が生成されました。
 
 ### 3.Lambda レイヤーを登録
 
-生成した psycopg2-3.12 を Lambda レイヤーに登録します。
+生成した psycopg2-3.12 を Lambda レイヤーに登録します。（画像ではコマンド実行が2回目なのでレスポンスのバージョンが2になっています）
 
 ```sh
 aws lambda publish-layer-version \
@@ -81,3 +81,6 @@ aws lambda publish-layer-version \
 
 ![lambda-publish-layer](/images/lambda-layer-psycopg2/lambda-publish-layer.jpg)
 
+マネジメントコンソールでも登録されていることが確認できました。（画像では2回目なのでバージョン2が生成されています）
+
+![result-console](/images/lambda-layer-psycopg2//result-console.jpg)
