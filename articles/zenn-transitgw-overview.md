@@ -60,13 +60,13 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 次のような集約が可能になります。集約以外にも、Transit Gateway を介してそれぞれが通信できようになるメリットもあります。
 
 - VPC ピアリングを集約できる
-  ![merit-vpc-peering](/images/transitgw/merit-vpc-peering-320.jpg)
+  ![merit-vpc-peering](/images/transitgw/merit-vpc-peering.png)
 
 - VPN 接続を集約できる
-  ![merit-site2site-vpn](/images/transitgw/merit-site2site-vpn-320.jpg)
+  ![merit-site2site-vpn](/images/transitgw/merit-site2site-vpn.png)
 
 - Direct Connect Gateway との接続を集約できる
-  ![merit-directconnect](/images/transitgw/merit-directconnect-320.jpg)
+  ![merit-directconnect](/images/transitgw/merit-directconnect.png)
 
 ## Transit Gateway の構造
 
