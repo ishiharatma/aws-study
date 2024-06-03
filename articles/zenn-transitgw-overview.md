@@ -2,9 +2,8 @@
 title: "【初心者向け】AWS Transit Gateway 入門！完全ガイド" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
-
 # AWS Transit Gateway<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->

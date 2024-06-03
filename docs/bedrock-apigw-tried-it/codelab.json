@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2024-06-03T19:52:28+09:00",
+  "updated": "2024-06-03T20:22:10+09:00",
   "id": "bedrock-apigw-tried-it",
   "duration": 0,
   "title": "Amazon Bedrock を利用した画像生成アプリケーションを AWS CDK で開発してみた！",
