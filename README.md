@@ -1,15 +1,15 @@
 # aws-study
 
 個人の AWS 勉強や、社内勉強会で使用した資料を公開しているリポジトリです。
-claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://ishiharatma.github.io/aws-study/)で公開しています。
+claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https://ishiharatma.github.io/aws-study/)で公開しています。
 
 ## 目次: サービス
 
 [AWS 勉強ガイド](/articles_base/aws-study-guide.md)
 
-[AWS 学習教材完全ガイド 2023年最新版](/articles_base/aws-study-guide-2023.md)
+[AWS 学習教材完全ガイド 2023 年最新版](/articles_base/aws-study-guide-2023.md)
 
-[AWSアカウント作成後に行うべき設定事項](/articles_base/aws-account-Initial-setting.md)
+[AWS アカウント作成後に行うべき設定事項](/articles_base/aws-account-Initial-setting.md)
 
 ### コンピューティング
 
@@ -59,18 +59,17 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 
 [AWS CloudTrail 概要](/articles_base/cloudtrail-overview.md)
 
-[AWS Systems Manager ①概要編](/articles_base/ssm-overview.md)
+[AWS Systems Manager ① 概要編](/articles_base/ssm-overview.md)
 
-[AWS Systems Manager ②ノード管理機能編](/articles_base/ssm-nodes-overview.md)
+[AWS Systems Manager ② ノード管理機能編](/articles_base/ssm-nodes-overview.md)
 
-[AWS Systems Manager ③アプリケーション管理機能編](/articles_base/ssm-apps-overview.md)
+[AWS Systems Manager ③ アプリケーション管理機能編](/articles_base/ssm-apps-overview.md)
 
-[AWS Systems Manager ④運用管理機能編](/articles_base/ssm-ops-overview.md)
+[AWS Systems Manager ④ 運用管理機能編](/articles_base/ssm-ops-overview.md)
 
-[AWS Systems Manager ⑤変更管理機能編](/articles_base/ssm-changes-overview.md)
+[AWS Systems Manager ⑤ 変更管理機能編](/articles_base/ssm-changes-overview.md)
 
 [AWS CloudFormation 概要](/articles_base/cfn-overview.md)
-
 
 ### アプリケーション統合
 
@@ -81,16 +80,24 @@ claatを使った Codelabs形式ドキュメントは⇒[GitHub Pages](https://i
 ### デベロッパーツール
 
 [AWS Code 兄弟概要](/articles_base/codexx-overview.md)
+
 [AWS CDK 概要](/articles_base/cdk-overview.md)
 
 ### セキュリティ、アイデンティティ、コンプライアンス
 
 [AWS IAM](/articles_base/iam-overview.md)
+
 [AWS KMS](/articles_base/kms-overview.md)
+
 [AWS Certificate Manager](/articles_base/acm-overview.md)
+
 [AWS WAF & Shield](/articles_base/waf-and-shield-overview.md)
+
 [Amazon GuardDuty](/articles_base/guardduty-overview.md)
+
 [AWS Security Hub](/articles_base/securityhub-overview.md)
+
+[AWS Secrets Manager 概要](/articles_base/secretsmanager-overview.md)
 
 ## 目次: 認定資格
 

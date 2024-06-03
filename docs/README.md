@@ -1,4 +1,4 @@
-# AWS勉強会資料公開ページ
+# AWS 勉強会資料公開ページ
 
 ## はじめに
 
@@ -8,12 +8,12 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-* 記載している人について⇒[こちら](https://ishiharatma.github.io/resume/)
+- 記載している人について ⇒[こちら](https://ishiharatma.github.io/resume/)
 
 ## 勉強会資料
 
 - <a href="./aws-study-guide/index.html" target="_blank">AWS 勉強ガイド</a>
-- <a href="./aws-account-Initial-setting/index.html" target="_blank">AWSアカウント作成後に行うべき設定事項</a>
+- <a href="./aws-account-Initial-setting/index.html" target="_blank">AWS アカウント作成後に行うべき設定事項</a>
 - コンピューティング
   - <a href="./elb-overview/index.html" target="_blank">ELB 概要</a>
   - <a href="./lambda-overview/index.html" target="_blank">AWS Lambda 概要</a>
@@ -38,11 +38,11 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - マネジメントとガバナンス
   - <a href="./cloudwatch-overview/index.html" target="_blank">Amazon CloudWatch 概要</a>
   - <a href="./cloudtrail-overview/index.html" target="_blank">AWS CloudTrail 概要</a>
-  - <a href="./ssm-overview/index.html" target="_blank">AWS Systems Manager ①概要編</a>
-  - <a href="./ssm-nodes-overview/index.html" target="_blank">AWS Systems Manager ②ノード管理機能編</a>
-  - <a href="./ssm-apps-overview/index.html" target="_blank">AWS Systems Manager ③アプリケーション管理機能編</a>
-  - <a href="./ssm-ops-overview/index.html" target="_blank">AWS Systems Manager ④運用管理機能編</a>
-  - <a href="./ssm-changes-overview/index.html" target="_blank">AWS Systems Manager ⑤変更管理機能編</a>
+  - <a href="./ssm-overview/index.html" target="_blank">AWS Systems Manager ① 概要編</a>
+  - <a href="./ssm-nodes-overview/index.html" target="_blank">AWS Systems Manager ② ノード管理機能編</a>
+  - <a href="./ssm-apps-overview/index.html" target="_blank">AWS Systems Manager ③ アプリケーション管理機能編</a>
+  - <a href="./ssm-ops-overview/index.html" target="_blank">AWS Systems Manager ④ 運用管理機能編</a>
+  - <a href="./ssm-changes-overview/index.html" target="_blank">AWS Systems Manager ⑤ 変更管理機能編</a>
   - <a href="./cfn-overview/index.html" target="_blank">AWS CloudFormation 概要</a>
 - アプリケーション統合
   - <a href="./sns-overview/index.html" target="_blank">Amazon SNS 概要</a>
@@ -57,6 +57,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
   - <a href="./waf-and-shield-overview/index.html" target="_blank">AWS WAF & Shield 概要</a>
   - <a href="./guardduty-overview/index.html" target="_blank">Amazon GuardDuty 概要</a>
   - <a href="./securityhub-overview/index.html" target="_blank">AWS Security Hub 概要</a>
+  - <a href="./secretsmanager-overview/index.html" target="_blank">AWS Secrets Manager 概要</a>
 
 ## AWS 認定資格勉強資料
 

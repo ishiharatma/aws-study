@@ -1,3 +1,10 @@
+---
+title: "【初心者向け】AWS Secrets Manager 入門！完全ガイド" # 記事のタイトル
+type: "tech" # tech: 技術記事 / idea: アイデア記事
+topics: ["aws", "study"]
+published: false
+---
+
 # AWS Secrets Manager<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
