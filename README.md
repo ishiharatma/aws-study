@@ -1,6 +1,11 @@
 # aws-study
 
 個人の AWS 勉強や、社内勉強会で使用した資料を公開しているリポジトリです。
+
+AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
+
+最新の情報については、AWS 公式ドキュメントをご参照ください。
+
 claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https://ishiharatma.github.io/aws-study/)で公開しています。
 
 ## 目次: サービス
@@ -17,17 +22,11 @@ claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https:
 
 [AWS Lambda 概要](/articles_base/lambda-overview.md)
 
-### コンテナ
+AWS Elastic Beanstalk
 
-[コンテナとは](/articles_base/container-overview.md)
+Amazon Lightsail
 
-[Amazon ECS と EKS 概要](/articles_base/ecs-vs-eks.md)
-
-[Amazon ECS 概要](/articles_base/ecs-overview.md)
-
-### ストレージ
-
-[Amazon S3 概要](/articles_base/s3-overview.md)
+AWS Batch
 
 ### データベース
 
@@ -41,6 +40,8 @@ claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https:
 
 [Amazon ElastiCache 概要](/articles_base/elasticache-overview.md)
 
+Amazon Redshift
+
 ### ネットワーキング
 
 [Amazon Route 53 概要](/articles_base/route53-overview.md)
@@ -52,6 +53,52 @@ claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https:
 [AWS Direct Connect 概要](/articles_base/directconnect-overview.md)
 
 [AWS Transit Gateway 概要](/articles_base/transitgw-overview.md)
+
+AWS VPN
+
+AWS Global Accelerator
+
+AWS PrivateLink
+
+### ストレージ
+
+[Amazon S3 概要](/articles_base/s3-overview.md)
+
+Amazon EBS
+
+Amazon EFS
+
+Amazon FSx
+
+AWS Storage Gateway
+
+AWS Backup
+
+### セキュリティ、アイデンティティ、コンプライアンス
+
+[AWS IAM](/articles_base/iam-overview.md)
+
+[AWS KMS](/articles_base/kms-overview.md)
+
+[AWS Certificate Manager](/articles_base/acm-overview.md)
+
+[AWS WAF & Shield](/articles_base/waf-and-shield-overview.md)
+
+[Amazon GuardDuty](/articles_base/guardduty-overview.md)
+
+[AWS Security Hub](/articles_base/securityhub-overview.md)
+
+[AWS Secrets Manager 概要](/articles_base/secretsmanager-overview.md)
+
+Amazon Cognito
+
+### コンテナ
+
+[コンテナとは](/articles_base/container-overview.md)
+
+[Amazon ECS と EKS 概要](/articles_base/ecs-vs-eks.md)
+
+[Amazon ECS 概要](/articles_base/ecs-overview.md)
 
 ### マネジメントとガバナンス
 
@@ -71,6 +118,12 @@ claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https:
 
 [AWS CloudFormation 概要](/articles_base/cfn-overview.md)
 
+AWS Organizations
+
+AWS Trusted Advisor
+
+AWS Config
+
 ### アプリケーション統合
 
 [Amazon SNS 概要](/articles_base/sns-overview.md)
@@ -79,25 +132,34 @@ claat を使った Codelabs 形式ドキュメントは ⇒[GitHub Pages](https:
 
 ### デベロッパーツール
 
+AWS CloudChell
+
+AWS Cloud9
+
 [AWS Code 兄弟概要](/articles_base/codexx-overview.md)
 
 [AWS CDK 概要](/articles_base/cdk-overview.md)
 
-### セキュリティ、アイデンティティ、コンプライアンス
+AWS CLI
 
-[AWS IAM](/articles_base/iam-overview.md)
+AWS SDK
 
-[AWS KMS](/articles_base/kms-overview.md)
+### 移行とデータ転送
+AWS Application Discovery Service
 
-[AWS Certificate Manager](/articles_base/acm-overview.md)
+AWS Database Migration Service
 
-[AWS WAF & Shield](/articles_base/waf-and-shield-overview.md)
+AWS Migration Hub
 
-[Amazon GuardDuty](/articles_base/guardduty-overview.md)
+AWS Application Migration Service
 
-[AWS Security Hub](/articles_base/securityhub-overview.md)
+### 分析
 
-[AWS Secrets Manager 概要](/articles_base/secretsmanager-overview.md)
+Amazon Athena
+
+Amazon Kinesis
+
+Amazon QuickSight
 
 ## 目次: 認定資格
 
