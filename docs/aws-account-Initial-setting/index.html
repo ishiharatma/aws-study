@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>これをやっておけば大丈夫！AWS アカウント作成後にやる 11 のこと！</title>
+  <title>これをやっておけば大丈夫！AWS アカウント作成後にやる X 個のこと！</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -23,7 +23,7 @@
   <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
                   id="aws-account-Initial-setting"
-                  title="これをやっておけば大丈夫！AWS アカウント作成後にやる 11 のこと！"
+                  title="これをやっておけば大丈夫！AWS アカウント作成後にやる X 個のこと！"
                   environment="web"
                   feedback-link="">
     
@@ -45,8 +45,30 @@
 <li><a href="#%EF%BC%97cloudtrail-%E3%81%AE%E3%83%AD%E3%82%B0%E8%A8%98%E9%8C%B2%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">７．CloudTrail のログ記録を有効にする</a></li>
 <li><a href="#%EF%BC%98cloudtrail-%E3%81%AE%E3%83%AD%E3%82%B0%E3%82%92%E7%9B%A3%E8%A6%96%E3%81%99%E3%82%8B" target="_blank">８．CloudTrail のログを監視する</a></li>
 <li><a href="#%EF%BC%99personal-service-dashboard-%E3%81%AE%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E6%A4%9C%E7%9F%A5%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">９．Personal Service Dashboard のイベント検知を設定する</a></li>
-<li><a href="#%EF%BC%91%EF%BC%90iam-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">１０．IAM パスワードポリシーを変更する</a></li>
+<li><a href="#%EF%BC%91%EF%BC%90iam-%E3%83%91%E3%82%B9%E3%83%AF%E3%83%BC%E3%83%89%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">１０．IAM パスワードポリシーを変更する</a><ul>
+<li><a href="#%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB" target="_blank">マネジメントコンソール</a></li>
+<li><a href="#aws-cli" target="_blank">AWS CLI</a></li>
+</ul>
+</li>
 <li><a href="#%EF%BC%91%EF%BC%91%E3%83%AB%E3%83%BC%E3%83%88%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%AE%E4%BB%A3%E3%82%8F%E3%82%8A%E3%81%AB%E3%81%AA%E3%82%8B-iam-%E3%83%A6%E3%83%BC%E3%82%B6%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E4%BD%9C%E6%88%90%E3%81%99%E3%82%8B" target="_blank">１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する</a></li>
+<li><a href="#%EF%BC%91%EF%BC%92%E5%85%A8%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE-ebs-%E6%9A%97%E5%8F%B7%E5%8C%96%E3%82%92%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%A7%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">１２．全リージョンの EBS 暗号化をデフォルトで有効にする</a><ul>
+<li><a href="#%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB-1" target="_blank">マネジメントコンソール</a></li>
+<li><a href="#aws-cli-1" target="_blank">AWS CLI</a></li>
+</ul>
+</li>
+<li><a href="#%EF%BC%91%EF%BC%93%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE-s3-%E5%85%AC%E9%96%8B%E9%98%B2%E6%AD%A2%E8%A8%AD%E5%AE%9A" target="_blank">１３．アカウントレベルの S3 公開防止設定</a><ul>
+<li><a href="#%E3%83%9E%E3%83%8D%E3%82%B8%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB-2" target="_blank">マネジメントコンソール</a></li>
+<li><a href="#aws-cli-2" target="_blank">AWS CLI</a></li>
+</ul>
+</li>
+<li><a href="#%EF%BC%91%EF%BC%94%E5%85%A8%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88-vpc-%E5%89%8A%E9%99%A4" target="_blank">１４．全リージョンのデフォルト VPC 削除</a><ul>
+<li><a href="#%E5%BE%A9%E5%85%83%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">復元したい場合</a></li>
+</ul>
+</li>
+<li><a href="#%EF%BC%91%EF%BC%95iam-access-analyzer-%E3%81%AE%E5%85%A8%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E6%9C%89%E5%8A%B9%E5%8C%96" target="_blank">１５．IAM Access Analyzer の全リージョン有効化</a></li>
+<li><a href="#%EF%BC%91%EF%BC%96%E5%85%A8%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%A7-guardduty-%E6%9C%89%E5%8A%B9%E5%8C%96" target="_blank">１６．全リージョンで GuardDuty 有効化</a></li>
+<li><a href="#%EF%BC%91%EF%BC%97config-%E6%9C%89%E5%8A%B9%E5%8C%96" target="_blank">１７．Config 有効化</a></li>
+<li><a href="#%EF%BC%91%EF%BC%98%E5%85%A8%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%A7-securityhub-%E6%9C%89%E5%8A%B9%E5%8C%96" target="_blank">１８．全リージョンで SecurityHub 有効化</a></li>
 <li><a href="#%E4%B8%8D%E8%A6%81%E3%81%AB%E3%81%AA%E3%81%A3%E3%81%9F%E3%82%82%E3%81%AE" target="_blank">不要になったもの</a><ul>
 <li><a href="#aws-artifact-%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%81%97%E3%81%A6%E6%97%A5%E6%9C%AC%E6%BA%96%E6%8B%A0%E6%B3%95%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">AWS Artifact にアクセスして、「日本準拠法」に変更する</a></li>
 <li><a href="#2024-%E5%B9%B4-1-%E6%9C%88-5-%E6%97%A5%E5%BB%83%E6%AD%A2aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E7%A7%98%E5%AF%86%E3%81%AE%E8%B3%AA%E5%95%8F%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">[2024 年 1 月 5 日廃止]AWS アカウントの秘密の質問を設定する</a></li>
@@ -72,8 +94,8 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="２．ルートユーザーに多要素認証（MFA）を設定する" duration="1">
-        <p>ルートユーザーの乗っ取りを防止する意味でも アカウントを作成したらすぐにでも MFA を設定しましょう。</p>
+      <google-codelab-step label="２．ルートユーザーに多要素認証（MFA）を設定する" duration="3">
+        <p>ルートユーザーの乗っ取りを防止する意味でも アカウントを作成したらすぐにでも MFA を設定しましょう。 ただし、MFA の管理は厳重かつ、紛失に注意してください。可能であれば、2 つ以上を設定してください。（<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa.html" target="_blank">最大 8 つまで設定可能です</a>） これを行っておけば、<a href="https://repost.aws/ja/knowledge-center/forgot-aws-sign-in-credentials" target="_blank">アカウント回復</a>を回避できます。</p>
 
 
       </google-codelab-step>
@@ -114,7 +136,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="５．予算アラートを設定する" duration="1">
+      <google-codelab-step label="５．予算アラートを設定する" duration="3">
         <p>アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -155,7 +177,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="８．CloudTrail のログを監視する" duration="1">
+      <google-codelab-step label="８．CloudTrail のログを監視する" duration="60">
         <p>CloudTrail のログを監視し、少なくとも以下を監視してアラートされるようにしましょう。</p>
 <ul>
 <li>ルートアカウントの使用を監視</li>
@@ -184,7 +206,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="９．Personal Service Dashboard のイベント検知を設定する" duration="1">
+      <google-codelab-step label="９．Personal Service Dashboard のイベント検知を設定する" duration="10">
         <p><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時確認し、監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -213,7 +235,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="１０．IAM パスワードポリシーを変更する" duration="1">
+      <google-codelab-step label="１０．IAM パスワードポリシーを変更する" duration="3">
         <p>デフォルトの IAM ユーザーのパスワードポリシーは脆弱です。そのため、アカウントを作成したら忘れないうちに強力なポリシーに変更しましょう。</p>
 <p>推奨は、以下です。</p>
 <pre><code language="language-text" class="language-text">- パスワードの最小長「12」以上
@@ -226,6 +248,7 @@
 <pre><code language="language-text" class="language-text">- パスワードの失効を許可「180日」
 - パスワードの再利用を禁止「5回」
 </code></pre>
+<h2 is-upgraded>マネジメントコンソール</h2>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
 <li>IAM コンソールを開きます <ul>
@@ -239,15 +262,242 @@
 </li>
 </ol>
 <p><a href="https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html" target="_blank">https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html</a></p>
+<h2 is-upgraded>AWS CLI</h2>
+<p>現在の設定を確認</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/get-account-password-policy.html?highlight=account%20password%20policy" target="_blank">CLI&gt;get-account-password-policy</a></p>
+<pre><code language="language-sh" class="language-sh">aws iam get-account-password-policy
+</code></pre>
+<p>設定</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/update-account-password-policy.html" target="_blank">CLI&gt;update-account-password-policy</a></p>
+<pre><code language="language-sh" class="language-sh">aws iam update-account-password-policy \
+  --minimum-password-length 12 \
+  --require-uppercase-characters \
+  --require-lowercase-characters \
+  --require-numbers \
+  --require-symbols \
+</code></pre>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="1">
-        <p>ルートユーザーの代わりとなる全般的な管理を行う IAM ユーザーとグループを作成します。</p>
+      <google-codelab-step label="１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="5">
+        <p>ルートユーザーは強力な権限を有しています。乗っ取られてしまった場合に無効化することが出来ません。 そのため、日常的な管理作業はルートユーザーではなく IAM ユーザーと IAM グループを使うことを推奨します。</p>
 <p>作成した管理用グループに IAM ユーザーを追加します。</p>
 <p>次に、AdministratorAccess の権限のロールとスイッチングロールを許可したポリシーを作成し、作成したグループに付与します。安全のために、ロール切り替え時には MFA が有効になっていることを条件としましょう。</p>
-<p>作成した IAM ユーザには MFA を設定しましょう。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::123456789012:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;BoolIfExists&#34;: {
+          &#34;aws:MultiFactorAuthPresent&#34;: &#34;true&#34;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>作成した IAM ユーザには <a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa.html" target="_blank">MFA を設定</a>しましょう。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１２．全リージョンの EBS 暗号化をデフォルトで有効にする" duration="1">
+        <p>この設定を行うことで、新しいボリュームを作成する際にデフォルトで暗号化が設定されるようになります。 暗号化設定を忘れてしまうことを回避でき、データの機密性の確保および、コンプライアンス要件を満たすことができます。この作業はアカウント開設直後に設定をすることを推奨します。</p>
+<h2 is-upgraded>マネジメントコンソール</h2>
+<p>&lt;<a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default" target="_blank">設定方法</a>&gt;</p>
+<ol type="1">
+<li>EC2 コンソールを開きます <ul>
+<li><a href="https://console.aws.amazon.com/ec2/" target="_blank">https://console.aws.amazon.com/ec2/</a></li>
+</ul>
+</li>
+<li>ナビゲーションペインで最後までスクロールして [設定]を選択します</li>
+<li>[データ保護とセキュリティ]タブにある[EBS 暗号化]の[管理]をクリックします</li>
+<li>「常に新しい EBS ボリュームを暗号化」の[有効化]のチェックボックスを<code>ON</code>にします</li>
+<li>[EBS 暗号化を更新する]をクリックして設定を保存します</li>
+<li>これを全てのリージョンで実施します</li>
+</ol>
+<h2 is-upgraded>AWS CLI</h2>
+<p>現在の設定を確認</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/enable-ebs-encryption-by-default.html" target="_blank">CLI&gt;get-ebs-encryption-by-default</a></p>
+<pre><code language="language-sh" class="language-sh">### Get ebs encryption by default
+aws ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; --output text |sort \
+| while read region; do
+  default_enc=$(aws ec2 get-ebs-encryption-by-default --region ${region}  --output text)
+  echo -e &#34;${region}\t&gt; ${default_enc}&#34;
+done
+</code></pre>
+<p>有効化を設定</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/enable-ebs-encryption-by-default.html" target="_blank">CLI&gt;enable-ebs-encryption-by-default</a></p>
+<pre><code language="language-sh" class="language-sh">aws ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; --output text |sort\
+| while read region; do
+  echo &#34;### Enable ebs encryption by default in ${region}&#34;
+  aws ec2 enable-ebs-encryption-by-default --region ${region}
+done
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１３．アカウントレベルの S3 公開防止設定" duration="1">
+        <p>この設定によって、S3 バケットを作成したときに誤って公開してしまうことを防止できます。ただし、アカウントレベルでパブリックアクセスを無効化してしまうと、バケットレベルで公開することができなくなります。（<a href="https://aws.amazon.com/jp/s3/features/block-public-access/?nc1=h_ls" target="_blank">ここを参照</a>）</p>
+<p>バケットの公開が必要なユースケースによっては、アカウントレベルのブロックパブリックアクセスをオフのままにすることもできます。</p>
+<h2 is-upgraded>マネジメントコンソール</h2>
+<p>&lt;[設定方法](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/configuring-block-public-access-account.html&gt;</p>
+<ol type="1">
+<li>EC2 コンソールを開きます <ul>
+<li><a href="https://console.aws.amazon.com/s3/" target="_blank">https://console.aws.amazon.com/s3/</a></li>
+</ul>
+</li>
+<li>ナビゲーションペインで[Block Public Access settings for this account (このアカウントのブロックパブリックアクセスの設定)] を選択します</li>
+<li>[Edit] (編集) を選択して、AWS アカウント のすべてのバケットに対するブロックパブリックアクセス設定を変更します。</li>
+<li>変更する設定を選択して、[Save changes (変更の保存)] を選択します</li>
+<li>確認を求められたら、「confirm」と入力します。次に、[確認] を選択して変更を保存します</li>
+</ol>
+<h2 is-upgraded>AWS CLI</h2>
+<p>バケットレベルでは、<code>s3api</code>だが、アカウントレベルでは<code>s3control</code>になります。</p>
+<p>現在の設定を確認</p>
+<p><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3control/get-public-access-block.html" target="_blank">CLI&gt;get-public-access-block</a></p>
+<pre><code language="language-sh" class="language-sh">aws s3control get-public-access-block --account-id $(aws --output text sts get-caller-identity --query &#39;Account&#39;)
+
+### 未設定の場合
+### An error occurred (NoSuchPublicAccessBlockConfiguration) when calling the GetPublicAccessBlock operation: The public access block configuration was not found
+</code></pre>
+<p>設定</p>
+<p><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/s3control/put-public-access-block.html" target="_blank">CLI&gt;put-public-access-block</a></p>
+<pre><code language="language-sh" class="language-sh">aws s3control put-public-access-block --account-id $(aws --output text sts get-caller-identity --query &#39;Account&#39;) --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１４．全リージョンのデフォルト VPC 削除" duration="5">
+        <p>アカウント作成時には、全リージョンにデフォルト VPC というものが存在します。すぐ使うには便利なデフォルト VPC ですが、セキュリティ的にはインバウンドとアウトバウンドがすべて許可されていたりと、危ういです。</p>
+<p>というわけで、基本的にはデフォルト VPC は削除してしまって、必要に応じて作成することを推奨します。</p>
+<p><a href="https://repost.aws/ja/knowledge-center/deleted-default-vpc" target="_blank">Amazon VPC 内で、デフォルト VPC を作成、削除、または復元する場合、どのような方法がありますか？</a></p>
+<p>現在の存在確認</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpcs.html" target="_blank">CLI&gt;describe-vpcs</a></p>
+<pre><code language="language-sh" class="language-sh">aws --output text ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; |sort \
+| while read region; do
+   aws --output text --region ${region} ec2 describe-vpcs --query &#34;Vpcs[?IsDefault].[VpcId]&#34; | while read vpc; do
+      echo -e &#34;# ${region}\tdefault vpc: ${vpc}&#34;
+   done
+done
+</code></pre>
+<p>削除実行</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/ec2/delete-vpc.html" target="_blank">CLI&gt;delete-vpc</a></p>
+<p><a href="https://repost.aws/ja/knowledge-center/troubleshoot-dependency-error-delete-vpc" target="_blank">依存関係が存在すると消せません</a>ので順番に削除していきます。 下記コマンドの中の<code>--dry-run</code>は実行時には削除してください。</p>
+<pre><code language="language-sh" class="language-sh">aws --output text ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; |sort \
+| while read region; do
+   aws --output text --region ${region} ec2 describe-vpcs --query &#34;Vpcs[?IsDefault].[VpcId]&#34; | while read vpc; do
+    ### InternetGateWay
+    aws --region ${region} --output text \
+      ec2 describe-internet-gateways --filters Name=attachment.vpc-id,Values=${vpc} \
+      --query &#34;InternetGateways[].[InternetGatewayId]&#34; \
+    | while read igw; do
+      echo &#34;## deleting InternetGateWay: ${igw} in ${vpc}, ${region}&#34;
+      echo &#34;--&gt; detatching&#34;
+      aws --region ${region} --output json \
+        ec2 detach-internet-gateway --internet-gateway-id ${igw} --vpc-id ${vpc} --dry-run
+      echo &#34;--&gt; deleteing&#34;
+      aws --region ${region} --output json \
+        ec2 delete-internet-gateway --internet-gateway-id ${igw} --dry-run
+    done
+
+    ### Subnet
+    aws --region ${region} --output text \
+      ec2 describe-subnets  --filters Name=vpc-id,Values=${vpc} \
+      --query &#34;Subnets[].[SubnetId]&#34; \
+    | while read subnet; do
+      echo &#34;## deleting subnet: ${subnet} in ${vpc}, ${region}&#34;
+      aws --region ${region} --output json \
+        ec2 delete-subnet --subnet-id ${subnet} --dry-run
+    done
+
+    ### VPC
+    echo &#34;## deleting vpc: ${vpc} in ${region}&#34;
+    aws --region ${region} --output json \
+      ec2 delete-vpc --vpc-id ${vpc} --dry-run
+   done
+done
+</code></pre>
+<h2 is-upgraded>復元したい場合</h2>
+<pre><code language="language-sh" class="language-sh">aws --output text ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; |sort \
+| while read region; do
+  echo &#34;creating default VPC in ${region}&#34;
+  aws --region ${region} ec2 create-default-vpc --dry-run
+done
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１５．IAM Access Analyzer の全リージョン有効化" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank">IAM Access Analyzer</a> は、外部公開できるサービスが不要に外部に公開されていないかモニタリングできるサービスです。</p>
+<p>追加料金なしで利用でき、自力で調査する必要もなく、継続的にモニタリングしてくれるため、有効にしておきましょう。</p>
+<p>ただし、リージョンサービスなので、全リージョンでは AWS CLI を使うことを推奨します。</p>
+<p><a href="https://docs.aws.amazon.com/cli/latest/reference/accessanalyzer/create-analyzer.html" target="_blank">CLI&gt;create-analyzer</a></p>
+<pre><code language="language-sh" class="language-sh">analyzer_name=&#34;my-access-analyzer&#34;
+aws --output text ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; |sort \
+| while read region; do
+  echo &#34;# create IAM Access Analyzer in ${region}&#34;
+  aws accessanalyzer create-analyzer --analyzer-name ${analyzer_name}  --type &#39;ACCOUNT&#39; --region ${region}
+done
+</code></pre>
+<p><a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/accessanalyzer/get-analyzer.html" target="_blank">CLI&gt;get-analyzer</a></p>
+<pre><code language="language-sh" class="language-sh">analyzer_name=&#34;my-access-analyzer&#34;
+aws --output text ec2 describe-regions --query &#34;Regions[].[RegionName]&#34; |sort \
+| while read region; do
+  echo &#34;# IAM Access Analyzer in ${region}&#34;
+  aws accessanalyzer get-analyzer --analyzer-name ${analyzer_name} --region ${region} --query &#34;analyzer.[name,createdAt]&#34; --output text
+done
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１６．全リージョンで GuardDuty 有効化" duration="0">
+        <p><a href="https://aws.amazon.com/jp/guardduty/" target="_blank">Amazon GuardDuty</a> は、AWS アカウントや AWS 環境に対する脅威を検知する、セキュリティモニタリングサービスです。</p>
+<p>対応している各種ログを継続的に取得し、機械学習によって不正なアクションなどを検知してくれます。簡単にセキュリティを強化できるため有効化しておくことを推奨します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１７．Config 有効化" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/config/latest/developerguide/gs-console.html" target="_blank">AWS Config</a>は、AWS 上で稼働するリソースの状態を監視し、変更履歴を追跡するためのサービスです。</p>
+<p>これによって、リソースの構成や状態の変更に関する詳細な情報を把握することができます。</p>
+<p>次に示す、SecurityHub を有効化する場合には Config の有効化は必須となっておりますので、有効化しておくことを推奨します。</p>
+<p>変更頻度が高いリソースがある場合は記録設定を<code>日次記録</code>にすることも検討する。これによりコストを大幅に削減できる可能性があります。</p>
+<p>例</p>
+<ul>
+<li>AWS EC2 VPC</li>
+<li>AWS EC2 Subnet</li>
+<li>AWS EC2 SecurityGroup</li>
+<li>AWS EC2 NetworkInterface</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="１８．全リージョンで SecurityHub 有効化" duration="0">
+        <ul>
+<li>検出結果はメインリージョンに集約</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/fsbp-standard.html" target="_blank">AWS Foundational Security Best Practices (FSBP) 標準</a>の有効化 <ul>
+<li>以下を無効化 <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/cloudtrail-controls.html#cloudtrail-5" target="_blank">[CloudTrail.5] CloudTrail 証跡は Amazon CloudWatch Logs と統合する必要があります</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/iam-controls.html#iam-6" target="_blank">[IAM.6] ルートユーザーに対してハードウェア MFA を有効にする必要があります</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/ec2-controls.html#ec2-8" target="_blank">[EC2.8] EC2 インスタンスは、インスタンスメタデータサービスバージョン 2 (IMDSv2) を使用することをお勧めします</a></li>
+<li>メインリージョン以外<a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/config-controls.html#config-1" target="_blank">[Config.1] AWS Config を有効にする必要があります</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 
 
       </google-codelab-step>
