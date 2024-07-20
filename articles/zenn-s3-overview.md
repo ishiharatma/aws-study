@@ -41,7 +41,7 @@ published: true
 
 ## Amazon S3 とは
 
-Duration: 01:56:54
+<!-- Duration: 01:56:54 -->
 
 スケーラビリティ、データ可用性、セキュリティ、およびパフォーマンスを提供するオブジェクトストレージサービスです。
 データ耐久性はイレブンナイン（99.999999999 %）です。可用性はストレージクラスによって異なります。
@@ -64,7 +64,7 @@ Duration: 01:56:54
 
 ## Amazon S3 の基本
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 ![s3_overview](/images/s3/s3_overview.png)
 
@@ -118,7 +118,7 @@ VPC エンドポイントは 24 時間 ×1 か月（30.5 日）使用してい�
 
 ## バケットポリシー
 
-Duration: 00:01:30
+<!-- Duration: 00:01:30 -->
 
 AWS ドキュメント> [バケットポリシーの使用](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html)
 
@@ -167,7 +167,7 @@ https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html
 
 ## アクセスコントロールリスト（ACL）
 
-Duration: 00:01:30
+<!-- Duration: 00:01:30 -->
 
 AWS ドキュメント> [ACL によるアクセス管理](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/acls.html)
 
@@ -184,7 +184,7 @@ AWS ドキュメント> [バケット所有者が所有権のないオブジェ�
 
 ## ライフサイクル
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 AWS ドキュメント > [ストレージのライフサイクルの管理](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/object-lifecycle-mgmt.html)
 
@@ -201,7 +201,7 @@ AWS ドキュメント > [ストレージのライフサイクルの管理](http
 
 ## ストレージタイプ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage-class-intro.html)
 
@@ -256,7 +256,7 @@ AWS ドキュメント > [Amazon S3 ストレージクラスを使用する](htt
 
 ## バージョニング
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 ![s3_versioning](/images/s3/s3_versioning.png)
 
@@ -273,7 +273,7 @@ AWS ドキュメント > [バージョニングな有効なバケットへの Am
 
 ## 暗号化
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 AWS ドキュメント > [サーバー側の暗号化を使用したデータの保護](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/serv-side-encryption.html)
 
@@ -302,7 +302,7 @@ AWS ドキュメント > [クライアント側の暗号化を使用したデー
 
 ## 静的ウェブサイトのホスティング
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 AWS ドキュメント > [Amazon S3 を使用して静的ウェブサイトをホスティングする](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/WebsiteHosting.html)
 
@@ -316,7 +316,7 @@ IP 制限をした静的ウェブサイトの設定例
 
 ## S3 Transfer Acceleration
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 AWS ドキュメント>[Amazon S3 Transfer Acceleration を使用した高速かつ安全なファイル転送の設定](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html)
 
@@ -387,7 +387,7 @@ AWS ドキュメント > [Transfer Acceleration を使用するための要件](
 
 ## アクセスログ
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 AWS ドキュメント > [サーバーアクセスログを使用したリクエストのログ記録](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/ServerLogs.html)
 
@@ -409,7 +409,7 @@ https://aws.amazon.com/jp/premiumsupport/knowledge-center/s3-server-access-logs-
 
 ## S3 Select
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 AWS ドキュメント > [Amazon S3 Select を使用したデータのフィルタリングと取得](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/selecting-content-from-objects.html)
 
@@ -458,7 +458,7 @@ SQL の ORDER が使えないという点も注意が必要です。
 
 ## Storage Lens
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 AWS ドキュメント > [S3 Storage Lens](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage_lens.html)
 
@@ -484,7 +484,7 @@ Storage Lens を使うと、オブジェクトストレージの使用状況と�
 
 ## リクエスタ支払いバケット
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 AWS ドキュメント > [ストレージ転送と使用量のリクエスタ支払いバケットの使用](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/RequesterPaysBuckets.html)
 
@@ -499,7 +499,7 @@ AWS CLI の場合は、オプションに「--request-player」を付与しま�
 
 ## アクセスポイント
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 AWS ドキュメント > [Amazon S3 アクセスポイントを使用したデータアクセスの管理](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/access-points.html)
 
@@ -530,7 +530,7 @@ AWS ドキュメント > [Amazon S3 アクセスポイントを使用したデ�
 
 ## パフォーマンスの最適化
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 AWS ドキュメント > [設計パターンのベストプラクティス: Amazon S3 のパフォーマンスの最適化](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/optimizing-performance.html)
 
@@ -582,7 +582,7 @@ BucketName/2022-11-02/aaa/xxx000000001.log
 
 ## 📖 他のサービスとの連携
 
-Duration: 00:00:30
+<!-- Duration: 00:00:30 -->
 
 ![s3_services](/images/s3/s3_services.png)
 

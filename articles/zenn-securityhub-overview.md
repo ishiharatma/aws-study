@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [AWS Security Hub とは](#aws-security-hub-とは)
 - [特徴](#特徴)
@@ -32,7 +32,7 @@ Duration: 00:01:00
 
 ## AWS Security Hub とは
 
-Duration: 1:02:06
+<!-- Duration: 1:02:06 -->
 
 AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウドセキュリティの構成ミス、管理不備などへ対応するための仕組み）に相当するサービスで、「AWS リソースのセキュリティ設定がベストプラクティスから逸脱していないか」を自動でチェックします。
 
@@ -50,7 +50,7 @@ AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウ�
 
 ## 特徴
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 - 30 日間は無料
 - Security Hub はリージョンサービス
@@ -60,7 +60,7 @@ Duration: 0:00:30
 
 ## Security Hub の有効化
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [AWS Security Hub の設定](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/securityhub-settingup.html)
 
@@ -77,7 +77,7 @@ Security Hub はリージョンサービスであるため、リージョン毎�
 
 ## 検出項目（コントロール）
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 検出項目はコントロールとよばれ、次のようなものがあります。
 
@@ -104,7 +104,7 @@ Duration: 0:01:30
 
 ## サービスリンクロール
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 `AWSServiceRoleForSecurityHub` という名前のロールをサービスリンクロールとして使用します。
 コンソールで Security Hub を有効化した場合は、`securityhub.amazonaws.com` のサービスにリンクしたロールが自動的に作成されます。
@@ -115,7 +115,7 @@ Duration: 0:00:30
 
 ## クロスリージョン集約
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [クロスリージョン集約を有効にする](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-enable.html)
 [クロスリージョン集約を停止する](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-stop.html)
@@ -127,7 +127,7 @@ Security Hub はリージョンサービスです。そのため、各リージ�
 
 ## 検出結果通知
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 検出結果通知は、Security Hub から Amazon EventBridge に発信されるイベントを検出し、SNS と連携することで実現できます。
 
@@ -344,7 +344,7 @@ Compliance の Status の意味については、[API_Compliance](https://docs.a
 
 ## Security Hub 自動応答と修復
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [自動応答および自動修復](https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/securityhub-cloudwatch-events.html)
 

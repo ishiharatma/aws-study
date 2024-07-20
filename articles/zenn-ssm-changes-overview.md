@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [変更管理の機能](#変更管理の機能)
 - [メンテナンスウィンドウ](#メンテナンスウィンドウ)
@@ -29,7 +29,7 @@ Duration: 00:01:00
 
 ## 変更管理の機能
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - 変更管理
   - メンテナンスウィンドウ
@@ -39,7 +39,7 @@ Duration: 00:01:00
 
 ## メンテナンスウィンドウ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [AWS Systems Manager Maintenance Windows](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-maintenance.html)
 
@@ -55,7 +55,7 @@ Duration: 00:01:00
 
 ## オートメーション
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [AWS Systems Manager Automation](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-automation.html)
 
@@ -72,7 +72,7 @@ SSM 自動化タイプのドキュメントを利用することで、多くの�
 
 ## Change Manager
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 [AWS Systems Manager Change Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/change-manager.html)
 
@@ -97,7 +97,7 @@ AWS の変更管理といえば、「AWS CloudTrail」や「AWS Config」を利�
 
 ## 変更カレンダー
 
-Duration: 00:10:00
+<!-- Duration: 00:10:00 -->
 
 [AWS Systems Manager Change Calendar](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-change-calendar.html)
 

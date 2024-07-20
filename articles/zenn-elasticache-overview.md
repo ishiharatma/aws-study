@@ -28,7 +28,7 @@ published: true
 
 ## Amazon ElastiCache とは
 
-Duration: 3:39:21
+<!-- Duration: 3:39:21 -->
 
 フルマネージドのインメモリキャッシングサービスで、Memcached または Redis プロトコルに互換性があります。
 
@@ -69,7 +69,7 @@ memory cache daemon の略でメムキャッシュディーと読みます｡
 
 ## Memcached と Redis の比較
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/SelectEngine.html
 
@@ -91,14 +91,14 @@ https://aws.amazon.com/jp/elasticache/redis-vs-memcached/
 
 ## どのように利用したらよいか？
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 - キャッシュは揮発性のあるデータであるため、消えて困るデータは保存しないほうがよいです。 -結果整合性（分散データベース環境でデータが更新された際に、一定時間経過後には最終的な一貫性が担保されること）を前提とした設計を行う必要があります。
 - TTL（Time to Live, 有効期限）を設定しましょう。データを保存しすぎて、メモリが溢れてしまうといったことが発生します。TTL は長すぎても TTL が切れる前にメモリが溢れることにもなります。また、TTL が切れるタイミングが同じデータが多く存在すると、CPU 使用率が上昇することがあります。
 
 ## DynamoDB で代用できる？
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。
 ただ、DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。
@@ -107,14 +107,14 @@ DynamoDB も Key-Value で低レイテンシーのサービスです。同じよ
 
 ## Amazon ElastiCache for Memcached
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 構成イメージはこのようになります。クラスタ化されていますが、レプリケーションの機能はありません。
 ![Redis Cluster/Replication](/images/elasticache/elasticache-memcached-cluster.png)
 
 ## Amazon ElastiCache for Redis
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 クラスタモード有効/無効　 × 　レプリケーション有/無のパターンがあります。
 クラスタモードは複数のシャードにデータを分散させることが出来ます。クラスタモードが有効でもシャードを１つに設定することも可能です。
@@ -133,7 +133,7 @@ Duration: 0:03:00
 
 ## 自動フェイルオーバー
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/AutoFailover.html
 
@@ -141,7 +141,7 @@ https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/AutoFailover.h
 
 ## Amazon ElastiCache for Redis の Global Datastore
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html
 

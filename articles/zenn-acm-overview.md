@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [AWS Certificate Manager とは](#aws-certificate-manager-とは)
 - [リージョナルサービスであること](#リージョナルサービスであること)
@@ -26,7 +26,7 @@ Duration: 00:01:00
 
 ## AWS Certificate Manager とは
 
-Duration: 00:57:12
+<!-- Duration: 00:57:12 -->
 
 AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続リソースで使用するパブリックおよびプライベート SSL/TLS 証明書をプロビジョニング、管理するサービスです。
 
@@ -44,7 +44,7 @@ AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続�
 
 ## リージョナルサービスであること
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ACM はリージョンごとのサービスであるということを意識する必要があります。
 他の AWS サービスで利用する場合は、リージョンの関係を意識しないといけません。
@@ -61,7 +61,7 @@ ALB に使用する場合は、ALB のリージョンで発行します。
 
 ## 使用可能なサービス
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner、API Gateway、CloudFormation などで利用できます。
 
@@ -69,7 +69,7 @@ Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner�
 
 ## パブリック証明書とプライベート証明書
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 FAQ の [Q: パブリック証明書とプライベート証明書の違いは何ですか?](https://aws.amazon.com/jp/certificate-manager/faqs/) に記載があります。
 
@@ -79,7 +79,7 @@ FAQ の [Q: パブリック証明書とプライベート証明書の違いは�
 
 ## インポートされた証明書
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 サードパーティーの証明書を使う場合はインポートすることで、CloudFront、ELB、API Gateway で利用することができます。
 ただし、自動更新は行われないため、証明書が切れる前に手動でインポートする必要があります。

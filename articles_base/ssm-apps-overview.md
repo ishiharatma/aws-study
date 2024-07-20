@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [アプリケーション管理の機能](#アプリケーション管理の機能)
 - [パラメータストア](#パラメータストア)
@@ -30,7 +30,7 @@ Duration: 00:01:00
 
 ## パラメータストア
 
-Duration: 00:20:00
+<!-- Duration: 00:20:00 -->
 
 [AWS Systems Manager Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html)
 
@@ -233,7 +233,7 @@ aws ssm get-parameters-by-path --path /prod --with-decryption --query "Parameter
 
 ## AppConfig
 
-Duration: 00:10:00
+<!-- Duration: 00:10:00 -->
 
 [AWS AppConfig](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/appconfig.html)
 
@@ -292,7 +292,7 @@ EC2 もサポートされるようになりました。
 
 ## アプリケーションマネージャー
 
-Duration: 00:10:00
+<!-- Duration: 00:10:00 -->
 
 [AWS Systems Manager Application Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/application-manager.html)
 

@@ -93,7 +93,7 @@ const bedrockLambdaFunction = new lambda.Function(
     ),
     handler: "index.lambda_handler",
     runtime: lambda.Runtime.PYTHON_3_12,
-    timeout: cdk.Duration.seconds(25),
+    timeout: cdk.<!-- Duration.seconds(25), -->
     architecture: lambda.Architecture.ARM_64, //X86_64,
     environment: {
       S3_BUCKET_NAME: resultS3Bucket.bucketName,

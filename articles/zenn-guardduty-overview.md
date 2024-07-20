@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [GuardDuty とは](#guardduty-とは)
 - [GuardDuty が必要な理由](#guardduty-が必要な理由)
@@ -33,7 +33,7 @@ Duration: 00:01:00
 
 ## GuardDuty とは
 
-Duration: 0:46:52
+<!-- Duration: 0:46:52 -->
 
 AWS 環境のセキュリティを継続的にチェックしてくれるサービスです。
 
@@ -55,7 +55,7 @@ AWS 環境のセキュリティを継続的にチェックしてくれるサー�
 
 ## GuardDuty が必要な理由
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 Well-Architected フレームワークという考え方のうち、「[セキュリティの柱](https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/framework/security.html)」に、「[発見的統制](https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/framework/sec-detection.html)」というものがあります。
 
@@ -65,7 +65,7 @@ Well-Architected フレームワークという考え方のうち、「[セキ�
 
 ## 特徴
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 - 30 日間は無料
 - AWS アカウントレベルで検出
@@ -138,7 +138,7 @@ RegionConfigs.forEach((x) => {
 
 ## 脅威検出
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 ログなどから脅威を検出する機能です。検出する機能なので、通知するには EventBridge と SNS を利用する必要があります。（[GuardDuty の検出結果を通知する CloudWatch Events ルールの作成](https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_findings_cloudwatch.html#guardduty_cloudwatch_severity_notification)）
 
@@ -151,7 +151,7 @@ EventBridge のイベントパターン指定例
 
 ## 検出結果タイプ
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 GuardDuty を有効化したときにデフォルトで次のログを検査します。CloudTrail の有効化や VPC Flow logs や DNS ログの設定がされていなくても GuardDuty によって個別に取得されます。
 ただし、調査などの理由から各サービスのログも有効化しておくのを推奨します。
@@ -187,7 +187,7 @@ IP アドレスまたは CIDR によって脅威の検出を制御できます�
 
 ## マルウェア検知
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 インスタンスで動作しているマルウェアを検出できます。
 通常、サードパーティ製のマルウェア検知ソフトの場合、インスタンスにエージェントをインストールしなければならないが、GuardDuty を使えばエージェントレスでマルウェアを検知できます。
@@ -215,7 +215,7 @@ Duration: 0:03:00
 
 ## 検出結果通知
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 検出結果通知は、GuardDuty から Amazon EventBridge に発信されるイベントを検出し、SNS と連携することで実現できます。
 
@@ -368,7 +368,7 @@ done
 
 ## 複数アカウントの管理
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [Amazon GuardDuty での複数のアカウントの管理](https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_accounts.html)
 

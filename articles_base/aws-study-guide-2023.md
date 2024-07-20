@@ -473,4 +473,3 @@ AWS 初心者が AWS を理解していくのに必要になる学習教材に�
     - https://youtu.be/eWogEkzOI8E
   - Amazon QuickSight アップデート
     - https://youtu.be/jjxr2j990rc
-

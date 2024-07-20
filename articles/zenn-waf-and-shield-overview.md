@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [OSI モデルとは](#osi-モデルとは)
 - [AWS Shield とは](#aws-shield-とは)
@@ -42,7 +42,7 @@ Duration: 00:01:00
 
 ## OSI モデルとは
 
-Duration: 0:1:00
+<!-- Duration: 0:1:00 -->
 
 | 層  | 名称                 | プロトコル            |
 | --- | -------------------- | --------------------- |
@@ -58,7 +58,7 @@ Duration: 0:1:00
 
 ## AWS Shield とは
 
-Duration: 1:00:33
+<!-- Duration: 1:00:33 -->
 
 AWS Shield は、AWS リソースを DDoS（分散型サービス拒否,[DDoS 攻撃（Distributed Denial of Service attack）とは(Wikipedia)](https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83)）攻撃から保護するためのサービスです。 Shield は、レイヤー 3 およびレイヤー 4(OSI モデルの項を参照)の攻撃（IP、TCP、UDP レベルでの攻撃）を自動的に検出および防止し、AWS のグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Flood などが含まれます。
 
@@ -76,7 +76,7 @@ AWS Shield は、AWS リソースを DDoS（分散型サービス拒否,[DDoS �
 
 ## AWS WAF とは
 
-Duration: 1:58:37
+<!-- Duration: 1:58:37 -->
 
 AWS WAF（Web Application Firewall） とは、Web アプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAF は、HTTP / HTTPS リクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAF は、XSS（クロスサイトスクリプティング）、SQL インジェクション、CSRF（クロスサイトリクエストフォージェリ）などの Web アプリケーション攻撃を検出および防止するための機能を提供します。
 
@@ -102,7 +102,7 @@ AWS WAF（Web Application Firewall） とは、Web アプリケーションの�
 
 ## AWS Shield の機能
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 AWS Shield は、 Standard と Advanced の２つがあります。
 Standard はデフォルトで有効になっており、追加料金なしで利用できます。
@@ -126,7 +126,7 @@ Advanced は有料サービスで、有効化すると月額 3,000 USD です。
 
 ### Global threat dashboard
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 全ての AWS アカウントで観測された DDoS イベントを表示するダッシュボードです。これを見ることで、個別に攻撃を受けたのか、大規模な攻撃が発生しているのかが分かります。
 
@@ -138,7 +138,7 @@ Duration: 0:01:00
 
 ## AWS WAF の機能
 
-Duration: 0:15:00
+<!-- Duration: 0:15:00 -->
 
 ### なぜ Web Application Firewall が必要か
 
@@ -307,7 +307,7 @@ WordPress や PHP など特定タイプのアプリケーションを保護す�
 
 ### ログ
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 #### ログ出力
 

@@ -37,7 +37,7 @@
 
 ## AWS Lambda とは
 
-Duration: 4:01:22
+<!-- Duration: 4:01:22 -->
 
 サーバーをプロビジョニングまたは管理せずにコードを実行できるようにするコンピューティングサービスです。FaaS(Function as a Service：ファース、エフアース)に分類されるサービスです。
 
@@ -71,7 +71,7 @@ Duration: 4:01:22
 
 ## ネットワーク
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 Lambda は Lambda サービスが所有する VPC 内で実行されています。
 ![lambda-eni.png](/images/lambda/invoke-path-320.jpg)
@@ -82,7 +82,7 @@ Lambda を自 VPC に接続すると、Lambda サービスの VPC と自 VPC を
 
 ## 実行環境
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.html
 
@@ -128,7 +128,7 @@ SnapStart の使用に追加コストは発生しませんが、利用するに�
 
 ## 命令セットアーキテクチャ
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html
 
@@ -145,7 +145,7 @@ ARM と x86：その違い：https://www.redhat.com/ja/topics/linux/ARM-vs-x86
 
 ## Lambda のアクセス権限
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAM ポリシーが含まれます）とリソースベースのポリシーがあります。
 
@@ -164,7 +164,7 @@ Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ば
 
 ## トリガー
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 Pull モデルと Push モデルがあります。
 
@@ -195,7 +195,7 @@ Push モデルは、イベント駆動型の実行です。Lambda がイベン�
 
 ## 呼び出しタイプ
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 AWS SDK や CLI から実行する際に、`InvocationType` を指定することでコントロールできます。
 
@@ -252,7 +252,7 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
 
 ## 対応ランタイム
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 - Node.js
   - 18,16,14,12
@@ -289,7 +289,7 @@ Duration: 0:01:30
 
 ## Layer
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-layers.html
 
@@ -298,7 +298,7 @@ Lambda 関数で使用するライブラリとその他の依存関係をパッ�
 
 ## デプロイパッケージ
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 関数をデプロイするには、関数コードと依存関係を含む .zip ファイルまたは、[Open Container Initiative](https://opencontainers.org/) (OCI) の仕様に準拠したコンテナーイメージでデプロイできます。
 
@@ -374,7 +374,7 @@ CLoudFormation で関数をデプロイするには、次の方法がありま�
         ),
         handler: 'index.lambda_handler',
         runtime: lambda.Runtime.PYTHON_3_9,
-        timeout: cdk.Duration.seconds(300),
+        timeout: cdk.<!-- Duration.seconds(300), -->
         architecture: lambda.Architecture.ARM_64,
         environment: {
           LOG_LEVEL: props.lambdaLogLevel ?? 'INFO',
@@ -403,7 +403,7 @@ Function1:
 
 ## エフェメラルストレージ(一時領域)
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 AWS Lambda で最大 10 GB のエフェメラルストレージをサポート可能に
 https://aws.amazon.com/jp/blogs/news/aws-lambda-now-supports-up-to-10-gb-ephemeral-storage/
@@ -412,7 +412,7 @@ https://aws.amazon.com/jp/blogs/news/aws-lambda-now-supports-up-to-10-gb-ephemer
 
 ## 同時実行
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 ある時点で実行されているリクエストの数のことです。
 Lambda 関数の同時実行数は同一アカウントの同一リージョン内につき、1,000 に制限されています。
@@ -426,7 +426,7 @@ Lambda 関数が平均 10 秒かかり、1 秒あたり 100 個のイベント�
 
 ## Qualifier
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-aliases.html
 
@@ -440,7 +440,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-aliases.html
 
 ## 関数 URL
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-urls.html
 
@@ -460,7 +460,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/urls-invocation.html
 
 ## モニタリング
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-monitoring.html
 
@@ -480,7 +480,7 @@ https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory
 
 ## ベストプラクティス
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/best-practices.html
 
@@ -502,7 +502,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/best-practices.html
 
 ## クォータ
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/gettingstarted-limits.html
 

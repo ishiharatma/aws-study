@@ -33,7 +33,7 @@ published: true
 
 ## ELB とは
 
-Duration: 02:02:11
+<!-- Duration: 02:02:11 -->
 
 ![elb](/images/elb/elb.png)
 
@@ -57,7 +57,7 @@ Elastic Load Balancing は、受信したトラフィックを複数のアベイ
 
 ## ELB の基本
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 - Internet-Facing（インターネットからアクセス可）と Internal（VPC 内など）の 2 種類があります。
   - Internet-Facing はパブリックサブネットのみ配置可
@@ -81,7 +81,7 @@ Duration: 00:02:00
 
 ## ELB の種類
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 ### CLB:Classic Load Balancer
 
@@ -182,7 +182,7 @@ ALB は LCU、NLB は NLCU、GLB は GLCU と呼ばれるメトリクスがあ�
 
 ## サブネットに必要な CIDR
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 AWS ドキュメント > Elastic Load Balancing > [ロードバランサーのサブネット](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer)
 
@@ -192,7 +192,7 @@ ELB を配置するサブネットの CIDR は最小で 「27」が必要であ�
 
 ## スティッキーセッション
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 AWS ドキュメント > [Application Load Balancer のスティッキーセッション](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/sticky-sessions.html)
 
@@ -207,7 +207,7 @@ AWS ドキュメント > Network Load Balancer > [スティッキーセッショ
 
 ## クロスゾーン負荷分散
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 複数 AZ に跨るノードに対しても均等にトラフィックを分散するようにできるオプションです。
 
@@ -242,7 +242,7 @@ ELB 配下にあるノードが異なっている場合には以下のように�
 
 ## Connection Draining
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ELB の配下のノードを切り離す場合、いきなり切り離されると、ノードで実行中だった場合にアプリケーション側でエラーが出てしまいます。
 そのため、切り離し対象のノードへのリクエストが終わるまで一定時間切り離しを待機してくれる機能です。
@@ -252,7 +252,7 @@ ELB の配下のノードを切り離す場合、いきなり切り離される�
 
 ## アクセスログ
 
-Duration: 00:02:00
+<!-- Duration: 00:02:00 -->
 
 ELB のアクセスログは、S3 に出力することができます。アクセスログは 5 分ごとに出力されます。
 
@@ -297,7 +297,7 @@ AWS ドキュメント > [Classic Load Balancer ログのクエリ](https://docs
 
 ## 📖 他のサービスとの連携
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - 独自ドメインを使いたい
   - Amazon Route 53

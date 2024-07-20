@@ -40,7 +40,7 @@ published: true
 
 ## Amazon CloudFront とは
 
-Duration: 2:26:37
+<!-- Duration: 2:26:37 -->
 
 CloudFront とは、大容量キャパシティを持つ地理的に分散したサーバー群（エッジロケーション）にコンテンツをキャッシュしたり、代理配信をするコンテンツ配信ネットワーク (CDN（Content Delivery Network）) サービスです。
 
@@ -74,7 +74,7 @@ CloudFront は従量課金のサービスであるため、使った分だけの
 
 ## CloudFront の基本
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 ### ディストリビューション
 
@@ -135,7 +135,7 @@ CloudFront エッジでコンテンツを gzip および Brotli 圧縮するこ�
 
 ## 料金クラス
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [価格クラス](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPriceClass)
 
@@ -159,7 +159,7 @@ CloudFront はデフォルトでは世界中全てのエッジロケーション
 
 ## 署名付き URL と署名付き Cookie
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [署名付き URL と署名付き Cookie を使用したプライベートコンテンツの提供](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 
@@ -195,7 +195,7 @@ aws cloudfront sign \
 
 ## S3 オリジンへのアクセス制限
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [Amazon S3 オリジンへのアクセスの制限](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
 
@@ -215,7 +215,7 @@ OAI は引き続き使用することができますが、2022 年 12 月以降�
 
 ## ALB オリジンへのアクセス制限
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [Application Load Balancers へのアクセスを制限する](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/restrict-access-to-load-balancer.html)
 
@@ -229,7 +229,7 @@ ALB を CloudFront 経由のアクセスに限定することで、CloudFront �
 
 ## コンテンツを地理的に制限
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [コンテンツの地理的ディストリビューションの制限](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/georestrictions.html)
 
@@ -243,7 +243,7 @@ CloudFront は、サードパーティーのデータベースを使用して、
 
 ## AWS Shield
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 CloudFront は、AWS Shield Standard によって追加料金なしで保護されています。
 
@@ -255,7 +255,7 @@ AWS Shield Advanced によってさらに高レベルの保護が可能になり
 
 ## AWS WAF によるアクセスコントロール
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [AWS WAF を使用してコンテンツへのアクセスの管理](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html)
 
@@ -265,7 +265,7 @@ CDN は様々な脅威に晒されています。AWS WAF を利用して、そ�
 
 ## CloudFront Origin Shield
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [Amazon CloudFront Origin Shield の使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html)
 
@@ -285,7 +285,7 @@ CloudFront は、クライアントからのリクエストをエッジロケー
 
 ## AWS Lambda@Edge
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [関数を使用してエッジでカスタマイズ](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/edge-functions.html)
 
@@ -308,7 +308,7 @@ Duration: 0:01:30
 
 ## ログ記録
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [標準ログ (アクセスログ) の設定および使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html)
 
@@ -349,7 +349,7 @@ Kiesis Data Firehose を使用した場合、インターバルが 60 ～ 900 �
 
 ## 監視
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [Amazon CloudWatch による CloudFront メトリクスのモニタリング](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/monitoring-using-cloudwatch.html)
 
@@ -363,7 +363,7 @@ CloudFront はデフォルトで記録されるメトリクスと、追加設定
 
 ## Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [Using CloudFront continuous deployment to safely test CDN configuration changes](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html)（2023 年 1 月時点で英語のみ）
 

@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [Aurora について知るには](#aurora-について知るには)
 - [Aurora について知るには(その他)](#aurora-について知るにはその他)
@@ -31,7 +31,7 @@ Duration: 00:01:00
 
 ## Aurora について知るには
 
-Duration: 03:22:41
+<!-- Duration: 03:22:41 -->
 
 【AWS Black Belt Online Seminar】[Amazon Aurora MySQL(YouTube)](https://youtu.be/VerVNchaqVY)(55:41)
 
@@ -59,7 +59,7 @@ Duration: 03:22:41
 
 ## Aurora について知るには(その他)
 
-Duration: 03:05:36
+<!-- Duration: 03:05:36 -->
 
 【AWS Summit Tokyo 2019】[AWS におけるデータベースの選択指針](https://www.youtube.com/watch?v=h1r8AzOdlqo)(39:25)
 
@@ -79,7 +79,7 @@ Duration: 03:05:36
 
 ## Amazon Aurora とは
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 MySQL および PostgreSQL と互換性のあるクラウド向けのリレーショナルデータベースを提供するフルマネージドサービスです。
 
@@ -87,7 +87,7 @@ MySQL および PostgreSQL と互換性のあるクラウド向けのリレー�
 
 ## サポートされているデータベースエンジン
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - PostgreSQL(互換)
 - MySQL(互換)
@@ -96,7 +96,7 @@ Duration: 00:01:00
 
 ## Aurora の基本的な構成
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS とは異なり、Aurora では DB インスタンスとストレージが分離されています。これにより、RDS の 2 倍の性能を発揮すると言われています。
 
@@ -119,13 +119,13 @@ Aurora を構成する要素は次の通りです。
 
 ## SLA
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [Amazon Aurora Service Level Agreement](https://aws.amazon.com/jp/rds/aurora/sla/)
 
 ## 可用性
 
-Duration: 00:10:00
+<!-- Duration: 00:10:00 -->
 
 ### 単一構成
 
@@ -169,7 +169,7 @@ AZ 障害時にはインスタンスが利用できなくなります。
 
 ## レプリカの昇格
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 レプリカを手動でフェールオーバーさせることで、プライマリインスタンスに昇格させることができます。
 
@@ -177,7 +177,7 @@ Duration: 00:05:00
 
 ## インスタンスタイプ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 RDS のインスタンスタイプは、「db.m6g.large」のように `db` から始まります。それ以降は、EC2 のインスタンスタイプと同じ構成となっています。
 
@@ -185,7 +185,7 @@ RDS のインスタンスタイプは、「db.m6g.large」のように `db` か�
 
 ## スケールアップ/ダウン
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 DB インスタンスはインスタンスタイプを変更することができます。インスタンスタイプの変更ではダウンタイムが発生します。
 
@@ -195,7 +195,7 @@ DB インスタンスはインスタンスタイプを変更することがで�
 
 ## ストレージの自動スケーリング
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 クラスタボリュームはデータベースのデータ量が増えるにつれて自動的に増加します。データが削除された場合は、データに割り当てられていた領域が解放され、ストレージ料金を最小限に抑えることができます。
 
@@ -205,7 +205,7 @@ Duration: 00:05:00
 
 ## Aurora のログ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 オンプレミスのデータベースでは、データベースのログはファイルシステムに存在します。ログが必要であれば、サーバーにログインすることでログを取得することができました。
 
@@ -224,7 +224,7 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 
 ## Serverless
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユースケースは次の通りです。安定したトラフィックが予想できる場合は Provisioned インスタンス（通常の Aurora）を利用するほうが良いです。
 
@@ -255,13 +255,13 @@ Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユー
 
 ## Global Database
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ![globaldatabase](/images/aurora/aurora-globaldatabase.png)
 
 ## Blue/Green Deployments(New: 2022-11-27)
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS](https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/)
 
@@ -285,6 +285,6 @@ Duration: 00:01:00
 
 ## 📖 まとめ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ![aurora](/images/all/aurora.png)

@@ -131,4 +131,3 @@ aws ec2 describe-network-interfaces --filters "Name=attachment.instance-id,Value
 ## まとめ
 
 今回のアップデートで、EC2インスタンスに自動割り当てされたパブリックIPv4アドレスをコンソールまたは、AWS CLIで簡単に追加・削除できることを確認できました。
-

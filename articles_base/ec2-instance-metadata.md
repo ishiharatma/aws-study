@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [インスタンスメタデータ とは](#インスタンスメタデータ-とは)
 - [IMDSv2](#imdsv2)
@@ -30,4 +30,4 @@ Duration: 00:01:00
 
 ## xx の基本
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->

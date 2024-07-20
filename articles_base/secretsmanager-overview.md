@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [AWS Secrets Manager とは](#aws-secrets-manager-とは)
 - [Systems Manager の SSM Parameter Store とどちらを選択するか？](#systems-manager-の-ssm-parameter-store-とどちらを選択するか)
@@ -23,7 +23,7 @@ Duration: 00:01:00
 
 ## AWS Secrets Manager とは
 
-Duration: 0:34:51
+<!-- Duration: 0:34:51 -->
 
 データベース認証情報、API キー、その他のシークレットのライフサイクルを通しての管理、取得、ローテーションできるサービスです。
 
@@ -41,7 +41,7 @@ Duration: 0:34:51
 
 ## Systems Manager の SSM Parameter Store とどちらを選択するか？
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 同様のサービスに [Systems Manager の Parameter Store](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html) というものがあり、どちらを選択するか迷うことがあります。
 
@@ -73,7 +73,7 @@ Duration: 0:01:30
 
 ## 管理できるシークレットのタイプ
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 基本的にデータベースの接続情報が選択できます。
 
@@ -83,7 +83,7 @@ Duration: 0:01:00
 
 ## シークレットの階層化
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 名前に"/"を使うことで、疑似的に階層化の管理が可能です。
 
@@ -95,7 +95,7 @@ Duration: 0:01:00
 
 ## 暗号化
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 作成するシークレットは KMS を使った暗号化が可能です。デフォルトでは、`aws/secretsmanager` という AWS マネージド型キーが使用できます。
 
@@ -103,7 +103,7 @@ Duration: 0:01:00
 
 ## 自動ローテーション
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 自動的にパスワードを変更する[ローテーション](https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/rotating-secrets.html)を設定することができます。
 
@@ -115,7 +115,7 @@ Duration: 0:01:30
 
 ## レプリケーション
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 シークレットは、指定した AWS リージョンにのみ作成されますが、
 [レプリケーション](https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html)することで複数のリージョンで同じ名前のシークレットを保持することが可能です。
@@ -131,13 +131,13 @@ Duration: 0:01:30
 
 ## 使用状況の監査
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 「[AWS CloudTrail による AWS Secrets Manager イベントのログ記録](https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/monitoring-cloudtrail.html)」や「[Amazon AWS Secrets Manager でのモニタリング CloudWatch](https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/monitoring-cloudwatch.html)」 にも記載されているように API 実行の記録やメトリクスを把握することができます。
 
 ## シークレットの削除
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 シークレットを削除する場合、最短で 7 日間の猶予期間後に削除されるようにスケジュールされます。猶予期間の間はシークレットが利用不可になり、この間は料金が発生しません。
 

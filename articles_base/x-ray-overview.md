@@ -42,7 +42,7 @@ Amazon EC2縲、mazon ECS縲、WS Lambda縲、WS Elastic Beanstalk縲、PI Gateway 縺ｪ縺
 
 ## AWS X-Ray 縺ｮ讒矩
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 ![xray-000](/images/xray/xray-000.png)
 

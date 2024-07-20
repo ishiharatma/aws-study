@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [Amazon API Gateway とは](#amazon-api-gateway-とは)
 - [API Gateway の種類](#api-gateway-の種類)
@@ -32,7 +32,7 @@ Duration: 00:01:00
 
 ## Amazon API Gateway とは
 
-Duration: 00:50:34
+<!-- Duration: 00:50:34 -->
 
 あらゆる規模の REST、HTTP、および WebSocket API を作成、公開、維持、モニタリング、およびセキュア化するための AWS のサービスです。
 簡単にいうと、API の管理や実行を容易にしてくれる AWS のフルマネージドサービスです。
@@ -55,7 +55,7 @@ API のバージョン管理、レスポンスのモニタリング、認証な�
 
 ## API Gateway の種類
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - REST API
   - RESTful API を使用したい場合
@@ -68,7 +68,7 @@ Duration: 00:01:00
 
 ## API Gateway の料金
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [Amazon API Gateway の料金](https://aws.amazon.com/jp/api-gateway/pricing/)
 
@@ -82,7 +82,7 @@ HTTP API では API コール数、REST API では API コール数とキャッ�
 
 ## OpenAPI を使用した REST API の設定
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 OpenAPI v2.0 および OpenAPI v3.0 定義ファイルをサポートしており、インポートすることで既存の API 定義をそのまま移行したり、新しい API を構築することができます。
 
@@ -92,7 +92,7 @@ OpenAPI v2.0 および OpenAPI v3.0 定義ファイルをサポートしてお�
 
 ## Amazon API Gateway のクォータ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 リクエストやレスポンスに影響する主なクォーターは次の通りです。
 
@@ -148,7 +148,7 @@ REST API は、3 種類のエンドポイントタイプが選択できます。
 
 ## API Gateway のメトリクス
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 以下のメトリクスを監視することを検討してください。
 
@@ -176,7 +176,7 @@ Duration: 00:03:00
 
 ## X-Ray でのトレース
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [X-Ray を使用した REST API へのユーザーリクエストのトレース](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/apigateway-xray.html)
 
@@ -192,6 +192,6 @@ Duration: 00:01:00
 
 ## 📖 まとめ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ![apigateway](/images/all/apigateway.png)

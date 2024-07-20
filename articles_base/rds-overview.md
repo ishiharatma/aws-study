@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [RDS について知るには](#rds-について知るには)
 - [RDS について知るには(その他)](#rds-について知るにはその他)
@@ -33,7 +33,7 @@ Duration: 00:01:00
 
 ## RDS について知るには
 
-Duration: 00:52:48
+<!-- Duration: 00:52:48 -->
 
 【AWS Black Belt Online Seminar】[Amazon Relational Database Service (Amazon RDS)(YouTube)](https://youtu.be/nDme-ET-_EY)(52:48)
 
@@ -49,7 +49,7 @@ Duration: 00:52:48
 
 ## RDS について知るには(その他)
 
-Duration: 03:05:36
+<!-- Duration: 03:05:36 -->
 
 【AWS Summit Tokyo 2019】[AWS におけるデータベースの選択指針](https://www.youtube.com/watch?v=h1r8AzOdlqo)(39:25)
 
@@ -69,7 +69,7 @@ Duration: 03:05:36
 
 ## Amazon RDS とは
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 リレーショナルデータベースを提供するフルマネージドサービスです。
 
@@ -77,7 +77,7 @@ Duration: 00:01:00
 
 ## サポートされているデータベースエンジン
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 サポートされているデータベースエンジンは以下の通りです。それぞれのデータベースエンジンでバージョンや機能などサポートされている範囲が異なるので、利用するには確認が必要です。
 
@@ -94,7 +94,7 @@ Duration: 00:01:00
 
 ## RDS の基本的な構成
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS は EC2 に MySQL や PostgreSQL をインストールする場合と同じように、インスタンスに EBS が紐づいており、ミラーリング用の EBS で耐久性を高めています。
 
@@ -114,13 +114,13 @@ RDS は EC2 に MySQL や PostgreSQL をインストールする場合と同じ�
 
 ## SLA
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [Amazon RDS Service Level Agreement](https://aws.amazon.com/rds/sla/?nc1=h_ls)
 
 ## 可用性
 
-Duration: 00:15:00
+<!-- Duration: 00:15:00 -->
 
 ### シングル AZ
 
@@ -184,7 +184,7 @@ RDS の自動バックアップは、スタンバイインスタンスから取�
 
 ## リードレプリカ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 読み取り頻度の高いデータベースのワークロードに対して、スケールアウトすることにより、パフォーマンスを向上させます。
 
@@ -216,7 +216,7 @@ Duration: 00:05:00
 
 ## リードレプリカの昇格
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 リードレプリカは、スタンドアロン DB インスタンスに昇格させることができます。
 
@@ -230,7 +230,7 @@ Duration: 00:05:00
 
 ## RDS のクロスリージョン自動バックアップ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS のクロスリージョン自動バックアップは、レプリケーション先のリージョンに自動スナップショットとトランザクションログのバックアップが保存されます。
 
@@ -272,7 +272,7 @@ RDS のクロスリージョン自動バックアップは、レプリケーシ�
 
 ## インスタンスタイプ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 RDS のインスタンスタイプは、「db.m6g.large」のように `db` から始まります。それ以降は、EC2 のインスタンスタイプと同じ構成となっています。
 
@@ -280,7 +280,7 @@ RDS のインスタンスタイプは、「db.m6g.large」のように `db` か�
 
 ## スケールアップ/ダウン
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 DB インスタンスはインスタンスタイプを変更することができます。インスタンスタイプの変更ではダウンタイムが発生します。
 
@@ -290,7 +290,7 @@ DB インスタンスはインスタンスタイプを変更することがで�
 
 ## ストレージクラス
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS で選択できるストレージクラスは次の通りです。
 
@@ -311,7 +311,7 @@ RDS で選択できるストレージクラスは次の通りです。
 
 ## ストレージの自動スケーリング
 
-Duration: 00:08:00
+<!-- Duration: 00:08:00 -->
 
 [Amazon RDS ストレージの自動スケーリングによる容量の自動管理](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
 
@@ -357,7 +357,7 @@ RDS のストレージの自動スケーリングは有効にする前に、ド�
 
 ## RDS のログ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 オンプレミスのデータベースでは、データベースのログはファイルシステムに存在します。ログが必要であれば、サーバーにログインすることでログを取得することができました。
 
@@ -389,7 +389,7 @@ CloudWatch Logs にエクスポートすることで、ログの検索やサブ�
 
 ## Blue/Green Deployments(New: 2022-11-27)
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS](https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/)
 
@@ -413,6 +413,6 @@ Duration: 00:01:00
 
 ## 📖 まとめ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ![rds](/images/all/rds.png)

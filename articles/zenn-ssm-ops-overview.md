@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [運用管理の機能](#運用管理の機能)
 - [エクスプローラー](#エクスプローラー)
@@ -27,7 +27,7 @@ Duration: 00:01:00
 
 ## 運用管理の機能
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - 運用管理
   - エクスプローラー
@@ -44,7 +44,7 @@ Duration: 00:01:00
 
 ## エクスプローラー
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 [AWS Systems Manager Explorer](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/Explorer.html)
 
@@ -64,7 +64,7 @@ Duration: 00:03:00
 
 ## インシデントマネージャー
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 [AWS Systems Manager Incident Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/incident-manager.html)
 
@@ -90,7 +90,7 @@ CloudWatch Alarm や EventBrige Events から検出された様々な異常状�
 
 ## OpsCenter
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 [AWS Systems Manager OpsCenter](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/OpsCenter.html)
 

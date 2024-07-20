@@ -35,7 +35,7 @@
 
 ## CloudWatch とは
 
-Duration: 2:27:15
+<!-- Duration: 2:27:15 -->
 
 モニタリングに関する様々な機能を提供するサービスです。
 
@@ -61,7 +61,7 @@ Duration: 2:27:15
 
 ## オブザーバビリティ（Observability）とは
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 「可観測性」といい、システムの外部から、システム内部の状態が推測・把握できるかという意味です。
 
@@ -73,7 +73,7 @@ Duration: 0:01:00
 
 ## CloudWatch Metrics
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 メトリクスを収集し、統計を取得
 
@@ -88,7 +88,7 @@ Duration: 0:01:00
 
 ## CloudWatch Metric Math
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [Metric Math を使用する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/using-metric-math.html)
 
@@ -108,7 +108,7 @@ Duration: 0:03:00
 
 ## CloudWatch Metric Streams
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [メトリクスストリームの使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html)
 
@@ -125,7 +125,7 @@ AWS サービスはもちろん、New Relic や Datadog のような外部の Sa
 
 ## CloudWatch Alarms
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 ![CloudWatchAlarm](/images/cloudwatch/CloudWatchAlarm.png)
 
@@ -145,7 +145,7 @@ ALARM(CPUUtilizationTooHigh) AND ALARM(DiskReadOpsTooHigh)
 
 ## CloudWatch Logs
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 ログを集約できるサービスです。ロググループ＞ログストリーム という形式で格納されます。
 ロググループ単位で保存期間を任意に設定することで、コスト削減できます。
@@ -157,7 +157,7 @@ kinesis と連携することでログを S3 に転送することもできま�
 
 ## CloudWatch エージェント
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [CloudWatch エージェントを使用して Amazon EC2 インスタンスとオンプレミスサーバーからメトリクスとログを収集する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Install-CloudWatch-Agent.html)
 
@@ -175,7 +175,7 @@ EC2 やオンプレミスサーバに CloudWatch エージェントをインス�
 
 ## CloudWatch Dashboards
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 ![CloudWatchDashboards](/images/cloudwatch/CloudWatchDashboards.jpg)
 
@@ -183,14 +183,14 @@ CloudWatch にて収集したデータをグラフなどで表示するサービ
 
 ## CloudWatch Events / EventBridge
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 現在は、拡張された Amazon EventBridge を利用します
 時間や、他のリソースなど、イベント駆動アーキテクチャを実現するためのサービスです
 
 ## CloudWatch Metrics Insights
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [CloudWatch Metrics Insights を使用してメトリクスをクエリする](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/query_with_cloudwatch-metrics-insights.html)
 
@@ -215,7 +215,7 @@ SQL が書けなくてもクエリビルダーを使うことで簡単に作成�
 
 ## CloudWatch Logs Insights
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [チュートリアル: サンプルクエリを実行および変更する](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/logs/CWL_AnalyzeLogData_RunSampleQuery.html)
 
@@ -232,7 +232,7 @@ fields @message
 
 ## CloudWatch Container Insights
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 ![CloudWatchContainerInsights](/images/cloudwatch/CloudWatchContainerInsights.jpg)
 
@@ -259,7 +259,7 @@ ECS コンテナのクラスター設定で `有効` にすることで利用で
 
 ## CloudWatch Lambda Insights
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [Lambda Insights の使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/Lambda-Insights.html)
 
@@ -276,7 +276,7 @@ Duration: 0:03:00
 
 ## CloudWatch Contributor Insights
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [Contributor Insights を使用した高カーディナリティデータの分析](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/ContributorInsights.html)
 
@@ -293,7 +293,7 @@ CloudWatch Logs の特定箇所を抽出して、可視化することができ�
 
 ## CloudWatch Application Insights
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [Amazon CloudWatch Application Insights](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html)
 
@@ -315,7 +315,7 @@ CloudWatch コンソールから、[Application Insight の使用を開始する
 
 ## CloudWatch ServiceLens
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 ![CloudWatchServiceLens](/images/cloudwatch/CloudWatchServiceLens.jpg)
 
@@ -327,7 +327,7 @@ Duration: 0:03:00
 
 ## CloudWatch Resource Health
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 CPU やメモリの使用率の状況を視覚的に把握することができるサービスです。管理している EC2 の台数が多い場合はカッコイイ表示ができます。
 
@@ -347,7 +347,7 @@ CPU やメモリの使用率の状況を視覚的に把握することができ�
 
 ## CloudWatch Synthetics
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 ![CloudWatchSynthetics](/images/cloudwatch/CloudWatchSynthetics.jpg)
 
@@ -382,7 +382,7 @@ Web サイトや URL、REST API に対してのモニタリングを自動で実
 
 ## CloudWatch Evidently
 
-Duration: 0:02:00
+<!-- Duration: 0:02:00 -->
 
 ![CloudWatchEvidently](/images/cloudwatch/CloudWatchEvidently.jpg)
 
@@ -400,7 +400,7 @@ Duration: 0:02:00
 
 ## CloudWatch Real-User Monitoring (RUM)
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 ![CloudWatchRUM](/images/cloudwatch/CloudWatchRUM.png)
 
@@ -412,7 +412,7 @@ JavaScript のコードスニペットをクライアントアプリに埋め込
 
 ## CloudWatch Anomaly Detection
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [CloudWatch 異常検出の使用](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/CloudWatch_Anomaly_Detection.html)
 

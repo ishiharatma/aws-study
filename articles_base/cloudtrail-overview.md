@@ -21,7 +21,7 @@
 
 ## CloudTrail とは
 
-Duration: 0:59:46
+<!-- Duration: 0:59:46 -->
 
 CloudTrail は、AWS アカウントのガバナンス、コンプライアンス、運用監査、リスク監査を行うためのサービスです。
 アカウントのアクティビティをログ記録し、継続的にモニタリングできます。
@@ -40,7 +40,7 @@ CloudTrail は、AWS アカウントのガバナンス、コンプライアン�
 
 ## CloudTrail の基本
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 CloudTrail で記録できるイベントは次のとおりです。
 
@@ -67,21 +67,21 @@ Insights イベントについては、[AWS ドキュメント](https://docs.aws
 
 ## 管理イベント
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 管理イベントは、アカウント内のリソースに対して実行されるすべての管理操作と、ほぼすべての非 API アクションが含まれます。
 非 API アクションとは、コンソールへのログイン（AwsConsoleSignIn）などです。
 
 ## データイベント
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 AWS IAM ロール、Amazon EC2 インスタンス、Amazon S3 バケット、AWS Lambda 関数などのリソースまたはサービス上または内部で実行される操作が含まれます。
 これらの操作は、AWS サービスを利用して構築したシステムの多くの場合で大量のアクティビティが発生するイベントのため、デフォルトでは無効になっています。
 
 ## CloudTrail ログファイル名の形式
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [CloudTrail ログファイル名の形式](https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html#cloudtrail-log-filename-format)
 
@@ -101,7 +101,7 @@ S3 にエクスポートした場合は、次のようになります。
 
 ## ログのフォーマット
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [ログファイルの例](https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-log-file-examples.html#cloudtrail-log-file-examples-section)
 
@@ -172,7 +172,7 @@ ConsoleLogin 時の例です。
 
 ## 監視する主要なログ
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 [Amazon CloudWatch Logs による CloudTrail ログファイルをモニタリングする](https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/monitor-cloudtrail-log-files-with-cloudwatch-logs.html)
 
@@ -227,7 +227,7 @@ Duration: 0:05:00
 
 ## AWS CloudTrail ログのクエリの Athena による分析
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [AWS CloudTrail ログのクエリ](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/cloudtrail-logs.html)
 
@@ -260,7 +260,7 @@ LIMIT 10;
 
 ## CloudTrail Lake
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-lake.html
 

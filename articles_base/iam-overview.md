@@ -28,7 +28,7 @@
 
 ## IAM とは
 
-Duration: 1:49:12
+<!-- Duration: 1:49:12 -->
 
 ID と AWS のサービスおよびリソースへのアクセスを安全に管理するサービスです。
 
@@ -54,7 +54,7 @@ IAM の料金 はありません。
 
 ## 認証・認可とは
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 IAM を理解する前に、「認証・認可」について把握しておく必要があります。
 
@@ -67,7 +67,7 @@ IAM を理解する前に、「認証・認可」について把握しておく�
 
 ## IAM ユーザー
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 AWS アカウントを利用するときに使用するユーザーです。ユーザーは、次のようなものを管理することができます。
 
@@ -122,7 +122,7 @@ CodeCommit には、Git 認証情報を使用しなくても接続できます�
 
 ## IAM ポリシー
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 [IAM でのポリシーとアクセス許可](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies.html)
 
@@ -179,7 +179,7 @@ Duration: 0:05:00
 
 ### ポリシーの論理評価
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [ポリシーの評価論理](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_evaluation-logic.html)
 
@@ -198,7 +198,7 @@ Duration: 0:03:00
 
 ## IAM ロール
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [IAM ロール](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles.html)
 
@@ -234,7 +234,7 @@ aws iam update-role --max-session-duration 43200
 
 ## IAM Permissions boundary（アクセス権限の境界）
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [IAM エンティティのアクセス許可境界](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_boundaries.html)
 
@@ -244,7 +244,7 @@ IAM ポリシーと Permissions boundary は AND 条件で評価されます。
 
 ## パスワードポリシー
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [IAM ユーザー用のアカウントパスワードポリシーの設定](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html)
 
@@ -262,7 +262,7 @@ IAM ユーザーのパスワードポリシーを設定することができま�
 
 ## IAM Policy Simulator
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [IAM Policy Simulator](https://policysim.aws.amazon.com/home/index.jsp?#)
 
@@ -277,7 +277,7 @@ Duration: 0:01:30
 
 ## IAM Access Advisor
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [最終アクセス情報を使用した AWS のアクセス許可の調整](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_access-advisor.html?icmpid=docs_iam_console)
 
@@ -290,7 +290,7 @@ Duration: 0:01:30
 
 ## IAM Access Analyzer
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [AWS Identity and Access Management Access Analyzer を使用する](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/what-is-access-analyzer.html)
 
@@ -302,7 +302,7 @@ AWS リソースに紐付いているポリシーを検査し、他 AWS アカ�
 
 ## ベストプラクティス
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html
 

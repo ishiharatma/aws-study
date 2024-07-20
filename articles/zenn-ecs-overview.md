@@ -29,7 +29,7 @@ published: true
 
 ## Amazon ECS とは
 
-Duration: 2:45:12
+<!-- Duration: 2:45:12 -->
 
 コンテナ化されたアプリケーションのデプロイ、管理、スケーリングを容易にするフルマネージドコンテナオーケストレーションサービスです。
 
@@ -69,7 +69,7 @@ Duration: 2:45:12
 
 ## ハンズオン
 
-Duration: 0:00:00
+<!-- Duration: 0:00:00 -->
 
 [Amazon ECS 入門ハンズオン](https://pages.awscloud.com/JAPAN-event-OE-Hands-on-for-Beginners-ECS-2022-reg-event.html)
 
@@ -77,7 +77,7 @@ Duration: 0:00:00
 
 ## ECS の構成要素
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 ![ecs-components](/images/ecs/ecs-components_no.png)
 
@@ -88,7 +88,7 @@ Duration: 0:01:00
 
 ## クラスター：サービスとタスクを実行する基盤
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 ![ecs-components-1](/images/ecs/ecs-components_no-1.jpg)
 
@@ -103,7 +103,7 @@ Fargate の場合は、どのインスタンスで動いているかは隠ぺい
 
 ## サービス：実行中のタスクを管理する単位
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [Amazon ECS サービス](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ecs_services.html)
 
@@ -113,7 +113,7 @@ Duration: 0:01:00
 
 ## タスク：起動する１つ以上のコンテナの集合
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 ![ecs-components-3](/images/ecs/ecs-components_no-3.jpg)
 
@@ -122,7 +122,7 @@ Duration: 0:01:00
 
 ## タスク定義：タスクを作成する定義テンプレート
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 [Amazon ECS の タスク定義](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html)
 
@@ -217,7 +217,7 @@ Duration: 0:05:00
 
 ### memoryReservation（ソフト制限）と memory（ハード制限）の組み合わせ
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 `memoryReservation` と `memory` のパラメータは指定有無などの組み合わせによって割り当てが異なります。
 
@@ -229,7 +229,7 @@ Duration: 0:01:00
 
 ## ECS クラスタ作成手順
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 1. コンテナイメージの作成
 2. コンテナイメージを ECR に Push
@@ -262,7 +262,7 @@ Duration: 0:00:30
 
 ## AWS Copilot
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [AWS Copilot](https://aws.amazon.com/jp/containers/copilot/)
 

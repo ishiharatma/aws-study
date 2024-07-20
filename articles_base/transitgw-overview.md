@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [AWS Transit Gateway とは](#aws-transit-gateway-とは)
 - [メリット](#メリット)
@@ -21,7 +21,7 @@ Duration: 00:01:00
 
 ## AWS Transit Gateway とは
 
-Duration: 00:55:33
+<!-- Duration: 00:55:33 -->
 
 クラウドネットワークを管理するための重要なサービスの一つです。企業が複数の VPC（Virtual Private Cloud）やオンプレミスのネットワークを統合し、効率的かつセキュアな通信を確立するのに役立ちます。
 
@@ -39,7 +39,7 @@ Duration: 00:55:33
 
 ## メリット
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 ```text
 AWS Transit Gateway は、クラウドルーターとして機能することで、大規模な
@@ -64,7 +64,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 
 ## Transit Gateway の構造
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 [Transit Gateway の概念](https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/what-is-transit-gateway.html#concepts)
 
@@ -85,7 +85,7 @@ Transit Gateway は主に次の要素から構成されています。
 
 ## Transit Gateway のユースケース例
 
-Duration: 00:03:00
+<!-- Duration: 00:03:00 -->
 
 [ユースケース例](https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/TGW_Scenarios.html)では次のようなものが記載されています。
 
@@ -104,7 +104,7 @@ Duration: 00:03:00
 
 ## ハンズオン
 
-Duration: 00:30:00
+<!-- Duration: 00:30:00 -->
 
 [TransitGateway ハンズオン](https://develop.d1xrg9ubdspdie.amplifyapp.com/)があります。
 実際に操作をしてみると理解が深まると思います。
@@ -115,7 +115,7 @@ Duration: 00:30:00
 
 ## ベストプラクティス
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 [Transit Gateway 設計のベストプラクティス](https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/tgw-best-design-practices.html)
 
@@ -138,7 +138,7 @@ Duration: 00:05:00
 
 ## 構成のサンプル
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ハンズオンの構成よりもベストプラクティスにもあるように、Transit Gateway のアタッチメントに個別のサブネットを作成したサンプル構成です。
 

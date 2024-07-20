@@ -42,7 +42,7 @@ https://docs.aws.amazon.com/ja_jp/elasticbeanstalk/latest/dg/Welcome.html
 
 ## xx の基本
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 ![eb](/images/all/eb.png)
 

@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [Systems Manager とは](#systems-manager-とは)
   - [Black Belt](#black-belt)
@@ -64,7 +64,7 @@ AWS 上のリソースを表示したり、インスタンスを制御するた�
 
 ## SSM？
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 Systems Manager の前身のサービス名である「Amazon Simple Systems Manager」の略称が `SSM` でしたので、それに由来しています。
 

@@ -48,7 +48,7 @@ published: true
 
 ## Amazon DynamoDB とは
 
-Duration: 1:31:15
+<!-- Duration: 1:31:15 -->
 
 1 桁ミリ秒単位で規模に応じたパフォーマンスを実現する高速で柔軟な NoSQL データベースのフルマネージドサービスです。
 
@@ -80,7 +80,7 @@ DynamoDB は、「値」とそれを取得するための「キー」だけを�
 
 ## Amazon DynamoDB のユースケース
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 - ユーザー情報
 - 広告やゲームなどのユーザー行動履歴
@@ -95,7 +95,7 @@ Duration: 0:01:30
 
 ## Amazon DynamoDB の料金
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [Amazon DynamoDB 料金](https://aws.amazon.com/jp/dynamodb/pricing/)
 
@@ -107,7 +107,7 @@ Duration: 0:00:30
 
 ## Amazon DynamoDB の基本
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 ![dynamodb table](/images/dynamodb/dynamodb-table.png)
 
@@ -144,7 +144,7 @@ Duration: 0:05:00
 
 ## Amazon DynamoDB のストレージ
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 DynamoDB のストレージは、容量制限がありません。自動的に拡張していきます。1GB 単位で課金されていきます。
 
@@ -168,7 +168,7 @@ S3（Standard） は、0.025 USD/GB ですので 10 倍となります。
 
 ## Amazon DynamoDB の耐久性
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 ![3az](/images/dynamodb/dynamodb-3az.png)
 
@@ -178,7 +178,7 @@ Duration: 0:00:30
 
 ## Amazon DynamoDB の読み込み整合性
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 先に述べたように、DynamoDB は CAP 定理「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」のうち、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視した設計となっているため、リレーショナルデータベースのような「一貫性」は保証されておらず、データはいつか必ず書き込まれる（通常は 1 秒以内）という動作になります。
 
@@ -190,7 +190,7 @@ Duration: 0:01:30
 
 ## Amazon DynamoDB のパフォーマンス
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 スループットキャパシティといった、1 秒間の読み取り、書き込みに必要なスループットキャパシティをテーブル単位で割り当てることができます。
 
@@ -276,7 +276,7 @@ DynamoDB は SSL/TLS で接続するため、常に暗号化されています�
 
 ## DynamoDB のテーブル操作
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 詳細は、[Amazon DynamoDB API Reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html)
 
@@ -377,7 +377,7 @@ aws dynamodb delete-table --table-name users
 
 ## DynamoDB の項目操作
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 詳細は、[Amazon DynamoDB API Reference](https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html)
 
@@ -576,7 +576,7 @@ aws dynamodb scan \
 
 ## DynamoDB ストリーム
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [DynamoDB Streams の変更データキャプチャ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html)
 
@@ -597,7 +597,7 @@ DynamoDB ストリームから「Lambda」や「Kinesis Firehose」を呼び出�
 
 ## TTL（Time to Live）
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [DynamoDB の有効期限 (TTL) を使用して項目を期限切れにする](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/TTL.html)
 
@@ -620,7 +620,7 @@ DynamoDB ストリームを使うことで、有効期限切れのデータを�
 
 ## トランザクション
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [Amazon DynamoDB Transaction](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/transaction-apis.html)
 
@@ -638,7 +638,7 @@ RDB のようなトランザクションまでは期待できないが、複数�
 
 ## グローバルテーブル
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [グローバルテーブル – DynamoDB の複数リージョンレプリケーション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GlobalTables.html)
 
@@ -652,7 +652,7 @@ Duration: 0:01:00
 
 ## DynamoDB Accelerator (DAX)
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [DynamoDB Accelerator (DAX) とインメモリアクセラレーション](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DAX.html)
 
@@ -664,7 +664,7 @@ DynamoDB と互換性のある高可用性インメモリキャッシュを提�
 
 ## 条件付き書き込み
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [条件付きの書き込み](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate)
 
@@ -696,7 +696,7 @@ aws dynamodb update-item \
 
 ## アトミックカウンター
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [アトミックカウンタ](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters)
 
@@ -717,7 +717,7 @@ aws dynamodb update-item \
 
 ## 並列スキャン
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [並列スキャン](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan)
 
@@ -735,7 +735,7 @@ DynamoDB の scan は全件走査 API です。ベストプラクティスは、
 
 ## バックアップ
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [DynamoDB のオンデマンドバックアップおよび復元の使用](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/BackupRestore.html)
 
@@ -769,7 +769,7 @@ PITR で復元する場合、新しいテーブルに復元されます。
 
 ## DynamoDB 用の NoSQL Workbench
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [DynamoDB 用の NoSQL Workbench](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/workbench.html)
 
@@ -783,7 +783,7 @@ macOS、Windows、Linux で利用できます。
 
 ## 設計
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [DynamoDB を使用した設計とアーキテクチャの設計に関するベストプラクティス](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html)
 

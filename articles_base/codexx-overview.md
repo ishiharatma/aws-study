@@ -31,7 +31,7 @@
 
 ## Code 兄弟 とは
 
-Duration: 327:55:00
+<!-- Duration: 327:55:00 -->
 
 AWS の Code がつくサービス CodeCommit、CodeDeploy CodeBuild CodePipeline などの俗称である。
 
@@ -108,7 +108,7 @@ AWS の Code がつくサービス CodeCommit、CodeDeploy CodeBuild CodePipelin
 
 ## AWS CodeCommit の基本
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 ![codecommit-overview](/images/codexx/codecommit.png)
 
@@ -163,7 +163,7 @@ https://aws.amazon.com/jp/codeguru/
 
 ## AWS CodeBuild の基本
 
-Duration: 0:15:00
+<!-- Duration: 0:15:00 -->
 
 ![codebuild-overview](/images/codexx/codebuild.png)
 
@@ -336,7 +336,7 @@ CodeBuild では通常 VPC 内のリソースにはアクセスできません�
 
 ## AWS CodeDeploy の基本
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 デプロイを実行してくれるサービスです。
 デプロイ先として下記 3 タイプのリソースがサポートされます。
@@ -384,7 +384,7 @@ Hooks:
 
 ## AWS CodePipeline の基本
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 CI / CD を構築できるサービスです。
 
@@ -394,7 +394,7 @@ CodeCommit、CodeBuild、CodeDeploy を組み合わせたパイプラインを�
 
 ## AWS CodeStar
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 アプリケーションを開発および構築して AWS にデプロイするために必要なツールを備えたクラウドベースの開発サービスです。
 
@@ -407,7 +407,7 @@ Duration: 0:05:00
 
 ## ハンズオン
 
-Duration: 2:00:00
+<!-- Duration: 2:00:00 -->
 
 > AWS Hands-on for Beginners
 > AWS Code サービス群を活用して、CI/CD のための構成を構築しよう！

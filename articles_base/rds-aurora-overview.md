@@ -8,7 +8,7 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [RDS について知るには](#rds-について知るには)
 - [Aurora について知るには](#aurora-について知るには)
@@ -27,7 +27,7 @@ Duration: 00:01:00
 
 ## RDS について知るには
 
-Duration: 00:52:48
+<!-- Duration: 00:52:48 -->
 
 【AWS Black Belt Online Seminar】[Amazon Relational Database Service (Amazon RDS)(YouTube)](https://youtu.be/nDme-ET-_EY)(52:48)
 
@@ -41,7 +41,7 @@ Duration: 00:52:48
 
 ## Aurora について知るには
 
-Duration: 03:22:41
+<!-- Duration: 03:22:41 -->
 
 【AWS Black Belt Online Seminar】[Amazon Aurora MySQL(YouTube)](https://youtu.be/VerVNchaqVY)(55:41)
 
@@ -67,7 +67,7 @@ Duration: 03:22:41
 
 ## RDS / Aurora について知るには(その他)
 
-Duration: 03:05:36
+<!-- Duration: 03:05:36 -->
 
 【AWS Summit Tokyo 2019】[AWS におけるデータベースの選択指針](https://www.youtube.com/watch?v=h1r8AzOdlqo)(39:25)
 
@@ -87,7 +87,7 @@ Duration: 03:05:36
 
 ## RDS と Aurora の比較サマリ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 比較のサマリは以下の通りです。
 
@@ -108,7 +108,7 @@ Duration: 00:05:00
 
 ## 比較ポイント１：データベースエンジン
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 MySQL や PostgreSQL を選択する場合で、Aurora 制約事項（\*1、\*2）を許容できる場合は、Aurora が最適となるケースが多いです。
 
@@ -130,7 +130,7 @@ Aurora がサポートしないデータベースエンジンを使用したい�
 
 ## 比較ポイント２：ストレージアーキテクチャと耐久性
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS と Aurora の大きく異なる点といえば、ストレージのアーキテクチャです。
 
@@ -149,7 +149,7 @@ https://www.youtube.com/watch?v=oJqIzHIMh7Q&t=25m49s
 
 ## 比較ポイント３：ストレージの容量拡張
 
-Duration: 00:10:00
+<!-- Duration: 00:10:00 -->
 
 RDS でストレージの自動スケーリングがサポート（[Jun 20, 2019 - Amazon RDS で Storage Auto Scaling のサポートを開始](https://aws.amazon.com/jp/about-aws/whats-new/2019/06/rds-storage-auto-scaling/)）されましたので、RDS も Aurora もストレージの自動拡張が可能ですが、RDS の自動スケーリングにはデメリットもあります。
 
@@ -188,7 +188,7 @@ RDS でストレージの自動スケーリングがサポート（[Jun 20, 2019
 
 ## 比較ポイント４：可用性
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS は マルチ AZ の場合のみ、スタンバイにフェールオーバーし、60 秒で自動的に復旧します。
 シングル AZ の場合、自動的に復旧できないので、スナップショットから手動復旧が必要になります。
@@ -208,7 +208,7 @@ RDS / Aurora ともに、AWS マネジメントコンソール、AWS CLI から�
 
 ## 比較ポイント５：読み取りスループット向上
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 プライマリインスタンスへの読み取りアクセスを分散することで、スループットを向上できます。
 
@@ -222,7 +222,7 @@ Aurora のレプリカは、オートスケーリングによってスケール�
 
 ## 比較ポイント６：自動バックアップの保持期間
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS は 0 ～ 35 日(デフォルトは 7 日)で、0 日にすることでバックアップを無効化できます。
 
@@ -270,7 +270,7 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 
 ## 比較ポイント７：データの復元
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS と Aurora のともにポイントインタイムリカバリとして、5 分前まで秒単位で復元が可能です。
 
@@ -280,7 +280,7 @@ RDS と Aurora のともにポイントインタイムリカバリとして、5 
 
 ## 比較ポイント８：キャッシュ
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS ではデータベースインスタンス内にキャッシュを持つが、Aurora では、データベースとは分離して管理しています。
 
@@ -290,7 +290,7 @@ Aurora PostgreSQL は、クラスタキャッシュ管理という仕組みで�
 
 ## 比較ポイント９：価格
 
-Duration: 00:05:00
+<!-- Duration: 00:05:00 -->
 
 RDS では、リードレプリカもプライマリインスタンス同様に、ストレージ料金も必要になります。
 Aurora は、ストレージ I/O の料金が追加で必要になります。ただし、Aurora のレプリカはストレージ料金がかかりません。

@@ -15,7 +15,7 @@ published: true
 
 ## 👀 Contents<!-- omit in toc -->
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 - [AWS Direct Connect とは](#aws-direct-connect-とは)
 - [AWS への接続方法](#aws-への接続方法)
@@ -41,7 +41,7 @@ Duration: 00:01:00
 
 ## AWS Direct Connect とは
 
-Duration: 01:00:21
+<!-- Duration: 01:00:21 -->
 
 AWS Direct Connect は、企業や組織が AWS クラウドへの高速かつ安定したプライベートネットワーク接続を確立するためのサービスです。通常のインターネット接続よりも安定性が高く、大容量のデータ転送が可能なため、企業のクリティカルなワークロードやデータの移動に適しています。
 
@@ -62,7 +62,7 @@ AWS Direct Connect は、企業や組織が AWS クラウドへの高速かつ�
 
 ## AWS への接続方法
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 AWS へ接続するには主に次のような方法があります
 
@@ -76,7 +76,7 @@ AWS へ接続するには主に次のような方法があります
 
 ## Direct Connect を使うメリットとデメリット
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 - メリット
   - インターネット回線を使用せず、専用のプライベートなネットワークで接続するためセキュリティが高い
@@ -98,7 +98,7 @@ Duration: 0:01:30
 
 ## 利用開始方法
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 - AWS に 直接申し込む
   - 申し込みとそれに伴うやりとり、自拠点のネットワーク機器設定など全て実施することになります
@@ -108,7 +108,7 @@ Duration: 0:00:30
 
 ## APN パートナーとは
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 AWS が提供するのは Direct Connect ロケーション内の接続ポイントまでなので、それ以外については利用者が準備しなければなりません。
 
@@ -127,7 +127,7 @@ APN パートナーと契約すると、これらの対応が不要になり、�
 
 ## 接続方法
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 接続方法は次の２つがあります。物理ポートを全て専有する専用接続と、物理ポートを共有し、仮想インターフェースによって接続するホスト型接続です。
 
@@ -148,7 +148,7 @@ Duration: 0:01:30
 
 ## 仮想インターフェース（VIF）
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 - パブリック VIF
   - パブリック IP アドレスを使用してアクセスする。
@@ -164,7 +164,7 @@ Duration: 0:00:30
 
 ## Link Aggregation Group (LAG)
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 専用接続の場合に設定できます。ポートスピードが 1 Gbps、10 Gbps または 100 Gbps であることが必要です。
 また、同じ帯域を使用する必要があります。「1 Gbps + 10 Gbps」という設定は不可となります。
@@ -178,7 +178,7 @@ Duration: 0:00:30
 
 ## 設定方法
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 個人では検証する敷居が高いため、Direct Connect を提供している事業者のマニュアルなどを参照すると理解しやすいかと思います。
 
@@ -186,7 +186,7 @@ Duration: 0:00:30
 
 ## 回復性モデル
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 要件に応じた回復性の高いネットワーク接続を実現できます。
 [AWS Direct Connect Resiliency Toolkit を使用した使用の開始](https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/resiliency_toolkit.html)
@@ -222,7 +222,7 @@ Duration: 0:03:00
 
 ## Direct Connect のバックアップとしての AWS Site to Site VPN 接続
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 高い回復性と通信の安定性を求めるのであれば、Direct Connect を複数接続する冗長化が望ましいです。
 
@@ -235,7 +235,7 @@ Duration: 0:01:30
 
 ## Direct Connect Gateway
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 Direct Connect の仮想インターフェース（VIF）は 1 本で１つの VPC にしか接続できません。複数の VPC に接続したい場合は、VIF を複数用意しなければなりません。また、他のリージョンには接続することができません。
 
@@ -257,7 +257,7 @@ Direct Connect ゲートウェイに接続する VPC の数を制限したい場
 
 ## 接続パターン
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 次のようなパターンをまとめてみました。
 多数の VPC を接続したい、VPC 間も接続したい、今後も VPC が追加される予定があるといった場合は、Transit Gateway との接続を採用したほうシンプルになります。

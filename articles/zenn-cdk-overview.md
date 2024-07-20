@@ -36,7 +36,7 @@ published: false
 
 ## AWS CDK とは
 
-Duration: 2:31:03
+<!-- Duration: 2:31:03 -->
 
 AWS Cloud Development Kit のことで、使い慣れたプログラミング言語を使用してクラウドアプリケーションのリソースを定義するためのオープンソースのソフトウェア開発フレームワークです。
 
@@ -68,7 +68,7 @@ AWS Cloud Development Kit のことで、使い慣れたプログラミング言
 
 ## CDK v2
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 CDK の v2 は、2021 年 5 月のプレビューが実施され、 2021 年 12 月 2 日に GA されました。
 

@@ -33,7 +33,7 @@ published: true
 
 ## KMS とは
 
-Duration: 0:59:33
+<!-- Duration: 0:59:33 -->
 
 暗号化操作に使用されるキーを簡単に作成および管理できるマネージドサービスです。
 
@@ -51,7 +51,7 @@ Duration: 0:59:33
 
 ## 基本概念
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [基本概念](https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/basic-concepts.html)
 
@@ -64,7 +64,7 @@ KMS のキーに対する操作は CloudTrail に記録されます。詳しく�
 
 ## マスターキーとデータキー
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 KMS では、マスターキーとデータキーという 2 種類の鍵が登場します。
 
@@ -79,7 +79,7 @@ KMS では、マスターキーとデータキーという 2 種類の鍵が登�
 
 ## マスターキー
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 - AWS マネージド型キー
   - AWS サービスが作成・管理する CMK で、キー名が「aws/s3」 のようになっています。
@@ -96,7 +96,7 @@ Duration: 0:01:30
 
 ## エイリアス
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 CMK にはエイリアス（別名）を付けることができます。エイリアスを使用することで、キーをローテーションした場合など、エイリアスの紐づけを変更するだけで、アプリケーション側の更新が不要になります。
 
@@ -110,7 +110,7 @@ arn:aws:kms:ap-northeast-1:123456789012:alias/aliasName
 
 ## キーマテリアル
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 [キーマテリアル](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material)とは、「暗号化キーを生成するために必要な材料」であり「CMK 作成時に使用されるデータのこと」をいいます。
 
@@ -138,7 +138,7 @@ Duration: 0:03:00
 
 ## キーポリシー
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 CMK にはリソースベースの[キーポリシー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-policies.html)を付与することができます。
 これにより、特定のサービスからのみアクセスさせるといった制御ができます。
@@ -154,14 +154,14 @@ CMK 作成時には[デフォルトのキーポリシー](https://docs.aws.amazo
 
 ## マルチリージョンキー
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 単一リージョンで作成した CMK はエクスポートのインポートも出来ないため、作成したリージョン以外では使用することができません。
 しかし、[マルチリージョンキー](https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/multi-region-keys-overview.html)を選択することで、複数のリージョンにレプリケートすることが可能です。
 
 ## 別の AWS アカウントへの許可
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 CMK は別のアカウントに使用を許可することができます。
 
@@ -172,7 +172,7 @@ CMK は別のアカウントに使用を許可することができます。
 
 ## キーの削除
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 [キーの削除](https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html)
 
@@ -243,14 +243,14 @@ OR
 
 ## データキーキャッシュ
 
-Duration: 0:00:15
+<!-- Duration: 0:00:15 -->
 
 AWS Encryption SDK の機能として、「[データキーキャッシュ](https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html)」があります。
 これを利用することでデータキー取得の API コールを減らすことができます。
 
 ## クライアントサイド暗号化とサーバサイド暗号化
 
-Duration: 0:03:00
+<!-- Duration: 0:03:00 -->
 
 KMS を利用した暗号化は、次の 2 種類があります。
 

@@ -33,7 +33,7 @@ published: true
 
 ## SQS とは
 
-Duration: 0:58:54
+<!-- Duration: 0:58:54 -->
 
 フルマネージドのキューイングサービスです。
 
@@ -51,7 +51,7 @@ Duration: 0:58:54
 
 ## SQS 構成要素
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 - プロデューサー（Producer）
   - メッセージを SQS に送信するアプリケーション
@@ -67,7 +67,7 @@ Duration: 0:01:00
 
 ## キュータイプ
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 - 標準キュー
 - FIFO キュー
@@ -78,7 +78,7 @@ Duration: 0:01:00
 
 ## メッセージグループ ID
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [メッセージグループ ID の使用](https://docs.aws.amazon.comja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html)
 
@@ -95,7 +95,7 @@ aws sqs send-message \
 
 ## メッセージ重複排除
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [メッセージ重複排除 ID の使用](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html)
 
@@ -116,7 +116,7 @@ aws sqs send-message \
 
 ## 可視性タイムアウト
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [可視性タイムアウト](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html)
 
@@ -135,7 +135,7 @@ FIFO キューの場合は、メッセージの順序が重要であるため、
 
 ## 配信遅延（遅延キュー）
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 [遅延キュー](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-delay-queues.html)
 
@@ -158,7 +158,7 @@ aws sqs send-message \
 
 ## メッセージ受信待機時間
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 メッセージ取得までの待機時間です。0 秒から 20 秒まで指定することができます。0 秒を指定すると、ショートポーリングになります。
 
@@ -179,7 +179,7 @@ Duration: 0:01:30
 
 ## メッセージ保持期間
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 キューに登録されたメッセージは明示的に削除処理を行われない限りデフォルトで 4 日間保持、1 分から 14 日設定できます。
 
@@ -189,7 +189,7 @@ Duration: 0:01:00
 
 ## 最大メッセージサイズ
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 キューのメッセージサイズで、1KB から 256KB の範囲を指定できます。デフォルト値は 256 KB です。
 
@@ -201,7 +201,7 @@ Duration: 0:01:00
 
 ## デッドレターキュー
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 [デッドレターキュー](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html)
 
@@ -212,7 +212,7 @@ Duration: 0:01:00
 
 ## 暗号化
 
-Duration: 0:01:00
+<!-- Duration: 0:01:00 -->
 
 AWS KMS を利用して、トピック内のメッセージを暗号化することができます（サーバ側の暗号化（SSE））
 暗号化されたメッセージは、配信時に自動的に復号されて配信されます。

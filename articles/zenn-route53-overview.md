@@ -32,7 +32,7 @@ published: true
 
 ## Amazon Route 53 とは
 
-Duration: 1:53:43
+<!-- Duration: 1:53:43 -->
 
 可用性と拡張性に優れたクラウドのドメインネームシステム (DNS) ウェブサービスです。AWS のサービスの中で唯一 SLA が 100 % のサービスです。
 
@@ -60,7 +60,7 @@ DNS ？？という人は、[DNS とは](https://aws.amazon.com/jp/route53/what-
 
 ## ドメインの新規登録
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 AWS では　 Route53 にて新規ドメインを取得することができます。
 
@@ -68,7 +68,7 @@ AWS では　 Route53 にて新規ドメインを取得することができま�
 
 ## ドメインの移管
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [ドメインの移管](https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/domain-transfer.html)
 
@@ -95,7 +95,7 @@ Duration: 0:00:30
 
 ## ホストゾーン
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 ホストゾーンは次の 2 種類があります。
 
@@ -110,7 +110,7 @@ Duration: 0:00:30
 
 ## DNS レコードタイプ
 
-Duration: 0:05:00
+<!-- Duration: 0:05:00 -->
 
 ![route53_hostedzone_record](/images/route53/route53_hostedzone_record-320.jpg)
 
@@ -165,7 +165,7 @@ Duration: 0:05:00
 
 ## DNS ルーティング
 
-Duration: 0:10:00
+<!-- Duration: 0:10:00 -->
 
 - シンプルルーティング
   - レコードセットに事前設定された値のみに基づいて DNS クエリに応答する方式
@@ -202,7 +202,7 @@ Duration: 0:10:00
 
 ## Route 53 Resolver
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 VPC に標準で配備されている DNS サーバー（フォワーダー＋フルサービスリゾルバ）のことで、以前は、「.2 Resolver」や「Amazon Provided DNS」と呼ばれていたものです。
 
@@ -220,7 +220,7 @@ VPC に標準で配備されている DNS サーバー（フォワーダー＋�
 
 ## Route 53 Resolver for Hybrid Clouds
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 オンプレミスとクラウドのリソースによって構成された環境での名前解決を一元化するための Amazon Route53 Resolver の機能拡張です。
 
@@ -230,7 +230,7 @@ Duration: 0:00:30
 
 ## DNS ヘルスチェック
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 Route53 ヘルスチェックには、エンドポイント、他のヘルスチェックのステータス、CloudWatch アラーム等があります。
 
@@ -242,7 +242,7 @@ Route53 ヘルスチェックには、エンドポイント、他のヘルスチ
 
 ## Amazon Route 53 の料金
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 [Amazon Route 53 料金表](https://aws.amazon.com/jp/route53/pricing/)
 
@@ -257,7 +257,7 @@ Duration: 0:00:30
 
 ## Route 53 のクォータ
 
-Duration: 0:00:30
+<!-- Duration: 0:00:30 -->
 
 主なクォーターは次の通りです。
 
@@ -273,7 +273,7 @@ Duration: 0:00:30
 
 ## Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 [Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート](https://aws.amazon.com/jp/about-aws/whats-new/2022/09/amazon-route-53-support-dns-resource-record-set-permissions/)
 
@@ -343,6 +343,6 @@ Duration: 00:01:00
 
 ## 📖 まとめ
 
-Duration: 00:01:00
+<!-- Duration: 00:01:00 -->
 
 ![route53](/images/all/route53.png)

@@ -51,6 +51,6 @@ published: false
 
 ## xx の基本
 
-Duration: 0:01:30
+<!-- Duration: 0:01:30 -->
 
 ## 📖 まとめ
