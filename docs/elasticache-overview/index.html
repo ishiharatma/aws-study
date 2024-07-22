@@ -53,7 +53,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache とは" duration="220">
+      <google-codelab-step label="Amazon ElastiCache とは" duration="0">
         <p>フルマネージドのインメモリキャッシングサービスで、Memcached または Redis プロトコルに互換性があります。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=-NU1U8_fxo4" target="_blank">Amazon ElastiCache(YouTube)</a>(39:21)</p>
 <p class="image-container"><img alt="blackbelt-elasticache" src="img\\7ab03c476a884761.jpg"></p>
@@ -76,7 +76,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Memcached と Redis の比較" duration="2">
+      <google-codelab-step label="Memcached と Redis の比較" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/SelectEngine.html</p>
 <p>主な比較は次のとおりです。</p>
 <table>
@@ -115,7 +115,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="どのように利用したらよいか？" duration="2">
+      <google-codelab-step label="どのように利用したらよいか？" duration="0">
         <ul>
 <li>キャッシュは揮発性のあるデータであるため、消えて困るデータは保存しないほうがよいです。 -結果整合性（分散データベース環境でデータが更新された際に、一定時間経過後には最終的な一貫性が担保されること）を前提とした設計を行う必要があります。</li>
 <li>TTL（Time to Live, 有効期限）を設定しましょう。データを保存しすぎて、メモリが溢れてしまうといったことが発生します。TTL は長すぎても TTL が切れる前にメモリが溢れることにもなります。また、TTL が切れるタイミングが同じデータが多く存在すると、CPU 使用率が上昇することがあります。</li>
@@ -124,20 +124,20 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB で代用できる？" duration="2">
+      <google-codelab-step label="DynamoDB で代用できる？" duration="0">
         <p>DynamoDB も Key-Value で低レイテンシーのサービスです。同じように代用もできるのではないかと考えます。 ただ、DynamoDB は可用性担保のため複数 AZ に保存しているので書き込みは遅くなります。また、DynamoDB はリクエスト数で課金されるため、頻繁に利用されるセッション情報などの場合はコストが急増したり、キャパシティが枯渇する可能性があります。DAX を利用することでこれらを回避することも出来ます。</p>
 <p>つまり、基本的には永続化が不要であれば ElastiCache のほうがよいケースが多いと思われます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache for Memcached" duration="2">
+      <google-codelab-step label="Amazon ElastiCache for Memcached" duration="0">
         <p>構成イメージはこのようになります。クラスタ化されていますが、レプリケーションの機能はありません。 <img alt="Redis Cluster/Replication" src="img\\2941a7c03219dc39.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache for Redis" duration="3">
+      <google-codelab-step label="Amazon ElastiCache for Redis" duration="0">
         <p>クラスタモード有効/無効　 × 　レプリケーション有/無のパターンがあります。 クラスタモードは複数のシャードにデータを分散させることが出来ます。クラスタモードが有効でもシャードを１つに設定することも可能です。</p>
 <p>クラスタもレプリケーションもない単一の構成です。 <img alt="Redis NonCluster/NonReplication" src="img\\94fedb0e6cba1c5a.png"></p>
 <p>レプリケーションが有効な構成です。 <img alt="Redis NonCluster/Replication" src="img\\21068385bc1e93fc.png"></p>
@@ -147,14 +147,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="自動フェイルオーバー" duration="1">
+      <google-codelab-step label="自動フェイルオーバー" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/AutoFailover.html</p>
 <p>レプリケーションされている場合、自動的にフェイルオーバーが実行されます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ElastiCache for Redis の Global Datastore" duration="1">
+      <google-codelab-step label="Amazon ElastiCache for Redis の Global Datastore" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html</p>
 <p class="image-container"><img alt="globaldatastore" src="img\\771cb580337dceaa.png"></p>
 <p>Global Datastore for Redis 機能を使用すると、AWS リージョン全体で完全マネージド型、高速、信頼性、安全なレプリケーションを実行できます。</p>

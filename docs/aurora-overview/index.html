@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">Aurora について知るには</a></li>
 <li><a href="#aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">Aurora について知るには(その他)</a></li>
@@ -61,7 +61,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Aurora について知るには" duration="203">
+      <google-codelab-step label="Aurora について知るには" duration="0">
         <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/VerVNchaqVY" target="_blank">Amazon Aurora MySQL(YouTube)</a>(55:41)</p>
 <p class="image-container"><img alt="blackbelt-aurora-mysql" src="img\\91557b1bfa29d31.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=9KQkskyP930" target="_blank">Amazon Aurora MySQL Compatible Edition ユースケース毎のスケーリング手法</a>(55:41)</p>
@@ -78,7 +78,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Aurora について知るには(その他)" duration="186">
+      <google-codelab-step label="Aurora について知るには(その他)" duration="0">
         <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=h1r8AzOdlqo" target="_blank">AWS におけるデータベースの選択指針</a>(39:25)</p>
 <p class="image-container"><img alt="aws-summit-2019-c2-03" src="img\\49298d1b9cdedb44.jpg"></p>
 <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=3oMR2hglQR0" target="_blank">Amazon RDS におけるパフォーマンス最適化とパフォーマンス管理</a>(41:33)</p>
@@ -91,14 +91,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon Aurora とは" duration="1">
+      <google-codelab-step label="Amazon Aurora とは" duration="0">
         <p>MySQL および PostgreSQL と互換性のあるクラウド向けのリレーショナルデータベースを提供するフルマネージドサービスです。</p>
 <p>マネジメントコンソールからわずか数クリックで冗長化、バックアップなどが設定されたデータベースを作成できます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="サポートされているデータベースエンジン" duration="1">
+      <google-codelab-step label="サポートされているデータベースエンジン" duration="0">
         <ul>
 <li>PostgreSQL(互換)</li>
 <li>MySQL(互換)</li>
@@ -108,7 +108,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Aurora の基本的な構成" duration="5">
+      <google-codelab-step label="Aurora の基本的な構成" duration="0">
         <p>RDS とは異なり、Aurora では DB インスタンスとストレージが分離されています。これにより、RDS の 2 倍の性能を発揮すると言われています。</p>
 <p class="image-container"><img alt="aurora-architecture" src="img\\7f8f6206f56d1ad7.png"></p>
 <p>Aurora を構成する要素は次の通りです。</p>
@@ -128,13 +128,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="SLA" duration="1">
+      <google-codelab-step label="SLA" duration="0">
         <p><a href="https://aws.amazon.com/jp/rds/aurora/sla/" target="_blank">Amazon Aurora Service Level Agreement</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="可用性" duration="10">
+      <google-codelab-step label="可用性" duration="0">
         <h2 is-upgraded>単一構成</h2>
 <p>１つの AZ に プライマリインスタンスを構築した最小構成です。 AZ 障害時にはインスタンスが利用できなくなります。</p>
 <p class="image-container"><img alt="aurora-single" src="img\\ceb0278a1815cfed.png"></p>
@@ -169,21 +169,21 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="レプリカの昇格" duration="5">
+      <google-codelab-step label="レプリカの昇格" duration="0">
         <p>レプリカを手動でフェールオーバーさせることで、プライマリインスタンスに昇格させることができます。</p>
 <p><a href="https://aws.amazon.com/jp/premiumsupport/knowledge-center/aurora-mysql-read-replicas/" target="_blank">Amazon Aurora でリードレプリカを使用するときの一般的な問題を解決するにはどうすればよいですか？</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="インスタンスタイプ" duration="1">
+      <google-codelab-step label="インスタンスタイプ" duration="0">
         <p>RDS のインスタンスタイプは、「db.m6g.large」のように <code>db</code> から始まります。それ以降は、EC2 のインスタンスタイプと同じ構成となっています。</p>
 <p><a href="https://aws.amazon.com/jp/rds/aurora/pricing/" target="_blank">Amazon Aurora の料金</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="スケールアップ/ダウン" duration="1">
+      <google-codelab-step label="スケールアップ/ダウン" duration="0">
         <p>DB インスタンスはインスタンスタイプを変更することができます。インスタンスタイプの変更ではダウンタイムが発生します。</p>
 <p>インスタンスタイプの変更は、マネジメントコンソールや AWS CLI を使って手動で追加することができます。変更を適用するには、「すぐに適用」か「次に予定されるメンテナンスウィンドウ中」を選択できます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Modifying.html#Aurora.Modifying.Settings" target="_blank">[すぐに適用] で使用できる設定</a></p>
@@ -191,7 +191,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ストレージの自動スケーリング" duration="5">
+      <google-codelab-step label="ストレージの自動スケーリング" duration="0">
         <p>クラスタボリュームはデータベースのデータ量が増えるにつれて自動的に増加します。データが削除された場合は、データに割り当てられていた領域が解放され、ストレージ料金を最小限に抑えることができます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-growth" target="_blank">Aurora ストレージのサイズを自動的に変更する方法</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Performance.html#Aurora.Managing.Performance.StorageScaling" target="_blank">ストレージのスケーリング</a></p>
@@ -199,7 +199,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Aurora のログ" duration="5">
+      <google-codelab-step label="Aurora のログ" duration="0">
         <p>オンプレミスのデータベースでは、データベースのログはファイルシステムに存在します。ログが必要であれば、サーバーにログインすることでログを取得することができました。</p>
 <p>Aurora でも、データベースのログは Aurora のサーバー内のファイルにシステムに存在します。ただし、Aurora ではデータベースサーバに SSH などで直接ログインできないため、取得できません。</p>
 <p>そのため、Aurora では CloudWatch Logs にログをエクスポートする機能をもっています。</p>
@@ -220,7 +220,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Serverless" duration="5">
+      <google-codelab-step label="Serverless" duration="0">
         <p>Aurora Serverless は現在 v1 と v2 が存在します。それぞれのユースケースは次の通りです。安定したトラフィックが予想できる場合は Provisioned インスタンス（通常の Aurora）を利用するほうが良いです。</p>
 <ul>
 <li>v1 <ul>
@@ -282,13 +282,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Global Database" duration="1">
+      <google-codelab-step label="Global Database" duration="0">
         <p class="image-container"><img alt="globaldatabase" src="img\\aa7c4541c402616b.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Blue/Green Deployments(New: 2022-11-27)" duration="1">
+      <google-codelab-step label="Blue/Green Deployments(New: 2022-11-27)" duration="0">
         <p><a href="https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/" target="_blank">New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS</a></p>
 <p><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html" target="_blank">Using Amazon RDS Blue/Green Deployments for database updates</a></p>
 <p class="image-container"><img alt="blue-green-deployment" src="img\\9598ff7d75b35fbb.png"></p>
@@ -311,7 +311,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="📖 まとめ" duration="1">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="aurora" src="img\\4994a380c22cd178.png"></p>
 
 

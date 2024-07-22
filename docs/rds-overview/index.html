@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">RDS について知るには</a></li>
 <li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF%E3%81%9D%E3%81%AE%E4%BB%96" target="_blank">RDS について知るには(その他)</a></li>
@@ -63,7 +63,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS について知るには" duration="53">
+      <google-codelab-step label="RDS について知るには" duration="0">
         <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/nDme-ET-_EY" target="_blank">Amazon Relational Database Service (Amazon RDS)(YouTube)</a>(52:48)</p>
 <p class="image-container"><img alt="blackbelt-rds" src="img\\813b49560cc9128.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/rds/" target="_blank">Amazon RDS サービス概要</a></p>
@@ -74,7 +74,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS について知るには(その他)" duration="186">
+      <google-codelab-step label="RDS について知るには(その他)" duration="0">
         <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=h1r8AzOdlqo" target="_blank">AWS におけるデータベースの選択指針</a>(39:25)</p>
 <p class="image-container"><img alt="aws-summit-2019-c2-03" src="img\\49298d1b9cdedb44.jpg"></p>
 <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=3oMR2hglQR0" target="_blank">Amazon RDS におけるパフォーマンス最適化とパフォーマンス管理</a>(41:33)</p>
@@ -87,14 +87,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon RDS とは" duration="1">
+      <google-codelab-step label="Amazon RDS とは" duration="0">
         <p>リレーショナルデータベースを提供するフルマネージドサービスです。</p>
 <p>マネジメントコンソールからわずか数クリックで冗長化、バックアップなどが設定されたデータベースを作成できます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="サポートされているデータベースエンジン" duration="1">
+      <google-codelab-step label="サポートされているデータベースエンジン" duration="0">
         <p>サポートされているデータベースエンジンは以下の通りです。それぞれのデータベースエンジンでバージョンや機能などサポートされている範囲が異なるので、利用するには確認が必要です。</p>
 <ul>
 <li>PostgreSQL <ul>
@@ -122,7 +122,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS の基本的な構成" duration="5">
+      <google-codelab-step label="RDS の基本的な構成" duration="0">
         <p>RDS は EC2 に MySQL や PostgreSQL をインストールする場合と同じように、インスタンスに EBS が紐づいており、ミラーリング用の EBS で耐久性を高めています。</p>
 <p>データベースを作成すると、エンドポイントと呼ばれる専用の DNS 名が発行されます。</p>
 <p>アプリケーションは、エンドポイントに接続して、データベースへの操作を行います。</p>
@@ -135,13 +135,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="SLA" duration="1">
+      <google-codelab-step label="SLA" duration="0">
         <p><a href="https://aws.amazon.com/rds/sla/?nc1=h_ls" target="_blank">Amazon RDS Service Level Agreement</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="可用性" duration="15">
+      <google-codelab-step label="可用性" duration="0">
         <h2 is-upgraded>シングル AZ</h2>
 <p>１つの AZ に RDS インスタンスを構築した最小構成です。 AZ 障害時にはインスタンスが利用できなくなります。</p>
 <p class="image-container"><img alt="rds-single-az" src="img\\b67f3cf22d83203.png"></p>
@@ -177,7 +177,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="リードレプリカ" duration="5">
+      <google-codelab-step label="リードレプリカ" duration="0">
         <p>読み取り頻度の高いデータベースのワークロードに対して、スケールアウトすることにより、パフォーマンスを向上させます。</p>
 <p>リードレプリカへのレプリケーションは非同期で行われます。</p>
 <p class="image-container"><img alt="rds-readreplica-00" src="img\\2f0de020d27ccca6.png"></p>
@@ -217,7 +217,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="リードレプリカの昇格" duration="5">
+      <google-codelab-step label="リードレプリカの昇格" duration="0">
         <p>リードレプリカは、スタンドアロン DB インスタンスに昇格させることができます。</p>
 <p>この昇格というのは、マスター・スレーブの関係性でマスターになるというわけではなく、リードレプリカが独立した DB インスタンスとなることです。</p>
 <p>そのため、昇格（独立）した時点でデータのレプリケーションは行われません。</p>
@@ -227,7 +227,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS のクロスリージョン自動バックアップ" duration="5">
+      <google-codelab-step label="RDS のクロスリージョン自動バックアップ" duration="0">
         <p>RDS のクロスリージョン自動バックアップは、レプリケーション先のリージョンに自動スナップショットとトランザクションログのバックアップが保存されます。</p>
 <p>本機能によって、災害対策（DR）が求められるシステムにおいて、リージョン障害が発生してもバックアップが作成されたリージョンでリストアを行うことで迅速に復旧することができます。</p>
 <p>ただし、リージョンを跨いだストレージ料金やデータ転送（スナップショットとトランザクションログ）が必要です。</p>
@@ -275,14 +275,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="インスタンスタイプ" duration="1">
+      <google-codelab-step label="インスタンスタイプ" duration="0">
         <p>RDS のインスタンスタイプは、「db.m6g.large」のように <code>db</code> から始まります。それ以降は、EC2 のインスタンスタイプと同じ構成となっています。</p>
 <p><a href="https://aws.amazon.com/jp/rds/instance-types/" target="_blank">Amazon RDS インスタンスタイプ</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="スケールアップ/ダウン" duration="1">
+      <google-codelab-step label="スケールアップ/ダウン" duration="0">
         <p>DB インスタンスはインスタンスタイプを変更することができます。インスタンスタイプの変更ではダウンタイムが発生します。</p>
 <p>インスタンスタイプの変更は、マネジメントコンソールや AWS CLI を使って手動で追加することができます。変更を適用するには、「すぐに適用」か「次に予定されるメンテナンスウィンドウ中」を選択できます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html#USER_ModifyInstance.Settings" target="_blank">[すぐに適用] で使用できる設定</a></p>
@@ -290,7 +290,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ストレージクラス" duration="5">
+      <google-codelab-step label="ストレージクラス" duration="0">
         <p>RDS で選択できるストレージクラスは次の通りです。</p>
 <ul>
 <li>汎用 SSD <ul>
@@ -318,7 +318,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ストレージの自動スケーリング" duration="8">
+      <google-codelab-step label="ストレージの自動スケーリング" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling" target="_blank">Amazon RDS ストレージの自動スケーリングによる容量の自動管理</a></p>
 <p>RDS で使用するストレージは、DB インスタンス作成時にサイズを指定します。</p>
 <p>ストレージにかかるコストは、実際に使っている容量ではなく、定義した容量で課金されています。300 GB で定義した場合、実際には 10 GB しか使っていなくても 300 GB 分のストレージ料金を支払っています。</p>
@@ -353,7 +353,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS のログ" duration="5">
+      <google-codelab-step label="RDS のログ" duration="0">
         <p>オンプレミスのデータベースでは、データベースのログはファイルシステムに存在します。ログが必要であれば、サーバーにログインすることでログを取得することができました。</p>
 <p>RDS でも、データベースのログは RDS のサーバー内のファイルにシステムに存在します。ただし、RDS ではデータベースサーバに SSH などで直接ログインできないため、取得できません。</p>
 <p>そのため、RDS では CloudWatch Logs にログをエクスポートする機能をもっています。</p>
@@ -388,7 +388,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Blue/Green Deployments(New: 2022-11-27)" duration="1">
+      <google-codelab-step label="Blue/Green Deployments(New: 2022-11-27)" duration="0">
         <p><a href="https://aws.amazon.com/jp/blogs/aws/new-fully-managed-blue-green-deployments-in-amazon-aurora-and-amazon-rds/" target="_blank">New – Fully Managed Blue/Green Deployments in Amazon Aurora and Amazon RDS</a></p>
 <p><a href="https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html" target="_blank">Using Amazon RDS Blue/Green Deployments for database updates</a></p>
 <p class="image-container"><img alt="blue-green-deployment" src="img\\9598ff7d75b35fbb.png"></p>
@@ -411,7 +411,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="📖 まとめ" duration="1">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="rds" src="img\\e71c74c0cda66d01.png"></p>
 
 

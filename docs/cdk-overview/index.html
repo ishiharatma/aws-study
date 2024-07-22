@@ -50,14 +50,15 @@
 </li>
 </ul>
 </li>
+<li><a href="#snapshot-test" target="_blank">Snapshot test</a></li>
 <li><a href="#unit-test" target="_blank">Unit Test</a></li>
 <li><a href="#cdk-%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89" target="_blank">CDK のコマンド</a></li>
 <li><a href="#cdk-%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE-metadata-%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">CDK 作成時の Metadata を削除したい場合</a></li>
 <li><a href="#aws-cdk-%E3%81%A7%E3%81%AE%E9%96%8B%E7%99%BA%E6%96%B9%E6%B3%95" target="_blank">AWS CDK での開発方法</a><ul>
-<li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0" target="_blank">ディレクトリ構造</a></li>
-<li><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0" target="_blank">スタック定義ファイルの基本構造</a></li>
+<li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0%E4%BE%8B" target="_blank">ディレクトリ構造例</a></li>
 <li><a href="#app-%E5%AE%9A%E7%BE%A9" target="_blank">App 定義</a></li>
-<li><a href="#app-%E5%AE%9A%E7%BE%A9%E3%81%AB%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%9F%E3%82%B9%E9%98%B2%E6%AD%A2%E7%AD%96" target="_blank">App 定義にリリースミス防止策</a></li>
+<li><a href="#app-%E5%AE%9A%E7%BE%A9%E3%81%AB%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%9F%E3%82%B9%E9%98%B2%E6%AD%A2%E7%AD%96%E3%81%AE%E4%BE%8B" target="_blank">App 定義にリリースミス防止策の例</a></li>
+<li><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0" target="_blank">スタック定義ファイルの基本構造</a></li>
 </ul>
 </li>
 </ul>
@@ -65,7 +66,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS CDK とは" duration="152">
+      <google-codelab-step label="AWS CDK とは" duration="0">
         <p>AWS Cloud Development Kit のことで、使い慣れたプログラミング言語を使用してクラウドアプリケーションのリソースを定義するためのオープンソースのソフトウェア開発フレームワークです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/1i7kWqpqtoY" target="_blank">AWS Cloud Development Kit (CDK)(YouTube)</a>(1:01:23)</p>
 <p class="image-container"><img alt="blackbelt-cdk_3" src="img\\bb9079791b0424f.jpg"></p>
@@ -84,7 +85,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="CDK v2" duration="2">
+      <google-codelab-step label="CDK v2" duration="0">
         <p>CDK の v2 は、2021 年 5 月のプレビューが実施され、 2021 年 12 月 2 日に GA されました。</p>
 <p>AWS Cloud Development Kit v2 開発者プレビューのお知らせ https://aws.amazon.com/jp/blogs/news/announcing-aws-cloud-development-kit-v2-developer-preview/</p>
 <p>AWS Cloud Development Kit (AWS CDK) v2 の一般提供開始 https://aws.amazon.com/jp/about-aws/whats-new/2021/12/aws-cloud-development-kit-cdk-generally-available/</p>
@@ -217,8 +218,33 @@ const loadBalancedFargateService =
 
       </google-codelab-step>
     
+      <google-codelab-step label="Snapshot test" duration="0">
+        <p>前回生成された CloudFormation テンプレートと比較して差分をチェックする<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot" target="_blank">スナップショットテスト</a>が実施できます。 スナップショットテストを行うことで、意図せずテンプレートが変更されるかどうかを検知できます。</p>
+<pre><code language="language-ts" class="language-ts">test(&#39;snapshot validation test&#39;,() =&gt;{
+    const stack = new MyTestStack(app, &#39;MyTestStack&#39;, {
+        pjName: projectName,
+        envName: envName,
+        description: &#39;xxxxxxxx&#39;,
+        :
+        isAutoDeleteObject: false,
+        env: defaultEnv,
+        terminationProtection: false, // Enabling deletion protection
+    });
+    // add tag
+    cdk.Tags.of(app).add(&#39;Project&#39;, projectName);
+    cdk.Tags.of(app).add(&#39;Environment&#39;, envName);
+    // test with snapshot
+    expect(Template.fromStack(stack)).toMatchSnapshot();
+
+})
+</code></pre>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="Unit Test" duration="0">
-        <p>Jest を使った Unit Test も実施できます。VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。</p>
+        <p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。</p>
+<p>VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。</p>
 <p>ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。</p>
 <pre><code language="language-ts" class="language-ts">test(&#34;create the vpc&#34;, () =&gt; {
   // GIVEN
@@ -292,14 +318,14 @@ const loadBalancedFargateService =
 <li>cdk deploy https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-deploy CDK で定義されたリソースを AWS 環境にデプロイするコマンドです。 すべてのスタックをデプロイしたい場合は、<code>--all</code> オプションを指定します。 指定したスタックをデプロイしたい場合は、deploy の後にスタック名を指定します。</li>
 <li>cdk diff https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-diff 現在の CDK とすでにデプロイされているバージョンとの差分を確認し、変更点を一覧で取得するコマンドです。</li>
 <li>cdk synth https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-synth CDK で定義されたスタックを CloudFormation テンプレートにするコマンドです。 リソースに付与される Metadata を削除したい場合は、<code>--path-metadata false</code> オプションを付与します。 テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 <code>--quit</code> または <code>-q</code> オプションを付与します。</li>
-<li>cdk ls https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-list 現在の CDK アプリに含まれるスタックの一覧を確認するコマンドです。</li>
+<li>cdk list / cdk ls https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-list 現在の CDK アプリに含まれるスタックの一覧を確認するコマンドです。</li>
 </ul>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="CDK 作成時の Metadata を削除したい場合" duration="0">
-        <p>CDK で作成される CloudFormation テンプレートファイルには、メタデータが含まれます。</p>
+        <p>CDK で作成される CloudFormation テンプレートファイルには、メタデータが含まれます。<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#version_reporting" target="_blank">バージョンレポート</a>と呼ばれるものです。</p>
 <pre><code language="language-yaml" class="language-yaml">Resources:
   CDKMetadata:
     Type: AWS::CDK::Metadata
@@ -319,10 +345,10 @@ Conditions:
 </code></pre>
 <p>これは、次のような目的で付与される内容です。</p>
 <p class="image-container"><img alt="cdk-metadata.png" src="img\\c196590b479360d9.png"></p>
-<p>これを付与したくない場合は、cdk コマンドに以下のオプションを追加して実行します。</p>
+<p>バージョンレポートを付与したくない場合は、cdk コマンドに以下のオプションを追加して実行します。</p>
 <pre><code language="language-sh" class="language-sh">cdk synth --no-version-reporting --path-metadata false
 </code></pre>
-<p>cdk.json に <code>"versionReporting": false,</code> を追加します。</p>
+<p>または、cdk.json に <code>"versionReporting": false,</code> を追加します。</p>
 <p class="image-container"><img alt="versionReporting" src="img\\d33ef30652cc0c8b.png"></p>
 <p>GitHub などからダウンロードしてきた CloudFormation テンプレートにこのような Metadata の記載がある場合は、消しても問題ありません。</p>
 
@@ -330,16 +356,16 @@ Conditions:
       </google-codelab-step>
     
       <google-codelab-step label="AWS CDK での開発方法" duration="0">
-        <h2 is-upgraded>ディレクトリ構造</h2>
-<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加しています。必要になったら [lib] 内にサブディレクトリを作成していきます。 ‘*&#39; が付いているディレクトリが追加したディレクトリです。</p>
+        <h2 is-upgraded>ディレクトリ構造例</h2>
+<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加した例を示します。これ以外は、必要になったら [lib] 内にサブディレクトリを作成していきます。 ‘★&#39; が付いているディレクトリが追加したディレクトリです。</p>
 <pre><code language="language-text" class="language-text">プロジェクトルートディレクトリ
     ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
     ├─ [lib]
-        ├─ *[stacks]           // スタック定義
-        ├─ *[resources]        // 各リソースごとの定義。スタックから呼ばれる
-        ├─ *[utils]            // 共通使用するものを格納
-    ├─ *[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
-    ├─ *[src]                  // Lambda や HTML などのソースを格納
+        ├─ ★[stacks]           // スタック定義
+        ├─ ★[resources]        // 各リソースごとの定義。スタックから呼ばれる
+        ├─ ★[utils]            // 共通使用するものを格納
+    ├─ ★[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
+    ├─ ★[src]                  // Lambda や HTML などのソースを格納
     ├─ [test]                  // テスト
     ├─ [node_modules]
     ├─ cdk.context.json        // 環境依存情報(context)
@@ -350,6 +376,114 @@ Conditions:
     ├─ package.json
     ├─ tsconfig.json
     ├─ README.md
+</code></pre>
+<h2 is-upgraded>App 定義</h2>
+<p><code>bin</code> に配置するスタックの依存関係を定義しておくファイルです。</p>
+<pre><code language="language-ts" class="language-ts">#!/usr/bin/env node
+import &#39;source-map-support/register&#39;;
+import * as cdk from &#39;aws-cdk-lib&#39;;
+import { MyStack } from &#39;../lib/stacks/cdk-my-stack&#39;;
+
+const app = new cdk.App();
+
+// env
+const defaultEnv = {
+  account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: process.env.CDK_DEFAULT_REGION,
+};
+
+// よく使うリージョンを定義しておくこともできます
+// see: https://docs.aws.amazon.com/ja_jp/general/latest/gr/rande.html#regional-endpoints
+const useast1Env = {
+// US East (Virginia)
+account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: &#34;us-east-1&#34;, // リージョンを固定したい場合
+};
+
+// 環境識別子の指定 -&gt; 環境識別子はコマンド実行時に &#39;-c project=xxx -c env=xxx&#39; と指定ます
+const projectName: string = app.node.tryGetContext(&#39;project&#39;);
+const envName: string = app.node.tryGetContext(&#39;env&#39;);
+
+// （オプション）環境識別子のチェック
+if (!envname.match(/^(dev|test|stage|prod)$/)) {
+  console.warn(&#39;Invalid context. envname must be [dev , test, stage, prod].&#39;)
+  process.exit(1)
+}
+
+// スタック
+const myStack = new MyStack (app, &#39;MyStack &#39;, {
+  stackName: &#34;ここにスタック名を記述&#34;, // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできます
+  description: &#34;ここにスタックの説明を記述&#34;,
+  // ここからスタックのパラメータ
+  PJName: conf.PJName,
+  EnvName: conf.EnvName,
+  :
+  // ここまでスタックのパラメータ
+
+  // 以下は基本的にどのスタックでも固定で指定する
+  env: defaultEnv,
+  /* リージョンを固定したい場合は次のようにも指定できます。1回限りの利用の場合はこのような指定も許容します。
+  何度も利用する場合は、最初に定義するのを推奨します。
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: &#34;us-east-2&#34;,
+  },
+  */
+  terminationProtection: true, // 削除保護の有効化 -&gt; スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できなくなります
+
+});
+
+// スタック
+const myStack2 = ....
+const myStack3 = ....
+const myStack4 = ....
+
+// --------------------------------- Tagging  -------------------------------------y
+// ここを指定しておくと、全てのスタックにタグ付けしてくれます。
+// プロジェクト名や環境識別子は共通タグとして定義します。
+cdk.Tags.of(this).add(&#39;Project&#39;, props.PJName);
+cdk.Tags.of(this).add(&#39;Environment&#39;, props.EnvName);
+</code></pre>
+<h2 is-upgraded>App 定義にリリースミス防止策の例</h2>
+<p>デプロイするときは、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code> として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。</p>
+<p>コンソール上で注意喚起のメッセージがあると、それだけで気付くことがありミス防止にもなります。</p>
+<p>その方法は、env で与えられる環境によって、メッセージを追加する方法です。</p>
+<p><code>prod</code> とした環境の場合には、次のようにコンソールに表示されます。</p>
+<p class="image-container"><img alt="CAUTION" src="img\\2af251baa121141b.png"></p>
+<pre><code language="language-ts" class="language-ts">// 文字色
+const color_red: string = &#34;\u001b[31m&#34;;
+const color_green: string = &#34;\u001b[32m&#34;;
+const color_yellow: string = &#34;\u001b[33m&#34;;
+const color_white: string = &#34;\u001b[37m&#34;;
+const color_reset: string = &#34;\u001b[0m&#34;;
+
+console.log();
+console.log(
+  `${color_yellow}##########################################${color_reset}`
+);
+console.log(`${color_yellow}  プロジェクト名: ${projectName} ${color_reset}`);
+console.log(
+  `${color_yellow}  リリース環境：${color_reset} ${color_red}${envname}${color_reset}`
+);
+console.log(
+  `${color_yellow}##########################################${color_reset}`
+);
+console.log();
+
+// 環境識別子のチェック
+if (!envname.match(/^(dev|test|stage|prod|jump)$/)) {
+  console.warn(
+    &#34;Invalid context. envname must be [dev , test, stage, prod, jump].&#34;
+  );
+  process.exit(1);
+}
+
+const isProduction: boolean = envname.match(/^(prod)$/) ? true : false;
+if (isProduction) {
+  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
+  console.log(`${color_red}   本番環境へのリリースです。${color_reset}`);
+  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
+}
 </code></pre>
 <h2 is-upgraded>スタック定義ファイルの基本構造</h2>
 <p><code>lib/stacks</code> に配置するスタック定義ファイルです。</p>
@@ -377,82 +511,11 @@ export class MyStack extends Stack {
     super(scope, id, props);
 
 
-    // タグを付与する -&gt; ここを指定しておくと全てにタグ付けしてくれます。
-    cdk.Tags.of(this).add(&#39;Project&#39;, props.PJName);
-    cdk.Tags.of(this).add(&#39;Environment&#39;, props.EnvName);
-
+    // タグを付与する -&gt; スタック内の全てにタグ付けしてくれます。
+    // 基本的にスタック固有のタグのみを指定し、全体で共通するものは、App 定義のほうでタグを付与します。
+    cdk.Tags.of(this).add(&#39;hogehoge&#39;, &#39;foobar&#39;);
   }
 }
-
-</code></pre>
-<h2 is-upgraded>App 定義</h2>
-<p><code>bin</code> に配置するスタックの依存関係を定義しておくファイルです。</p>
-<pre><code language="language-ts" class="language-ts">#!/usr/bin/env node
-import &#39;source-map-support/register&#39;;
-import * as cdk from &#39;aws-cdk-lib&#39;;
-import { MyStack } from &#39;../lib/stacks/cdk-my-stack&#39;;
-
-const app = new cdk.App();
-
-// 環境識別子の指定 -&gt; 環境識別子はコマンド実行時に &#39;-c env=xxx&#39; と指定する
-const envname: string = app.node.tryGetContext(&#39;env&#39;)
-// 環境識別子のチェック
-if (!envname.match(/^(dev|test|stage|prod)$/)) {
-  console.warn(&#39;Invalid context. envname must be [dev , test, stage, prod].&#39;)
-  process.exit(1)
-}
-
-// スタック
-const myStack = new MyStack (app, &#39;MyStack &#39;, {
-  stackName: &#34;ここにスタック名を記述&#34;, // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできる。
-  description: &#34;ここにスタックの説明を記述&#34;,
-  // ここからスタックのパラメータ
-  PJName: conf.PJName,
-  EnvName: conf.EnvName,
-  :
-  // ここまでスタックのパラメータ
-
-  // 以下は基本的にどのスタックでも固定で指定する
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: &#34;us-east-1&#34; // リージョンを固定したい場合、デフォルトでよい場合はprocess.env.CDK_DEFAULT_REGION とする
-  },
-  terminationProtection: true, // 削除保護の有効化 -&gt; スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できない
-
-});
-</code></pre>
-<h2 is-upgraded>App 定義にリリースミス防止策</h2>
-<p>デプロイするときは、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code> として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。</p>
-<p>コンソール上で注意喚起のメッセージがあると、それだけで気付くことがありミス防止にもなります。</p>
-<p>その方法は、env で与えられる環境によって、メッセージを追加する方法です。</p>
-<p><code>prod</code> とした環境の場合には、次のようにコンソールに表示されます。</p>
-<p class="image-container"><img alt="CAUTION" src="img\\2af251baa121141b.png"></p>
-<pre><code language="language-text" class="language-text">// 文字色
-const color_red: string = &#34;\u001b[31m&#34;;
-const color_green: string = &#34;\u001b[32m&#34;;
-const color_yellow: string = &#34;\u001b[33m&#34;;
-const color_white: string = &#34;\u001b[37m&#34;;
-const color_reset: string = &#34;\u001b[0m&#34;;
-
-console.log();
-console.log(`${color_yellow}##########################################${color_reset}`);
-console.log(`${color_yellow}  sample プロジェクト${color_reset}`);
-console.log(`${color_yellow}  リリース環境：${color_reset} ${color_red}${envname}${color_reset}`);
-console.log(`${color_yellow}##########################################${color_reset}`);
-console.log();
-
-// 環境識別子のチェック
-if (!envname.match(/^(dev|test|stage|prod|jump)$/)) {
-  console.warn(&#39;Invalid context. envname must be [dev , test, stage, prod, jump].&#39;);
-  process.exit(1);
-}
-
-const isProduction:boolean = envname.match(/^(prod)$/) ? true: false;
-if (isProduction) {
-  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
-  console.log(`${color_red}   本番環境へのリリースです。${color_reset}`);
-  console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
-};
 </code></pre>
 
 

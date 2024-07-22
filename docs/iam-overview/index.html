@@ -62,7 +62,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM とは" duration="110">
+      <google-codelab-step label="IAM とは" duration="0">
         <p>ID と AWS のサービスおよびリソースへのアクセスを安全に管理するサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=K7F5yTThynw&t=6s" target="_blank">AWS Identity and Access Management (AWS IAM) Part1(YouTube)</a>(48:03)</p>
 <p class="image-container"><img alt="blackbelt-iam-part1" src="img\\99a062884ea77b0b.jpg"></p>
@@ -78,7 +78,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="認証・認可とは" duration="2">
+      <google-codelab-step label="認証・認可とは" duration="0">
         <p>IAM を理解する前に、「認証・認可」について把握しておく必要があります。</p>
 <ul>
 <li>認証 <ul>
@@ -96,7 +96,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM ユーザー" duration="5">
+      <google-codelab-step label="IAM ユーザー" duration="0">
         <p>AWS アカウントを利用するときに使用するユーザーです。ユーザーは、次のようなものを管理することができます。</p>
 <h2 is-upgraded>MFA</h2>
 <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa.html" target="_blank">AWS での多要素認証 (MFA) の使用</a></p>
@@ -132,7 +132,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM ポリシー" duration="3">
+      <google-codelab-step label="IAM ポリシー" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies.html" target="_blank">IAM でのポリシーとアクセス許可</a></p>
 <p>ポリシーとは、AWS リソースへのアクセス権限を定義した JSON ドキュメントです。</p>
 <pre><code language="language-json" class="language-json">{
@@ -208,7 +208,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM ロール" duration="3">
+      <google-codelab-step label="IAM ロール" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles.html" target="_blank">IAM ロール</a></p>
 <p>ロールとは、ある用途や職責など目的のために１つ以上のポリシーをまとめたものです。 ロール自体はユーザーやグループなどに直接付与することができませんので、ロールを引き受けること（sts:AssumeRole アクション）を許可した IAM ポリシーを作成する必要があります。</p>
 <pre><code language="language-json" class="language-json">{
@@ -232,7 +232,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM Permissions boundary（アクセス権限の境界）" duration="3">
+      <google-codelab-step label="IAM Permissions boundary（アクセス権限の境界）" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_boundaries.html" target="_blank">IAM エンティティのアクセス許可境界</a></p>
 <p>IAM ユーザーもしくはロールに付与できる権限の境界を定義したものです。IAM ポリシーで強力な権限（AdministratorAccess）が付与されたとしても、Permissions boundary を超えた権限は許可されません。</p>
 <p>IAM ポリシーと Permissions boundary は AND 条件で評価されます。</p>
@@ -240,7 +240,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="パスワードポリシー" duration="2">
+      <google-codelab-step label="パスワードポリシー" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_passwords_account-policy.html" target="_blank">IAM ユーザー用のアカウントパスワードポリシーの設定</a></p>
 <p>IAM ユーザーのパスワードポリシーを設定することができます。</p>
 <p class="image-container"><img alt="iam password policy" src="img\\c2766ff6d8b13fbc.png"></p>
@@ -252,7 +252,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM Policy Simulator" duration="2">
+      <google-codelab-step label="IAM Policy Simulator" duration="0">
         <p><a href="https://policysim.aws.amazon.com/home/index.jsp?#" target="_blank">IAM Policy Simulator</a></p>
 <p class="image-container"><img alt="policy-simulator" src="img\\624764db6630b84b.png"></p>
 <p>ユーザー、グループ、ロールに対して設定したポリシーが正しいかどうかをテストすることができます。</p>
@@ -262,7 +262,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM Access Advisor" duration="2">
+      <google-codelab-step label="IAM Access Advisor" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/access_policies_access-advisor.html?icmpid=docs_iam_console" target="_blank">最終アクセス情報を使用した AWS のアクセス許可の調整</a></p>
 <p>アクセス可能なサービスと最終アクセス日時が表示されるので、未使用の権限を特定し削除することが可能になります。</p>
 <p>アクセスアドバイザーは、ユーザー/グループ/ロール/ポリシーで使用することができます。 グループの場合は、グループに所属するユーザーが最後に利用したものが表示されます。</p>
@@ -271,7 +271,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="IAM Access Analyzer" duration="2">
+      <google-codelab-step label="IAM Access Analyzer" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/what-is-access-analyzer.html" target="_blank">AWS Identity and Access Management Access Analyzer を使用する</a></p>
 <p>AWS リソースに紐付いているポリシーを検査し、他 AWS アカウントや外部のインターネット等からのアクセスを可能とするような設定がされているかどうかを検出および可視化してくれる機能です。</p>
 <p class="image-container"><img alt="iam-access-analyzer-result" src="img\\204f5c0cc2ef60b9.png"></p>
@@ -280,7 +280,7 @@ aws iam update-role --max-session-duration 43200
 
       </google-codelab-step>
     
-      <google-codelab-step label="ベストプラクティス" duration="2">
+      <google-codelab-step label="ベストプラクティス" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/best-practices.html</p>
 <ul>
 <li>最小特権アクセス許可を適用</li>

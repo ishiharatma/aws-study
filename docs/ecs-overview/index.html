@@ -54,7 +54,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon ECS とは" duration="166">
+      <google-codelab-step label="Amazon ECS とは" duration="0">
         <p>コンテナ化されたアプリケーションのデプロイ、管理、スケーリングを容易にするフルマネージドコンテナオーケストレーションサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=tmMLLjQrrRA" target="_blank">Amazon Elastic Container Service (Amazon ECS)(YouTube)</a>(1:00:02)</p>
 <p class="image-container"><img alt="blackbelt-ecs" src="img\\d972232abeb60670.jpg"></p>
@@ -84,7 +84,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ECS の構成要素" duration="1">
+      <google-codelab-step label="ECS の構成要素" duration="0">
         <p class="image-container"><img alt="ecs-components" src="img\\a83a2c9cf3b39c39.png"></p>
 <ol type="1">
 <li>クラスター</li>
@@ -96,7 +96,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="クラスター：サービスとタスクを実行する基盤" duration="1">
+      <google-codelab-step label="クラスター：サービスとタスクを実行する基盤" duration="0">
         <p class="image-container"><img alt="ecs-components-1" src="img\\6474d8b7048bbcf4.jpg"></p>
 <p>起動タイプが EC2 の場合、EC2 インスタンス群のことです。 Fargate の場合は、どのインスタンスで動いているかは隠ぺいされているので、論理的なグループに過ぎない。</p>
 <p>システム、環境などで分けるのが一般的だと思われます。</p>
@@ -106,7 +106,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="サービス：実行中のタスクを管理する単位" duration="1">
+      <google-codelab-step label="サービス：実行中のタスクを管理する単位" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/ecs_services.html" target="_blank">Amazon ECS サービス</a></p>
 <p class="image-container"><img alt="ecs-components-2" src="img\\2d32c817973d08d7.jpg"></p>
 <p>サービスは、指定した数のタスクを維持したり、ロードバランサーなど、実行するタスクの管理をする単位です。</p>
@@ -114,14 +114,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="タスク：起動する１つ以上のコンテナの集合" duration="1">
+      <google-codelab-step label="タスク：起動する１つ以上のコンテナの集合" duration="0">
         <p class="image-container"><img alt="ecs-components-3" src="img\\1d662fcefa765776.jpg"></p>
 <p>タスク定義とよばれる定義テンプレートに従って起動されるコンテナの集まりです。 タスクの単位で、CPU やメモリの割り当てを行い、割り当てられた範囲でコンテナを起動します。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="タスク定義：タスクを作成する定義テンプレート" duration="1">
+      <google-codelab-step label="タスク定義：タスクを作成する定義テンプレート" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/task_definitions.html" target="_blank">Amazon ECS の タスク定義</a></p>
 <p class="image-container"><img alt="ecs-components-4" src="img\\4f3123f7a40fb9e8.jpg"></p>
 <p>タスク定義は、次のようになります。（公式のサンプル）</p>
@@ -260,7 +260,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ECS クラスタ作成手順" duration="1">
+      <google-codelab-step label="ECS クラスタ作成手順" duration="0">
         <ol type="1">
 <li>コンテナイメージの作成</li>
 <li>コンテナイメージを ECR に Push</li>
@@ -281,7 +281,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Copilot" duration="1">
+      <google-codelab-step label="AWS Copilot" duration="0">
         <p><a href="https://aws.amazon.com/jp/containers/copilot/" target="_blank">AWS Copilot</a></p>
 <p>AWS Cpilot(コパイロット)とは、Amazon ECS CLI の後継にあたるもので、コンテナ化されたアプリケーション用のコマンドラインインターフェイスです。</p>
 <p>コマンド１つといくつかの設定で、可用性を考慮した構成や LB の構築、設定などを行ってくれるというものです。</p>

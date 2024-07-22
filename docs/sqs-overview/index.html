@@ -60,7 +60,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="SQS とは" duration="59">
+      <google-codelab-step label="SQS とは" duration="0">
         <p>フルマネージドのキューイングサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=avfc0gQ7X0A" target="_blank">Amazon Simple Queue Service(YouTube)</a>(58:54)</p>
 <p class="image-container"><img alt="sqs" src="img\\c700543f3b4fd493.jpg"></p>
@@ -72,7 +72,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="SQS 構成要素" duration="1">
+      <google-codelab-step label="SQS 構成要素" duration="0">
         <ul>
 <li>プロデューサー（Producer） <ul>
 <li>メッセージを SQS に送信するアプリケーション</li>
@@ -97,7 +97,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="キュータイプ" duration="1">
+      <google-codelab-step label="キュータイプ" duration="0">
         <ul>
 <li>標準キュー</li>
 <li>FIFO キュー</li>
@@ -108,7 +108,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="メッセージグループ ID" duration="1">
+      <google-codelab-step label="メッセージグループ ID" duration="0">
         <p><a href="https://docs.aws.amazon.comja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagegroupid-property.html" target="_blank">メッセージグループ ID の使用</a></p>
 <p>メッセージ送信時に <code>MessageGroupId</code> を指定することで、メッセージをグループ化できます。</p>
 <p>FIFO キューでは、グループ単位で順序が保証されますが、異なるグループ間では順序は守られません。</p>
@@ -121,7 +121,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="メッセージ重複排除" duration="1">
+      <google-codelab-step label="メッセージ重複排除" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/using-messagededuplicationid-property.html" target="_blank">メッセージ重複排除 ID の使用</a></p>
 <p>FIFO キューで指定することで、<code>5分間</code> は同一の重複排除 ID ID のメッセージが受け付けられないようになるという機能です。</p>
 <pre><code language="language-sh" class="language-sh">aws sqs send-message \
@@ -136,7 +136,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="可視性タイムアウト" duration="1">
+      <google-codelab-step label="可視性タイムアウト" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html" target="_blank">可視性タイムアウト</a></p>
 <p class="image-container"><img alt="sqs-visibilitytimeout" src="img\\a9abb1dd1bfb215b.png"></p>
 <p>SQS ではメッセージを取得しても自動で削除されることはありません。コンシューマー側が処理済みとして削除するか、メッセージの保持期間が過ぎて削除されるかです。 複数のコンシューマーがメッセージを読み取った場合、重複して処理されてしまう可能性があるため、可視性タイムアウトという処理中のメッセージが他のコンシューマーからは取得できなくする機能があります。0 秒から 12 時間が指定できます。デフォルト値は 30 秒です。 コンシューマーは、可視性タイムアウトの時間に取得したメッセージを削除する必要があります。可視性タイムアウトの時間が過ぎると、メッセージを削除できなくなり、他のコンシューマーが取得できる状態になります。</p>
@@ -146,7 +146,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="配信遅延（遅延キュー）" duration="2">
+      <google-codelab-step label="配信遅延（遅延キュー）" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-delay-queues.html" target="_blank">遅延キュー</a></p>
 <p>プロデューサー側からキューに新しいメッセージが送信された後に、指定した時間が経過してからコンシューマー側にメッセージが表示されるようにする設定です。0 秒から 15 分までの間を指定できます。</p>
 <p class="image-container"><img alt="sqs-delay" src="img\\294579d5c9a1a3fd.png"></p>
@@ -162,7 +162,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="メッセージ受信待機時間" duration="2">
+      <google-codelab-step label="メッセージ受信待機時間" duration="0">
         <p>メッセージ取得までの待機時間です。0 秒から 20 秒まで指定することができます。0 秒を指定すると、ショートポーリングになります。</p>
 <p class="image-container"><img alt="sqs-waitseconts" src="img\\d63afa09fa5a1713.png"></p>
 <h2 is-upgraded>ショートポーリングとロングポーリング</h2>
@@ -185,7 +185,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="メッセージ保持期間" duration="1">
+      <google-codelab-step label="メッセージ保持期間" duration="0">
         <p>キューに登録されたメッセージは明示的に削除処理を行われない限りデフォルトで 4 日間保持、1 分から 14 日設定できます。</p>
 <p class="image-container"><img alt="sqs-message-retention" src="img\\b5acfa3c6bb304c9.png"></p>
 <p>コンシューマーアプリケーションに障害があった場合、この保持期間内に復旧できれば、キューに貯まったメッセージを処理することができます。しかし、期間を過ぎてしまうと処理することが出来なくなってしまうので注意が必要です。</p>
@@ -193,7 +193,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="最大メッセージサイズ" duration="1">
+      <google-codelab-step label="最大メッセージサイズ" duration="0">
         <p>キューのメッセージサイズで、1KB から 256KB の範囲を指定できます。デフォルト値は 256 KB です。</p>
 <p class="image-container"><img alt="sqs-maxsize" src="img\\417aa4fd6dfc6422.png"></p>
 <p>256 KB を超えるメッセージを送信したい場合、「Java 用 SQS 拡張ライブラリ」と「S3」を利用します。これによって「2 GB」までのメッセージを扱えるようになります。</p>
@@ -202,7 +202,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="デッドレターキュー" duration="1">
+      <google-codelab-step label="デッドレターキュー" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html" target="_blank">デッドレターキュー</a></p>
 <p>メッセージの受信者に正常に配信できなかった場合に格納する SQS のキューを指定できます。 これにより、エラーの分析や、再処理などを行うことができます。</p>
 <p class="image-container"><img alt="sqs-dlq" src="img\\7fac564e482627e8.png"></p>
@@ -210,7 +210,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="暗号化" duration="1">
+      <google-codelab-step label="暗号化" duration="0">
         <p>AWS KMS を利用して、トピック内のメッセージを暗号化することができます（サーバ側の暗号化（SSE）） 暗号化されたメッセージは、配信時に自動的に復号されて配信されます。</p>
 <p>指定できるキーは、デフォルトの <code>alias/aws/sqs</code> と 作成済みの CMK を指定できます。</p>
 <p class="image-container"><img alt="sqs-sse" src="img\\9f892ed7fdf0229c.png"></p>

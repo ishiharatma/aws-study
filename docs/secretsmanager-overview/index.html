@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-secrets-manager-%E3%81%A8%E3%81%AF" target="_blank">AWS Secrets Manager とは</a></li>
 <li><a href="#systems-manager-%E3%81%AE-ssm-parameter-store-%E3%81%A8%E3%81%A9%E3%81%A1%E3%82%89%E3%82%92%E9%81%B8%E6%8A%9E%E3%81%99%E3%82%8B%E3%81%8B" target="_blank">Systems Manager の SSM Parameter Store とどちらを選択するか？</a></li>
@@ -51,7 +51,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Secrets Manager とは" duration="35">
+      <google-codelab-step label="AWS Secrets Manager とは" duration="0">
         <p>データベース認証情報、API キー、その他のシークレットのライフサイクルを通しての管理、取得、ローテーションできるサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/r7JQSBaQwh4" target="_blank">AWS Secrets Manager(YouTube)</a>(0:34:51)</p>
 <p class="image-container"><img alt="secrets-manager-blackbelt" src="img\\c5cb9abf92fb8c40.jpg"></p>
@@ -63,7 +63,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Systems Manager の SSM Parameter Store とどちらを選択するか？" duration="2">
+      <google-codelab-step label="Systems Manager の SSM Parameter Store とどちらを選択するか？" duration="0">
         <p>同様のサービスに <a href="https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/systems-manager-parameter-store.html" target="_blank">Systems Manager の Parameter Store</a> というものがあり、どちらを選択するか迷うことがあります。</p>
 <p>いくつかの項目で比較したものは下記のとおりです。</p>
 <table>
@@ -125,7 +125,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="管理できるシークレットのタイプ" duration="1">
+      <google-codelab-step label="管理できるシークレットのタイプ" duration="0">
         <p>基本的にデータベースの接続情報が選択できます。</p>
 <p>「その他のシークレットタイプ」を選択することでデータベース接続情報以外のデータをシークレットとして登録することも可能です。その場合、SSM の Parameter Store と比較検討したほうがよいでしょう。</p>
 <p class="image-container"><img alt="types" src="img\\6108535d3b09579b.jpg"></p>
@@ -133,7 +133,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="シークレットの階層化" duration="1">
+      <google-codelab-step label="シークレットの階層化" duration="0">
         <p>名前に&#34;/&#34;を使うことで、疑似的に階層化の管理が可能です。</p>
 <p>階層化を行うことで、次のように <code>project-x</code> 配下のシークレットに対して一括したアクセス制御を行うことができます。</p>
 <pre><code language="language-json" class="language-json">&#34;Resource&#34;: &#34;arn:aws:secretsmanager:ap-northeast-1:123456789012:secret:project-x/*&#34;
@@ -142,14 +142,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="暗号化" duration="1">
+      <google-codelab-step label="暗号化" duration="0">
         <p>作成するシークレットは KMS を使った暗号化が可能です。デフォルトでは、<code>aws/secretsmanager</code> という AWS マネージド型キーが使用できます。</p>
 <p>このほかに、<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#customer-cmk" target="_blank">顧客管理のキー（CMK）</a>が指定できます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="自動ローテーション" duration="2">
+      <google-codelab-step label="自動ローテーション" duration="0">
         <p>自動的にパスワードを変更する<a href="https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/rotating-secrets.html" target="_blank">ローテーション</a>を設定することができます。</p>
 <p class="image-container"><img alt="rotation" src="img\\26969aa817b87afa.jpg"></p>
 <p>設定方法は簡単で、自動ローテーションを <code>ON</code> にして、スケジュールを設定するだけで、自動ローテーションを構成できます。</p>
@@ -158,7 +158,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="レプリケーション" duration="2">
+      <google-codelab-step label="レプリケーション" duration="0">
         <p>シークレットは、指定した AWS リージョンにのみ作成されますが、 <a href="https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/create-manage-multi-region-secrets.html" target="_blank">レプリケーション</a>することで複数のリージョンで同じ名前のシークレットを保持することが可能です。</p>
 <p class="image-container"><img alt="replication" src="img\\706e11013bfc6723.jpg"></p>
 <p>レプリケーションを有効にした場合、レプリケーション元をプライマリシークレット、レプリケーション先をレプリカシークレットと呼び、自動ローテーションが有効な場合は、レプリカシークレットのほうにも反映されます。</p>
@@ -171,13 +171,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="使用状況の監査" duration="2">
+      <google-codelab-step label="使用状況の監査" duration="0">
         <p>「<a href="https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/monitoring-cloudtrail.html" target="_blank">AWS CloudTrail による AWS Secrets Manager イベントのログ記録</a>」や「<a href="https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/monitoring-cloudwatch.html" target="_blank">Amazon AWS Secrets Manager でのモニタリング CloudWatch</a>」 にも記載されているように API 実行の記録やメトリクスを把握することができます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="シークレットの削除" duration="2">
+      <google-codelab-step label="シークレットの削除" duration="0">
         <p>シークレットを削除する場合、最短で 7 日間の猶予期間後に削除されるようにスケジュールされます。猶予期間の間はシークレットが利用不可になり、この間は料金が発生しません。</p>
 <p class="image-container"><img alt="remove" src="img\\3be7389e7a48f121.png"></p>
 <p>この猶予期間の間に、「<a href="https://docs.aws.amazon.com/ja_jp/secretsmanager/latest/userguide/monitoring_cloudwatch_deleted-secrets.html" target="_blank">Amazon CloudWatch を使用して、削除予定の AWS Secrets Manager シークレットをモニタリングする</a>」にあるようにモニタリングすることで、利用有無を確認することができます。</p>

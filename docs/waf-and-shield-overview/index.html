@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#osi-%E3%83%A2%E3%83%87%E3%83%AB%E3%81%A8%E3%81%AF" target="_blank">OSI モデルとは</a></li>
 <li><a href="#aws-shield-%E3%81%A8%E3%81%AF" target="_blank">AWS Shield とは</a></li>
@@ -75,7 +75,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="OSI モデルとは" duration="1">
+      <google-codelab-step label="OSI モデルとは" duration="0">
         <table>
 <tr><td colspan="1" rowspan="1"><p>層</p>
 </td><td colspan="1" rowspan="1"><p>名称</p>
@@ -115,7 +115,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Shield とは" duration="61">
+      <google-codelab-step label="AWS Shield とは" duration="0">
         <p>AWS Shield は、AWS リソースを DDoS（分散型サービス拒否,<a href="https://ja.wikipedia.org/wiki/DoS%E6%94%BB%E6%92%83" target="_blank">DDoS 攻撃（Distributed Denial of Service attack）とは(Wikipedia)</a>）攻撃から保護するためのサービスです。 Shield は、レイヤー 3 およびレイヤー 4(OSI モデルの項を参照)の攻撃（IP、TCP、UDP レベルでの攻撃）を自動的に検出および防止し、AWS のグローバルネットワークに統合されており、ネットワークレベルの保護を提供します。これには、TCP SYN Flood、UDP Flood、ICMP Flood などが含まれます。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/qKNsYWHWOiYxx" target="_blank">AWS Shield Advanced(YouTube)</a>(1:00:33)</p>
 <p class="image-container"><img alt="blackbelt-shield" src="img\\498e741a485f9d0a.jpg"></p>
@@ -127,7 +127,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS WAF とは" duration="119">
+      <google-codelab-step label="AWS WAF とは" duration="0">
         <p>AWS WAF（Web Application Firewall） とは、Web アプリケーションの脆弱性や攻撃から保護するためのセキュリティサービスです。 WAF は、HTTP / HTTPS リクエストを監視し、指定されたルールに基づいてトラフィックを許可またはブロックします。WAF は、XSS（クロスサイトスクリプティング）、SQL インジェクション、CSRF（クロスサイトリクエストフォージェリ）などの Web アプリケーション攻撃を検出および防止するための機能を提供します。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/ceQ7eU_jkD4" target="_blank">AWS Managed Rules for AWS WAF の活用(YouTube)</a>(0:32:28)</p>
 <p class="image-container"><img alt="blackbelt-waf-rule" src="img\\2075acc0a5ea132a.jpg"></p>
@@ -143,7 +143,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Shield の機能" duration="1">
+      <google-codelab-step label="AWS Shield の機能" duration="0">
         <p>AWS Shield は、 Standard と Advanced の２つがあります。 Standard はデフォルトで有効になっており、追加料金なしで利用できます。 Elastic Load Balancing (ELB)、Application Load Balancer、Amazon CloudFront、Amazon Route 53 を利用する際には効果を発揮します。</p>
 <p>Advanced は有料サービスで、有効化すると月額 3,000 USD です。</p>
 <p>主な違いは次のとおりです。</p>
@@ -202,7 +202,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS WAF の機能" duration="5">
+      <google-codelab-step label="AWS WAF の機能" duration="0">
         <h2 is-upgraded>なぜ Web Application Firewall が必要か</h2>
 <p>OSI モデルのレイヤー３，４については Shield のようなファイアウォールによって悪意のあるトラフィックを遮断することができます。 しかし、アプリケーションの HTTP リクエストに発生する SQL インジェクションやクロスサイトスクリプティングのようなものはどうでしょうか。 これらはレイヤー７で動作するため、パケットの中身を読み取ることができず、遮断することが出来ません。 この部分には様々な情報を含むことができるため、攻撃手段も多様です。 そのため、レイヤー７で動作する内容を読み取り、攻撃からアプリケーションを保護するファイアウォールが必要になりました。</p>
 <p>攻撃によって Web アプリケーションが受けるセキュリティに関する最も重大な 10 のリスクについては下記サイトを参考にしてください。</p>

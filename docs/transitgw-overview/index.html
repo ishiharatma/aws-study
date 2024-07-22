@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-transit-gateway-%E3%81%A8%E3%81%AF" target="_blank">AWS Transit Gateway とは</a></li>
 <li><a href="#%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">メリット</a></li>
@@ -49,7 +49,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Transit Gateway とは" duration="56">
+      <google-codelab-step label="AWS Transit Gateway とは" duration="0">
         <p>クラウドネットワークを管理するための重要なサービスの一つです。企業が複数の VPC（Virtual Private Cloud）やオンプレミスのネットワークを統合し、効率的かつセキュアな通信を確立するのに役立ちます。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/Yhe2jYzFmfs" target="_blank">AWS Transit Gateway(YouTube)</a>(0:55:33)</p>
 <p class="image-container"><img alt="blackbelt-transitgw" src="img\\7d291db60e30d259.jpg"></p>
@@ -61,7 +61,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="メリット" duration="2">
+      <google-codelab-step label="メリット" duration="0">
         <pre><code language="language-text" class="language-text">AWS Transit Gateway は、クラウドルーターとして機能することで、大規模な
 ネットワークの設計と実装を支援します。ネットワークが拡大しても、増分接続
 の管理が複雑であることが原因で速度が低下する可能性があります。
@@ -79,7 +79,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="Transit Gateway の構造" duration="3">
+      <google-codelab-step label="Transit Gateway の構造" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/what-is-transit-gateway.html#concepts" target="_blank">Transit Gateway の概念</a></p>
 <p>Transit Gateway は主に次の要素から構成されています。</p>
 <p class="image-container"><img alt="transitgateway-concepts" src="img\\6098de5d11b84d2d.png"></p>
@@ -109,7 +109,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="Transit Gateway のユースケース例" duration="3">
+      <google-codelab-step label="Transit Gateway のユースケース例" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/TGW_Scenarios.html" target="_blank">ユースケース例</a>では次のようなものが記載されています。</p>
 <ul>
 <li>集中型ルーター <ul>
@@ -141,7 +141,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="ハンズオン" duration="30">
+      <google-codelab-step label="ハンズオン" duration="0">
         <p><a href="https://develop.d1xrg9ubdspdie.amplifyapp.com/" target="_blank">TransitGateway ハンズオン</a>があります。 実際に操作をしてみると理解が深まると思います。</p>
 <p>ハンズオンでは次のような構成を構築します。</p>
 <p class="image-container"><img alt="Chapter1_1.png" src="img\\1ddeb23a4d718f57.png"></p>
@@ -149,7 +149,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="ベストプラクティス" duration="5">
+      <google-codelab-step label="ベストプラクティス" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/tgw/tgw-best-design-practices.html" target="_blank">Transit Gateway 設計のベストプラクティス</a></p>
 <pre><code language="language-text" class="language-text">各 Transit Gateway VPC アタッチメントに個別のサブネットを使用します。
 各サブネットに対して、小さな CIDR (/28 など) を使用して、EC2 リソースの
@@ -165,7 +165,7 @@ AWS Transit Gateway は、中央ハブを介して VPC とオンプレミスネ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="構成のサンプル" duration="1">
+      <google-codelab-step label="構成のサンプル" duration="0">
         <p>ハンズオンの構成よりもベストプラクティスにもあるように、Transit Gateway のアタッチメントに個別のサブネットを作成したサンプル構成です。</p>
 <p class="image-container"><img alt="transitgateway-sample" src="img\\6a7a43f48d13ae20.png"></p>
 

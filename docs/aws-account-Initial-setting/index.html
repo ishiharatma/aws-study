@@ -27,7 +27,7 @@
                   environment="web"
                   feedback-link="">
     
-      <google-codelab-step label="☘️ はじめに" duration="1">
+      <google-codelab-step label="☘️ はじめに" duration="0">
         <p>AWS アカウントは簡単に作成でき、手軽に利用できます。しかし、初期設定ではセキュリティ設定が弱いため、第三者に悪用される危険があります。</p>
 <p>安全に利用するために、適切な設定を実施しましょう。</p>
 
@@ -79,7 +79,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="１．ルートユーザーは封印する" duration="1">
+      <google-codelab-step label="１．ルートユーザーは封印する" duration="0">
         <p>ルートユーザーの権限は強力であるため、初期設定を行ったあとは可能な限り利用しないようにしましょう。</p>
 <p>ルートユーザーでしか出来ない作業が必要になった場合のみ利用するようにしましょう。</p>
 <ul>
@@ -94,13 +94,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="２．ルートユーザーに多要素認証（MFA）を設定する" duration="3">
+      <google-codelab-step label="２．ルートユーザーに多要素認証（MFA）を設定する" duration="0">
         <p>ルートユーザーの乗っ取りを防止する意味でも アカウントを作成したらすぐにでも MFA を設定しましょう。 ただし、MFA の管理は厳重かつ、紛失に注意してください。可能であれば、2 つ以上を設定してください。（<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_credentials_mfa.html" target="_blank">最大 8 つまで設定可能です</a>） これを行っておけば、<a href="https://repost.aws/ja/knowledge-center/forgot-aws-sign-in-credentials" target="_blank">アカウント回復</a>を回避できます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="３．AWS アカウントの代替の連絡先を設定する" duration="1">
+      <google-codelab-step label="３．AWS アカウントの代替の連絡先を設定する" duration="0">
         <p>AWS アカウント登録時の連絡先以外にも連絡してくれるようになります。</p>
 <p>請求、オペレーション、セキュリティの３つに対して代替の連絡先を指定できます。必要に応じて設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
@@ -119,7 +119,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="４．ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="1">
+      <google-codelab-step label="４．ルートユーザーの連絡先に設定した電話番号に「国際電話識別番号」が設定してあるかを確認する" duration="0">
         <p>MFA デバイスの紛失時などに電話番号認証を行う場合、国際電話識別番号が設定していないと AWS からの国際電話が着信しません。（03-1234-5678 の場合、+81 3-1234-5678） 国際電話が着信しないと、カスタマーサポートに連絡することになり、時間外などはすぐに対応してもらえない場合があります。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -136,7 +136,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="５．予算アラートを設定する" duration="3">
+      <google-codelab-step label="５．予算アラートを設定する" duration="0">
         <p>アカウントの乗っ取りや誤ったインスタンスタイプの起動など、予期しない請求を早期に検知できるので設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -154,7 +154,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="６．コスト異常検知" duration="1">
+      <google-codelab-step label="６．コスト異常検知" duration="0">
         <p>予算アラートは、設定した予算額に対してある敷居値を超えるときに通知するサービスでした。実際に超過しなければ通知されないため、異常な兆候は検出できません。</p>
 <p>コスト異常検知は、コストを継続的にモニタリングし、機械学習モデルを利用して異常な AWS コストの発生を検出することができるサービスです。 AWS コスト異常検出を使うことで、想定外のコストが発生することを減らすことができ、アラートを受信することができます。</p>
 <p><a href="https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html" target="_blank">https://docs.aws.amazon.com/cost-management/latest/userguide/getting-started-ad.html</a></p>
@@ -162,7 +162,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="７．CloudTrail のログ記録を有効にする" duration="1">
+      <google-codelab-step label="７．CloudTrail のログ記録を有効にする" duration="0">
         <p>アカウント内で不正な操作を記録、検知するためにも有効にしましょう。 CloudTrail のログ保存先の S3 は、ライフサイクルルールも設定しましょう。 後述するログ監視を実施するために、CloudWatch Logs にも配信しましょう。CloudWatch のロググループには適切な保持期限を設定しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -177,7 +177,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="８．CloudTrail のログを監視する" duration="60">
+      <google-codelab-step label="８．CloudTrail のログを監視する" duration="0">
         <p>CloudTrail のログを監視し、少なくとも以下を監視してアラートされるようにしましょう。</p>
 <ul>
 <li>ルートアカウントの使用を監視</li>
@@ -206,7 +206,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="９．Personal Service Dashboard のイベント検知を設定する" duration="10">
+      <google-codelab-step label="９．Personal Service Dashboard のイベント検知を設定する" duration="0">
         <p><a href="https://phd.aws.amazon.com/phd/home" target="_blank">Personal Health Dashboard</a> で随時確認し、監視してもよいですが、<a href="https://ap-northeast-1.console.aws.amazon.com/events/home?region=ap-northeast-1#/" target="_blank">Amazon EventBridge コンソール</a> でイベントパターン{&#34;source&#34;: [&#34;aws.health&#34;]}を監視して自動化しよう。 通知する場合は、入力トランスフォーマーを使い、メッセージを読みやすいように整形しましょう。</p>
 <p>&lt;設定方法&gt;</p>
 <ol type="1">
@@ -235,7 +235,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="１０．IAM パスワードポリシーを変更する" duration="3">
+      <google-codelab-step label="１０．IAM パスワードポリシーを変更する" duration="0">
         <p>デフォルトの IAM ユーザーのパスワードポリシーは脆弱です。そのため、アカウントを作成したら忘れないうちに強力なポリシーに変更しましょう。</p>
 <p>推奨は、以下です。</p>
 <pre><code language="language-text" class="language-text">- パスワードの最小長「12」以上
@@ -280,7 +280,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="5">
+      <google-codelab-step label="１１．ルートユーザーの代わりになる IAM ユーザとグループを作成する" duration="0">
         <p>ルートユーザーは強力な権限を有しています。乗っ取られてしまった場合に無効化することが出来ません。 そのため、日常的な管理作業はルートユーザーではなく IAM ユーザーと IAM グループを使うことを推奨します。</p>
 <p>作成した管理用グループに IAM ユーザーを追加します。</p>
 <p>次に、AdministratorAccess の権限のロールとスイッチングロールを許可したポリシーを作成し、作成したグループに付与します。安全のために、ロール切り替え時には MFA が有効になっていることを条件としましょう。</p>
@@ -307,7 +307,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="１２．全リージョンの EBS 暗号化をデフォルトで有効にする" duration="1">
+      <google-codelab-step label="１２．全リージョンの EBS 暗号化をデフォルトで有効にする" duration="0">
         <p>この設定を行うことで、新しいボリュームを作成する際にデフォルトで暗号化が設定されるようになります。 暗号化設定を忘れてしまうことを回避でき、データの機密性の確保および、コンプライアンス要件を満たすことができます。この作業はアカウント開設直後に設定をすることを推奨します。</p>
 <h2 is-upgraded>マネジメントコンソール</h2>
 <p>&lt;<a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default" target="_blank">設定方法</a>&gt;</p>
@@ -344,7 +344,7 @@ done
 
       </google-codelab-step>
     
-      <google-codelab-step label="１３．アカウントレベルの S3 公開防止設定" duration="1">
+      <google-codelab-step label="１３．アカウントレベルの S3 公開防止設定" duration="0">
         <p>この設定によって、S3 バケットを作成したときに誤って公開してしまうことを防止できます。ただし、アカウントレベルでパブリックアクセスを無効化してしまうと、バケットレベルで公開することができなくなります。（<a href="https://aws.amazon.com/jp/s3/features/block-public-access/?nc1=h_ls" target="_blank">ここを参照</a>）</p>
 <p>バケットの公開が必要なユースケースによっては、アカウントレベルのブロックパブリックアクセスをオフのままにすることもできます。</p>
 <h2 is-upgraded>マネジメントコンソール</h2>
@@ -376,7 +376,7 @@ done
 
       </google-codelab-step>
     
-      <google-codelab-step label="１４．全リージョンのデフォルト VPC 削除" duration="5">
+      <google-codelab-step label="１４．全リージョンのデフォルト VPC 削除" duration="0">
         <p>アカウント作成時には、全リージョンにデフォルト VPC というものが存在します。すぐ使うには便利なデフォルト VPC ですが、セキュリティ的にはインバウンドとアウトバウンドがすべて許可されていたりと、危ういです。</p>
 <p>というわけで、基本的にはデフォルト VPC は削除してしまって、必要に応じて作成することを推奨します。</p>
 <p><a href="https://repost.aws/ja/knowledge-center/deleted-default-vpc" target="_blank">Amazon VPC 内で、デフォルト VPC を作成、削除、または復元する場合、どのような方法がありますか？</a></p>
@@ -502,7 +502,7 @@ done
 
       </google-codelab-step>
     
-      <google-codelab-step label="不要になったもの" duration="1">
+      <google-codelab-step label="不要になったもの" duration="0">
         <h2 is-upgraded><a href="https://console.aws.amazon.com/artifact/home" target="_blank">AWS Artifact</a> にアクセスして、「日本準拠法」に変更する</h2>
 <p>※ 2022 年 2 月以降に作成した AWS アカウントでは、最初から「日本準拠法」になっているので本手順は不要になりました。</p>
 <p>AWS アカウントの開設直後に設定されている準拠法は米国ワシントン州法となっています。ワシントン州法への準拠および英語での法務対応が困難な場合は、準拠法を日本法、紛争に関する第一審裁判所を東京地方裁判所に変更しましょう。</p>

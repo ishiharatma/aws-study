@@ -102,7 +102,7 @@ const resultS3Bucket = new s3.Bucket(this, &#34;BedrockResultBucket&#34;, {
     ),
     handler: &#34;index.lambda_handler&#34;,
     runtime: lambda.Runtime.PYTHON_3_12,
-    timeout: cdk.Duration.seconds(25),
+    timeout: cdk.&lt;!-- Duration.seconds(25), --&gt;
     architecture: lambda.Architecture.ARM_64, //X86_64,
     environment: {
       S3_BUCKET_NAME: resultS3Bucket.bucketName,

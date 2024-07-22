@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#rds-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">RDS について知るには</a></li>
 <li><a href="#aurora-%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E7%9F%A5%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">Aurora について知るには</a></li>
@@ -55,7 +55,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS について知るには" duration="53">
+      <google-codelab-step label="RDS について知るには" duration="0">
         <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/nDme-ET-_EY" target="_blank">Amazon Relational Database Service (Amazon RDS)(YouTube)</a>(52:48)</p>
 <p class="image-container"><img alt="blackbelt-rds" src="img\\813b49560cc9128.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/rds/" target="_blank">Amazon RDS サービス概要</a></p>
@@ -65,7 +65,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Aurora について知るには" duration="203">
+      <google-codelab-step label="Aurora について知るには" duration="0">
         <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/VerVNchaqVY" target="_blank">Amazon Aurora MySQL(YouTube)</a>(55:41)</p>
 <p class="image-container"><img alt="blackbelt-aurora-mysql" src="img\\91557b1bfa29d31.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=9KQkskyP930" target="_blank">Amazon Aurora MySQL Compatible Edition ユースケース毎のスケーリング手法</a>(55:41)</p>
@@ -81,7 +81,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS / Aurora について知るには(その他)" duration="186">
+      <google-codelab-step label="RDS / Aurora について知るには(その他)" duration="0">
         <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=h1r8AzOdlqo" target="_blank">AWS におけるデータベースの選択指針</a>(39:25)</p>
 <p class="image-container"><img alt="aws-summit-2019-c2-03" src="img\\49298d1b9cdedb44.jpg"></p>
 <p>【AWS Summit Tokyo 2019】<a href="https://www.youtube.com/watch?v=3oMR2hglQR0" target="_blank">Amazon RDS におけるパフォーマンス最適化とパフォーマンス管理</a>(41:33)</p>
@@ -94,7 +94,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="RDS と Aurora の比較サマリ" duration="5">
+      <google-codelab-step label="RDS と Aurora の比較サマリ" duration="0">
         <p>比較のサマリは以下の通りです。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>比較項目</p>
@@ -154,7 +154,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント１：データベースエンジン" duration="5">
+      <google-codelab-step label="比較ポイント１：データベースエンジン" duration="0">
         <p>MySQL や PostgreSQL を選択する場合で、Aurora 制約事項（*1、*2）を許容できる場合は、Aurora が最適となるケースが多いです。</p>
 <p>Aurora がサポートしないデータベースエンジンを使用したい場合は、RDS が最適となるケースが多いです。ただし、RDS にも制約事項(*3)があるため、EC2 でインスタンスを構築するケースもあります。</p>
 <table>
@@ -187,7 +187,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント２：ストレージアーキテクチャと耐久性" duration="5">
+      <google-codelab-step label="比較ポイント２：ストレージアーキテクチャと耐久性" duration="0">
         <p>RDS と Aurora の大きく異なる点といえば、ストレージのアーキテクチャです。</p>
 <p>RDS の方は EC2 に MySQL や PostgreSQL をインストールする場合と同じように、インスタンスに EBS が紐づいており、マルチ AZ の場合もそれぞれに EBS を持っています。 ミラーリング用の EBS で耐久性を高めています。</p>
 <p class="image-container"><img alt="rds-architecture" src="img\\5f60b1a76add6de1.png"></p>
@@ -199,7 +199,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント３：ストレージの容量拡張" duration="10">
+      <google-codelab-step label="比較ポイント３：ストレージの容量拡張" duration="0">
         <p>RDS でストレージの自動スケーリングがサポート（<a href="https://aws.amazon.com/jp/about-aws/whats-new/2019/06/rds-storage-auto-scaling/" target="_blank">Jun 20, 2019 - Amazon RDS で Storage Auto Scaling のサポートを開始</a>）されましたので、RDS も Aurora もストレージの自動拡張が可能ですが、RDS の自動スケーリングにはデメリットもあります。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>項目</p>
@@ -260,7 +260,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント４：可用性" duration="5">
+      <google-codelab-step label="比較ポイント４：可用性" duration="0">
         <p>RDS は マルチ AZ の場合のみ、スタンバイにフェールオーバーし、60 秒で自動的に復旧します。 シングル AZ の場合、自動的に復旧できないので、スナップショットから手動復旧が必要になります。 マルチ AZ は、プライマリインスタンスとスタンバイインスタンスで構成されます。プライマリインスタンスからスタンバイインスタンスには、同期的にレプリケーションされます。 通常、スタンバイインスタンスにはアクセスできません。</p>
 <p>Aurora はレプリカが存在する場合は、レプリカにフェールオーバーし、60 秒から 120 秒で復旧します。 レプリカが存在しない場合、同じ AZ 内に新規インスタンスが作成され、10 分以内に復旧します。AZ 障害時にはフェールオーバーが失敗する可能性があります。</p>
 <p>Aurora レプリカのフェールオーバーは優先順位を設定することが可能です。</p>
@@ -271,7 +271,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント５：読み取りスループット向上" duration="5">
+      <google-codelab-step label="比較ポイント５：読み取りスループット向上" duration="0">
         <p>プライマリインスタンスへの読み取りアクセスを分散することで、スループットを向上できます。</p>
 <p>RDS ではリードレプリカを追加することができます。リードレプリカは、「インスタンス + EBS + ミラーリング EBS 」のセットが増えていきます。</p>
 <p>Aurora ではレプリカを追加すると、「インスタンス」のみが増えていきます。</p>
@@ -281,7 +281,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント６：自動バックアップの保持期間" duration="5">
+      <google-codelab-step label="比較ポイント６：自動バックアップの保持期間" duration="0">
         <p>RDS は 0 ～ 35 日(デフォルトは 7 日)で、0 日にすることでバックアップを無効化できます。</p>
 <p>Aurora は 1 ～ 35 日(デフォルトは 1 日)となっており、0 日に設定できないため、バックアップを無効にすることは出来ません。</p>
 <p>自動バックアップは、インスタンスが起動している間のみ取得されます。ドキュメントには以下の記述があります。</p>
@@ -313,7 +313,7 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント７：データの復元" duration="5">
+      <google-codelab-step label="比較ポイント７：データの復元" duration="0">
         <p>RDS と Aurora のともにポイントインタイムリカバリとして、5 分前まで秒単位で復元が可能です。</p>
 <p>復元といっても「特定地点のデータ状態のデータベースクラスタを再作成する機能」ですので注意が必要です。</p>
 <p>データベースクラスタ内でデータのみをリカバリするわけではありません。</p>
@@ -321,7 +321,7 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント８：キャッシュ" duration="5">
+      <google-codelab-step label="比較ポイント８：キャッシュ" duration="0">
         <p>RDS ではデータベースインスタンス内にキャッシュを持つが、Aurora では、データベースとは分離して管理しています。</p>
 <p>Aurora PostgreSQL は、クラスタキャッシュ管理という仕組みで、プライマリインスタンスが持っているキャシュを特定のレプリカと共有することで、フェールオーバー時にキャッシュが失われて、処理性能が低下することを抑えることが可能になっています。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/AuroraPostgreSQL.cluster-cache-mgmt.html#AuroraPostgreSQL.cluster-cache-mgmt.Configure" target="_blank">Aurora PostgreSQL のクラスターキャッシュ管理によるフェイルオーバー後の高速リカバリ</a></p>
@@ -329,7 +329,7 @@ RDSには、バックアップ保存期間の計算時にstopped状態にあっ�
 
       </google-codelab-step>
     
-      <google-codelab-step label="比較ポイント９：価格" duration="5">
+      <google-codelab-step label="比較ポイント９：価格" duration="0">
         <p>RDS では、リードレプリカもプライマリインスタンス同様に、ストレージ料金も必要になります。 Aurora は、ストレージ I/O の料金が追加で必要になります。ただし、Aurora のレプリカはストレージ料金がかかりません。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>データベース</p>

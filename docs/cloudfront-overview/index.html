@@ -65,7 +65,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon CloudFront とは" duration="147">
+      <google-codelab-step label="Amazon CloudFront とは" duration="0">
         <p>CloudFront とは、大容量キャパシティを持つ地理的に分散したサーバー群（エッジロケーション）にコンテンツをキャッシュしたり、代理配信をするコンテンツ配信ネットワーク (CDN（Content Delivery Network）) サービスです。</p>
 <p>CDN を導入することによって、ユーザーに一番近いエッジロケーションから配信することによる高速化と、エッジサーバーでコンテンツをキャッシュすることによるオリジンの負荷軽減ができるというメリットがあります。</p>
 <p>CloudFront は従量課金のサービスであるため、使った分だけの支払でよいため安価に始められます。</p>
@@ -85,7 +85,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="CloudFront の基本" duration="1">
+      <google-codelab-step label="CloudFront の基本" duration="0">
         <h2 is-upgraded>ディストリビューション</h2>
 <p>ドメイン毎に割り当てられる CloudFront の設定の単位です。デフォルトのドメイン名は「xxxx.cloudfront.net」となっていますが、CNAME エイリアスを利用することで、独自のドメインを割り当てることができます。</p>
 <h2 is-upgraded>オリジン</h2>
@@ -121,7 +121,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="料金クラス" duration="2">
+      <google-codelab-step label="料金クラス" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPriceClass" target="_blank">価格クラス</a></p>
 <p>CloudFront はデフォルトでは世界中全てのエッジロケーションを利用し、クライアントのロケーションから最もレイテンシーが低いエッジロケーションから配信されます。</p>
 <p class="image-container"><img alt="cloudfront-priceclass" src="img\\a9caf5c9d4f669ce.png"></p>
@@ -138,7 +138,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="署名付き URL と署名付き Cookie" duration="2">
+      <google-codelab-step label="署名付き URL と署名付き Cookie" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html" target="_blank">署名付き URL と署名付き Cookie を使用したプライベートコンテンツの提供</a></p>
 <p>プライベートコンテンツの配信に利用できる機能です。「ビューワーのアクセスを制限する」を有効にすることで利用できます。 CloudFront に登録したキーペアを利用して生成します。</p>
 <p class="image-container"><img alt="cloudfront-private-contents" src="img\\290a2ff4881be2a1.png"></p>
@@ -169,7 +169,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="S3 オリジンへのアクセス制限" duration="1">
+      <google-codelab-step label="S3 オリジンへのアクセス制限" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html" target="_blank">Amazon S3 オリジンへのアクセスの制限</a></p>
 <p>S3 をオリジンに設定する場合、オリジンアクセスコントロール (OAC、旧オリジンアクセスアイデンティティ (OAI)) を設定することで、S3 バケットをパブリックアクセス可能にすることなく、意図しない 別の CloudFront ディストリビューション経由のアクセスを制限することができます。</p>
 <p>新しい OAC では、OAI で対応していなかった以下に対応できるようになっています。</p>
@@ -185,7 +185,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ALB オリジンへのアクセス制限" duration="2">
+      <google-codelab-step label="ALB オリジンへのアクセス制限" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/restrict-access-to-load-balancer.html" target="_blank">Application Load Balancers へのアクセスを制限する</a></p>
 <p>CloudFront のオリジンには ALB が設定できます。オリジンに設定するリソースは、パブリック IP によるアクセスができる必要があるため、ALB は インターネット向け（internet-facing）で作成します。</p>
 <p>この状態ですと、CloudFront を経由しなくてもアクセスが可能になっています。これでは、CloudFront のメリットを生かすことができません。</p>
@@ -195,7 +195,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="コンテンツを地理的に制限" duration="2">
+      <google-codelab-step label="コンテンツを地理的に制限" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/georestrictions.html" target="_blank">コンテンツの地理的ディストリビューションの制限</a></p>
 <p>指定した地域からのアクセスをブロックできる機能です。</p>
 <p class="image-container"><img alt="georestrictions" src="img\\c67c98ac652090ea.png"></p>
@@ -205,7 +205,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Shield" duration="1">
+      <google-codelab-step label="AWS Shield" duration="0">
         <p>CloudFront は、AWS Shield Standard によって追加料金なしで保護されています。</p>
 <p>AWS Shield Advanced によってさらに高レベルの保護が可能になります。</p>
 <p>ただし、1 年のサブスクリプションで固定月額 3,000 USD と、さらにデータ転送量による課金が発生します。</p>
@@ -214,7 +214,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS WAF によるアクセスコントロール" duration="1">
+      <google-codelab-step label="AWS WAF によるアクセスコントロール" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/distribution-web-awswaf.html" target="_blank">AWS WAF を使用してコンテンツへのアクセスの管理</a></p>
 <p>CDN は様々な脅威に晒されています。AWS WAF を利用して、それらのアクセスから保護することができます。</p>
 <p>適用できるものは バージニア北部リージョンで作成した Web ACL のみです。</p>
@@ -222,7 +222,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="CloudFront Origin Shield" duration="2">
+      <google-codelab-step label="CloudFront Origin Shield" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html" target="_blank">Amazon CloudFront Origin Shield の使用</a></p>
 <p>CloudFront は、クライアントからのリクエストをエッジロケーションで受け、エッジロケーションにキャッシュがない場合、リージョン別エッジキャッシュという中間層に送信します。</p>
 <p>リージョン別エッジキャッシュにキャッシュがない場合は、オリジンにリクエストが送信されます。</p>
@@ -235,7 +235,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Lambda@Edge" duration="2">
+      <google-codelab-step label="AWS Lambda@Edge" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/edge-functions.html" target="_blank">関数を使用してエッジでカスタマイズ</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/lambda-cloudfront-trigger-events.html" target="_blank">Lambda@Edge 関数をトリガーできる CloudFront イベント</a></p>
 <p>クライアントのロケーションに近い場所でコードを実行することができます。</p>
@@ -254,7 +254,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ログ記録" duration="2">
+      <google-codelab-step label="ログ記録" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html" target="_blank">標準ログ (アクセスログ) の設定および使用</a></p>
 <p>ログは S3 へエクスポートすることができます（標準ログ）。ログはログ発生から 1 時間以内にまたは、最大で 24 時間遅延することがあります。</p>
 <p>標準ログは追加料金が発生しませんが、S3 のアクセスと保管料金がかかります。（<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html#AccessLogsCharges" target="_blank">標準ログの料金</a>）</p>
@@ -281,7 +281,7 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 
       </google-codelab-step>
     
-      <google-codelab-step label="監視" duration="2">
+      <google-codelab-step label="監視" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/monitoring-using-cloudwatch.html" target="_blank">Amazon CloudWatch による CloudFront メトリクスのモニタリング</a></p>
 <p>CloudFront はデフォルトで記録されるメトリクスと、追加設定で記録されるメトリクスがあります。 追加メトリクスはメトリクスごとに料金がかかります。</p>
 <ul>
@@ -298,7 +298,7 @@ ex.) example-prefix/EMLARXS9EXAMPLE.2019-11-14-20.RT4KCN4SGK9.gz
 
       </google-codelab-step>
     
-      <google-codelab-step label="Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)" duration="2">
+      <google-codelab-step label="Use CloudFront continuous deployment to safely validate CDN changes(New: 2022-11-18)" duration="0">
         <p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/continuous-deployment.html" target="_blank">Using CloudFront continuous deployment to safely test CDN configuration changes</a>（2023 年 1 月時点で英語のみ）</p>
 <p>現在の設定に影響を与えることなく、新しい設定のディストリビューションの動作確認を Staging で行うことができます。動作確認ができたら、Staging を昇格させて変更を適用します。</p>
 <p class="image-container"><img alt="cloudfront-cd_1" src="img\\a7bc49ebed27a5f6.png"></p>

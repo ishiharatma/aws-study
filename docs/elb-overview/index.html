@@ -58,7 +58,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ELB とは" duration="123">
+      <google-codelab-step label="ELB とは" duration="0">
         <p class="image-container"><img alt="elb" src="img\\86b8c8c264fefa76.png"></p>
 <p>Elastic Load Balancing は、受信したトラフィックを複数のアベイラビリティーゾーンの複数のターゲット (EC2 インスタンス、コンテナ、IP アドレスなど) に自動的に分散させます。さらに、登録されているターゲットの状態をモニタリングし、正常なターゲットにのみトラフィックをルーティングします。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=4laAoK-zXko" target="_blank">Elastic Load Balancing (ELB)(YouTube)</a>(1:08:05)</p>
@@ -73,7 +73,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ELB の基本" duration="2">
+      <google-codelab-step label="ELB の基本" duration="0">
         <ul>
 <li>Internet-Facing（インターネットからアクセス可）と Internal（VPC 内など）の 2 種類があります。 <ul>
 <li>Internet-Facing はパブリックサブネットのみ配置可</li>
@@ -113,7 +113,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ELB の種類" duration="5">
+      <google-codelab-step label="ELB の種類" duration="0">
         <h2 is-upgraded>CLB:Classic Load Balancer</h2>
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/classic/introduction.html" target="_blank">Classic Load Balancer とは?</a></p>
 <ul>
@@ -230,7 +230,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="サブネットに必要な CIDR" duration="1">
+      <google-codelab-step label="サブネットに必要な CIDR" duration="0">
         <p>AWS ドキュメント &gt; Elastic Load Balancing &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer" target="_blank">ロードバランサーのサブネット</a></p>
 <p>ELB を配置するサブネットの CIDR は最小で 「27」が必要であり、8 個以上の IP アドレスの空きが必要です。</p>
 <p class="image-container"><img alt="ELB_CIDR" src="img\\bff93f45807a995a.png"></p>
@@ -238,7 +238,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="スティッキーセッション" duration="1">
+      <google-codelab-step label="スティッキーセッション" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/sticky-sessions.html" target="_blank">Application Load Balancer のスティッキーセッション</a></p>
 <p>AWS ドキュメント &gt; Network Load Balancer &gt; <a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/network/load-balancer-target-groups.html#sticky-sessions" target="_blank">スティッキーセッション</a></p>
 <p>ロードバランサーが生成した Cookie（AWSALB）を使用して同じターゲットにルーティングする機能です。クロスオリジンリソース共有 (CORS) リクエストの場合、「AWSALBCORS」を生成します。 ロードバランサーが生成する AWSALB は、ローテーションキーを使用して暗号化されており、復号することは出来ません。また、中身が同じ内容なのかも分かりません。</p>
@@ -248,7 +248,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="クロスゾーン負荷分散" duration="5">
+      <google-codelab-step label="クロスゾーン負荷分散" duration="0">
         <p>複数 AZ に跨るノードに対しても均等にトラフィックを分散するようにできるオプションです。</p>
 <p>どういうことかというと、 ELB が２つの AZ に配置されている場合は、ラウンドロビンルーティングによって、それぞれの ELB に 50%のトラフィックが分散されます。 次のようにノードが等しくなるような構成の場合、それぞれのノードは 25%のトラフィックを処理します。</p>
 <p class="image-container"><img alt="elb_normal" src="img\\c170db7c37f0176d.png"></p>
@@ -266,13 +266,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Connection Draining" duration="1">
+      <google-codelab-step label="Connection Draining" duration="0">
         <p>ELB の配下のノードを切り離す場合、いきなり切り離されると、ノードで実行中だった場合にアプリケーション側でエラーが出てしまいます。 そのため、切り離し対象のノードへのリクエストが終わるまで一定時間切り離しを待機してくれる機能です。 この機能は、デフォルトで有効化されています。 待機時間のデフォルトで 300 秒となっており、最大で 3,600 秒まで設定できます。 指定された待機時間に達した場合は、強制的に切り離しが実施されます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="アクセスログ" duration="2">
+      <google-codelab-step label="アクセスログ" duration="0">
         <p>ELB のアクセスログは、S3 に出力することができます。アクセスログは 5 分ごとに出力されます。</p>
 <p>出力されるログファイルのキーは、次のようになっています。</p>
 <pre><code language="language-text" class="language-text">bucket[/prefix]/AWSLogs/aws-account-id/elasticloadbalancing/region/yyyy/mm/dd/aws-account-id_elasticloadbalancing_region_app.load-balancer-id_end-time_ip-address_random-string.log.gz
@@ -303,7 +303,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="📖 他のサービスとの連携" duration="1">
+      <google-codelab-step label="📖 他のサービスとの連携" duration="0">
         <ul>
 <li>独自ドメインを使いたい <ul>
 <li>Amazon Route 53</li>

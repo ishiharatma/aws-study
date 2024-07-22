@@ -68,7 +68,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon S3 とは" duration="117">
+      <google-codelab-step label="Amazon S3 とは" duration="0">
         <p>スケーラビリティ、データ可用性、セキュリティ、およびパフォーマンスを提供するオブジェクトストレージサービスです。 データ耐久性はイレブンナイン（99.999999999 %）です。可用性はストレージクラスによって異なります。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=oFG5kMZjKtc" target="_blank">Amazon S3/Glacier(YouTube)</a>(1:00:33)</p>
 <p class="image-container"><img alt="blackbelt_s3" src="img\\46ab453257be9a02.jpg"></p>
@@ -82,7 +82,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon S3 の基本" duration="2">
+      <google-codelab-step label="Amazon S3 の基本" duration="0">
         <p class="image-container"><img alt="s3_overview" src="img\\a31f837f62e95f7f.png"></p>
 <p>S3 のデータ耐久性はイレブンナイン（99.999999999 %）で、可用性は 99.99 %です（ストレージタイプによって異なります）。 耐久性とは、データが失われないことに対する指標で、可用性は稼働し続けることの指標です。</p>
 <p>このイレブンナインという耐久性は、S3 にオブジェクトをアップロードすると、自動的に 3AZ 以上にバックアップが行われることで実現しています。バックアップされるのはリージョン内の AZ なので、リージョン障害時にはアクセスできなくなります。</p>
@@ -125,7 +125,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="バケットポリシー" duration="2">
+      <google-codelab-step label="バケットポリシー" duration="0">
         <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/bucket-policies.html" target="_blank">バケットポリシーの使用</a></p>
 <p>バケットとその中のオブジェクトへのアクセス許可を付与できるリソースベースのポリシーで、JSON で定義します。</p>
 <p>同一アカウント内でのアクセスに対する許可設定は、基本的に IAM ポリシーによって制御します。（併用してもよいが設定が煩雑になります）</p>
@@ -162,7 +162,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="アクセスコントロールリスト（ACL）" duration="2">
+      <google-codelab-step label="アクセスコントロールリスト（ACL）" duration="0">
         <p>AWS ドキュメント&gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/acls.html" target="_blank">ACL によるアクセス管理</a></p>
 <p>「バケット・オブジェクト」への「アクセス」を許可するもので、基本的な読み取り/書き込み許可を他の AWS アカウントに付与するために使用します。</p>
 <p>ACL は S3 のサービスが開始された当初からあったアクセス制御の手段ですが、その後 IAM が提供されたため、アクセス制御の手段が複数になりました。 現在では、バケットポリシーや IAM ポリシーのほうが柔軟な制御が可能です。</p>
@@ -173,7 +173,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ライフサイクル" duration="1">
+      <google-codelab-step label="ライフサイクル" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/object-lifecycle-mgmt.html" target="_blank">ストレージのライフサイクルの管理</a></p>
 <p>指定した期間が経過したファイルを、別のストレージタイプに移動してコスト削減したり、削除したりできる機能です。</p>
 <pre><code language="language-text" class="language-text">ライフサイクルのルールは、最大 1,000個です。この制限は引き上げができません。
@@ -184,7 +184,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ストレージタイプ" duration="5">
+      <google-codelab-step label="ストレージタイプ" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage-class-intro.html" target="_blank">Amazon S3 ストレージクラスを使用する</a></p>
 <p class="image-container"><img alt="s3_storage_type" src="img\\e6b24db390ed5fe.png"></p>
 <p>上記画像は、AWS ドキュメントにある<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html#lifecycle-general-considerations-transition-sc" target="_blank">ストレージクラス間の移行のためのウォーターフォールモデル</a>に情報を追加したものです。</p>
@@ -249,7 +249,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="バージョニング" duration="2">
+      <google-codelab-step label="バージョニング" duration="0">
         <p class="image-container"><img alt="s3_versioning" src="img\\4bfa9ca0511f3f5a.png"></p>
 <p>パフォーマンスに影響を与えずに偶発的な上書きや削除から保護するためにアップロードごとに新しいバージョンを生成するオプションです。 削除されたオブジェクトの取得や、過去のバージョンへのロールバックが可能になります。</p>
 <pre><code language="language-text" class="language-text">デフォルトでは無効になっているので利用する場合は、バージョニングを有効にする必要があります。
@@ -260,7 +260,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="暗号化" duration="2">
+      <google-codelab-step label="暗号化" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/serv-side-encryption.html" target="_blank">サーバー側の暗号化を使用したデータの保護</a></p>
 <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/UsingClientSideEncryption.html" target="_blank">クライアント側の暗号化を使用したデータの保護</a></p>
 <ul>
@@ -303,7 +303,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="静的ウェブサイトのホスティング" duration="1">
+      <google-codelab-step label="静的ウェブサイトのホスティング" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/WebsiteHosting.html" target="_blank">Amazon S3 を使用して静的ウェブサイトをホスティングする</a></p>
 <p>S3 バケット単体で静的ウェブサイトが構築できる機能です。この機能だけでは HTTP アクセスのみですので、HTTPS が必要な場合は他のサービスと組み合わせる必要があります。（CloudFront との併用が最も簡単です）</p>
 <p class="image-container"><img alt="s3_static_website_1" src="img\\b9f55aed65ad42e9.png"></p>
@@ -313,7 +313,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="S3 Transfer Acceleration" duration="5">
+      <google-codelab-step label="S3 Transfer Acceleration" duration="0">
         <p>AWS ドキュメント&gt;<a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/transfer-acceleration.html" target="_blank">Amazon S3 Transfer Acceleration を使用した高速かつ安全なファイル転送の設定</a></p>
 <p class="image-container"><img alt="s3_Transfer_Acceleration" src="img\\2a8cbeba163a2016.png"></p>
 <p>遠方のリージョンからの転送を高速化できます。 同一リージョンで転送する分には問題になりませんが、海外展開している事業で、海外リージョンを利用し、中央リージョンのバケットに対して、世界中からアップロードするようなシステムの場合には、データ転送の距離により遅延が問題になります。 これを解消できる機能です。</p>
@@ -418,7 +418,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="アクセスログ" duration="2">
+      <google-codelab-step label="アクセスログ" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/ServerLogs.html" target="_blank">サーバーアクセスログを使用したリクエストのログ記録</a></p>
 <p>バケットに対する監査などの目的で、S3 のサーバアクセスログを別のバケットに保存することができます。</p>
 <p class="image-container"><img alt="s3_accesslog" src="img\\bd2218e0607be2e.png"></p>
@@ -433,7 +433,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="S3 Select" duration="2">
+      <google-codelab-step label="S3 Select" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/selecting-content-from-objects.html" target="_blank">Amazon S3 Select を使用したデータのフィルタリングと取得</a></p>
 <p>S3 に格納した CSV 形式または JSON 形式のデータをシンプルな構造化クエリ言語 (SQL) の SELECT 文を利用して、検索・集計することができます。 検索対象にできるのは単一のオブジェクトのみです。（Athena のように複数ファイルを対象には出来ません。）</p>
 <p>クエリでスキャンされたデータサイズ、返されたデータサブセットのサイズで課金されます。</p>
@@ -459,7 +459,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Storage Lens" duration="3">
+      <google-codelab-step label="Storage Lens" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/storage_lens.html" target="_blank">S3 Storage Lens</a></p>
 <p>Storage Lens を使うと、オブジェクトストレージの使用状況とアクティビティの傾向を可視化し、ストレージコストの最適化とデータ保護のベストプラクティスの推奨事項を確認することができます。 不要なデータが存在していることや、ライフサイクルが想定通りになっておらず、容量が増加しているなど、分析できます。 デフォルトでは、「default-account-dashboard」というダッシュボードが作成されているので、すぐに分析することができます。 より詳細に分析したい場合は、無料のメトリクスから有料のメトリクスに切り替えることができます。</p>
 <p>全バケットの概要 <img alt="strage_lens_3" src="img\\b4950fcab520a1bf.png"></p>
@@ -471,7 +471,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="リクエスタ支払いバケット" duration="2">
+      <google-codelab-step label="リクエスタ支払いバケット" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/RequesterPaysBuckets.html" target="_blank">ストレージ転送と使用量のリクエスタ支払いバケットの使用</a></p>
 <p>通常、バケットのデータ保存容量とデータ転送にかかるコストはバケット所有者が負担します。別のアカウントとバケットを共有指定いる場合もバケット所有者が負担します。</p>
 <p>共有先からのダウンロードが大量に発生する場合、バケット所有者の負担が大きくなってしまいます。 そのような場合、リクエスタ支払いを行うことで、データを取得した先のアカウントに料金を負担してもらうことができます。</p>
@@ -480,7 +480,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="アクセスポイント" duration="2">
+      <google-codelab-step label="アクセスポイント" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/access-points.html" target="_blank">Amazon S3 アクセスポイントを使用したデータアクセスの管理</a></p>
 <p>バケットに複数のユーザーやアカウントからアクセスがある場合、バケットポリシーでの設定が煩雑になります。 そこで、用途ごとにアクセスポイントを作成することで、アクセスポイントごとのポリシーを定義することができます。</p>
 <p class="image-container"><img alt="s3_accesspoint" src="img\\dd8843f83484a7be.png"></p>
@@ -504,7 +504,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="パフォーマンスの最適化" duration="2">
+      <google-codelab-step label="パフォーマンスの最適化" duration="0">
         <p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/optimizing-performance.html" target="_blank">設計パターンのベストプラクティス: Amazon S3 のパフォーマンスの最適化</a></p>
 <p>以前は、連続するキープレフィックスのオブジェクトを作成すると、パフォーマンス上の問題がありましたが、現在ではそのような問題は発生しません。</p>
 <pre><code language="language-text" class="language-text">BucketName/2022-11-02/aaa/xxx000000001.log
@@ -538,7 +538,7 @@ BucketName/2022-11-02/aaa/xxx000000001.log
 
       </google-codelab-step>
     
-      <google-codelab-step label="📖 他のサービスとの連携" duration="1">
+      <google-codelab-step label="📖 他のサービスとの連携" duration="0">
         <p class="image-container"><img alt="s3_services" src="img\\adcba94193679c8f.png"></p>
 <p>2019 年頃の資料のため、現在では AWS WAF も直接 S3 へログ配信できるようになっているため連携できるサービスが増えています。</p>
 

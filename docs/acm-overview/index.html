@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-certificate-manager-%E3%81%A8%E3%81%AF" target="_blank">AWS Certificate Manager とは</a></li>
 <li><a href="#%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8A%E3%83%AB%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A7%E3%81%82%E3%82%8B%E3%81%93%E3%81%A8" target="_blank">リージョナルサービスであること</a></li>
@@ -47,7 +47,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Certificate Manager とは" duration="58">
+      <google-codelab-step label="AWS Certificate Manager とは" duration="0">
         <p>AWS Certificate Manager (ACM) を使用して、AWS サービスと内部接続リソースで使用するパブリックおよびプライベート SSL/TLS 証明書をプロビジョニング、管理するサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/d-zsi1ZRwLs" target="_blank">AWS Certificate Manager(YouTube)</a>(0:57:12)</p>
 <p class="image-container"><img alt="blackbelt-acm" src="img\\e7d5b4f38b5b5e88.jpg"></p>
@@ -59,7 +59,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="リージョナルサービスであること" duration="1">
+      <google-codelab-step label="リージョナルサービスであること" duration="0">
         <p>ACM はリージョンごとのサービスであるということを意識する必要があります。 他の AWS サービスで利用する場合は、リージョンの関係を意識しないといけません。</p>
 <p>特に、CloudFront で利用する場合は、<code>バージニア北部リージョン</code> で証明書を発行する必要があります。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/acm-regions.html" target="_blank">サポートされるリージョン</a></p>
@@ -70,14 +70,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="使用可能なサービス" duration="1">
+      <google-codelab-step label="使用可能なサービス" duration="0">
         <p>Elastic Load Balancing、CloudFront、Cognito、Elastic Beanstalk、App Runner、API Gateway、CloudFormation などで利用できます。</p>
 <p>詳細は、<a href="https://docs.aws.amazon.com/ja_jp/acm/latest/userguide/acm-services.html" target="_blank">サービスと AWS Certificate Manager の統合</a> を参照します。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="パブリック証明書とプライベート証明書" duration="2">
+      <google-codelab-step label="パブリック証明書とプライベート証明書" duration="0">
         <p>FAQ の <a href="https://aws.amazon.com/jp/certificate-manager/faqs/" target="_blank">Q: パブリック証明書とプライベート証明書の違いは何ですか?</a> に記載があります。</p>
 <p>パブリック証明書は厳しい審査をクリアしているパブリック認証局から発行しているのに対し、プライベート証明書は審査を受けていない認証局から発行するもので、ざっくりいうと、インターネットからアクセスするようなサービスの場合は、パブリック証明書で、組織内などのプライベートネットワークの場合は、プライベート証明書という使い分けです。</p>
 <p>パブリック証明書とプライベート証明書は有効期限が近づくと、自動更新されます。</p>
@@ -85,7 +85,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="インポートされた証明書" duration="1">
+      <google-codelab-step label="インポートされた証明書" duration="0">
         <p>サードパーティーの証明書を使う場合はインポートすることで、CloudFront、ELB、API Gateway で利用することができます。 ただし、自動更新は行われないため、証明書が切れる前に手動でインポートする必要があります。 自動更新は行われませんが、<a href="https://docs.amazonaws.cn/en_us/acm/latest/userguide/cloudwatch-metrics.html" target="_blank">ACM CloudWatch メトリクス</a>で証明書の有効期限を監視することはできます。</p>
 <p><code>DaysToExpiry</code> は証明書が切れるまでの残り日数になっているので、このように減少していきます。</p>
 <p class="image-container"><img alt="DaysToExpiry" src="img\\ae736248a41f7586.jpg"></p>

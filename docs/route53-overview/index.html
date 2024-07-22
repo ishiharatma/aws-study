@@ -55,7 +55,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon Route 53 とは" duration="114">
+      <google-codelab-step label="Amazon Route 53 とは" duration="0">
         <p>可用性と拡張性に優れたクラウドのドメインネームシステム (DNS) ウェブサービスです。AWS のサービスの中で唯一 SLA が 100 % のサービスです。</p>
 <p>ルートフィフティスリーと読みます。</p>
 <p>なぜ 53 が付くのかというと、DNS が使用するポート番号が 53 番だからです。</p>
@@ -72,14 +72,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ドメインの新規登録" duration="1">
+      <google-codelab-step label="ドメインの新規登録" duration="0">
         <p>AWS では　 Route53 にて新規ドメインを取得することができます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/registrar-tld-list.html" target="_blank">Amazon Route 53 に登録できる最上位ドメイン</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="ドメインの移管" duration="1">
+      <google-codelab-step label="ドメインの移管" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/domain-transfer.html" target="_blank">ドメインの移管</a></p>
 <p>以下の移管が可能です。</p>
 <ul>
@@ -119,7 +119,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ホストゾーン" duration="1">
+      <google-codelab-step label="ホストゾーン" duration="0">
         <p>ホストゾーンは次の 2 種類があります。</p>
 <p class="image-container"><img alt="route53_hostedzone" src="img\\644e92014b5b3908.jpg"></p>
 <ul>
@@ -137,7 +137,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DNS レコードタイプ" duration="5">
+      <google-codelab-step label="DNS レコードタイプ" duration="0">
         <p class="image-container"><img alt="route53_hostedzone_record" src="img\\5c75bd5862b62944.jpg"></p>
 <p>主なレコードタイプは次の通りです。</p>
 <p>詳細については、<a href="https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/ResourceRecordTypes.html" target="_blank">サポートされる DNS レコードタイプ</a> を参照してください。</p>
@@ -206,7 +206,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DNS ルーティング" duration="10">
+      <google-codelab-step label="DNS ルーティング" duration="0">
         <ul>
 <li>シンプルルーティング <ul>
 <li>レコードセットに事前設定された値のみに基づいて DNS クエリに応答する方式</li>
@@ -252,7 +252,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Route 53 Resolver" duration="1">
+      <google-codelab-step label="Route 53 Resolver" duration="0">
         <p>VPC に標準で配備されている DNS サーバー（フォワーダー＋フルサービスリゾルバ）のことで、以前は、「.2 Resolver」や「Amazon Provided DNS」と呼ばれていたものです。</p>
 <p class="image-container"><img alt="route53_resolver" src="img\\a863b052b4377646.png"></p>
 <p>一般的に、リゾルバ（Resolver）とは、DNS サーバへドメイン名を照会して対応する IP アドレスを調べたり、その逆（IP アドレス → ドメイン名）を調べたりするソフトウェアのことを言います。</p>
@@ -264,7 +264,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Route 53 Resolver for Hybrid Clouds" duration="1">
+      <google-codelab-step label="Route 53 Resolver for Hybrid Clouds" duration="0">
         <p>オンプレミスとクラウドのリソースによって構成された環境での名前解決を一元化するための Amazon Route53 Resolver の機能拡張です。</p>
 <p>実体は、ENI（Elastic Network Interface）なので、セキュリティグループによるアクセス制御が可能です。</p>
 <p class="image-container"><img alt="route53_resolver_hybrid" src="img\\9a9684d072b27d27.png"></p>
@@ -272,7 +272,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DNS ヘルスチェック" duration="1">
+      <google-codelab-step label="DNS ヘルスチェック" duration="0">
         <p>Route53 ヘルスチェックには、エンドポイント、他のヘルスチェックのステータス、CloudWatch アラーム等があります。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/health-checks-types.html" target="_blank">Amazon Route 53 ヘルスチェックの種類</a></p>
 <p>エンドポイントのヘルスチェックを使用することで、特定の URL へのウェブページのリクエストなどの正常性を確認できます。ヘルスチェック対象のウェブページは、HTTP ステータスコード 2xx または 3xx で応答する必要があります。</p>
@@ -281,7 +281,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon Route 53 の料金" duration="1">
+      <google-codelab-step label="Amazon Route 53 の料金" duration="0">
         <p><a href="https://aws.amazon.com/jp/route53/pricing/" target="_blank">Amazon Route 53 料金表</a></p>
 <p>ホストゾーン、レコード数、処理されたクエリ数で課金されます。</p>
 <p>ホストゾーンの料金は、1 か月未満でも日割り計算されませんので注意が必要です</p>
@@ -296,7 +296,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Route 53 のクォータ" duration="1">
+      <google-codelab-step label="Route 53 のクォータ" duration="0">
         <p>主なクォーターは次の通りです。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>項目</p>
@@ -322,7 +322,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）" duration="1">
+      <google-codelab-step label="Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート（2022-9-21）" duration="0">
         <p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2022/09/amazon-route-53-support-dns-resource-record-set-permissions/" target="_blank">Amazon Route 53 が DNS リソースレコードセットに対するアクセス許可をサポート</a></p>
 <p>今までは、IAM ポリシーで Route 53 のホストゾーンに対するレコード操作を制限することができましたが、特定のレコードだけという制限は出来ませんでした。</p>
 <pre><code language="language-json" class="language-json">{
@@ -381,7 +381,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="📖 まとめ" duration="1">
+      <google-codelab-step label="📖 まとめ" duration="0">
         <p class="image-container"><img alt="route53" src="img\\399fb9d2a83b7246.png"></p>
 
 

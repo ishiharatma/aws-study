@@ -75,7 +75,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB とは" duration="92">
+      <google-codelab-step label="Amazon DynamoDB とは" duration="0">
         <p>1 桁ミリ秒単位で規模に応じたパフォーマンスを実現する高速で柔軟な NoSQL データベースのフルマネージドサービスです。</p>
 <p>CAP 定理という、「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」をすべて達成することはできない、という決まりがあります。</p>
 <p>DynamoDB は、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視して開発されています。</p>
@@ -94,7 +94,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB のユースケース" duration="2">
+      <google-codelab-step label="Amazon DynamoDB のユースケース" duration="0">
         <ul>
 <li>ユーザー情報</li>
 <li>広告やゲームなどのユーザー行動履歴</li>
@@ -109,7 +109,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB の料金" duration="1">
+      <google-codelab-step label="Amazon DynamoDB の料金" duration="0">
         <p><a href="https://aws.amazon.com/jp/dynamodb/pricing/" target="_blank">Amazon DynamoDB 料金</a></p>
 <p>「データストレージ」「読み込み/書き込み要求」によって課金されます。その他、使用したオプション機能によって追加で課金が発生します。</p>
 <p>また、「オンデマンド」と「プロビジョニング済み」のキャパシティーモードそれぞれで料金体系が異なります。</p>
@@ -118,7 +118,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB の基本" duration="5">
+      <google-codelab-step label="Amazon DynamoDB の基本" duration="0">
         <p class="image-container"><img alt="dynamodb table" src="img\\fe9b85125d57d98c.png"></p>
 <ul>
 <li>パーティションキー <ul>
@@ -166,7 +166,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB のストレージ" duration="2">
+      <google-codelab-step label="Amazon DynamoDB のストレージ" duration="0">
         <p>DynamoDB のストレージは、容量制限がありません。自動的に拡張していきます。1GB 単位で課金されていきます。</p>
 <p>東京リージョンでは、0.285 USD/GB （標準ストレージクラス）です。</p>
 <p>同じデータベースサービスである Aurora は 0.11 USD/GB ですので、2 倍です。</p>
@@ -189,7 +189,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB の耐久性" duration="1">
+      <google-codelab-step label="Amazon DynamoDB の耐久性" duration="0">
         <p class="image-container"><img alt="3az" src="img\\30690d8ee5b6e6e3.png"></p>
 <p>3 つの AZ にデータがレプリケートされることで冗長化されます。書き込みについては、少なくとも 2AZ に書き込みが完了した時点で、応答（Ack）が返却されます。</p>
 <p>最終的に、全ての AZ に反映されます。</p>
@@ -197,7 +197,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB の読み込み整合性" duration="2">
+      <google-codelab-step label="Amazon DynamoDB の読み込み整合性" duration="0">
         <p>先に述べたように、DynamoDB は CAP 定理「一貫性（Consistency）」「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」のうち、「可用性（Availability）」「ネットワーク分断耐性（Partition-tolerance）」を重視した設計となっているため、リレーショナルデータベースのような「一貫性」は保証されておらず、データはいつか必ず書き込まれる（通常は 1 秒以内）という動作になります。</p>
 <p>そのため、デフォルトでは <code>結果整合性のある読み込み</code> となります。この読み取りでは、最新の書き込み結果が反映されていない場合がある読み込みです。</p>
 <p>もう一つの読み込みとして、<code>強い整合性のある読み込み</code> があります。Consistent Read オプションを付けたリクエストでは、この読み込みが行われ、リクエストを受け取る前までの最新のデータを読み取ることができます。Consistent Read オプションを付けられるのは、「GetItem, Query, Scan」です。</p>
@@ -206,7 +206,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Amazon DynamoDB のパフォーマンス" duration="3">
+      <google-codelab-step label="Amazon DynamoDB のパフォーマンス" duration="0">
         <p>スループットキャパシティといった、1 秒間の読み取り、書き込みに必要なスループットキャパシティをテーブル単位で割り当てることができます。</p>
 <ul>
 <li>読み取りキャパシティ（RCU:Read Capacity Unit）読み取りのスループットは、RCU(Read Capacity Unit)という単位で割り当てます。1 RCU は、4 KB の項目に対して、結果整合性のある読み取りの場合 2 回/秒、強い整合性のある読み取りの場合 1 回/秒、といった読み取り性能を表す単位です。</li>
@@ -265,7 +265,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB のテーブル操作" duration="5">
+      <google-codelab-step label="DynamoDB のテーブル操作" duration="0">
         <p>詳細は、<a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html" target="_blank">Amazon DynamoDB API Reference</a></p>
 <ul>
 <li>list-tables: テーブル一覧</li>
@@ -361,7 +361,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB の項目操作" duration="5">
+      <google-codelab-step label="DynamoDB の項目操作" duration="0">
         <p>詳細は、<a href="https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Operations_Amazon_DynamoDB.html" target="_blank">Amazon DynamoDB API Reference</a></p>
 <ul>
 <li>help: 利用できるコマンドの確認</li>
@@ -547,7 +547,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB ストリーム" duration="1">
+      <google-codelab-step label="DynamoDB ストリーム" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Streams.html" target="_blank">DynamoDB Streams の変更データキャプチャ</a></p>
 <p>テーブルの変更履歴を記録するフローで、変更の順番は厳密に記録されます。この情報は最大 24 時間保存されます。</p>
 <p>DynamoDB ストリームを利用することで、イベントドリブンなアプリケーションを実装することができます。 ストリームは非同期的に動作するため、テーブルのパフォーマンスへの影響はありません。</p>
@@ -560,7 +560,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="TTL（Time to Live）" duration="2">
+      <google-codelab-step label="TTL（Time to Live）" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/TTL.html" target="_blank">DynamoDB の有効期限 (TTL) を使用して項目を期限切れにする</a></p>
 <p>テーブルのレコードの有効期限を設定でき、有効期限が過ぎるとレコードが自動的に削除されます。</p>
 <p>削除処理はバックグラウンドで動き、通常のトラフィックに影響を与えません。またデータは 48 時間以内に削除されます。 そのため、API リクエストの結果、期限切れになっているが削除されていないレコードも返ってくることがあります。「<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.FilterExpression" target="_blank">スキャンのフィルタ式</a>」で、フィルタする必要があります。</p>
@@ -574,7 +574,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="トランザクション" duration="1">
+      <google-codelab-step label="トランザクション" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/transaction-apis.html" target="_blank">Amazon DynamoDB Transaction</a></p>
 <p>RDB のようなトランザクションまでは期待できないが、複数テーブルに対する操作をグループ化できます。</p>
 <p>複雑なトランザクションは、設計に依存する部分が大きいので、<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html" target="_blank">ベストプラクティス</a>を参考にしながら最適な設計を行う必要があります。</p>
@@ -589,7 +589,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="グローバルテーブル" duration="1">
+      <google-codelab-step label="グローバルテーブル" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/GlobalTables.html" target="_blank">グローバルテーブル – DynamoDB の複数リージョンレプリケーション</a></p>
 <p>指定したリージョンに DynamoDB テーブルを自動的にレプリケートする機能です。グローバルに分散したユーザーがいる場合など、大規模にスケールされたアプリケーションを使用する場合に最適です。</p>
 <p>レプリケーションは全てのテーブルに 1 秒以内に行われます。近いリージョンはそれ以下になることもあります。 また、同じ項目が複数のリージョンからほぼ同時に行われた場合、1 回目の書き込みよりも 2 回目の書き込みが「優先」されます。 これを回避するためには、最終書き込みタイムスタンプを使って、最初に取得した時点より大きい場合に書き込みを行わないように制御することが推奨されます。詳しくは、「<a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate" target="_blank">条件付きの書き込み</a>」を参照してください。</p>
@@ -598,7 +598,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB Accelerator (DAX)" duration="1">
+      <google-codelab-step label="DynamoDB Accelerator (DAX)" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/DAX.html" target="_blank">DynamoDB Accelerator (DAX) とインメモリアクセラレーション</a></p>
 <p>DynamoDB と互換性のある高可用性インメモリキャッシュを提供するフルマネージドサービスで、VPC 内に DynamoDB のキャッシュクラスターを作成します。</p>
 <p>レスポンスをミリ秒単位からマイクロ秒単位まで高速化することが可能になります。</p>
@@ -607,7 +607,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="条件付き書き込み" duration="2">
+      <google-codelab-step label="条件付き書き込み" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate" target="_blank">条件付きの書き込み</a></p>
 <p>デフォルトの DynamoDB の書き込み（PutItem、UpdateItem、DeleteItem）は無条件であるため、指定したプライマリキーをもつ項目が上書きされます。</p>
 <p>これは複数人でデータを更新するような処理（たとえば、商品の在庫を減らす、訪問者数のカウンタなど）では、前の更新内容が失われてしまう場合が発生します。</p>
@@ -630,7 +630,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="アトミックカウンター" duration="2">
+      <google-codelab-step label="アトミックカウンター" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.AtomicCounters" target="_blank">アトミックカウンタ</a></p>
 <p>条件付き書き込みとは別に、アトミックカウンターというものが利用できます。この機能は、「UpdateItem」を利用して実現されます。インクリメントの他、デクリメントも可能です。</p>
 <p>ただし、「UpdateItem」は失敗すると再試行する仕様であるため、二重実行される可能性があります。そのため、訪問者数のカウンタなど誤差が許容できるような場合にのみ使用し、厳密な数値が必要な場合には利用しないほうがよいです。</p>
@@ -646,7 +646,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="並列スキャン" duration="2">
+      <google-codelab-step label="並列スキャン" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan" target="_blank">並列スキャン</a></p>
 <p>DynamoDB の scan は全件走査 API です。ベストプラクティスは、query を使うものですが、どうしても全レコードに対する処理が必要になるケースがあります。</p>
 <p>そのような時、並列スキャンを利用することで、効率よくスキャンすることができます。</p>
@@ -660,7 +660,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="バックアップ" duration="1">
+      <google-codelab-step label="バックアップ" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/BackupRestore.html" target="_blank">DynamoDB のオンデマンドバックアップおよび復元の使用</a></p>
 <p>バックアップ機能を使用し、バックアップを保存することができます。バックアップは Management コンソールか、API を使うことで、バックアップおよび復元することができます。バックアップや復元はテーブルのパフォーマンスや可用性に影響を与えません。</p>
 <p>バックアップのオプションは次の２つです。</p>
@@ -692,7 +692,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="DynamoDB 用の NoSQL Workbench" duration="1">
+      <google-codelab-step label="DynamoDB 用の NoSQL Workbench" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/workbench.html" target="_blank">DynamoDB 用の NoSQL Workbench</a></p>
 <p>Amazon DynamoDB 用の NoSQL Workbench は、最新のデータベース開発および運用向けのクロスプラットフォームのクライアント側 GUI アプリケーションです。</p>
 <p>macOS、Windows、Linux で利用できます。</p>
@@ -702,7 +702,7 @@ aws dynamodb delete-item \
 
       </google-codelab-step>
     
-      <google-codelab-step label="設計" duration="1">
+      <google-codelab-step label="設計" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/best-practices.html" target="_blank">DynamoDB を使用した設計とアーキテクチャの設計に関するベストプラクティス</a></p>
 <p>リレーショナルデータベースと比べると様々な相違点があります。それらを考慮した上で、適切な設計を行わないと DynamoDB の能力を発揮できません。</p>
 <p>ベストプラクティスのドキュメントを読み、 NoSQL に最適な設計をしましょう。</p>

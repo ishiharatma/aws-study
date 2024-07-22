@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-security-hub-%E3%81%A8%E3%81%AF" target="_blank">AWS Security Hub とは</a></li>
 <li><a href="#%E7%89%B9%E5%BE%B4" target="_blank">特徴</a></li>
@@ -55,7 +55,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Security Hub とは" duration="63">
+      <google-codelab-step label="AWS Security Hub とは" duration="0">
         <p>AWS Security Hub とは、Cloud Security Posture Management（CSPM：クラウドセキュリティの構成ミス、管理不備などへ対応するための仕組み）に相当するサービスで、「AWS リソースのセキュリティ設定がベストプラクティスから逸脱していないか」を自動でチェックします。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=1JJw9efXIlw" target="_blank">AWS Security Hub(YouTube)</a>(1:02:06) <a href="https://d1.awsstatic.com/webinars/jp/pdf/services/20201013_AWS-BlackBelt-AWSSecurityHub.pdf" target="_blank">pdf</a></p>
 <p class="image-container"><img alt="blackbelt-securityhub" src="img\\422d5de145fab42a.jpg"></p>
@@ -67,7 +67,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="特徴" duration="1">
+      <google-codelab-step label="特徴" duration="0">
         <ul>
 <li>30 日間は無料</li>
 <li>Security Hub はリージョンサービス</li>
@@ -81,7 +81,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Security Hub の有効化" duration="2">
+      <google-codelab-step label="Security Hub の有効化" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/securityhub-settingup.html" target="_blank">AWS Security Hub の設定</a></p>
 <p>AWS Organizations のアカウントでは Security Hub が自動的に有効になります。 それ以外のアカウントでは、手動で有効化する必要がありますが、有効化はコンソールで簡単に実施することができます。 AWS Security Hub を有効化する前に、AWS Config でリソースの記録を有効にする必要があります。</p>
 <p class="image-container"><img alt="securityhub-setup" src="img\\21da876f030e5766.png"></p>
@@ -91,7 +91,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="検出項目（コントロール）" duration="2">
+      <google-codelab-step label="検出項目（コントロール）" duration="0">
         <p>検出項目はコントロールとよばれ、次のようなものがあります。</p>
 <pre><code language="language-text" class="language-text">[Account.1] AWS アカウント について、セキュリティの連絡先情報を提供する必要があります
 [IAM.4] IAM ルートユーザーアクセスキーが存在してはいけません
@@ -108,7 +108,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="サービスリンクロール" duration="1">
+      <google-codelab-step label="サービスリンクロール" duration="0">
         <p><code>AWSServiceRoleForSecurityHub</code> という名前のロールをサービスリンクロールとして使用します。 コンソールで Security Hub を有効化した場合は、<code>securityhub.amazonaws.com</code> のサービスにリンクしたロールが自動的に作成されます。</p>
 <p>手動で作成することもできます。手動で作成する方法は、<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/using-service-linked-roles.html#create-service-linked-role" target="_blank">サービスにリンクされたロールの作成</a> を参照してください。</p>
 <p>作成したサービスリンクロールは、ロールを使用するすべてのリージョンの Security Hub が無効化された後でしか削除できません。</p>
@@ -116,7 +116,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="クロスリージョン集約" duration="1">
+      <google-codelab-step label="クロスリージョン集約" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-enable.html" target="_blank">クロスリージョン集約を有効にする</a><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/finding-aggregation-stop.html" target="_blank">クロスリージョン集約を停止する</a></p>
 <p>Security Hub はリージョンサービスです。そのため、各リージョンの検出結果は各リージョンで確認しなければなりません。 しかし、クロスリージョン集約を使うことで、1 つのリージョンに集約して管理することができます。</p>
 <p class="image-container"><img alt="Aggregation Region" src="img\\189e5f5b2060e95c.png"></p>
@@ -124,7 +124,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="検出結果通知" duration="5">
+      <google-codelab-step label="検出結果通知" duration="0">
         <p>検出結果通知は、Security Hub から Amazon EventBridge に発信されるイベントを検出し、SNS と連携することで実現できます。</p>
 <p>Security Hub から 発信される <a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/securityhub-cwe-event-formats.html" target="_blank">EventBridge イベント形式</a> は次のようになります。</p>
 <pre><code language="language-json" class="language-json">{
@@ -329,7 +329,7 @@ https://&lt;region&gt;.console.aws.amazon.com/securityhub/home?region=&lt;region
 
       </google-codelab-step>
     
-      <google-codelab-step label="Security Hub 自動応答と修復" duration="1">
+      <google-codelab-step label="Security Hub 自動応答と修復" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/securityhub/latest/userguide/securityhub-cloudwatch-events.html" target="_blank">自動応答および自動修復</a></p>
 <p>Amazon EventBridge を使用して、つぎのようなリソースを自動的にトリガーすることで自動修復などを行うことができます。</p>
 <ul>

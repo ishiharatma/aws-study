@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#guardduty-%E3%81%A8%E3%81%AF" target="_blank">GuardDuty とは</a></li>
 <li><a href="#guardduty-%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E7%90%86%E7%94%B1" target="_blank">GuardDuty が必要な理由</a></li>
@@ -58,7 +58,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="GuardDuty とは" duration="47">
+      <google-codelab-step label="GuardDuty とは" duration="0">
         <p>AWS 環境のセキュリティを継続的にチェックしてくれるサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/Tb2Uw4B_Ihw" target="_blank">Amazon GuardDuty(YouTube)</a>(0:46:52)</p>
 <p class="image-container"><img alt="blackbelt-guardduty" src="img\\470e4a520fb45766.jpg"></p>
@@ -72,7 +72,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="GuardDuty が必要な理由" duration="2">
+      <google-codelab-step label="GuardDuty が必要な理由" duration="0">
         <p>Well-Architected フレームワークという考え方のうち、「<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/framework/security.html" target="_blank">セキュリティの柱</a>」に、「<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/framework/sec-detection.html" target="_blank">発見的統制</a>」というものがあります。</p>
 <p>これは、セキュリティインシデントが発生しても通知するようにしておき対応する、というものです。</p>
 <p>自力で検知を組み込むのは大変な事ですが、これを自動的に検知して通知してくれるのが Amazon GuardDuty ですので、有効化しておくとよいです。</p>
@@ -80,7 +80,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="特徴" duration="1">
+      <google-codelab-step label="特徴" duration="0">
         <ul>
 <li>30 日間は無料</li>
 <li>AWS アカウントレベルで検出</li>
@@ -154,7 +154,7 @@ RegionConfigs.forEach((x) =&gt; {
 
       </google-codelab-step>
     
-      <google-codelab-step label="脅威検出" duration="1">
+      <google-codelab-step label="脅威検出" duration="0">
         <p>ログなどから脅威を検出する機能です。検出する機能なので、通知するには EventBridge と SNS を利用する必要があります。（<a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_findings_cloudwatch.html#guardduty_cloudwatch_severity_notification" target="_blank">GuardDuty の検出結果を通知する CloudWatch Events ルールの作成</a>）</p>
 <p>検出結果 <img alt="result" src="img\\7b35604db9576098.png"><img alt="result-detail" src="img\\fb2ce7835e7018f3.png"></p>
 <p>EventBridge のイベントパターン指定例 <img alt="event-pattern" src="img\\72685c3784307bc1.png"></p>
@@ -162,7 +162,7 @@ RegionConfigs.forEach((x) =&gt; {
 
       </google-codelab-step>
     
-      <google-codelab-step label="検出結果タイプ" duration="2">
+      <google-codelab-step label="検出結果タイプ" duration="0">
         <p>GuardDuty を有効化したときにデフォルトで次のログを検査します。CloudTrail の有効化や VPC Flow logs や DNS ログの設定がされていなくても GuardDuty によって個別に取得されます。 ただし、調査などの理由から各サービスのログも有効化しておくのを推奨します。</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_data-sources.html#guardduty_cloudtrail" target="_blank">AWS CloudTrail イベントログ</a></li>
@@ -197,7 +197,7 @@ RegionConfigs.forEach((x) =&gt; {
 
       </google-codelab-step>
     
-      <google-codelab-step label="マルウェア検知" duration="3">
+      <google-codelab-step label="マルウェア検知" duration="0">
         <p>インスタンスで動作しているマルウェアを検出できます。 通常、サードパーティ製のマルウェア検知ソフトの場合、インスタンスにエージェントをインストールしなければならないが、GuardDuty を使えばエージェントレスでマルウェアを検知できます。 チェック対象の EC2 にアタッチされた EBS はスナップショットが取得され、そのスナップショットから、DuardDuty が動作する 別の AWS アカウントに EBS が複製され、チェックを実行する　 EC2 にアタッチされて検査されます。</p>
 <p class="image-container"><img alt="malware-scan" src="img\\35e9ff7f9130d476.png"></p>
 <p>このため、チェック対象のインスタンスにエージェントのインストールが不要になります。</p>
@@ -227,7 +227,7 @@ RegionConfigs.forEach((x) =&gt; {
 
       </google-codelab-step>
     
-      <google-codelab-step label="検出結果通知" duration="5">
+      <google-codelab-step label="検出結果通知" duration="0">
         <p>検出結果通知は、GuardDuty から Amazon EventBridge に発信されるイベントを検出し、SNS と連携することで実現できます。</p>
 <p>GuardDuty から 発信される <a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_findings-summary.html" target="_blank">検出結果の詳細</a> は次のようになります。</p>
 <pre><code language="language-json" class="language-json">        {
@@ -352,7 +352,7 @@ done
 
       </google-codelab-step>
     
-      <google-codelab-step label="複数アカウントの管理" duration="2">
+      <google-codelab-step label="複数アカウントの管理" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/guardduty/latest/ug/guardduty_accounts.html" target="_blank">Amazon GuardDuty での複数のアカウントの管理</a></p>
 <p>結果を集約したい管理者アカウントでメンバーアカウントを招待することで、権威結果を表示することができます。</p>
 <p>メンバーアカウントの管理は次の２つがあります。</p>

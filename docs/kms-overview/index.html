@@ -58,7 +58,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="KMS とは" duration="60">
+      <google-codelab-step label="KMS とは" duration="0">
         <p>暗号化操作に使用されるキーを簡単に作成および管理できるマネージドサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=4F5rSxzu0U4" target="_blank">AWS Key Management Service(YouTube)</a>(0:59:33)</p>
 <p class="image-container"><img alt="blackbelt-kms" src="img\\f8cb233944a76343.jpg"></p>
@@ -70,7 +70,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="基本概念" duration="2">
+      <google-codelab-step label="基本概念" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/basic-concepts.html" target="_blank">基本概念</a></p>
 <p>KMS では、<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/financial-services-industry-lens/use-envelope-encryption-with-customer-master-keys.html" target="_blank">エンベロープ暗号化</a>を使用しています。 これは、データを暗号化する鍵(データキー)とデータキーを暗号化する鍵(マスターキー)を利用する方式で、セキュリティが強化されます。</p>
 <p>KMS のキーに対する操作は CloudTrail に記録されます。詳しくは、「<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/logging-using-cloudtrail.html" target="_blank">AWS KMS による AWS CloudTrail API コールのログ記録</a>」を参照してください。</p>
@@ -79,7 +79,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="マスターキーとデータキー" duration="2">
+      <google-codelab-step label="マスターキーとデータキー" duration="0">
         <p>KMS では、マスターキーとデータキーという 2 種類の鍵が登場します。</p>
 <ul>
 <li>マスターキー(Customer Master Key: CMK) <ul>
@@ -99,7 +99,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="マスターキー" duration="2">
+      <google-codelab-step label="マスターキー" duration="0">
         <ul>
 <li>AWS マネージド型キー <ul>
 <li>AWS サービスが作成・管理する CMK で、キー名が「aws/s3」 のようになっています。</li>
@@ -124,7 +124,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="エイリアス" duration="2">
+      <google-codelab-step label="エイリアス" duration="0">
         <p>CMK にはエイリアス（別名）を付けることができます。エイリアスを使用することで、キーをローテーションした場合など、エイリアスの紐づけを変更するだけで、アプリケーション側の更新が不要になります。</p>
 <p class="image-container"><img alt="kms-alias" src="img\\644d19ac0e3d4700.png"></p>
 <p>エイリアス名の ARN は次のようになります。そのため、リージョン/アカウントで一意にする必要があります。</p>
@@ -134,7 +134,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="キーマテリアル" duration="3">
+      <google-codelab-step label="キーマテリアル" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/concepts.html#key-material" target="_blank">キーマテリアル</a>とは、「暗号化キーを生成するために必要な材料」であり「CMK 作成時に使用されるデータのこと」をいいます。</p>
 <p>キーマテリアルは、次の 3 種類が指定できます。</p>
 <ul>
@@ -170,7 +170,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="キーポリシー" duration="1">
+      <google-codelab-step label="キーポリシー" duration="0">
         <p>CMK にはリソースベースの<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-policies.html" target="_blank">キーポリシー</a>を付与することができます。 これにより、特定のサービスからのみアクセスさせるといった制御ができます。 CMK 作成時には<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/key-policy-default.html" target="_blank">デフォルトのキーポリシー</a>が設定されているので、必要に応じて変更します。</p>
 <p>キーポリシーに指定できる代表的な条件は次のとおりです。その他については、<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/policy-conditions.html" target="_blank">AWS KMS 条件キー</a>を参照してください。</p>
 <ul>
@@ -184,13 +184,13 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="マルチリージョンキー" duration="1">
+      <google-codelab-step label="マルチリージョンキー" duration="0">
         <p>単一リージョンで作成した CMK はエクスポートのインポートも出来ないため、作成したリージョン以外では使用することができません。 しかし、<a href="https://docs.aws.amazon.com/ja_jp/kms/latest/developerguide/multi-region-keys-overview.html" target="_blank">マルチリージョンキー</a>を選択することで、複数のリージョンにレプリケートすることが可能です。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="別の AWS アカウントへの許可" duration="1">
+      <google-codelab-step label="別の AWS アカウントへの許可" duration="0">
         <p>CMK は別のアカウントに使用を許可することができます。</p>
 <p>次のように使用を許可するアカウントを指定すると、キーポリシーに反映されます。 <img alt="kms-use-other-account" src="img\\1ecedb492d16839c.png"></p>
 <p class="image-container"><img alt="kms-use-other-account-policy" src="img\\d03b8bb27d8906b2.png"></p>
@@ -198,7 +198,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="キーの削除" duration="5">
+      <google-codelab-step label="キーの削除" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/kms/latest/cryptographic-details/key-deletion.html" target="_blank">キーの削除</a></p>
 <p>CMK は即時削除することはできません。削除スケジュールを設定し、一定期間後に削除されます。 削除スケジュールは、7 日～ 30 日を指定できます。この期間内であれば削除をキャンセルすることができます。 削除されると、既存データを二度と復号できなくなるので注意が必要です。</p>
 <p>削除ではなく、無効化することもできますのでまずは無効化を行い、本当にキーが使用されていないことを確認することを推奨します。</p>
@@ -254,13 +254,13 @@ OR
 
       </google-codelab-step>
     
-      <google-codelab-step label="データキーキャッシュ" duration="1">
+      <google-codelab-step label="データキーキャッシュ" duration="0">
         <p>AWS Encryption SDK の機能として、「<a href="https://docs.aws.amazon.com/ja_jp/encryption-sdk/latest/developer-guide/data-caching-details.html" target="_blank">データキーキャッシュ</a>」があります。 これを利用することでデータキー取得の API コールを減らすことができます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="クライアントサイド暗号化とサーバサイド暗号化" duration="3">
+      <google-codelab-step label="クライアントサイド暗号化とサーバサイド暗号化" duration="0">
         <p>KMS を利用した暗号化は、次の 2 種類があります。</p>
 <ul>
 <li>クライアントサイド暗号化（Client-Side-Encryption: CSE） <ul>

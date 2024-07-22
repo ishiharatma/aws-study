@@ -73,7 +73,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Lambda とは" duration="242">
+      <google-codelab-step label="AWS Lambda とは" duration="0">
         <p>サーバーをプロビジョニングまたは管理せずにコードを実行できるようにするコンピューティングサービスです。FaaS(Function as a Service：ファース、エフアース)に分類されるサービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=QvPgjEwgiew" target="_blank">AWS Lambda Part1(YouTube)</a>(1:02:22)</p>
 <p class="image-container"><img alt="AWS Lambda Part1" src="img\\514d02dbfb45c038.jpg"></p>
@@ -92,7 +92,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ネットワーク" duration="1">
+      <google-codelab-step label="ネットワーク" duration="0">
         <p>Lambda は Lambda サービスが所有する VPC 内で実行されています。 <img alt="lambda-eni.png" src="img\\e2c4164f5219aa49.jpg"></p>
 <p>Lambda を自 VPC に接続すると、Lambda サービスの VPC と自 VPC を接続するために Hyperplane ENI(Elastic Network Interface)を作成し、関数に割り当てます。</p>
 <p class="image-container"><img alt="lambda-eni.png" src="img\\1183b80c4a3a93ce.jpg"></p>
@@ -100,7 +100,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="実行環境" duration="2">
+      <google-codelab-step label="実行環境" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.html</p>
 <p>安全で分離されたランタイムを実行するための環境で、実行環境のライフサイクルは次のようになっています。</p>
 <ul>
@@ -146,7 +146,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="命令セットアーキテクチャ" duration="1">
+      <google-codelab-step label="命令セットアーキテクチャ" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html</p>
 <ul>
 <li>arm64 — AWS Graviton2 プロセッサ用の 64 ビット ARM アーキテクチャ <ul>
@@ -166,7 +166,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Lambda のアクセス権限" duration="1">
+      <google-codelab-step label="Lambda のアクセス権限" duration="0">
         <p>Lambda のアクセス権限には、IAM ロール（＝実行ロールと呼ばれます。ロールの中には、IAM ポリシーが含まれます）とリソースベースのポリシーがあります。</p>
 <p>実行ロールでは、Lambda 関数が他のリソースにアクセスできる権限や実行をまかせるための信頼ポリシーを記述するロールで、Lambda 関数を作成する際には必ず付与します。</p>
 <p>リソースポリシーでは、どのサービスやアカウントが Lambda 関数を呼び出せるかを記述します。後述する Push モデルのトリガー（S3, CloudWatch など）を使用する場合に指定します。</p>
@@ -197,7 +197,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="トリガー" duration="2">
+      <google-codelab-step label="トリガー" duration="0">
         <p>Pull モデルと Push モデルがあります。</p>
 <h2 is-upgraded>Pull モデル</h2>
 <p>Pull モデルは、ポーリング型の実行です。Lambda の<a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/invocation-eventsourcemapping.html" target="_blank">イベントソースマッピング</a>で指定されたイベントソースをポーリングして読み取りを行うものです。イベントが一度ストリームまたはキューに格納されるので、処理順序が保証されています。 以下のサービスとの連携が対象です。</p>
@@ -223,7 +223,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="呼び出しタイプ" duration="2">
+      <google-codelab-step label="呼び出しタイプ" duration="0">
         <p>AWS SDK や CLI から実行する際に、<code>InvocationType</code> を指定することでコントロールできます。</p>
 <ul>
 <li>RequestResponse<ul>
@@ -276,7 +276,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="対応ランタイム" duration="2">
+      <google-codelab-step label="対応ランタイム" duration="0">
         <ul>
 <li>Node.js <ul>
 <li>18,16,14,12</li>
@@ -333,14 +333,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Layer" duration="1">
+      <google-codelab-step label="Layer" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-layers.html</p>
 <p>Lambda 関数で使用するライブラリとその他の依存関係をパッケージ化できる機能です。関数には最大で 5 つのレイヤーを含めることができます。 レイヤーを使用することで、デプロイパッケージのサイズを削減し、デプロイスピードを速めることができます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="デプロイパッケージ" duration="3">
+      <google-codelab-step label="デプロイパッケージ" duration="0">
         <p>関数をデプロイするには、関数コードと依存関係を含む .zip ファイルまたは、<a href="https://opencontainers.org/" target="_blank">Open Container Initiative</a> (OCI) の仕様に準拠したコンテナーイメージでデプロイできます。</p>
 <p>Lambda 関数を作成するには、次の方法があります。</p>
 <ul>
@@ -400,7 +400,7 @@ Function3:
         ),
         handler: &#39;index.lambda_handler&#39;,
         runtime: lambda.Runtime.PYTHON_3_9,
-        timeout: cdk.Duration.seconds(300),
+        timeout: cdk.&lt;!-- Duration.seconds(300), --&gt;
         architecture: lambda.Architecture.ARM_64,
         environment: {
           LOG_LEVEL: props.lambdaLogLevel ?? &#39;INFO&#39;,
@@ -426,14 +426,14 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="エフェメラルストレージ(一時領域)" duration="1">
+      <google-codelab-step label="エフェメラルストレージ(一時領域)" duration="0">
         <p>AWS Lambda で最大 10 GB のエフェメラルストレージをサポート可能に https://aws.amazon.com/jp/blogs/news/aws-lambda-now-supports-up-to-10-gb-ephemeral-storage/</p>
 <p>512 MB ～ 10 GB まで <code>/tmp</code> 領域を作成できます。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="同時実行" duration="1">
+      <google-codelab-step label="同時実行" duration="0">
         <p>ある時点で実行されているリクエストの数のことです。 Lambda 関数の同時実行数は同一アカウントの同一リージョン内につき、1,000 に制限されています。 Lambda の同時実行数の計測は以下のように考えます。</p>
 <pre><code language="language-text" class="language-text">同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒））
 </code></pre>
@@ -442,7 +442,7 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="Qualifier" duration="1">
+      <google-codelab-step label="Qualifier" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-aliases.html</p>
 <p class="image-container"><img alt="lambda-alias" src="img\\5fd70aca59837e1a.png"></p>
 <p>関数を呼び出す場合のバージョン（my-function:1）やエイリアス（my-function:BLUE）を指定できます。 エイリアス作成時に<code>Weighted alias (加重エイリアス)</code>を指定することで、リクエストの振り分けに重みをつけることができます。 ほとんどのトラフィックを既存バージョンに振り分けて一部のトラフィックを新しいバージョンに振り分けるといったことができます。これにより、新しいバージョンを展開するリスクを軽減できます。</p>
@@ -451,7 +451,7 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="関数 URL" duration="1">
+      <google-codelab-step label="関数 URL" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-urls.html</p>
 <p class="image-container"><img alt="lambda-alias" src="img\\f1874e0105e8a94a.png"></p>
 <p>関数を呼び出すための HTTPS エンドポイントが作成できます。</p>
@@ -463,7 +463,7 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="モニタリング" duration="2">
+      <google-codelab-step label="モニタリング" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-monitoring.html</p>
 <p class="image-container"><img alt="monitoring-320.jpg" src="img\\846474b453a3839d.jpg"></p>
 <p>監視するメトリクスとしては次のようなものがあります。</p>
@@ -477,7 +477,7 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="ベストプラクティス" duration="1">
+      <google-codelab-step label="ベストプラクティス" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/best-practices.html</p>
 <p>主なベストプラクティスは次の通りです。</p>
 <ul>
@@ -511,7 +511,7 @@ Function3:
 
       </google-codelab-step>
     
-      <google-codelab-step label="クォータ" duration="1">
+      <google-codelab-step label="クォータ" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/gettingstarted-limits.html</p>
 <p>主に、同時実行数を引き上げたいなど。</p>
 

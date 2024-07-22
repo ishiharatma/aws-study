@@ -34,7 +34,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="👀 Contents" duration="1">
+      <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#aws-direct-connect-%E3%81%A8%E3%81%AF" target="_blank">AWS Direct Connect とは</a></li>
 <li><a href="#aws-%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95" target="_blank">AWS への接続方法</a></li>
@@ -66,7 +66,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS Direct Connect とは" duration="61">
+      <google-codelab-step label="AWS Direct Connect とは" duration="0">
         <p>AWS Direct Connect は、企業や組織が AWS クラウドへの高速かつ安定したプライベートネットワーク接続を確立するためのサービスです。通常のインターネット接続よりも安定性が高く、大容量のデータ転送が可能なため、企業のクリティカルなワークロードやデータの移動に適しています。</p>
 <p>企業がデータセンターと AWS にシステムを持っているハイブリットアーキテクチャの場合、両方のサーバとの通信には通信距離というコストが発生します。さらに、インターネット経由の場合、ISP の回線が十分ではなかった場合にはさらなる遅延が発生します。 このような課題を解決するために、AWS Direct Connect というサービスが提供されました。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/mEtluVrgXlk" target="_blank">AWS Direct Connect(YouTube)</a>(1:00:21)</p>
@@ -79,7 +79,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS への接続方法" duration="1">
+      <google-codelab-step label="AWS への接続方法" duration="0">
         <p>AWS へ接続するには主に次のような方法があります</p>
 <ul>
 <li>インターネット回線を使った接続 <ul>
@@ -102,7 +102,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Direct Connect を使うメリットとデメリット" duration="2">
+      <google-codelab-step label="Direct Connect を使うメリットとデメリット" duration="0">
         <ul>
 <li>メリット <ul>
 <li>インターネット回線を使用せず、専用のプライベートなネットワークで接続するためセキュリティが高い</li>
@@ -133,7 +133,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="利用開始方法" duration="1">
+      <google-codelab-step label="利用開始方法" duration="0">
         <ul>
 <li>AWS に 直接申し込む <ul>
 <li>申し込みとそれに伴うやりとり、自拠点のネットワーク機器設定など全て実施することになります</li>
@@ -149,7 +149,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="APN パートナーとは" duration="1">
+      <google-codelab-step label="APN パートナーとは" duration="0">
         <p>AWS が提供するのは Direct Connect ロケーション内の接続ポイントまでなので、それ以外については利用者が準備しなければなりません。</p>
 <p>主に次のようなことを検討・準備しなければならないため、負担が大きいです。</p>
 <ul>
@@ -166,7 +166,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="接続方法" duration="2">
+      <google-codelab-step label="接続方法" duration="0">
         <p>接続方法は次の２つがあります。物理ポートを全て専有する専用接続と、物理ポートを共有し、仮想インターフェースによって接続するホスト型接続です。</p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/dedicated_connection.html" target="_blank">専用接続</a><ul>
@@ -184,7 +184,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="仮想インターフェース（VIF）" duration="1">
+      <google-codelab-step label="仮想インターフェース（VIF）" duration="0">
         <ul>
 <li>パブリック VIF <ul>
 <li>パブリック IP アドレスを使用してアクセスする。</li>
@@ -207,7 +207,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Link Aggregation Group (LAG)" duration="1">
+      <google-codelab-step label="Link Aggregation Group (LAG)" duration="0">
         <p>専用接続の場合に設定できます。ポートスピードが 1 Gbps、10 Gbps または 100 Gbps であることが必要です。 また、同じ帯域を使用する必要があります。「1 Gbps + 10 Gbps」という設定は不可となります。 100 Gbps の場合は最大２つの接続、100Gbps 未満の場合は最大で４つの接続となります。</p>
 <p>1Gbps のポートの場合、最大で 1 Gbps × 4 = 4 Gbps 50Gbps のポートの場合、最大で 50 Gbps × 4 = 200 Gbps 100Gbps のポートの場合、最大で 100 Gbps × 2 = 200 Gbps</p>
 <p class="image-container"><img alt="lag" src="img\\1700eeeb506d968d.png"></p>
@@ -215,14 +215,14 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="設定方法" duration="1">
+      <google-codelab-step label="設定方法" duration="0">
         <p>個人では検証する敷居が高いため、Direct Connect を提供している事業者のマニュアルなどを参照すると理解しやすいかと思います。</p>
 <p><a href="https://sdpf.ntt.com/docs/quick-start-guide/fic/rsts/quickstartguide_aws.html#id9" target="_blank">Flexible InterConnect 基本構築ガイド&gt;1.6. AWS 作業（仮想プライベートゲートウェイ,Direct Connect ゲートウェイの作成）|NTT コミュニケーションズ</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="回復性モデル" duration="3">
+      <google-codelab-step label="回復性モデル" duration="0">
         <p>要件に応じた回復性の高いネットワーク接続を実現できます。 <a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/resiliency_toolkit.html" target="_blank">AWS Direct Connect Resiliency Toolkit を使用した使用の開始</a></p>
 <h2 is-upgraded>最大の回復性</h2>
 <p>クリティカルなワークロードの場合に使用します。</p>
@@ -251,7 +251,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Direct Connect のバックアップとしての AWS Site to Site VPN 接続" duration="2">
+      <google-codelab-step label="Direct Connect のバックアップとしての AWS Site to Site VPN 接続" duration="0">
         <p>高い回復性と通信の安定性を求めるのであれば、Direct Connect を複数接続する冗長化が望ましいです。</p>
 <p class="image-container"><img alt="directconnect-double" src="img\\6e19031730595d7c.png"></p>
 <p>ただ、そこまでのコストを掛けられないが冗長化したい場合があります。そのような場合には、Site-to-Site VPN を利用した方法もあります。 最大帯域幅が 1.25 Gbps なので、フェイルオーバー時にパフォーマンスが低下する可能性があります。</p>
@@ -260,7 +260,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="Direct Connect Gateway" duration="1">
+      <google-codelab-step label="Direct Connect Gateway" duration="0">
         <p>Direct Connect の仮想インターフェース（VIF）は 1 本で１つの VPC にしか接続できません。複数の VPC に接続したい場合は、VIF を複数用意しなければなりません。また、他のリージョンには接続することができません。</p>
 <p class="image-container"><img alt="direct-connect-gw-1" src="img\\1e2994edcf2c8769.png"></p>
 <p>この問題を解決してくれるのが、<a href="https://docs.aws.amazon.com/ja_jp/directconnect/latest/UserGuide/direct-connect-gateways-intro.html" target="_blank">Direct Connect ゲートウェイ</a>です。 Direct Connect ゲートウェイを使用することで、複数の異なるリージョンや AWS アカウントにまたがる VPC への接続を可能にします。</p>
@@ -276,7 +276,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="接続パターン" duration="1">
+      <google-codelab-step label="接続パターン" duration="0">
         <p>次のようなパターンをまとめてみました。 多数の VPC を接続したい、VPC 間も接続したい、今後も VPC が追加される予定があるといった場合は、Transit Gateway との接続を採用したほうシンプルになります。 ただし、Direct Connect に接続できる Transit Gateway は 6 個までとなります。 また、VPC の CIDR は重複しないように注意してください。</p>
 <p>逆に、VPC 数が限られており、今後も増える予定がないといった場合、②VPC Peering パターンで構築するほうが良いということもあります。 今後の拡張性を十分に考慮して接続パターンを選択します。</p>
 <table>
