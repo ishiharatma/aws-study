@@ -1,6 +1,6 @@
 # AWS 勉強会資料公開ページ<!-- omit in toc -->
 
-![banner](../banner2.png)
+<img src="https://github.com/ishiharatma/aws-study/blob/main/banner2.png?raw=true" />
 
 ## Table of Contents<!-- omit in toc -->
 
