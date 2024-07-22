@@ -50,8 +50,11 @@
 </li>
 </ul>
 </li>
+<li><a href="#cdk-%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88" target="_blank">CDK のテスト</a><ul>
 <li><a href="#snapshot-test" target="_blank">Snapshot test</a></li>
 <li><a href="#unit-test" target="_blank">Unit Test</a></li>
+</ul>
+</li>
 <li><a href="#cdk-%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89" target="_blank">CDK のコマンド</a></li>
 <li><a href="#cdk-%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE-metadata-%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">CDK 作成時の Metadata を削除したい場合</a></li>
 <li><a href="#aws-cdk-%E3%81%A7%E3%81%AE%E9%96%8B%E7%99%BA%E6%96%B9%E6%B3%95" target="_blank">AWS CDK での開発方法</a><ul>
@@ -218,8 +221,9 @@ const loadBalancedFargateService =
 
       </google-codelab-step>
     
-      <google-codelab-step label="Snapshot test" duration="0">
-        <p>前回生成された CloudFormation テンプレートと比較して差分をチェックする<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot" target="_blank">スナップショットテスト</a>が実施できます。 スナップショットテストを行うことで、意図せずテンプレートが変更されるかどうかを検知できます。</p>
+      <google-codelab-step label="CDK のテスト" duration="0">
+        <h2 is-upgraded>Snapshot test</h2>
+<p>前回生成された CloudFormation テンプレートと比較して差分をチェックする<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot" target="_blank">スナップショットテスト</a>が実施できます。 スナップショットテストを行うことで、意図しないテンプレートへの変更があるかどうかを検知できます。</p>
 <pre><code language="language-ts" class="language-ts">test(&#39;snapshot validation test&#39;,() =&gt;{
     const stack = new MyTestStack(app, &#39;MyTestStack&#39;, {
         pjName: projectName,
@@ -238,12 +242,8 @@ const loadBalancedFargateService =
 
 })
 </code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Unit Test" duration="0">
-        <p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。</p>
+<h2 is-upgraded>Unit Test</h2>
+<p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。</p>
 <p>VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。</p>
 <p>ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。</p>
 <pre><code language="language-ts" class="language-ts">test(&#34;create the vpc&#34;, () =&gt; {

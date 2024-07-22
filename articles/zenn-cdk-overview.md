@@ -2,7 +2,7 @@
 title: "【初心者向け】AWS CDK 入門！完全ガイド" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study", "awscdk"]
-published: false
+published: true
 ---
 # AWS CDK<!-- omit in toc -->
 
@@ -24,8 +24,9 @@ published: false
   - [Construct](#construct)
     - [L1 Construct / L2 Construct](#l1-construct--l2-construct)
     - [Patterns](#patterns)
-- [Snapshot test](#snapshot-test)
-- [Unit Test](#unit-test)
+- [CDK のテスト](#cdk-のテスト)
+  - [Snapshot test](#snapshot-test)
+  - [Unit Test](#unit-test)
 - [CDK のコマンド](#cdk-のコマンド)
 - [CDK 作成時の Metadata を削除したい場合](#cdk-作成時の-metadata-を削除したい場合)
 - [AWS CDK での開発方法](#aws-cdk-での開発方法)
@@ -234,10 +235,12 @@ const loadBalancedFargateService =
   );
 ```
 
-## Snapshot test
+## CDK のテスト
+
+### Snapshot test
 
 前回生成された CloudFormation テンプレートと比較して差分をチェックする[スナップショットテスト](https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot)が実施できます。
-スナップショットテストを行うことで、意図せずテンプレートが変更されるかどうかを検知できます。
+スナップショットテストを行うことで、意図しないテンプレートへの変更があるかどうかを検知できます。
 
 ```ts
 test('snapshot validation test',() =>{
@@ -259,7 +262,7 @@ test('snapshot validation test',() =>{
 })
 ```
 
-## Unit Test
+### Unit Test
 
 Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。
 
