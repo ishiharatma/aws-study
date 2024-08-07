@@ -76,6 +76,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 ### セキュリティ、アイデンティティ、コンプライアンス
 
 - <a href="./iam-overview/index.html" target="_blank">【初心者向け】AWS IAM 入門！完全ガイド</a>
+- <a href="./iam-multi-account/index.html" target="_blank">【初心者向け】AWS IAM マルチアカウント管理入門！完全ガイド</a>
+- <a href="./iam-identity-center-overview/index.html" target="_blank">【初心者向け】AWS IAM Identity Center 入門！完全ガイド</a>
 - <a href="./kms-overview/index.html" target="_blank">【初心者向け】AWS KMS 入門！完全ガイド</a>
 - <a href="./acm-overview/index.html" target="_blank">【初心者向け】AWS Certificate Manager 入門！完全ガイド</a>
 - <a href="./waf-and-shield-overview/index.html" target="_blank">【初心者向け】AWS WAF & Shield 入門！完全ガイド</a>

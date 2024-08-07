@@ -1,0 +1,210 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS IAM Identity Center</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="iam-identity-center-overview"
+                  title="AWS IAM Identity Center"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-iam-identity-center-%E3%81%A8%E3%81%AF" target="_blank">AWS IAM Identity Center とは</a></li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E6%A9%9F%E8%83%BD" target="_blank">主要機能</a></li>
+<li><a href="#aws-sso-%E3%81%A8-aws-identity-center-%E3%81%A7%E5%A4%89%E3%82%8F%E3%81%A3%E3%81%A6%E3%81%84%E3%81%AA%E3%81%84%E3%81%93%E3%81%A8" target="_blank">AWS SSO と AWS Identity Center で変わっていないこと</a></li>
+<li><a href="#iam-identity-center-%E3%81%AE%E5%88%A9%E7%94%A8%E6%89%8B%E9%A0%86" target="_blank">IAM Identity Center の利用手順</a></li>
+<li><a href="#iam-identity-center-%E3%81%AE%E6%9C%89%E5%8A%B9%E5%8C%96" target="_blank">IAM Identity Center の有効化</a><ul>
+<li><a href="#%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9" target="_blank">アカウントインスタンス</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">ユーザーとグループ</a></li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E6%A8%A9%E9%99%90%E3%82%BB%E3%83%83%E3%83%88" target="_blank">アクセス権限セット</a></li>
+<li><a href="#aws-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E5%89%B2%E3%82%8A%E5%BD%93%E3%81%A6" target="_blank">AWS アカウントへの割り当て</a></li>
+<li><a href="#%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3" target="_blank">ログイン</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E5%A7%94%E4%BB%BB%E7%AE%A1%E7%90%86%E3%81%AE%E6%96%B9%E6%B3%95" target="_blank">参考：委任管理の方法</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS IAM Identity Center とは" duration="0">
+        <p>クラウド環境におけるアイデンティティとアクセス管理は、セキュリティと効率性の両面で重要な課題です。 この課題に対応するために AWS Identity Center を提供しています。 AWS Identity Center は、AWS アカウント、クラウドアプリケーション、およびオンプレミスアプリケーションへのシングルサインオン（SSO）アクセスを一元管理するサービスです。</p>
+<p>以前は AWS Single Sign-On (AWS SSO)でしたが、機能拡張に伴い に名称が変更されました。（<a href="https://aws.amazon.com/jp/about-aws/whats-new/2022/07/aws-single-sign-on-aws-sso-now-aws-iam-identity-center/" target="_blank">Jul 26, 2022</a>）</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=ZzD9-5XZgRE" target="_blank">AWS アカウント シングルサインオンの設計と運用(YouTube)</a>(53:24)</p>
+<p class="image-container"><img alt="blackbelt-iam-sso" src="img\\8c50197e4cb3b3b8.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/iam/identity-center/" target="_blank">AWS IAM Identity Center サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/singlesignon/?id=docs_gateway" target="_blank">AWS IAM Identity Center ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/iam/identity-center/faqs/" target="_blank">AWS IAM Identity Center よくある質問</a></p>
+<p>IAM の料金 はありません。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/tutorials.html" target="_blank">入門チュートリアル</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="主要機能" duration="0">
+        <ol type="1">
+<li>中央集権的なアクセス管理 <ul>
+<li>マルチアカウント権限管理</li>
+<li>きめ細かなアクセス制御を実現する権限セットの定義と割り当て</li>
+</ul>
+</li>
+<li>ID プロバイダー（IdP）の連携 <ul>
+<li>複数の IdP サポート <ul>
+<li>AWS Managed Microsoft AD、オンプレミスの Active Directory、外部の IdP との連携</li>
+<li>SAML 2.0 準拠の IdP との互換性</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>セキュリティ強化 <ul>
+<li>複数の MFA 方式をサポート（ハードウェアトークン、ソフトウェアトークン、SMS）</li>
+<li>セッションの有効期限設定、強制ログアウト機能</li>
+</ul>
+</li>
+<li>監査とコンプライアンス <ul>
+<li>AWS CloudTrail との統合によるユーザーアクティビティの追跡</li>
+<li>アクセス権限レポート、使用状況レポートの生成</li>
+</ul>
+</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS SSO と AWS Identity Center で変わっていないこと" duration="0">
+        <p>サービス名が変更されただけで、技術的な機能や API（sso, sso-directory, and identitystore）は下位互換維持のため変更されていません。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM Identity Center の利用手順" duration="0">
+        <ol type="1">
+<li>IAM Identity Center の有効化</li>
+<li>多要素認証の設定</li>
+<li>ユーザーとグループの作成</li>
+<li>許可セットの作成</li>
+<li>AWS アカウントとの紐づけ</li>
+<li>MFA デバイスの登録</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="IAM Identity Center の有効化" duration="0">
+        <p class="image-container"><img alt="idc-enable.png" src="img\\b3ab47749f44c4a2.png"></p>
+<p>有効化できるリージョンは１つのみです。 選択したリージョンに IAM Identity Center で設定したすべてのデータが保存されるインスタンスが配置されます。</p>
+<ul>
+<li>アクセス権限セット</li>
+<li>ユーザーとグループ</li>
+<li>AWS アカウントへのユーザー/グループ割り当て情報</li>
+</ul>
+<p>別にリージョンにしたい場合は、一度削除してから切り替える必要があります。切り替えると、 AWS アクセスポータル URL が変更され、これまで設定した情報を再設定する必要がありますので慎重に削除します。</p>
+<p class="image-container"><img alt="idc-delete" src="img\\31e5866c99e10a6d.png"></p>
+<p>リージョンを選択するには、<a href="https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/get-started-prereqs-considerations.html#prereq-choose-region" target="_blank">AWS リージョンを選択する際の考慮事項</a>を参考にして検討してください。</p>
+<h2 is-upgraded>アカウントインスタンス</h2>
+<p>IAM Identity Center は AWS Organization での利用を想定しているため、単一 AWS アカウント（スタンドアロンアカウント）でも AWS Organizations を利用する必要がありましたが、2023 年 11 月 17 日に AWS Organizations なしでも利用可能になりました。</p>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2023/11/aws-iam-identity-center-account-instance-evaluation-adoption-managed-applications/" target="_blank">AWS IAM アイデンティティセンターが新しいアカウントインスタンスを提供し、AWS マネージドアプリケーションの評価と導入を迅速化</a></p>
+<p>ただし、公式として推奨するのは「組織インスタンス」のようです。</p>
+<pre><code language="language-text" class="language-text">We recommend that you enable IAM Identity Center with AWS Organizations,
+which creates an organization instance of IAM Identity Center.
+An organization instance is our recommended best practice
+because it supports all features of IAM Identity Center and provides central management capabilities.
+
+AWS Organizations で IAM Identity Center を有効にして、IAM Identity Center の組織インスタンスを
+作成することをお勧めします。組織インスタンスは、IAM Identity Center のすべての機能をサポートし、
+集中管理機能を提供するため、推奨されるベストプラクティスです。
+</code></pre>
+<p>参考：<a href="https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/identity-center-instances.html" target="_blank">AWS ドキュメント&gt;IAM アイデンティティセンターの組織インスタンスとアカウントインスタンスの管理</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ユーザーとグループ" duration="0">
+        <p>IAM ユーザーと IAM グループと同等の機能を持つものです。 違いといえば、IAM グループのように IAM ポリシーの割り当てを行わない点です。 IAM ポリシーに相当する「アクセス権限セット」は、アクセス先の AWS アカウントとセットで指定することになります。</p>
+<p class="image-container"><img alt="idc-user" src="img\\d9eea1fdc8c50060.png"></p>
+<p class="image-container"><img alt="idc-group" src="img\\93489410a6bf23f7.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="アクセス権限セット" duration="0">
+        <p>IAM ポリシーと同等の機能を持つものです。</p>
+<p>IAM ポリシーのように、AWS によって事前定義された許可セットや、カスタマイズした許可セットを作成することができます。 <img alt="idc-permission-00" src="img\\b342d974e1149b40.png"></p>
+<p>カスタム許可セットでは、インラインポリシーで指定することも可能です。</p>
+<p class="image-container"><img alt="idc-permission-01" src="img\\51d4780121b49330.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS アカウントへの割り当て" duration="0">
+        <p>作成したユーザー／グループとアクセス権限セットを、AWS アカウントに割り当てます。</p>
+<p class="image-container"><img alt="idc-allocation-00" src="img\\2c1d3eff0e4397c9.png"></p>
+<p class="image-container"><img alt="idc-allocation-01" src="img\\eb18285f9dad5b92.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ログイン" duration="0">
+        <p>アクセスポータル URL からログインすることができます。</p>
+<p class="image-container"><img alt="login" src="img\\d1eee3e415b68831.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="参考：委任管理の方法" duration="0">
+        <p><a href="https://aws.amazon.com/jp/blogs/security/delegating-permission-set-management-and-account-assignment-in-aws-iam-identity-center/" target="_blank">AWS セキュリティブログ&gt;AWS IAM Identity Center での権限セット管理とアカウント割り当ての委任</a></p>
+<p>Identity Center の管理を AWS Organizations のメンバーアカウントに委任できます。</p>
+<p>その場合の方法について解説があります。記事では以下の３つの方法が紹介されており、委任管理のベストプラクティスについて記載があります。</p>
+<ul>
+<li>アカウントベースモデル</li>
+<li>許可ベースのモデル</li>
+<li>タグベースモデル</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p class="image-container"><img alt="iam-idc" src="img\\94b032af7d470d8b.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

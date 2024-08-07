@@ -12,15 +12,13 @@
 - [主要機能](#主要機能)
 - [AWS SSO と AWS Identity Center で変わっていないこと](#aws-sso-と-aws-identity-center-で変わっていないこと)
 - [IAM Identity Center の利用手順](#iam-identity-center-の利用手順)
-- [IAM Identity Center](#iam-identity-center)
-  - [ユーザーとグループ](#ユーザーとグループ)
-  - [アクセス権限セット](#アクセス権限セット)
-  - [AWS アカウント](#aws-アカウント)
-- [委任管理の方法](#委任管理の方法)
-  - [アカウントベースモデル](#アカウントベースモデル)
-  - [許可ベースのモデル](#許可ベースのモデル)
-  - [タグベースモデル](#タグベースモデル)
-- [委任管理のベストプラクティス](#委任管理のベストプラクティス)
+- [IAM Identity Center の有効化](#iam-identity-center-の有効化)
+  - [アカウントインスタンス](#アカウントインスタンス)
+- [ユーザーとグループ](#ユーザーとグループ)
+- [アクセス権限セット](#アクセス権限セット)
+- [AWS アカウントへの割り当て](#aws-アカウントへの割り当て)
+- [ログイン](#ログイン)
+- [参考：委任管理の方法](#参考委任管理の方法)
 - [📖 まとめ](#-まとめ)
 
 ## AWS IAM Identity Center とは
@@ -35,7 +33,7 @@ AWS Identity Center は、AWS アカウント、クラウドアプリケーシ�
 
 【AWS Black Belt Online Seminar】[AWS アカウント シングルサインオンの設計と運用(YouTube)](https://www.youtube.com/watch?v=ZzD9-5XZgRE)(53:24)
 
-![blackbelt-iam-idc-part1](/images/iam/blackbelt-iam-part1-s.jpg)
+![blackbelt-iam-sso](/images/blackbelt/blackbelt-iam-sso-320.jpg)
 
 [AWS IAM Identity Center サービス概要](https://aws.amazon.com/jp/iam/identity-center/)
 
@@ -44,6 +42,8 @@ AWS Identity Center は、AWS アカウント、クラウドアプリケーシ�
 [AWS IAM Identity Center よくある質問](https://aws.amazon.com/jp/iam/identity-center/faqs/)
 
 IAM の料金 はありません。
+
+[入門チュートリアル](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/tutorials.html)
 
 ## 主要機能
 
@@ -74,27 +74,90 @@ IAM の料金 はありません。
 5. AWS アカウントとの紐づけ
 6. MFA デバイスの登録
 
-## IAM Identity Center
+## IAM Identity Center の有効化
 
-### ユーザーとグループ
+![idc-enable.png](/images/iam-idc/idc-enable.png)
 
-IAM ユーザーと IAM グループとは異なります。
+有効化できるリージョンは１つのみです。
+選択したリージョンに IAM Identity Center で設定したすべてのデータが保存されるインスタンスが配置されます。
 
-### アクセス権限セット
+- アクセス権限セット
+- ユーザーとグループ
+- AWS アカウントへのユーザー/グループ割り当て情報
 
-### AWS アカウント
+別にリージョンにしたい場合は、一度削除してから切り替える必要があります。切り替えると、 AWS アクセスポータル URL が変更され、これまで設定した情報を再設定する必要がありますので慎重に削除します。
 
-## 委任管理の方法
+![idc-delete](/images/iam-idc/idc-delete-01.png)
 
-https://aws.amazon.com/jp/blogs/security/delegating-permission-set-management-and-account-assignment-in-aws-iam-identity-center/
+リージョンを選択するには、[AWS リージョンを選択する際の考慮事項](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/get-started-prereqs-considerations.html#prereq-choose-region)を参考にして検討してください。
 
-### アカウントベースモデル
+### アカウントインスタンス
 
-### 許可ベースのモデル
+IAM Identity Center は AWS Organization での利用を想定しているため、単一 AWS アカウント（スタンドアロンアカウント）でも AWS Organizations を利用する必要がありましたが、2023 年 11 月 17 日に AWS Organizations なしでも利用可能になりました。
 
-### タグベースモデル
+[AWS IAM アイデンティティセンターが新しいアカウントインスタンスを提供し、AWS マネージドアプリケーションの評価と導入を迅速化](https://aws.amazon.com/jp/about-aws/whats-new/2023/11/aws-iam-identity-center-account-instance-evaluation-adoption-managed-applications/)
 
-## 委任管理のベストプラクティス
+ただし、公式として推奨するのは「組織インスタンス」のようです。
+
+```text
+We recommend that you enable IAM Identity Center with AWS Organizations,
+which creates an organization instance of IAM Identity Center.
+An organization instance is our recommended best practice
+because it supports all features of IAM Identity Center and provides central management capabilities.
+
+AWS Organizations で IAM Identity Center を有効にして、IAM Identity Center の組織インスタンスを
+作成することをお勧めします。組織インスタンスは、IAM Identity Center のすべての機能をサポートし、
+集中管理機能を提供するため、推奨されるベストプラクティスです。
+```
+
+参考：[AWS ドキュメント>IAM アイデンティティセンターの組織インスタンスとアカウントインスタンスの管理](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/identity-center-instances.html)
+
+## ユーザーとグループ
+
+IAM ユーザーと IAM グループと同等の機能を持つものです。
+違いといえば、IAM グループのように IAM ポリシーの割り当てを行わない点です。
+IAM ポリシーに相当する「アクセス権限セット」は、アクセス先の AWS アカウントとセットで指定することになります。
+
+![idc-user](/images/iam-idc/idc-user.png)
+
+![idc-group](/images/iam-idc/idc-group.png)
+
+## アクセス権限セット
+
+IAM ポリシーと同等の機能を持つものです。
+
+IAM ポリシーのように、AWS によって事前定義された許可セットや、カスタマイズした許可セットを作成することができます。
+![idc-permission-00](/images/iam-idc/idc-permission-00.png)
+
+カスタム許可セットでは、インラインポリシーで指定することも可能です。
+
+![idc-permission-01](/images/iam-idc/idc-permission-01.png)
+
+## AWS アカウントへの割り当て
+
+作成したユーザー／グループとアクセス権限セットを、AWS アカウントに割り当てます。
+
+![idc-allocation-00](/images/iam-idc/idc-allocation-00.png)
+
+![idc-allocation-01](/images/iam-idc/idc-allocation-01.png)
+
+## ログイン
+
+アクセスポータル URL からログインすることができます。
+
+![login](/images/iam-idc/idc-login.png)
+
+## 参考：委任管理の方法
+
+[AWS セキュリティブログ>AWS IAM Identity Center での権限セット管理とアカウント割り当ての委任](https://aws.amazon.com/jp/blogs/security/delegating-permission-set-management-and-account-assignment-in-aws-iam-identity-center/)
+
+Identity Center の管理を AWS Organizations のメンバーアカウントに委任できます。
+
+その場合の方法について解説があります。記事では以下の３つの方法が紹介されており、委任管理のベストプラクティスについて記載があります。
+
+- アカウントベースモデル
+- 許可ベースのモデル
+- タグベースモデル
 
 ## 📖 まとめ
 
