@@ -83,7 +83,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="マルチアカウント管理の全体像" duration="0">
-        <p class="image-container"><img alt="overview" src="img\\a25ccc54515b452b.svg"></p>
+        <p class="image-container"><img alt="overview" src="img\\b91f665f4f4050df.png"></p>
 <p>マルチアカウント管理では、以下の役割りの AWS アカウントが存在します。</p>
 <ul>
 <li>IAM ユーザーを一元的に管理する「Jump アカウント」が 1 つ <ul>
@@ -109,7 +109,7 @@
       <google-codelab-step label="メンバーアカウントでの設定" duration="0">
         <h2 is-upgraded>① 許可ポリシーの設定</h2>
 <p class="image-container"><img alt="step1" src="img\\35da5ff6b95b3729.png"></p>
-<p class="image-container"><img alt="step1" src="img\\d3c1dabb66a48367.svg"></p>
+<p class="image-container"><img alt="step1" src="img\\ee95382fce31ad93.png"></p>
 <p>操作の許可/拒否を定義したポリシーを作成します。以下のような <a href="https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/policy-list.html" target="_blank">AWS 管理ポリシー</a>を使用する場合は、作成不要です。カスタマイズした権限セットが必要な場合に作成します。</p>
 <ul>
 <li>AdministratorAccess</li>
@@ -151,10 +151,10 @@
 <h2 is-upgraded>② ロールの作成</h2>
 <p class="image-container"><img alt="step2" src="img\\aa1887b12eddc10.png"></p>
 <p>許可ポリシーを紐づけたロールを作成します。</p>
-<p class="image-container"><img alt="step2" src="img\\7e1c16a3b7e26e3.svg"></p>
+<p class="image-container"><img alt="step2" src="img\\27673db640dc926f.png"></p>
 <h2 is-upgraded>③ ロールの信頼ポリシー（信頼関係）と使用条件</h2>
 <p class="image-container"><img alt="step3" src="img\\90d3e79f2151b3e1.png"></p>
-<p class="image-container"><img alt="step3" src="img\\6383b290061a457c.svg"></p>
+<p class="image-container"><img alt="step3" src="img\\f886760a97aabc4f.png"></p>
 <h3 is-upgraded>信頼ポリシー（信頼関係）</h3>
 <p>Jump アカウントのどの IAM ユーザーに対してロールを引き受けることができるか（使用してもよいか）を定義します。 IAM ユーザーの指定は「全て」か「特定のユーザーのみ」といった指定ができます。 また、信頼ポリシーで記述するアクションは<code>sts:AssumeRole</code>のみです。</p>
 <p>ここでは、Jump アカウント（999999999999）からのみロールを引き受けることができるシンプルな例を示します。</p>

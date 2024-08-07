@@ -49,7 +49,7 @@ AWS アカウントでユーザーを管理するには、次の方法があり�
 
 ## マルチアカウント管理の全体像
 
-![overview](/images/iam-idc/overview.drawio.svg)
+![overview](/images/iam-idc/overview.png)
 
 マルチアカウント管理では、以下の役割りの AWS アカウントが存在します。
 
@@ -76,7 +76,7 @@ Jump アカウントにて IAM ユーザーを一元管理することで、以�
 
 ![step1](/images/iam-idc/overview_1.png)
 
-![step1](/images/iam-idc/step1.drawio.svg)
+![step1](/images/iam-idc/step1.png)
 
 操作の許可/拒否を定義したポリシーを作成します。以下のような [AWS 管理ポリシー](https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/policy-list.html)を使用する場合は、作成不要です。カスタマイズした権限セットが必要な場合に作成します。
 
@@ -127,13 +127,13 @@ const ec2EBSOwner = new iam.ManagedPolicy(this, "EC2EBSOwner", {
 
 許可ポリシーを紐づけたロールを作成します。
 
-![step2](/images/iam-idc/step2.drawio.svg)
+![step2](/images/iam-idc/step2.png)
 
 ### ③ ロールの信頼ポリシー（信頼関係）と使用条件
 
 ![step3](/images/iam-idc/overview_3.png)
 
-![step3](/images/iam-idc/step3.drawio.svg)
+![step3](/images/iam-idc/step3.png)
 
 #### 信頼ポリシー（信頼関係）
 
