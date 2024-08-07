@@ -69,9 +69,11 @@ Jump アカウントにて IAM ユーザーを一元管理することで、以�
 
 ![step1](/images/iam-idc/overview_1.png)
 
+操作の許可/拒否を定義したポリシーを必要な分だけ作成します。
+
 ![step1](/images/iam-idc/step1.png)
 
-操作の許可/拒否を定義したポリシーを作成します。以下のような [AWS 管理ポリシー](https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/policy-list.html)を使用する場合は、作成不要です。カスタマイズした権限セットが必要な場合に作成します。
+以下のような [AWS 管理ポリシー](https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/policy-list.html)を使用する場合は、作成不要です。カスタマイズした権限セットが必要な場合に作成します。
 
 - AdministratorAccess
 - PowerUserAccess
