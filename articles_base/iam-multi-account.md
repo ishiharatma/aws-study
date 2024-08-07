@@ -42,7 +42,7 @@ AWS アカウントでユーザーを管理するには、次の方法があり�
 
 ## マルチアカウント管理の全体像
 
-![overview](/images/iam-idc/overview.png)
+![overview](/images/iam-multi-account/overview.png)
 
 マルチアカウント管理では、以下の役割りの AWS アカウントが存在します。
 
@@ -67,11 +67,11 @@ Jump アカウントにて IAM ユーザーを一元管理することで、以�
 
 ### ① 許可ポリシーの設定
 
-![step1](/images/iam-idc/overview_1.png)
+![step1](/images/iam-multi-account/overview_1.png)
 
 操作の許可/拒否を定義したポリシーを必要な分だけ作成します。
 
-![step1](/images/iam-idc/step1.png)
+![step1](/images/iam-multi-account/step1.png)
 
 以下のような [AWS 管理ポリシー](https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/policy-list.html)を使用する場合は、作成不要です。カスタマイズした権限セットが必要な場合に作成します。
 
@@ -118,17 +118,17 @@ const ec2EBSOwner = new iam.ManagedPolicy(this, "EC2EBSOwner", {
 
 ### ② ロールの作成
 
-![step2](/images/iam-idc/overview_2.png)
+![step2](/images/iam-multi-account/overview_2.png)
 
 許可ポリシーを紐づけたロールを作成します。
 
-![step2](/images/iam-idc/step2.png)
+![step2](/images/iam-multi-account/step2.png)
 
 ### ③ ロールの信頼ポリシー（信頼関係）と使用条件
 
-![step3](/images/iam-idc/overview_3.png)
+![step3](/images/iam-multi-account/overview_3.png)
 
-![step3](/images/iam-idc/step3.png)
+![step3](/images/iam-multi-account/step3.png)
 
 #### 信頼ポリシー（信頼関係）
 
@@ -352,7 +352,7 @@ const devAdminRole = new iam.Role(this, "DevAdminRole", {
 
 ### ④ メンバーアカウントのロール使用許可
 
-![step4](/images/iam-idc/overview_4.png)
+![step4](/images/iam-multi-account/overview_4.png)
 
 Jump アカウントでユーザーが引き受けること(`sts:AssumeRole`)ができるロールを指定したポリシーを作成します。
 
@@ -458,7 +458,7 @@ const assumeRoleDevAminPolicy = new iam.ManagedPolicy(
 
 ## ロールの切り替え方法
 
-![step5](/images/iam-idc/overview_5.png)
+![step5](/images/iam-multi-account/overview_5.png)
 
 ### コンソール
 
@@ -470,11 +470,11 @@ const assumeRoleDevAminPolicy = new iam.ManagedPolicy(
 `Display color`は任意指定ですが、指定することを推奨します。視覚的に認識できるので切り替えミスの軽減が期待できます。
 例えば本番環境など注意が必要なアカウントは赤色といったルールを決めるとよいでしょう。
 
-![switch-role](/images/iam-idc/switch-role.png)
+![switch-role](/images/iam-multi-account/switch-role.png)
 
 過去に切り替えたことがあるロールは履歴として最大 5 件まで表示されます。
 
-![switch-role-history](/images/iam-idc/switch-role-history.png)
+![switch-role-history](/images/iam-multi-account/switch-role-history.png)
 
 この履歴は Cookie の`noflush_awsc-roleInfo`に次の構造で保持しています。
 ※Cookie を削除すると、ロール履歴も消えてしまうので注意が必要です。
