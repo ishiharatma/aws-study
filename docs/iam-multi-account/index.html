@@ -1,0 +1,574 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS IAM でのマルチアカウント管理</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="iam-multi-account"
+                  title="AWS IAM でのマルチアカウント管理"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
+<li><a href="#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E7%AE%A1%E7%90%86%E3%81%AE%E5%85%A8%E4%BD%93%E5%83%8F" target="_blank">マルチアカウント管理の全体像</a></li>
+<li><a href="#%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">メンバーアカウントでの設定</a><ul>
+<li><a href="#-%E8%A8%B1%E5%8F%AF%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">① 許可ポリシーの設定</a></li>
+<li><a href="#aws-cdktypescript%E3%81%AE%E5%AE%9F%E8%A3%85%E4%BE%8B" target="_blank">AWS CDK(TypeScript)の実装例</a></li>
+<li><a href="#-%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AE%E4%BD%9C%E6%88%90" target="_blank">② ロールの作成</a></li>
+<li><a href="#-%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AE%E4%BF%A1%E9%A0%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E4%BF%A1%E9%A0%BC%E9%96%A2%E4%BF%82%E3%81%A8%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6" target="_blank">③ ロールの信頼ポリシー（信頼関係）と使用条件</a><ul>
+<li><a href="#%E4%BF%A1%E9%A0%BC%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E4%BF%A1%E9%A0%BC%E9%96%A2%E4%BF%82" target="_blank">信頼ポリシー（信頼関係）</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6" target="_blank">使用条件</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E3%81%AE%E5%BF%9C%E7%94%A8" target="_blank">使用条件の応用</a></li>
+<li><a href="#aws-cdktypescript%E3%81%AE%E5%AE%9F%E8%A3%85%E4%BE%8B-1" target="_blank">AWS CDK(TypeScript)の実装例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#jump-%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">Jump アカウントでの設定</a><ul>
+<li><a href="#-%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%AB%E4%BD%BF%E7%94%A8%E8%A8%B1%E5%8F%AF" target="_blank">④ メンバーアカウントのロール使用許可</a></li>
+<li><a href="#aws-cdktypescript%E3%81%AE%E5%AE%9F%E8%A3%85%E4%BE%8B-2" target="_blank">AWS CDK(TypeScript)の実装例</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%A9%E7%94%A8%E8%80%85%E3%81%B8%E3%81%AE%E6%83%85%E5%A0%B1%E6%8F%90%E4%BE%9B" target="_blank">利用者への情報提供</a></li>
+<li><a href="#%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AE%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E6%96%B9%E6%B3%95" target="_blank">ロールの切り替え方法</a><ul>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%82%BD%E3%83%BC%E3%83%AB" target="_blank">コンソール</a></li>
+<li><a href="#aws-cli" target="_blank">AWS CLI</a></li>
+</ul>
+</li>
+<li><a href="#chrome-%E6%8B%A1%E5%BC%B5%E6%A9%9F%E8%83%BD%E3%82%92%E5%88%A9%E7%94%A8%E3%81%97%E3%81%9F%E5%8A%B9%E7%8E%87%E7%9A%84%E3%81%AA%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81%E3%83%AD%E3%83%BC%E3%83%AB" target="_blank">Chrome 拡張機能を利用した効率的なスイッチロール</a></li>
+<li><a href="#%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AE%E5%88%87%E3%82%8A%E6%9B%BF%E3%81%88%E3%82%92-cloudtrail-%E3%81%A7%E8%A6%8B%E3%82%8B" target="_blank">ロールの切り替えを CloudTrail で見る</a></li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="はじめに" duration="0">
+        <p>AWS アカウントでユーザーを管理するには、次の方法があります。</p>
+<ol type="1">
+<li>各 AWS アカウントで IAM ユーザーを個別に管理する</li>
+<li><strong>1 つのアカウントで IAM ユーザーを一元管理し、他のアカウントにスイッチロールする</strong></li>
+<li>AWS IAM Identity Center で管理する</li>
+</ol>
+<p>今回は、「2. 1 つのアカウントで IAM ユーザーを一元管理し、他のアカウントにスイッチロールする」について解説します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="マルチアカウント管理の全体像" duration="0">
+        <p class="image-container"><img alt="overview" src="img\\a25ccc54515b452b.svg"></p>
+<p>マルチアカウント管理では、以下の役割りの AWS アカウントが存在します。</p>
+<ul>
+<li>IAM ユーザーを一元的に管理する「Jump アカウント」が 1 つ <ul>
+<li>この AWS アカウントでは<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/userguide/workloads.html#:~:text=%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%89%E3%81%A8%E3%81%AF%E3%80%81%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9,%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82" target="_blank">ワークロード</a>を配置しません。</li>
+</ul>
+</li>
+<li>ワークロードを配置する「メンバーアカウント」が 1 つ以上 <ul>
+<li>例えば、開発環境、検証環境、本番環境といったものがメンバーアカウントに該当します</li>
+</ul>
+</li>
+</ul>
+<p>Jump アカウントにて IAM ユーザーを一元管理することで、以下の<strong>メリット</strong>があります。</p>
+<ul>
+<li>認証情報の一元管理: Jump アカウントを使用することで、各 AWS アカウントに個別の IAM ユーザーを作成する必要がなくなります。これにより、認証情報の管理が簡素化され、セキュリティリスクが低減します。</li>
+<li>セキュリティの向上: IAM ユーザーを管理する Jump アカウントを使用することで、アクセス権限を集中管理でき、最小権限の原則を適用しやすくなります。また、多要素認証（MFA）を導入することで、セキュリティがさらに強化されます。</li>
+<li>運用の効率化: 一度 Jump アカウントにログインすれば、各作業対象のアカウントにスイッチロール（AssumeRole）するだけでアクセスできるため、複数のアカウントにログインし直す手間が省けます。</li>
+</ul>
+<p><strong>デメリット</strong>としては、複雑であるため「実装工数が大きい」という点だと思います。 ただし、AWS CDK や CloudFormation などでテンプレートとして作成しておけば、このあたりは大幅に削減することが可能であると思います。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="メンバーアカウントでの設定" duration="0">
+        <h2 is-upgraded>① 許可ポリシーの設定</h2>
+<p class="image-container"><img alt="step1" src="img\\35da5ff6b95b3729.png"></p>
+<p class="image-container"><img alt="step1" src="img\\d3c1dabb66a48367.svg"></p>
+<p>操作の許可/拒否を定義したポリシーを作成します。以下のような <a href="https://docs.aws.amazon.com/ja_jp/aws-managed-policy/latest/reference/policy-list.html" target="_blank">AWS 管理ポリシー</a>を使用する場合は、作成不要です。カスタマイズした権限セットが必要な場合に作成します。</p>
+<ul>
+<li>AdministratorAccess</li>
+<li>PowerUserAccess</li>
+<li>ReadOnlyAccess</li>
+</ul>
+<h2 is-upgraded>AWS CDK(TypeScript)の実装例</h2>
+<p>※ 本来は変数を使用するところの一部を便宜上、固定値にしています</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_examples_ec2_ebs-owner.html" target="_blank">AWS ドキュメント&gt;Amazon EC2: タグに基づいて EC2 インスタンスに Amazon EBS ボリュームをアタッチまたはデタッチする</a> を参考にしています。</p>
+<pre><code language="language-ts" class="language-ts">const ec2EBSOwner = new iam.ManagedPolicy(this, &#34;EC2EBSOwner&#34;, {
+  managedPolicyName: [
+    &#34;@policy&#34;,
+    &#34;ec2&#34;,
+    &#34;ebs&#34;,
+    &#34;owner&#34;,
+    props.pjName,
+    props.envName,
+  ].join(&#34;-&#34;),
+  statements: [
+    new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [&#34;ec2:AttachVolume&#34;, &#34;ec2:DetachVolume&#34;],
+      resources: [&#34;arn:aws:ec2:*:*:instance/*&#34;],
+      condition: {
+        StringEquals: { &#34;aws:ResourceTag/Department&#34;: &#34;Development&#34; },
+      },
+    }),
+    new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [&#34;ec2:AttachVolume&#34;, &#34;ec2:DetachVolume&#34;],
+      resources: [&#34;arn:aws:ec2:*:*:volume/*&#34;],
+      condition: {
+        StringEquals: { &#34;aws:ResourceTag/VolumeUser&#34;: &#34;${aws:username}&#34; },
+      },
+    }),
+  ],
+});
+</code></pre>
+<h2 is-upgraded>② ロールの作成</h2>
+<p class="image-container"><img alt="step2" src="img\\aa1887b12eddc10.png"></p>
+<p>許可ポリシーを紐づけたロールを作成します。</p>
+<p class="image-container"><img alt="step2" src="img\\7e1c16a3b7e26e3.svg"></p>
+<h2 is-upgraded>③ ロールの信頼ポリシー（信頼関係）と使用条件</h2>
+<p class="image-container"><img alt="step3" src="img\\90d3e79f2151b3e1.png"></p>
+<p class="image-container"><img alt="step3" src="img\\6383b290061a457c.svg"></p>
+<h3 is-upgraded>信頼ポリシー（信頼関係）</h3>
+<p>Jump アカウントのどの IAM ユーザーに対してロールを引き受けることができるか（使用してもよいか）を定義します。 IAM ユーザーの指定は「全て」か「特定のユーザーのみ」といった指定ができます。 また、信頼ポリシーで記述するアクションは<code>sts:AssumeRole</code>のみです。</p>
+<p>ここでは、Jump アカウント（999999999999）からのみロールを引き受けることができるシンプルな例を示します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;
+    }
+  ]
+}
+</code></pre>
+<p><code>"AWS": "arn:aws:iam::999999999999:root"</code> はルートユーザーという意味ではなく、全ての IAM ユーザー/グループという意味です。 <code>"AWS": "999999999999"</code>と指定しても同じ意味になります。（参考：A<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-accounts" target="_blank">WS ドキュメント&gt;AWS アカウント プリンシパル</a>）</p>
+<p>応用として、「特定のユーザーのみ」という指定も可能です。次の例の場合は、Jump アカウントの「Alice、Bob、Carol」のユーザーを信頼します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:user/Alice&#34;,
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:user/Bob&#34;,
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:user/Carol&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;
+    }
+  ]
+}
+</code></pre>
+<p>注意として、以下は指定することができません。</p>
+<ul>
+<li>IAM グループでの指定（参考：<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying" target="_blank">AWS ドキュメント&gt;プリンシパルの指定</a>）</li>
+<li><code>arn:aws:iam::999999999999:user/*</code> といったワイルドカードを使用したすべてのユーザー（参考：<a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-users" target="_blank">AWS ドキュメント&gt;IAM ユーザープリンシパル</a>）</li>
+</ul>
+<h3 is-upgraded>使用条件</h3>
+<p>使用条件を追加することで、さらに細かい制限を設けることができます。使用条件は<code>Condition</code>句で指定します。 例えば、MFA を使ったログインの場合のみロールを引き受けることを許可する条件はつぎのようになります。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;BoolIfExists&#34;: {
+          &#34;aws:MultiFactorAuthPresent&#34;: &#34;true&#34;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<h3 is-upgraded>使用条件の応用</h3>
+<ul>
+<li>送信元 IP アドレスで許可 ①</li>
+</ul>
+<p>指定した IP アドレスからのアクセスのみロールの引き受けを許可します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;IpAddress&#34;: {
+          &#34;aws:SourceIp&#34;: [&#34;192.168.0.0/16&#34;, &#34;172.16.0.0/16&#34;]
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>送信元 IP アドレスで許可 ②</li>
+</ul>
+<p>① のパターンと同じになりますが、記載方法が異なります。 指定した IP アドレスではないアクセスを拒否します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;
+    },
+    {
+      &#34;Effect&#34;: &#34;Deny&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;NotIpAddress&#34;: {
+          &#34;aws:SourceIp&#34;: [&#34;192.168.0.0/16&#34;, &#34;172.16.0.0/16&#34;]
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>MFA あり かつ IP 制限</li>
+</ul>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;BoolIfExists&#34;: {
+          &#34;aws:MultiFactorAuthPresent&#34;: &#34;true&#34;
+        },
+        &#34;IpAddress&#34;: {
+          &#34;aws:SourceIp&#34;: [&#34;192.168.0.0/16&#34;, &#34;172.16.0.0/16&#34;]
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>この場合、次のように<code>Deny</code>で分けたほうが分かりやすいかもしれません。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;BoolIfExists&#34;: {
+          &#34;aws:MultiFactorAuthPresent&#34;: &#34;true&#34;
+        }
+      }
+    },
+    {
+      &#34;Effect&#34;: &#34;Deny&#34;,
+      &#34;Principal&#34;: {
+        &#34;AWS&#34;: &#34;arn:aws:iam::999999999999:root&#34;
+      },
+      &#34;Action&#34;: &#34;sts:AssumeRole&#34;,
+      &#34;Condition&#34;: {
+        &#34;NotIpAddress&#34;: {
+          &#34;aws:SourceIp&#34;: [&#34;192.168.0.0/16&#34;, &#34;172.16.0.0/16&#34;]
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<h3 is-upgraded>AWS CDK(TypeScript)の実装例</h3>
+<p>※ 本来は変数を使用するところの一部を便宜上、固定値にしています</p>
+<pre><code language="language-ts" class="language-ts">const maxSessionDurationSeconds: cdk.Duration = props.maxSessionDurationSeconds
+  ? cdk.Duration.seconds(props.maxSessionDurationSeconds)
+  : cdk.Duration.hours(4);
+
+const devAdminRole = new iam.Role(this, &#34;DevAdminRole&#34;, {
+  roleName: [&#34;@jobrole&#34;, &#34;devadmin&#34;, props.pjName, props.envName].join(&#34;-&#34;),
+  assumedBy: new iam.PrincipalWithConditions(
+    new iam.AccountPrincipal(&#34;999999999999&#34;),
+    {
+      BoolIfExists: { &#34;aws:MultiFactorAuthPresent&#34;: &#34;true&#34; },
+    }
+  ),
+  description: &#34;Development Administrator Role.&#34;,
+  maxSessionDuration: maxSessionDurationSeconds,
+  managedPolicies: [
+    iam.ManagedPolicy.fromAwsManagedPolicyName(&#34;AdministratorAccess&#34;),
+    :
+  ],
+});
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Jump アカウントでの設定" duration="0">
+        <h2 is-upgraded>④ メンバーアカウントのロール使用許可</h2>
+<p class="image-container"><img alt="step4" src="img\\20a7957fd77e1d30.png"></p>
+<p>Jump アカウントでユーザーが引き受けること(<code>sts:AssumeRole</code>)ができるロールを指定したポリシーを作成します。</p>
+<p>特定のロール名やワイルドカードによる指定の方法があります。</p>
+<ul>
+<li>特定のロールのみ</li>
+</ul>
+<p>指定されたロールのみ引き受けることができます。</p>
+<p><a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege" target="_blank">最小権限の原則</a>に従って、必要なもののみ指定する方法を推奨します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Action&#34;: [&#34;sts:AssumeRole&#34;],
+      &#34;Resource&#34;: [&#34;arn:aws:iam::111111111111:role/RoleName&#34;],
+      &#34;Effect&#34;: &#34;Allow&#34;
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>ワイルドカードで指定</li>
+</ul>
+<p>ワイルドカード (*) を使用し、ロール名が文字列 <code>RolePrefix</code> で始まるものを引き受けることができます。 ※　ベストプラクティスとして、<a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege" target="_blank">最小権限の原則</a>に従うので非推奨 ※　名前の付け方次第では、想定外のロールに対して知らないうちに引き受け許可してしまうリスクがあります。命名規則など十分に考慮してください。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Action&#34;: [&#34;sts:AssumeRole&#34;],
+      &#34;Resource&#34;: [&#34;arn:aws:iam::111111111111:role/RolePrefix*&#34;],
+      &#34;Effect&#34;: &#34;Allow&#34;
+    }
+  ]
+}
+</code></pre>
+<ul>
+<li>全て</li>
+</ul>
+<p><code>role/*</code>とすることで IAM ロールのすべてを引き受けることができます。 ※　ベストプラクティスとして、<a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege" target="_blank">最小権限の原則</a>に従うので非推奨 ※　メンバーアカウント側で新しいロールを作成すると自動的に引き受けが許可されてしまうリスクがあります。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Action&#34;: [&#34;sts:AssumeRole&#34;],
+      &#34;Resource&#34;: [&#34;arn:aws:iam::111111111111:role/*&#34;],
+      &#34;Effect&#34;: &#34;Allow&#34;
+    }
+  ]
+}
+</code></pre>
+<h2 is-upgraded>AWS CDK(TypeScript)の実装例</h2>
+<p>※ 本来は変数を使用するところの一部を便宜上、固定値にしています</p>
+<pre><code language="language-ts" class="language-ts">// スイッチロール：開発管理者
+const assumeRoleDevAminPolicy = new iam.ManagedPolicy(
+  this,
+  &#34;AssumeRoleDevAminPolicyDev111111111111&#34;,
+  {
+    managedPolicyName: [
+      &#34;@jobpolicy&#34;,
+      &#34;allow&#34;,
+      &#34;switch&#34;,
+      &#34;devadmin&#34;,
+      props.pjName,
+      &#34;dev&#34;, // メンバーアカウントの環境識別子（dev/stage/test/prod）
+      &#34;111111111111&#34;, // メンバーアカウントのAWSアカウントID
+    ].join(&#34;-&#34;),
+    description: &#34;Development Administrator Switch Role.(dev:111111111111)&#34;,
+    statements: [
+      new iam.PolicyStatement({
+        effect: iam.Effect.ALLOW,
+        actions: [&#34;sts:AssumeRole&#34;],
+        resources: [
+          `arn:aws:iam::111111111111:role/@jobrole-devadmin-${props.pjName}-dev`,
+        ],
+      }),
+    ],
+  }
+);
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="利用者への情報提供" duration="0">
+        <p>利用者には以下の情報を提供します。</p>
+<ul>
+<li>Jump アカウントへのログイン URL（e.g. <code>https://999999999999.signin.aws.amazon.com/console</code>）</li>
+<li>ロールの ARN</li>
+<li>メンバーアカウントの AWS アカウント ID（e.g. <code>111111111111</code>）</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ロールの切り替え方法" duration="0">
+        <p class="image-container"><img alt="step5" src="img\\aa97c76d20e90a61.png"></p>
+<h2 is-upgraded>コンソール</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_use_switch-role-console.html" target="_blank">AWS ドキュメント&gt;ロールの切り替え (コンソール)</a>を参考にします。</p>
+<p>管理者より連絡された情報をもとに、コンソールでロールの切り替えを行います。<code>Display name（表示名）</code>は分かりやすい名前にします。表示名を日本語にするとロール履歴で文字化けする場合がありますので、英語での指定を推奨します。 <code>Display name</code>を指定しなかった場合は、<code><role name> @ <AccountID></code> となります。</p>
+<p><code>Display color</code>は任意指定ですが、指定することを推奨します。視覚的に認識できるので切り替えミスの軽減が期待できます。 例えば本番環境など注意が必要なアカウントは赤色といったルールを決めるとよいでしょう。</p>
+<p class="image-container"><img alt="switch-role" src="img\\5a104e7e7f37ed7.png"></p>
+<p>過去に切り替えたことがあるロールは履歴として最大 5 件まで表示されます。</p>
+<p class="image-container"><img alt="switch-role-history" src="img\\33ad7eda85ecce2e.png"></p>
+<p>この履歴は Cookie の<code>noflush_awsc-roleInfo</code>に次の構造で保持しています。 ※Cookie を削除すると、ロール履歴も消えてしまうので注意が必要です。</p>
+<pre><code language="language-json" class="language-json">{
+    &#34;bn&#34;: &#34;IAMユーザー名&#34;,
+    &#34;ba&#34;: &#34;JumpアカウントのAWSアカウントID&#34;,
+    &#34;rl&#34;: [
+        {
+            &#34;a&#34;: &#34;メンバーアカウントのAWS Account ID&#34;,
+            &#34;r&#34;: &#34;IAM role name&#34;,
+            &#34;d&#34;: &#34;Displayname&#34;,
+            &#34;c&#34;: &#34;Display color&#34;
+        },
+        :
+    ]
+}
+</code></pre>
+<h2 is-upgraded>AWS CLI</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_use_switch-role-cli.html" target="_blank">AWS ドキュメント&gt;ロールの切り替え (AWS CLI)</a>を参考にします。</p>
+<p><code>.aws/config</code>に以下を定義します。</p>
+<p><code>Alice</code>ユーザーが<code>developerAdmin</code>ロールに切り替える場合の例です。</p>
+<pre><code language="language-text" class="language-text">[xxxx-accesskey]
+aws_access_key_id = AKIAIOSFODNN7EXAMPLE
+aws_secret_access_key = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+[xxxx-prod]
+region = ap-northeast-1
+role_arn = arn:aws:iam::111111111111:role/developerAdmin
+mfa_serial = arn:aws:iam::999999999999:mfa/Alice
+source_profile = xxxx-accesskey
+</code></pre>
+<pre><code language="language-sh" class="language-sh">aws s3 ls --profile xxxx-prod
+</code></pre>
+<p>次のコマンドを実行して、IAM ロールを引き受けたことを確認します。</p>
+<pre><code language="language-sh" class="language-sh">aws sts get-caller-identity --profile
+
+{
+    &#34;UserId&#34;: &#34;AROAXXXXXXXXXXXXXXXXX:botocore-session-1722942390&#34;,
+    &#34;Account&#34;: &#34;111111111111&#34;,
+    &#34;Arn&#34;: &#34;arn:aws:sts::111111111111:assumed-role/developerAdmin/botocore-session-1722942390&#34;
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Chrome 拡張機能を利用した効率的なスイッチロール" duration="0">
+        <p>ブラウザの Cookie を使用したロール履歴では最大で 5 つしか保持できませんが、Chrome 拡張機能を使えば 6 個以上のロールを瞬時に切り替えることができます。</p>
+<p>その拡張機能は、<a href="https://github.com/tilfinltd/aws-extend-switch-roles" target="_blank">AWS Extend Switch Roles</a>です。Chrome ウェブストアでインストールできます。</p>
+<p>拡張機能の設定で次のように指定します。</p>
+<pre><code language="language-text" class="language-text">[xxxx]
+aws_account_id = 999999999999
+
+[xxxx-prod]
+role_arn = arn:aws:iam::111111111111:role/developerAdmin
+source_profile = xxxx
+color = 00FF7F
+[xxxx-dev]
+role_arn = arn:aws:iam::222222222222:role/developerAdmin
+source_profile = xxxx
+color = 00FF7F
+image = &#34;https://example.com/sample.png&#34;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ロールの切り替えを CloudTrail で見る" duration="0">
+        <p><code>イベント名＝SwitchRole</code>の条件でイベント履歴を検索することで確認できます。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;eventVersion&#34;: &#34;1.08&#34;,
+  &#34;userIdentity&#34;: {
+    &#34;type&#34;: &#34;AssumedRole&#34;,
+    &#34;principalId&#34;: &#34;AROAXXXXXXXXXXXXXXXXX:Alice&#34;,
+    &#34;arn&#34;: &#34;arn:aws:sts::111111111111:assumed-role/developerAdmin/Alice&#34;,
+    &#34;accountId&#34;: &#34;111111111111&#34;
+  },
+  &#34;eventTime&#34;: &#34;2024-01-01T00:00:00Z&#34;,
+  &#34;eventSource&#34;: &#34;signin.amazonaws.com&#34;,
+  &#34;eventName&#34;: &#34;SwitchRole&#34;,
+  &#34;awsRegion&#34;: &#34;ap-northeast-1&#34;,
+  &#34;sourceIPAddress&#34;: &#34;192.0.2.1&#34;,
+  &#34;userAgent&#34;: &#34;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36&#34;,
+  &#34;requestParameters&#34;: null,
+  &#34;responseElements&#34;: {
+    &#34;SwitchRole&#34;: &#34;Success&#34;
+  },
+  &#34;additionalEventData&#34;: {
+    &#34;SwitchFrom&#34;: &#34;arn:aws:iam::999999999999:user/Alice&#34;,
+    &#34;RedirectTo&#34;: &#34;https://ap-northeast-1.console.aws.amazon.com/console/home?region=ap-northeast-1#&#34;
+  },
+  &#34;eventID&#34;: &#34;87337348-62a8-4e1f-9c64-79566dc7ca56&#34;,
+  &#34;readOnly&#34;: false,
+  &#34;eventType&#34;: &#34;AwsConsoleSignIn&#34;,
+  &#34;managementEvent&#34;: true,
+  &#34;recipientAccountId&#34;: &#34;111111111111&#34;,
+  &#34;eventCategory&#34;: &#34;Management&#34;,
+  &#34;tlsDetails&#34;: {
+    &#34;tlsVersion&#34;: &#34;TLSv1.3&#34;,
+    &#34;cipherSuite&#34;: &#34;TLS_AES_128_GCM_SHA256&#34;,
+    &#34;clientProvidedHostHeader&#34;: &#34;ap-northeast-1.signin.aws.amazon.com&#34;
+  }
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p>AWS でのマルチアカウント管理は、セキュリティと運用の効率化の両面で大きなメリットをもたらします。特に、Jump アカウントを活用することで、アクセス管理が一元化され、最小権限の原則を効果的に適用することが可能になります。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
