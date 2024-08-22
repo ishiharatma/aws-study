@@ -37,7 +37,11 @@
       <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#%E3%81%AF%E3%81%98%E3%82%81%E3%81%AB" target="_blank">はじめに</a></li>
-<li><a href="#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E7%AE%A1%E7%90%86%E3%81%AE%E5%85%A8%E4%BD%93%E5%83%8F" target="_blank">マルチアカウント管理の全体像</a></li>
+<li><a href="#%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E7%AE%A1%E7%90%86%E3%81%AE%E5%85%A8%E4%BD%93%E5%83%8F" target="_blank">マルチアカウント管理の全体像</a><ul>
+<li><a href="#%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">メリット</a></li>
+<li><a href="#%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">デメリット</a></li>
+</ul>
+</li>
 <li><a href="#%E3%83%A1%E3%83%B3%E3%83%90%E3%83%BC%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">メンバーアカウントでの設定</a><ul>
 <li><a href="#-%E8%A8%B1%E5%8F%AF%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">① 許可ポリシーの設定</a></li>
 <li><a href="#aws-cdktypescript%E3%81%AE%E5%AE%9F%E8%A3%85%E4%BE%8B" target="_blank">AWS CDK(TypeScript)の実装例</a></li>
@@ -86,22 +90,27 @@
         <p class="image-container"><img alt="overview" src="img\\b91f665f4f4050df.png"></p>
 <p>マルチアカウント管理では、以下の役割りの AWS アカウントが存在します。</p>
 <ul>
-<li>IAM ユーザーを一元的に管理する「Jump アカウント」が 1 つ <ul>
+<li>IAM 「Jump アカウント（IAM ユーザーを一元管理するための中央アカウント）」が 1 つ <ul>
 <li>この AWS アカウントでは<a href="https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/userguide/workloads.html#:~:text=%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%89%E3%81%A8%E3%81%AF%E3%80%81%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9,%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88%E3%82%82%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%80%82" target="_blank">ワークロード</a>を配置しません。</li>
 </ul>
 </li>
-<li>ワークロードを配置する「メンバーアカウント」が 1 つ以上 <ul>
+<li>ワークロードを配置する「メンバーアカウント（個別の環境用アカウント）」が 1 つ以上 <ul>
 <li>例えば、開発環境、検証環境、本番環境といったものがメンバーアカウントに該当します</li>
 </ul>
 </li>
 </ul>
-<p>Jump アカウントにて IAM ユーザーを一元管理することで、以下の<strong>メリット</strong>があります。</p>
+<h2 is-upgraded>メリット</h2>
 <ul>
 <li>認証情報の一元管理: Jump アカウントを使用することで、各 AWS アカウントに個別の IAM ユーザーを作成する必要がなくなります。これにより、認証情報の管理が簡素化され、セキュリティリスクが低減します。</li>
 <li>セキュリティの向上: IAM ユーザーを管理する Jump アカウントを使用することで、アクセス権限を集中管理でき、最小権限の原則を適用しやすくなります。また、多要素認証（MFA）を導入することで、セキュリティがさらに強化されます。</li>
 <li>運用の効率化: 一度 Jump アカウントにログインすれば、各作業対象のアカウントにスイッチロール（AssumeRole）するだけでアクセスできるため、複数のアカウントにログインし直す手間が省けます。</li>
 </ul>
-<p><strong>デメリット</strong>としては、複雑であるため「実装工数が大きい」という点だと思います。 ただし、AWS CDK や CloudFormation などでテンプレートとして作成しておけば、このあたりは大幅に削減することが可能であると思います。</p>
+<h2 is-upgraded>デメリット</h2>
+<ul>
+<li>実装の複雑さ: マルチアカウント管理の構築には、複雑な設定が必要となり、初期の実装工数が大きくなる可能性があります。</li>
+<li>学習コスト: チームメンバーがこの方式に慣れるまでに時間がかかる可能性があります。</li>
+</ul>
+<p>ただし、AWS CDK や CloudFormation などでテンプレートとして作成しておけば、実装工数を大幅に削減することが可能です。また、長期的には運用効率の向上によりこれらのデメリットを相殺できると考えられます。</p>
 
 
       </google-codelab-step>
@@ -119,7 +128,7 @@
 </ul>
 <h2 is-upgraded>AWS CDK(TypeScript)の実装例</h2>
 <p>※ 本来は変数を使用するところの一部を便宜上、固定値にしています</p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_examples_ec2_ebs-owner.html" target="_blank">AWS ドキュメント&gt;Amazon EC2: タグに基づいて EC2 インスタンスに Amazon EBS ボリュームをアタッチまたはデタッチする</a> を参考にしています。</p>
+<p>以下は、EC2 インスタンスと EBS ボリュームの管理権限を持つカスタムポリシーの作成例です。 <a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/reference_policies_examples_ec2_ebs-owner.html" target="_blank">AWS ドキュメント&gt;Amazon EC2: タグに基づいて EC2 インスタンスに Amazon EBS ボリュームをアタッチまたはデタッチする</a> を参考にしています。</p>
 <pre><code language="language-ts" class="language-ts">const ec2EBSOwner = new iam.ManagedPolicy(this, &#34;EC2EBSOwner&#34;, {
   managedPolicyName: [
     &#34;@policy&#34;,
@@ -558,7 +567,7 @@ image = &#34;https://example.com/sample.png&#34;
       </google-codelab-step>
     
       <google-codelab-step label="まとめ" duration="0">
-        <p>AWS でのマルチアカウント管理は、セキュリティと運用の効率化の両面で大きなメリットをもたらします。特に、Jump アカウントを活用することで、アクセス管理が一元化され、最小権限の原則を効果的に適用することが可能になります。</p>
+        <p>本記事では、AWS IAM を使用したマルチアカウント管理の実装方法と利点について解説しました。Jump アカウントを活用することで、セキュリティの向上、運用の効率化、そして最小権限の原則の効果的な適用が可能になります。適切に実装することで、複雑な組織構造においても、AWS リソースへのアクセスを安全かつ効率的に管理できます。ただし、初期の実装には一定の工数が必要なため、組織の規模や要件に応じて導入を検討することをお勧めします。</p>
 
 
       </google-codelab-step>
