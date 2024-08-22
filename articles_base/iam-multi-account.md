@@ -508,7 +508,7 @@ const assumeRoleDevAminPolicy = new iam.ManagedPolicy(
 
 [AWS ドキュメント>ロールの切り替え (AWS CLI)](https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_use_switch-role-cli.html)を参考にします。
 
-`.aws/config`に以下を定義します。
+`.aws/credentials`に以下を定義します。
 
 `Alice`ユーザーが`developerAdmin`ロールに切り替える場合の例です。
 
