@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2024-10-02T01:19:53+09:00",
+  "id": "ebs-overview",
+  "duration": 0,
+  "title": "Amazon Elastic Block Store(EBS)",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_ebs-overview.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "amazonebs"
+  ],
+  "url": "ebs-overview"
+}
