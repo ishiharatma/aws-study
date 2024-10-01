@@ -14,20 +14,20 @@ minima_reboot:
   date_format_short: "%b %-d"
 
 header_pages:
-- basic.md
-- compute.md
-- database.md
-- networking.md
-- storage.md
-- security.md
-- containers.md
-- analytics.md
-- management-and-governance.md
-- application-integration.md
-- developer-tools.md
-- data-migration.md
-- certificate.md
-- links.md
+  - basic.md
+  - compute.md
+  - database.md
+  - networking.md
+  - storage.md
+  - security.md
+  - containers.md
+  - analytics.md
+  - management-and-governance.md
+  - application-integration.md
+  - developer-tools.md
+  - data-migration.md
+  - certificate.md
+  - links.md
 
 footer_icons:
 - username: ishiharatma
