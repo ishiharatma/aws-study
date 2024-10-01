@@ -1,5 +1,43 @@
-#theme: jekyll-theme-cayman
-theme: jekyll-theme-midnight
-#theme: jekyll-theme-slate
-#theme: jekyll-theme-minimal
+title: aws-study
+author: ishiharatma
+description: Powered by GitHub Pages & Jekyll
+  
+plugins:
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-redirect-from
+
 google_analytics: G-01ZZ95D1K9
+
+minima_reboot:
+  date_format: "%b %-d, %Y"
+  date_format_short: "%b %-d"
+
+header_pages:
+- basic.md
+- compute.md
+- database.md
+- networking.md
+- storage.md
+- security.md
+- containers.md
+- analytics.md
+- management-and-governance.md
+- application-integration.md
+- developer-tools.md
+- data-migration.md
+- certificate.md
+- links.md
+
+footer_icons:
+- username: ishiharatma
+  url: https://github.com/ishiharatma
+  icon: icon-github.svg
+
+
+markdown: kramdown
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - minima-reboot.gemspec
