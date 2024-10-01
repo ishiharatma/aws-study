@@ -66,7 +66,7 @@ AWS PrivateLink
 
 [Amazon S3 概要](/articles_base/s3-overview.md)
 
-Amazon EBS
+[Amazon EBS 概要](/articles_base/ebs-overview.md)
 
 Amazon EFS
 

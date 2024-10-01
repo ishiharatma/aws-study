@@ -67,7 +67,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 ### ストレージ
 
 - <a href="./s3-overview/index.html" target="_blank">【初心者向け】Amazon S3 入門！完全ガイド</a>
-- Amazon EBS
+- <a href="./ebs-overview/index.html" target="_blank">【初心者向け】Amazon EBS 入門！完全ガイド</a>
 - Amazon EFS
 - Amazon FSx
 - AWS Storage Gateway
