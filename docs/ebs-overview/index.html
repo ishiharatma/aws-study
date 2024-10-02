@@ -58,7 +58,6 @@
 </li>
 <li><a href="#%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9" target="_blank">パフォーマンス</a></li>
 <li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">モニタリング</a></li>
-<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 
 
@@ -77,15 +76,16 @@
       </google-codelab-step>
     
       <google-codelab-step label="EBS の基本" duration="0">
-        <ul>
+        <p class="image-container"><img alt="ebs" src="img\\4e4641238fbc2f4.png"></p>
+<ul>
+<li>EC2 にアタッチして使用します</li>
 <li>EBS はブロックストレージサービスです</li>
 <li>EBS は AZ の単位です <ul>
 <li><img alt="ebs-az" src="img\\e2a61dd646e04fdf.png"></li>
 </ul>
 </li>
-<li>EC2 にアタッチします</li>
 <li>EC2 にアタッチする EBS は同一 AZ のみです。 <ul>
-<li><img alt="ebs-az-ec2" src="img\\c9393a8b8cfc9301.png"></li>
+<li><img alt="ebs-az-ec2" src="img\\52565df7d0de85a2.png"></li>
 </ul>
 </li>
 <li>EC2 のルートボリュームはデフォルトでは EC2 が終了すると削除されます。ただし、下記手順で保持することが可能です。 <ul>
@@ -319,7 +319,7 @@
 </li>
 </ul>
 <h2 is-upgraded><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-copy-snapshot.html" target="_blank">スナップショットのコピー</a></h2>
-<p class="image-container"><img alt="snapshot-copy" src="img\\7cdcc97e8590de48.png"></p>
+<p class="image-container"><img alt="snapshot-copy" src="img\\4cf75e6d5113551d.png"></p>
 <ul>
 <li>転送中は、スナップショットが格納されている S3 の KMS で暗号化</li>
 <li>コピーしたスナップショットはオリジナルのスナップショットと異なる ID <ul>
@@ -431,11 +431,6 @@
 <li>GuardDuty</li>
 </ul>
 
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="📖 まとめ" duration="0">
-        
 
       </google-codelab-step>
     
