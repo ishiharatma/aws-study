@@ -1,11 +1,11 @@
 title: aws-study
 author: ishiharatma
 description: Powered by GitHub Pages & Jekyll
-  
 plugins:
   - jekyll-seo-tag
   - jekyll-paginate
   - jekyll-redirect-from
+  - jekyll-remote-theme
 
 google_analytics: G-01ZZ95D1K9
 
@@ -33,6 +33,7 @@ footer_icons:
 - username: ishiharatma
   url: https://github.com/ishiharatma
   icon: icon-github.svg
+remote_theme: jekyll/minima
 
 
 markdown: kramdown
