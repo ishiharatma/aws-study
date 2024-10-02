@@ -31,7 +31,7 @@
 
 Amazon Elastic Block Store (EBS) は、AWS EC2 インスタンスで使用するための永続的な**ブロックストレージ**サービスです。
 
-【AWS Black Belt Online Seminar】[xx(YouTube)](https://www.youtube.com/watch?v=ffND-tX1Qxs)(0:55:30)
+【AWS Black Belt Online Seminar】[Amazon Elastic Block Store(YouTube)](https://www.youtube.com/watch?v=ffND-tX1Qxs)(0:55:30)
 
 ![xx](/images/blackbelt/blackbelt-ebs-320.jpg)
 

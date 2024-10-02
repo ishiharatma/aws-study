@@ -33,13 +33,12 @@ published: false
   - [暗号化されているボリュームの暗号化を解除するには？](#暗号化されているボリュームの暗号化を解除するには)
 - [パフォーマンス](#パフォーマンス)
 - [モニタリング](#モニタリング)
-- [📖 まとめ](#-まとめ)
 
 ## Amazon EBS とは
 
 Amazon Elastic Block Store (EBS) は、AWS EC2 インスタンスで使用するための永続的な**ブロックストレージ**サービスです。
 
-【AWS Black Belt Online Seminar】[xx(YouTube)](https://www.youtube.com/watch?v=ffND-tX1Qxs)(0:55:30)
+【AWS Black Belt Online Seminar】[Amazon Elastic Block Store(YouTube)](https://www.youtube.com/watch?v=ffND-tX1Qxs)(0:55:30)
 
 ![xx](/images/blackbelt/blackbelt-ebs-320.jpg)
 
@@ -55,10 +54,12 @@ Amazon Elastic Block Store (EBS) は、AWS EC2 インスタンスで使用する
 
 <!-- Duration: 0:01:30 -->
 
+![ebs](/images/ebs/ebs.png)
+
+- EC2 にアタッチして使用します
 - EBS はブロックストレージサービスです
 - EBS は AZ の単位です
   - ![ebs-az](/images/ebs/ebs-az.png)
-- EC2 にアタッチします
 - EC2 にアタッチする EBS は同一 AZ のみです。
   - ![ebs-az-ec2](/images/ebs/ebs-az-ec2.png)
 - EC2 のルートボリュームはデフォルトでは EC2 が終了すると削除されます。ただし、下記手順で保持することが可能です。
@@ -317,4 +318,4 @@ EBS 作成時に暗号化有無を指定できますが、デフォルトで暗�
 - EventBridge
 - GuardDuty
 
-## 📖 まとめ
+<!-- ## 📖 まとめ -->
