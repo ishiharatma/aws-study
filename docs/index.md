@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-<img src="https://github.com/ishiharatma/aws-study/blob/main/banner2.png?raw=true" />
+<img src="./banner2.png"  width="100%"/>
 
 ## AWS 勉強会資料公開ページ<!-- omit in toc -->
 
