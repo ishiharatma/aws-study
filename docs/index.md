@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-<img src="./banner2.png"  width="100%"/>
+<img src="./banner3.png"  width="100%"/>
 
 ## AWS 勉強会資料公開ページ<!-- omit in toc -->
 
