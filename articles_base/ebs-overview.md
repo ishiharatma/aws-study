@@ -105,6 +105,7 @@ IOPS を最適化する上で [EBS 最適化インスタンス](https://docs.aws
       - gp3: 125 MiB/s から 1,000 MiB/s
       - gp2: 128 MiB/s から 250 MiB/s
     - [gp2 から gp3 への変更](https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-modify-volume.html)
+      - gp2から gp3へ移行することでコスト削減が可能
 - プロビジョンド IOPS SSD
   - ユースケース：ミリ秒未満のレイテンシーなど、高い IOPS が必要なワークロード、データベース
   - io2 Block Express
@@ -202,8 +203,7 @@ IOPS を最適化する上で [EBS 最適化インスタンス](https://docs.aws
   - 過去のスナップショットが削除されても、最新のスナップショットがあれば全量が復元できるようになっている
   - この仕組みで、スナップショットを削除してもコストが減少しないことがある。
 
-増分バックアップでは、初回はフルバックアップとなり、それ以降は更新したデータのみを保持し、
-更新されていないデータは、過去のスナップショットを参照します。
+増分バックアップでは、初回はフルバックアップとなり、それ以降は更新したデータのみを保持し、更新されていないデータは、過去のスナップショットを参照します。
 
 ![incremental](/images/ebs/ebs-snaphost-incremental.png)
 
@@ -254,6 +254,17 @@ EBS 作成時に暗号化有無を指定できますが、デフォルトで暗�
 
 ![default-encryption](/images/ebs/ebs-default-encryption-01.png)
 
+AWS CLI で実施する場合
+
+
+```sh
+# デフォルト暗号化を表示
+aws ec2 get-ebs-encryption-by-default --region region
+
+# デフォルト暗号化を設定
+aws ec2 enable-ebs-encryption-by-default --region region
+```
+
 ### 暗号化されていないボリュームを暗号化するには？
 
 [暗号化されていないリソースの暗号化](https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-encryption.html#encrypt-unencrypted)
@@ -288,6 +299,7 @@ EBS 作成時に暗号化有無を指定できますが、デフォルトで暗�
 ## パフォーマンス
 
 - EBS 最適化されたインスタンスを使用
+- 適切なボリュームサイズの選択
 - [RAID](https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/raid-config.html)
   - RAID 0（ストライピング） によって単一の EBS よりパフォーマンスが向上する
   - RAID 5（分散パリティ） および 6（複数分散パリティ） ではボリュームに使用できる IOPS の一部がパリティ（復元するために使われる符号）書き込み操作によって消費されるため、EBS では非推奨
@@ -302,13 +314,20 @@ EBS 作成時に暗号化有無を指定できますが、デフォルトで暗�
     - ただし、要件によってはこれを行うことが困難な場合がある
       - →「[高速スナップショット復元](https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-fast-snapshot-restore.html)」を有効にしたスナップショットにする
 
-## モニタリング
+## モニタリングとトラブルシューティング
 
-- CloudTrail
 - CloudWatch
   - メトリクスはデフォルトで 1 分間隔で送信される（無料）
   - 空き容量を AWS が提供するデフォルトのメトリクスで取得することはできない。CloudWatch エージェントを設定してインスタンスから送信する。参考：[空きディスク容量の表示](https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-describing-volumes.html#ebs-view-free-disk-space-lin)
-- EventBridge
-- GuardDuty
+  - VolumeReadBytesとVolumeWriteBytes
+    - 一定の時間内にボリューム間で転送されたバイト数
+  - VolumeReadOpsとVolumeWriteOps
+    - 一定の時間内にボリュームに読み込み、書き込みされた数
+  - VolumeQueueLength
+    - 実行を待機しているキューに入れられた数
+  - VolumeIdleTime
+    - ボリュームが非アクティブになっている時間(秒)
+  - VolumeStatus
+    - EBS ボリュームのヘルスチェック結果
 
 <!-- ## 📖 まとめ -->
