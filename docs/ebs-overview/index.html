@@ -149,7 +149,10 @@
 <li>gp2: 128 MiB/s から 250 MiB/s</li>
 </ul>
 </li>
-<li><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-modify-volume.html" target="_blank">gp2 から gp3 への変更</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-modify-volume.html" target="_blank">gp2 から gp3 への変更</a><ul>
+<li>gp2から gp3へ移行することでコスト削減が可能</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -307,7 +310,7 @@
 </ul>
 </li>
 </ul>
-<p>増分バックアップでは、初回はフルバックアップとなり、それ以降は更新したデータのみを保持し、 更新されていないデータは、過去のスナップショットを参照します。</p>
+<p>増分バックアップでは、初回はフルバックアップとなり、それ以降は更新したデータのみを保持し、更新されていないデータは、過去のスナップショットを参照します。</p>
 <p class="image-container"><img alt="incremental" src="img\\c0c5cf4d6065f215.png"></p>
 <p>スナップショットを削除すると、直後のスナップショットにデータが移動します。</p>
 <p class="image-container"><img alt="incremental-delete" src="img\\4b55b68843a23574.png"></p>
@@ -359,6 +362,13 @@
 <p>EBS 作成時に暗号化有無を指定できますが、デフォルトで暗号化するようにもできます。 <a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default" target="_blank">デフォルトで暗号化の有効化</a></p>
 <p class="image-container"><img alt="default-encryption" src="img\\b6976d30fa9f5bf8.png"></p>
 <p class="image-container"><img alt="default-encryption" src="img\\43a534590c52913f.png"></p>
+<p>AWS CLI で実施する場合</p>
+<pre><code language="language-sh" class="language-sh"># デフォルト暗号化を表示
+aws ec2 get-ebs-encryption-by-default --region region
+
+# デフォルト暗号化を設定
+aws ec2 enable-ebs-encryption-by-default --region region
+</code></pre>
 <h2 is-upgraded>暗号化されていないボリュームを暗号化するには？</h2>
 <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-encryption.html#encrypt-unencrypted" target="_blank">暗号化されていないリソースの暗号化</a></p>
 <p>暗号化なしで作成した既存のボリュームまたはスナップショットを直接暗号化することはできません。</p>
@@ -393,6 +403,7 @@
       <google-codelab-step label="パフォーマンス" duration="0">
         <ul>
 <li>EBS 最適化されたインスタンスを使用</li>
+<li>適切なボリュームサイズの選択</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/raid-config.html" target="_blank">RAID</a><ul>
 <li>RAID 0（ストライピング） によって単一の EBS よりパフォーマンスが向上する</li>
 <li>RAID 5（分散パリティ） および 6（複数分散パリティ） ではボリュームに使用できる IOPS の一部がパリティ（復元するために使われる符号）書き込み操作によって消費されるため、EBS では非推奨</li>
@@ -419,16 +430,33 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="モニタリング" duration="0">
+      <google-codelab-step label="モニタリングとトラブルシューティング" duration="0">
         <ul>
-<li>CloudTrail</li>
 <li>CloudWatch <ul>
 <li>メトリクスはデフォルトで 1 分間隔で送信される（無料）</li>
 <li>空き容量を AWS が提供するデフォルトのメトリクスで取得することはできない。CloudWatch エージェントを設定してインスタンスから送信する。参考：<a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-describing-volumes.html#ebs-view-free-disk-space-lin" target="_blank">空きディスク容量の表示</a></li>
+<li>VolumeReadBytesとVolumeWriteBytes <ul>
+<li>一定の時間内にボリューム間で転送されたバイト数</li>
 </ul>
 </li>
-<li>EventBridge</li>
-<li>GuardDuty</li>
+<li>VolumeReadOpsとVolumeWriteOps <ul>
+<li>一定の時間内にボリュームに読み込み、書き込みされた数</li>
+</ul>
+</li>
+<li>VolumeQueueLength <ul>
+<li>実行を待機しているキューに入れられた数</li>
+</ul>
+</li>
+<li>VolumeIdleTime <ul>
+<li>ボリュームが非アクティブになっている時間(秒)</li>
+</ul>
+</li>
+<li>VolumeStatus <ul>
+<li>EBS ボリュームのヘルスチェック結果</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
 

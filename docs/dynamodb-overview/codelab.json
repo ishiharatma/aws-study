@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2024-10-02T14:16:49+09:00",
+  "updated": "2025-01-07T14:18:46+09:00",
   "id": "dynamodb-overview",
   "duration": 0,
   "title": "Amazon DynamoDB",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "K:\\work\\@git\\github.com\\@myaccount\\aws-study\\claat_header\\..\\claat_dynamodb-overview.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_dynamodb-overview.md",
   "theme": "",
   "status": [
     "published"
