@@ -1,0 +1,265 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon FSx（xx）</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="fsx-overview"
+                  title="Amazon FSx（xx）"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#fsx-%E3%81%A8%E3%81%AF" target="_blank">FSx とは</a></li>
+<li><a href="#1-fsx%E3%83%95%E3%82%A1%E3%83%9F%E3%83%AA%E3%83%BC%E3%81%AE%E6%A6%82%E8%A6%81" target="_blank">1. FSxファミリーの概要</a></li>
+<li><a href="#2-%E4%B8%BB%E8%A6%81%E6%A9%9F%E8%83%BD%E3%81%A8%E7%89%B9%E5%BE%B4" target="_blank">2. 主要機能と特徴</a><ul>
+<li><a href="#21-fsx-for-windows-file-server" target="_blank">2.1 FSx for Windows File Server</a></li>
+<li><a href="#22-fsx-for-lustre" target="_blank">2.2 FSx for Lustre</a></li>
+<li><a href="#23-fsx-for-netapp-ontap" target="_blank">2.3 FSx for NetApp ONTAP</a></li>
+<li><a href="#24-fsx-for-openzfs" target="_blank">2.4 FSx for OpenZFS</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%AE%9F%E8%A3%85%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">3. 実装のベストプラクティス</a><ul>
+<li><a href="#31-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">3.1 セキュリティ</a></li>
+<li><a href="#32-%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E6%9C%80%E9%81%A9%E5%8C%96" target="_blank">3.2 パフォーマンス最適化</a></li>
+<li><a href="#33-%E3%82%B3%E3%82%B9%E3%83%88%E6%9C%80%E9%81%A9%E5%8C%96" target="_blank">3.3 コスト最適化</a></li>
+</ul>
+</li>
+<li><a href="#4-%E4%B8%80%E8%88%AC%E7%9A%84%E3%81%AA%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">4. 一般的なユースケース</a><ul>
+<li><a href="#41-%E3%82%A8%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%97%E3%83%A9%E3%82%A4%E3%82%BA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">4.1 エンタープライズアプリケーション</a></li>
+<li><a href="#42-hpc%E5%88%86%E6%9E%90%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%89" target="_blank">4.2 HPC/分析ワークロード</a></li>
+<li><a href="#43-%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%A8%E7%81%BD%E5%AE%B3%E5%AF%BE%E7%AD%96" target="_blank">4.3 バックアップと災害対策</a></li>
+<li><a href="#44-s3-vs-efs-vs-fsx-vs-ebs" target="_blank">4.4 S3 vs EFS vs FSx vs EBS</a></li>
+</ul>
+</li>
+<li><a href="#5-%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9" target="_blank">5. モニタリングとメンテナンス</a><ul>
+<li><a href="#51-%E4%B8%BB%E8%A6%81%E3%83%A1%E3%83%88%E3%83%AA%E3%82%AF%E3%82%B9" target="_blank">5.1 主要メトリクス</a></li>
+<li><a href="#52-%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%B9%E3%82%AF" target="_blank">5.2 メンテナンスタスク</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="FSx とは" duration="0">
+        <p>Amazon FSxは、ファイルシステムを実行するためのフルマネージドサービスです。</p>
+<p><a href="https://aws.amazon.com/jp/fsx/" target="_blank">FSx サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/fsx/?id=docs_gateway" target="_blank">EFS ドキュメント</a></p>
+<ul>
+<li>Amazon FSx for Windows File Server <ul>
+<li>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=74rdt--zb-c" target="_blank">Amazon FSx for Windows Server&amp;Lustre(YouTube)</a>(0:24:22) <ul>
+<li><img alt="blackbelt-windows" src="img\\5337b687e4f3ac2d.jpg"></li>
+</ul>
+</li>
+<li><a href="https://aws.amazon.com/jp/fsx/windows/faqs/" target="_blank">Amazon FSx for Windows File Server よくある質問</a></li>
+<li><a href="https://aws.amazon.com/jp/fsx/windows/pricing/" target="_blank">Amazon FSx for Windows File Server の料金</a></li>
+</ul>
+</li>
+<li>FSx for Lustre <ul>
+<li>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=74rdt--zb-c" target="_blank">Amazon FSx for Windows Server&amp;Lustre(YouTube)</a>(0:24:22) <ul>
+<li><img alt="blackbelt-lustre" src="img\\5337b687e4f3ac2d.jpg"></li>
+</ul>
+</li>
+<li><a href="https://aws.amazon.com/jp/fsx/lustre/faqs/" target="_blank">Amazon FSx for Lustre よくある質問</a></li>
+<li><a href="https://aws.amazon.com/jp/fsx/lustre/pricing/" target="_blank">Amazon FSx for Lustre の料金</a></li>
+</ul>
+</li>
+<li>FSx for NetApp ONTAP <ul>
+<li>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=KjZLgJ2AnKQ" target="_blank">Amazon FSx for NetApp ONTAP(YouTube)</a>(1:08:33) <ul>
+<li><img alt="blackbelt-netapp-ontap" src="img\\1d785efd97f328da.jpg"></li>
+</ul>
+</li>
+<li><a href="https://aws.amazon.com/jp/fsx/netapp-ontap/faqs/" target="_blank">Amazon FSx for NetApp ONTAP よくある質問</a></li>
+<li><a href="https://aws.amazon.com/jp/fsx/netapp-ontap/pricing/" target="_blank">Amazon FSx for NetApp ONTAP の料金</a></li>
+</ul>
+</li>
+<li>FSx for OpenZFS <ul>
+<li>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=iDItcfeG2iU" target="_blank">Amazon FSx for OpenZFS(YouTube)</a>(1:01:50) <ul>
+<li><img alt="blackbelt-openzfs" src="img\\6451770045d9061d.jpg"></li>
+</ul>
+</li>
+<li><a href="https://aws.amazon.com/jp/fsx/openzfs/faqs/" target="_blank">Amazon FSx for OpenZFS よくある質問</a></li>
+<li><a href="https://aws.amazon.com/jp/fsx/openzfs/pricing/" target="_blank">Amazon FSx for OpenZFS の料金</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. FSxファミリーの概要" duration="0">
+        <p>Amazon FSxは以下の4つのファイルシステムをサポートしています：</p>
+<ul>
+<li><strong>FSx for Windows File Server</strong>：Active Directory統合されたWindowsファイル共有</li>
+<li><strong>FSx for Lustre</strong>：高性能コンピューティング(HPC)向けの並列ファイルシステム</li>
+<li><strong>FSx for NetApp ONTAP</strong>：NetApp ONTAPの機能をフルマネージドで提供</li>
+<li><strong>FSx for OpenZFS</strong>：ZFSベースの高性能ファイルシステム</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. 主要機能と特徴" duration="0">
+        <h2 is-upgraded>2.1 FSx for Windows File Server</h2>
+<ul>
+<li>Windows互換のSMBプロトコルサポート</li>
+<li>Active Directory統合によるきめ細かなアクセス制御</li>
+<li>DFSネームスペースとDFSレプリケーションのサポート</li>
+<li>シャドウコピー（VSS）によるバックアップ</li>
+<li>データ重複除外とファイル圧縮機能</li>
+<li>最大64 TiB</li>
+</ul>
+<h2 is-upgraded>2.2 FSx for Lustre</h2>
+<ul>
+<li>最大数百GBpsのスループットと数百万IOPSを実現</li>
+<li>S3との透過的な統合→参考：<a href="https://aws.amazon.com/jp/blogs/news/enhanced-amazon-s3-integration-for-amazon-fsx-for-lustre/" target="_blank">Amazon FSx for Lustre – Amazon S3 統合の強化</a></li>
+<li>自動バックアップと高可用性オプション</li>
+<li>スクラッチまたは永続ファイルシステムの選択が可能</li>
+<li>Lustreはスパコン「富岳」でも使われている高性能な並列ファイルシステム</li>
+</ul>
+<h2 is-upgraded>2.3 FSx for NetApp ONTAP</h2>
+<ul>
+<li>NetApp ONTAP（オンタップ）は、NetAppのストレージOSです。FAS（Fabric Attached Storage）、AFF（All-Flash FAS）に搭載され、最⼩限の処理や負荷によって最⼤限の拡張性と管理性を提供</li>
+<li>NFSv3、NFSv4.1、SMB v3.0、iSCSIプロトコルをサポート</li>
+<li>NetAppのSnapshotやFlexClone機能</li>
+<li>マルチプロトコルアクセス</li>
+<li>容量プール型ストレージによるコスト最適化</li>
+<li>最大512 TiB</li>
+</ul>
+<h2 is-upgraded>2.4 FSx for OpenZFS</h2>
+<ul>
+<li>サン・マイクロシステムズによって開発されたファイルシステム・ZFSのオープンソース実装「<a href="https://openzfs.org/wiki/Main_Page" target="_blank">OpenZFS</a>」</li>
+<li>NFSv3、NFSv4.0、NFSv4.1プロトコルサポート</li>
+<li>スナップショットとクローン機能</li>
+<li>圧縮による容量効率化</li>
+<li>低レイテンシーと高いIOPS</li>
+<li>最大512 TiB</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. 実装のベストプラクティス" duration="0">
+        <h2 is-upgraded>3.1 セキュリティ</h2>
+<ul>
+<li>VPC内での展開を推奨</li>
+<li>セキュリティグループによるアクセス制御の実装</li>
+<li>暗号化の有効化（保存時および転送時）</li>
+<li>最小権限の原則に基づくIAMポリシーの設定</li>
+</ul>
+<h2 is-upgraded>3.2 パフォーマンス最適化</h2>
+<ul>
+<li>ワークロードに適したストレージ容量とスループット容量の選択</li>
+<li>適切なバックアップウィンドウの設定</li>
+<li>マルチAZ展開による可用性の確保</li>
+<li>モニタリングとアラートの設定</li>
+</ul>
+<h2 is-upgraded>3.3 コスト最適化</h2>
+<ul>
+<li>自動バックアップの保持期間の適切な設定</li>
+<li>使用率に基づいたストレージ容量の調整</li>
+<li>スループット容量の定期的な見直し</li>
+<li>未使用のスナップショットの定期的なクリーンアップ</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. 一般的なユースケース" duration="0">
+        <h2 is-upgraded>4.1 エンタープライズアプリケーション</h2>
+<ul>
+<li>Windows共有ファイルサーバーの移行</li>
+<li>ホームディレクトリの提供</li>
+<li>アプリケーションデータの共有ストレージ</li>
+</ul>
+<h2 is-upgraded>4.2 HPC/分析ワークロード</h2>
+<ul>
+<li>機械学習トレーニングデータの格納</li>
+<li>ゲノム解析</li>
+<li>金融モデリング</li>
+<li>メディアレンダリング</li>
+</ul>
+<h2 is-upgraded>4.3 バックアップと災害対策</h2>
+<ul>
+<li>クロスリージョンバックアップ</li>
+<li>データレプリケーション</li>
+<li>ポイントインタイムリカバリ</li>
+</ul>
+<h2 is-upgraded>4.4 S3 vs EFS vs FSx vs EBS</h2>
+<ul>
+<li>オブジェクトストレージ： S3</li>
+<li>ブロックストレージ：EBS</li>
+<li>ファイルストレージ：EFS, FSx</li>
+<li>S3: データ分析、大量データ、データレイク</li>
+<li>EFS:複数のEC2インスタンス（Linux）でファイル共有</li>
+<li>FSx:WindowsServerでのファイル共有、分析ワークロードでのファイル共有など</li>
+<li>EBS: EC2やRDSなど高速読み書きが必要なケース</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="5. モニタリングとメンテナンス" duration="0">
+        <h2 is-upgraded>5.1 主要メトリクス</h2>
+<ul>
+<li>ストレージ容量使用率</li>
+<li>IOPSとスループット</li>
+<li>レイテンシー</li>
+<li>クライアント接続数</li>
+</ul>
+<h2 is-upgraded>5.2 メンテナンスタスク</h2>
+<ul>
+<li>定期的なバックアップの検証</li>
+<li>パフォーマンスメトリクスの確認</li>
+<li>セキュリティグループルールの見直し</li>
+<li>パッチ適用状況の確認</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Amazon FSxは、エンタープライズグレードのファイルシステムをマネージドサービスとして提供し、様々なワークロードに対応できる柔軟性を備えています。適切な設計と運用管理により、高可用性、高性能、そしてセキュアなファイルストレージソリューションを実現できます。</p>
+<p>各ワークロードの要件に応じて適切なFSxファイルシステムを選択し、ベストプラクティスに従った実装を行うことで、効率的なファイルストレージ環境を構築することができます。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

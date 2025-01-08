@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2025-01-08T14:36:02+09:00",
-  "id": "directconnect-overview",
+  "id": "efs-overview",
   "duration": 0,
-  "title": "AWS Direct Connect",
+  "title": "Amazon Elastic File System (Amazon EFS)",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_directconnect-overview.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_efs-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awsdirectconnect"
+    "amazonefs"
   ],
-  "url": "directconnect-overview"
+  "url": "efs-overview"
 }

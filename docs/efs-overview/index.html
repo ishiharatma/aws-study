@@ -1,0 +1,190 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon Elastic File System (Amazon EFS)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="efs-overview"
+                  title="Amazon Elastic File System (Amazon EFS)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#efs-%E3%81%A8%E3%81%AF" target="_blank">EFS とは</a></li>
+<li><a href="#efs-%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E6%88%90" target="_blank">EFS の基本構成</a></li>
+<li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">ファイルシステムのタイプ</a></li>
+<li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%AF%E3%83%A9%E3%82%B9" target="_blank">ストレージクラス</a></li>
+<li><a href="#%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">ライフサイクルポリシー</a></li>
+<li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">バックアップ</a></li>
+<li><a href="#ec2%E3%81%A7%E3%81%AE%E5%88%A9%E7%94%A8" target="_blank">EC2での利用</a></li>
+<li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">モニタリングとトラブルシューティング</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="EFS とは" duration="0">
+        <p>フルマネージド型ファイルストレージサービスで、複数のEC2インスタンスで利用する共有ファイルシステムなどによく利用されます。</p>
+<p>ネットワークファイルシステムバージョン 4 (NFSv4.1 および NFSv4.0) プロトコルを使用し、Linuxワークロード向けに設計されています。 Windows Serverの場合は、Amazon FSx for Windows File Serverを利用します。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=srLHV0ualZs" target="_blank">Amazon Elastic File System (Amazon EFS)(YouTube)</a>(0:40:25)</p>
+<p class="image-container"><img alt="01" src="img\\d0c97647f5fdc684.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=swoxicPWPHE" target="_blank">Amazon Elastic File System (Amazon EFS)(YouTube)</a>(0:35:25)</p>
+<p class="image-container"><img alt="02" src="img\\81bc6540d01d86f.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/efs/" target="_blank">EFS サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/efs/?id=docs_gateway" target="_blank">EFS ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/efs/" target="_blank">EFS よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/efs/pricing/" target="_blank">EFS の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="EFS の基本構成" duration="0">
+        <p class="image-container"><img alt="efs" src="img\\693224bf1a0941ba.png"></p>
+<ul>
+<li>マウントターゲット <ul>
+<li>EC2から接続するエンドポイントのことで、実体はENIであり、プライベートIPアドレスが割り当てられます。</li>
+<li>AZに１つだけ作成できます。</li>
+<li>セキュリティグループでアクセス制御を行います。</li>
+</ul>
+</li>
+<li>DNS名 <ul>
+<li>EC2から接続する場合はDNS名を指定します。</li>
+<li>DNS名は２種類あります。 <ul>
+<li>ファイルシステム： <code>file-system-id.efs.aws-region.amazonaws.com</code><ul>
+<li>同一AZのマウントターゲットのIPを返す。別AZのIPは返さない。</li>
+</ul>
+</li>
+<li>マウントターゲット： <code>availability-zone.file-system-id.efs.aws-region.amazonaws.com</code><ul>
+<li>別AZからでも参照可能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>別のVPCから接続したい場合は、VPCピアリングやTransitGatewayなどで接続しておく。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ファイルシステムのタイプ" duration="0">
+        <p class="image-container"><img alt="efs-filesystem-type" src="img\\b98a097cba507589.jpg"></p>
+<ol type="1">
+<li><strong>リージョン</strong><ul>
+<li>3つのアベイラビリティゾーンにデータを複製</li>
+<li>99.999999999%（11ナイン）の耐久性</li>
+<li>頻繁にアクセスされるデータ向け</li>
+</ul>
+</li>
+<li><strong>1ゾーン ストレージクラス</strong><ul>
+<li>単一AZでの運用によるコスト最適化</li>
+<li>99.999999999%（11ナイン）の耐久性</li>
+<li>開発環境やバックアップなどに最適</li>
+</ul>
+</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ストレージクラス" duration="0">
+        <ol type="1">
+<li><strong>標準</strong><ul>
+<li>SSD</li>
+<li>頻繁にアクセスされるデータ</li>
+</ul>
+</li>
+<li><strong>低頻度アクセス (IA,Infrequent Access)</strong><ul>
+<li>アクセス頻度の低いデータ向け</li>
+<li>四半期ごとに数回しかアクセスされないデータ</li>
+</ul>
+</li>
+<li><strong>EFS アーカイブ</strong><ul>
+<li>1 年に数回しかアクセスされないデータ</li>
+</ul>
+</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ライフサイクルポリシー" duration="0">
+        <p class="image-container"><img alt="efs-lifecycle-settings" src="img\\30c378edc5c23f31.jpg"></p>
+<p>S3バケットのライフサイクルと同様に低頻度アクセスのデータを低コストのストレージクラスに移動させることでコストを最適化することができます。 さらに、EFSでは標準ストレージクラスに戻すことが可能です（デフォルトでは戻さない）。</p>
+<p class="image-container"><img alt="efs-lifecycle" src="img\\686bdef21502963.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="バックアップ" duration="0">
+        <p>AWS Backupによって自動バックアップが可能です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="EC2での利用" duration="0">
+        <p>EFSマウントヘルパーを使用します。</p>
+<pre><code language="language-sh" class="language-sh"># マウントするディレクトリを作成します
+sudo mkdir efs
+
+# ファイルシステムIDを指定してマウントします
+sudo mount -t efs file-system-id マウントするディレクトリ/
+
+# ファイルシステム DNS 名を使用してマウントする場合
+sudo mount -t efs -o tls file-system-dns-name マウントするディレクトリ/
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="モニタリングとトラブルシューティング" duration="0">
+        <ul>
+<li>CloudWatchメトリクス</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
