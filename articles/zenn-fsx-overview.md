@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: false
 ---
 
-# Amazon FSx（xx）<!-- omit in toc -->
+# Amazon FSx<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
 

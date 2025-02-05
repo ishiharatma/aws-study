@@ -1,0 +1,468 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Glue</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="glue-overview"
+                  title="AWS Glue"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#1-aws-glue-%E3%81%A8%E3%81%AF" target="_blank">1. AWS Glue とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+<li><a href="#13-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">1.3. ワークショップ</a></li>
+<li><a href="#14-glue%E5%B0%8E%E5%85%A5%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">1.4. Glue導入のメリット</a></li>
+<li><a href="#14-%E4%B8%BB%E3%81%AA%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">1.4. 主なユースケース</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E6%A9%9F%E8%83%BD" target="_blank">2. 基本機能</a><ul>
+<li><a href="#21-%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AB%E3%82%BF%E3%83%AD%E3%82%B0" target="_blank">2.1. データカタログ</a></li>
+<li><a href="#22-%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%A9%E3%83%BC" target="_blank">2.2. クローラー</a></li>
+<li><a href="#23-etl%E3%82%B8%E3%83%A7%E3%83%96" target="_blank">2.3. ETLジョブ</a><ul>
+<li><a href="#231-dpu-%E3%81%A8%E3%83%AF%E3%83%BC%E3%82%AB%E3%83%BC" target="_blank">2.3.1. DPU とワーカー</a></li>
+</ul>
+</li>
+<li><a href="#24-glue-studio" target="_blank">2.4. Glue Studio</a></li>
+<li><a href="#25-%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">2.5. ワークフロー</a></li>
+</ul>
+</li>
+<li><a href="#3-%E7%99%BA%E5%B1%95%E7%9A%84%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">3. 発展的な機能</a><ul>
+<li><a href="#31-%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%A9%9F%E8%83%BD" target="_blank">3.1. ブックマーク機能</a></li>
+<li><a href="#32-glue-streaming" target="_blank">3.2. Glue Streaming</a></li>
+<li><a href="#33-glue-databrew" target="_blank">3.3. Glue DataBrew</a></li>
+<li><a href="#34-%E3%82%BC%E3%83%ADetl%E7%B5%B1%E5%90%88" target="_blank">3.4. ゼロETL統合</a></li>
+<li><a href="#35-glue-data-quality" target="_blank">3.5. Glue Data Quality</a></li>
+</ul>
+</li>
+<li><a href="#4-%E9%81%8B%E7%94%A8%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">4. 運用のポイント</a><ul>
+<li><a href="#41-aws-lake-formation%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">4.1. AWS Lake Formationとの連携</a></li>
+<li><a href="#42-%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86" target="_blank">4.2. コスト管理</a></li>
+<li><a href="#43-%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">4.3. モニタリング</a></li>
+<li><a href="#44-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">4.4. セキュリティ</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. AWS Glue とは" duration="0">
+        <p>抽出、変換、ロード (ETL) プロセスの検出、準備、統合、近代化（モダナイゼーション）を容易にするサーバーレスデータ統合サービスです。</p>
+<p>近代化（モダナイゼーション）とは、単にツールを新しくするだけでなく、データ統合のプロセス全体をよりスケーラブルで、管理しやすく、コスト効率の良いものに変革することを意味し、AWS Glueは、これらの「近代化」を実現するためのマネージドサービスです。</p>
+<p class="image-container"><img alt="glue-concept" src="img\\4a949073eaf181e0.png"></p>
+<p>（引用元：<a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/components-key-concepts.html" target="_blank">AWS Glue の概念</a>）</p>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
+<p>AWS Glueを理解する公式ドキュメントは次のとおりです。</p>
+<p><a href="https://aws.amazon.com/jp/glue/getting-started/" target="_blank">AWS Glue の開始方法</a></p>
+<p class="image-container"><img alt="getting-started" src="img\\5a351eca2f3490f9.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/glue/" target="_blank">AWS Glue サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/glue/?id=docs_gateway" target="_blank">AWS Glue ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/glue/faqs/" target="_blank">AWS Glue よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/glue/pricing/" target="_blank">AWS Glue の料金</a></p>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=px96mjFoZwM" target="_blank">AWS Glue(YouTube)</a>(0:55:30)</p>
+<p class="image-container"><img alt="glue-1" src="img\\ff38a6b2c7e18e00.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=5fbdx849AYw" target="_blank">AWS Glue【AWS Black Belt】</a>(0:41:53)</p>
+<p class="image-container"><img alt="glue-2" src="img\\fd0cafb2b0fb7c19.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=k-qTKz0xG-0" target="_blank">[AWS Black Belt Online Seminar]猫でもわかる、AWS Glue ETLパフォーマンス・チューニング 基礎知識編</a>(0:34:22)</p>
+<p class="image-container"><img alt="glue-3" src="img\\9d40161d83026be1.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=0a1MA3rI3pY" target="_blank">[AWS Black Belt Online Seminar]猫でもわかる、AWS Glue ETLパフォーマンス・チューニング 後編</a>(0:34:47)</p>
+<p class="image-container"><img alt="glue-4" src="img\\b12ee88b273601f4.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=xRszN4Tb4uM" target="_blank">【AWS Black Belt Online Seminar】AWS Glue -Glue Studioを使ったデータ変換のベストプラクティス-</a>(0:57:13)</p>
+<p class="image-container"><img alt="glue-5" src="img\\a647f6fc3fc31def.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=jglmTz1yISc" target="_blank">【AWS Black Belt Online Seminar】AWS Glue DataBrew</a>(0:56:49)</p>
+<p class="image-container"><img alt="glue-6" src="img\\976e433c6d3b2f8f.jpg"></p>
+<h2 is-upgraded>1.3. ワークショップ</h2>
+<ul>
+<li><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/ee59d21b-4cb8-4b3d-a629-24537cf37bb5/ja-JP" target="_blank">AWS Glue DataBrew Immersion Day</a></li>
+<li><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/976050cc-0606-4b23-b49f-ca7b8ac4b153/ja-JP/600" target="_blank">Data Engineering Immersion Day</a></li>
+<li><a href="https://resources.awscloud.com/aws-summit-online-japan-2020-on-demand-self-paced-hands-on-85234" target="_blank">HOL-01：AWS ではじめるデータ分析〜データレイクハンズオン〜</a></li>
+<li><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/ed82a5d4-6630-41f0-a6a1-9345898fa6ec/en-US" target="_blank">Amazon Personalize with Glue DataBrew</a></li>
+</ul>
+<h2 is-upgraded>1.4. Glue導入のメリット</h2>
+<p>AWS Glueを導入する主なメリットは以下の3つです。</p>
+<ol type="1">
+<li>サーバーレス <ul>
+<li>インフラ構築・管理が不要</li>
+<li>必要な時に分析環境を使用可能</li>
+<li>スケーラブルな処理基盤</li>
+</ul>
+</li>
+<li>運用負荷の軽減</li>
+</ol>
+<ul>
+<li>ETLに必要な機能が標準機能を利用可能</li>
+<li>データ分析環境や処理の更新が容易</li>
+<li>自動化による保守性の向上</li>
+</ul>
+<ol type="1" start="3">
+<li>ビジネス価値への集中</li>
+</ol>
+<ul>
+<li>ETLが自動化によりデータ分析に専念</li>
+<li>データサイエンティストの生産性向上</li>
+</ul>
+<h2 is-upgraded>1.4. 主なユースケース</h2>
+<ul>
+<li>データレイク構築</li>
+<li>データウェアハウス連携</li>
+<li>バッチ処理の自動化</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. 基本機能" duration="0">
+        <p>Glueの主要な機能は次のとおりです。</p>
+<ul>
+<li>データカタログ</li>
+<li>クローラー</li>
+<li>ETLジョブ</li>
+<li>Glue Studio</li>
+<li>ワークフロー</li>
+</ul>
+<h2 is-upgraded>2.1. データカタログ</h2>
+<p>データの場所やスキーマといったメタデータ管理する機能です。</p>
+<p>データカタログは、データベースとテーブルというオブジェクトから構成されます。データベースは、データカタログを論理的にグループ化したものと言えます。 例えば、次のようなグループ化の方法があります。</p>
+<ol type="1">
+<li>データ環境別のグループ化 <ul>
+<li>raw_database: 生データ</li>
+<li>staging_database: 加工途中のデータ</li>
+<li>analytics_database: 分析用に整形済み</li>
+</ul>
+</li>
+<li>ビジネス部門別のグループ化 <ul>
+<li>sales_database: 営業部門のデータ</li>
+<li>marketing_database: マーケティング部門のデータ</li>
+<li>finance_database: 経理部門のデータ</li>
+</ul>
+</li>
+</ol>
+<p>テーブルは、データの場所やスキーマの情報が格納されています。 実際に格納されている情報はマネジメントコンソールで確認できます。 CloudTrailが出力したログのテーブルは次のようになっています。</p>
+<p class="image-container"><img alt="data-catalog-sample-00" src="img\\ab6b4f5a427efec3.jpg"><img alt="data-catalog-sample-01" src="img\\e61ab877241fd115.jpg"><img alt="data-catalog-sample-02" src="img\\7d00c062daf4dade.jpg"></p>
+<p>テーブルはバージョン管理されていて、過去のバージョンとの比較もできます。</p>
+<p class="image-container"><img alt="data-catalog-sample-03" src="img\\e15ecff328693c24.jpg"></p>
+<p>コンソールでのバージョン比較はこのように確認できます。</p>
+<p class="image-container"><img alt="data-catalog-compare-01" src="img\\dce289bafe5d7515.jpg"></p>
+<p>データカタログを利用できるAWSサービスは次のようなものがあります。</p>
+<ul>
+<li>Amazon Athena <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/querying-glue-catalog.html" target="_blank">AWS Glue Data Catalog をクエリする</a></li>
+</ul>
+</li>
+<li>Amazon Redshift Spectrum <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/redshift/latest/dg/c-spectrum-external-schemas.html" target="_blank">Amazon Redshift Spectrum 用の外部スキーマ</a></li>
+</ul>
+</li>
+<li>Amazon EMR <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/emr/latest/ReleaseGuide/emr-spark-glue.html" target="_blank">Amazon EMR AWS で Spark で Glue データカタログカタログを使用する</a></li>
+</ul>
+</li>
+<li>Apach Hiveメタストア <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/emr/latest/ReleaseGuide/emr-hive-metastore-glue.html" target="_blank">AWS Glue データカタログを Hive のメタストアとして使用する</a></li>
+</ul>
+</li>
+</ul>
+<p>データカタログの利用イメージ（引用：Blackbelt）</p>
+<p class="image-container"><img alt="catalog" src="img\\a1b4cdd72b39ae44.jpg"></p>
+<h2 is-upgraded>2.2. クローラー</h2>
+<p>メタデータをデータカタログに登録・更新する機能です。 定期的に実行することで、スキーマの自動更新が可能になります。</p>
+<p>スケジュールは、オンデマンドで実行するか、定期的に実行するかを選択できます。 Hourlyなど簡単な設定方法や、cron形式で詳細な実行スケジュールを作成することもできます。</p>
+<p class="image-container"><img alt="crawler-schedule" src="img\\1c6748e5a46ec4de.jpg"></p>
+<p>クローラーを定期的に実行させることで、新しいデータやスキーマの変更を検知できます。</p>
+<p>クローラーが取得可能なデータソースは、<a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/crawler-data-stores.html" target="_blank">ドキュメント</a>によると次のようなものがあります。</p>
+<ul>
+<li>ネイティブクライアント <ul>
+<li>Amazon S3</li>
+<li>Amazon DynamoDB</li>
+<li>Delta Lake</li>
+<li>Apache Iceerg</li>
+<li>Apache Hudi</li>
+</ul>
+</li>
+<li>JDBC <ul>
+<li>Amazon Redshift</li>
+<li>Snowflake</li>
+<li>Amazon Aurora</li>
+<li>MariaDB</li>
+<li>Microsoft SQL Server</li>
+<li>MySQL</li>
+<li>PostgreSQL</li>
+<li>Oracle</li>
+</ul>
+</li>
+<li>MongoDB クライアント <ul>
+<li>MongoDB</li>
+<li>Amazon DucumentDB</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="crawler-datasource" src="img\\3a8230747612dc1.jpg"></p>
+<p>標準でサポートしていないデータソースは、AWS Marketpkaceから取得するか、独自でカスタムコネクタを作成することができます。</p>
+<h2 is-upgraded>2.3. ETLジョブ</h2>
+<p>ジョブとは、データソースに接続してデータターゲットに出力する処理を実行するものです。</p>
+<p>ジョブの種類は以下のとおりです。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/etl-jobs-section.html" target="_blank">Sparkジョブ</a><ul>
+<li>Apache Sparkを利用した大規模なバッチデータ処理向け</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/add-job-python.html" target="_blank">Pythonシェルジョブ</a><ul>
+<li>Pythonスクリプトを実行でき、分散処理を必要としない軽量な処理向け</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/add-job-streaming.html" target="_blank">ストリーミングETLジョブ</a><ul>
+<li>Amazon Kinesis Data StreamsやAmazon MSKなどのストリーミングソースから連続的に実行されるジョブ</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/ray-jobs-section.html" target="_blank">Rayジョブ</a><ul>
+<li>Pythonワークロードを実現可能なOSSのRayを用いたマルチノード環境で高速に処理できる</li>
+<li>Sparkよりも低い学習コストで、既存のPythonコードを並列化することも容易</li>
+</ul>
+</li>
+</ul>
+<p>※15分以内に処理が完了でき、小規模な処理であればAWS Lambdaの利用も検討する。</p>
+<h3 is-upgraded>2.3.1. DPU とワーカー</h3>
+<p>ジョブには、DPU とワーカーというものがあります。</p>
+<ul>
+<li>DPU: Data Processing Unit <ul>
+<li>ジョブに割り当てる処理能力の単位で、１DPUにつき4vCPUと16GBのメモリ</li>
+<li>１時間あたりに決められた料金が1秒単位で課金される <ul>
+<li>1DPU = 0.44USD/時で、6DPUを15分利用した場合、6DPU×0.44×0.25時間＝0.66USD</li>
+</ul>
+</li>
+<li>ワーカータイプによって、１分or10分の最低料金がある</li>
+</ul>
+</li>
+<li>ワーカー <ul>
+<li>SparkジョブとRayジョブで指定できる事前定義済みのワーカー</li>
+<li>ワーカータイプ <ul>
+<li>G.025X=0.25DPU、標準＝1DPU、G.1X＝1DPU、G.2X＝2DPU、G.4X＝4DPU、G.8X=8DPU</li>
+<li>多くのメモリが必要なら大きいワーカータイプを選択する。</li>
+</ul>
+</li>
+<li>ワーカー数 <ul>
+<li>これを増やすと分散実行数が増える</li>
+<li>１つのワーカー内には、Executorという処理を実行する１つ存在する <ul>
+<li>標準タイプのワーカーには、Executorが２つ存在する。その分、１つのExecutorが利用できるメモリが減る</li>
+</ul>
+</li>
+<li>並列性が求められる場合は、ワーカー数を増やす</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>2.4. Glue Studio</h2>
+<p>Glue Studioを使えば、GUIベースでETLジョブを構築することや、ジョブの実行、監視設定を行うことが可能です。</p>
+<p class="image-container"><img alt="studio" src="img\\c365317512eb9dc7.png"></p>
+<h2 is-upgraded>2.5. ワークフロー</h2>
+<p>ETLジョブ、クローラーを自動化し、データカタログ出力までの一連の処理をGUIで管理する機能です。</p>
+<p class="image-container"><img alt="glue-workflow" src="img\\fc4ba685f9cf7efa.jpg"></p>
+<p>AWSには、ワークフロー系のサービスはほかにもあります。</p>
+<ul>
+<li>AWS Glue Workflow <ul>
+<li>Glueワークフローは、基本的にデータの準備（ETL）を簡単に行うことを目的としたサーバーレスデータ統合サービスです。</li>
+<li>データの準備に必要なデータソースへの接続などを備えています。</li>
+<li>Glueジョブとの統合や連携のみの場合はこちらを選択するケースが考えられる</li>
+</ul>
+</li>
+<li>AWS Step Functions <ul>
+<li>複数のAWSサービスを組み合わせてワークフローを構築できるサーバーレスオーケストレーションサービス</li>
+<li>ETLの処理も作成可能で、汎用性が高いワークフローを定義可能</li>
+<li>AWSサービスとの統合や連携を行うならばこちらを選択するケースが考えられる</li>
+</ul>
+</li>
+<li>Amazon MWAA（Managed Workflows for Apache Airflow） <ul>
+<li>OSSのApache Airflow</li>
+<li>オンプレからの移行で、すでにApache Airflowを使っている場合や、AWS以外との連携もある場合に選択するケースが考えられる</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. 発展的な機能" duration="0">
+        <h2 is-upgraded>3.1. ブックマーク機能</h2>
+<p>ETLジョブを実行する場合、処理済みデータを記録し、差分抽出を可能にする機能です。 <code>job.init()</code>でブックマークの情報を取得し、<code>job.commit()</code>が呼び出されたときに状態を記録します。 そのため、ジョブスクリプトから<code>job.commit()</code>が呼び出されていないと、ブックマーク機能を正常に利用できないことになります。</p>
+<p>参考：エラー : <a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/glue-troubleshooting-errors.html#error-job-bookmarks-reprocess-data" target="_blank">ジョブのブックマークが有効なときにジョブがデータを再処理しています</a></p>
+<h2 is-upgraded>3.2. Glue Streaming</h2>
+<p>Glueはもともとバッチ処理に特化したETLサービスという特徴があります。ただ、Glue Streamingを使うことで、準リアルタイム処理が可能になります。</p>
+<p>具体的なユースケースは次のとおりです。詳細については、<a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/streaming-chapter.html" target="_blank">ドキュメント</a>をご参照ください</p>
+<ul>
+<li>不正検出</li>
+<li>ソーシャルメディア分析</li>
+<li>IoT分析</li>
+<li>ログの監視と分析</li>
+<li>レコメンデーションシステム</li>
+</ul>
+<p>例えば、Amazon Kinesis Data StreamsとAWS Glue Streamingを連携することで準リアルタイムのデータ処理が実現できます。 Kinesis Data Streamsがデータソースとできるサービスと組み合わせることで、さまざまなユースケースに対応することができます。</p>
+<h2 is-upgraded>3.3. Glue DataBrew</h2>
+<p>データのクリーニング、正規化、変換のためのフルマネージド型のビジュアルデータ準備サービスです。 null の削除、欠損値の置き換え、スキーマの不整合の修正、関数に基づく列の作成などが実施できます。</p>
+<p>DataBrewは、S3に保存された以下のデータフォーマットをサポートしています。</p>
+<ul>
+<li>カンマ区切り値 (CSV)</li>
+<li>Microsoft Excel</li>
+<li>JSON</li>
+<li>ORC</li>
+<li>Parquet</li>
+</ul>
+<h2 is-upgraded>3.4. ゼロETL統合</h2>
+<p>ETLのジョブやワークフローは大きな運用負荷が伴います。このようなものを極力抑えるようにできるのが、ゼロETL統合です。 ETLの要件によっては、完全になくすことができる可能性があります。</p>
+<p>GlueのゼロETLのデータソースとして、主に次のようなものがあります。 参考：<a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/zero-etl-using.html" target="_blank">ゼロ ETL 統合</a></p>
+<ul>
+<li>AWS <ul>
+<li>Amazon DynamoDB</li>
+</ul>
+</li>
+<li>サードパーティー <ul>
+<li>Salesforce</li>
+<li>Zendesk</li>
+<li>ServiceNow など</li>
+</ul>
+</li>
+</ul>
+<p>GlueのゼロETLのデータターゲットとして、主に次のようなものがあります。</p>
+<ul>
+<li>Amazon SageMaker Lakehouse</li>
+<li>Amazon Redshift</li>
+</ul>
+<h2 is-upgraded>3.5. Glue Data Quality</h2>
+<p>データレイクのデータに対して、ユーザーが定義したルールに従って品質を自動的に測定し、統計などを表示してくれるマネージドサービスです。 これによって、データの変化を監視し、予想外の値が入ってくることを検知できます。</p>
+<p class="image-container"><img alt="dataquality" src="img\\b9baf5e4d4f9e033.png"></p>
+<p><a href="https://aws.amazon.com/jp/glue/features/data-quality/" target="_blank">AWS Glue Data Quality サービス概要</a></p>
+<p>データ品質定義言語 (DQDL) を用いてカスタムルールを定義することによって、データの品質をチェックすることができます。</p>
+<p>具体的には次のような記述を行うことでデータをチェックできます。詳細は、<a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/dqdl.html" target="_blank">データ品質定義言語 (DQDL) リファレンス</a>を参照してください。</p>
+<pre><code language="language-sh" class="language-sh">Rules = [
+   IsComplete &#34;order-id&#34;,
+   IsUnique &#34;order-id&#34;
+]
+</code></pre>
+<p>以下の動画では、AWS Glue Data Qualityがどのようにデータ品質を管理するかについての基本的な説明や主要な機能について説明されています。 <a href="https://www.youtube.com/watch?v=rK1NGQu4Sgg" target="_blank">Measure and Monitor Data Quality of your Datasets in AWS Glue Data Catalog(YouTube) | Amazon Web Services</a></p>
+<p class="image-container"><img alt="data-quality" src="img\\5fe8485330b5cea2.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. 運用のポイント" duration="0">
+        <h2 is-upgraded>4.1. <a href="https://docs.aws.amazon.com/ja_jp/lake-formation/latest/dg/glue-features-lf.html" target="_blank">AWS Lake Formationとの連携</a></h2>
+<p class="image-container"><img alt="glue-lake-formation" src="img\\b10ea10840e0ac18.jpg"></p>
+<p>Lake Formationを利用すると、Glueが作成したデータカタログに対して詳細なアクセスコントロールを行うことができます。</p>
+<p>具体的には、以下のアクセス管理を行うことができます。</p>
+<ul>
+<li>データベース、テーブルへのアクセス管理</li>
+<li>列、行、または行列の組み合わせでのアクセス管理</li>
+</ul>
+<p>アクセス管理の方法は、次の2つの方法があります。</p>
+<ul>
+<li>名前付きリソースアクセスコントロール（NRAC）</li>
+<li>タグベースアクセスコントロール（TBAC） <ul>
+<li>NRACよりも管理する権限が少なく、リソースが増えた場合の運用負荷が低いため、推奨される</li>
+</ul>
+</li>
+</ul>
+<p>詳細については、<a href="https://docs.aws.amazon.com/ja_jp/lake-formation/latest/dg/managing-permissions.html" target="_blank">Lake Formation 許可の管理</a>を参照してください。</p>
+<h2 is-upgraded>4.2. コスト管理</h2>
+<p>コスト最適化については、スキャンするデータ量を最小限にすることと、処理時間に見合うサービス選択を意識することが重要であると考えます。 具体的には、以下のようなポイントを考慮します。</p>
+<ul>
+<li>ジョブブックマーク機能を用いて増分クロールを行い、処理時間を削減</li>
+<li>必要なワーカータイプを選択しているか？過剰なDPUを割り当てていないか？</li>
+<li>最小課金時間を下回る処理の場合、別の方法への変更を検討</li>
+</ul>
+<p>また、コスト最適化については以下のAWSブログ記事をご参照ください</p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/monitor-optimize-cost-glue-spark/" target="_blank">AWS Glue for Apache Spark のコストのモニタリングと最適化</a></p>
+<h2 is-upgraded>4.3. モニタリング</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/monitor-glue.html" target="_blank">AWS Glue のモニタリング</a>は、以下のツールを利用することで実現できます。</p>
+<ul>
+<li>Amazon EventBridge <ul>
+<li>ETLジョブの成功や失敗のイベントによって、次の処理を実行したり、SNSによる通知を実現</li>
+<li><code>"detail-type":"Glue Job State Change"</code>のイベントが<code>SUCCEEDED、FAILED、TIMEOUT、STOPPED</code>に対して発生</li>
+</ul>
+</li>
+<li>Amazon CloudWatch Logs <ul>
+<li>ログファイルのモニタリングによる監視・通知</li>
+</ul>
+</li>
+<li>Amazon CloudWatch メトリクス <ul>
+<li>メトリクスによってジョブのリソース使用率（80％超）などを監視・通知</li>
+</ul>
+</li>
+<li>AWS CloudTrail <ul>
+<li>APIレベルでの実行を監視・通知</li>
+<li>例えば、<code>DeleteCrawler</code>アクションが発生した場合に通知</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>4.4. セキュリティ</h2>
+<ul>
+<li>アクセス管理 <ul>
+<li>IAMによってアクセス管理を実施</li>
+</ul>
+</li>
+<li>保管中のデータの暗号化 <ul>
+<li>AWS KMSを使用して以下を暗号化 <ul>
+<li>データカタログ</li>
+<li>ログ</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>AWS Glueは、モダンなデータ統合基盤として、以下の特徴を提供します。</p>
+<ul>
+<li>サーバーレスでの運用による管理負荷の軽減</li>
+<li>豊富な統合機能による開発効率の向上</li>
+<li>データ品質管理の自動化によるガバナンスの強化</li>
+</ul>
+<p>これらの機能により、より価値の高いデータ分析に注力できる環境を実現できます。</p>
+<p>詳しい内容については、AWS公式ドキュメントやAWS Black Belt Online Seminarをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
