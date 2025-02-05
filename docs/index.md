@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-<img src="./banner3.png"  width="100%"/>
+<img src="./banner2.png"  width="70%"/>
 
 ## AWS 勉強会資料公開ページ<!-- omit in toc -->
 
@@ -11,4 +11,10 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
-- 記載している人について ⇒[こちら](https://ishiharatma.github.io/)
+- 本ページのGitHubリポジトリは[こちら](https://github.com/ishiharatma/aws-study)です。
+
+- 記載している人については、[こちら](https://ishiharatma.github.io/)を参照ください。
+
+## 学習ロードマップ
+
+![loadmap](../aws-learing-loadmap.jpg)
