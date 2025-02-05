@@ -13,7 +13,6 @@ minima_reboot:
   date_format_short: "%b %-d"
 
 header_pages:
-  - alllinks.md
   - basic.md
   - compute.md
   - database.md
