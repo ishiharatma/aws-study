@@ -1,6 +1,6 @@
 # AWS 勉強会資料公開ページ<!-- omit in toc -->
 
-<img src="https://github.com/ishiharatma/aws-study/blob/main/banner2.png?raw=true" />
+<img src="https://github.com/ishiharatma/aws-study/blob/main/docs/banner2.png?raw=true" />
 
 ## Table of Contents<!-- omit in toc -->
 
@@ -130,6 +130,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 ### 分析
 
+- AWS Glue
 - Amazon Athena
 - Amazon Kinesis
 - Amazon QuickSight
