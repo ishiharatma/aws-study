@@ -20,4 +20,4 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 ## 学習ロードマップ
 
-![loadmap](https://github.com/ishiharatma/aws-study/blob/main/aws-learing-loadmap.jpg)
+<img src="https://github.com/ishiharatma/aws-study/blob/main/aws-learing-loadmap.jpg?raw=true" />
