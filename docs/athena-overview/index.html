@@ -1,0 +1,326 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon Athena</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="athena-overview"
+                  title="Amazon Athena"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#1-amazon-athena-%E3%81%A8%E3%81%AF" target="_blank">1. Amazon Athena とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+<li><a href="#13-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">1.3. ワークショップ</a></li>
+<li><a href="#14-%E5%B0%8E%E5%85%A5%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">1.4. 導入のメリット</a></li>
+<li><a href="#14-%E4%B8%BB%E3%81%AA%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">1.4. 主なユースケース</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E6%A9%9F%E8%83%BD" target="_blank">2. 基本機能</a><ul>
+<li><a href="#21-%E3%82%AF%E3%82%A8%E3%83%AA%E3%82%A8%E3%83%87%E3%82%A3%E3%82%BF%E3%81%AE%E7%94%BB%E9%9D%A2%E6%A7%8B%E6%88%90" target="_blank">2.1. クエリエディタの画面構成</a></li>
+<li><a href="#22-%E3%83%87%E3%83%BC%E3%82%BF%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">2.2. データソース</a></li>
+<li><a href="#24-%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3%E3%82%B7%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86" target="_blank">2.4. パーティション管理</a></li>
+<li><a href="#25-%E3%83%86%E3%83%B3%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%81%A8%E3%83%93%E3%83%A5%E3%83%BC" target="_blank">2.5. テンプレートとビュー</a></li>
+</ul>
+</li>
+<li><a href="#3-%E7%99%BA%E5%B1%95%E7%9A%84%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">3. 発展的な機能</a><ul>
+<li><a href="#31-%E3%83%95%E3%82%A7%E3%83%87%E3%83%AC%E3%83%BC%E3%83%86%E3%83%83%E3%83%89%E3%82%AF%E3%82%A8%E3%83%AA" target="_blank">3.1. フェデレーテッドクエリ</a></li>
+<li><a href="#32-ctas" target="_blank">3.2. CTAS</a></li>
+<li><a href="#33-%E6%A9%9F%E6%A2%B0%E5%AD%A6%E7%BF%92%E3%81%A8%E3%81%AE%E7%B5%B1%E5%90%88" target="_blank">3.3. 機械学習との統合</a></li>
+<li><a href="#34-udf%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E5%AE%9A%E7%BE%A9%E9%96%A2%E6%95%B0" target="_blank">3.4. UDF（ユーザー定義関数）</a></li>
+<li><a href="#35-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">3.5. ワークグループ</a></li>
+<li><a href="#36-%E5%9C%B0%E7%90%86%E7%A9%BA%E9%96%93%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E5%88%86%E6%9E%90" target="_blank">3.6. 地理空間データの分析</a></li>
+</ul>
+</li>
+<li><a href="#4-%E9%81%8B%E7%94%A8%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">4. 運用のポイント</a><ul>
+<li><a href="#41-%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9" target="_blank">4.1. パフォーマンス</a></li>
+<li><a href="#42-%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">4.2. モニタリング</a></li>
+<li><a href="#43-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">4.3. セキュリティ</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. Amazon Athena とは" duration="0">
+        <p>標準的な SQL を使用して Amazon Simple Storage Service (Amazon S3) 内のデータを直接分析することを容易にするインタラクティブなクエリサービスです。</p>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
+<p>Amazon Athenaを理解する公式ドキュメントは次のとおりです。</p>
+<p><a href="https://aws.amazon.com/jp/athena/" target="_blank">Amazon Athena サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/athena/?id=docs_gateway" target="_blank">Amazon Athena ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/athena/faqs/" target="_blank">Amazon Athena よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/athena/pricing/" target="_blank">Amazon Athena の料金</a></p>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=6FLkOE60Pfs" target="_blank">Amazon Athena(YouTube)</a>(1:00:43)</p>
+<p class="image-container"><img alt="athena-01" src="img\\439d70591a953f49.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=_mGvfwRoWYQ" target="_blank">第二十回 ちょっぴりDD -Amazon Athena であっちこっちのデータを一括分析しよう</a></p>
+<p class="image-container"><img alt="athena-01" src="img\\106952b562de2141.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=XyrccCDbKu0" target="_blank">第三十二回 ちょっぴりDD - Amazon Athena (Iceberg) x dbt ではじめるデータ分析！</a></p>
+<p class="image-container"><img alt="athena-02" src="img\\4b447cbcea94524a.jpg"></p>
+<h2 is-upgraded>1.3. ワークショップ</h2>
+<p><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/9981f1a1-abdc-49b5-8387-cb01d238bb78/en-US" target="_blank">Amazon Athena Workshop</a></p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/athena-federated-query-dynamodb-quicksight/" target="_blank">Amazon Athena Federated Query 経由で Amazon DynamoDB のデータを Amazon QuickSight で可視化するハンズオン</a></p>
+<p><a href="https://github.com/harunobukameda/Amazon-Athena-ACID-transcation/blob/main/Amazon%20Athena%20ACID%20transaction%20workshop.pdf" target="_blank">Amazon Athena ACID transaction workshop</a></p>
+<p><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/fe68adc5-7b3a-4f08-93c9-45993d85cfe1/ja-JP/10-athena" target="_blank">CloudFront ハンズオン&gt;Athena でのログ集計</a></p>
+<p><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/81e94a4b-b47f-4acc-a284-914c4514d50f/ja-JP/4-monitor/1-investigate-logs" target="_blank">AWS WAF を使って Web アプリケーションの防御を強化する&gt;AWS WAF ログを調査する</a></p>
+<h2 is-upgraded>1.4. 導入のメリット</h2>
+<p>Amazon Athenaを導入する主なメリットは以下の３つです。</p>
+<ul>
+<li>標準SQLによる分析 <ul>
+<li>既存のSQL知識を利用可能</li>
+</ul>
+</li>
+<li>コスト最適化 <ul>
+<li>インフラ構築不要のサーバーレスサービス</li>
+<li>スキャンしたデータに応じた従量課金</li>
+<li>S3にあるデータを事前にロードする必要なく手軽に分析可能</li>
+</ul>
+</li>
+<li>大規模データに対しても高速なクエリを実施可能</li>
+</ul>
+<h2 is-upgraded>1.4. 主なユースケース</h2>
+<ul>
+<li>ログ分析 <ul>
+<li>CloudFrontのアクセスログ分析</li>
+<li>WAFのセキュリティ分析</li>
+<li>VPCフローログの通信分析</li>
+</ul>
+</li>
+<li>データレイク分析</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. 基本機能" duration="0">
+        <h2 is-upgraded>2.1. クエリエディタの画面構成</h2>
+<p class="image-container"><img alt="athena-query-editor" src="img\\51ff0867626e61ed.jpg"></p>
+<h2 is-upgraded>2.2. データソース</h2>
+<p>基本となるデータソースは次の２つです。</p>
+<ul>
+<li>S3 <ul>
+<li>Athenaと異なるリージョンでも利用可能</li>
+<li>ただし、リージョン間の転送となるため、クエリパフォーマンスやコストに影響がある <ul>
+<li>異なるリージョンにするのは、リージョン間で移動できない理由がある場合のみを推奨</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>AWS Glue Data Calalog <ul>
+<li>Glueで作成されたデータカタログを使用可能</li>
+</ul>
+</li>
+</ul>
+<p>そのほかのデータソースコネクタを使用することで、次のようなものも接続できます。</p>
+<ul>
+<li>フェデレーテッドクエリを使用した外部データソース</li>
+<li>外部の Hive メタストア</li>
+</ul>
+<h2 is-upgraded>2.4. パーティション管理</h2>
+<p>Athenaはクエリでスキャンしたデータ量による従量課金であるため、データをパーティション化し、スキャンするデータ量を制限できるようにすることは、コスト最適化の点で重要です。</p>
+<pre><code language="language-sql" class="language-sql">  CREATE EXTERNAL TABLE my_ingested_data2 (
+   ...
+  )
+  ...
+  PARTITIONED BY (
+   day STRING,
+   hour INT
+  )
+  LOCATION &#34;s3://amzn-s3-demo-bucket/prefix/&#34;
+  TBLPROPERTIES (
+   &#34;projection.enabled&#34; = &#34;true&#34;,
+   &#34;projection.day.type&#34; = &#34;date&#34;,
+   &#34;projection.day.format&#34; = &#34;yyyy/MM/dd&#34;,
+   &#34;projection.day.range&#34; = &#34;2021/01/01,NOW&#34;,
+   &#34;projection.day.interval&#34; = &#34;1&#34;,
+   &#34;projection.day.interval.unit&#34; = &#34;DAYS&#34;,
+   &#34;projection.hour.type&#34; = &#34;integer&#34;,
+   &#34;projection.hour.range&#34; = &#34;0,23&#34;,
+   &#34;projection.hour.digits&#34; = &#34;2&#34;,
+   &#34;storage.location.template&#34; = &#34;s3://amzn-s3-demo-bucket/prefix/${day}/${hour}/&#34;
+  )
+</code></pre>
+<h2 is-upgraded>2.5. テンプレートとビュー</h2>
+<p>過去に実行したクエリをテンプレートとして再利用可能な形で保存することができます。クエリエディタで実行したクエリ似たしいて、「名前をつけて保存」ができます。</p>
+<p>詳細は、「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/saved-queries.html" target="_blank">保存されたクエリを使用する</a>」を参照してください。</p>
+<p>テンプレートは保存したクエリをそのまま実行する用途なのに対して、ビューはさらにデータの絞り込みや必要な項目のみにしたい場合に有効です。</p>
+<p>作成するには、<code>CREATE VIEW</code>を使用します。</p>
+<pre><code language="language-sql" class="language-sql">CREATE VIEW name_salary AS
+SELECT
+ employees.name, 
+ salaries.salary 
+FROM employees, salaries 
+WHERE employees.id = salaries.id
+</code></pre>
+<p>詳細は、「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/views.html" target="_blank">ビューを使用する</a>」を参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. 発展的な機能" duration="0">
+        <h2 is-upgraded>3.1. フェデレーテッドクエリ</h2>
+<p>S3以外にあるデータソースに対してもクエリが実行でき、横断的に分析ができるようになります。</p>
+<p>主なデータソースは次のとおりです。詳細はドキュメント「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/connectors-available.html" target="_blank">使用可能なデータソースコネクタ</a>」を参照してください</p>
+<ul>
+<li>Amazon CloudWatch Logs</li>
+<li>Amazon DynamoDB</li>
+<li>Amazon DucumentDB</li>
+<li>Amazon RDS</li>
+</ul>
+<p>動画：「<a href="https://www.youtube.com/watch?v=tZia_5qxPkY" target="_blank">Amazon Athena Federated Query</a>」</p>
+<p>動画: <a href="https://youtu.be/HyM5d0TmwAQ" target="_blank">Amazon QuickSight で Amazon Athena フェデレーティッドクエリの結果を分析する</a></p>
+<h2 is-upgraded>3.2. CTAS</h2>
+<p>CTASは、「シータス」と読みます。（AWS Black Belt Online Seminarより）</p>
+<p>CREATE TABLE AS SELECT (CTAS) クエリは、SELECTステートメントの結果から、Athenaで新しいテーブルを作成します。作成されたテーブルのデータはS3に保存されます。</p>
+<p>CTASを使うユースケースとしては次のようなものがあります</p>
+<ul>
+<li>必要なデータのみが含まれるテーブルを作成</li>
+<li>クエリ結果を変換し、他のテーブル形式（Parquet、ORCなど）に移行してパフォーマンス向上</li>
+</ul>
+<p>CTASの例</p>
+<pre><code language="language-sql" class="language-sql">CREATE TABLE new_table
+WITH (
+      format = &#39;Parquet&#39;,
+      write_compression = &#39;SNAPPY&#39;)
+AS SELECT * 
+FROM old_table 
+WHERE condition;
+</code></pre>
+<h2 is-upgraded>3.3. 機械学習との統合</h2>
+<p>Amazon SageMaker AI を使用して Machine Learning (ML) 推論を実行する SQL ステートメントの記述に Athena を使用できます。</p>
+<pre><code language="language-sql" class="language-sql">USING EXTERNAL FUNCTION ml_function_name (variable1 data_type[, variable2 data_type][,...])
+RETURNS data_type 
+SAGEMAKER &#39;sagemaker_endpoint&#39;
+SELECT ml_function_name()
+</code></pre>
+<h2 is-upgraded>3.4. UDF（ユーザー定義関数）</h2>
+<p>レコードまたはレコードのグループを処理するためのカスタム関数を作成できます。</p>
+<pre><code language="language-sql" class="language-sql">USING EXTERNAL FUNCTION UDF_name(variable1 data_type[, variable2 data_type][,...])
+RETURNS data_type
+LAMBDA &#39;lambda_function_name_or_ARN&#39;
+[, EXTERNAL FUNCTION UDF_name2(variable1 data_type[, variable2 data_type][,...]) 
+RETURNS data_type 
+LAMBDA &#39;lambda_function_name_or_ARN&#39;[,...]]
+SELECT  [...] UDF_name(expression) [, UDF_name2(expression)] [...]
+</code></pre>
+<h2 is-upgraded>3.5. ワークグループ</h2>
+<p>ワークグループとは、ユーザーやチームでクエリの実行やクエリ実行履歴の保存環境を分離できる仮想的なグループです。</p>
+<p>ワークグループを使用すると、以下の管理ができます。</p>
+<ul>
+<li>IAMによるアクセス許可</li>
+<li>ワークグループごとのメトリクス管理 <ul>
+<li>データスキャン量やクエリ数をワークグループごとに把握可能</li>
+</ul>
+</li>
+<li>ワークグループ単位でクエリ結果を保存するS3バケットの分離</li>
+<li>ワークグループごとにクエリ結果の暗号化を設定</li>
+<li>同時に実行できるクエリの数やスキャン量の管理 <ul>
+<li>指定したサイズ以上のデータスキャンをさせないようにできる</li>
+<li>上限に達したことをSNS通知によって、想定外のコストが発生を検知可能</li>
+</ul>
+</li>
+<li>ワークグループごとに分析エンジンタイプを指定 <ul>
+<li>Athena SQLかApache Sparkを指定し、制限可能</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>3.6. 地理空間データの分析</h2>
+<p>Athenaでは、ESRIの Java Geometry Libraryをサポートしています。</p>
+<p>詳細は、「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/querying-geospatial-data.html" target="_blank">地理空間データをクエリする</a>」、「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/geospatial-example-queries.html" target="_blank">例: 地理空間クエリ</a>」を参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. 運用のポイント" duration="0">
+        <h2 is-upgraded>4.1. パフォーマンス</h2>
+<ul>
+<li>スキャンデータ量を減らす <ul>
+<li>列指向フォーマットを利用</li>
+<li>データを圧縮</li>
+<li>パーティショニング</li>
+</ul>
+</li>
+<li>ファイルサイズを一定以上にする <ul>
+<li>小さいファイルた大量にある場合はファイル操作のオーバーヘッドが発生するので、128MB以上にまとめる</li>
+</ul>
+</li>
+<li>テーブルの結合を最適化 <ul>
+<li>結合する場合は、大きいテーブルを左、小さいテーブルを右に記述する</li>
+</ul>
+</li>
+</ul>
+<p>Athenaでのパフォーマンスチューニングの詳細については、「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/performance-tuning.html" target="_blank">Athena のパフォーマンスを最適化する</a>」や「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/performance-tuning-additional-resources.html" target="_blank">追加リソース</a>」を参照してください。</p>
+<h2 is-upgraded>4.2. モニタリング</h2>
+<ul>
+<li>Amazon CloudWatch メトリクス <ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/query-metrics-viewing.html" target="_blank">CloudWatch による Athena クエリメトリクスのモニタリング</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/monitoring-athena-usage-metrics.html" target="_blank">CloudWatch による Athena 使用状況メトリクスのモニタリング</a></li>
+</ul>
+</li>
+<li>AWS CloudTrail</li>
+</ul>
+<h2 is-upgraded>4.3. セキュリティ</h2>
+<ul>
+<li>データ保護 <ul>
+<li>AWS KMSによって暗号化</li>
+</ul>
+</li>
+<li>アクセス管理 <ul>
+<li>AWS IAMによってアクセス制御を行います。</li>
+<li>詳細は「<a href="https://docs.aws.amazon.com/ja_jp/athena/latest/ug/security-iam-athena.html" target="_blank">Athena でのアイデンティティとアクセス権の管理</a>」を参照してください</li>
+</ul>
+</li>
+<li>データアクセス管理 <ul>
+<li>Lake Formationでデータへの詳細なアクセス管理が実施可能</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

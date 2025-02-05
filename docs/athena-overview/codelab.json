@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2025-02-05T14:14:13+09:00",
-  "id": "iam-identity-center-overview",
+  "updated": "2025-02-05T14:14:12+09:00",
+  "id": "athena-overview",
   "duration": 0,
-  "title": "AWS IAM Identity Center",
+  "title": "Amazon Athena",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_iam-identity-center-overview.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_athena-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awsiam"
+    "amazonathena"
   ],
-  "url": "iam-identity-center-overview"
+  "url": "athena-overview"
 }

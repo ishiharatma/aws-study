@@ -1,5 +1,5 @@
 summary: Summary
-id: glue-overview
+id: athena-overview
 categories: AWS
 tags: Amazon Athena
 status: Published
