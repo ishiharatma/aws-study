@@ -1,7 +1,7 @@
 ---
 layout: home
 ---
-<img src="./banner2.png"  width="70%"/>
+<img src="./banner2.png"  width="50%"/>
 
 ## AWS 勉強会資料公開ページ<!-- omit in toc -->
 
@@ -20,4 +20,4 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 ## 学習ロードマップ
 
-![loadmap](../aws-learing-loadmap.jpg)
+![loadmap](https://github.com/ishiharatma/aws-study/blob/main/aws-learing-loadmap.jpg)
