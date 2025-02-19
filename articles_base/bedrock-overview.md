@@ -1,5 +1,7 @@
 # Amazon Bedrock<!-- omit in toc -->
 
+![icon](/images/icons/64/Arch_Amazon-Bedrock_64.png)
+
 ## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
@@ -10,7 +12,7 @@
 
 <!-- Duration: 00:01:00 -->
 
-- [xx とは](#xx-とは)
+- [Amazon Bedrock とは](#amazon-bedrock-とは)
 - [xx の基本](#xx-の基本)
 - [📖 まとめ](#-まとめ)
 

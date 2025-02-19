@@ -7,6 +7,8 @@ published: true
 
 # Amazon CloudFront<!-- omit in toc -->
 
+![icon](/images/icons/64/Arch_Amazon-CloudFront_64.png)
+
 ## ☘️ はじめに<!-- omit in toc -->
 
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
