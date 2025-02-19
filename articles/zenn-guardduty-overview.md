@@ -7,7 +7,7 @@ published: true
 
 # Amazon GuardDuty<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_Amazon-GuardDuty_64.png)![icon](/images/icons/64/Arch_Amazon-GuardDuty_64.png)![icon](/images/icons/64/Arch_Amazon-GuardDuty_64.png)![icon](/images/icons/64/Arch_Amazon-GuardDuty_64.png)![icon](/images/icons/64/Arch_Amazon-GuardDuty_64.png)
+![icon](/images/icons/64/Arch_Amazon-GuardDuty_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 

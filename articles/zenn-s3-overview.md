@@ -7,7 +7,7 @@ published: true
 
 # Amazon Simple Storage Service（S3）<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_Amazon-Simple-Storage-Service_64.png)![icon](/images/icons/64/Arch_Amazon-Simple-Storage-Service-Glacier_64.png)![icon](/images/icons/64/Arch_Amazon-Simple-Storage-Service_64.png)![icon](/images/icons/64/Arch_Amazon-Simple-Storage-Service_64.png)![icon](/images/icons/64/Arch_Amazon-Simple-Storage-Service_64.png)
+![icon](/images/icons/64/Arch_Amazon-Simple-Storage-Service_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 

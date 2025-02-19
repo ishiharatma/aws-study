@@ -1,6 +1,6 @@
 # AWS Transit Gateway<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_AWS-Transit-Gateway_64.png)![icon](/images/icons/64/Arch_AWS-Transit-Gateway_64.png)![icon](/images/icons/64/Arch_AWS-Transit-Gateway_64.png)![icon](/images/icons/64/Arch_AWS-Transit-Gateway_64.png)![icon](/images/icons/64/Arch_AWS-Transit-Gateway_64.png)
+![icon](/images/icons/64/Arch_AWS-Transit-Gateway_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 

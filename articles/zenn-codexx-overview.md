@@ -7,7 +7,7 @@ published: true
 
 # Code 兄弟<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_AWS-CodeCommit_64.png)![icon](/images/icons/64/Arch_AWS-CodeBuild_64.png)![icon](/images/icons/64/Arch_AWS-CodeDeploy_64.png)![icon](/images/icons/64/Arch_AWS-CodePipeline_64.png)
+![icon](/images/icons/64/Arch_AWS-CodeCommit_64.png) ![icon](/images/icons/64/Arch_AWS-CodeBuild_64.png) ![icon](/images/icons/64/Arch_AWS-CodeDeploy_64.png) ![icon](/images/icons/64/Arch_AWS-CodePipeline_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 

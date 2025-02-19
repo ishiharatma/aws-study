@@ -1,6 +1,6 @@
 # Amazon Route 53<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_Amazon-Route-53_64.png)![icon](/images/icons/64/Arch_Amazon-Route-53_64.png)![icon](/images/icons/64/Arch_Amazon-Route-53_64.png)![icon](/images/icons/64/Arch_Amazon-Route-53_64.png)![icon](/images/icons/64/Arch_Amazon-Route-53_64.png)
+![icon](/images/icons/64/Arch_Amazon-Route-53_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 

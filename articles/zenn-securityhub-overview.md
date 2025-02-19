@@ -7,7 +7,7 @@ published: true
 
 # AWS Security Hub<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_AWS-Security-Hub_64.png)![icon](/images/icons/64/Arch_AWS-Security-Hub_64.png)![icon](/images/icons/64/Arch_AWS-Security-Hub_64.png)![icon](/images/icons/64/Arch_AWS-Security-Hub_64.png)![icon](/images/icons/64/Arch_AWS-Security-Hub_64.png)
+![icon](/images/icons/64/Arch_AWS-Security-Hub_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 

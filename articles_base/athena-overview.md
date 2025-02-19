@@ -1,6 +1,6 @@
 # Amazon Athena<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_Amazon-Athena_64.png)![icon](/images/icons/64/Arch_Amazon-Athena_64.png)![icon](/images/icons/64/Arch_Amazon-Athena_64.png)![icon](/images/icons/64/Arch_Amazon-Athena_64.png)![icon](/images/icons/64/Arch_Amazon-Athena_64.png)
+![icon](/images/icons/64/Arch_Amazon-Athena_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 
