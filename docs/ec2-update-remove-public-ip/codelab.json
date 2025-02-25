@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2025-02-20T01:21:26+09:00",
+  "updated": "2025-02-25T23:33:10+09:00",
   "id": "ec2-update-remove-public-ip",
   "duration": 0,
   "title": "[アップデート：2024/4/25]自動的に割り当てられたパブリック IPv4 アドレスの動的な削除と追加をサポート",

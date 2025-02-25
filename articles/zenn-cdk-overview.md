@@ -452,7 +452,7 @@ account: process.env.CDK_DEFAULT_ACCOUNT,
   region: "us-east-1", // リージョンを固定したい場合
 };
 
-// 環境識別子の指定 -> 環境識別子はコマンド実行時に '-c project=xxx -c env=xxx' と指定ます
+// 環境識別子の指定 -> 環境識別子はコマンド実行時に '-c project=xxx -c env=xxx' と指定します
 const projectName: string = app.node.tryGetContext('project');
 const envName: string = app.node.tryGetContext('env');
 
