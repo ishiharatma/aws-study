@@ -234,10 +234,22 @@ ALB を CloudFront 経由のアクセスに限定することで、CloudFront �
 
 CloudFront は、サードパーティーのデータベースを使用して、ユーザーがいる場所を判別しており、IP アドレスと国のマッピングはリージョンによって異なるものの、正確性は 99.8% となっています。
 
-ただし、CloudFrontがユーザーの場所が特定できなかったときは、ブロックせずにコンテンツを配信する動きになるようです。
+正確性に関しては、注意書きには以下の記述があります。
 
->  If CloudFront can’t determine a user’s location, CloudFront serves the content that the user has requested.
+> Note
+> CloudFront determines the location of your users by using a third-party database. 
+> The accuracy of the mapping between IP addresses and countries varies by Region. 
+> Based on recent tests, the overall accuracy is 99.8%. 
 
+注意書きには、さらに続きがあります。
+
+> If CloudFront can’t determine a user’s location, CloudFront serves the content that the user has requested.
+
+CloudFrontがユーザーの場所が特定できなかったときは、ブロックせずにコンテンツを配信する動きになるようです。
+
+CloudFrontの地理的制限機能は手軽に実装できますが、0.2％という低確率で特定できない可能性があることを認識した上で利用する必要があります。
+
+厳密に制御したいようなケースでは、開発者ガイドの「[サードパーティの位置情報サービスを使用する](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/georestrictions.html#georestrictions-geolocation-service)」にあるように、アプリケーション側で実装する方法がよいのではないでしょうか。
 
 ## AWS Shield
 

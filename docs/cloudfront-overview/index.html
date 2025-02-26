@@ -200,8 +200,13 @@
 <p>指定した地域からのアクセスをブロックできる機能です。</p>
 <p class="image-container"><img alt="georestrictions" src="img\\c67c98ac652090ea.png"></p>
 <p>CloudFront は、サードパーティーのデータベースを使用して、ユーザーがいる場所を判別しており、IP アドレスと国のマッピングはリージョンによって異なるものの、正確性は 99.8% となっています。</p>
-<p>ただし、CloudFrontがユーザーの場所が特定できなかったときは、ブロックせずにコンテンツを配信する動きになるようです。</p>
+<p>正確性に関しては、注意書きには以下の記述があります。</p>
+<p>Note CloudFront determines the location of your users by using a third-party database. The accuracy of the mapping between IP addresses and countries varies by Region. Based on recent tests, the overall accuracy is 99.8%.</p>
+<p>注意書きには、さらに続きがあります。</p>
 <p>If CloudFront can&#39;t determine a user&#39;s location, CloudFront serves the content that the user has requested.</p>
+<p>CloudFrontがユーザーの場所が特定できなかったときは、ブロックせずにコンテンツを配信する動きになるようです。</p>
+<p>CloudFrontの地理的制限機能は手軽に実装できますが、0.2％という低確率で特定できない可能性があることを認識した上で利用する必要があります。</p>
+<p>厳密に制御したいようなケースでは、開発者ガイドの「<a href="https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/georestrictions.html#georestrictions-geolocation-service" target="_blank">サードパーティの位置情報サービスを使用する</a>」にあるように、アプリケーション側で実装する方法がよいのではないでしょうか。</p>
 
 
       </google-codelab-step>
