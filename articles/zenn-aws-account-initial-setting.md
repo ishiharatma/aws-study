@@ -4,7 +4,7 @@ type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: true
 ---
-<!-- # これをやっておけば大丈夫！AWS アカウント作成後にやる X 個のこと！<!-- omit in toc -->-->
+<!-- # これをやっておけば大丈夫！AWS アカウント作成後にやる X 個のこと！<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
 
