@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# 【実例】Amazon API Gateway を S3 プロキシにして簡易スタブ API でテスト効率化！<!-- omit in toc -->
+<!--# 【実例】Amazon API Gateway を S3 プロキシにして簡易スタブ API でテスト効率化！<!-- omit in toc -->
 
 ## ☘️ スタブ作成の経緯<!-- omit in toc -->
 

@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# デフォルトリージョンを東京にする<!-- omit in toc -->
+<!--# デフォルトリージョンを東京にする<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
 

@@ -4,7 +4,7 @@ type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: true
 ---
-# psycopg2 の Lambda レイヤーを作成する<!-- omit in toc -->
+<!--# psycopg2 の Lambda レイヤーを作成する<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
 

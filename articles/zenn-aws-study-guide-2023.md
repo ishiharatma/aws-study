@@ -4,7 +4,7 @@ type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
 ---
-# AWS 学習教材完全ガイド 2023年最新版
+<!--# AWS 学習教材完全ガイド 2023年最新版-->
 
 AWS 初心者が AWS を理解していくのに必要になる学習教材について、AWS Black Belt Online Seminar を中心にまとめたものになります。
 上の項目から順番に学習していくことで、脱 AWS 初心者となれるようにしております。

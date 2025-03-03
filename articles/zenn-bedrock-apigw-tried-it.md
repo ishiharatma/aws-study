@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: true
 ---
 
-# Amazon Bedrock を利用した画像生成アプリケーションを AWS CDK で開発してみた！<!-- omit in toc -->
+<!--# Amazon Bedrock を利用した画像生成アプリケーションを AWS CDK で開発してみた！<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
 

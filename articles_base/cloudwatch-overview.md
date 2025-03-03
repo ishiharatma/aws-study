@@ -1,4 +1,4 @@
-# CloudWatch<!-- omit in toc -->
+# Amazon CloudWatch<!-- omit in toc -->
 
 ![icon](/images/icons/64/Arch_Amazon-CloudWatch_64.png)
 

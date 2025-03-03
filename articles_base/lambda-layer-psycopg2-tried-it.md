@@ -1,4 +1,4 @@
-# psycopg2 の Lambda レイヤーを作成する<!-- omit in toc -->
+<!--# psycopg2 の Lambda レイヤーを作成する<!-- omit in toc -->
 
 ## ☘️ はじめに<!-- omit in toc -->
 
