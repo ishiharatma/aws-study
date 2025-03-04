@@ -30,6 +30,7 @@
   - [3.4. UDF（ユーザー定義関数）](#34-udfユーザー定義関数)
   - [3.5. ワークグループ](#35-ワークグループ)
   - [3.6. 地理空間データの分析](#36-地理空間データの分析)
+  - [3.7. AWS CDKでの実装](#37-aws-cdkでの実装)
 - [4. 運用のポイント](#4-運用のポイント)
   - [4.1. パフォーマンス](#41-パフォーマンス)
   - [4.2. モニタリング](#42-モニタリング)
@@ -53,6 +54,8 @@ Amazon Athenaを理解する公式ドキュメントは次のとおりです。
 [Amazon Athena の料金](https://aws.amazon.com/jp/athena/pricing/)
 
 ### 1.2. 学習リソース
+
+[Athena をグラレコで解説||builders.flash](https://aws.amazon.com/jp/builders-flash/202305/awsgeek-amazon-athena/)
 
 【AWS Black Belt Online Seminar】[Amazon Athena(YouTube)](https://www.youtube.com/watch?v=6FLkOE60Pfs)(1:00:43)
 
@@ -102,6 +105,8 @@ Amazon Athenaを導入する主なメリットは以下の３つです。
 
 ### 2.1. クエリエディタの画面構成
 
+AWSマネジメントコンソール上で簡単にSQLを記述し、実行することができます。
+
 ![athena-query-editor](/images/athena/athena-query-editor-resize.jpg)
 
 ### 2.2. データソース
@@ -122,30 +127,56 @@ Amazon Athenaを導入する主なメリットは以下の３つです。
 
 ### 2.4. パーティション管理
 
-Athenaはクエリでスキャンしたデータ量による従量課金であるため、データをパーティション化し、スキャンするデータ量を制限できるようにすることは、コスト最適化の点で重要です。
+Athenaはクエリでスキャンしたデータ量による従量課金であるため、スキャンするデータ量を制限できるようにすることは、コスト最適化の点で重要です。
+スキャンするデータ量を制限する方法として、パーティションと呼ばれる一定のグループにデータを分けて整理しておくことで、目的のデータを探すのに読み込むデータを削減できます。
+代表的なパーティションが、S3バケットのプレフィックスを年・月の単位にすることです。
+具体的には、`s3://amzn-s3-demo-bucket/hogehoge/` という単一のプレフィックスに保存するのではなく、`s3://amzn-s3-demo-bucket/2025/01/` といったプレフィックスにして保存します。こうすることで、2025年1月のデータを読み込みたい場合、バケット全体から探す必要がなくなります。
+
+![partition](/images/athena/partition.png)
+
+パーティションの分け方には２種類あります。
+
+- Hive形式
+  - `s3://amzn-s3-demo-bucket/year=2025/month=01/day=01/myfile.csv`
+  - 新しいパーティションを追加するには`MSCK REPAIR TABLE`が必要
+  - 自己説明的な構造（どこがyearなのか明確）
+  - Hive、Spark、EMRなどで利用するならば、互換性の高いHive形式を選択
+- 非Hive形式
+  - `s3://amzn-s3-demo-bucket/2025/01/01/myfile.csv`
+  - `ALTER TABLE ADD PARTITION`でパーティションを手動で追加できる
+  - Hive形式よりURLが短くなる
+
+S3バケットのプレフィックスでパーティション化したら、あとはAthenaでテーブルを作成します。
+年（year）の範囲（range）にNOWを指定すると、範囲指定がクエリ実行時の年となるため、新しいパーティションを追加する手間がありません。
 
 ```sql
-  CREATE EXTERNAL TABLE my_ingested_data2 (
+  CREATE EXTERNAL TABLE my_test_table (
    ...
   )
   ...
-  PARTITIONED BY (
-   day STRING,
-   hour INT
-  )
-  LOCATION "s3://amzn-s3-demo-bucket/prefix/"
-  TBLPROPERTIES (
-   "projection.enabled" = "true",
-   "projection.day.type" = "date",
-   "projection.day.format" = "yyyy/MM/dd",
-   "projection.day.range" = "2021/01/01,NOW",
-   "projection.day.interval" = "1",
-   "projection.day.interval.unit" = "DAYS",
-   "projection.hour.type" = "integer",
-   "projection.hour.range" = "0,23",
-   "projection.hour.digits" = "2",
-   "storage.location.template" = "s3://amzn-s3-demo-bucket/prefix/${day}/${hour}/"
-  )
+PARTITIONED BY (
+    year string,
+    month string,
+    day string
+)
+  LOCATION "s3://amzn-s3-demo-bucket/test_table/"
+TBLPROPERTIES (
+    'projection.enabled' = 'true',
+    'projection.year.type' = 'date',
+    'projection.year.format' = 'yyyy',
+    'projection.year.range' = '2024,NOW',
+    'projection.month.type' = 'integer',
+    'projection.month.range' = '1,12',
+    'projection.month.digits' = '2',
+    'projection.day.type' = 'integer',
+    'projection.day.range' = '1,31',
+    'projection.day.digits' = '2',
+    /* 非Hive形式 */
+    'storage.location.template' = 's3://amzn-s3-demo-bucket/test_table/${year}/${month}/${day}'
+    /* Hive形式
+    'storage.location.template' = 's3://amzn-s3-demo-bucket/test_table/year=${year}/month=${month}/day=${day}'
+    */
+);
 ```
 
 ### 2.5. テンプレートとビュー
@@ -173,7 +204,8 @@ WHERE employees.id = salaries.id
 
 ### 3.1. フェデレーテッドクエリ
 
-S3以外にあるデータソースに対してもクエリが実行でき、横断的に分析ができるようになります。
+S3以外にあるデータソースに対してもクエリが実行できるようになります。
+この機能を使うことで、複数のデータソースのデータを横断的に分析ができるようになります。
 
 主なデータソースは次のとおりです。詳細はドキュメント「[使用可能なデータソースコネクタ](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/connectors-available.html)」を参照してください
 
@@ -257,6 +289,145 @@ Athenaでは、ESRIの Java Geometry Libraryをサポートしています。
 
 詳細は、「[地理空間データをクエリする](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/querying-geospatial-data.html)」、「[例: 地理空間クエリ](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/geospatial-example-queries.html)」を参照してください。
 
+### 3.7. AWS CDKでの実装
+
+<details>
+  <summary>CDKのコード(クリックしてください)</summary>
+
+```typescript
+import { Construct } from 'constructs';
+import * as cdk from 'aws-cdk-lib';
+import {
+  aws_s3 as s3,
+  aws_athena as athena,
+} from 'aws-cdk-lib';
+
+
+export class AthenaStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+    super(scope, id, props);
+
+    // Athenaクエリ結果格納バケット
+    const athenaQueryResultBucket = new s3.Bucket(this, 'AthenaQueryResultBucket', {
+      bucketName: ['athena-query-result', accountId].join('-') ,
+      accessControl: s3.BucketAccessControl.PRIVATE,
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      objectOwnership: s3.ObjectOwnership.BUCKET_OWNER_ENFORCED,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      removalPolicy: props.isAutoDeleteObject ? cdk.RemovalPolicy.DESTROY : cdk.RemovalPolicy.RETAIN,
+      autoDeleteObjects: props.isAutoDeleteObject,
+    });
+    athenaQueryResultBucket.addLifecycleRule({
+      //expiration: cdk.Duration.days(60),
+      abortIncompleteMultipartUploadAfter: cdk.Duration.days(7), // 不完全なマルチパートアップロードの削除
+      transitions: [
+        {
+          storageClass: s3.StorageClass.INTELLIGENT_TIERING,
+          transitionAfter: cdk.Duration.days(0),
+        },
+      ],
+    });
+    // Athena ワークグループ
+    const athenaWorkGroup = new athena.CfnWorkGroup(this,'athenaWorkGroup',{
+        name: ['athenaWorkGroup',accountId].join('-'),
+        description: 'description....',
+        workGroupConfiguration: {
+          resultConfiguration: {
+            outputLocation: `s3://${athenaQueryResultBucket.bucketName}/result-data`,
+          },
+        },
+      },
+    );
+  }
+}
+```
+<details>
+
+
+<details>
+  <summary>実装例：ALBログテーブル作成のCDKコード(クリックしてください)</summary>
+
+```typescript
+    const applicationLogsDatabase = new glue.CfnDatabase(scope, 'ApplicationLogsDatabase', {
+      catalogId: accountId,
+      databaseInput: {
+        name: 'application_logs_database',
+      },
+    });
+
+    // Glue Table (ALB Access Logs) with Partition Projection
+    const albAccessLogsTable = new glue.CfnTable(scope, "AlbAccessLogsTables", {
+      databaseName: 'application_logs_database',
+      catalogId: cdk.Stack.of(scope).account,
+      tableInput: {
+        name: 'alb_access_logs_table',
+        tableType: "EXTERNAL_TABLE",
+        parameters: {
+          "projection.enabled": true,
+          "projection.date.type": "date",
+          "projection.date.range": "NOW-1YEARS, NOW+9HOUR",
+          "projection.date.format": "yyyy/MM/dd",
+          "projection.date.interval": "1",
+          "projection.date.interval.unit": "DAYS",
+          "serialization.encoding": "utf-8",
+          "storage.location.template": `s3://amzn-s3-demo-bucket/AWSLogs/${cdk.Stack.of(scope).account}/elasticloadbalancing/${cdk.Stack.of(this).region}/` + "${date}/",
+        },
+        storageDescriptor: {
+          columns: [
+            {"name": "type","type": "string"},
+            {"name": "time","type": "string"},
+            {"name": "elb", "type": "string"},
+            {"name": "client_ip","type": "string"},
+            {"name": "client_port","type": "int"},
+            {"name": "target_ip","type": "string"},
+            {"name": "target_port","type": "int"},
+            {"name": "request_processing_time","type": "double"},
+            {"name": "target_processing_time","type": "double"},
+            {"name": "response_processing_time","type": "double"},
+            {"name": "elb_status_code","type": "int"},
+            {"name": "target_status_code","type": "string"},
+            {"name": "received_bytes","type": "bigint"},
+            {"name": "sent_bytes","type": "bigint"},
+            {"name": "request_verb","type": "string"},
+            {"name": "request_url","type": "string"},
+            {"name": "request_proto","type": "string"},
+            {"name": "user_agent","type": "string"},
+            {"name": "ssl_cipher","type": "string"},
+            {"name": "ssl_protocol","type": "string"},
+            {"name": "target_group_arn","type": "string"},
+            {"name": "trace_id","type": "string"},
+            {"name": "domain_name","type": "string"},
+            {"name": "chosen_cert_arn","type": "string"},
+            {"name": "matched_rule_priority","type": "string"},
+            {"name": "request_creation_time","type": "string"},
+            {"name": "actions_executed","type": "string"},
+            {"name": "redirect_url","type": "string"},
+            {"name": "lambda_error_reason","type": "string"},
+            {"name": "target_port_list","type": "string"},
+            {"name": "target_status_code_list","type": "string"},
+            {"name": "classification","type": "string"},
+            {"name": "classification_reason","type": "string"},
+          ],
+          inputFormat: "org.apache.hadoop.mapred.TextInputFormat",
+          outputFormat: "org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat",
+          serdeInfo: {
+            serializationLibrary: "org.apache.hadoop.hive.serde2.RegexSerDe",
+            parameters: {
+              'serialization.format': '1',
+              'input.regex': '([^ ]*) ([^ ]*) ([^ ]*) ([^ ]*):([0-9]*) ([^ ]*)[:-]([0-9]*) ([-.0-9]*) ([-.0-9]*) ([-.0-9]*) (|[-0-9]*) (-|[-0-9]*) ([-0-9]*) ([-0-9]*) \"([^ ]*) (.*) (- |[^ ]*)\" \"([^\"]*)\" ([A-Z0-9-_]+) ([A-Za-z0-9.-]*) ([^ ]*) \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\" ([-.0-9]*) ([^ ]*) \"([^\"]*)\" \"([^\"]*)\" \"([^ ]*)\" \"([^\s]+?)\" \"([^\s]+)\" \"([^ ]*)\" \"([^ ]*)\"'
+            }
+          },
+          location: `s3://amzn-s3-demo-bucket/AWSLogs/${cdk.Stack.of(scope).account}/elasticloadbalancing/${cdk.Stack.of(this).region}`,
+        },
+        partitionKeys: [
+          {"name": "date", "type": "string"},
+        ]
+      }
+    })
+```
+<details>
+
+
 ## 4. 運用のポイント
 
 ### 4.1. パフォーマンス
@@ -291,3 +462,6 @@ Athenaでのパフォーマンスチューニングの詳細については、�
   - Lake Formationでデータへの詳細なアクセス管理が実施可能
 
 ## 📖 まとめ
+
+Athenaは、データレイク戦略の中核として位置づけられ、S3に蓄積された様々な形式のデータを迅速に分析する強力なツールです。ETLパイプラインやダッシュボード構築などと組み合わせることで、データ駆動型の意思決定を促進するプラットフォームとして活用できます。
+データ分析の需要が高まる中、Athenaはその柔軟性と拡張性により、ますます重要な役割を担っていくと思われます。
