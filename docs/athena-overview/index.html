@@ -332,7 +332,7 @@ export class AthenaStack extends cdk.Stack {
   }
 }
 </code></pre>
-<p>実装例：ALBログテーブル作成のCDKコード(クリックしてください)</p>
+<p>   実装例：ALBログテーブル作成のCDKコード(クリックしてください)</p>
 <pre><code language="language-typescript" class="language-typescript">    const applicationLogsDatabase = new glue.CfnDatabase(scope, &#39;ApplicationLogsDatabase&#39;, {
       catalogId: accountId,
       databaseInput: {
@@ -410,8 +410,12 @@ export class AthenaStack extends cdk.Stack {
       }
     })
 </code></pre>
-<p>4. 運用のポイント</p>
-<h2 is-upgraded>4.1. パフォーマンス</h2>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. 運用のポイント" duration="0">
+        <h2 is-upgraded>4.1. パフォーマンス</h2>
 <ul>
 <li>スキャンデータ量を減らす <ul>
 <li>列指向フォーマットを利用</li>
@@ -454,8 +458,12 @@ export class AthenaStack extends cdk.Stack {
 </ul>
 </li>
 </ul>
-<p>📖 まとめ</p>
-<p>Athenaは、データレイク戦略の中核として位置づけられ、S3に蓄積された様々な形式のデータを迅速に分析する強力なツールです。ETLパイプラインやダッシュボード構築などと組み合わせることで、データ駆動型の意思決定を促進するプラットフォームとして活用できます。 データ分析の需要が高まる中、Athenaはその柔軟性と拡張性により、ますます重要な役割を担っていくと思われます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Athenaは、データレイク戦略の中核として位置づけられ、S3に蓄積された様々な形式のデータを迅速に分析する強力なツールです。ETLパイプラインやダッシュボード構築などと組み合わせることで、データ駆動型の意思決定を促進するプラットフォームとして活用できます。 データ分析の需要が高まる中、Athenaはその柔軟性と拡張性により、ますます重要な役割を担っていくと思われます。</p>
 
 
       </google-codelab-step>

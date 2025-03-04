@@ -341,7 +341,7 @@ export class AthenaStack extends cdk.Stack {
   }
 }
 ```
-<details>
+</details>
 
 
 <details>
@@ -425,7 +425,7 @@ export class AthenaStack extends cdk.Stack {
       }
     })
 ```
-<details>
+</details>
 
 
 ## 4. 運用のポイント

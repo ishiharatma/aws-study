@@ -13,4 +13,4 @@ permalink: /security/
 - <a href="../guardduty-overview/index.html#0" target="_blank">【初心者向け】Amazon GuardDuty 入門！完全ガイド</a>
 - <a href="../securityhub-overview/index.html#0" target="_blank">【初心者向け】AWS Security Hub 入門！完全ガイド</a>
 - <a href="../secretsmanager-overview/index.html#0" target="_blank">【初心者向け】AWS Secrets Manager 入門！完全ガイド</a>
-- Amazon Cognito
+- <a href="../cognito-overview/index.html#0" target="_blank">【初心者向け】Amazon Cognito 入門！完全ガイド</a>

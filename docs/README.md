@@ -84,7 +84,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./guardduty-overview/index.html" target="_blank">【初心者向け】Amazon GuardDuty 入門！完全ガイド</a>
 - <a href="./securityhub-overview/index.html" target="_blank">【初心者向け】AWS Security Hub 入門！完全ガイド</a>
 - <a href="./secretsmanager-overview/index.html" target="_blank">【初心者向け】AWS Secrets Manager 入門！完全ガイド</a>
-- Amazon Cognito
+- <a href="./cognito-overview/index.html" target="_blank">【初心者向け】Amazon Cognito 入門！完全ガイド</a>
 
 ### コンテナ
 
