@@ -299,7 +299,7 @@ Athenaでは、ESRIの Java Geometry Libraryをサポートしています。
 ### 3.7. AWS CDKでの実装
 
 <details>
-  <summary>CDKのコード(クリックしてください)</summary>
+  <summary>実装例：ワークグループ作成のCDKコード(クリックしてください)</summary>
 
 ```typescript
 import { Construct } from 'constructs';

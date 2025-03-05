@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2025-03-05T13:48:26+09:00",
-  "id": "bedrock-apigw-tried-it",
+  "id": "cognito-overview",
   "duration": 0,
-  "title": "",
+  "title": "Amazon Cognito",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_bedrock-apigw-tried-it.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_cognito-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "amazonbedrock"
+    "amazoncognito"
   ],
-  "url": "bedrock-apigw-tried-it"
+  "url": "cognito-overview"
 }
