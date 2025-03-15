@@ -1103,11 +1103,11 @@ export class CustomCdkNagRules extends NagPack {
 <p>チェックを適用するには、<code>AwsSolutionsChecks</code>と同様の方法でインポートして使用します。</p>
 <pre><code language="language-ts" class="language-ts">import { AwsSolutionsChecks } from &#39;cdk-nag&#39;
 import { Aspects } from &#39;aws-cdk-lib&#39;;
-import { CustomCdkNagRules } from &#39;/path/to/custom-cdk-nag-rules&#39;;
++ import { CustomCdkNagRules } from &#39;/path/to/custom-cdk-nag-rules&#39;;
 
 // Add the cdk-nag AwsSolutions Pack with extra verbose logging enabled.
 Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }))
-Aspects.of(app).add(new CustomCdkNagRules({ verbose: true }));
++ Aspects.of(app).add(new CustomCdkNagRules({ verbose: true }));
 </code></pre>
 <p>実行するとこのようなエラーが表示されるようになります。</p>
 <pre><code language="language-text" class="language-text">[Error at /SampleStack/LogsBucket/S3Bucket/Resource] MyCompanyRules-S3BucketTaggingRule[LogsBucketS3BucketD57C9602]: MyCompanyRule-S3-TAG-HOGEHOGE S3 バケットには hogehoge タグが必要です

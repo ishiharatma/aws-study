@@ -1331,11 +1331,11 @@ export class CustomCdkNagRules extends NagPack {
 ```ts
 import { AwsSolutionsChecks } from 'cdk-nag'
 import { Aspects } from 'aws-cdk-lib';
-import { CustomCdkNagRules } from '/path/to/custom-cdk-nag-rules';
++ import { CustomCdkNagRules } from '/path/to/custom-cdk-nag-rules';
 
 // Add the cdk-nag AwsSolutions Pack with extra verbose logging enabled.
 Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }))
-Aspects.of(app).add(new CustomCdkNagRules({ verbose: true }));
++ Aspects.of(app).add(new CustomCdkNagRules({ verbose: true }));
 ```
 
 実行するとこのようなエラーが表示されるようになります。
