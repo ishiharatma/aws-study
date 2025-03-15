@@ -81,7 +81,7 @@ published: true
   - [6.5. エラーの抑止](#65-エラーの抑止)
   - [6.6. テスト実施方法](#66-テスト実施方法)
   - [6.7. 【発展】CDK-NAGへのカスタムルールの追加](#67-発展cdk-nagへのカスタムルールの追加)
-- [まとめ](#まとめ)
+- [📖 まとめ](#-まとめ)
 
 ## 1. AWS CDK とは
 
@@ -1345,7 +1345,7 @@ Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }))
 [Error at /SampleStack/EC2Instance1/Resource] MyCompanyRules-EC2TaggingRule[EC2Instance14196AB1A]: MyCompanyRule-EC2-TAG-FOOBAR EC2インスタンスには foobar タグが必要です
 ```
 
-## まとめ
+## 📖 まとめ
 
 AWS CDKは、使い慣れたプログラミング言語を活用してクラウドインフラストラクチャをコードとして定義する強力なフレームワークです。この記事では、AWS CDKの基本概念から高度な使用方法まで幅広く解説しました。
 CDKを使用することの主なメリットは以下の通りです：
