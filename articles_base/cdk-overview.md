@@ -57,14 +57,15 @@
   - [4.2. Unit Test](#42-unit-test)
       - [記述例①：単純なリソース存在チェック](#記述例単純なリソース存在チェック)
       - [記述例②：属性値のチェック](#記述例属性値のチェック)
-- [5. Tips](#5-tips)
+- [5. AWS CDK Tips](#5-aws-cdk-tips)
   - [5.1. App定義のTips](#51-app定義のtips)
     - [5.1.1. 共通するリソースを一括で付与したい](#511-共通するリソースを一括で付与したい)
-    - [5.1.2. パラメータで指定した環境識別子をチェックしたい](#512-パラメータで指定した環境識別子をチェックしたい)
-    - [5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい](#513-本番環境prodリリース時に注意喚起してミスを防止策したい)
-    - [5.1.4.  スタックの削除を防止したい](#514--スタックの削除を防止したい)
-    - [5.1.5. リージョンの指定を変数化](#515-リージョンの指定を変数化)
-  - [5.2. その他Tips](#52-その他tips)
+    - [5.1.2. CDKコマンド実行時に動的なパラメータを渡したい](#512-cdkコマンド実行時に動的なパラメータを渡したい)
+    - [5.1.3. パラメータで指定した環境識別子をチェックしたい](#513-パラメータで指定した環境識別子をチェックしたい)
+    - [5.1.4. 本番環境（prod）リリース時に注意喚起してミスを防止策したい](#514-本番環境prodリリース時に注意喚起してミスを防止策したい)
+    - [5.1.5. スタックの削除を防止したい](#515-スタックの削除を防止したい)
+    - [5.1.6. リージョンの指定を変数化](#516-リージョンの指定を変数化)
+  - [5.2. AWS CDK Tips その他Tips](#52-aws-cdk-tips-その他tips)
     - [5.2.1. 環境識別子とプロファイル名の二重指定をやめる](#521-環境識別子とプロファイル名の二重指定をやめる)
     - [5.2.2. AWS CDK 作成時の Metadata を削除したい場合](#522-aws-cdk-作成時の-metadata-を削除したい場合)
 - [6. cdk-nagによるセキュリティとコンプライアンスの強化](#6-cdk-nagによるセキュリティとコンプライアンスの強化)
@@ -881,7 +882,7 @@ test("create the vpc", () => {
 
 ![jest](/images/cdk/jest.png)
 
-## 5. Tips
+## 5. AWS CDK Tips
 
 ### 5.1. App定義のTips
 
@@ -913,7 +914,24 @@ export class MyStack extends Stack {
 }
 ```
 
-#### 5.1.2. パラメータで指定した環境識別子をチェックしたい
+#### 5.1.2. CDKコマンド実行時に動的なパラメータを渡したい
+
+CDKコマンドに`-c key=value`という形式で指定します。複数のパラメータを渡す場合は、`-c key1=value -c key2=value`のように繰り返します。
+
+```sh
+cdk deploy -c key=value
+or
+cdk deploy -c key1=value -c key2=value
+```
+
+パラメータを取得するには次のようにします。
+
+```ts
+const key1: string = app.node.tryGetContext('key1');
+const key2: string = app.node.tryGetContext('key2');
+```
+
+#### 5.1.3. パラメータで指定した環境識別子をチェックしたい
 
 ```ts
 // 環境識別子の指定 -> 環境識別子はコマンド実行時に '-c project=xxx -c env=xxx' と指定します
@@ -928,7 +946,7 @@ if (!envNames.includes(envName)) {
 }
 ```
 
-#### 5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい
+#### 5.1.4. 本番環境（prod）リリース時に注意喚起してミスを防止策したい
 
 デプロイするときは、`cdk deploy MyStack -c env=dev --profile xxxxx` として、AWS プロファイル名を指定するのが一般的ですが、これだと環境識別子やプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。
 
@@ -962,10 +980,9 @@ console.log(
 console.log();
 
 // 環境識別子のチェック
-if (!envname.match(/^(dev|test|stage|prod|jump)$/)) {
-  console.warn(
-    "Invalid context. envname must be [dev , test, stage, prod, jump]."
-  );
+const envNames: string[] = ['dev', 'test', 'stage', 'prod'];
+if (!envNames.includes(envName)) {
+  console.error(`Invalid environment specified. Please use one of the following: ${envNames.join(', ')}.`);
   process.exit(1);
 }
 
@@ -977,7 +994,7 @@ if (isProduction) {
 }
 ```
 
-#### 5.1.4.  スタックの削除を防止したい
+#### 5.1.5. スタックの削除を防止したい
 
 CloudFormationにある[スタック削除](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html)をAWS CDKから指定する方法です。
 具体的には、`terminationProtection: true`を指定します。こうすることで、スタック作成と同時に、削除保護を有効にできます。誤って`cdk deploy`してしまうこともありません。
@@ -990,7 +1007,7 @@ const myStack = new MyStack (app, 'MySample ', {
 });
 ```
 
-#### 5.1.5. リージョンの指定を変数化
+#### 5.1.6. リージョンの指定を変数化
 
 複数のスタックを管理する場合は、リージョンを毎回指定するのではなくまとめて変数化しておくと便利です。
 
@@ -1019,7 +1036,7 @@ const stack2 = new MyStack (app, 'Stack2 ', {
 });
 ```
 
-### 5.2. その他Tips
+### 5.2. AWS CDK Tips その他Tips
 
 #### 5.2.1. 環境識別子とプロファイル名の二重指定をやめる
 

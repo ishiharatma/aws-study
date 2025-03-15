@@ -1,0 +1,9 @@
+title: "AWS CDK"
+summary: "本の紹介文"
+topics: ["aws", "awscdk", "study"] # トピック（5つまで）
+published: false # falseだと下書き
+price: 0 # 有料の場合200〜5000
+chapters:
+  - example1 # チャプター1
+  - example2 # チャプター2
+  - example3 # チャプター3

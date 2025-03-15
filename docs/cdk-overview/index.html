@@ -109,16 +109,17 @@
 </li>
 </ul>
 </li>
-<li><a href="#5-tips" target="_blank">5. Tips</a><ul>
+<li><a href="#5-aws-cdk-tips" target="_blank">5. AWS CDK Tips</a><ul>
 <li><a href="#51-app%E5%AE%9A%E7%BE%A9%E3%81%AEtips" target="_blank">5.1. App定義のTips</a><ul>
 <li><a href="#511-%E5%85%B1%E9%80%9A%E3%81%99%E3%82%8B%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E4%BB%98%E4%B8%8E%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.1. 共通するリソースを一括で付与したい</a></li>
-<li><a href="#512-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%A7%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%9F%E7%92%B0%E5%A2%83%E8%AD%98%E5%88%A5%E5%AD%90%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.2. パラメータで指定した環境識別子をチェックしたい</a></li>
-<li><a href="#513-%E6%9C%AC%E7%95%AA%E7%92%B0%E5%A2%83prod%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%99%82%E3%81%AB%E6%B3%A8%E6%84%8F%E5%96%9A%E8%B5%B7%E3%81%97%E3%81%A6%E3%83%9F%E3%82%B9%E3%82%92%E9%98%B2%E6%AD%A2%E7%AD%96%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</a></li>
-<li><a href="#514--%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E5%89%8A%E9%99%A4%E3%82%92%E9%98%B2%E6%AD%A2%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.4.  スタックの削除を防止したい</a></li>
-<li><a href="#515-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E6%8C%87%E5%AE%9A%E3%82%92%E5%A4%89%E6%95%B0%E5%8C%96" target="_blank">5.1.5. リージョンの指定を変数化</a></li>
+<li><a href="#512-cdk%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89%E5%AE%9F%E8%A1%8C%E6%99%82%E3%81%AB%E5%8B%95%E7%9A%84%E3%81%AA%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%82%92%E6%B8%A1%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.2. CDKコマンド実行時に動的なパラメータを渡したい</a></li>
+<li><a href="#513-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%A7%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%9F%E7%92%B0%E5%A2%83%E8%AD%98%E5%88%A5%E5%AD%90%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.3. パラメータで指定した環境識別子をチェックしたい</a></li>
+<li><a href="#514-%E6%9C%AC%E7%95%AA%E7%92%B0%E5%A2%83prod%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%99%82%E3%81%AB%E6%B3%A8%E6%84%8F%E5%96%9A%E8%B5%B7%E3%81%97%E3%81%A6%E3%83%9F%E3%82%B9%E3%82%92%E9%98%B2%E6%AD%A2%E7%AD%96%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.4. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</a></li>
+<li><a href="#515-%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E5%89%8A%E9%99%A4%E3%82%92%E9%98%B2%E6%AD%A2%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.5. スタックの削除を防止したい</a></li>
+<li><a href="#516-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E6%8C%87%E5%AE%9A%E3%82%92%E5%A4%89%E6%95%B0%E5%8C%96" target="_blank">5.1.6. リージョンの指定を変数化</a></li>
 </ul>
 </li>
-<li><a href="#52-%E3%81%9D%E3%81%AE%E4%BB%96tips" target="_blank">5.2. その他Tips</a><ul>
+<li><a href="#52-aws-cdk-tips-%E3%81%9D%E3%81%AE%E4%BB%96tips" target="_blank">5.2. AWS CDK Tips その他Tips</a><ul>
 <li><a href="#521-%E7%92%B0%E5%A2%83%E8%AD%98%E5%88%A5%E5%AD%90%E3%81%A8%E3%83%97%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D%E3%81%AE%E4%BA%8C%E9%87%8D%E6%8C%87%E5%AE%9A%E3%82%92%E3%82%84%E3%82%81%E3%82%8B" target="_blank">5.2.1. 環境識別子とプロファイル名の二重指定をやめる</a></li>
 <li><a href="#522-aws-cdk-%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE-metadata-%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">5.2.2. AWS CDK 作成時の Metadata を削除したい場合</a></li>
 </ul>
@@ -752,7 +753,7 @@ export class BucketConstruct extends Construct {
 
       </google-codelab-step>
     
-      <google-codelab-step label="5. Tips" duration="0">
+      <google-codelab-step label="5. AWS CDK Tips" duration="0">
         <h2 is-upgraded>5.1. App定義のTips</h2>
 <h3 is-upgraded>5.1.1. 共通するリソースを一括で付与したい</h3>
 <p>App定義の最後に以下を追加することで、App全体で共通してリソースタグを付与することができます。</p>
@@ -775,7 +776,17 @@ cdk.Tags.of(this).add(&#39;Environment&#39;, props.EnvName);
   }
 }
 </code></pre>
-<h3 is-upgraded>5.1.2. パラメータで指定した環境識別子をチェックしたい</h3>
+<h3 is-upgraded>5.1.2. CDKコマンド実行時に動的なパラメータを渡したい</h3>
+<p>CDKコマンドに<code>-c key=value</code>という形式で指定します。複数のパラメータを渡す場合は、<code>-c key1=value -c key2=value</code>のように繰り返します。</p>
+<pre><code language="language-sh" class="language-sh">cdk deploy -c key=value
+or
+cdk deploy -c key1=value -c key2=value
+</code></pre>
+<p>パラメータを取得するには次のようにします。</p>
+<pre><code language="language-ts" class="language-ts">const key1: string = app.node.tryGetContext(&#39;key1&#39;);
+const key2: string = app.node.tryGetContext(&#39;key2&#39;);
+</code></pre>
+<h3 is-upgraded>5.1.3. パラメータで指定した環境識別子をチェックしたい</h3>
 <pre><code language="language-ts" class="language-ts">// 環境識別子の指定 -&gt; 環境識別子はコマンド実行時に &#39;-c project=xxx -c env=xxx&#39; と指定します
 const projectName: string = app.node.tryGetContext(&#39;project&#39;);
 const envName: string = app.node.tryGetContext(&#39;env&#39;);
@@ -787,7 +798,7 @@ if (!envNames.includes(envName)) {
   process.exit(1);
 }
 </code></pre>
-<h3 is-upgraded>5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</h3>
+<h3 is-upgraded>5.1.4. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</h3>
 <p>デプロイするときは、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code> として、AWS プロファイル名を指定するのが一般的ですが、これだと環境識別子やプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。</p>
 <p>コンソール上で注意喚起のメッセージがあると、それだけで気付くことがありミス防止にもなります。</p>
 <p>具体的には env で与えられる環境によって、メッセージを表示する方法です。</p>
@@ -814,10 +825,9 @@ console.log(
 console.log();
 
 // 環境識別子のチェック
-if (!envname.match(/^(dev|test|stage|prod|jump)$/)) {
-  console.warn(
-    &#34;Invalid context. envname must be [dev , test, stage, prod, jump].&#34;
-  );
+const envNames: string[] = [&#39;dev&#39;, &#39;test&#39;, &#39;stage&#39;, &#39;prod&#39;];
+if (!envNames.includes(envName)) {
+  console.error(`Invalid environment specified. Please use one of the following: ${envNames.join(&#39;, &#39;)}.`);
   process.exit(1);
 }
 
@@ -828,14 +838,14 @@ if (isProduction) {
   console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
 }
 </code></pre>
-<h3 is-upgraded>5.1.4.  スタックの削除を防止したい</h3>
+<h3 is-upgraded>5.1.5. スタックの削除を防止したい</h3>
 <p>CloudFormationにある<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html" target="_blank">スタック削除</a>をAWS CDKから指定する方法です。 具体的には、<code>terminationProtection: true</code>を指定します。こうすることで、スタック作成と同時に、削除保護を有効にできます。誤って<code>cdk deploy</code>してしまうこともありません。 ただし、本当に削除したい場合はマネジメントコンソールやAWS CLI（<a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/update-termination-protection.html" target="_blank">update-termination-protection</a>）から削除保護を解除する必要があります。</p>
 <pre><code language="language-ts" class="language-ts">// スタック
 const myStack = new MyStack (app, &#39;MySample &#39;, {
   terminationProtection: true, // 削除保護の有効化
 });
 </code></pre>
-<h3 is-upgraded>5.1.5. リージョンの指定を変数化</h3>
+<h3 is-upgraded>5.1.6. リージョンの指定を変数化</h3>
 <p>複数のスタックを管理する場合は、リージョンを毎回指定するのではなくまとめて変数化しておくと便利です。</p>
 <pre><code language="language-ts" class="language-ts">// env
 const defaultEnv = {
@@ -860,7 +870,7 @@ const stack2 = new MyStack (app, &#39;Stack2 &#39;, {
   env: useast1Env,
 });
 </code></pre>
-<h2 is-upgraded>5.2. その他Tips</h2>
+<h2 is-upgraded>5.2. AWS CDK Tips その他Tips</h2>
 <h3 is-upgraded>5.2.1. 環境識別子とプロファイル名の二重指定をやめる</h3>
 <p>「5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい」では、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code>のようにしましたが、これでは<code>profile</code>の指定誤りを検知できません。 具体的には、<code>package.json</code>に以下の定義をして、<code>profile</code>を動的に指定できるようにします。 そのためには、<code>.aws\credentials</code>に、<code>--profile %npm_config_project%-%npm_config_env%"</code>で指定できる形式のプロファイルを追加しておきます。</p>
 <pre><code language="language-json" class="language-json">{
