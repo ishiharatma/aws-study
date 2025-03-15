@@ -36,166 +36,337 @@
     
       <google-codelab-step label="👀 Contents" duration="0">
         <ul>
-<li><a href="#aws-cdk-%E3%81%A8%E3%81%AF" target="_blank">AWS CDK とは</a></li>
-<li><a href="#cdk-v2" target="_blank">CDK v2</a></li>
-<li><a href="#%E5%AF%BE%E5%BF%9C%E8%A8%80%E8%AA%9E" target="_blank">対応言語</a></li>
-<li><a href="#cdk-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">CDK ワークショップ</a></li>
-<li><a href="#cdk-%E3%81%AE%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">CDK の構成要素</a><ul>
-<li><a href="#app" target="_blank">App</a></li>
-<li><a href="#stacks" target="_blank">Stack(s)</a></li>
-<li><a href="#construct" target="_blank">Construct</a><ul>
-<li><a href="#l1-construct--l2-construct" target="_blank">L1 Construct / L2 Construct</a></li>
-<li><a href="#patterns" target="_blank">Patterns</a></li>
+<li><a href="#1-aws-cdk-%E3%81%A8%E3%81%AF" target="_blank">1. AWS CDK とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+<li><a href="#13-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">1.3. ワークショップ</a></li>
+<li><a href="#14-%E5%B0%8E%E5%85%A5%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">1.4. 導入のメリット</a><ul>
+<li><a href="#1-%E5%9E%8B%E5%AE%89%E5%85%A8%E6%80%A7%E3%81%AB%E3%82%88%E3%82%8B%E3%82%A8%E3%83%A9%E3%83%BC%E6%A4%9C%E5%87%BA" target="_blank">1. 型安全性によるエラー検出</a></li>
+<li><a href="#2-%E3%82%B3%E3%83%BC%E3%83%89%E5%86%8D%E5%88%A9%E7%94%A8%E3%81%AB%E3%82%88%E3%82%8B%E5%93%81%E8%B3%AA%E5%90%91%E4%B8%8A%E3%81%A8%E3%82%B3%E3%82%B9%E3%83%88%E5%89%8A%E6%B8%9B" target="_blank">2. コード再利用による品質向上とコスト削減</a></li>
+<li><a href="#3-%E9%96%8B%E7%99%BA%E7%94%9F%E7%94%A3%E6%80%A7%E3%81%AE%E5%90%91%E4%B8%8A" target="_blank">3. 開発生産性の向上</a></li>
+<li><a href="#4-%E3%82%A4%E3%83%B3%E3%83%95%E3%83%A9%E3%81%A8%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AE%E7%B5%B1%E5%90%88" target="_blank">4. インフラとアプリケーションコードの統合</a></li>
+<li><a href="#5-%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%82%AC%E3%83%90%E3%83%8A%E3%83%B3%E3%82%B9%E3%81%AE%E5%BC%B7%E5%8C%96" target="_blank">5. スケーリングとガバナンスの強化</a></li>
+</ul>
+</li>
+<li><a href="#15-cloudformation%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84" target="_blank">1.5. CloudFormationとの違い</a></li>
+<li><a href="#%E8%A3%9C%E8%B6%B3%E3%83%9C%E3%82%A4%E3%83%A9%E3%83%BC%E3%83%97%E3%83%AC%E3%83%BC%E3%83%88%E3%82%B3%E3%83%BC%E3%83%89%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6" target="_blank">補足：ボイラープレートコードについて</a></li>
+</ul>
+</li>
+<li><a href="#2-aws-cdk%E3%81%AE%E5%9F%BA%E7%A4%8E" target="_blank">2. AWS CDKの基礎</a><ul>
+<li><a href="#21-aws-cdk-%E3%81%AE%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">2.1. AWS CDK の構成要素</a><ul>
+<li><a href="#211-app" target="_blank">2.1.1. App</a></li>
+<li><a href="#212-stacks" target="_blank">2.1.2. Stack(s)</a></li>
+<li><a href="#213-construct" target="_blank">2.1.3. Construct</a><ul>
+<li><a href="#l1-construct" target="_blank">L1 Construct</a></li>
+<li><a href="#l2-construct" target="_blank">L2 Construct</a></li>
+<li><a href="#l3-construct" target="_blank">L3 Construct</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#cdk-%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88" target="_blank">CDK のテスト</a><ul>
-<li><a href="#snapshot-test" target="_blank">Snapshot test</a></li>
-<li><a href="#unit-test" target="_blank">Unit Test</a></li>
+<li><a href="#22-aws-cdk-%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89" target="_blank">2.2. AWS CDK のコマンド</a><ul>
+<li><a href="#221-cdk-init" target="_blank">2.2.1. cdk init</a></li>
+<li><a href="#222-cdk-bootstrap" target="_blank">2.2.2. cdk bootstrap</a></li>
+<li><a href="#223-cdk-deploy" target="_blank">2.2.3. cdk deploy</a></li>
+<li><a href="#224-cdk-diff" target="_blank">2.2.4. cdk diff</a></li>
+<li><a href="#225-cdk-synth" target="_blank">2.2.5. cdk synth</a></li>
+<li><a href="#226-cdk-destroy" target="_blank">2.2.6. cdk destroy</a></li>
+<li><a href="#227-cdk-list--cdk-ls" target="_blank">2.2.7. cdk list / cdk ls</a></li>
 </ul>
 </li>
-<li><a href="#cdk-%E3%81%AE%E3%82%B3%E3%83%9E%E3%83%B3%E3%83%89" target="_blank">CDK のコマンド</a></li>
-<li><a href="#cdk-%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE-metadata-%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">CDK 作成時の Metadata を削除したい場合</a></li>
-<li><a href="#aws-cdk-%E3%81%A7%E3%81%AE%E9%96%8B%E7%99%BA%E6%96%B9%E6%B3%95" target="_blank">AWS CDK での開発方法</a><ul>
-<li><a href="#%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0%E4%BE%8B" target="_blank">ディレクトリ構造例</a></li>
-<li><a href="#app-%E5%AE%9A%E7%BE%A9" target="_blank">App 定義</a></li>
-<li><a href="#app-%E5%AE%9A%E7%BE%A9%E3%81%AB%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E3%83%9F%E3%82%B9%E9%98%B2%E6%AD%A2%E7%AD%96%E3%81%AE%E4%BE%8B" target="_blank">App 定義にリリースミス防止策の例</a></li>
-<li><a href="#%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%AE%9A%E7%BE%A9%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E9%80%A0" target="_blank">スタック定義ファイルの基本構造</a></li>
+<li><a href="#23-cdk%E3%81%AE%E3%83%90%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3" target="_blank">2.3. CDKのバージョン</a><ul>
+<li><a href="#231-cdk-v2" target="_blank">2.3.1. CDK v2</a></li>
+<li><a href="#232202523%E8%BF%BD%E8%A8%98aws-cdk-%E3%81%AF-aws-cdk-cli-%E3%81%A8-cdk-%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%83%88%E3%83%A9%E3%82%A4%E3%83%96%E3%83%A9%E3%83%AA%E3%82%92%E5%88%86%E9%9B%A2" target="_blank">2.3.2.（2025/2/3追記）AWS CDK は AWS CDK CLI と CDK コンストラクトライブラリを分離</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#3-aws-cdk-%E3%81%A7%E3%81%AE%E9%96%8B%E7%99%BA%E6%96%B9%E6%B3%95" target="_blank">3. AWS CDK での開発方法</a><ul>
+<li><a href="#31-aws-cdk%E9%96%8B%E7%99%BA%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%82%E3%81%AE" target="_blank">3.1. AWS CDK開発に必要なもの</a><ul>
+<li><a href="#%E6%9C%80%E4%BD%8E%E9%99%90%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%82%E3%81%AE" target="_blank">最低限必要なもの</a></li>
+<li><a href="#%E3%81%A7%E3%81%8D%E3%82%8C%E3%81%B0%E7%94%A8%E6%84%8F%E3%81%97%E3%81%9F%E3%81%BB%E3%81%86%E3%81%8C%E3%81%84%E3%81%84%E3%82%82%E3%81%AE" target="_blank">できれば用意したほうがいいもの</a></li>
+</ul>
+</li>
+<li><a href="#32-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0%E4%BE%8B" target="_blank">3.2. ディレクトリ構造例</a></li>
+<li><a href="#33-construct-id-%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87" target="_blank">3.3. Construct ID の命名規則</a><ul>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%ABconstruct-id%E3%81%AFpascalcase%E3%82%92%E6%8E%A8%E5%A5%A8%E3%81%99%E3%82%8B" target="_blank">ルール①：Construct IDは<code>PascalCase</code>を推奨する</a></li>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%ABconstruct-id%E3%81%AF%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E5%90%8D%E7%A7%B0%E3%81%A8%E3%81%99%E3%82%8B" target="_blank">ルール②：Construct IDは<code>シンプルな名称</code>とする</a></li>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%AB%E5%88%A5%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E5%A0%B4%E5%90%88%E5%90%8C%E3%81%98%E6%84%8F%E5%91%B3%E3%81%AEconstruct-id%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%97%E3%81%AA%E3%81%84" target="_blank">ルール③：別のコンストラクタを呼び出す場合、<code>同じ意味</code>のConstruct IDを付与しない</a></li>
+</ul>
+</li>
+<li><a href="#34-construct-id-%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E4%BD%99%E8%AB%87" target="_blank">3.4. Construct ID に関する余談</a><ul>
+<li><a href="#341-construct-id-%E3%81%8B%E3%82%89%E8%AB%96%E7%90%86id%E3%81%AB%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%95%E3%82%8C%E3%82%8B%E3%81%8B" target="_blank">3.4.1. Construct ID から論理IDにどのように変換されるか？</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-aws-cdk-%E3%81%AE%E3%83%86%E3%82%B9%E3%83%88%E6%96%B9%E6%B3%95" target="_blank">4. AWS CDK のテスト方法</a><ul>
+<li><a href="#41-snapshot-test" target="_blank">4.1. Snapshot test</a></li>
+<li><a href="#42-unit-test" target="_blank">4.2. Unit Test</a><ul>
+<li><a href="#%E8%A8%98%E8%BF%B0%E4%BE%8B%E5%8D%98%E7%B4%94%E3%81%AA%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E5%AD%98%E5%9C%A8%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF" target="_blank">記述例①：単純なリソース存在チェック</a></li>
+<li><a href="#%E8%A8%98%E8%BF%B0%E4%BE%8B%E5%B1%9E%E6%80%A7%E5%80%A4%E3%81%AE%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF" target="_blank">記述例②：属性値のチェック</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-tips" target="_blank">5. Tips</a><ul>
+<li><a href="#51-app%E5%AE%9A%E7%BE%A9%E3%81%AEtips" target="_blank">5.1. App定義のTips</a><ul>
+<li><a href="#511-%E5%85%B1%E9%80%9A%E3%81%99%E3%82%8B%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%82%92%E4%B8%80%E6%8B%AC%E3%81%A7%E4%BB%98%E4%B8%8E%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.1. 共通するリソースを一括で付与したい</a></li>
+<li><a href="#512-%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%A7%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%9F%E7%92%B0%E5%A2%83%E8%AD%98%E5%88%A5%E5%AD%90%E3%82%92%E3%83%81%E3%82%A7%E3%83%83%E3%82%AF%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.2. パラメータで指定した環境識別子をチェックしたい</a></li>
+<li><a href="#513-%E6%9C%AC%E7%95%AA%E7%92%B0%E5%A2%83prod%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%99%82%E3%81%AB%E6%B3%A8%E6%84%8F%E5%96%9A%E8%B5%B7%E3%81%97%E3%81%A6%E3%83%9F%E3%82%B9%E3%82%92%E9%98%B2%E6%AD%A2%E7%AD%96%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</a></li>
+<li><a href="#514--%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E5%89%8A%E9%99%A4%E3%82%92%E9%98%B2%E6%AD%A2%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.4.  スタックの削除を防止したい</a></li>
+<li><a href="#515-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E6%8C%87%E5%AE%9A%E3%82%92%E5%A4%89%E6%95%B0%E5%8C%96" target="_blank">5.1.5. リージョンの指定を変数化</a></li>
+</ul>
+</li>
+<li><a href="#52-%E3%81%9D%E3%81%AE%E4%BB%96tips" target="_blank">5.2. その他Tips</a><ul>
+<li><a href="#521-%E7%92%B0%E5%A2%83%E8%AD%98%E5%88%A5%E5%AD%90%E3%81%A8%E3%83%97%E3%83%AD%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E5%90%8D%E3%81%AE%E4%BA%8C%E9%87%8D%E6%8C%87%E5%AE%9A%E3%82%92%E3%82%84%E3%82%81%E3%82%8B" target="_blank">5.2.1. 環境識別子とプロファイル名の二重指定をやめる</a></li>
+<li><a href="#522-aws-cdk-%E4%BD%9C%E6%88%90%E6%99%82%E3%81%AE-metadata-%E3%82%92%E5%89%8A%E9%99%A4%E3%81%97%E3%81%9F%E3%81%84%E5%A0%B4%E5%90%88" target="_blank">5.2.2. AWS CDK 作成時の Metadata を削除したい場合</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#6-cdk-nag%E3%81%AB%E3%82%88%E3%82%8B%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%81%A8%E3%82%B3%E3%83%B3%E3%83%97%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%82%B9%E3%81%AE%E5%BC%B7%E5%8C%96" target="_blank">6. cdk-nagによるセキュリティとコンプライアンスの強化</a><ul>
+<li><a href="#61-cdk-nag%E3%81%A8%E3%81%AF" target="_blank">6.1. cdk-nagとは</a></li>
+<li><a href="#62-%E5%B0%8E%E5%85%A5%E6%96%B9%E6%B3%95" target="_blank">6.2. 導入方法</a></li>
+<li><a href="#63-%E5%AE%9F%E8%A3%85%E6%96%B9%E6%B3%95" target="_blank">6.3. 実装方法</a></li>
+<li><a href="#64-rules-pack" target="_blank">6.4. Rules Pack</a></li>
+<li><a href="#65-%E3%82%A8%E3%83%A9%E3%83%BC%E3%81%AE%E6%8A%91%E6%AD%A2" target="_blank">6.5. エラーの抑止</a></li>
+<li><a href="#66-%E3%83%86%E3%82%B9%E3%83%88%E5%AE%9F%E6%96%BD%E6%96%B9%E6%B3%95" target="_blank">6.6. テスト実施方法</a></li>
+<li><a href="#67-%E7%99%BA%E5%B1%95cdk-nag%E3%81%B8%E3%81%AE%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%83%AB%E3%83%BC%E3%83%AB%E3%81%AE%E8%BF%BD%E5%8A%A0" target="_blank">6.7. 【発展】CDK-NAGへのカスタムルールの追加</a></li>
+</ul>
+</li>
+<li><a href="#%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">まとめ</a></li>
 </ul>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="AWS CDK とは" duration="0">
+      <google-codelab-step label="1. AWS CDK とは" duration="0">
         <p>AWS Cloud Development Kit のことで、使い慣れたプログラミング言語を使用してクラウドアプリケーションのリソースを定義するためのオープンソースのソフトウェア開発フレームワークです。</p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/1i7kWqpqtoY" target="_blank">AWS Cloud Development Kit (CDK)(YouTube)</a>(1:01:23)</p>
-<p class="image-container"><img alt="blackbelt-cdk_3" src="img\\bb9079791b0424f.jpg"></p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/BmCpa44rAXI" target="_blank">AWS CDK 概要 (Basic #1)(YouTube)</a>(0:33:07)<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-1-Overview_0731_v1.pdf" target="_blank">PDF</a></p>
-<p class="image-container"><img alt="blackbelt-cdk_1" src="img\\342c70ecd496531a.jpg"></p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/aqa2bFFzcjs" target="_blank">AWS CDK の基本的なコンポーネントと機能 (Basic #2)(YouTube)</a>(0:28:13)<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-2-Features_0831_v1.pdf" target="_blank">PDF</a></p>
-<p class="image-container"><img alt="blackbelt-cdk_2" src="img\\c3170cfd7e8108f7.jpg"></p>
-<p>【AWS Black Belt Online Seminar】<a href="https://youtu.be/z3Mst77p-aU" target="_blank">AWS CDK の開発を効率化する機能 (Basic #3)(YouTube)</a>(0:29:20)<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-3-AppDev_0831_v1.pdf" target="_blank">PDF</a></p>
-<p class="image-container"><img alt="blackbelt-cdk_3" src="img\\381bea663448dd31.jpg"></p>
+<p>AWS CDKを学習するためのリソースは次のとおりです。</p>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
+<p>AWS CDKを理解する公式ドキュメントは次のとおりです。</p>
 <p><a href="https://aws.amazon.com/jp/cdk/" target="_blank">AWS クラウド開発キット</a></p>
 <p><a href="https://docs.aws.amazon.com/cdk/api/v2/" target="_blank">AWS CDK Reference Documentation</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" target="_blank">AWS CDK DEVELOPER GUIDE</a></p>
 <p><a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-construct-library.html" target="_blank">AWS CDK API REFERENCE</a></p>
 <p><a href="https://aws.amazon.com/jp/cdk/faqs/" target="_blank">AWS Cloud Development Kit のよくある質問</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="CDK v2" duration="0">
-        <p>CDK の v2 は、2021 年 5 月のプレビューが実施され、 2021 年 12 月 2 日に GA されました。</p>
-<p>AWS Cloud Development Kit v2 開発者プレビューのお知らせ https://aws.amazon.com/jp/blogs/news/announcing-aws-cloud-development-kit-v2-developer-preview/</p>
-<p>AWS Cloud Development Kit (AWS CDK) v2 の一般提供開始 https://aws.amazon.com/jp/about-aws/whats-new/2021/12/aws-cloud-development-kit-cdk-generally-available/</p>
-<p>v2 では Construct ライブラリが aws-cdk-lib に単一化されたため、v1 で実施していた個々のパッケージインストールが不要になりました。</p>
-<p>v1 では個別にパッケージをインストールする必要があったため、後からインストールしたパッケージはバージョンを指定しないとバージョンが異なってしまうことがあります。バージョンを合わせるために、「npm install @aws-cdk/aws-lambda@1.111.0」とする必要がありました。</p>
-<pre><code language="language-ts" class="language-ts">npm install @aws-cdk/aws-lambda
-npm install @aws-cdk/aws-cloudfront
-npm install @aws-cdk/aws-iam
-npm install @aws-cdk/aws-s3
-
-
-import * as cdk from &#34;@aws-cdk/core&#34;;
-import * as cloudfront from &#34;@aws-cdk/aws-cloudfront&#34;;
-import * as s3 from &#34;@aws-cdk/aws-s3&#34;;
-import * as iam from &#34;@aws-cdk/aws-iam&#34;;
-</code></pre>
-<p>v2 では単一のパッケージに統合されたため、個別パッケージをインストールすることなく使用できます。</p>
-<pre><code language="language-ts" class="language-ts">npm install aws-cdk-lib
-
-import {
-  aws_s3 as s3,
-  aws_iam as iam,
-  aws_cloudfront as cloudfront,
-from &#34;aws-cdk-lib&#34;;
-</code></pre>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="対応言語" duration="0">
-        <ul>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】AWS CDK 概要 (Basic #1)<a href="https://youtu.be/BmCpa44rAXI" target="_blank"> | YouTube</a>(0:33:07) | <a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-1-Overview_0731_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-cdk-0" src="img\\342c70ecd496531a.jpg"></p>
+<p>【AWS Black Belt Online Seminar】AWS CDK の基本的なコンポーネントと機能 (Basic #2) | <a href="https://youtu.be/aqa2bFFzcjs" target="_blank">YouTube</a>(0:28:13) | <a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-2-Features_0831_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-cdk-1" src="img\\c3170cfd7e8108f7.jpg"></p>
+<p>【AWS Black Belt Online Seminar】AWS CDK の開発を効率化する機能 (Basic #3) | <a href="https://youtu.be/z3Mst77p-aU" target="_blank">YouTube</a>(0:29:20) | <a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AWS-CDK-Basic-3-AppDev_0831_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-cdk-2" src="img\\381bea663448dd31.jpg"></p>
+<p>【AWS Black Belt Online Seminar】AWS Cloud Development Kit (CDK) | <a href="https://youtu.be/1i7kWqpqtoY" target="_blank">YouTube</a>(1:01:23)</p>
+<p class="image-container"><img alt="blackbelt-cdk-3" src="img\\bb9079791b0424f.jpg"></p>
+<p><a href="https://speakerdeck.com/konokenj/cdk-best-practice-2024" target="_blank">初心者がおさえておきたいAWS CDKのベストプラクティス 2024| Speaker Deck</a></p>
+<p><a href="https://speakerdeck.com/tmokmss/answering-cdk-faqs" target="_blank">AWS CDKのあるあるお悩みに答えたい| Speaker Deck</a></p>
+<p><a href="https://aws.amazon.com/jp/builders-flash/202411/learn-cdk-unit-test/" target="_blank">AWS CDK における単体テストの使い所を学ぶ|builders.flash</a></p>
+<p><a href="https://aws.amazon.com/jp/builders-flash/202406/cdk-validation/" target="_blank">AWS CDK におけるバリデーションの使い分け方を学ぶ|builders.flash</a></p>
+<p><a href="https://aws.amazon.com/jp/builders-flash/202411/operate-infrastructure-with-cdk/" target="_blank">AWS CDK でアプリと一緒にインフラをコードで操ろう !|builders.flash</a></p>
+<h2 is-upgraded>1.3. ワークショップ</h2>
+<p><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/10141411-0192-4021-afa8-2436f3c66bd8/ja-JP" target="_blank">AWS CDK Immersion Day Workshop</a></p>
+<p><a href="https://aws.amazon.com/jp/builders-flash/202411/create-cdk-local-dev-environment/" target="_blank">AWS CDK のローカル開発環境を作ろう！|builders.flash</a></p>
+<h2 is-upgraded>1.4. 導入のメリット</h2>
+<p>AWS CDKをプロジェクトに導入することで得られる主なメリットは以下の通りです。</p>
+<h3 is-upgraded>1. 型安全性によるエラー検出</h3>
+<p>TypeScriptやJavaなどの静的型付き言語を使用することで、CloudFormationでは実行時にしか検出できなかったパラメータミスを、コンパイル時に発見できます。 これは、大規模プロジェクトほどこの恩恵は大きくなります。</p>
+<h3 is-upgraded>2. コード再利用による品質向上とコスト削減</h3>
+<p>カスタムConstructを作成することで、組織内のベストプラクティスを組み込んだコンポーネントの再利用が可能になります。 これにより、以下を実現できコスト削減と品質向上につながります。</p>
+<ul>
+<li>個々のプロジェクト間でのインフラ設計の一貫性確保</li>
+<li>セキュリティ設計の標準化</li>
+<li>変更が必要になった場合の一元管理</li>
+</ul>
+<h3 is-upgraded>3. 開発生産性の向上</h3>
+<p>AWS CDKは使い慣れたプログラミング言語を使用できます。サポートされている言語は、以下のとおりです。詳しくは<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/languages.html" target="_blank">AWSドキュメント</a>を参照してください。</p>
+<ul>
 <li>TypeScript</li>
 <li>JavaScript</li>
 <li>Python</li>
 <li>Java</li>
-<li>C#/.NET</li>
+<li>C#</li>
+<li>Go</li>
 </ul>
+<p>これらのプログラミング言語を使用することで、CloudFormationでは難しかった次のような開発生産性の向上につながります。</p>
+<ul>
+<li>コードエディタのサポート（コード補完、リファクタリング）を活用できる</li>
+<li>条件分岐、ループ、関数抽象化などのプログラミングの手法が使える</li>
+<li>単体テスト、統合テストなどの既存テスト手法が適用できる</li>
+</ul>
+<p>特に価値が高いのは、条件分岐によって環境による違いなどを簡単に実装できる点です。 ただし、過度なプログラミング機能への依存は複雑性を高め、保守性が低下します。適度な利用を心がけましょう。</p>
+<h3 is-upgraded>4. インフラとアプリケーションコードの統合</h3>
+<p>AWS CDKを使用すると、アプリケーションコードとインフラコードを同じリポジトリで管理することが可能になります。</p>
+<ul>
+<li>アプリケーションの変更に伴うインフラ変更を同一PR（Pull Request, プルリクエスト）で管理</li>
+<li>環境変数やIAMポリシーなどの設定がアプリケーションコードと常に同期</li>
+<li>デプロイパイプラインの一元化</li>
+</ul>
+<h3 is-upgraded>5. スケーリングとガバナンスの強化</h3>
+<p>大規模な組織やプロジェクトにおいて、AWS CDKは以下の効果をもたらします。</p>
+<ul>
+<li>キャパシティ拡大: 同じパターンを複数環境や複数リージョンに素早く展開可能</li>
+<li>標準化: 組織のベストプラクティスをコードとして強制</li>
+<li>コンプライアンス対応: セキュリティ要件を事前に組み込んだConstructを活用</li>
+<li>継続的改善: プログラム的に既存インフラの監査や更新が可能</li>
+</ul>
+<h2 is-upgraded>1.5. CloudFormationとの違い</h2>
+<p>AWSには、IaCを実現するツールとして、AWS CDKのほかにCloudFormationがあります。Black Beltでは次のような比較が説明されています。</p>
+<p class="image-container"><img alt="cdk-cfn" src="img\\439f71c2419df353.jpg"></p>
+<p>AWS CDKは、Appによって複数のスタックを一度にデプロイできるので作業効率が向上します。</p>
+<p>また、CloudFormationとAWS CDKではコード記述面において、大きな違いがあります。</p>
+<p>CloudFormationでは、次のような特徴があります。</p>
+<ul>
+<li>JSONやYAML形式のみで記述する必要がある</li>
+<li>すべての定義を明示的に記述していく必要がある</li>
+<li>構成の複雑度に比例して、コード記述量が増大する</li>
+<li>コード量の増大に伴い、可読性が低下する</li>
+</ul>
+<p>これに対して、AWS CDKでは、次のようなメリットがあります。</p>
+<ul>
+<li>TypeScriptなどのプログラミング言語が利用可能</li>
+<li>IDEなどでコード補完が利用可能</li>
+<li>CDKライブラリによる自動生成が利用できるため、コード記述量を最小限に抑えられる</li>
+<li>コメントやIDEの機能により、コード量が増大しても可読性への影響は限定的</li>
+</ul>
+<p>例えば、下図のような2つのAZにサブネットとNATGateway1台を備えたVPCを構築する場合で、各実装方法を比較してみましょう。</p>
+<p class="image-container"><img alt="sample" src="img\\658ac0db4b76bdf6.png"></p>
+<p>まず、JSONで記述した例は次のようになります。括弧などの構文の特性上、コードが非常に長くなり、人間が直感的に読み解くのは容易ではありません。</p>
+<p class="image-container"><img alt="sample-cfn-json" src="img\\4bd4bf42a80e485a.png"></p>
+<p>次に、YAMLで記述した例です。JSONではコメントを記入できないため、実務ではYAML形式が多く採用されています。JSON形式よりは階層構造が視覚的に理解しやすくなりますが、それでも記述するコード量は多く、複雑なインフラ構成では管理が難しくなります。</p>
+<p class="image-container"><img alt="sample-cfn-yaml" src="img\\523b5bc81c6f1fb9.png"></p>
+<p>最後に、AWS CDKでTypeScriptを使って実装した例です。後述するL2コンストラクトを使用することで、ボイラープレートコードが自動生成され、開発者は本質的な設定のみに集中できます。そのため、このように少ないコード量で同等の機能を実装でき、可読性と保守性が大幅に向上します。</p>
+<p class="image-container"><img alt="sample-cdk-ts" src="img\\c8087bc38dda9792.png"></p>
+<h2 is-upgraded>補足：ボイラープレートコードについて</h2>
+<p>AWS CDKが大幅に削減できる「ボイラープレートコード」とは、プログラミングにおいて繰り返し記述される定型的なコードのことを指します。名前の由来は、かつての新聞業界で何度も再利用された金属製の印刷版（ボイラープレート）から来ています。</p>
+<p>CloudFormationのJSONやYAML記述では、以下のようなボイラープレートコードが必要になります：</p>
+<ul>
+<li>リソースタイプの完全修飾名の記述</li>
+<li>必須パラメータの明示的な宣言</li>
+<li>リソース間の関連付けを示す参照構文</li>
+<li>デフォルト値であっても必要な設定項目の記述</li>
+<li>リソース属性やタグの繰り返し定義</li>
+</ul>
+<p>一方、AWS CDKでは、L2コンストラクトなどの高レベル抽象化により、これらのボイラープレートコードが自動生成されます。開発者は本質的な設定（VPCのCIDR範囲やサブネット数など）のみ記述するだけで、関連する標準的なリソースやその設定は自動的に生成されます。</p>
+<p>このボイラープレートコードの削減は、単にコード量を減らすだけでなく、次のような効果をもたらします。</p>
+<ul>
+<li>人為的なエラーの減少</li>
+<li>コード全体の可読性向上</li>
+<li>メンテナンス工数の削減</li>
+<li>本質的なインフラ設計への集中</li>
+</ul>
+<p>さきほど示した構成例でも、AWS CDKを使用した実装では、VPCとサブネットの本質的な設定のみに焦点を当て、その他の標準的な設定は自動生成されているため、コード量が大幅に削減されています。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="CDK ワークショップ" duration="0">
-        <p>手を動かして学ぶことができます。</p>
-<p>https://cdkworkshop.com/</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="CDK の構成要素" duration="0">
-        <p class="image-container"><img alt="AppStacks.png" src="img\\e3686a243fe5e33.png"></p>
+      <google-codelab-step label="2. AWS CDKの基礎" duration="0">
+        <h2 is-upgraded>2.1. AWS CDK の構成要素</h2>
+<p>開発者ガイドの構成図から、主要構成要素は以下の３つです。</p>
+<ul>
+<li>App</li>
+<li>Stack(s)</li>
+<li>Construct</li>
+</ul>
+<p class="image-container"><img alt="AppStacks.png" src="img\\e3686a243fe5e33.png"></p>
 <p>引用：<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html" target="_blank">開発者ガイド&gt;CDK とは</a></p>
-<h2 is-upgraded>App</h2>
-<p>CDK の最上位層で、複数のスタックの依存関係などを定義します。</p>
-<h2 is-upgraded>Stack(s)</h2>
-<p>CloudFormation のスタックに対応します。AWS へのデプロイはこのスタック単位で行います。</p>
-<h2 is-upgraded>Construct</h2>
+<p>AWS CDKを使用してAWS環境にリソースをデプロイすると、最終的にはCloudFormationのスタックとして管理されます。</p>
+<p>スタックについては、CloudFormationの<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cloudformation-overview.html#cfn-concepts-stacks" target="_blank">ドキュメント</a>を参照してください。</p>
+<h3 is-upgraded>2.1.1. App</h3>
+<p>AWS CDK の最上位層で、複数のスタックの依存関係などを定義する部分です。複数のリージョンも管理することができます。</p>
+<pre><code language="language-ts" class="language-ts">#!/usr/bin/env node
+import &#39;source-map-support/register&#39;;
+import * as cdk from &#39;aws-cdk-lib&#39;;
+
+// Stackのインポート
+import { Stack1 } from &#39;../lib/stacks/stack1&#39;
+import { Stack2 } from &#39;../lib/stacks/stack2&#39;
+
+const app = new cdk.App();
+
+// デフォルトリージョン
+const stack1 = new Stack1(app,&#39;Stack1&#39;,{
+  // ここにパラメータを指定
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION,
+  }
+});
+
+// 明示的に東京リージョンを指定
+const stack2 = new Stack2(app,&#39;Stack2&#39;,{
+  // ここにパラメータを指定
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: &#34;ap-northeast-1&#34;,
+  }
+});
+stack2.addDependency(stack1); // 依存関係
+
+// バージニア北部リージョン
+const stack3 = new Stack2(app,&#39;Stack3&#39;,{
+  // ここにパラメータを指定
+  env: {
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: &#34;us-east-1&#34;,
+  }
+});
+stack3.addDependency(stack1); // 依存関係
+</code></pre>
+<h3 is-upgraded>2.1.2. Stack(s)</h3>
+<p>CloudFormation のスタック１つに対応する部分です。Appから呼び出されて実行されます。</p>
+<pre><code language="language-ts" class="language-ts">import { StackProps } from &#39;aws-cdk-lib&#39;;
+import * as cdk from &#39;aws-cdk-lib&#39;;
+import { Construct } from &#39;constructs&#39;;
+import {
+  aws_s3 as s3,
+  aws_ec2 as ec2, 
+  aws_iam as iam,
+  aws_kms as kms,
+} from &#39;aws-cdk-lib&#39;;
+
+interface Stack1Props extends StackProps {
+  readonly param1: string;
+  readonly param2: string;
+}
+
+export class Stack1 extends cdk.Stack {
+  constructor(scope: Construct, id: string, props: Stack1Props) {
+    super(scope, id, props);
+
+  }
+}
+</code></pre>
+<h3 is-upgraded>2.1.3. Construct</h3>
 <p>Stack 層に AWS リソースの定義を作成します。</p>
-<p>Construct には 3 つの種類があります。</p>
+<p>Construct には 3 つの種類があります。L1→L3の順で抽象化のレベルが上がります。</p>
 <ul>
 <li>L1 Construct(Low Level Construct)</li>
 <li>L2 Construct(High Level Construct)</li>
 <li>L3 Construct(Patterns)</li>
 </ul>
-<h3 is-upgraded>L1 Construct / L2 Construct</h3>
+<p class="image-container"><img alt="cdk-construct" src="img\\a62db7c49bd73803.jpg"></p>
+<p>引用：【AWS Black Belt Online Seminar】<a href="https://youtu.be/BmCpa44rAXI" target="_blank">AWS CDK 概要 (Basic #1)(YouTube)</a></p>
+<h4 is-upgraded>L1 Construct</h4>
 <p>L1 Construct とは、Low Level Construct のことです。CloudFormation の各リソースと 1:1 の関係になっています。<code>Cfn</code>で始まるものが L1 です。</p>
-<p>CloudFormation で定義するのと同じレベルでの記載になります。L2 Construct が存在するリソースは、L2 Construct を利用することを推奨しますが、要件に応じた細かい設定が必要な場合は、L1 Construct を利用します。</p>
-<p>https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/constructs.html#constructs_l1_using</p>
+<p>CloudFormation で定義するのと同じレベルでの記載になります。<strong>L2 Construct が存在するリソースは、L2 Construct を利用することを推奨</strong>しますが、要件に応じた細かい設定が必要な場合は、L1 Construct を利用します。</p>
 <pre><code language="language-ts" class="language-ts">const bucket = new s3.CfnBucket(this, &#34;MyBucket&#34;, {
   bucketName: &#34;MyBucket&#34;,
 });
 </code></pre>
-<p>L2 Construct とは、High Level Construct と呼ばれるもので、L1 Construct をラップした Construct です。</p>
-<p>https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/constructs.html#constructs_using</p>
+<h4 is-upgraded>L2 Construct</h4>
+<p>L2 Construct とは、High Level Construct と呼ばれるもので、L1 Construct をラップした Construct です。 AWSリソースを作成するのに必要な要素が未指定だった場合に自動的に生成してくれるのが最大のメリットです。これによって、記述するコード量を削減することができます。</p>
+<p>L1 ConstructでS3バケットを作成する場合、バケット名は必須ですが、L2 Constructでは未指定の場合は自動生成されるので、バケット名すら省略することが可能です。</p>
 <pre><code language="language-ts" class="language-ts">import * as s3 from &#34;aws-cdk-lib/aws-s3&#34;;
 
 const bucket = new s3.Bucket(this, &#34;MyBucket&#34;, {
   versioned: true,
 });
 </code></pre>
-<p>TypeScript を使用して、VPC を作る場合は下記のようにするだけで、VPC、ルートテーブル、インターネットゲートウェイ、NAT ゲートウェイ、サブネット 6 つ（3 種類 × maxAzs 数分） の CloudFormation 定義を作成してくれます。CloudFormation で記述すると 430 行にもなる定義が 12 行だけで完了します。</p>
-<p>cidrMask の数字だけ指定しているので、サブネットの CIDR ブロックは自動的に生成されます。CIDR ブロックを特定の値で指定したい場合は、L1 Construct を使用します。</p>
-<pre><code language="language-ts" class="language-ts">const vpc = new ec2.Vpc(this, &#34;vpc&#34;, {
-  vpcName: &#34;vpc&#34;,
-  cidr: &#34;10.0.0.0/16&#34;,
-  natGateways: 2,
-  natGatewaySubnets: { subnetType: ec2.SubnetType.PUBLIC },
-  maxAzs: 2,
-  subnetConfiguration: [
-    { subnetType: ec2.SubnetType.PUBLIC, name: &#34;public&#34;, cidrMask: 20 },
-    {
-      subnetType: ec2.SubnetType.PRIVATE_WITH_NAT,
-      name: &#34;private&#34;,
-      cidrMask: 19,
-    },
-    {
-      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
-      name: &#34;protected&#34;,
-      cidrMask: 21,
-    },
-  ],
-});
-</code></pre>
-<p>この定義を実行した場合に生成される CloudFormation のコードは次の通りです。</p>
-<p><img alt="vpc_cfn_00" src="img\\b6f6b7c87e4c41a8.png"> ： ： <img alt="vpc_cfn_01" src="img\\da9f8ff5f3dfb02c.png"></p>
-<h3 is-upgraded>Patterns</h3>
+<h4 is-upgraded>L3 Construct</h4>
 <p>L3 Construct として、ECS Patterns のように ECS 関連のリソースを簡単に生成できるものがあります。</p>
-<p>次のようにするだけで、ECS サービス、ALB、関連するセキュリティグループ、タスク用の IAM ロールなど 200 ～ 300 行の CloudFormation のコードを出力してくれます。</p>
+<p>次のようにするだけで、ECS サービス、ALB、関連するセキュリティグループ、タスク用の IAM ロールなど 200 ～ 300 行の CloudFormation のコードを出力してくれます。 要件が合致すれば非常に簡単に環境構築が行えますが、カスタマイズが行いにくいという特徴があります。公式で提供されているL3 Constructも数が少ないことから、基本的にはL2 Constructを使用して構築することになります。</p>
 <pre><code language="language-ts" class="language-ts">// クラスタを作成
 const cluster = new ecs.Cluster(this, &#34;MyCluster&#34;, {
   vpc: props.vpc,
@@ -217,15 +388,272 @@ const loadBalancedFargateService =
     }
   );
 </code></pre>
+<h2 is-upgraded>2.2. AWS CDK のコマンド</h2>
+<p>AWS CDKで使用する主なコマンドについて説明します。 ここで説明していないコマンドなど、詳細は<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/ref-cli-cmd.html" target="_blank">ドキュメント</a>を参照してください。</p>
+<h3 is-upgraded>2.2.1. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/ref-cli-cmd-init.html" target="_blank">cdk init</a></h3>
+<p>AWS CDKでコードを作成する前に、実行するコマンドです。コマンドを実行したカレントディレクトリ内で、必要なファイルをセットアップします。 languageには、[csharp|fsharp|go|java|javascript|python|typescript]のいずれかを指定します。</p>
+<p>以下は、TypeScriptを使用する場合の例です。</p>
+<pre><code language="language-sh" class="language-sh">cdk init app --language typescript
+</code></pre>
+<h3 is-upgraded>2.2.2. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/ref-cli-cmd-bootstrap.html" target="_blank">cdk bootstrap</a></h3>
+<p>AWSアカウントで初めてAWS CDKを利用する際に実行します。実行するとリージョンごとに<code>CDKToolkit</code>というCloudFormationのスタックが作成され、AWS CDKを利用するのに必要なリソースが作成されます。</p>
+<pre><code language="language-sh" class="language-sh">cdk bootstrap
+</code></pre>
+<p>作成されるリソースは記事作成時点では、下記11種類となっています。</p>
+<ul>
+<li>CdkBootstrapVersion：BootStrapのバージョンを管理するSSMパラメータストアです。定期的にバージョンアップがあるため、バージョンのチェックに利用されます。</li>
+<li>DeploymentActionRole：デプロイ時にCloudFormatioスタックを操作するためのIAMロールです</li>
+<li>CloudFormationExecutionRole：<code>AdministratorAccess</code>が付与されたロールで、<code>cdk deploy</code>で作成されるスタック実行時に使用されます。</li>
+<li>LookupRole：既存リソースを参照する<code>fromLookup()</code>などの実行に必要なロールです</li>
+<li>ContainerAssetsRepository：ECRリポジトリです</li>
+<li>ImagePublishingRole：ECRリポジトリにコンテナイメージをプッシュするためのIAMロールです</li>
+<li>ImagePublishingRoleDefaultPolicy：上記IAMロールのポリシーです</li>
+<li>StagingBucket：<code>cdk deploy</code>時にCloudFormationテンプレートやLambdaソースのzipファイルなどをアップロードするためのS3バケットです</li>
+<li>StagingBucketPolicy：上記バケットポリシーです</li>
+<li>FilePublishingRole：S3バケットにアーティファクトをアップロードするためのIAMロールです</li>
+<li>FilePublishingRoleDefaultPolicy：上記IAMロールのポリシーです</li>
+</ul>
+<h3 is-upgraded>2.2.3. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-deploy" target="_blank">cdk deploy</a></h3>
+<p>AWS CDK で定義されたリソースを AWS 環境にデプロイするコマンドです。すべてのスタックをデプロイしたい場合は、<code>--all</code> オプションを指定します。</p>
+<pre><code language="language-sh" class="language-sh">cdk deploy --all
+</code></pre>
+<p>指定したスタックをデプロイしたい場合は、deploy の後にスタック名を指定します。</p>
+<pre><code language="language-sh" class="language-sh">cdk deploy Stack1 Stack2
+</code></pre>
+<h3 is-upgraded>2.2.4. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-diff" target="_blank">cdk diff</a></h3>
+<p>現在の AWS CDK とすでにデプロイされているバージョンとの差分を確認し、変更点を一覧で取得するコマンドです。 <code>deploy</code>と同じように、すべてのスタックの場合は<code>--all</code>、特定のスタックの場合はスタック名を指定します。</p>
+<pre><code language="language-sh" class="language-sh">cdk diff --all
+or
+cdk diff  Stack1 Stack2
+</code></pre>
+<h3 is-upgraded>2.2.5. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-synth" target="_blank">cdk synth</a></h3>
+<p>AWS CDK で定義されたスタックを CloudFormation テンプレートにするコマンドです。 リソースに付与される Metadata を削除したい場合は、<code>--path-metadata false</code> オプションを付与します。 テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 <code>--quit</code> または <code>-q</code> オプションを付与します。</p>
+<h3 is-upgraded>2.2.6. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/ref-cli-cmd-destroy.html" target="_blank">cdk destroy</a></h3>
+<p>スタックを削除する場合に利用するコマンドです。 <code>deploy</code>と同じように、すべてのスタックの場合は<code>--all</code>、特定のスタックの場合はスタック名を指定します。 依存関係のエラーなどを無視して強制的に削除する場合は、<code>--force</code>を指定します。</p>
+<pre><code language="language-sh" class="language-sh">cdk destroy --all
+or
+cdk destroy  Stack1 Stack2
+</code></pre>
+<h3 is-upgraded>2.2.7. <a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-list" target="_blank">cdk list / cdk ls</a></h3>
+<p>現在の AWS CDK アプリに含まれるスタックの一覧を確認するコマンドです。</p>
+<pre><code language="language-sh" class="language-sh">cdk list
+or
+cdk ls
+</code></pre>
+<h2 is-upgraded>2.3. CDKのバージョン</h2>
+<h3 is-upgraded>2.3.1. CDK v2</h3>
+<p class="image-container"><img alt="cdk-v2" src="img\\234013c9d4cffd8e.jpg"></p>
+<p>現在のAWS CDKのバージョンは、<code>v2</code>となっています。v2は、2021年5月のプレビューが実施され、2021年12月2日にGAされました。</p>
+<p>AWS Cloud Development Kit v2 開発者プレビューのお知らせ https://aws.amazon.com/jp/blogs/news/announcing-aws-cloud-development-kit-v2-developer-preview/</p>
+<p>AWS Cloud Development Kit (AWS CDK) v2 の一般提供開始 https://aws.amazon.com/jp/about-aws/whats-new/2021/12/aws-cloud-development-kit-cdk-generally-available/</p>
+<p>v2sではConstructライブラリが<code>aws-cdk-lib</code>に単一化されたため、v1で実施していた個々のパッケージインストールが不要になりました。</p>
+<p>v1では個別にパッケージをインストールする必要があったため、後からインストールしたパッケージはバージョンを指定しないとバージョンが異なってしまうことがあります。バージョンを合わせるために、「npm install @aws-cdk/aws-lambda@1.111.0」とする必要がありました。</p>
+<pre><code language="language-ts" class="language-ts">npm install @aws-cdk/aws-lambda
+npm install @aws-cdk/aws-cloudfront
+npm install @aws-cdk/aws-iam
+npm install @aws-cdk/aws-s3
+
+import * as cdk from &#34;@aws-cdk/core&#34;;
+import * as cloudfront from &#34;@aws-cdk/aws-cloudfront&#34;;
+import * as s3 from &#34;@aws-cdk/aws-s3&#34;;
+import * as iam from &#34;@aws-cdk/aws-iam&#34;;
+</code></pre>
+<p>v2 では単一のパッケージに統合されたため、個別パッケージをインストールすることなく使用できます。</p>
+<pre><code language="language-ts" class="language-ts">npm install aws-cdk-lib
+
+import {
+  aws_s3 as s3,
+  aws_iam as iam,
+  aws_cloudfront as cloudfront,
+from &#34;aws-cdk-lib&#34;;
+</code></pre>
+<h3 is-upgraded>2.3.2.（2025/2/3追記）AWS CDK は AWS CDK CLI と CDK コンストラクトライブラリを分離</h3>
+<p><a href="https://aws.amazon.com/jp/blogs/news/aws-cdk-is-splitting-construct-library-and-cli/" target="_blank">AWS CDK は AWS CDK CLI と CDK コンストラクトライブラリを分離します</a></p>
+<p>AWS CDK CLI と CDK コンストラクトライブラリの分離で以下の影響があります：</p>
+<ol type="1">
+<li>バージョン番号の不一致: aws-cdkとaws-cdk-libで異なるバージョン番号体系に</li>
+</ol>
+<ul>
+<li><code>aws-cdk</code>のバージョンが<code>2.174.0</code>の次から、<code>2.1000.0</code>になります。</li>
+</ul>
+<ol type="1" start="2">
+<li>依存関係管理の変更: package.jsonでの指定方法が変更</li>
+</ol>
+<p>具体的な対応方法としては、以下のようにpackage.jsonを更新します：</p>
+<p>以前の指定方法：</p>
+<pre><code language="language-json" class="language-json">  &#34;devDependencies&#34;: {
+    &#34;aws-cdk&#34;: &#34;2.174.0&#34;,
+    :
+  },
+  &#34;dependencies&#34;: {
+    &#34;aws-cdk-lib&#34;: &#34;2.174.0&#34;,
+    :
+  }
+</code></pre>
+<p>これからの指定方法：</p>
+<pre><code language="language-json" class="language-json">  &#34;devDependencies&#34;: {
+    &#34;aws-cdk&#34;: &#34;2.1000.0&#34;, // CLIは2.1000.0から始まる新しい体系
+    :
+  },
+  &#34;dependencies&#34;: {
+    &#34;aws-cdk-lib&#34;: &#34;2.180.0&#34;,  // コンストラクトライブラリは従来のバージョン体系を継続
+    :
+  }
+</code></pre>
+<p>この分離による影響を最小化するには、以下のプラクティスを推奨します：</p>
+<ol type="1">
+<li>CI/CD環境では特定のバージョンに固定する</li>
+<li>依存関係を正確に管理する</li>
+<li>peerDependenciesを使用して依存関係を管理する</li>
+</ol>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="CDK のテスト" duration="0">
-        <h2 is-upgraded>Snapshot test</h2>
+      <google-codelab-step label="3. AWS CDK での開発方法" duration="0">
+        <p class="image-container"><img alt="cdk-dev-flow" src="img\\a433a15d757aaaad.jpg"></p>
+<p>AWS CDKで開発する順序は次のとおりです。</p>
+<ul>
+<li>対象のディレクトリで<code>cdk init</code>を実行</li>
+<li>app定義を編集</li>
+<li>stack定義を作成</li>
+<li>テストコードを作成</li>
+<li>初回： <ul>
+<li><code>cdk bootstrap</code>を実行</li>
+<li><code>cdk deploy</code>を実行</li>
+</ul>
+</li>
+<li>2回目以降： <ul>
+<li>（任意）<code>cdk diff</code>を実行して差分チェック</li>
+<li><code>cdk deploy</code>を実行（ここでも差分チェックできます）</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>3.1. AWS CDK開発に必要なもの</h2>
+<h3 is-upgraded>最低限必要なもの</h3>
+<ul>
+<li>AWS CLI v2</li>
+<li>Node.js</li>
+<li>テキストエディタ</li>
+</ul>
+<h3 is-upgraded>できれば用意したほうがいいもの</h3>
+<ul>
+<li>Git</li>
+<li>IDE <ul>
+<li>テキストエディタより、VS CodeなどのIDEを使うほうが開発生産性が向上します</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>3.2. ディレクトリ構造例</h2>
+<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加した例を示します。これ以外は、必要になったら [lib] 内にサブディレクトリを作成していきます。 ‘★&#39; が付いているディレクトリは追加例です。</p>
+<pre><code language="language-text" class="language-text">プロジェクトルートディレクトリ
+    ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
+    ├─ [lib]
+        ├─ ★[stacks]           // スタック定義
+        ├─ ★[resources]        // 各リソースごとの定義。スタックから呼ばれる
+        ├─ ★[utils]            // 共通使用するものを格納
+    ├─ ★[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
+    ├─ ★[src]                  // Lambda や HTML などのソースを格納
+    ├─ [test]                  // テスト
+        ├─ xxxxx.test.ts           // スナップショットテスト
+        ├─ xxxxx-cdk-nag.test.ts   // CDK-NAG
+        ├─ xxxxx-unittest.test.ts  // Unit Test
+    ├─ [node_modules]
+    ├─ cdk.context.json        // 環境依存情報(context)
+    ├─ cdk.json                // デフォルトのappなどが入る
+    ├─ cdk.out                 // cfnなどの出力先。コンパイルされたjsを動かすと出力される
+    ├─ jest.config.js          // テストの設定ファイル
+    ├─ package-lock.json
+    ├─ package.json
+    ├─ tsconfig.json
+    ├─ README.md
+</code></pre>
+<h2 is-upgraded>3.3. Construct ID の命名規則</h2>
+<p>Construct ID とは、以下のように第二引数で指定する文字列のことをいいます。この文字列はコンストラクトのスコープ内で一意である必要があります。</p>
+<pre><code language="language-ts" class="language-ts">export class Stack1 extends cdk.Stack {
+  constructor(scope: Construct, id: string, props: Stack1Props) {
+    super(scope, id, props);
+
+    const bucket1 = new s3.Bucket(this, &#34;MyBucket&#34;, {});
+    // bucket2で指定した&#34;MyBucket&#34;はすでに使用済みなのでエラーになります。
+    const bucket2 = new s3.Bucket(this, &#34;MyBucket&#34;, {});
+
+  }
+}
+</code></pre>
+<p>⚠Construct ID は、CloudFormationのテンプレートに変換後の<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-logical-id" target="_blank">論理ID（論理名）</a>の一部として利用されます。</p>
+<h3 is-upgraded>ルール①：Construct IDは<code>PascalCase</code>を推奨する</h3>
+<p>まず、AWS CDKが論理IDを生成する過程で、<code>[A-Za-z0-9]</code>以外除去されます。そのため、指定しても無駄になってしまいます。</p>
+<p>参考： <a href="https://github.com/aws/aws-cdk/blob/4b00ffeb86b3ebb9a0190c2842bd36ebb4043f52/packages/aws-cdk-lib/core/lib/private/uniqueid.ts#L86" target="_blank">aws-cdk/packages/aws-cdk-lib/core/lib/private/uniqueid.ts &gt;removeNonAlphanumeric</a></p>
+<p>実際は、<code>PascalCase</code>でなくても問題ありませんが、AWS CloudFormationのユーザーガイドのサンプルでは論理IDが<code>PascalCase</code>で記載されていますので合わせるのがよいでしょう。</p>
+<h3 is-upgraded>ルール②：Construct IDは<code>シンプルな名称</code>とする</h3>
+<p>長すぎると理解しにくくなりますので、できるだけシンプルな名称にすることを心がけます。 また、AWS CDKでは240文字で切り捨てられるようになっていますので、CloudFormationテンプレートになったときに意味が欠落します。</p>
+<p>参考： <a href="https://github.com/aws/aws-cdk/blob/4b00ffeb86b3ebb9a0190c2842bd36ebb4043f52/packages/aws-cdk-lib/core/lib/private/uniqueid.ts#L32" target="_blank">aws-cdk/packages/aws-cdk-lib/core/lib/private/uniqueid.ts &gt;makeUniqueId</a></p>
+<h3 is-upgraded>ルール③：別のコンストラクタを呼び出す場合、<code>同じ意味</code>のConstruct IDを付与しない</h3>
+<p class="image-container"><img alt="construct-tree" src="img\\2ecc782056d86eed.jpg"></p>
+<p>単一のコンストラクタで処理が完結せず、共通定義された別のコンストラクタを呼び出すような場合は注意が必要です。 Construct IDは親＋子というように連結されていきます。</p>
+<p>例えばこのような呼び出しを行っていた場合です。</p>
+<p>呼び出し元で指定したConstruct ID「MyBucket」＋呼び出し先で指定したConstruct ID「S3Bucket」が連結されて、「MyBucketS3Bucket9C4D8843」という論理IDが生成されます。 「Bucket」部分が重複して、可読性が低下します。</p>
+<pre><code language="language-ts" class="language-ts">import { BucketConstruct } from &#39;../lib/bucket&#39;;
+
+export class Stack1 extends cdk.Stack {
+  constructor(scope: Construct, id: string, props: Stack1Props) {
+    super(scope, id, props);
+
+    const myBucket = new BucketConstruct(this,&#39;MyBucket&#39;,{
+      :
+    });
+  }
+}
+
+// 呼び出し先
+export class BucketConstruct extends Construct {
+  public readonly bucket: s3.IBucket;
+  constructor(scope: Construct, id: string, props: S3BucketProps) {
+    this.bucket =  new s3.Bucket(this, &#39;S3Bucket&#39;, {
+      :
+    }
+  }
+}
+</code></pre>
+<h2 is-upgraded>3.4. Construct ID に関する余談</h2>
+<h3 is-upgraded>3.4.1. Construct ID から論理IDにどのように変換されるか？</h3>
+<p>Construct IDと論理IDは完全一致するものではなく、Construct IDから論理IDに変換されるとハッシュ値が付与されます。</p>
+<p>例えば次のようにS3バケットを作成した場合には、論理IDが「LogsBucket9C4D8843」となっています。</p>
+<pre><code language="language-ts" class="language-ts">const logBucket = new s3.Bucket(this, &#39;LogsBucket&#39;, {});
+</code></pre>
+<pre><code language="language-json" class="language-json">&#34;Resources&#34;: {
+  &#34;LogsBucket9C4D8843&#34;: {
+   &#34;Type&#34;: &#34;AWS::S3::Bucket&#34;,
+   &#34;Properties&#34;: {
+    :
+   }
+  }
+}
+</code></pre>
+<p>Construct IDから論理IDへの変換ロジックが気になる人は、以下のコードを読むとよいでしょう。</p>
+<p><a href="https://github.com/aws/aws-cdk/blob/4b00ffeb86b3ebb9a0190c2842bd36ebb4043f52/packages/aws-cdk-lib/core/lib/stack.ts#L1357" target="_blank">aws-cdk/packages/aws-cdk-lib/core/lib/stack.ts &gt; allocateLogicalId</a></p>
+<p class="image-container"><img alt="Stack.allocateLogicalId" src="img\\4da19ceac371cfc5.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. AWS CDK のテスト方法" duration="0">
+        <p>ここでは、AWS CDKのテスト方法を説明します。</p>
+<ul>
+<li>Snapshot test</li>
+<li>Unit Test</li>
+</ul>
+<h2 is-upgraded>4.1. Snapshot test</h2>
 <p>前回生成された CloudFormation テンプレートと比較して差分をチェックする<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot" target="_blank">スナップショットテスト</a>が実施できます。 スナップショットテストを行うことで、意図しないテンプレートへの変更があるかどうかを検知できます。</p>
+<p>例えば以下のようなケースで効果を発揮します：</p>
+<ul>
+<li>AWS CDKのバージョンアップによる差分チェック</li>
+<li>リファクタリング前後の差分チェック</li>
+</ul>
+<p>具体的なスナップショットテストの記述方法は次のとおりです。</p>
 <pre><code language="language-ts" class="language-ts">test(&#39;snapshot validation test&#39;,() =&gt;{
-    const stack = new MyTestStack(app, &#39;MyTestStack&#39;, {
+    const stack = new MyTestStack(app, &#39;MyTest&#39;, {
         pjName: projectName,
         envName: envName,
         description: &#39;xxxxxxxx&#39;,
@@ -242,10 +670,9 @@ const loadBalancedFargateService =
 
 })
 </code></pre>
-<h2 is-upgraded>Unit Test</h2>
-<p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。</p>
-<p>VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。</p>
-<p>ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。</p>
+<h2 is-upgraded>4.2. Unit Test</h2>
+<p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。 VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。 ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。</p>
+<p>具体的な記述方法は次のとおりです。</p>
 <pre><code language="language-ts" class="language-ts">test(&#34;create the vpc&#34;, () =&gt; {
   // GIVEN
   const app = new App({
@@ -255,7 +682,7 @@ const loadBalancedFargateService =
       CidrBlock: &#34;10.0.0.0/16&#34;,
     },
   });
-  const stack = new VPCStack(app, &#34;testing-vpcstack&#34;, {});
+  const stack = new VPCStack(app, &#34;testing-vpc&#34;, {});
   // WHEN
   const template = Template.fromStack(stack);
 
@@ -266,11 +693,19 @@ const loadBalancedFargateService =
     CidrBlock: &#34;10.0.0.0/16&#34;,
   });
 
+  // これ以降にテストコードを記述していきます。
+  :
+</code></pre>
+<h4 is-upgraded>記述例①：単純なリソース存在チェック</h4>
+<pre><code language="language-ts" class="language-ts">  // 
   // Subnet
   template.resourceCountIs(&#34;AWS::EC2::Subnet&#34;, 6);
   // Internet Gateway
   template.resourceCountIs(&#34;AWS::EC2::InternetGateway&#34;, 1);
   template.resourceCountIs(&#34;AWS::EC2::VPCGatewayAttachment&#34;, 1);
+</code></pre>
+<h4 is-upgraded>記述例②：属性値のチェック</h4>
+<pre><code language="language-ts" class="language-ts">  // 
   template.hasResourceProperties(&#34;AWS::EC2::VPCGatewayAttachment&#34;, {
     VpcId: Match.anyValue(),
     InternetGatewayId: Match.anyValue(),
@@ -313,141 +748,45 @@ const loadBalancedFargateService =
 
       </google-codelab-step>
     
-      <google-codelab-step label="CDK のコマンド" duration="0">
-        <ul>
-<li>cdk deploy https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-deploy CDK で定義されたリソースを AWS 環境にデプロイするコマンドです。 すべてのスタックをデプロイしたい場合は、<code>--all</code> オプションを指定します。 指定したスタックをデプロイしたい場合は、deploy の後にスタック名を指定します。</li>
-<li>cdk diff https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-diff 現在の CDK とすでにデプロイされているバージョンとの差分を確認し、変更点を一覧で取得するコマンドです。</li>
-<li>cdk synth https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-synth CDK で定義されたスタックを CloudFormation テンプレートにするコマンドです。 リソースに付与される Metadata を削除したい場合は、<code>--path-metadata false</code> オプションを付与します。 テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 <code>--quit</code> または <code>-q</code> オプションを付与します。</li>
-<li>cdk list / cdk ls https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#cli-list 現在の CDK アプリに含まれるスタックの一覧を確認するコマンドです。</li>
-</ul>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="CDK 作成時の Metadata を削除したい場合" duration="0">
-        <p>CDK で作成される CloudFormation テンプレートファイルには、メタデータが含まれます。<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#version_reporting" target="_blank">バージョンレポート</a>と呼ばれるものです。</p>
-<pre><code language="language-yaml" class="language-yaml">Resources:
-  CDKMetadata:
-    Type: AWS::CDK::Metadata
-    Properties:
-      Analytics: v2:deflate64:H4sIAAAAAAAAEzPUMzQw0TNQdEgsL9ZNTsnWT84vStWrDi5JTM7Wcc7PKy4pKk0u0XFOywtKLc4vLUpOBbGBEimZJZn5ebU6efkpqXpZxfplhmZ6hkCDsoozM3WLSvNKMnNT9YIgNAAtXENFZQAAAA==
-    Metadata:
-      aws:cdk:path: DevioStack/CDKMetadata/Default
-    Condition: CDKMetadataAvailable
-Conditions:
-  CDKMetadataAvailable:
-    Fn::Or:
-      - Fn::Or:
-          - Fn::Equals:
-              - Ref: AWS::Region
-              - af-south-1
-:
-</code></pre>
-<p>これは、次のような目的で付与される内容です。</p>
-<p class="image-container"><img alt="cdk-metadata.png" src="img\\c196590b479360d9.png"></p>
-<p>バージョンレポートを付与したくない場合は、cdk コマンドに以下のオプションを追加して実行します。</p>
-<pre><code language="language-sh" class="language-sh">cdk synth --no-version-reporting --path-metadata false
-</code></pre>
-<p>または、cdk.json に <code>"versionReporting": false,</code> を追加します。</p>
-<p class="image-container"><img alt="versionReporting" src="img\\d33ef30652cc0c8b.png"></p>
-<p>GitHub などからダウンロードしてきた CloudFormation テンプレートにこのような Metadata の記載がある場合は、消しても問題ありません。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="AWS CDK での開発方法" duration="0">
-        <h2 is-upgraded>ディレクトリ構造例</h2>
-<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加した例を示します。これ以外は、必要になったら [lib] 内にサブディレクトリを作成していきます。 ‘★&#39; が付いているディレクトリが追加したディレクトリです。</p>
-<pre><code language="language-text" class="language-text">プロジェクトルートディレクトリ
-    ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
-    ├─ [lib]
-        ├─ ★[stacks]           // スタック定義
-        ├─ ★[resources]        // 各リソースごとの定義。スタックから呼ばれる
-        ├─ ★[utils]            // 共通使用するものを格納
-    ├─ ★[parameters]           // 環境依存情報ファイルを格納（※contextを使わない）
-    ├─ ★[src]                  // Lambda や HTML などのソースを格納
-    ├─ [test]                  // テスト
-    ├─ [node_modules]
-    ├─ cdk.context.json        // 環境依存情報(context)
-    ├─ cdk.json                // デフォルトのappなどが入る
-    ├─ cdk.out                 // cfnなどの出力先。コンパイルされたjsを動かすと出力される
-    ├─ jest.config.js          // テストの設定ファイル
-    ├─ package-lock.json
-    ├─ package.json
-    ├─ tsconfig.json
-    ├─ README.md
-</code></pre>
-<h2 is-upgraded>App 定義</h2>
-<p><code>bin</code> に配置するスタックの依存関係を定義しておくファイルです。</p>
-<pre><code language="language-ts" class="language-ts">#!/usr/bin/env node
-import &#39;source-map-support/register&#39;;
-import * as cdk from &#39;aws-cdk-lib&#39;;
-import { MyStack } from &#39;../lib/stacks/cdk-my-stack&#39;;
-
-const app = new cdk.App();
-
-// env
-const defaultEnv = {
-  account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: process.env.CDK_DEFAULT_REGION,
-};
-
-// よく使うリージョンを定義しておくこともできます
-// see: https://docs.aws.amazon.com/ja_jp/general/latest/gr/rande.html#regional-endpoints
-const useast1Env = {
-// US East (Virginia)
-account: process.env.CDK_DEFAULT_ACCOUNT,
-  region: &#34;us-east-1&#34;, // リージョンを固定したい場合
-};
-
-// 環境識別子の指定 -&gt; 環境識別子はコマンド実行時に &#39;-c project=xxx -c env=xxx&#39; と指定します
-const projectName: string = app.node.tryGetContext(&#39;project&#39;);
-const envName: string = app.node.tryGetContext(&#39;env&#39;);
-
-// （オプション）環境識別子のチェック
-if (!envname.match(/^(dev|test|stage|prod)$/)) {
-  console.warn(&#39;Invalid context. envname must be [dev , test, stage, prod].&#39;)
-  process.exit(1)
-}
-
-// スタック
-const myStack = new MyStack (app, &#39;MyStack &#39;, {
-  stackName: &#34;ここにスタック名を記述&#34;, // 環境識別子をつけたい場合は、`xxxx-${envname}` のようにできます
-  description: &#34;ここにスタックの説明を記述&#34;,
-  // ここからスタックのパラメータ
-  PJName: conf.PJName,
-  EnvName: conf.EnvName,
-  :
-  // ここまでスタックのパラメータ
-
-  // 以下は基本的にどのスタックでも固定で指定する
-  env: defaultEnv,
-  /* リージョンを固定したい場合は次のようにも指定できます。1回限りの利用の場合はこのような指定も許容します。
-  何度も利用する場合は、最初に定義するのを推奨します。
-  env: {
-    account: process.env.CDK_DEFAULT_ACCOUNT,
-    region: &#34;us-east-2&#34;,
-  },
-  */
-  terminationProtection: true, // 削除保護の有効化 -&gt; スタック作成と同時に削除保護を有効にできます。ただし、コンソールから解除しないと cdk destroy できなくなります
-
-});
-
-// スタック
-const myStack2 = ....
-const myStack3 = ....
-const myStack4 = ....
-
-// --------------------------------- Tagging  -------------------------------------y
+      <google-codelab-step label="5. Tips" duration="0">
+        <h2 is-upgraded>5.1. App定義のTips</h2>
+<h3 is-upgraded>5.1.1. 共通するリソースを一括で付与したい</h3>
+<p>App定義の最後に以下を追加することで、App全体で共通してリソースタグを付与することができます。</p>
+<pre><code language="language-ts" class="language-ts">// --------------------------------- Tagging  -------------------------------------
 // ここを指定しておくと、全てのスタックにタグ付けしてくれます。
 // プロジェクト名や環境識別子は共通タグとして定義します。
 cdk.Tags.of(this).add(&#39;Project&#39;, props.PJName);
 cdk.Tags.of(this).add(&#39;Environment&#39;, props.EnvName);
 </code></pre>
-<h2 is-upgraded>App 定義にリリースミス防止策の例</h2>
-<p>デプロイするときは、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code> として、AWS プロファイル名を指定するのが一般的ですが、これだとプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。</p>
+<p>スタック特有のリソースタグを付与する場合は、スタック定義ファイルのほうで指定します。</p>
+<pre><code language="language-ts" class="language-ts">export class MyStack extends Stack {
+  // 別のスタックで参照
+  public readonly xxx: string;
+
+  constructor(scope: Construct, id: string, props: IMyStackProps) {
+    super(scope, id, props);
+
+    // タグを付与する -&gt; スタック内の全てにタグ付けしてくれます。
+    cdk.Tags.of(this).add(&#39;hogehoge&#39;, &#39;foobar&#39;);
+  }
+}
+</code></pre>
+<h3 is-upgraded>5.1.2. パラメータで指定した環境識別子をチェックしたい</h3>
+<pre><code language="language-ts" class="language-ts">// 環境識別子の指定 -&gt; 環境識別子はコマンド実行時に &#39;-c project=xxx -c env=xxx&#39; と指定します
+const projectName: string = app.node.tryGetContext(&#39;project&#39;);
+const envName: string = app.node.tryGetContext(&#39;env&#39;);
+
+// 環境識別子のチェック
+const envNames: string[] = [&#39;dev&#39;, &#39;test&#39;, &#39;stage&#39;, &#39;prod&#39;];
+if (!envNames.includes(envName)) {
+  console.error(`Invalid environment specified. Please use one of the following: ${envNames.join(&#39;, &#39;)}.`);
+  process.exit(1);
+}
+</code></pre>
+<h3 is-upgraded>5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</h3>
+<p>デプロイするときは、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code> として、AWS プロファイル名を指定するのが一般的ですが、これだと環境識別子やプロファイル名を間違えてしまった場合、間違った環境にデプロイされてしまう危険があります。</p>
 <p>コンソール上で注意喚起のメッセージがあると、それだけで気付くことがありミス防止にもなります。</p>
-<p>その方法は、env で与えられる環境によって、メッセージを追加する方法です。</p>
+<p>具体的には env で与えられる環境によって、メッセージを表示する方法です。</p>
 <p><code>prod</code> とした環境の場合には、次のようにコンソールに表示されます。</p>
 <p class="image-container"><img alt="CAUTION" src="img\\2af251baa121141b.png"></p>
 <pre><code language="language-ts" class="language-ts">// 文字色
@@ -485,38 +824,307 @@ if (isProduction) {
   console.log(`${color_red}!!!!!!!!!! CAUTION !!!!!!!!!!${color_reset}`);
 }
 </code></pre>
-<h2 is-upgraded>スタック定義ファイルの基本構造</h2>
-<p><code>lib/stacks</code> に配置するスタック定義ファイルです。</p>
-<pre><code language="language-ts" class="language-ts">import { Stack, StackProps , CfnMapping} from &#39;aws-cdk-lib&#39;;
-import { Construct } from &#39;constructs&#39;;
-import * as cdk from &#39;aws-cdk-lib&#39;;
-import { // ここにリソース作成に必要なモジュールを列挙します
-  aws_ec2 as ec2,
-  aws_s3 as s3,
-    :
-} from &#39;aws-cdk-lib&#39;;
+<h3 is-upgraded>5.1.4.  スタックの削除を防止したい</h3>
+<p>CloudFormationにある<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/using-cfn-protect-stacks.html" target="_blank">スタック削除</a>をAWS CDKから指定する方法です。 具体的には、<code>terminationProtection: true</code>を指定します。こうすることで、スタック作成と同時に、削除保護を有効にできます。誤って<code>cdk deploy</code>してしまうこともありません。 ただし、本当に削除したい場合はマネジメントコンソールやAWS CLI（<a href="https://docs.aws.amazon.com/cli/latest/reference/cloudformation/update-termination-protection.html" target="_blank">update-termination-protection</a>）から削除保護を解除する必要があります。</p>
+<pre><code language="language-ts" class="language-ts">// スタック
+const myStack = new MyStack (app, &#39;MySample &#39;, {
+  terminationProtection: true, // 削除保護の有効化
+});
+</code></pre>
+<h3 is-upgraded>5.1.5. リージョンの指定を変数化</h3>
+<p>複数のスタックを管理する場合は、リージョンを毎回指定するのではなくまとめて変数化しておくと便利です。</p>
+<pre><code language="language-ts" class="language-ts">// env
+const defaultEnv = {
+  account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: process.env.CDK_DEFAULT_REGION,
+};
 
-interface IMyStackProps extends StackProps {
-  // スタック実行時のパラメータを指定
-  readonly PJName: string;
-  readonly EnvName: string;
-   :
+// see: https://docs.aws.amazon.com/ja_jp/general/latest/gr/rande.html#regional-endpoints
+const useast1Env = {
+// US East (Virginia)
+account: process.env.CDK_DEFAULT_ACCOUNT,
+  region: &#34;us-east-1&#34;, // リージョンを固定したい場合
+};
+
+// stack1はデフォルトリージョン
+const stack1 = new MyStack (app, &#39;Stack1&#39;, {
+  env: defaultEnv,
+});
+
+// stack2はバージニア北部リージョン
+const stack2 = new MyStack (app, &#39;Stack2 &#39;, {
+  env: useast1Env,
+});
+</code></pre>
+<h2 is-upgraded>5.2. その他Tips</h2>
+<h3 is-upgraded>5.2.1. 環境識別子とプロファイル名の二重指定をやめる</h3>
+<p>「5.1.3. 本番環境（prod）リリース時に注意喚起してミスを防止策したい」では、<code>cdk deploy MyStack -c env=dev --profile xxxxx</code>のようにしましたが、これでは<code>profile</code>の指定誤りを検知できません。 具体的には、<code>package.json</code>に以下の定義をして、<code>profile</code>を動的に指定できるようにします。 そのためには、<code>.aws\credentials</code>に、<code>--profile %npm_config_project%-%npm_config_env%"</code>で指定できる形式のプロファイルを追加しておきます。</p>
+<pre><code language="language-json" class="language-json">{
+  :
+  &#34;scripts&#34;: {
+    &#34;build&#34;: &#34;tsc&#34;,
+    &#34;watch&#34;: &#34;tsc -w&#34;,
+    &#34;test&#34;: &#34;jest&#34;,
+    &#34;cdk&#34;: &#34;cdk&#34;,
+    &#34;cdk:synth&#34;: &#34;cdk synth --version-reporting false --path-metadata false --asset-metadata false -c project=%npm_config_project% -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env%&#34;,
+    &#34;cdk:diff:all&#34;: &#34;cdk diff --all --version-reporting false --path-metadata false --asset-metadata false -c project=%npm_config_project% -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env%&#34;,
+    &#34;cdk:deploy:all&#34;: &#34;cdk deploy --all --version-reporting false --path-metadata false --asset-metadata false -c project=%npm_config_project% -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env%&#34;,
+    &#34;cdk:destroy:all&#34;: &#34;cdk destroy --all -c project=%npm_config_project% -c env=%npm_config_env% --profile %npm_config_project%-%npm_config_env%&#34;
+  },
+:
 }
+</code></pre>
+<h3 is-upgraded>5.2.2. AWS CDK 作成時の Metadata を削除したい場合</h3>
+<p>AWS CDK で作成される CloudFormation テンプレートファイルには、メタデータが含まれます。<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/cli.html#version_reporting" target="_blank">バージョンレポート</a>と呼ばれるものです。</p>
+<pre><code language="language-yaml" class="language-yaml">Resources:
+  CDKMetadata:
+    Type: AWS::CDK::Metadata
+    Properties:
+      Analytics: v2:deflate64:H4sIAAAAAAAAEzPUMzQw0TNQdEgsL9ZNTsnWT84vStWrDi5JTM7Wcc7PKy4pKk0u0XFOywtKLc4vLUpOBbGBEimZJZn5ebU6efkpqXpZxfplhmZ6hkCDsoozM3WLSvNKMnNT9YIgNAAtXENFZQAAAA==
+    Metadata:
+      aws:cdk:path: MyStack/CDKMetadata/Default
+    Condition: CDKMetadataAvailable
+Conditions:
+  CDKMetadataAvailable:
+    Fn::Or:
+      - Fn::Or:
+          - Fn::Equals:
+              - Ref: AWS::Region
+              - af-south-1
+:
+</code></pre>
+<p>これは、次のような目的で付与される内容です。</p>
+<p class="image-container"><img alt="cdk-metadata.png" src="img\\c196590b479360d9.png"></p>
+<p>バージョンレポートを付与したくない場合は、cdk コマンドに以下のオプションを追加して実行します。</p>
+<pre><code language="language-sh" class="language-sh">cdk synth --no-version-reporting --path-metadata false
+</code></pre>
+<p>または、cdk.json に <code>"versionReporting": false,</code> を追加します。</p>
+<p class="image-container"><img alt="versionReporting" src="img\\d33ef30652cc0c8b.png"></p>
+<p>GitHub などからダウンロードしてきた CloudFormation テンプレートにこのような Metadata の記載がある場合は、消しても問題ありません。</p>
 
-export class MyStack extends Stack {
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="6. cdk-nagによるセキュリティとコンプライアンスの強化" duration="0">
+        <p>「Amazon Web Services ブログ&gt;<a href="https://aws.amazon.com/jp/blogs/news/manage-application-security-and-compliance-with-the-aws-cloud-development-kit-and-cdk-nag/" target="_blank">AWS Cloud Development Kit と cdk-nag でアプリケーションのセキュリティとコンプライアンスを管理する</a>」にも紹介されている「cdk-nag」を使ったセキュリティとコンプライアンスの強化を行う方法です。</p>
+<h2 is-upgraded>6.1. cdk-nagとは</h2>
+<p><code>cdk-nag</code>とは「<a href="https://github.com/stelligent/cfn_nag" target="_blank">cfn_nag</a>」に影響された静的解析ツールです。</p>
+<p>GitHubリポジトリは<a href="https://github.com/cdklabs/cdk-nag" target="_blank">こちら</a></p>
+<h2 is-upgraded>6.2. 導入方法</h2>
+<p>次のコマンドで cdk-nag パッケージを開発依存関係（devDependencies）としてインストールします。</p>
+<pre><code language="language-sh" class="language-sh">npm install cdk-nag --save-dev
+or
+npm install cdk-nag -D
+</code></pre>
+<h2 is-upgraded>6.3. 実装方法</h2>
+<p>App定義(./bin/xxxxxx.ts)に次のように実装します。 このように指定することで、AWS Solutionsルールに準拠しているか確認するようにできます。</p>
+<pre><code language="language-ts" class="language-ts">import &#34;source-map-support/register&#34;;
+import * as cdk from &#34;aws-cdk-lib&#34;;
+import { AwsSolutionsChecks } from &#34;cdk-nag&#34;;
+import { Stack1 } from &#34;../lib/stack1&#34;;
+
+const app = new cdk.App();
+cdk.Aspects.of(app).add(new AwsSolutionsChecks());
+
+const stack1 = new Stack1(app,&#39;Stack1&#39;,{
+  // ここにパラメータを指定
+});
+</code></pre>
+<p>次のコマンドを実行することでルールに沿っているかどうかをチェックできます。</p>
+<pre><code language="language-sh" class="language-sh">cdk synth
+</code></pre>
+<p>違反しているルールがある場合はつぎのように表示されます。</p>
+<pre><code language="language-text" class="language-text">[Error at /CdkTestStack/Bucket/Resource] AwsSolutions-S1: The S3 Bucket has server access logs disabled. The bucket should have server access logging enabled to provide detailed records for the requests that are made to the bucket.
+
+[Error at /CdkTestStack/Bucket/Resource] AwsSolutions-S2: The S3 Bucket does not have public access restricted and blocked. The bucket should have public access restricted and blocked to prevent unauthorized access.
+
+[Error at /CdkTestStack/Bucket/Resource] AwsSolutions-S3: The S3 Bucket does not default encryption enabled. The bucket should minimally have SSE enabled to help protect data-at-rest.
+
+[Error at /CdkTestStack/Bucket/Resource] AwsSolutions-S10: The S3 Bucket does not require requests to use SSL. You can use HTTPS (TLS) to help prevent potential attackers from eavesdropping on or manipulating network traffic using person-in-the-middle or similar attacks. You should allow only encrypted connections over HTTPS (TLS) using the aws:SecureTransport condition on Amazon S3 bucket policies.
+
+Found errors
+</code></pre>
+<p>対応するには、該当するソースを修正します。例えば、<code>AwsSolutions-S3</code>に対応するには、<code>enforceSSL: true</code>を指定します。（enforceSSLは未指定の場合、デフォルトがfalseです。）</p>
+<p>※現在は、<code>AwsSolutions-S3</code>のルールが削除されています。</p>
+<pre><code language="language-ts" class="language-ts">const bucket = new Bucket(this, &#39;MyBucket&#39;, {
+  :
++  enforceSSL: true
+  }
+)
+</code></pre>
+<h2 is-upgraded>6.4. Rules Pack</h2>
+<p>チェックできるルールはGitHubリポジトリの<a href="https://github.com/cdklabs/cdk-nag/blob/main/RULES.md" target="_blank">RULES.md</a>に記載があるように、以下の5種類になります。</p>
+<ul>
+<li><a href="https://github.com/cdklabs/cdk-nag/blob/main/RULES.md#awssolutions" target="_blank">AWS Solutions</a></li>
+<li><a href="https://github.com/cdklabs/cdk-nag/blob/main/RULES.md#hipaa-security" target="_blank">HIPAA security</a></li>
+<li><a href="https://github.com/cdklabs/cdk-nag/blob/main/RULES.md#nist-800-53-rev-4" target="_blank">NIST 800-53 rev 4</a></li>
+<li><a href="https://github.com/cdklabs/cdk-nag/blob/main/RULES.md#nist-800-53-rev-5" target="_blank">NIST 800-53 rev 5</a></li>
+<li><a href="https://github.com/cdklabs/cdk-nag/blob/main/RULES.md#pci-dss-321" target="_blank">Payment Card Industry Data Security Standard (PCI DSS) 3.2.1</a></li>
+</ul>
+<p>使用するには、importでルールを指定します。</p>
+<pre><code language="language-ts" class="language-ts">import {
+  AwsSolutionsChecks,
+  HIPAASecurityChecks,
+  NIST80053R4Checks,
+  NIST80053R5Checks,
+  PCIDSS321Checks,
+} from &#39;cdk-nag&#39;;
+
+Aspects.of(app).add(new AwsSolutionsChecks());
+Aspects.of(app).add(new HIPAASecurityChecks());
+Aspects.of(app).add(new NIST80053R4Checks());
+Aspects.of(app).add(new NIST80053R5Checks());
+Aspects.of(app).add(new PCIDSS321Checks());
+</code></pre>
+<p>ルールには、パラメータを指定することができます。</p>
+<pre><code language="language-ts" class="language-ts">Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
+</code></pre>
+<h2 is-upgraded>6.5. エラーの抑止</h2>
+<p>cdk-nagでチェックされるルールは、あくまでベストプラクティスに則ったものであり、特定のユースケースでは除外したい場合もあります。 そのような場合、<code>NagSuppressions</code>を使用することで除外することができます。</p>
+<p>特定のスタック(./lib/stacks/xxxxx.ts)で次のように除外するルールIDを指定します。</p>
+<pre><code language="language-ts" class="language-ts">export class MyStack extends Stack {
   // 別のスタックで参照
   public readonly xxx: string;
 
   constructor(scope: Construct, id: string, props: IMyStackProps) {
     super(scope, id, props);
 
+    const appLogsBucket = new Bucket(this, &#39;AppLogsBucket&#39;, { enforceSSL: true })
 
-    // タグを付与する -&gt; スタック内の全てにタグ付けしてくれます。
-    // 基本的にスタック固有のタグのみを指定し、全体で共通するものは、App 定義のほうでタグを付与します。
-    cdk.Tags.of(this).add(&#39;hogehoge&#39;, &#39;foobar&#39;);
++    NagSuppressions.addResourceSuppressions(this.bucket, [
++      {
++        // サーバーアクセスログが無効
++        // Reason: アプリログには不要とする
++        id: &#39;AwsSolutions-S1&#39;,
++        reason: &#39;Demonstrate a stack level suppression.&#39;
++      },
++    ]);
   }
 }
 </code></pre>
+<h2 is-upgraded>6.6. テスト実施方法</h2>
+<p>以下は、テストコード(./test/xxxxx.text.ts)の例になります。</p>
+<pre><code language="language-ts" class="language-ts">import { Annotations, Match } from &#34;aws-cdk-lib/assertions&#34;;
+import { App, Aspects, Stack } from &#34;aws-cdk-lib&#34;;
+import { Stack1 } from &#34;../lib/stack1&#34;;
+import { AwsSolutionsChecks } from &#34;cdk-nag&#34;;
+
+describe(&#34;cdk-nag Aws Solutions Pack&#34;, () =&gt; {
+  let stack: Stack;
+  let app: App;
+  beforeAll(() =&gt; {
+    app = new App();
+    stack = new Stack1(app, &#34;test-stack&#34;,{
+      // スタックパラメータ
+    });
+
+    Aspects.of(stack).add(new AwsSolutionsChecks());
+  });
+
+  test(&#34;No unsuppressed Warnings&#34;, () =&gt; {
+    const Warnings = Annotations.fromStack(stack).findWarning(
+      &#34;*&#34;,
+      Match.stringLikeRegexp(&#34;AwsSolutions-.*&#34;)
+    );
+    expect(Warnings).toHaveLength(0);
+  });
+
+  test(&#34;No unsuppressed Errors&#34;, () =&gt; {
+    const errors = Annotations.fromStack(stack).findError(
+      &#34;*&#34;,
+      Match.stringLikeRegexp(&#34;AwsSolutions-.*&#34;)
+    );
+    expect(errors).toHaveLength(0);
+  });
+});
+</code></pre>
+<h2 is-upgraded>6.7. 【発展】CDK-NAGへのカスタムルールの追加</h2>
+<p>CDK-NAGを使ったカスタムルールを追加する方法です。<code>NagPack</code>をextendsしたクラスを定義することで、組織などで規定されている独自ルールに対するチェックが実施できます。</p>
+<p>例えば、S3やEC2に独自のタグを付与しなければならないルールがあった場合のコード例は次のとおりです。</p>
+<pre><code language="language-ts" class="language-ts">import { NagPack, NagMessageLevel,NagPackProps } from &#39;cdk-nag&#39;;
+import * as cdk from &#39;aws-cdk-lib&#39;;
+import { IConstruct } from &#39;constructs&#39;;;
+import {
+    aws_ec2 as ec2,
+    aws_s3 as s3
+ } from &#39;aws-cdk-lib&#39;;
+
+export class CustomCdkNagRules extends NagPack {
+    constructor(props?: NagPackProps) {
+        super(props);
+        this.packName = &#39;MyCompanyRules&#39;;
+      }
+    visit(node: IConstruct): void {
+    if (node instanceof cdk.CfnResource) {
+        // S3バケットに特定のタグが必要というカスタムルール
+        this.applyRule({
+            ruleSuffixOverride: &#39;S3BucketTaggingRule&#39;, // The rule ID.
+            info: &#39;MyCompanyRule-S3-TAG-HOGEHOGE&#39;, //Why the rule was triggered.
+            explanation: &#39;S3 バケットには hogehoge タグが必要です&#39;, // Why the rule exists.
+            rule: (node: IConstruct) =&gt; {
+                if (node instanceof s3.CfnBucket) {
+                    // タグの存在確認ロジック
+                    const tags = node.tags?.renderTags();
+                    if (!tags || !tags.some((tag: { key: string }) =&gt; tag.key === &#39;hogehoge&#39;)) {
+                    return [node.logicalId];
+                    }
+                }
+                return [];
+            },
+            level: NagMessageLevel.ERROR, // The annotations message level to apply to the rule if triggered.
+            node: node,
+        });
+        // EC2に特定のタグが必要というカスタムルール
+        this.applyRule({
+            ruleSuffixOverride: &#39;EC2TaggingRule&#39;, // The rule ID.
+            info: &#39;MyCompanyRule-EC2-TAG-FOOBAR&#39;, //Why the rule was triggered.
+            explanation: &#39;EC2インスタンスには foobar タグが必要です&#39;, // Why the rule exists.
+            rule: (node: IConstruct) =&gt; {
+                if (node instanceof ec2.CfnInstance) {
+                    // タグの存在確認ロジック
+                    const tags = node.tags?.renderTags();
+                    if (!tags || !tags.some((tag: { key: string }) =&gt; tag.key === &#39;foobar&#39;)) {
+                    return [node.logicalId];
+                    }
+                }
+                return [];
+            },
+            level: NagMessageLevel.ERROR, // The annotations message level to apply to the rule if triggered.
+            node: node,
+        });
+    }
+  }
+}
+</code></pre>
+<p>チェックを適用するには、<code>AwsSolutionsChecks</code>と同様の方法でインポートして使用します。</p>
+<pre><code language="language-ts" class="language-ts">import { AwsSolutionsChecks } from &#39;cdk-nag&#39;
+import { Aspects } from &#39;aws-cdk-lib&#39;;
+import { CustomCdkNagRules } from &#39;/path/to/custom-cdk-nag-rules&#39;;
+
+// Add the cdk-nag AwsSolutions Pack with extra verbose logging enabled.
+Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }))
+Aspects.of(app).add(new CustomCdkNagRules({ verbose: true }));
+</code></pre>
+<p>実行するとこのようなエラーが表示されるようになります。</p>
+<pre><code language="language-text" class="language-text">[Error at /SampleStack/LogsBucket/S3Bucket/Resource] MyCompanyRules-S3BucketTaggingRule[LogsBucketS3BucketD57C9602]: MyCompanyRule-S3-TAG-HOGEHOGE S3 バケットには hogehoge タグが必要です
+[Error at /SampleStack/EC2Instance1/Resource] MyCompanyRules-EC2TaggingRule[EC2Instance14196AB1A]: MyCompanyRule-EC2-TAG-FOOBAR EC2インスタンスには foobar タグが必要です
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="まとめ" duration="0">
+        <p>AWS CDKは、使い慣れたプログラミング言語を活用してクラウドインフラストラクチャをコードとして定義する強力なフレームワークです。この記事では、AWS CDKの基本概念から高度な使用方法まで幅広く解説しました。 CDKを使用することの主なメリットは以下の通りです：</p>
+<ul>
+<li>静的型付き言語による型安全性と早期のエラー検出</li>
+<li>コード再利用によるベストプラクティスの標準化と品質向上</li>
+<li>プログラミング言語の機能（条件分岐、ループ、抽象化）が活用できる開発生産性</li>
+<li>インフラとアプリケーションコードの統合による一元管理</li>
+<li>組織全体でのスケーリングとガバナンス強化</li>
+</ul>
+<p>特にL2レベルのコンストラクトを使用することで、CloudFormationでは数百行に及ぶコードが数十行で実現でき、可読性と保守性が大幅に向上します。</p>
+<p>また、cdk-nagや、効率的な開発のための命名規則、環境識別方法などの実践的なテクニックを使用することで、大規模なプロジェクトや組織全体でのCDKの活用に役立ちます。</p>
+<p>AWS CDKを適切に活用し、安全で堅牢、かつ効率的なクラウドインフラストラクチャ管理を実現しましょう。</p>
 
 
       </google-codelab-step>
