@@ -693,25 +693,23 @@ export class BucketConstruct extends Construct {
   const template = Template.fromStack(stack);
 
   // THEN
+  // これ以降にテストコードを記述していきます。
   // VPC
   template.resourceCountIs(&#34;AWS::EC2::VPC&#34;, 1);
   template.hasResourceProperties(&#34;AWS::EC2::VPC&#34;, {
     CidrBlock: &#34;10.0.0.0/16&#34;,
   });
-
-  // これ以降にテストコードを記述していきます。
   :
 </code></pre>
 <h4 is-upgraded>記述例①：単純なリソース存在チェック</h4>
-<pre><code language="language-ts" class="language-ts">  // 
-  // Subnet
+<pre><code language="language-ts" class="language-ts">  // Subnet
   template.resourceCountIs(&#34;AWS::EC2::Subnet&#34;, 6);
   // Internet Gateway
   template.resourceCountIs(&#34;AWS::EC2::InternetGateway&#34;, 1);
   template.resourceCountIs(&#34;AWS::EC2::VPCGatewayAttachment&#34;, 1);
 </code></pre>
 <h4 is-upgraded>記述例②：属性値のチェック</h4>
-<pre><code language="language-ts" class="language-ts">  // 
+<pre><code language="language-ts" class="language-ts">  // VPCGatewayAttachment
   template.hasResourceProperties(&#34;AWS::EC2::VPCGatewayAttachment&#34;, {
     VpcId: Match.anyValue(),
     InternetGatewayId: Match.anyValue(),

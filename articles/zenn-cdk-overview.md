@@ -823,20 +823,18 @@ test("create the vpc", () => {
   const template = Template.fromStack(stack);
 
   // THEN
+  // これ以降にテストコードを記述していきます。
   // VPC
   template.resourceCountIs("AWS::EC2::VPC", 1);
   template.hasResourceProperties("AWS::EC2::VPC", {
     CidrBlock: "10.0.0.0/16",
   });
-
-  // これ以降にテストコードを記述していきます。
   :
 ```
 
 ##### 記述例①：単純なリソース存在チェック
 
 ```ts
-  // 
   // Subnet
   template.resourceCountIs("AWS::EC2::Subnet", 6);
   // Internet Gateway
@@ -847,7 +845,7 @@ test("create the vpc", () => {
 ##### 記述例②：属性値のチェック
 
 ```ts
-  // 
+  // VPCGatewayAttachment
   template.hasResourceProperties("AWS::EC2::VPCGatewayAttachment", {
     VpcId: Match.anyValue(),
     InternetGatewayId: Match.anyValue(),
@@ -888,7 +886,6 @@ test("create the vpc", () => {
 テストを実行した結果は次のようになります。
 
 ![jest](/images/cdk/jest.png)
-
 
 ## 5. Tips
 
