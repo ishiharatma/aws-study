@@ -485,6 +485,14 @@ AWS CDK で定義されたスタックを CloudFormation テンプレートに�
 リソースに付与される Metadata を削除したい場合は、`--path-metadata false` オプションを付与します。
 テンプレートは出力せずに、プログラム内に記述した console.log() だけ確認したい場合は、 `--quit` または `-q` オプションを付与します。
 
+```sh
+cdk synth
+or
+cdk synth --version-reporting false --path-metadata false --asset-metadata false
+or
+cdk synth -q
+```
+
 #### 2.2.6. [cdk destroy](https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/ref-cli-cmd-destroy.html)
 
 スタックを削除する場合に利用するコマンドです。
