@@ -49,15 +49,17 @@ published: true
     - [2.3.2.（2025/2/3追記）AWS CDK は AWS CDK CLI と CDK コンストラクトライブラリを分離](#232202523追記aws-cdk-は-aws-cdk-cli-と-cdk-コンストラクトライブラリを分離)
 - [3. AWS CDK での開発方法](#3-aws-cdk-での開発方法)
   - [3.1. AWS CDK開発に必要なもの](#31-aws-cdk開発に必要なもの)
-    - [最低限必要なもの](#最低限必要なもの)
-    - [できれば用意したほうがいいもの](#できれば用意したほうがいいもの)
-  - [3.2. ディレクトリ構造例](#32-ディレクトリ構造例)
-  - [3.3. Construct ID の命名規則](#33-construct-id-の命名規則)
+    - [3.1.1. 知識](#311-知識)
+    - [3.1.2. 環境](#312-環境)
+  - [3.2. 個人的AWS CDKのディレクトリ構造ベストプラクティス](#32-個人的aws-cdkのディレクトリ構造ベストプラクティス)
+  - [3.3. スタックの分割方法](#33-スタックの分割方法)
+    - [3.3.1. スタック分割で困ること](#331-スタック分割で困ること)
+  - [3.4. Construct ID の命名規則](#34-construct-id-の命名規則)
     - [ルール①：Construct IDは`PascalCase`を推奨する](#ルールconstruct-idはpascalcaseを推奨する)
     - [ルール②：Construct IDは`シンプルな名称`とする](#ルールconstruct-idはシンプルな名称とする)
     - [ルール③：別のコンストラクタを呼び出す場合、`同じ意味`のConstruct IDを付与しない](#ルール別のコンストラクタを呼び出す場合同じ意味のconstruct-idを付与しない)
-  - [3.4. Construct ID に関する余談](#34-construct-id-に関する余談)
-    - [3.4.1. Construct ID から論理IDにどのように変換されるか？](#341-construct-id-から論理idにどのように変換されるか)
+  - [3.x. Construct ID に関する余談](#3x-construct-id-に関する余談)
+    - [3.x.1. Construct ID から論理IDにどのように変換されるか？](#3x1-construct-id-から論理idにどのように変換されるか)
 - [4. AWS CDK のテスト方法](#4-aws-cdk-のテスト方法)
   - [4.1. Snapshot test](#41-snapshot-test)
   - [4.2. Unit Test](#42-unit-test)
@@ -621,23 +623,43 @@ AWS CDKで開発する順序は次のとおりです。
 
 ### 3.1. AWS CDK開発に必要なもの
 
-#### 最低限必要なもの
+#### 3.1.1. 知識
+
+知識としてあったほうがいいものは次のとおりです。
+
+- AWSリソース全般に対する基礎知識。認定試験「[AWS Certified Solutions Architect - Associate](https://aws.amazon.com/jp/certification/certified-solutions-architect-associate/)」以上が望ましい
+- CloudFormationテンプレートを使った環境構築経験
+- プログラミング開発経験
+
+#### 3.1.2. 環境
+
+最低限必要なものは次のとおりです。
 
 - AWS CLI v2
 - Node.js
 - テキストエディタ
 
-#### できれば用意したほうがいいもの
+できれば用意したほうがいいものは次のとおりです。
 
 - Git
 - IDE
   - テキストエディタより、VS CodeなどのIDEを使うほうが開発生産性が向上します
 
-### 3.2. ディレクトリ構造例
+### 3.2. 個人的AWS CDKのディレクトリ構造ベストプラクティス
 
 `cdk init --typescript` を実行すると初期ディレクトリが作成されます。
-通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加した例を示します。これ以外は、必要になったら [lib] 内にサブディレクトリを作成していきます。
-'★' が付いているディレクトリは追加例です。
+通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。
+
+しかし、共通で利用したいものなどが出てきたときに分かりにくくなります。
+
+そこで、個人的なディレクトリ構造ベストプラクティスはこのようだと考えます。'★' が付いているディレクトリは標準作成以外で追加したディレクトリです。
+
+ポイントは次のとおりです。
+
+- 環境ごとの動的設定を`cdk.json`ではなく、`parameters`というディレクトリで管理
+- スタック定義を明示的に、`stacks`ディレクトリに配置
+- 共通利用や、スタック定義から呼び出されるものを`utils`や`resources`に分離
+- Lambdaなどのソースを`src`ディレクトリに配置
 
 ```text
 プロジェクトルートディレクトリ
@@ -663,7 +685,34 @@ AWS CDKで開発する順序は次のとおりです。
     ├─ README.md
 ```
 
-### 3.3. Construct ID の命名規則
+### 3.3. スタックの分割方法
+
+「アプリケーションのライフサイクルが異なる」などの理由でスタックを分割することがあると思います。
+分割したスタックが互いに依存していない場合は、積極的に分割することになんの問題もありませんが、スタック間でリソースの参照が発生する場合には、注意が必要です。依存している場合は、スタック分割を最小限にとどめるということを検討してください。
+
+AWS CDKでは以下のような特別な理由を除き、**単一のスタックで構築する**のがよいと考えます。
+
+- 影響範囲を分離したい
+  - 例：あるサービスを削除してもストレージ（監査ログなどの利用）だけは残す可能性がある
+- １つのスタックで管理できる制限を超える
+  - 参照：[CloudFormationのクオータ](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
+
+#### 3.3.1. スタック分割で困ること
+
+スタックを分割することで困ることの１つにスタック間でリソースを参照しているケースが挙げられます。
+このスタック間の参照のことを「[クロススタック参照](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html)」といい、CloudFormationでも利用可能で大変便利な機能です。
+
+しかし、参照元（親）と参照先（子）の依存関係を強めてしまい、親側でリソースを更新や削除をしたくでも、子側で参照していると更新や削除を実施できない。といったことが発生します。
+このような「デッドロック」状態を解決する方法はありますが、運用が複雑化します。
+このリスクを回避するため、スタック分割は慎重に検討する必要があります。
+
+「[CDK tips, part 3 – how to unblock cross-stack references](https://www.endoflineblog.com/cdk-tips-03-how-to-unblock-cross-stack-references)」という記事に具体的な方法が解説されていますが、複雑な手順です。
+
+スタック分割については、以下のドキュメントを参照するとよいでしょう。
+
+[参考：AWS CloudFormationユーザーガイド>ライフサイクルと所有権によるスタックの整理](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/best-practices.html#organizingstacks)
+
+### 3.4. Construct ID の命名規則
 
 Construct ID とは、以下のように第二引数で指定する文字列のことをいいます。この文字列はコンストラクトのスコープ内で一意である必要があります。
 
@@ -733,9 +782,9 @@ export class BucketConstruct extends Construct {
 }
 ```
 
-### 3.4. Construct ID に関する余談
+### 3.x. Construct ID に関する余談
 
-#### 3.4.1. Construct ID から論理IDにどのように変換されるか？
+#### 3.x.1. Construct ID から論理IDにどのように変換されるか？
 
 Construct IDと論理IDは完全一致するものではなく、Construct IDから論理IDに変換されるとハッシュ値が付与されます。
 

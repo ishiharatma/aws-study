@@ -83,19 +83,23 @@
 </li>
 <li><a href="#3-aws-cdk-%E3%81%A7%E3%81%AE%E9%96%8B%E7%99%BA%E6%96%B9%E6%B3%95" target="_blank">3. AWS CDK での開発方法</a><ul>
 <li><a href="#31-aws-cdk%E9%96%8B%E7%99%BA%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%82%E3%81%AE" target="_blank">3.1. AWS CDK開発に必要なもの</a><ul>
-<li><a href="#%E6%9C%80%E4%BD%8E%E9%99%90%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%82%E3%81%AE" target="_blank">最低限必要なもの</a></li>
-<li><a href="#%E3%81%A7%E3%81%8D%E3%82%8C%E3%81%B0%E7%94%A8%E6%84%8F%E3%81%97%E3%81%9F%E3%81%BB%E3%81%86%E3%81%8C%E3%81%84%E3%81%84%E3%82%82%E3%81%AE" target="_blank">できれば用意したほうがいいもの</a></li>
+<li><a href="#311-%E7%9F%A5%E8%AD%98" target="_blank">3.1.1. 知識</a></li>
+<li><a href="#312-%E7%92%B0%E5%A2%83" target="_blank">3.1.2. 環境</a></li>
 </ul>
 </li>
-<li><a href="#32-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0%E4%BE%8B" target="_blank">3.2. ディレクトリ構造例</a></li>
-<li><a href="#33-construct-id-%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87" target="_blank">3.3. Construct ID の命名規則</a><ul>
+<li><a href="#32-%E5%80%8B%E4%BA%BA%E7%9A%84aws-cdk%E3%81%AE%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AA%E6%A7%8B%E9%80%A0%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">3.2. 個人的AWS CDKのディレクトリ構造ベストプラクティス</a></li>
+<li><a href="#33-%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95" target="_blank">3.3. スタックの分割方法</a><ul>
+<li><a href="#331-%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E5%88%86%E5%89%B2%E3%81%A7%E5%9B%B0%E3%82%8B%E3%81%93%E3%81%A8" target="_blank">3.3.1. スタック分割で困ること</a></li>
+</ul>
+</li>
+<li><a href="#34-construct-id-%E3%81%AE%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87" target="_blank">3.4. Construct ID の命名規則</a><ul>
 <li><a href="#%E3%83%AB%E3%83%BC%E3%83%ABconstruct-id%E3%81%AFpascalcase%E3%82%92%E6%8E%A8%E5%A5%A8%E3%81%99%E3%82%8B" target="_blank">ルール①：Construct IDは<code>PascalCase</code>を推奨する</a></li>
 <li><a href="#%E3%83%AB%E3%83%BC%E3%83%ABconstruct-id%E3%81%AF%E3%82%B7%E3%83%B3%E3%83%97%E3%83%AB%E3%81%AA%E5%90%8D%E7%A7%B0%E3%81%A8%E3%81%99%E3%82%8B" target="_blank">ルール②：Construct IDは<code>シンプルな名称</code>とする</a></li>
 <li><a href="#%E3%83%AB%E3%83%BC%E3%83%AB%E5%88%A5%E3%81%AE%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99%E5%A0%B4%E5%90%88%E5%90%8C%E3%81%98%E6%84%8F%E5%91%B3%E3%81%AEconstruct-id%E3%82%92%E4%BB%98%E4%B8%8E%E3%81%97%E3%81%AA%E3%81%84" target="_blank">ルール③：別のコンストラクタを呼び出す場合、<code>同じ意味</code>のConstruct IDを付与しない</a></li>
 </ul>
 </li>
-<li><a href="#34-construct-id-%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E4%BD%99%E8%AB%87" target="_blank">3.4. Construct ID に関する余談</a><ul>
-<li><a href="#341-construct-id-%E3%81%8B%E3%82%89%E8%AB%96%E7%90%86id%E3%81%AB%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%95%E3%82%8C%E3%82%8B%E3%81%8B" target="_blank">3.4.1. Construct ID から論理IDにどのように変換されるか？</a></li>
+<li><a href="#3x-construct-id-%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E4%BD%99%E8%AB%87" target="_blank">3.x. Construct ID に関する余談</a><ul>
+<li><a href="#3x1-construct-id-%E3%81%8B%E3%82%89%E8%AB%96%E7%90%86id%E3%81%AB%E3%81%A9%E3%81%AE%E3%82%88%E3%81%86%E3%81%AB%E5%A4%89%E6%8F%9B%E3%81%95%E3%82%8C%E3%82%8B%E3%81%8B" target="_blank">3.x.1. Construct ID から論理IDにどのように変換されるか？</a></li>
 </ul>
 </li>
 </ul>
@@ -537,13 +541,21 @@ from &#34;aws-cdk-lib&#34;;
 </li>
 </ul>
 <h2 is-upgraded>3.1. AWS CDK開発に必要なもの</h2>
-<h3 is-upgraded>最低限必要なもの</h3>
+<h3 is-upgraded>3.1.1. 知識</h3>
+<p>知識としてあったほうがいいものは次のとおりです。</p>
+<ul>
+<li>AWSリソース全般に対する基礎知識。認定試験「<a href="https://aws.amazon.com/jp/certification/certified-solutions-architect-associate/" target="_blank">AWS Certified Solutions Architect - Associate</a>」以上が望ましい</li>
+<li>CloudFormationテンプレートを使った環境構築経験</li>
+<li>プログラミング開発経験</li>
+</ul>
+<h3 is-upgraded>3.1.2. 環境</h3>
+<p>最低限必要なものは次のとおりです。</p>
 <ul>
 <li>AWS CLI v2</li>
 <li>Node.js</li>
 <li>テキストエディタ</li>
 </ul>
-<h3 is-upgraded>できれば用意したほうがいいもの</h3>
+<p>できれば用意したほうがいいものは次のとおりです。</p>
 <ul>
 <li>Git</li>
 <li>IDE <ul>
@@ -551,8 +563,17 @@ from &#34;aws-cdk-lib&#34;;
 </ul>
 </li>
 </ul>
-<h2 is-upgraded>3.2. ディレクトリ構造例</h2>
-<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。しかし、共通で利用したいものなどが出てきたときに分かりにくくなるので、[stacks] と [utils] などのディレクトリを追加した例を示します。これ以外は、必要になったら [lib] 内にサブディレクトリを作成していきます。 ‘★&#39; が付いているディレクトリは追加例です。</p>
+<h2 is-upgraded>3.2. 個人的AWS CDKのディレクトリ構造ベストプラクティス</h2>
+<p><code>cdk init --typescript</code> を実行すると初期ディレクトリが作成されます。 通常は、[lib] ディレクトリにスタックの構成ファイルを配置します。</p>
+<p>しかし、共通で利用したいものなどが出てきたときに分かりにくくなります。</p>
+<p>そこで、個人的なディレクトリ構造ベストプラクティスはこのようだと考えます。‘★&#39; が付いているディレクトリは標準作成以外で追加したディレクトリです。</p>
+<p>ポイントは次のとおりです。</p>
+<ul>
+<li>環境ごとの動的設定を<code>cdk.json</code>ではなく、<code>parameters</code>というディレクトリで管理</li>
+<li>スタック定義を明示的に、<code>stacks</code>ディレクトリに配置</li>
+<li>共通利用や、スタック定義から呼び出されるものを<code>utils</code>や<code>resources</code>に分離</li>
+<li>Lambdaなどのソースを<code>src</code>ディレクトリに配置</li>
+</ul>
 <pre><code language="language-text" class="language-text">プロジェクトルートディレクトリ
     ├─ [bin]                   // App定義。複数のスタックの依存関係などを定義
     ├─ [lib]
@@ -575,7 +596,26 @@ from &#34;aws-cdk-lib&#34;;
     ├─ tsconfig.json
     ├─ README.md
 </code></pre>
-<h2 is-upgraded>3.3. Construct ID の命名規則</h2>
+<h2 is-upgraded>3.3. スタックの分割方法</h2>
+<p>「アプリケーションのライフサイクルが異なる」などの理由でスタックを分割することがあると思います。 分割したスタックが互いに依存していない場合は、積極的に分割することになんの問題もありませんが、スタック間でリソースの参照が発生する場合には、注意が必要です。依存している場合は、スタック分割を最小限にとどめるということを検討してください。</p>
+<p>AWS CDKでは以下のような特別な理由を除き、<strong>単一のスタックで構築する</strong>のがよいと考えます。</p>
+<ul>
+<li>影響範囲を分離したい <ul>
+<li>例：あるサービスを削除してもストレージ（監査ログなどの利用）だけは残す可能性がある</li>
+</ul>
+</li>
+<li>１つのスタックで管理できる制限を超える <ul>
+<li>参照：<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html" target="_blank">CloudFormationのクオータ</a></li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>3.3.1. スタック分割で困ること</h3>
+<p>スタックを分割することで困ることの１つにスタック間でリソースを参照しているケースが挙げられます。 このスタック間の参照のことを「<a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/walkthrough-crossstackref.html" target="_blank">クロススタック参照</a>」といい、CloudFormationでも利用可能で大変便利な機能です。</p>
+<p>しかし、参照元（親）と参照先（子）の依存関係を強めてしまい、親側でリソースを更新や削除をしたくでも、子側で参照していると更新や削除を実施できない。といったことが発生します。 このような「デッドロック」状態を解決する方法はありますが、運用が複雑化します。 このリスクを回避するため、スタック分割は慎重に検討する必要があります。</p>
+<p>「<a href="https://www.endoflineblog.com/cdk-tips-03-how-to-unblock-cross-stack-references" target="_blank">CDK tips, part 3 – how to unblock cross-stack references</a>」という記事に具体的な方法が解説されていますが、複雑な手順です。</p>
+<p>スタック分割については、以下のドキュメントを参照するとよいでしょう。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/best-practices.html#organizingstacks" target="_blank">参考：AWS CloudFormationユーザーガイド&gt;ライフサイクルと所有権によるスタックの整理</a></p>
+<h2 is-upgraded>3.4. Construct ID の命名規則</h2>
 <p>Construct ID とは、以下のように第二引数で指定する文字列のことをいいます。この文字列はコンストラクトのスコープ内で一意である必要があります。</p>
 <pre><code language="language-ts" class="language-ts">export class Stack1 extends cdk.Stack {
   constructor(scope: Construct, id: string, props: Stack1Props) {
@@ -623,8 +663,8 @@ export class BucketConstruct extends Construct {
   }
 }
 </code></pre>
-<h2 is-upgraded>3.4. Construct ID に関する余談</h2>
-<h3 is-upgraded>3.4.1. Construct ID から論理IDにどのように変換されるか？</h3>
+<h2 is-upgraded>3.x. Construct ID に関する余談</h2>
+<h3 is-upgraded>3.x.1. Construct ID から論理IDにどのように変換されるか？</h3>
 <p>Construct IDと論理IDは完全一致するものではなく、Construct IDから論理IDに変換されるとハッシュ値が付与されます。</p>
 <p>例えば次のようにS3バケットを作成した場合には、論理IDが「LogsBucket9C4D8843」となっています。</p>
 <pre><code language="language-ts" class="language-ts">const logBucket = new s3.Bucket(this, &#39;LogsBucket&#39;, {});
