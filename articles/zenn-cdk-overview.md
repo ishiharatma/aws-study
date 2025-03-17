@@ -1265,9 +1265,19 @@ Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }));
 cdk-nagでチェックされるルールは、あくまでベストプラクティスに則ったものであり、特定のユースケースでは除外したい場合もあります。
 そのような場合、`NagSuppressions`を使用することで除外することができます。
 
+- addStackSuppressions
+  - スタック全体で除外する場合
+  - または、CDKが自動的に生成するリソースに対して除外する場合
+- addResourceSuppressions
+  - リソースを指定して除外する場合
+- addResourceSuppressionsByPath
+  - リソースのパス名を指定します。
+
 特定のスタック(./lib/stacks/xxxxx.ts)で次のように除外するルールIDを指定します。
 
 ```ts
+import { NagSuppressions } from "cdk-nag";
+
 export class MyStack extends Stack {
   // 別のスタックで参照
   public readonly xxx: string;
@@ -1276,11 +1286,30 @@ export class MyStack extends Stack {
     super(scope, id, props);
 
     const appLogsBucket = new Bucket(this, 'AppLogsBucket', { enforceSSL: true })
++    // スタック全体で指定する場合
++    NagSuppressions.addStackSuppressions(this, [
++      {
++        // サーバーアクセスログが無効
++        id: 'AwsSolutions-S1',
++        reason: 'Demonstrate a stack level suppression.'
++      },
++    ]);
 
++    // リソースを指定する場合
 +    NagSuppressions.addResourceSuppressions(this.bucket, [
 +      {
 +        // サーバーアクセスログが無効
-+        // Reason: アプリログには不要とする
++        id: 'AwsSolutions-S1',
++        reason: 'Demonstrate a stack level suppression.'
++      },
++    ]);
+
++    // リソースパスを指定する場合
++    NagSuppressions.addResourceSuppressionsByPath(this,
++    '/path/to/a/b/c/d/DefaultPolicy/Resource'
++    [
++      {
++        // サーバーアクセスログが無効
 +        id: 'AwsSolutions-S1',
 +        reason: 'Demonstrate a stack level suppression.'
 +      },

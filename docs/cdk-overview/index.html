@@ -1035,8 +1035,25 @@ Aspects.of(app).add(new PCIDSS321Checks());
 </code></pre>
 <h2 is-upgraded>6.5. エラーの抑止</h2>
 <p>cdk-nagでチェックされるルールは、あくまでベストプラクティスに則ったものであり、特定のユースケースでは除外したい場合もあります。 そのような場合、<code>NagSuppressions</code>を使用することで除外することができます。</p>
+<ul>
+<li>addStackSuppressions <ul>
+<li>スタック全体で除外する場合</li>
+<li>または、CDKが自動的に生成するリソースに対して除外する場合</li>
+</ul>
+</li>
+<li>addResourceSuppressions <ul>
+<li>リソースを指定して除外する場合</li>
+</ul>
+</li>
+<li>addResourceSuppressionsByPath <ul>
+<li>リソースのパス名を指定します。</li>
+</ul>
+</li>
+</ul>
 <p>特定のスタック(./lib/stacks/xxxxx.ts)で次のように除外するルールIDを指定します。</p>
-<pre><code language="language-ts" class="language-ts">export class MyStack extends Stack {
+<pre><code language="language-ts" class="language-ts">import { NagSuppressions } from &#34;cdk-nag&#34;;
+
+export class MyStack extends Stack {
   // 別のスタックで参照
   public readonly xxx: string;
 
@@ -1044,11 +1061,30 @@ Aspects.of(app).add(new PCIDSS321Checks());
     super(scope, id, props);
 
     const appLogsBucket = new Bucket(this, &#39;AppLogsBucket&#39;, { enforceSSL: true })
++    // スタック全体で指定する場合
++    NagSuppressions.addStackSuppressions(this, [
++      {
++        // サーバーアクセスログが無効
++        id: &#39;AwsSolutions-S1&#39;,
++        reason: &#39;Demonstrate a stack level suppression.&#39;
++      },
++    ]);
 
++    // リソースを指定する場合
 +    NagSuppressions.addResourceSuppressions(this.bucket, [
 +      {
 +        // サーバーアクセスログが無効
-+        // Reason: アプリログには不要とする
++        id: &#39;AwsSolutions-S1&#39;,
++        reason: &#39;Demonstrate a stack level suppression.&#39;
++      },
++    ]);
+
++    // リソースパスを指定する場合
++    NagSuppressions.addResourceSuppressionsByPath(this,
++    &#39;/path/to/a/b/c/d/DefaultPolicy/Resource&#39;
++    [
++      {
++        // サーバーアクセスログが無効
 +        id: &#39;AwsSolutions-S1&#39;,
 +        reason: &#39;Demonstrate a stack level suppression.&#39;
 +      },
