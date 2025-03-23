@@ -144,7 +144,7 @@ AWS CDKをプロジェクトに導入することで得られる主なメリッ�
 TypeScriptやJavaなどの静的型付き言語を使用することで、CloudFormationでは実行時にしか検出できなかったパラメータミスを、コンパイル時に発見できます。
 これは、大規模プロジェクトほどこの恩恵は大きくなります。
 
-```typescript
+```ts
 // With TypeScript, incorrectly typed parameters are caught during development
 const bucket = new s3.Bucket(this, 'MyBucket', {
     versioned: true,
@@ -162,7 +162,7 @@ const bucket = new s3.Bucket(this, 'MyBucket', {
 - 変更が必要になった場合の一元管理
 
 
-```typescript
+```ts
 export class SecureS3Bucket extends Construct {
     public readonly bucket: s3.IBucket;
     
@@ -202,7 +202,7 @@ AWS CDKは使い慣れたプログラミング言語を使用できます。サ�
 ただし、過度なプログラミング機能への依存は複雑性を高め、保守性が低下します。適度な利用を心がけましょう。
 
 
-```typescript
+```ts
 // Easily implement environment-specific configurations
 const isProd:boolean = app.node.tryGetContext('environment') === 'prod';
 
@@ -287,7 +287,7 @@ CloudFormationでは、次のような特徴があります。
 
 AWS CDKが大幅に削減できる「ボイラープレートコード」とは、プログラミングにおいて繰り返し記述される定型的なコードのことを指します。名前の由来は、かつての新聞業界で何度も再利用された金属製の印刷版（ボイラープレート）から来ています。
 
-CloudFormationのJSONやYAML記述では、以下のようなボイラープレートコードが必要になります：
+CloudFormationのJSONやYAML記述では、以下のようなボイラープレートコードが必要になります。
 
 - リソースタイプの完全修飾名の記述
 - 必須パラメータの明示的な宣言
@@ -619,7 +619,7 @@ AWS CDK CLI と CDK コンストラクトライブラリの分離で以下の影
   - `aws-cdk`のバージョンが`2.174.0`の次から、`2.1000.0`になります。
 2. 依存関係管理の変更: package.jsonでの指定方法が変更
 
-具体的な対応方法としては、以下のようにpackage.jsonを更新します：
+具体的な対応方法としては、以下のようにpackage.jsonを更新します。
 
 以前の指定方法：
 
@@ -647,7 +647,7 @@ AWS CDK CLI と CDK コンストラクトライブラリの分離で以下の影
   }
 ```
 
-この分離による影響を最小化するには、以下のプラクティスを推奨します：
+この分離による影響を最小化するには、以下のプラクティスを推奨します。
 
 1. CI/CD環境では特定のバージョンに固定する
 2. 依存関係を正確に管理する
@@ -872,7 +872,7 @@ Construct IDから論理IDへの変換ロジックが気になる人は、以下
 前回生成された CloudFormation テンプレートと比較して差分をチェックする[スナップショットテスト](https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot)が実施できます。
 スナップショットテストを行うことで、意図しないテンプレートへの変更があるかどうかを検知できます。
 
-例えば以下のようなケースで効果を発揮します：
+例えば以下のようなケースで効果を発揮します。
 
 - AWS CDKのバージョンアップによる差分チェック
 - リファクタリング前後の差分チェック
@@ -1145,7 +1145,7 @@ const stack2 = new MyStack (app, 'Stack2 ', {
 
 マルチリージョンへのデプロイで、リージョンごとの設定を定義できます。
 
-```typescript
+```ts
 const regionConfig = {
   'us-east-1': {
     name: 'Virginia',

@@ -178,7 +178,7 @@
 <p>AWS CDKをプロジェクトに導入することで得られる主なメリットは以下の通りです。</p>
 <h3 is-upgraded>1. 型安全性によるエラー検出</h3>
 <p>TypeScriptやJavaなどの静的型付き言語を使用することで、CloudFormationでは実行時にしか検出できなかったパラメータミスを、コンパイル時に発見できます。 これは、大規模プロジェクトほどこの恩恵は大きくなります。</p>
-<pre><code language="language-typescript" class="language-typescript">// With TypeScript, incorrectly typed parameters are caught during development
+<pre><code language="language-ts" class="language-ts">// With TypeScript, incorrectly typed parameters are caught during development
 const bucket = new s3.Bucket(this, &#39;MyBucket&#39;, {
     versioned: true,
     // If you try to set an invalid property, TypeScript will flag it
@@ -192,7 +192,7 @@ const bucket = new s3.Bucket(this, &#39;MyBucket&#39;, {
 <li>セキュリティ設計の標準化</li>
 <li>変更が必要になった場合の一元管理</li>
 </ul>
-<pre><code language="language-typescript" class="language-typescript">export class SecureS3Bucket extends Construct {
+<pre><code language="language-ts" class="language-ts">export class SecureS3Bucket extends Construct {
     public readonly bucket: s3.IBucket;
     
     constructor(scope: Construct, id: string, props?: s3.BucketProps) {
@@ -226,7 +226,7 @@ const bucket = new s3.Bucket(this, &#39;MyBucket&#39;, {
 <li>単体テスト、統合テストなどの既存テスト手法が適用できる</li>
 </ul>
 <p>特に価値が高いのは、条件分岐によって環境による違いなどを簡単に実装できる点です。 ただし、過度なプログラミング機能への依存は複雑性を高め、保守性が低下します。適度な利用を心がけましょう。</p>
-<pre><code language="language-typescript" class="language-typescript">// Easily implement environment-specific configurations
+<pre><code language="language-ts" class="language-ts">// Easily implement environment-specific configurations
 const isProd:boolean = app.node.tryGetContext(&#39;environment&#39;) === &#39;prod&#39;;
 
 const bucket = new s3.Bucket(this, &#39;DataBucket&#39;, {
@@ -292,7 +292,7 @@ const bucket = new s3.Bucket(this, &#39;DataBucket&#39;, {
 <p class="image-container"><img alt="sample-cdk-ts" src="img\\c8087bc38dda9792.png"></p>
 <h2 is-upgraded>補足：ボイラープレートコードについて</h2>
 <p>AWS CDKが大幅に削減できる「ボイラープレートコード」とは、プログラミングにおいて繰り返し記述される定型的なコードのことを指します。名前の由来は、かつての新聞業界で何度も再利用された金属製の印刷版（ボイラープレート）から来ています。</p>
-<p>CloudFormationのJSONやYAML記述では、以下のようなボイラープレートコードが必要になります：</p>
+<p>CloudFormationのJSONやYAML記述では、以下のようなボイラープレートコードが必要になります。</p>
 <ul>
 <li>リソースタイプの完全修飾名の記述</li>
 <li>必須パラメータの明示的な宣言</li>
@@ -537,7 +537,7 @@ from &#34;aws-cdk-lib&#34;;
 <ol type="1" start="2">
 <li>依存関係管理の変更: package.jsonでの指定方法が変更</li>
 </ol>
-<p>具体的な対応方法としては、以下のようにpackage.jsonを更新します：</p>
+<p>具体的な対応方法としては、以下のようにpackage.jsonを更新します。</p>
 <p>以前の指定方法：</p>
 <pre><code language="language-json" class="language-json">  &#34;devDependencies&#34;: {
     &#34;aws-cdk&#34;: &#34;2.174.0&#34;,
@@ -558,7 +558,7 @@ from &#34;aws-cdk-lib&#34;;
     :
   }
 </code></pre>
-<p>この分離による影響を最小化するには、以下のプラクティスを推奨します：</p>
+<p>この分離による影響を最小化するには、以下のプラクティスを推奨します。</p>
 <ol type="1">
 <li>CI/CD環境では特定のバージョンに固定する</li>
 <li>依存関係を正確に管理する</li>
@@ -740,7 +740,7 @@ export class BucketConstruct extends Construct {
 </ul>
 <h2 is-upgraded>4.1. Snapshot test</h2>
 <p>前回生成された CloudFormation テンプレートと比較して差分をチェックする<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/testing.html#testing_snapshot" target="_blank">スナップショットテスト</a>が実施できます。 スナップショットテストを行うことで、意図しないテンプレートへの変更があるかどうかを検知できます。</p>
-<p>例えば以下のようなケースで効果を発揮します：</p>
+<p>例えば以下のようなケースで効果を発揮します。</p>
 <ul>
 <li>AWS CDKのバージョンアップによる差分チェック</li>
 <li>リファクタリング前後の差分チェック</li>
@@ -959,7 +959,7 @@ const stack2 = new MyStack (app, &#39;Stack2 &#39;, {
 </code></pre>
 <h3 is-upgraded>5.1.7. マルチリージョンへの一括デプロイ</h3>
 <p>マルチリージョンへのデプロイで、リージョンごとの設定を定義できます。</p>
-<pre><code language="language-typescript" class="language-typescript">const regionConfig = {
+<pre><code language="language-ts" class="language-ts">const regionConfig = {
   &#39;us-east-1&#39;: {
     name: &#39;Virginia&#39;,
     isPrimary: true,
