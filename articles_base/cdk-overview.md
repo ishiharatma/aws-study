@@ -56,7 +56,7 @@
     - [3.x.1. Construct ID から論理IDにどのように変換されるか？](#3x1-construct-id-から論理idにどのように変換されるか)
 - [4. AWS CDK のテスト方法](#4-aws-cdk-のテスト方法)
   - [4.1. Snapshot test](#41-snapshot-test)
-  - [4.2. Unit Test](#42-unit-test)
+  - [4.2. Unit Test(Fine-grained Assertions)](#42-unit-testfine-grained-assertions)
       - [記述例①：単純なリソース存在チェック](#記述例単純なリソース存在チェック)
       - [記述例②：属性値のチェック](#記述例属性値のチェック)
 - [5. AWS CDK Tips](#5-aws-cdk-tips)
@@ -865,7 +865,7 @@ Construct IDから論理IDへの変換ロジックが気になる人は、以下
 ここでは、AWS CDKのテスト方法を説明します。
 
 - Snapshot test
-- Unit Test
+- Unit Test(Fine-grained Assertions)
 
 ### 4.1. Snapshot test
 
@@ -899,7 +899,7 @@ test('snapshot validation test',() =>{
 })
 ```
 
-### 4.2. Unit Test
+### 4.2. Unit Test(Fine-grained Assertions)
 
 Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。
 VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。
