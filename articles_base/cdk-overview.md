@@ -67,6 +67,7 @@
     - [5.1.4. 本番環境（prod）リリース時に注意喚起してミスを防止策したい](#514-本番環境prodリリース時に注意喚起してミスを防止策したい)
     - [5.1.5. スタックの削除を防止したい](#515-スタックの削除を防止したい)
     - [5.1.6. リージョンの指定を変数化](#516-リージョンの指定を変数化)
+    - [5.1.7. マルチリージョンへの一括デプロイ](#517-マルチリージョンへの一括デプロイ)
   - [5.2. AWS CDK Tips その他Tips](#52-aws-cdk-tips-その他tips)
     - [5.2.1. 環境識別子とプロファイル名の二重指定をやめる](#521-環境識別子とプロファイル名の二重指定をやめる)
     - [5.2.2. AWS CDK 作成時の Metadata を削除したい場合](#522-aws-cdk-作成時の-metadata-を削除したい場合)
@@ -143,6 +144,15 @@ AWS CDKをプロジェクトに導入することで得られる主なメリッ�
 TypeScriptやJavaなどの静的型付き言語を使用することで、CloudFormationでは実行時にしか検出できなかったパラメータミスを、コンパイル時に発見できます。
 これは、大規模プロジェクトほどこの恩恵は大きくなります。
 
+```typescript
+// With TypeScript, incorrectly typed parameters are caught during development
+const bucket = new s3.Bucket(this, 'MyBucket', {
+    versioned: true,
+    // If you try to set an invalid property, TypeScript will flag it
+    // invalidProperty: 'value' // This would cause a compilation error
+});
+```
+
 #### 2. コード再利用による品質向上とコスト削減
 カスタムConstructを作成することで、組織内のベストプラクティスを組み込んだコンポーネントの再利用が可能になります。
 これにより、以下を実現できコスト削減と品質向上につながります。
@@ -150,6 +160,26 @@ TypeScriptやJavaなどの静的型付き言語を使用することで、CloudF
 - 個々のプロジェクト間でのインフラ設計の一貫性確保
 - セキュリティ設計の標準化
 - 変更が必要になった場合の一元管理
+
+
+```typescript
+export class SecureS3Bucket extends Construct {
+    public readonly bucket: s3.IBucket;
+    
+    constructor(scope: Construct, id: string, props?: s3.BucketProps) {
+        super(scope, id);
+        
+        // Apply organization's security standards
+        this.bucket = new s3.Bucket(this, 'Bucket', {
+            ...props,
+            encryption: s3.BucketEncryption.S3_MANAGED,
+            blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+            enforceSSL: true,
+            versioned: true
+        });
+    }
+}
+```
 
 #### 3. 開発生産性の向上
 
@@ -170,6 +200,31 @@ AWS CDKは使い慣れたプログラミング言語を使用できます。サ�
 
 特に価値が高いのは、条件分岐によって環境による違いなどを簡単に実装できる点です。
 ただし、過度なプログラミング機能への依存は複雑性を高め、保守性が低下します。適度な利用を心がけましょう。
+
+
+```typescript
+// Easily implement environment-specific configurations
+const isProd:boolean = app.node.tryGetContext('environment') === 'prod';
+
+const bucket = new s3.Bucket(this, 'DataBucket', {
+    versioned: true,
+    lifecycleRules: isProd ? [
+        {
+            expiration: Duration.days(365),
+            transitions: [
+                {
+                    storageClass: s3.StorageClass.INFREQUENT_ACCESS,
+                    transitionAfter: Duration.days(30)
+                },
+                {
+                    storageClass: s3.StorageClass.GLACIER,
+                    transitionAfter: Duration.days(90)
+                }
+            ]
+        }
+    ] : undefined
+});
+```
 
 #### 4. インフラとアプリケーションコードの統合
 
@@ -1082,6 +1137,48 @@ const stack1 = new MyStack (app, 'Stack1', {
 // stack2はバージニア北部リージョン
 const stack2 = new MyStack (app, 'Stack2 ', {
   env: useast1Env,
+});
+```
+
+#### 5.1.7. マルチリージョンへの一括デプロイ
+
+マルチリージョンへのデプロイで、リージョンごとの設定に定義できます。
+
+```typescript
+const regionConfig = {
+  'us-east-1': {
+    name: 'Virginia',
+    isPrimary: true,
+    availabilityZones: ['us-east-1a', 'us-east-1b', 'us-east-1c'],
+    certificateArn: 'arn:aws:acm:us-east-1:123456789012:certificate/uuid',
+  },
+  'eu-west-1': {
+    name: 'Ireland',
+    isPrimary: false,
+    availabilityZones: ['eu-west-1a', 'eu-west-1b', 'eu-west-1c'],
+    certificateArn: 'arn:aws:acm:eu-west-1:123456789012:certificate/uuid',
+  },
+  'ap-northeast-1': {
+    name: 'Tokyo',
+    isPrimary: false,
+    availabilityZones: ['ap-northeast-1a', 'ap-northeast-1c', 'ap-northeast-1d'],
+    certificateArn: 'arn:aws:acm:ap-northeast-1:123456789012:certificate/uuid',
+  }
+};
+
+// Usage example
+const deploymentRegions = ['us-east-1', 'ap-northeast-1']; // Selected regions for deployment
+
+deploymentRegions.forEach(regionId => {
+  const region = regionConfig[regionId];
+  
+  const networkStack = new NetworkStack(app, `${props.projectName}-${props.environment}-${region.name}-network`, {
+    env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: regionId },
+    availabilityZones: region.availabilityZones,
+    isPrimary: region.isPrimary,
+  });
+  
+  // Create other region-specific stacks...
 });
 ```
 

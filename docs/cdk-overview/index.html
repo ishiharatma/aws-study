@@ -121,6 +121,7 @@
 <li><a href="#514-%E6%9C%AC%E7%95%AA%E7%92%B0%E5%A2%83prod%E3%83%AA%E3%83%AA%E3%83%BC%E3%82%B9%E6%99%82%E3%81%AB%E6%B3%A8%E6%84%8F%E5%96%9A%E8%B5%B7%E3%81%97%E3%81%A6%E3%83%9F%E3%82%B9%E3%82%92%E9%98%B2%E6%AD%A2%E7%AD%96%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.4. 本番環境（prod）リリース時に注意喚起してミスを防止策したい</a></li>
 <li><a href="#515-%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%AE%E5%89%8A%E9%99%A4%E3%82%92%E9%98%B2%E6%AD%A2%E3%81%97%E3%81%9F%E3%81%84" target="_blank">5.1.5. スタックの削除を防止したい</a></li>
 <li><a href="#516-%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E6%8C%87%E5%AE%9A%E3%82%92%E5%A4%89%E6%95%B0%E5%8C%96" target="_blank">5.1.6. リージョンの指定を変数化</a></li>
+<li><a href="#517-%E3%83%9E%E3%83%AB%E3%83%81%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%B8%E3%81%AE%E4%B8%80%E6%8B%AC%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4" target="_blank">5.1.7. マルチリージョンへの一括デプロイ</a></li>
 </ul>
 </li>
 <li><a href="#52-aws-cdk-tips-%E3%81%9D%E3%81%AE%E4%BB%96tips" target="_blank">5.2. AWS CDK Tips その他Tips</a><ul>
@@ -177,6 +178,13 @@
 <p>AWS CDKをプロジェクトに導入することで得られる主なメリットは以下の通りです。</p>
 <h3 is-upgraded>1. 型安全性によるエラー検出</h3>
 <p>TypeScriptやJavaなどの静的型付き言語を使用することで、CloudFormationでは実行時にしか検出できなかったパラメータミスを、コンパイル時に発見できます。 これは、大規模プロジェクトほどこの恩恵は大きくなります。</p>
+<pre><code language="language-typescript" class="language-typescript">// With TypeScript, incorrectly typed parameters are caught during development
+const bucket = new s3.Bucket(this, &#39;MyBucket&#39;, {
+    versioned: true,
+    // If you try to set an invalid property, TypeScript will flag it
+    // invalidProperty: &#39;value&#39; // This would cause a compilation error
+});
+</code></pre>
 <h3 is-upgraded>2. コード再利用による品質向上とコスト削減</h3>
 <p>カスタムConstructを作成することで、組織内のベストプラクティスを組み込んだコンポーネントの再利用が可能になります。 これにより、以下を実現できコスト削減と品質向上につながります。</p>
 <ul>
@@ -184,6 +192,23 @@
 <li>セキュリティ設計の標準化</li>
 <li>変更が必要になった場合の一元管理</li>
 </ul>
+<pre><code language="language-typescript" class="language-typescript">export class SecureS3Bucket extends Construct {
+    public readonly bucket: s3.IBucket;
+    
+    constructor(scope: Construct, id: string, props?: s3.BucketProps) {
+        super(scope, id);
+        
+        // Apply organization&#39;s security standards
+        this.bucket = new s3.Bucket(this, &#39;Bucket&#39;, {
+            ...props,
+            encryption: s3.BucketEncryption.S3_MANAGED,
+            blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+            enforceSSL: true,
+            versioned: true
+        });
+    }
+}
+</code></pre>
 <h3 is-upgraded>3. 開発生産性の向上</h3>
 <p>AWS CDKは使い慣れたプログラミング言語を使用できます。サポートされている言語は、以下のとおりです。詳しくは<a href="https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/languages.html" target="_blank">AWSドキュメント</a>を参照してください。</p>
 <ul>
@@ -201,6 +226,28 @@
 <li>単体テスト、統合テストなどの既存テスト手法が適用できる</li>
 </ul>
 <p>特に価値が高いのは、条件分岐によって環境による違いなどを簡単に実装できる点です。 ただし、過度なプログラミング機能への依存は複雑性を高め、保守性が低下します。適度な利用を心がけましょう。</p>
+<pre><code language="language-typescript" class="language-typescript">// Easily implement environment-specific configurations
+const isProd:boolean = app.node.tryGetContext(&#39;environment&#39;) === &#39;prod&#39;;
+
+const bucket = new s3.Bucket(this, &#39;DataBucket&#39;, {
+    versioned: true,
+    lifecycleRules: isProd ? [
+        {
+            expiration: Duration.days(365),
+            transitions: [
+                {
+                    storageClass: s3.StorageClass.INFREQUENT_ACCESS,
+                    transitionAfter: Duration.days(30)
+                },
+                {
+                    storageClass: s3.StorageClass.GLACIER,
+                    transitionAfter: Duration.days(90)
+                }
+            ]
+        }
+    ] : undefined
+});
+</code></pre>
 <h3 is-upgraded>4. インフラとアプリケーションコードの統合</h3>
 <p>AWS CDKを使用すると、アプリケーションコードとインフラコードを同じリポジトリで管理することが可能になります。</p>
 <ul>
@@ -908,6 +955,44 @@ const stack1 = new MyStack (app, &#39;Stack1&#39;, {
 // stack2はバージニア北部リージョン
 const stack2 = new MyStack (app, &#39;Stack2 &#39;, {
   env: useast1Env,
+});
+</code></pre>
+<h3 is-upgraded>5.1.7. マルチリージョンへの一括デプロイ</h3>
+<p>マルチリージョンへのデプロイで、リージョンごとの設定に定義できます。</p>
+<pre><code language="language-typescript" class="language-typescript">const regionConfig = {
+  &#39;us-east-1&#39;: {
+    name: &#39;Virginia&#39;,
+    isPrimary: true,
+    availabilityZones: [&#39;us-east-1a&#39;, &#39;us-east-1b&#39;, &#39;us-east-1c&#39;],
+    certificateArn: &#39;arn:aws:acm:us-east-1:123456789012:certificate/uuid&#39;,
+  },
+  &#39;eu-west-1&#39;: {
+    name: &#39;Ireland&#39;,
+    isPrimary: false,
+    availabilityZones: [&#39;eu-west-1a&#39;, &#39;eu-west-1b&#39;, &#39;eu-west-1c&#39;],
+    certificateArn: &#39;arn:aws:acm:eu-west-1:123456789012:certificate/uuid&#39;,
+  },
+  &#39;ap-northeast-1&#39;: {
+    name: &#39;Tokyo&#39;,
+    isPrimary: false,
+    availabilityZones: [&#39;ap-northeast-1a&#39;, &#39;ap-northeast-1c&#39;, &#39;ap-northeast-1d&#39;],
+    certificateArn: &#39;arn:aws:acm:ap-northeast-1:123456789012:certificate/uuid&#39;,
+  }
+};
+
+// Usage example
+const deploymentRegions = [&#39;us-east-1&#39;, &#39;ap-northeast-1&#39;]; // Selected regions for deployment
+
+deploymentRegions.forEach(regionId =&gt; {
+  const region = regionConfig[regionId];
+  
+  const networkStack = new NetworkStack(app, `${props.projectName}-${props.environment}-${region.name}-network`, {
+    env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: regionId },
+    availabilityZones: region.availabilityZones,
+    isPrimary: region.isPrimary,
+  });
+  
+  // Create other region-specific stacks...
 });
 </code></pre>
 <h2 is-upgraded>5.2. AWS CDK Tips その他Tips</h2>
