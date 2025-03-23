@@ -909,9 +909,10 @@ test('snapshot validation test',() =>{
 
 Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。
 VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。
-ただ、"AWS::EC2::VPC" のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。
+ただ、"AWS::EC2::VPC" のように AWS のリソースを知っていないといけないので慣れないうちは難しく感じるかもしれません。
 
 具体的な記述方法は次のとおりです。
+さらに詳しく知りたい場合は、[AWS CDKの公式ドキュメント](https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.assertions-readme.html)を参照してください。
 
 ```ts
 test("create the vpc", () => {

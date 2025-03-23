@@ -765,8 +765,8 @@ export class BucketConstruct extends Construct {
 })
 </code></pre>
 <h2 is-upgraded>4.2. Unit Test(Fine-grained Assertions)</h2>
-<p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。 VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。 ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは手間取るかもしれません。</p>
-<p>具体的な記述方法は次のとおりです。</p>
+<p>Jest を使った Unit Test も実施できます。これにより、リソース単位の細かなテストを行うことができます。 VPC の場合は、以下のようにして VPC やサブネットの数、ルートテーブルの状態などをテストすることができます。 ただ、&#34;AWS::EC2::VPC&#34; のように AWS のリソースを知っていないといけないので慣れないうちは難しく感じるかもしれません。</p>
+<p>具体的な記述方法は次のとおりです。 さらに詳しく知りたい場合は、<a href="https://docs.aws.amazon.com/cdk/api/v2/docs/aws-cdk-lib.assertions-readme.html" target="_blank">AWS CDKの公式ドキュメント</a>を参照してください。</p>
 <pre><code language="language-ts" class="language-ts">test(&#34;create the vpc&#34;, () =&gt; {
   // GIVEN
   const app = new App({
