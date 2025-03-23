@@ -454,7 +454,7 @@ const loadBalancedFargateService =
 <p>作成されるリソースは記事作成時点では、下記11種類となっています。</p>
 <ul>
 <li>CdkBootstrapVersion：BootStrapのバージョンを管理するSSMパラメータストアです。定期的にバージョンアップがあるため、バージョンのチェックに利用されます。</li>
-<li>DeploymentActionRole：デプロイ時にCloudFormatioスタックを操作するためのIAMロールです</li>
+<li>DeploymentActionRole：デプロイ時にCloudFormationスタックを操作するためのIAMロールです</li>
 <li>CloudFormationExecutionRole：<code>AdministratorAccess</code>が付与されたロールで、<code>cdk deploy</code>で作成されるスタック実行時に使用されます。</li>
 <li>LookupRole：既存リソースを参照する<code>fromLookup()</code>などの実行に必要なロールです</li>
 <li>ContainerAssetsRepository：ECRリポジトリです</li>
@@ -1300,6 +1300,8 @@ Aspects.of(app).add(new AwsSolutionsChecks({ verbose: true }))
 <p>特にL2レベルのコンストラクトを使用することで、CloudFormationでは数百行に及ぶコードが数十行で実現でき、可読性と保守性が大幅に向上します。</p>
 <p>また、cdk-nagや、効率的な開発のための命名規則、環境識別方法などの実践的なテクニックを使用することで、大規模なプロジェクトや組織全体でのCDKの活用に役立ちます。</p>
 <p>AWS CDKを適切に活用し、安全で堅牢、かつ効率的なクラウドインフラストラクチャ管理を実現しましょう。</p>
+<p>最後に、生成AIによる本記事のグラレコ（Webページの画像変換後のため一部見切れています。オリジナルは<a href="https://ishiharatma.github.io/aws-cdk-cdp/aws-cdk-infographic-ja.html" target="_blank">こちら|GitHub</a>）</p>
+<p class="image-container"><img alt="aws-cdk-visual-guide-ja.png" src="img\\ba009cfe4bcbbf0d.png"></p>
 
 
       </google-codelab-step>

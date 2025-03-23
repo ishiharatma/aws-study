@@ -495,7 +495,7 @@ cdk bootstrap
 作成されるリソースは記事作成時点では、下記11種類となっています。
 
 - CdkBootstrapVersion：BootStrapのバージョンを管理するSSMパラメータストアです。定期的にバージョンアップがあるため、バージョンのチェックに利用されます。
-- DeploymentActionRole：デプロイ時にCloudFormatioスタックを操作するためのIAMロールです
+- DeploymentActionRole：デプロイ時にCloudFormationスタックを操作するためのIAMロールです
 - CloudFormationExecutionRole：`AdministratorAccess`が付与されたロールで、`cdk deploy`で作成されるスタック実行時に使用されます。
 - LookupRole：既存リソースを参照する`fromLookup()`などの実行に必要なロールです
 - ContainerAssetsRepository：ECRリポジトリです
@@ -1548,3 +1548,7 @@ CDKを使用することの主なメリットは以下の通りです。
 また、cdk-nagや、効率的な開発のための命名規則、環境識別方法などの実践的なテクニックを使用することで、大規模なプロジェクトや組織全体でのCDKの活用に役立ちます。
 
 AWS CDKを適切に活用し、安全で堅牢、かつ効率的なクラウドインフラストラクチャ管理を実現しましょう。
+
+最後に、生成AIによる本記事のグラレコ（Webページの画像変換後のため一部見切れています。オリジナルは[こちら|GitHub](https://ishiharatma.github.io/aws-cdk-cdp/aws-cdk-infographic-ja.html)）
+
+![aws-cdk-visual-guide-ja.png](/images/cdk/aws-cdk-visual-guide-ja.png)
