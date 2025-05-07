@@ -1,0 +1,411 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="vpc-lattice-overview"
+                  title=""
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#1-amazon-vpc-lattice-%E3%81%A8%E3%81%AF" target="_blank">1. Amazon VPC Lattice とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+<li><a href="#13-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">1.3. ワークショップ</a></li>
+<li><a href="#14-%E5%B0%8E%E5%85%A5%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">1.4. 導入のメリット</a></li>
+<li><a href="#15-%E4%B8%BB%E3%81%AA%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">1.5. 主なユースケース</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E6%A9%9F%E8%83%BD" target="_blank">2. 基本機能</a><ul>
+<li><a href="#21-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF" target="_blank">2.1. サービスネットワーク</a></li>
+<li><a href="#22-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9" target="_blank">2.2. サービス</a></li>
+<li><a href="#23-%E3%82%BF%E3%83%BC%E3%82%B2%E3%83%83%E3%83%88%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">2.3. ターゲットグループ</a></li>
+<li><a href="#24-%E3%83%AA%E3%82%B9%E3%83%8A%E3%83%BC%E3%81%A8%E3%83%AB%E3%83%BC%E3%83%88" target="_blank">2.4. リスナーとルート</a></li>
+<li><a href="#25-%E8%AA%8D%E8%A8%BC%E3%81%A8%E8%AA%8D%E5%8F%AF" target="_blank">2.5. 認証と認可</a></li>
+</ul>
+</li>
+<li><a href="#3-%E7%99%BA%E5%B1%95%E7%9A%84%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">3. 発展的な機能</a><ul>
+<li><a href="#31-%E3%82%AF%E3%83%AD%E3%82%B9%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E6%8E%A5%E7%B6%9A" target="_blank">3.1. クロスアカウント接続</a></li>
+<li><a href="#32-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%87%E3%82%A3%E3%82%B9%E3%82%AB%E3%83%90%E3%83%AA%E3%83%BC" target="_blank">3.2. サービスディスカバリー</a></li>
+<li><a href="#33-tcp%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%89%E3%81%AE%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88" target="_blank">3.3. TCPワークロードのサポート</a></li>
+</ul>
+</li>
+<li><a href="#4-%E9%81%8B%E7%94%A8%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">4. 運用のポイント</a><ul>
+<li><a href="#41-%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86" target="_blank">4.1. コスト管理</a></li>
+<li><a href="#42-%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">4.2. モニタリング</a></li>
+<li><a href="#43-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">4.3. セキュリティ</a></li>
+<li><a href="#44-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%A1%E3%83%83%E3%82%B7%E3%83%A5%E3%81%A8%E3%81%AE%E6%AF%94%E8%BC%83" target="_blank">4.4. サービスメッシュとの比較</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. Amazon VPC Lattice とは" duration="0">
+        <p>Amazon VPC Lattice は、VPCやアカウントをまたいでサービス間の通信を簡単に接続・保護・監視できるアプリケーションネットワーキングサービスです。マイクロサービスやサービス指向アーキテクチャを採用する場合に、基盤となるインフラストラクチャやネットワーク接続を意識することなく、サービス同士を接続できるようになります。</p>
+<p class="image-container"><img alt="overview" src="img\\c4a47f3ad3c6b235.svg"></p>
+<p>主要コンポーネントには次のようなものがあります。</p>
+<ul>
+<li>サービス <ul>
+<li>リスナー</li>
+<li>ターゲットグループ</li>
+</ul>
+</li>
+<li>サービスネットワーク</li>
+</ul>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
+<p>Amazon VPC Latticeを理解する公式ドキュメントは次のとおりです。</p>
+<p><a href="https://aws.amazon.com/jp/vpc/lattice/" target="_blank">Amazon VPC Lattice サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/?id=docs_gateway" target="_blank">Amazon VPC Lattice ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/vpc/lattice/faqs/" target="_blank">Amazon VPC Lattice よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/vpc/lattice/pricing/" target="_blank">Amazon VPC Lattice の料金</a></p>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=6_s_KuKkahY" target="_blank">PrivateLink and Lattice - Amazon VPC Lattice Service 編(YouTube)</a>(0:36:17) | <a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2025_AmazonVPCLattice_0122_v1.pdf" target="_blank">PDF</a></p>
+<p class="image-container"><img alt="blackbelt-vpc-lattice" src="img\\1584497debab3e0a.jpg"></p>
+<p>Amazon VPC Lattice × EKS で実現するアプリケーションネットワーキング(<a href="https://pages.awscloud.com/rs/112-TZM-766/images/20230525_30th_ISV_DiveDeepSeminar_Lattice_EKS.pdf" target="_blank">PDF</a>)</p>
+<p>Amazon VPC Lattice: エンタープライズネットワークアーキテクチャをモダン化し、簡素化する(<a href="https://aws.amazon.com/jp/blogs/news/amazon-vpc-vattice-modernize-and-simplify-your-enterprise-network-architectures/" target="_blank">Amazon Web Services ブログ</a>)</p>
+<h2 is-upgraded>1.3. ワークショップ</h2>
+<p><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/036b30f8-1541-4656-af12-4e6c5558eeee/ja-JP" target="_blank">Amazon VPC Lattice ワークショップ</a> - AWS が提供する VPC Lattice ハンズオン形式のワークショップです。</p>
+<ul>
+<li>所要時間の目安: 4 時間</li>
+<li>学習目標: Amazon VPC Lattice の主要概念の紹介</li>
+</ul>
+<p class="image-container"><img alt="v2-vpclattice-target-architecture" src="img\\5b1985aa9dd16c32.png"></p>
+<h2 is-upgraded>1.4. 既存サービスとの違い</h2>
+<p>VPC Lattice以外のVPC間接続サービスは次のようなものがあります。</p>
+<ul>
+<li>VPC Peering: 単純なVPC間の接続</li>
+<li>Transit Gateway: 複数VPCやオンプレミスとの接続</li>
+</ul>
+<p class="image-container"><img alt="VPC-Peering" src="img\\d8d9887edc616134.svg"></p>
+<p class="image-container"><img alt="TransitGW" src="img\\c793b80b6a949a27.svg"></p>
+<p>これらのサービスは、ネットワークレイヤー（L3）での接続に焦点を当てているのに対し、VPC Latticeは<strong>アプリケーションレベル（L7）のサービス接続と管理</strong>に重点を置いています。</p>
+<p>特定のリソースを接続するサービスには次のようなものがあります。</p>
+<ul>
+<li>PrivateLink</li>
+</ul>
+<p>PrivateLinkは、VPC Latticeと共通する部分が多いですが、目的と機能が異なります。 PrivateLinkは、サービスプロバイダーがサービスをプライベートに公開するなどのシナリオに適しています。一方、VPC Latticeは、<strong>マイクロサービスアーキテクチャでの複数サービス間の接続管理</strong>に適しています。</p>
+<h2 is-upgraded>1.5. 導入のメリット</h2>
+<p>Amazon VPC Latticeを導入する主なメリットは以下の3つです。</p>
+<ul>
+<li>接続の簡素化: VPCやアカウントをまたいだサービス間の接続を自動化し、基盤となるネットワークインフラを抽象化します。</li>
+<li>セキュリティの向上: 認証・認可ポリシーを一元管理でき、サービスレベルでのきめ細かいアクセス制御を実現します。</li>
+<li>運用監視の統一: サービス間通信の監視、ログ記録、トラブルシューティングを一元的に管理できます。</li>
+</ul>
+<h2 is-upgraded>1.6. 主なユースケース</h2>
+<ul>
+<li>マイクロサービスアーキテクチャの接続管理: 多数のマイクロサービス間の通信を効率的に管理し、サービスメッシュのような機能を提供します。 <img alt="Figure-1-1.png" src="img\\1376f9a9ceb02fe9.png"></li>
+<li>クロスアカウントサービス連携: 複数のAWSアカウントにまたがるサービスを安全に接続し、マルチアカウント戦略を促進します。 <ul>
+<li>参考＞<a href="https://konghq.com/blog/news/kong-with-amazon-vpc-lattice" target="_blank">Kong Enterprise &amp; Kong Konnect with Amazon VPC Lattice</a><img alt="image1-3.avif" src="img\\70f6d82477576120.avif"></li>
+</ul>
+</li>
+<li>ハイブリッドワークロードの統合: EC2インスタンス、コンテナ、Lambda関数などの異なるコンピューティングリソース間の通信を統一的に管理します。</li>
+<li>TCPベースのサービス連携: HTTPだけでなく、TCPベースの通信も含めた幅広いサービスの接続を可能にします。 <img alt="vpc-lattice-tcp" src="img\\fece794e0c331333.svg"></li>
+</ul>
+<p>参考：Amazon Web Services ブログ＞<a href="https://aws.amazon.com/jp/blogs/news/amazon-vpc-vattice-modernize-and-simplify-your-enterprise-network-architectures/" target="_blank">Amazon VPC Lattice: エンタープライズネットワークアーキテクチャをモダン化し、簡素化する</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. 基本機能" duration="0">
+        <p>Amazon VPC Latticeは、いくつかの主要コンポーネントから構成されており、これらが連携してサービス間の通信を実現します。</p>
+<p class="image-container"><img alt="vpc-lattice-service-network" src="img\\b6064217bd7b6ecc.png"></p>
+<h2 is-upgraded>2.1. サービスネットワーク</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/service-networks.html" target="_blank">サービスネットワーク</a>は、VPC Latticeの中核となる概念で、サービスとVPCの関連付けを管理する論理的なコンテナです。</p>
+<ul>
+<li>定義: サービスディスカバリーと接続性を提供する論理的なグループで、サービスとVPCを関連付けます</li>
+<li>機能 <ul>
+<li>複数のサービスを1つのネットワークに関連付け可能</li>
+<li>複数のVPCをサービスネットワークに関連付け可能</li>
+<li>クロスアカウント共有をサポート（AWS RAM経由）</li>
+</ul>
+</li>
+<li>制限 <ul>
+<li>リージョンごとのアカウントあたり最大10個のサービスネットワーク</li>
+<li>サービスネットワークごとに最大500個のVPCアソシエーション</li>
+<li>サービスネットワークごとに最大500個のサービスアソシエーション</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>2.2. サービス</h2>
+<p>VPC Lattice内の<a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/services.html" target="_blank">サービス</a>は、アプリケーションのエンドポイントを表現し、クライアントがリクエストを送信する対象となります。</p>
+<ul>
+<li>定義: Lattice内の個々のサービスエンドポイントを表し、リスナーとルートを含みます</li>
+<li>特徴 <ul>
+<li>各サービスには一意のDNS名が割り当てられる <ul>
+<li>デフォルトは、<code>service_name-service_id.partition_id.vpc-lattice-svcs.region.on.aws</code></li>
+<li>カスタムドメイン名の設定が可能</li>
+</ul>
+</li>
+<li>サービスはHTTP、HTTPS、gRPC、TCPプロトコルをサポート <ul>
+<li><strong>VPC Lattice では WebSocket はサポートされていません。</strong></li>
+</ul>
+</li>
+<li>認証ポリシーとアクセスコントロールルールを設定可能</li>
+</ul>
+</li>
+<li>作成方法 <ul>
+<li>コンソール、CLI、API、CloudFormation、CDKから作成可能</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>2.3. ターゲットグループ</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/target-groups.html" target="_blank">ターゲットグループ</a>は、リクエストを処理する実際のバックエンドリソースを定義します。</p>
+<ul>
+<li>定義: トラフィックをルーティングする宛先となるリソースのグループ</li>
+<li>タイプ <ul>
+<li>インスタンス: EC2インスタンス</li>
+<li>IP: IPアドレス（VPC内またはオンプレミス）</li>
+<li>Lambda: Lambda関数</li>
+<li>ALB: Application Load Balancer</li>
+</ul>
+</li>
+<li>ヘルスチェック: 設定可能なヘルスチェックによりターゲットの健全性を監視 <ul>
+<li><strong>LambdaとALBではヘルスチェックは使用不可</strong></li>
+</ul>
+</li>
+<li>重み付けルーティング: 各ターゲットに重み付けを設定可能</li>
+</ul>
+<h2 is-upgraded>2.4. リスナーとルール</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/listeners.html" target="_blank">リスナー</a>と<a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/listener-rules.html" target="_blank">ルール</a>は、トラフィックの受信とリクエストのルーティングを担当します。</p>
+<ul>
+<li>リスナー<ul>
+<li>指定したポートとプロトコル（HTTP/HTTPS/gRPC/TCP）でトラフィックを待ち受ける</li>
+<li>複数のリスナーを1つのサービスに設定可能</li>
+<li>TLS証明書の管理（ACMと統合）</li>
+</ul>
+</li>
+<li>ルール<ul>
+<li>HTTPベースプロトコル（HTTP/HTTPS/gRPC）の場合： <ul>
+<li>パスベースルーティング</li>
+<li>ヘッダーベースルーティング</li>
+<li>メソッドベースルーティング</li>
+</ul>
+</li>
+<li>TCPの場合は単純なフォワーディング</li>
+<li>優先度を設定してルーティングの順序を制御可能</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>2.5. 認証と認可</h2>
+<p>VPC Latticeは、サービスへのアクセスを制御するための認証と認可の仕組みを提供します。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/auth-policies.html" target="_blank">認証ポリシー</a><ul>
+<li>AWS IAMベースの認証をサポート</li>
+<li>相互TLS（mTLS）による認証</li>
+<li>匿名アクセスの許可も可能</li>
+</ul>
+</li>
+<li>認可ポリシー<ul>
+<li>リソースベースのポリシー（JSON形式）</li>
+<li>きめ細かいアクセス制御（サービスレベル、操作レベル）</li>
+<li>プリンシパル（IAMユーザー、ロール、AWSアカウント）単位でのアクセス制限</li>
+<li>タグベースの条件付きアクセス制御</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. 発展的な機能" duration="0">
+        <h2 is-upgraded>3.1. クロスアカウント接続</h2>
+<p>VPC Latticeはマルチアカウント環境において、アカウントをまたいだサービスの接続をシームレスに実現します。</p>
+<ul>
+<li>AWS RAM (Resource Access Manager)との統合<ul>
+<li>サービスネットワークをアカウント間で共有可能</li>
+<li>サービスを別アカウントのサービスネットワークに関連付け可能</li>
+</ul>
+</li>
+<li>接続フロー<ol type="1">
+<li>サービスネットワークの所有者がAWS RAMを使用して他アカウントとネットワークを共有</li>
+<li>共有先アカウントはVPCをそのサービスネットワークに関連付け</li>
+<li>サービス所有者はサービスを同じネットワークに関連付け</li>
+<li>クライアントアカウントのVPC内のリソースはサービスを利用可能に</li>
+</ol>
+</li>
+<li>セキュリティ考慮事項<ul>
+<li>共有されたリソースへのアクセス権限は、認証・認可ポリシーで詳細に制御可能</li>
+<li>組織単位（OU）単位でのリソース共有が可能</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>3.2. サービスディスカバリー</h2>
+<p>VPC Latticeはサービスディスカバリー機能を提供し、クライアントが利用可能なサービスを簡単に特定できるようにします。</p>
+<ul>
+<li>自動DNS登録<ul>
+<li>各サービスに一意のDNS名を自動的に割り当て</li>
+<li>形式: <code><service-name>.<lattice-domain-name></code></li>
+<li>プライベートDNSゾーンとの統合</li>
+</ul>
+</li>
+<li>サービスディレクトリ<ul>
+<li>サービスネットワークに関連付けられたサービスの一覧をクエリ可能</li>
+<li>API、AWS CLIでのリスト取得サポート</li>
+<li>サービスのメタデータ（タグなど）を含む情報の取得</li>
+</ul>
+</li>
+<li>DNS設定オプション<ul>
+<li>Route 53プライベートホストゾーンとの連携</li>
+<li>カスタムドメイン名のサポート</li>
+<li>複数のエイリアスレコードによるアクセス</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>3.3. TCPワークロードのサポート</h2>
+<p>VPC LatticeはHTTPベースのプロトコルに加えて、TCPベースのワークロードもサポートしています。</p>
+<ul>
+<li>TCP接続の利点<ul>
+<li>レイヤー4（トランスポート層）レベルでの接続</li>
+<li>プロトコルに依存しない通信が必要なアプリケーションに適合</li>
+<li>既存のTCPベースのシステムを容易に統合可能</li>
+</ul>
+</li>
+<li>主なTCPリソース<ul>
+<li>RDS</li>
+<li>任意のTCPサービス（カスタムアプリケーションなど）</li>
+</ul>
+</li>
+<li>制限事項<ul>
+<li>TCPトラフィックではコンテンツベースのルーティングは利用不可</li>
+<li>TCPリスナーはシンプルなフォワーディングのみ</li>
+<li>HTTP/HTTPSと比較して高度なルーティング機能は制限される</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. 運用のポイント" duration="0">
+        <h2 is-upgraded>4.1. コスト管理</h2>
+<p>VPC Latticeのコスト構造を理解し、効率的に管理するためのポイントです。</p>
+<ul>
+<li>料金体系<ul>
+<li>処理時間: サービスリクエストの処理時間に対する課金</li>
+<li>データ転送: サービス間で転送されるデータ量に対する課金</li>
+<li>サービス時間: サービスとVPCの関連付けに対する課金</li>
+</ul>
+</li>
+<li>コスト最適化の戦略<ul>
+<li>不要なサービスネットワークの関連付けを削除</li>
+<li>キャッシング戦略の実装によるリクエスト数削減</li>
+<li>CloudWatchメトリクスを活用したコスト監視</li>
+<li>リザーブドインスタンスやSavings Planの活用（バックエンドリソース向け）</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>4.2. モニタリング</h2>
+<p>VPC Latticeは、サービス間通信の監視とトラブルシューティングのための包括的なモニタリング機能を提供します。</p>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/monitoring-cloudwatch.html" target="_blank">CloudWatch統合</a><ul>
+<li>サービスメトリクス: リクエスト数、レイテンシー、エラー率</li>
+<li>ディメンション別の分析: サービス、VPC、ターゲットグループ</li>
+<li>カスタムダッシュボードの作成方法</li>
+</ul>
+</li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/vpc-lattice/latest/ug/monitoring-access-logs.html" target="_blank">ログ記録</a><ul>
+<li>アクセスログの設定（CloudWatch Logs、S3、Firehoseへの配信）</li>
+<li>ログフォーマットとフィールド</li>
+<li>ログの分析とクエリ</li>
+</ul>
+</li>
+<li>分散トレーシング<ul>
+<li>AWS X-Rayとの統合</li>
+<li>サービス間依存関係の可視化</li>
+<li>パフォーマンスボトルネックの特定</li>
+</ul>
+</li>
+<li>アラートとアクション<ul>
+<li>CloudWatchアラームの設定</li>
+<li>SNSとの連携による通知</li>
+<li>自動修復アクションの実装</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>4.3. セキュリティ</h2>
+<p>VPC Latticeでのセキュリティ強化のためのベストプラクティスです。</p>
+<ul>
+<li>ネットワークセキュリティ<ul>
+<li>最小権限の原則に基づく設計</li>
+<li>セキュリティグループとNACLの適切な設定</li>
+<li>VPCエンドポイントポリシーの活用</li>
+</ul>
+</li>
+<li>認証と認可<ul>
+<li>IAMポリシーの詳細設定</li>
+<li>相互TLS（mTLS）の実装手順</li>
+<li>リソースポリシーの定期的な監査</li>
+</ul>
+</li>
+<li>暗号化<ul>
+<li>転送中のデータ暗号化（TLSの強制）</li>
+<li>ACM証明書</li>
+</ul>
+</li>
+<li>コンプライアンス<ul>
+<li>AWSコンプライアンスプログラムの活用</li>
+<li>リソースのタグ付けと監査</li>
+<li>セキュリティイベントの記録と追跡</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Amazon VPC Latticeは、マイクロサービスやサービス指向アーキテクチャを採用する組織にとって、サービス間通信を簡素化し、セキュアにするための強力なソリューションです。</p>
+<h2 is-upgraded>主要なポイント</h2>
+<ul>
+<li>VPC Latticeはアプリケーションネットワーキングサービスとして、サービス間の接続、保護、監視を一元管理</li>
+<li>サービスネットワーク、サービス、ターゲットグループ、リスナー、ルートという主要コンポーネントで構成</li>
+<li>クロスアカウント、クロスVPC接続を簡素化し、サービスディスカバリーをネイティブサポート</li>
+<li>HTTPSだけでなく、TCPベースのワークロードもサポート</li>
+<li>CloudWatchとの統合による包括的なモニタリングと可観測性を実現</li>
+<li>適切なIAMポリシーと認証メカニズムによるセキュリティの確保</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

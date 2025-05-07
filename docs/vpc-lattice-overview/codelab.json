@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
-  "updated": "2025-05-07T12:54:36+09:00",
-  "id": "aws-certified",
+  "updated": "2025-05-07T12:54:38+09:00",
+  "id": "vpc-lattice-overview",
   "duration": 0,
-  "title": "AWS 認定",
+  "title": "",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_aws-certification.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_vpc-lattice-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awscertification"
+    "amazonvpclattice"
   ],
-  "url": "aws-certified"
+  "url": "vpc-lattice-overview"
 }
