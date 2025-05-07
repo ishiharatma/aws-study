@@ -12,3 +12,4 @@ permalink: /networking/
 - AWS VPN
 - AWS Global Accelerator
 - AWS PrivateLink
+- <a href ="../vpc-lattice-overview/index.html#0" target="_blank">【初心者向け】Amazon VPC Lattice 入門！完全ガイド</a>

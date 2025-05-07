@@ -53,6 +53,8 @@ AWS Global Accelerator
 
 AWS PrivateLink
 
+[Amazon VPC Lattice 概要](/articles_base/vpc-lattice-overview.md)
+
 ### ストレージ
 
 [Amazon S3 概要](/articles_base/s3-overview.md)
