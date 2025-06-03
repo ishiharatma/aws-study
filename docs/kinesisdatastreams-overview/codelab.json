@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2025-06-04T02:34:39+09:00",
-  "id": "sns-overview",
+  "id": "kinesisdatastreams-overview",
   "duration": 0,
-  "title": "Amazon Simple Notification Service (SNS)",
+  "title": "Amazon Kinesis Data Streams",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_sns-overview.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_kinesisdatastreams-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "amazonsns"
+    "amazonkinesisdatastreams"
   ],
-  "url": "sns-overview"
+  "url": "kinesisdatastreams-overview"
 }

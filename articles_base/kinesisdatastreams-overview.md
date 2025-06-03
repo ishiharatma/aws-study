@@ -54,9 +54,9 @@ Amazon Kinesis Data Streamsを理解する公式ドキュメントは次のと�
 
 ### 1.2. 学習リソース
 
-【AWS Black Belt Online Seminar】[Amazon Kinesis(YouTube)](https://www.youtube.com/watch?v=1KJyf6Ru5S0)(1:04:03)
+【AWS Black Belt Online Seminar】[Amazon Kinesis(pdf)](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2023_AmazonKinesisDataStreams_0430_v1.pdf)
 
-![blackbelt](/images/blackbelt/blackbelt-kinesis-320.jpg)
+![blackbelt](/images/blackbelt/blackbelt-kinesisdatastreams-320.jpg)
 
 [「Amazon Kinesis Data Streams」をグラレコで解説｜builders.flash](https://aws.amazon.com/jp/builders-flash/202311/awsgeek-kinesis-data-streams/)
 
