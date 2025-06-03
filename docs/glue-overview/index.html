@@ -55,7 +55,7 @@
 <li><a href="#25-%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">2.5. ワークフロー</a></li>
 </ul>
 </li>
-<li><a href="#3-%E7%99%BA%E5%B1%95%E7%9A%84%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">3. 発展的な機能</a><ul>
+<li><a href="#3-%E9%AB%98%E5%BA%A6%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">3. 高度な機能</a><ul>
 <li><a href="#31-%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF%E6%A9%9F%E8%83%BD" target="_blank">3.1. ブックマーク機能</a></li>
 <li><a href="#32-glue-streaming" target="_blank">3.2. Glue Streaming</a></li>
 <li><a href="#33-glue-databrew" target="_blank">3.3. Glue DataBrew</a></li>
@@ -313,7 +313,7 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="3. 発展的な機能" duration="0">
+      <google-codelab-step label="3. 高度な機能" duration="0">
         <h2 is-upgraded>3.1. ブックマーク機能</h2>
 <p>ETLジョブを実行する場合、処理済みデータを記録し、差分抽出を可能にする機能です。 <code>job.init()</code>でブックマークの情報を取得し、<code>job.commit()</code>が呼び出されたときに状態を記録します。 そのため、ジョブスクリプトから<code>job.commit()</code>が呼び出されていないと、ブックマーク機能を正常に利用できないことになります。</p>
 <p>参考：エラー : <a href="https://docs.aws.amazon.com/ja_jp/glue/latest/dg/glue-troubleshooting-errors.html#error-job-bookmarks-reprocess-data" target="_blank">ジョブのブックマークが有効なときにジョブがデータを再処理しています</a></p>
