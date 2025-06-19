@@ -78,7 +78,7 @@ psycopg2-3.12.zip が生成されました。
 
 ```sh
 aws lambda publish-layer-version \
-  --layer-name psycopg2-312 \
+  --layer-name psycopg2 \
   --zip-file fileb://psycopg2-3.12.zip \
   --compatible-runtimes python3.12 \
   --region ap-northeast-1
