@@ -1,0 +1,487 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon Q Developer</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="q-overview"
+                  title="Amazon Q Developer"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#1-amazon-q-developer-%E3%81%A8%E3%81%AF" target="_blank">1. Amazon Q Developer とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+<li><a href="#13-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%83%E3%83%97" target="_blank">1.3. ワークショップ</a></li>
+<li><a href="#14-%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%AF%BE%E5%BF%9C%E7%8A%B6%E6%B3%81" target="_blank">1.4. 日本語対応状況</a></li>
+<li><a href="#15-%E5%88%A9%E7%94%A8%E6%99%82%E3%81%AE%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A0%85" target="_blank">1.5. 利用時の注意事項</a></li>
+</ul>
+</li>
+<li><a href="#2-%E6%96%99%E9%87%91%E4%BD%93%E7%B3%BB" target="_blank">2. 料金体系</a><ul>
+<li><a href="#21-%E7%84%A1%E6%96%99%E5%88%A9%E7%94%A8%E6%9E%A0free-tier" target="_blank">2.1. 無料利用枠（Free Tier）</a></li>
+<li><a href="#22-amazon-q-developer-pro" target="_blank">2.2. Amazon Q Developer Pro</a></li>
+</ul>
+</li>
+<li><a href="#3-amazon-q-developer-%E3%82%92%E5%AE%89%E5%85%A8%E3%81%AB%E4%BD%BF%E3%81%86%E3%81%9F%E3%82%81%E3%81%AE%E3%82%AA%E3%83%97%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88" target="_blank">3. Amazon Q Developer を安全に使うためのオプトアウト</a><ul>
+<li><a href="#31-vs-code%E3%81%A7%E3%81%AE%E8%A8%AD%E5%AE%9A%E4%BE%8B" target="_blank">3.1. VS Codeでの設定例</a><ul>
+<li><a href="#%E3%83%86%E3%83%AC%E3%83%A1%E3%83%88%E3%83%AA%E3%81%AE%E5%85%B1%E6%9C%89%E3%81%8B%E3%82%89%E3%82%AA%E3%83%97%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88" target="_blank">テレメトリの共有からオプトアウト</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AE%E5%85%B1%E6%9C%89%E3%81%8B%E3%82%89%E3%81%AE%E3%82%AA%E3%83%97%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88" target="_blank">コンテンツの共有からのオプトアウト</a></li>
+</ul>
+</li>
+<li><a href="#32-aws-cli" target="_blank">3.2. AWS CLI</a><ul>
+<li><a href="#%E3%83%86%E3%83%AC%E3%83%A1%E3%83%88%E3%83%AA%E3%81%AE%E5%85%B1%E6%9C%89%E3%81%8B%E3%82%89%E3%82%AA%E3%83%97%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88-1" target="_blank">テレメトリの共有からオプトアウト</a></li>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%B3%E3%83%84%E3%81%AE%E5%85%B1%E6%9C%89%E3%81%8B%E3%82%89%E3%81%AE%E3%82%AA%E3%83%97%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88-1" target="_blank">コンテンツの共有からのオプトアウト</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-%E4%B8%BB%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">4. 主な機能</a><ul>
+<li><a href="#41-%E3%83%81%E3%83%A3%E3%83%83%E3%83%88" target="_blank">4.1. チャット</a></li>
+<li><a href="#42-%E3%82%A4%E3%83%B3%E3%83%A9%E3%82%A4%E3%83%B3%E3%82%B3%E3%83%BC%E3%83%89%E8%A3%9C%E5%AE%8C" target="_blank">4.2. インラインコード補完</a></li>
+<li><a href="#43-%E3%82%B3%E3%83%BC%E3%83%89%E5%A4%89%E6%8F%9B%E3%82%A2%E3%83%83%E3%83%97%E3%82%B0%E3%83%AC%E3%83%BC%E3%83%89transform" target="_blank">4.3 コード変換・アップグレード（/transform）</a></li>
+<li><a href="#44-%E6%A9%9F%E8%83%BD%E9%96%8B%E7%99%BAdev" target="_blank">4.4. 機能開発（/dev）</a></li>
+<li><a href="#45-%E3%83%A6%E3%83%8B%E3%83%83%E3%83%88%E3%83%86%E3%82%B9%E3%83%88%E4%BD%9C%E6%88%90test" target="_blank">4.5. ユニットテスト作成（/test）</a></li>
+<li><a href="#46-%E3%82%B3%E3%83%BC%E3%83%89%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BCreview" target="_blank">4.6. コードレビュー（/review）</a></li>
+<li><a href="#47-%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E7%94%9F%E6%88%90doc" target="_blank">4.7. ドキュメントの生成（/doc）</a></li>
+</ul>
+</li>
+<li><a href="#5-q-cli" target="_blank">5. Q CLI</a><ul>
+<li><a href="#51-%E3%82%B3%E3%83%B3%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86" target="_blank">5.1. コンテキスト管理</a></li>
+<li><a href="#52-mcp%E3%82%B5%E3%83%BC%E3%83%90%E7%AE%A1%E7%90%86" target="_blank">5.2. MCPサーバ管理</a></li>
+<li><a href="#53-%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88" target="_blank">5.3. カスタムエージェント</a><ul>
+<li><a href="#%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0%E3%82%A8%E3%83%BC%E3%82%B8%E3%82%A7%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90%E6%96%B9%E6%B3%95" target="_blank">カスタムエージェントの作成方法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83-build-games-with-amazon-q-cli-and-score-a-t-shirt-" target="_blank">参考: Build Games with Amazon Q CLI and score a T shirt 🏆👕</a></li>
+</ul>
+</li>
+<li><a href="#7-%E4%BB%96%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">7. 他のサービスとの連携</a><ul>
+<li><a href="#71-microsoft-teams--slack-%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">7.1. Microsoft Teams / Slack との連携</a></li>
+<li><a href="#72-github-%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">7.2. GitHub との連携</a></li>
+<li><a href="#73-gitlab-%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">7.3. GitLab との連携</a></li>
+</ul>
+</li>
+<li><a href="#8-amazon-q-developer%E3%82%92%E6%B4%BB%E7%94%A8%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AE%E3%83%92%E3%83%B3%E3%83%88" target="_blank">8. Amazon Q Developerを活用するためのヒント</a><ul>
+<li><a href="#%E6%98%8E%E7%A2%BA%E3%81%AA%E6%8C%87%E7%A4%BA%E3%82%92%E4%B8%8E%E3%81%88%E3%82%8B" target="_blank">明確な指示を与える</a></li>
+<li><a href="#%E5%AF%BE%E8%A9%B1%E3%82%92%E9%87%8D%E3%81%AD%E3%82%8B" target="_blank">対話を重ねる</a></li>
+<li><a href="#%E6%AE%B5%E9%9A%8E%E7%9A%84%E3%81%AB%E6%8C%87%E7%A4%BA%E3%82%92%E4%B8%8E%E3%81%88%E3%82%8B" target="_blank">段階的に指示を与える</a></li>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89%E6%94%B9%E5%96%84%E3%81%AE%E3%81%9F%E3%82%81%E3%81%AE%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC" target="_blank">コード改善のためのレビュー</a></li>
+<li><a href="#%E8%A8%AD%E8%A8%88%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90" target="_blank">設計ドキュメントの作成</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. Amazon Q Developer とは" duration="0">
+        <p>生成AIを活用した会話型アシスタントです。 AWS re:Invent 2023で発表されました。 Amazon Q には大きく分けて2つの種類があります。</p>
+<ul>
+<li>Amazon Q Developer <ul>
+<li>主に開発者向けのサービスで、以下のような用途で活用されます。 <ul>
+<li>ソフトウェア開発タスクの支援</li>
+<li>AWS インフラストラクチャの管理</li>
+<li>技術的な問題解決</li>
+<li>コードの生成・レビュー・最適化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Amazon Q Business <ul>
+<li>ビジネスユーザー向けのサービスで、企業の内部データを活用した質問応答システムの構築が可能です。 <ul>
+<li>社内のQ&amp;Aチャットボット</li>
+<li>タスク自動化のアプリケーション</li>
+<li>コンテンツ生成</li>
+<li>要約</li>
+</ul>
+</li>
+<li>Amazon Q Developer とは料金も異なります。 <ul>
+<li><a href="https://aws.amazon.com/jp/q/business/pricing/" target="_blank">Amazon Q Business の料金</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Amazon Q Developerは、従来のCodeWhispererから発展した形で提供されており、単なるコード補完ツールではなく、AWS環境全体での開発・運用業務を支援する包括的なAIアシスタントとして位置づけられています。2024年4月30日より、Amazon CodeWhispererはAmazon Q Developerに統合されました。</p>
+<p>参考: <a href="https://docs.aws.amazon.com/ja_jp/toolkit-for-vscode/latest/userguide/amazonq.html" target="_blank">Amazon Q Developer と Amazon CodeWhisperer</a></p>
+<p>本記事では、主に Amazon Q Developer について詳しく解説していきます。</p>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
+<p>Amazon Q Developerを理解する公式ドキュメントは次のとおりです。</p>
+<p><a href="https://aws.amazon.com/jp/q/developer/" target="_blank">Amazon Q Developer サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/#amazon-q-developer" target="_blank">Amazon Q Developer ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/q/developer/pricing/" target="_blank">Amazon Q Developer の料金</a></p>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p><a href="https://www.youtube.com/watch?v=booI_HvuCiQ" target="_blank">Getting started with Amazon Q Developer - Part 1(Youtube)</a>(0:19:07)</p>
+<p><a href="https://www.youtube.com/watch?v=nqfLFxOnVuM" target="_blank">Getting started with Amazon Q Developer - Part 2| Amazon Web Services(Youtube)</a>(0:23:19)</p>
+<p><a href="https://www.youtube.com/watch?v=hkZf_h-SeL4" target="_blank">デモで学ぶ！Amazon Q Developer エージェントで実現する開発効率化（AWS-27）(Youtube)</a>(0:41:00)</p>
+<h2 is-upgraded>1.3. ワークショップ</h2>
+<p><a href="https://catalog.workshops.aws/qwords/en-US" target="_blank">Amazon Q Developer Workshop - Building the Q-Words App</a></p>
+<p><a href="https://github.com/094459/aqd-cli-workshop" target="_blank">Amazon Q CLI セルフサービスワークショップ</a></p>
+<h2 is-upgraded>1.4. 日本語対応状況</h2>
+<p>2025年4月より、Amazon Q Developer で日本語サポートが開始されました。これにより、さらに使いやすくなりました。</p>
+<p>参考: AWSブログ＞<a href="https://aws.amazon.com/jp/blogs/news/amazon-q-developer-global-capabilities/" target="_blank">Amazon Q Developer の言語サポートが拡大 (日本語を含む)</a></p>
+<h2 is-upgraded>1.5. 利用時の注意事項</h2>
+<p>Amazon Qは便利なサービスですが、生成AIを利用する上で、以下の点には気を付けてください。</p>
+<ul>
+<li>所属組織のセキュリティポリシー: 業務利用する場合には、所属する組織のセキュリティポリシーに違反しないかを確認しましょう。</li>
+<li>機密情報の扱い: 入力した内容や出力された内容が学習に使われることがあります。本記事の「3. Amazon Q Developer を安全に使うためのオプトアウト」を参照し、必要に応じて送信されないようにしましょう。</li>
+<li>情報の鮮度: 生成AIの学習に使用したデータによっては最新ではない可能性があるので、重要な情報は必ず公式情報を参照するようにしましょう。</li>
+<li>回答の正確性: 生成AIの回答には事実とは異なる内容（ハルシネーション）が含まれることがありますので、確認が必要です。</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. 料金体系" duration="0">
+        <p>まずは、Builder IDを取得して使い始めるのがおすすめです。</p>
+<h2 is-upgraded>2.1. 無料利用枠（Free Tier）</h2>
+<ul>
+<li>料金: 無料</li>
+<li>チャット: 月50回まで</li>
+<li>コード生成: 月5回まで</li>
+<li>コード変換: 月1,000行まで</li>
+<li>データ収集: オプトアウト可能</li>
+<li>認証: AWS Builder ID</li>
+</ul>
+<h2 is-upgraded>2.2. Amazon Q Developer Pro</h2>
+<ul>
+<li>料金: 月額19USD / ユーザー</li>
+<li>チャット: 無制限</li>
+<li>コード生成: 無制限</li>
+<li>コード変換: アカウントレベルで 1 ユーザーあたり毎月 4,000 行</li>
+<li>データ収集: 自動的にオプトアウト</li>
+<li>高度な機能: カスタマイズ、セキュリティスキャン強化など</li>
+<li>認証: IAM Identity Center</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. Amazon Q Developer を安全に使うためのオプトアウト" duration="0">
+        <p>Amazon Q Developerで送信されるデータには2種類あります。</p>
+<ul>
+<li>テレメトリ: サービスの利用状況を数値化・定量化したデータのことです。実際のコードやプロンプトのテキストは含まれません。 <ul>
+<li>どのようなデータが共有されるかは、<a href="https://github.com/aws/aws-toolkit-common/blob/main/telemetry/definitions/commonDefinitions.json" target="_blank">GitHubリポジトリ</a>で確認できます。</li>
+</ul>
+</li>
+<li>コンテンツ: ユーザが Amazon Q に入力した情報や、Amazon Q が生成した情報</li>
+</ul>
+<p>Amazon Q Developerの無料利用枠（Free Tier）では、デフォルトでオプトアウトされていませんので、データが送信されます。</p>
+<h2 is-upgraded>3.1. VS Codeでの設定例</h2>
+<h3 is-upgraded>テレメトリの共有からオプトアウト</h3>
+<ol type="1">
+<li>VS Code で [設定] を開きます。</li>
+<li>VS Code ワークスペースを使用している場合は、[ワークスペース] サブタブに切り替えます。VS Code では、ワークスペース設定がユーザー設定より優先されます。</li>
+<li>以下を検索し、チェックボックスをオフにします。 <ul>
+<li>「Amazon Q: Telemetry」</li>
+</ul>
+</li>
+</ol>
+<p class="image-container"><img alt="vscode-telemetry" src="img\\10a1487206b0b335.jpg"></p>
+<p>または、settings.json に以下の設定を追加してください。</p>
+<pre><code language="language-json" class="language-json">{
+    &#34;amazonQ.telemetry&#34;: false
+}
+</code></pre>
+<p>※ (参考)settings.jsonの場所</p>
+<pre><code language="language-text" class="language-text">Windows: %APPDATA%\Code\User\settings.json
+        ( C:\Users\&lt;ユーザー名&gt;\AppData\Roaming\Code\User\settings.json)
+Linux: $HOME/.config/Code/User/settings.json
+macOS: $HOME/Library/Application Support/Code/User/settings.json
+</code></pre>
+<h3 is-upgraded>コンテンツの共有からのオプトアウト</h3>
+<ol type="1">
+<li>VS Code で [設定] を開きます。</li>
+<li>[ユーザー] サブタブに切り替えます。</li>
+<li>以下を検索し、チェックボックスをオフにします。 <ul>
+<li>「Amazon Q: Share Content」</li>
+</ul>
+</li>
+</ol>
+<p class="image-container"><img alt="vscode-share-content" src="img\\54c9e353b64e0393.jpg"></p>
+<p>または、settings.json に以下の設定を追加してください。</p>
+<pre><code language="language-json" class="language-json">{
+    &#34;amazonQ.shareContentWithAWS&#34;: false
+}
+</code></pre>
+<p>その他IDEについては、<a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/opt-out-IDE.html" target="_blank">AWSドキュメント</a>を参照してください。</p>
+<h2 is-upgraded>3.2. AWS CLI</h2>
+<h3 is-upgraded>テレメトリの共有からオプトアウト</h3>
+<pre><code language="language-sh" class="language-sh"># 現在のステータスを確認します
+q telemetry status
+# Telemetry status: enabled
+
+# 無効化します
+q telemetry disable
+# ステータスを確認します
+q telemetry status
+#Telemetry status: disabled
+</code></pre>
+<h3 is-upgraded>コンテンツの共有からのオプトアウト</h3>
+<pre><code language="language-sh" class="language-sh"># 無効化します
+q settings codeWhisperer.shareCodeWhispererContentWithAWS false
+# 設定を確認します
+q settings all
+#codeWhisperer.shareCodeWhispererContentWithAWS = false
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. 主な機能" duration="0">
+        <h2 is-upgraded>4.1. チャット</h2>
+<p>自然言語での質問に対して、AWSのベストプラクティスや実装方法を回答してもらうことができます。</p>
+<p>主なユースケースは以下の通りです。</p>
+<ul>
+<li>AWSアーキテクチャの相談</li>
+<li>AWSリソースの使い方</li>
+<li>トラブルシューティングなどにおける運用調査支援</li>
+<li>ドキュメントの参照</li>
+</ul>
+<p>IDE上にインストールした拡張機能や、AWSマネジメントコンソールでも質問ができます。</p>
+<p>AWSマネジメントコンソールでは右上のアイコンからチャットを始めることができます。</p>
+<p class="image-container"><img alt="console-amazonq" src="img\\afa267d822e72c08.jpg"></p>
+<p>Lambda関数作成の例：</p>
+<p class="image-container"><img alt="chat-lambda-create-function-01" src="img\\44d1c0587e43687b.jpg"></p>
+<p>読み取り専用アクセスのみしかないため、さすがに直接書き込んではくれないようです。</p>
+<p class="image-container"><img alt="chat-lambda-create-function-02" src="img\\e00c3315c015d8b.jpg"></p>
+<p>トラブルシューティングの例：</p>
+<p class="image-container"><img alt="chat-troubleshooting" src="img\\efb3f60c30a576b5.jpg"></p>
+<h2 is-upgraded>4.2. インラインコード補完</h2>
+<p>IDE上でリアルタイムにコード補完や提案を行ってくれます。コメントや関数宣言をもとに、適切なコードスニペットや関数本体を生成してくれます。</p>
+<p>VSCodeでのコード補完例：</p>
+<p class="image-container"><img alt="inline-suggestions-vscode" src="img\\b8faa7375e20ccf7.jpg"></p>
+<p>AWSマネジメントコンソール上のLambdaでもAmazon Q によるコード補完を利用することができます。 コード補完が動いていなかったら、左下にある「|| Amazon Q」をクリックして「Resume Auto-Suggestions...」からコード補完を再開できます。再開していれば、左下の表示も「▷Amazon Q」となっています。</p>
+<p class="image-container"><img alt="lambda-amazonq" src="img\\164bdaa4cc4671d.jpg"></p>
+<p>Lambdaでのコード補完例：</p>
+<p class="image-container"><img alt="inline-suggestions-lambda-01" src="img\\705481429d003c4.jpg"></p>
+<p>Lambdaコンソールでは、1行ずつ出るようです。</p>
+<p class="image-container"><img alt="inline-suggestions-lambda-02" src="img\\c531be6b847c811c.jpg"></p>
+<h2 is-upgraded>4.3 コード変換・アップグレード（/transform）</h2>
+<p>既存のコードを新しいバージョンや別の言語に変換できます。特に以下の変換に対応しています。</p>
+<ul>
+<li>Java 8/11/17 から Java 17/21 への自動アップグレード（詳細は<a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/code-transformation.html" target="_blank">こちら</a>） <ul>
+<li>Java 21へのアップグレードは、2025年2月14日にサポートされました。（詳細は<a href="https://aws.amazon.com/jp/about-aws/whats-new/2025/02/amazon-q-developer-upgrade-java-21/" target="_blank">こちら</a>）</li>
+<li>Java 8 から Java 17へアップグレードした事例は、「AWSブログ: <a href="https://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/" target="_blank">Amazon Q Developer による Java アプリケーションのモダナイゼーションhttps://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/</a>」を参照してください。</li>
+</ul>
+</li>
+<li>.NET の Windows から Linux への移植（詳細は<a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/transform-dotnet-IDE.html" target="_blank">こちら</a>）</li>
+</ul>
+<h2 is-upgraded>4.4. 機能開発（/dev）</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/software-dev.html" target="_blank">Amazon Q Developer を使用した機能の開発</a></p>
+<p><code>/dev</code> コマンドを使用することで、自然言語での指示から新機能の実装を支援してもらえます。 単純なコード生成だけでなく、複数ファイルにまたがる機能開発も可能です。</p>
+<p>ただし、<code>/dev</code>と入力すると以下のように表示されるので、不要かもしれません。</p>
+<p class="image-container"><img alt="amazonq-dev" src="img\\79571774f913cd5a.jpg"></p>
+<pre><code language="language-sh" class="language-sh">/dev DynamoDBとAPIGatewayを使ったユーザー管理APIを作成してください
+</code></pre>
+<p class="image-container"><img alt="amazonq-dev-01" src="img\\efd1ba12c3dc9839.jpg"></p>
+<p>このように作成されます。</p>
+<p class="image-container"><img alt="amazonq-dev-03" src="img\\82313a2d8b55aca0.jpg"><img alt="amazonq-dev-02" src="img\\48cb3d01a0c996ec.jpg"></p>
+<h2 is-upgraded>4.5. ユニットテスト作成（/test）</h2>
+<p><a href="http://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/test-generation.html" target="_blank">Amazon Q を使用したユニットテストの生成</a></p>
+<p>表示しているファイルか、選択したファイルのソースコードに対して、ユニットテストを作成してくれる機能です。 具体的には、以下の作業を行ってくれます。</p>
+<ul>
+<li>テストケースの識別</li>
+<li>モックとスタブの作成</li>
+<li>テストコードの生成</li>
+</ul>
+<p class="image-container"><img alt="unit-test" src="img\\28643b7a9be9d6c9.jpg"></p>
+<p>作成されたテストを実行してみます。</p>
+<pre><code language="language-sh" class="language-sh">coverage run -m unittest test_fizzbuzz_v2.py
+</code></pre>
+<p class="image-container"><img alt="unit-test-run" src="img\\51328bc677132161.jpg"></p>
+<p>カバレッジレポートを出力すると、<code>69%</code>でした。</p>
+<pre><code language="language-sh" class="language-sh">coverage report
+</code></pre>
+<p class="image-container"><img alt="unit-test-coverage-report" src="img\\879e3aa87534f41b.jpg"></p>
+<h2 is-upgraded>4.6. コードレビュー（/review）</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/code-reviews.html" target="_blank">Amazon Q Developer でコードを確認する</a></p>
+<p>コードのレビューを実施してくれる機能です。<code>/review</code>で実行できます。 日本語で回答してほしい場合は、あらかじめ「日本語で対応してください」としておくとよいです。</p>
+<p class="image-container"><img alt="review-01" src="img\\c8e780212ab51b55.jpg"></p>
+<p class="image-container"><img alt="review-02" src="img\\cfefd5aa4339e601.jpg"></p>
+<h2 is-upgraded>4.7. ドキュメントの生成（/doc）</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/doc-generation.html" target="_blank">Amazon Q Developer を使用したドキュメントの生成</a></p>
+<p>ワークスペースで実行することで、READMEなどを作成してもらえる機能です。</p>
+<p><code>/doc</code>と入れると、どんな種類のドキュメントを作成するか聞かれますので、ほしいドキュメントを回答します。</p>
+<ul>
+<li>API Documentation - Document APIs, endpoints, and integration guides</li>
+<li>README Files - Project overviews, setup instructions, and quick starts</li>
+<li>User Guides - Step-by-step instructions for end users</li>
+<li>Developer Guides - Technical implementation details and code examples</li>
+<li>Configuration Guides - Setup and configuration instructions</li>
+<li>Architecture Documentation - System design and component overviews</li>
+</ul>
+<p>例えば、以下のリポジトリの内容で<code>Developer Guides</code>を作成してもらうとこのようなものが出力されます。</p>
+<pre><code language="language-sh" class="language-sh">git clone https://github.com/aws-samples/amazon-bedrock-workshop.git
+</code></pre>
+<p>こちらもあらかじめ「日本語で対応してください」としておくと日本語で出力してくれます。</p>
+<p class="image-container"><img alt="doc" src="img\\4002a5ee68ec8ee8.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="5. Q CLI" duration="0">
+        <p>コマンドライン用のAmazon Qを利用できます。 2025年9月時点でサポートされているOSは、<code>macOS</code>と<code>Linux</code>です。WindowsでもWSLを使うことでインストールすることができます。</p>
+<p>VSCodeのDev Containerでも利用することもできます。以下のリポジトリにソースコードがおいてありますので参考にしてください。</p>
+<p>https://github.com/ishiharatma/devcontainer-amazon-q-cli</p>
+<p>インストールに成功すると、次のような画面から利用することができます。</p>
+<p class="image-container"><img alt="q-chat-start" src="img\\845004fd09039c9e.jpg"></p>
+<p>終了するには、次のコマンドを入力します。</p>
+<pre><code language="language-sh" class="language-sh">/quit
+</code></pre>
+<h2 is-upgraded>5.1. コンテキスト管理</h2>
+<p>他のAIコーディングエージェントと同様に特定のファイルにコンテキストを書いておくことで、Amazon Qが読み取り、書かれた内容に従った動作を行ってくれるものです。</p>
+<ul>
+<li>README.md: プロジェクトの説明や仕様が書いてあることを想定しています</li>
+<li>AmazonQ.md: Q CLI の動作全般にかかわることを記述するファイルです</li>
+<li>.amazonq/rules/*.md: 各言語など細かいコンテキストを記述するファイルです</li>
+</ul>
+<p>次のコマンドを入力すると読み込まれているコンテキストファイルを表示することができます。</p>
+<pre><code language="language-sh" class="language-sh">/context show
+</code></pre>
+<h2 is-upgraded>5.2. MCPサーバ管理</h2>
+<p>JSONファイルに指定しておくことで、Q CLIがMCPサーバを利用できるようになります。</p>
+<ul>
+<li>.amazonq/mcp.json</li>
+</ul>
+<pre><code language="language-json" class="language-json">{
+  &#34;mcpServers&#34;: {
+    &#34;mcp-server-fetch&#34;: {
+      &#34;command&#34;: &#34;uvx&#34;,
+      &#34;args&#34;: [
+        &#34;mcp-server-fetch&#34;
+      ]
+    },
+    &#34;AWS Core MCP Server&#34;: {
+      &#34;command&#34;: &#34;uvx&#34;,
+      &#34;timeout&#34;: 60000,
+      &#34;args&#34;: [
+        &#34;awslabs.core-mcp-server@latest&#34;
+      ],
+      &#34;env&#34;: {
+        &#34;FASTMCP_LOG_LEVEL&#34;: &#34;ERROR&#34;
+      },
+      &#34;autoApprove&#34;: [],
+      &#34;disabled&#34;: false
+    },
+    :
+  }
+}
+</code></pre>
+<h2 is-upgraded>5.3. カスタムエージェント</h2>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2025/07/amazon-q-developer-cli-custom-agents/" target="_blank">Amazon Q Developer CLI がカスタムエージェントを発表</a></p>
+<p>2025年7月31日に発表された、Q CLIで独自のエージェントを作成できる機能です。カスタムエージェントとは、特定のユースケースやワークフローに合わせて設定できるAIアシスタントです。</p>
+<p>JSONファイルでエージェントの動作が指定可能です。JSONファイルは、<code>.aws/amazonq/cli-agents</code>の中に格納されます。</p>
+<p>設定されているエージェントのリストは以下のコマンドで確認できます。(最初は何も登録されていないので、一覧に表示されませ)</p>
+<pre><code language="language-sh" class="language-sh">/agent list
+</code></pre>
+<p class="image-container"><img alt="agent-list-00" src="img\\3baaba5936a557e9.jpg"></p>
+<p>エージェントの構成要素は、<a href="https://raw.githubusercontent.com/aws/amazon-q-developer-cli/refs/heads/main/schemas/agent-v1.json" target="_blank">Gitリポジトリ</a>か、以下のコマンドで確認します。</p>
+<pre><code language="language-sh" class="language-sh">/agent schema
+</code></pre>
+<p class="image-container"><img alt="custom-agent-schema" src="img\\84f0ea41bfca1021.jpg"></p>
+<h3 is-upgraded>カスタムエージェントの作成方法</h3>
+<p>Q CLIでチャット（q chat）を開いてから、以下のコマンドを実行します。</p>
+<pre><code language="language-sh" class="language-sh">/agent create --name example-agent
+</code></pre>
+<p>エディタが開きますので、必要事項を設定し、ファイルを保存します。 ファイルは、<code>~/.aws/amazonq/cli-agents/example-agent.json</code>として保存されます。</p>
+<p>ここでカスタムエージェントの一覧を表示すると作成したカスタムエージェントが確認できます。</p>
+<p class="image-container"><img alt="agent-list-01" src="img\\fb0e664cf36109b5.jpg"></p>
+<p>一度、チャットを終了（/quit）します。</p>
+<p>カスタムエージェントを指定して、チャットを起動します。</p>
+<pre><code language="language-sh" class="language-sh">q chat --agent example-agent
+</code></pre>
+<p class="image-container"><img alt="custom-agent" src="img\\aa19957c72aadc9.jpg"></p>
+<p>詳しくは、<a href="https://aws.amazon.com/jp/blogs/devops/overcome-development-disarray-with-amazon-q-developer-cli-custom-agents/" target="_blank">こちら</a>のAWSブログか、<a href="https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/command-line-custom-agents.html" target="_blank">Amazon Q Developer ドキュメント</a>を参照してください。</p>
+<h2 is-upgraded>参考: Build Games with Amazon Q CLI and score a T shirt 🏆👕</h2>
+<p>2025年5月20日から6月20日までで開催されたAmazon Q CLIを使ってゲームを開発することで、特製Tシャツが貰えるというキャンペーンです。最終的に、キャンペーン期間は2025年6月30日まで延長されました。</p>
+<p>https://builder.aws.com/content/2xIoduO0xhkhUApQpVUIqBFGmAc/ended-build-games-with-amazon-q-cli-and-score-a-t-shirt</p>
+<p>どのようにゲームを作ったかについては、以下の記事を参考にしてください。ゲーム作成を通して、Q CLIの使い方や指示の方法が学べます。</p>
+<p>https://qiita.com/issy929/items/9562187de4f93999e8d4</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="7. 他のサービスとの連携" duration="0">
+        <h2 is-upgraded>7.1. Microsoft Teams / Slack との連携</h2>
+<p>チャットアプリケーション内でAmazon Q を活用し、運用イベントの監視やトラブルシューティングが可能です。</p>
+<p>Amazon Q Developer in chat applications(旧称: AWS ChatBot)を利用することで、指定したチャネルに通知し、Amazon Q Developerとチャットを行った情報の取得やAWS CLIの実行などができます。 実行できる権限は、IAMロールで制御します。</p>
+<p>参考: <a href="https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html" target="_blank">Tutorial: Get started with Microsoft Teams</a></p>
+<p>参考: <a href="https://docs.aws.amazon.com/chatbot/latest/adminguide/slack-setup.html" target="_blank">Tutorial: Get started with Slack</a></p>
+<h2 is-upgraded>7.2. GitHub との連携</h2>
+<p>AWSブログ: <a href="https://aws.amazon.com/jp/blogs/news/amazon-q-developer-in-github-now-in-preview-with-code-generation-review-and-legacy-transformation-capabilities/" target="_blank">2025年5月5日 Amazon Q Developer in GitHub (プレビュー) がコード生成を加速</a></p>
+<p>Amazon Q Developer for GitHubを使うと、GitHubのIssueに「Amazon Q Developer agent」ラベルを付けるだけで、新機能の開発から自動コードレビューまでをAIが支援してくれます。</p>
+<p class="image-container"><img alt="amazonq-github" src="img\\4b344d72479fff3f.jpg"></p>
+<h2 is-upgraded>7.3. GitLab との連携</h2>
+<p><a href="https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/gitlab-with-amazon-q.html" target="_blank">GitLab Duo Amazon Q</a></p>
+<p><a href="https://aws.amazon.com/jp/blogs/devops/announcing-general-availability-of-gitlab-duo-with-amazon-q/" target="_blank">2025年4月17日 GitLab Duo with Amazon Q の一般提供開始のお知らせ</a></p>
+<p>GitLab の DevSecOps プラットフォームに Amazon Q エージェント機能を直接組み込み、ソフトウェア開発ライフサイクル全体でAmazon Qの機能を活用できます。</p>
+<p>ただし、以下の利用条件があります。</p>
+<ul>
+<li>GitLab 17.11.0 以降のセルフマネージドインスタンス</li>
+<li>GitLab Ultimateプラン</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="8. Amazon Q Developerを活用するためのヒント" duration="0">
+        <p>Amazon Q Developerを効率的に活用するためのヒントをいくつか紹介します。</p>
+<h2 is-upgraded>明確な指示を与える</h2>
+<p>具体的で明確な指示を与えることで、より正確な回答やコード生成が期待できます。 生成AIは少ない指示でもそれなりのものを作成するため、生成AIに慣れてくると曖昧な指示を行ってしまうことがあります。これが思わぬところで大きな手戻りとなってしまうことがあるため、常に明確な指示を心がけましょう。</p>
+<h2 is-upgraded>対話を重ねる</h2>
+<p>１回の質問で終わらず、追加の質問を行なうことで、より深く、正確な情報が得られます。最初の回答をベースに、「この実装でエラーハンドリングはどう追加すれば良いですか？」といったフォローアップ質問が効果的です。</p>
+<h2 is-upgraded>段階的に指示を与える</h2>
+<p>1回の指示で大量の情報を与えず、段階的に指示することで、より理解しやすく実装しやすいコードが得られます。大きな機能は小さなコンポーネントに分けて、順次実装を依頼しましょう。</p>
+<h2 is-upgraded>コード改善のためのレビュー</h2>
+<p>作成したソースコードのレビューを実施してもらうことで、より効率的な記述方法を学ぶことができます。パフォーマンス改善や、セキュリティなどのベストプラクティスを学べます。</p>
+<h2 is-upgraded>設計ドキュメントの作成</h2>
+<p><code>/doc</code>コマンドを使ってドキュメント生成機能を活用することで、既存のコードベースから自動的にドキュメントを生成でき、コードの理解および、設計書作成の時間短縮にもなります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Amazon Q Developer は、AWS での開発・運用業務を大幅に効率化できる強力なAIアシスタントです。日本語への対応がされたことで、利用する機会が増えてくると思います。開発での利用も効果的ですが、個人的には運用業務におけるログ調査やメトリクスからの洞察を得るといった点において、非常に強力だと感じています。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
