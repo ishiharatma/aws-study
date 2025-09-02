@@ -115,7 +115,7 @@ Amazon Q Developerを理解する公式ドキュメントは次のとおりで�
 
 ### 1.5. 利用時の注意事項
 
-Amazon Qは便利なサービスですが、生成AIを利用する上で、以下の点には気を付けてください。
+Amazon Qは便利なサービスですが、生成AIを利用する上で以下の点には気を付けてください。
 
 - 所属組織のセキュリティポリシー: 業務利用する場合には、所属する組織のセキュリティポリシーに違反しないかを確認しましょう。
 - 機密情報の扱い: 入力した内容や出力された内容が学習に使われることがあります。本記事の「3. Amazon Q Developer を安全に使うためのオプトアウト」を参照し、必要に応じて送信されないようにしましょう。
@@ -233,6 +233,8 @@ q settings all
 
 ### 4.1. チャット
 
+[Amazon Q Developer とのチャット](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/q-in-IDE-chat.html)
+
 自然言語での質問に対して、AWSのベストプラクティスや実装方法を回答してもらうことができます。
 
 主なユースケースは以下の通りです。
@@ -262,6 +264,8 @@ Lambda関数作成の例：
 
 ### 4.2. インラインコード補完
 
+[Amazon Q Developer によるインライン提案の生成](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/inline-suggestions.html)
+
 IDE上でリアルタイムにコード補完や提案を行ってくれます。コメントや関数宣言をもとに、適切なコードスニペットや関数本体を生成してくれます。
 
 VSCodeでのコード補完例：
@@ -283,11 +287,13 @@ Lambdaコンソールでは、1行ずつ出るようです。
 
 ### 4.3 コード変換・アップグレード（/transform）
 
+[Amazon Q Developer を使用した IDE でのコードの変換](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/transform-in-IDE.html)
+
 既存のコードを新しいバージョンや別の言語に変換できます。特に以下の変換に対応しています。
 
 - Java 8/11/17 から Java 17/21 への自動アップグレード（詳細は[こちら](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/code-transformation.html)）
   - Java 21へのアップグレードは、2025年2月14日にサポートされました。（詳細は[こちら](https://aws.amazon.com/jp/about-aws/whats-new/2025/02/amazon-q-developer-upgrade-java-21/)）
-  - Java 8 から Java 17へアップグレードした事例は、「AWSブログ: [Amazon Q Developer による Java アプリケーションのモダナイゼーションhttps://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/](https://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/)」を参照してください。
+  - Java 8 から Java 17へアップグレードした事例は、「AWSブログ: [Amazon Q Developer による Java アプリケーションのモダナイゼーション](https://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/)」を参照してください。
 - .NET の Windows から Linux への移植（詳細は[こちら](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/transform-dotnet-IDE.html)）
 
 ### 4.4. 機能開発（/dev）
@@ -378,6 +384,8 @@ git clone https://github.com/aws-samples/amazon-bedrock-workshop.git
 ![doc](/images/q/doc.jpg)
 
 ## 5. Q CLI
+
+[コマンドラインで Amazon Q Developer を使用する](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/command-line.html)
 
 コマンドライン用のAmazon Qを利用できます。
 2025年9月時点でサポートされているOSは、`macOS`と`Linux`です。WindowsでもWSLを使うことでインストールすることができます。
@@ -505,6 +513,8 @@ https://builder.aws.com/content/2xIoduO0xhkhUApQpVUIqBFGmAc/ended-build-games-wi
 https://qiita.com/issy929/items/9562187de4f93999e8d4
 
 ## 7. 他のサービスとの連携
+
+[Amazon Q Developer とのサードパーティー統合](https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/third-party-integration.html)
 
 ### 7.1. Microsoft Teams / Slack との連携
 

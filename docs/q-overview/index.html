@@ -149,7 +149,7 @@
 <p>2025年4月より、Amazon Q Developer で日本語サポートが開始されました。これにより、さらに使いやすくなりました。</p>
 <p>参考: AWSブログ＞<a href="https://aws.amazon.com/jp/blogs/news/amazon-q-developer-global-capabilities/" target="_blank">Amazon Q Developer の言語サポートが拡大 (日本語を含む)</a></p>
 <h2 is-upgraded>1.5. 利用時の注意事項</h2>
-<p>Amazon Qは便利なサービスですが、生成AIを利用する上で、以下の点には気を付けてください。</p>
+<p>Amazon Qは便利なサービスですが、生成AIを利用する上で以下の点には気を付けてください。</p>
 <ul>
 <li>所属組織のセキュリティポリシー: 業務利用する場合には、所属する組織のセキュリティポリシーに違反しないかを確認しましょう。</li>
 <li>機密情報の扱い: 入力した内容や出力された内容が学習に使われることがあります。本記事の「3. Amazon Q Developer を安全に使うためのオプトアウト」を参照し、必要に応じて送信されないようにしましょう。</li>
@@ -258,6 +258,7 @@ q settings all
     
       <google-codelab-step label="4. 主な機能" duration="0">
         <h2 is-upgraded>4.1. チャット</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/q-in-IDE-chat.html" target="_blank">Amazon Q Developer とのチャット</a></p>
 <p>自然言語での質問に対して、AWSのベストプラクティスや実装方法を回答してもらうことができます。</p>
 <p>主なユースケースは以下の通りです。</p>
 <ul>
@@ -276,6 +277,7 @@ q settings all
 <p>トラブルシューティングの例：</p>
 <p class="image-container"><img alt="chat-troubleshooting" src="img\\efb3f60c30a576b5.jpg"></p>
 <h2 is-upgraded>4.2. インラインコード補完</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/inline-suggestions.html" target="_blank">Amazon Q Developer によるインライン提案の生成</a></p>
 <p>IDE上でリアルタイムにコード補完や提案を行ってくれます。コメントや関数宣言をもとに、適切なコードスニペットや関数本体を生成してくれます。</p>
 <p>VSCodeでのコード補完例：</p>
 <p class="image-container"><img alt="inline-suggestions-vscode" src="img\\b8faa7375e20ccf7.jpg"></p>
@@ -286,11 +288,12 @@ q settings all
 <p>Lambdaコンソールでは、1行ずつ出るようです。</p>
 <p class="image-container"><img alt="inline-suggestions-lambda-02" src="img\\c531be6b847c811c.jpg"></p>
 <h2 is-upgraded>4.3 コード変換・アップグレード（/transform）</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/transform-in-IDE.html" target="_blank">Amazon Q Developer を使用した IDE でのコードの変換</a></p>
 <p>既存のコードを新しいバージョンや別の言語に変換できます。特に以下の変換に対応しています。</p>
 <ul>
 <li>Java 8/11/17 から Java 17/21 への自動アップグレード（詳細は<a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/code-transformation.html" target="_blank">こちら</a>） <ul>
 <li>Java 21へのアップグレードは、2025年2月14日にサポートされました。（詳細は<a href="https://aws.amazon.com/jp/about-aws/whats-new/2025/02/amazon-q-developer-upgrade-java-21/" target="_blank">こちら</a>）</li>
-<li>Java 8 から Java 17へアップグレードした事例は、「AWSブログ: <a href="https://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/" target="_blank">Amazon Q Developer による Java アプリケーションのモダナイゼーションhttps://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/</a>」を参照してください。</li>
+<li>Java 8 から Java 17へアップグレードした事例は、「AWSブログ: <a href="https://aws.amazon.com/jp/blogs/news/modernize-your-java-application-with-amazon-q-developer/" target="_blank">Amazon Q Developer による Java アプリケーションのモダナイゼーション</a>」を参照してください。</li>
 </ul>
 </li>
 <li>.NET の Windows から Linux への移植（詳細は<a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/transform-dotnet-IDE.html" target="_blank">こちら</a>）</li>
@@ -349,7 +352,8 @@ q settings all
       </google-codelab-step>
     
       <google-codelab-step label="5. Q CLI" duration="0">
-        <p>コマンドライン用のAmazon Qを利用できます。 2025年9月時点でサポートされているOSは、<code>macOS</code>と<code>Linux</code>です。WindowsでもWSLを使うことでインストールすることができます。</p>
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/command-line.html" target="_blank">コマンドラインで Amazon Q Developer を使用する</a></p>
+<p>コマンドライン用のAmazon Qを利用できます。 2025年9月時点でサポートされているOSは、<code>macOS</code>と<code>Linux</code>です。WindowsでもWSLを使うことでインストールすることができます。</p>
 <p>VSCodeのDev Containerでも利用することもできます。以下のリポジトリにソースコードがおいてありますので参考にしてください。</p>
 <p>https://github.com/ishiharatma/devcontainer-amazon-q-cli</p>
 <p>インストールに成功すると、次のような画面から利用することができます。</p>
@@ -431,7 +435,8 @@ q settings all
       </google-codelab-step>
     
       <google-codelab-step label="7. 他のサービスとの連携" duration="0">
-        <h2 is-upgraded>7.1. Microsoft Teams / Slack との連携</h2>
+        <p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/third-party-integration.html" target="_blank">Amazon Q Developer とのサードパーティー統合</a></p>
+<h2 is-upgraded>7.1. Microsoft Teams / Slack との連携</h2>
 <p>チャットアプリケーション内でAmazon Q を活用し、運用イベントの監視やトラブルシューティングが可能です。</p>
 <p>Amazon Q Developer in chat applications(旧称: AWS ChatBot)を利用することで、指定したチャネルに通知し、Amazon Q Developerとチャットを行った情報の取得やAWS CLIの実行などができます。 実行できる権限は、IAMロールで制御します。</p>
 <p>参考: <a href="https://docs.aws.amazon.com/chatbot/latest/adminguide/teams-setup.html" target="_blank">Tutorial: Get started with Microsoft Teams</a></p>
