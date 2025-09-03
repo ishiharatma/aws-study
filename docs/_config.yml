@@ -26,6 +26,7 @@ header_pages:
   - developer-tools.md
   - data-migration.md
   - certificate.md
+  - other.md
   - links.md
 
 footer_icons:
