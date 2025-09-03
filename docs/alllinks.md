@@ -30,5 +30,7 @@ permalink: /alllinks/
 ![data-migration.md](data-migration.md)
 ## certificate
 ![certificate.md](certificate.md)
+## other
+![other.md](other.md)
 ## links
 ![links.md](links.md)

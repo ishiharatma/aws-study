@@ -17,6 +17,7 @@
   - [デベロッパーツール](#デベロッパーツール)
   - [移行とデータ転送](#移行とデータ転送)
   - [分析](#分析)
+  - [その他](#その他)
 - [AWS 認定資格勉強資料](#aws-認定資格勉強資料)
 
 ## はじめに<!-- omit in toc -->
@@ -135,6 +136,10 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - <a href="./kinesisdatastreams-overview/index.html#0" target="_blank">【初心者向け】Amazon Kinesis Data Streams入門！完全ガイド</a>
 - Amazon Data Firehose
 - Amazon QuickSight
+
+### その他
+
+- <a href="./q-overview/index.html#0" target="_blank">【初心者向け】Amazon Q Developer入門！完全ガイド</a>
 
 ## AWS 認定資格勉強資料
 
