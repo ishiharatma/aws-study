@@ -329,6 +329,7 @@ q settings all
 <p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/code-reviews.html" target="_blank">Amazon Q Developer でコードを確認する</a></p>
 <p>コードのレビューを実施してくれる機能です。<code>/review</code>で実行できます。 日本語で回答してほしい場合は、あらかじめ「日本語で対応してください」としておくとよいです。</p>
 <p class="image-container"><img alt="review-01" src="img\\c8e780212ab51b55.jpg"></p>
+<p>※ソースコードにコメントを書いたためか、レビュー指摘されそうな問題を意図的に含んだことがバレてます。</p>
 <p class="image-container"><img alt="review-02" src="img\\cfefd5aa4339e601.jpg"></p>
 <h2 is-upgraded>4.7. ドキュメントの生成（/doc）</h2>
 <p><a href="https://docs.aws.amazon.com/ja_jp/amazonq/latest/qdeveloper-ug/doc-generation.html" target="_blank">Amazon Q Developer を使用したドキュメントの生成</a></p>
@@ -365,14 +366,14 @@ q settings all
 <p>他のAIコーディングエージェントと同様に特定のファイルにコンテキストを書いておくことで、Amazon Qが読み取り、書かれた内容に従った動作を行ってくれるものです。</p>
 <ul>
 <li>README.md: プロジェクトの説明や仕様が書いてあることを想定しています</li>
-<li>AmazonQ.md: Q CLI の動作全般にかかわることを記述するファイルです</li>
+<li>AmazonQ.md: Amazon Q CLI の動作全般にかかわることを記述するファイルです</li>
 <li>.amazonq/rules/*.md: 各言語など細かいコンテキストを記述するファイルです</li>
 </ul>
 <p>次のコマンドを入力すると読み込まれているコンテキストファイルを表示することができます。</p>
 <pre><code language="language-sh" class="language-sh">/context show
 </code></pre>
 <h2 is-upgraded>5.2. MCPサーバ管理</h2>
-<p>JSONファイルに指定しておくことで、Q CLIがMCPサーバを利用できるようになります。</p>
+<p>JSONファイルに指定しておくことで、Amazon Q CLIがMCPサーバを利用できるようになります。</p>
 <ul>
 <li>.amazonq/mcp.json</li>
 </ul>
@@ -402,9 +403,9 @@ q settings all
 </code></pre>
 <h2 is-upgraded>5.3. カスタムエージェント</h2>
 <p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2025/07/amazon-q-developer-cli-custom-agents/" target="_blank">Amazon Q Developer CLI がカスタムエージェントを発表</a></p>
-<p>2025年7月31日に発表された、Q CLIで独自のエージェントを作成できる機能です。カスタムエージェントとは、特定のユースケースやワークフローに合わせて設定できるAIアシスタントです。</p>
+<p>2025年7月31日に発表された、Amazon Q CLIで独自のエージェントを作成できる機能です。カスタムエージェントとは、特定のユースケースやワークフローに合わせて設定できるAIアシスタントです。</p>
 <p>JSONファイルでエージェントの動作が指定可能です。JSONファイルは、<code>.aws/amazonq/cli-agents</code>の中に格納されます。</p>
-<p>設定されているエージェントのリストは以下のコマンドで確認できます。(最初は何も登録されていないので、一覧に表示されませ)</p>
+<p>設定されているエージェントのリストは以下のコマンドで確認できます。(最初は何も登録されていないので、一覧に表示されません)</p>
 <pre><code language="language-sh" class="language-sh">/agent list
 </code></pre>
 <p class="image-container"><img alt="agent-list-00" src="img\\3baaba5936a557e9.jpg"></p>
@@ -413,7 +414,7 @@ q settings all
 </code></pre>
 <p class="image-container"><img alt="custom-agent-schema" src="img\\84f0ea41bfca1021.jpg"></p>
 <h3 is-upgraded>カスタムエージェントの作成方法</h3>
-<p>Q CLIでチャット（q chat）を開いてから、以下のコマンドを実行します。</p>
+<p>Amazon Q CLIでチャット（q chat）を開いてから、以下のコマンドを実行します。</p>
 <pre><code language="language-sh" class="language-sh">/agent create --name example-agent
 </code></pre>
 <p>エディタが開きますので、必要事項を設定し、ファイルを保存します。 ファイルは、<code>~/.aws/amazonq/cli-agents/example-agent.json</code>として保存されます。</p>
@@ -428,7 +429,7 @@ q settings all
 <h2 is-upgraded>参考: Build Games with Amazon Q CLI and score a T shirt 🏆👕</h2>
 <p>2025年5月20日から6月20日までで開催されたAmazon Q CLIを使ってゲームを開発することで、特製Tシャツが貰えるというキャンペーンです。最終的に、キャンペーン期間は2025年6月30日まで延長されました。</p>
 <p>https://builder.aws.com/content/2xIoduO0xhkhUApQpVUIqBFGmAc/ended-build-games-with-amazon-q-cli-and-score-a-t-shirt</p>
-<p>どのようにゲームを作ったかについては、以下の記事を参考にしてください。ゲーム作成を通して、Q CLIの使い方や指示の方法が学べます。</p>
+<p>どのようにゲームを作ったかについては、以下の記事を参考にしてください。ゲーム作成を通して、Amazon Q CLIの使い方や指示の方法が学べます。</p>
 <p>https://qiita.com/issy929/items/9562187de4f93999e8d4</p>
 
 

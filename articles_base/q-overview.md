@@ -350,6 +350,8 @@ coverage report
 
 ![review-01](/images/q/review-01.jpg)
 
+※ソースコードにコメントを書いたためか、レビュー指摘されそうな問題を意図的に含んだことがバレてます。
+
 ![review-02](/images/q/review-02.jpg)
 
 ### 4.7. ドキュメントの生成（/doc）
@@ -403,7 +405,7 @@ https://github.com/ishiharatma/devcontainer-amazon-q-cli
 他のAIコーディングエージェントと同様に特定のファイルにコンテキストを書いておくことで、Amazon Qが読み取り、書かれた内容に従った動作を行ってくれるものです。
 
 - README.md: プロジェクトの説明や仕様が書いてあることを想定しています
-- AmazonQ.md: Q CLI の動作全般にかかわることを記述するファイルです
+- AmazonQ.md: Amazon Q CLI の動作全般にかかわることを記述するファイルです
 - .amazonq/rules/*.md: 各言語など細かいコンテキストを記述するファイルです
 
 次のコマンドを入力すると読み込まれているコンテキストファイルを表示することができます。
@@ -414,7 +416,7 @@ https://github.com/ishiharatma/devcontainer-amazon-q-cli
 
 ### 5.2. MCPサーバ管理
 
-JSONファイルに指定しておくことで、Q CLIがMCPサーバを利用できるようになります。
+JSONファイルに指定しておくことで、Amazon Q CLIがMCPサーバを利用できるようになります。
 
 - .amazonq/mcp.json
 
@@ -448,11 +450,11 @@ JSONファイルに指定しておくことで、Q CLIがMCPサーバを利用�
 
 [Amazon Q Developer CLI がカスタムエージェントを発表](https://aws.amazon.com/jp/about-aws/whats-new/2025/07/amazon-q-developer-cli-custom-agents/)
 
-2025年7月31日に発表された、Q CLIで独自のエージェントを作成できる機能です。カスタムエージェントとは、特定のユースケースやワークフローに合わせて設定できるAIアシスタントです。
+2025年7月31日に発表された、Amazon Q CLIで独自のエージェントを作成できる機能です。カスタムエージェントとは、特定のユースケースやワークフローに合わせて設定できるAIアシスタントです。
 
 JSONファイルでエージェントの動作が指定可能です。JSONファイルは、`.aws/amazonq/cli-agents`の中に格納されます。
 
-設定されているエージェントのリストは以下のコマンドで確認できます。(最初は何も登録されていないので、一覧に表示されませ)
+設定されているエージェントのリストは以下のコマンドで確認できます。(最初は何も登録されていないので、一覧に表示されません)
 
 ```sh
 /agent list
@@ -471,7 +473,7 @@ JSONファイルでエージェントの動作が指定可能です。JSONファ
 
 #### カスタムエージェントの作成方法
 
-Q CLIでチャット（q chat）を開いてから、以下のコマンドを実行します。
+Amazon Q CLIでチャット（q chat）を開いてから、以下のコマンドを実行します。
 
 ```sh
 /agent create --name example-agent
@@ -502,7 +504,7 @@ q chat --agent example-agent
 
 https://builder.aws.com/content/2xIoduO0xhkhUApQpVUIqBFGmAc/ended-build-games-with-amazon-q-cli-and-score-a-t-shirt
 
-どのようにゲームを作ったかについては、以下の記事を参考にしてください。ゲーム作成を通して、Q CLIの使い方や指示の方法が学べます。
+どのようにゲームを作ったかについては、以下の記事を参考にしてください。ゲーム作成を通して、Amazon Q CLIの使い方や指示の方法が学べます。
 
 https://qiita.com/issy929/items/9562187de4f93999e8d4
 
