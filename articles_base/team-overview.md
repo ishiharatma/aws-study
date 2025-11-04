@@ -676,7 +676,7 @@ see: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/conf
 **TEAM管理アカウント**のAWSマネジメントコンソールから、[Amazon SES > 設定: ID]を開きます。
 
 - [IDの作成]
-- [ドメイン]を選択し、ドメイン名に`example.cloud`を入力します。
+- [ドメイン]を選択し、ドメイン名に`example.com`を入力します。
 - `Easy DKIM`を選択し、キーの長さを`RSA_2048_BIT`に指定します。
 - [DNS レコードの発行]の3レコードをRoute 53のホストゾーンへ設定します。
 - [ID ステータス]が`検証保留中`から`検証済み`になるまで待機します。
