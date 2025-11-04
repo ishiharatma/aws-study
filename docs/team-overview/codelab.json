@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2025-11-05T02:25:10+09:00",
+  "id": "team-overview",
+  "duration": 0,
+  "title": "",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_team-overview.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "awsteam"
+  ],
+  "url": "team-overview"
+}

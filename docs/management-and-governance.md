@@ -15,3 +15,4 @@ permalink: /management-and-governance/
 - AWS Organizations
 - AWS Trusted Advisor
 - AWS Config
+- <a href="../team-overview/index.html#0" target="_blank">TEAM for AWS IAM Identity Center 導入ガイド ── 一時的な権限昇格管理の実践</a>

@@ -1,0 +1,1148 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title></title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="team-overview"
+                  title=""
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#1-team-for-aws-iam-identity-center-%E3%81%A8%E3%81%AF" target="_blank">1. TEAM for AWS IAM Identity Center とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%B0%8E%E5%85%A5%E3%81%AE%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">1.2. 導入のメリット</a></li>
+<li><a href="#13-%E4%B8%BB%E3%81%AA%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">1.3. 主なユースケース</a></li>
+</ul>
+</li>
+<li><a href="#2-%E5%9F%BA%E6%9C%AC%E6%A9%9F%E8%83%BD" target="_blank">2. 基本機能</a><ul>
+<li><a href="#21-%E6%A8%A9%E9%99%90%E7%94%B3%E8%AB%8B%E6%A9%9F%E8%83%BD" target="_blank">2.1. 権限申請機能</a></li>
+<li><a href="#22-%E6%89%BF%E8%AA%8D%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">2.2. 承認ワークフロー</a></li>
+<li><a href="#23-%E4%B8%80%E6%99%82%E6%A8%A9%E9%99%90%E3%81%AE%E8%87%AA%E5%8B%95%E4%BB%98%E4%B8%8E%E5%89%8A%E9%99%A4" target="_blank">2.3. 一時権限の自動付与・削除</a></li>
+<li><a href="#24-%E9%80%9A%E7%9F%A5%E6%A9%9F%E8%83%BD" target="_blank">2.4. 通知機能</a></li>
+<li><a href="#25-%E7%9B%A3%E6%9F%BB%E3%81%A8%E3%82%B3%E3%83%B3%E3%83%97%E3%83%A9%E3%82%A4%E3%82%A2%E3%83%B3%E3%82%B9" target="_blank">2.5. 監査とコンプライアンス</a></li>
+<li><a href="#26-%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E7%AE%A1%E7%90%86" target="_blank">2.6. ポリシー管理</a></li>
+</ul>
+</li>
+<li><a href="#3-%E9%81%8B%E7%94%A8%E3%81%AE%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">3. 運用のポイント</a><ul>
+<li><a href="#31-%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86" target="_blank">3.1. コスト管理</a></li>
+<li><a href="#32-%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">3.2. モニタリング</a></li>
+<li><a href="#33-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">3.3. セキュリティ</a><ul>
+<li><a href="#1-%E6%9C%80%E5%B0%8F%E6%A8%A9%E9%99%90%E3%81%AE%E5%8E%9F%E5%89%87" target="_blank">1. 最小権限の原則</a></li>
+<li><a href="#2-%E6%89%BF%E8%AA%8D%E3%83%97%E3%83%AD%E3%82%BB%E3%82%B9%E3%81%AE%E8%A8%AD%E8%A8%88" target="_blank">2. 承認プロセスの設計</a></li>
+<li><a href="#3-%E7%9B%A3%E6%9F%BB%E3%81%A8%E3%83%AC%E3%83%93%E3%83%A5%E3%83%BC" target="_blank">3. 監査とレビュー</a></li>
+<li><a href="#4-%E8%A8%AD%E5%AE%9A%E3%81%AE%E5%AE%9A%E6%9C%9F%E7%9A%84%E3%81%AA%E8%A6%8B%E7%9B%B4%E3%81%97" target="_blank">4. 設定の定期的な見直し</a></li>
+<li><a href="#5-%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%A8%E7%81%BD%E5%AE%B3%E5%AF%BE%E7%AD%96" target="_blank">5. バックアップと災害対策</a></li>
+<li><a href="#6-%E9%80%9A%E4%BF%A1%E3%81%AE%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">6. 通信のセキュリティ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#4-%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E6%96%B9%E6%B3%95" target="_blank">4. デプロイ方法</a><ul>
+<li><a href="#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E3%81%AE%E6%B5%81%E3%82%8C" target="_blank">デプロイの流れ</a></li>
+<li><a href="#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E5%89%8D%E6%BA%96%E5%82%99" target="_blank">デプロイ前準備</a><ul>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%91-aws-iam-identity-center%E3%81%AE%E7%AE%A1%E7%90%86%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%8B%E3%82%89team%E7%AE%A1%E7%90%86%E3%82%A2%E3%82%AB%E3%82%A6%E3%83%B3%E3%83%88%E3%81%B8%E3%81%AE%E6%A8%A9%E9%99%90%E5%A7%94%E4%BB%BB" target="_blank">ステップ１： AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%92personal-access-token-classic-%E3%81%AE%E4%BD%9C%E6%88%90%E3%81%A8aws-secrets-manager%E3%81%B8%E3%81%AE%E7%99%BB%E9%8C%B2" target="_blank">ステップ２：personal access token (classic) の作成とAWS Secrets Managerへの登録</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%93team%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%99%E3%82%8B-iam-identity-center-%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AE%E4%BD%9C%E6%88%90" target="_blank">ステップ３：TEAMで利用する IAM Identity Center グループの作成</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%94cloudtrail-lake-eventdatastore%E3%81%AE%E4%BD%9C%E6%88%90" target="_blank">ステップ４：CloudTrail Lake EventDataStoreの作成</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4" target="_blank">デプロイ</a><ul>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%91github%E3%83%AA%E3%83%9D%E3%82%B8%E3%83%88%E3%83%AA%E3%81%AE%E3%82%AF%E3%83%AD%E3%83%BC%E3%83%B3" target="_blank">ステップ１：GitHubリポジトリのクローン</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%92%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E7%94%A8%E3%83%91%E3%83%A9%E3%83%A1%E3%83%BC%E3%82%BF%E3%81%AE%E4%BD%9C%E6%88%90" target="_blank">ステップ２：デプロイ用パラメータの作成</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%93%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E5%AE%9F%E8%A1%8C" target="_blank">ステップ３：デプロイ実行</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%94iam-identity-center-saml-integration%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">ステップ４：IAM Identity Center SAML Integrationの設定</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%95amazon-cognito%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">ステップ５：Amazon Cognitoの設定</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%96amazon-ses%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">ステップ６：Amazon SESの設定</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#5-%E3%83%87%E3%83%97%E3%83%AD%E3%82%A4%E5%BE%8C%E3%81%AE%E3%82%B9%E3%83%86%E3%83%83%E3%83%97" target="_blank">5. デプロイ後のステップ</a></li>
+<li><a href="#6-%E3%82%A2%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB" target="_blank">6. アンインストール</a><ul>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%91%E3%82%A2%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB" target="_blank">ステップ１：アンインストール</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%92s3%E3%83%90%E3%82%B1%E3%83%83%E3%83%88%E3%81%AE%E5%89%8A%E9%99%A4" target="_blank">ステップ２：S3バケットの削除</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%93iam-identity-center-%E3%81%8B%E3%82%89-team-%E3%82%A2%E3%83%97%E3%83%AA%E3%81%AE%E5%89%8A%E9%99%A4" target="_blank">ステップ３：IAM Identity Center から TEAM アプリの削除</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%83%E3%83%97%EF%BC%94team%E3%81%A7%E5%88%A9%E7%94%A8%E3%81%97%E3%81%A6%E3%81%84%E3%81%9F-iam-identity-center-%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%AE%E5%89%8A%E9%99%A4" target="_blank">ステップ４：TEAMで利用していた IAM Identity Center グループの削除</a></li>
+<li><a href="#team%E7%94%A8iam-identity-center%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%AE%9A%E7%BE%A9%E4%BE%8B" target="_blank">TEAM用IAM Identity Centerグループ定義例</a></li>
+</ul>
+</li>
+<li><a href="#7-%E5%88%A9%E7%94%A8%E8%80%85%E5%90%91%E3%81%91%E3%82%AC%E3%82%A4%E3%83%89" target="_blank">7. 利用者向けガイド</a><ul>
+<li><a href="#team%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AB%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%99%E3%82%8B" target="_blank">TEAMアプリケーションにログインする</a></li>
+<li><a href="#%E4%B8%80%E6%99%82%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E8%A8%B1%E5%8F%AF%E3%81%AE%E7%94%B3%E8%AB%8B%E3%82%92%E8%A1%8C%E3%81%86" target="_blank">一時アクセス許可の申請を行う</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E3%81%AE%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">申請のステータスを確認する</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E3%82%92%E3%82%AD%E3%83%A3%E3%83%B3%E3%82%BB%E3%83%AB%E3%81%99%E3%82%8B" target="_blank">申請をキャンセルする</a></li>
+</ul>
+</li>
+<li><a href="#8-%E7%AE%A1%E7%90%86%E8%80%85%E5%90%91%E3%81%91%E3%82%AC%E3%82%A4%E3%83%89" target="_blank">8. 管理者向けガイド</a><ul>
+<li><a href="#team%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%AE%A1%E7%90%86%E8%80%85%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%BE%E3%81%9F%E3%81%AF%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B" target="_blank">TEAMアプリケーション管理者を追加または削除する</a></li>
+<li><a href="#team%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E7%9B%A3%E6%9F%BB%E8%80%85%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%BE%E3%81%9F%E3%81%AF%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B" target="_blank">TEAMアプリケーション監査者を追加または削除する</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E8%80%85%E7%AE%A1%E7%90%86" target="_blank">申請者管理</a><ul>
+<li><a href="#team%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E7%94%B3%E8%AB%8B%E3%81%A7%E3%81%8D%E3%82%8B%E4%BA%BA%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%BE%E3%81%9F%E3%81%AF%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B" target="_blank">TEAMアプリケーションを使って申請できる人を追加または削除する</a></li>
+<li><a href="#team%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%AE%E7%94%B3%E8%AB%8B%E8%80%85%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E8%BF%BD%E5%8A%A0%E5%89%8A%E9%99%A4%E3%81%99%E3%82%8B" target="_blank">TEAMアプリケーションの申請者グループを追加、削除する</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E8%80%85%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B" target="_blank">申請者ポリシーを管理する</a></li>
+</ul>
+</li>
+<li><a href="#%E6%89%BF%E8%AA%8D%E7%AE%A1%E7%90%86" target="_blank">承認管理</a><ul>
+<li><a href="#%E6%89%BF%E8%AA%8D%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E7%AE%A1%E7%90%86%E3%81%99%E3%82%8B" target="_blank">承認ポリシーを管理する</a></li>
+<li><a href="#%E3%81%9D%E3%81%AE%E4%BB%96%E8%A8%AD%E5%AE%9A" target="_blank">その他設定</a><ul>
+<li><a href="#%E7%94%B3%E8%AB%8B%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E6%89%BF%E8%AA%8D%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%BE%E3%81%9F%E3%81%AF%E7%84%A1%E5%8A%B9%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">申請に対する承認を有効または無効に変更する</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E6%99%82%E3%81%AE%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E5%85%A5%E5%8A%9B%E3%82%92%E5%BF%85%E9%A0%88%E3%81%BE%E3%81%9F%E3%81%AF%E4%BB%BB%E6%84%8F%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">申請時のコメント入力を必須または任意に変更する</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E6%99%82%E3%81%AE%E3%83%81%E3%82%B1%E3%83%83%E3%83%88%E7%95%AA%E5%8F%B7%E5%85%A5%E5%8A%9B%E3%82%92%E5%BF%85%E9%A0%88%E3%81%BE%E3%81%9F%E3%81%AF%E4%BB%BB%E6%84%8F%E3%81%AB%E5%A4%89%E6%9B%B4%E3%81%99%E3%82%8B" target="_blank">申請時のチケット番号入力を必須または任意に変更する</a></li>
+<li><a href="#%E4%B8%80%E6%99%82%E6%A8%A9%E9%99%90%E3%81%AE%E6%9C%80%E5%A4%A7%E5%88%A9%E7%94%A8%E5%8F%AF%E8%83%BD%E6%99%82%E9%96%93%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">一時権限の最大利用可能時間を設定する</a></li>
+<li><a href="#%E6%9C%AA%E6%89%BF%E8%AA%8D%E3%83%AA%E3%82%AF%E3%82%A8%E3%82%B9%E3%83%88%E3%81%AE%E6%9C%9F%E9%99%90%E5%88%87%E3%82%8C%E3%81%A8%E3%81%AA%E3%82%8B%E6%99%82%E9%96%93%E3%82%92%E8%A8%AD%E5%AE%9A%E3%81%99%E3%82%8B" target="_blank">未承認リクエストの期限切れとなる時間を設定する</a></li>
+<li><a href="#e%E3%83%A1%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%88%E3%82%8B%E7%94%B3%E8%AB%8B%E9%80%9A%E7%9F%A5%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">Eメールによる申請通知を有効にする</a></li>
+<li><a href="#sns%E3%81%AB%E3%82%88%E3%82%8B%E7%94%B3%E8%AB%8B%E9%80%9A%E7%9F%A5%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">SNSによる申請通知を有効にする</a></li>
+<li><a href="#slack%E3%81%AB%E3%82%88%E3%82%8B%E7%94%B3%E8%AB%8B%E9%80%9A%E7%9F%A5%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">Slackによる申請通知を有効にする</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#9-%E6%89%BF%E8%AA%8D%E8%80%85%E5%90%91%E3%81%91%E3%82%AC%E3%82%A4%E3%83%89" target="_blank">9. 承認者向けガイド</a><ul>
+<li><a href="#%E7%94%B3%E8%AB%8B%E3%82%92%E6%89%BF%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">申請を承認する</a></li>
+<li><a href="#%E7%94%B3%E8%AB%8B%E3%82%92%E5%90%A6%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">申請を否認する</a></li>
+<li><a href="#%E8%87%AA%E8%BA%AB%E3%81%8C%E5%AE%9F%E6%96%BD%E3%81%97%E3%81%9F%E6%89%BF%E8%AA%8D%E5%B1%A5%E6%AD%B4%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">自身が実施した承認履歴を確認する</a></li>
+</ul>
+</li>
+<li><a href="#10-%E7%9B%A3%E6%9F%BB%E8%80%85%E5%90%91%E3%81%91%E3%82%AC%E3%82%A4%E3%83%89" target="_blank">10. 監査者向けガイド</a><ul>
+<li><a href="#%E6%89%BF%E8%AA%8D%E5%B1%A5%E6%AD%B4%E3%82%92%E9%96%B2%E8%A6%A7%E3%81%99%E3%82%8B" target="_blank">承認履歴を閲覧する</a></li>
+<li><a href="#%E3%82%BB%E3%83%83%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B" target="_blank">セッションアクティビティを確認する</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a><ul>
+<li><a href="#team%E3%81%AE%E4%B8%BB%E3%81%AA%E7%89%B9%E5%BE%B4" target="_blank">TEAMの主な特徴</a></li>
+<li><a href="#%E5%B0%8E%E5%85%A5%E5%8A%B9%E6%9E%9C" target="_blank">導入効果</a></li>
+<li><a href="#%E5%B0%8E%E5%85%A5%E6%99%82%E3%81%AE%E6%A4%9C%E8%A8%8E%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">導入時の検討ポイント</a></li>
+<li><a href="#%E6%AC%A1%E3%81%AE%E3%82%B9%E3%83%86%E3%83%83%E3%83%97" target="_blank">次のステップ</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">参考リソース</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. TEAM for AWS IAM Identity Center とは" duration="0">
+        <p class="image-container"><img alt="TEAM" src="img\\30b38ca677cd1f3f.png"></p>
+<p>Temporary elevated access management (TEAM) for AWS IAM Identity Center とは、AWS が提供するオープンソースソリューションで、ユーザーに一時的な管理者権限を付与するための仕組みです。</p>
+<p class="image-container"><img alt="TEAM architecture" src="img\\2c62b092ecf145c2.png"></p>
+<p>** 画像は TEAM の GitHub より引用</p>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
+<p>TEAMを理解する公式ドキュメントは次のとおりです。</p>
+<p><a href="https://aws-samples.github.io/iam-identity-center-team/" target="_blank">Temporary elevated access management (TEAM)</a></p>
+<p><a href="https://github.com/aws-samples/iam-identity-center-team/tree/main" target="_blank">GitHub</a></p>
+<p><a href="https://aws.amazon.com/jp/blogs/security/temporary-elevated-access-management-with-iam-identity-center/" target="_blank">AWS Security Blog on 08 JUN 2023</a></p>
+<p><a href="https://aws.amazon.com/jp/builders-flash/202505/temporary-elevated-access-management/" target="_blank">builders.flash on 2025-05-01 | AWS Community Hero: 山口 正徳氏)</a></p>
+<h2 is-upgraded>1.2. 導入のメリット</h2>
+<p>TEAMを導入する主なメリットは以下の5つです。</p>
+<ul>
+<li>常時管理者権限の排除 <ul>
+<li>常設の管理者権限を削減し、必要な時だけ一時的に権限を付与することで、セキュリティリスクを最小化できます</li>
+</ul>
+</li>
+<li>承認ワークフローの実装 <ul>
+<li>申請・承認プロセスを通じて、権限付与の透明性と説明責任を確保できます</li>
+</ul>
+</li>
+<li>監査証跡の自動記録 <ul>
+<li>すべての権限申請、承認、アクセスログが自動的に記録され、コンプライアンス要件に対応できます</li>
+</ul>
+</li>
+<li>柔軟なポリシー設定 <ul>
+<li>グループ、アカウント、OU単位で細かく権限申請のルールを設定でき、組織の要件に合わせた運用が可能です</li>
+</ul>
+</li>
+<li>運用コストの削減 <ul>
+<li>IAM Identity Centerと統合されているため、既存のユーザー管理基盤をそのまま活用でき、追加の認証基盤が不要です</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>1.3. 主なユースケース</h2>
+<ul>
+<li>本番環境へのアクセス管理 <ul>
+<li>開発者やオペレーターが本番環境で作業する際に、一時的な管理者権限を申請・承認フローを通じて付与</li>
+</ul>
+</li>
+<li>緊急対応時の権限付与 <ul>
+<li>インシデント対応やトラブルシューティング時に、迅速かつ記録可能な形で必要な権限を付与</li>
+</ul>
+</li>
+<li>コンプライアンス対応 <ul>
+<li>SOC2、ISO27001などの監査要件に対応するため、すべての特権アクセスの記録と承認証跡を保持</li>
+</ul>
+</li>
+<li>職務分離の実現 <ul>
+<li>申請者と承認者を分離し、自己承認を防止することで、内部統制を強化</li>
+</ul>
+</li>
+<li>マルチアカウント環境での権限管理 <ul>
+<li>AWS Organizationsと連携し、複数のAWSアカウントに対する一時権限を一元管理</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. 基本機能" duration="0">
+        <p>TEAMは以下の主要な機能を提供します。</p>
+<h2 is-upgraded>2.1. 権限申請機能</h2>
+<p>利用者（申請者）は、Webベースのダッシュボードから一時的な管理者権限を申請できます。</p>
+<p>申請時に指定可能な項目は次のようなものがあります。</p>
+<ul>
+<li>対象のAWSアカウント</li>
+<li>付与する権限（IAM Identity Centerの許可セット）</li>
+<li>アクセス開始時刻</li>
+<li>アクセス期間（時間単位）</li>
+<li>作業理由（Justification）</li>
+<li>チケット番号（任意、または必須に設定可能）</li>
+</ul>
+<p>申請後、設定された承認ポリシーに従って承認者に通知が送信されます。</p>
+<h2 is-upgraded>2.2. 承認ワークフロー</h2>
+<p>承認者は申請内容を確認し、承認または拒否を判断します。</p>
+<p>承認ワークフローの特徴は次のとおりです。</p>
+<ul>
+<li>承認者は申請内容の詳細（誰が、どのアカウントに、何の権限を、いつまで、なぜ必要か）を確認可能</li>
+<li>自己承認の防止: 承認者権限を持っていても、自分自身の申請は承認できない仕組み</li>
+<li>承認ポリシーは、アカウントまたはOU単位で設定可能</li>
+<li>承認が不要な設定も可能（開発環境など、リスクの低い環境向け）</li>
+</ul>
+<h2 is-upgraded>2.3. 一時権限の自動付与・削除</h2>
+<p>承認された申請は、指定された開始時刻に自動的にIAM Identity Centerで権限が付与されます。</p>
+<p>TEAMはサーバーレスアーキテクチャで構築されており、以下のAWSサービスが連携して一時権限のライフサイクルを自動管理します。</p>
+<p><strong>実装の仕組み:</strong></p>
+<ol type="1">
+<li><strong>申請データの保存</strong><ul>
+<li>承認された申請情報（開始時刻、終了時刻、対象アカウント、権限など）はAmazon DynamoDBに保存されます</li>
+</ul>
+</li>
+<li><strong>権限の自動付与</strong><ul>
+<li>Amazon EventBridgeがスケジュール実行を管理し、指定された開始時刻にAWS Lambdaをトリガーします</li>
+<li>Lambda関数がIAM Identity Center APIを呼び出し、対象ユーザーに対してアサインメント（Account Assignment）を作成します</li>
+<li>ユーザーはAWSアクセスポータルにログインすると、付与された権限で対象アカウントにアクセスできるようになります</li>
+</ul>
+</li>
+<li><strong>権限の自動削除</strong><ul>
+<li>EventBridgeが定期的にDynamoDBの申請データをチェックし、終了時刻を過ぎたアクセスを検出します</li>
+<li>Lambda関数がIAM Identity Center APIを呼び出し、該当するアサインメントを自動的に削除します</li>
+<li>これにより、アクセス期間が終了すると自動的に権限が取り消されます</li>
+</ul>
+</li>
+<li><strong>ワークフローの調整</strong><ul>
+<li>AWS Step Functionsが申請から承認、通知、権限付与までの一連のワークフローを統合的に管理します</li>
+<li>Amazon API Gateway + Lambdaがフロントエンド（Amplifyアプリ）からのリクエストを処理します</li>
+</ul>
+</li>
+<li><strong>監査ログの記録</strong><ul>
+<li>すべての権限付与・削除操作はAWS CloudTrailに記録され、監査証跡として保持されます</li>
+<li>CloudTrail Lakeと統合することで、一時権限を使用したユーザーの操作履歴も追跡可能です</li>
+</ul>
+</li>
+</ol>
+<p>この自動化により、手動での権限管理が不要になり、人的ミス（権限の付けっぱなしなど）を防止できます。</p>
+<h2 is-upgraded>2.4. 通知機能</h2>
+<p>申請や承認のステータス変化を、複数のチャネルで通知できます。</p>
+<p>サポートされる通知方法は次のとおりです。</p>
+<ul>
+<li>Eメール通知: Amazon SESを利用した電子メール通知</li>
+<li>SNS通知: Amazon SNSトピックへの発行（Emailサブスクリプションやその他の統合が可能）</li>
+<li>Slack通知: Slackチャンネルへのリアルタイム通知</li>
+</ul>
+<p>通知は申請者、承認者の両方に送信され、承認待ちや承認完了などのステータスをタイムリーに把握できます。</p>
+<h2 is-upgraded>2.5. 監査とコンプライアンス</h2>
+<p>すべてのアクセス履歴と操作ログが記録され、監査に対応できます。</p>
+<p>監査機能は次のとおりです。</p>
+<ul>
+<li>承認履歴の閲覧: すべての申請と承認/拒否の履歴を確認可能</li>
+<li>セッションアクティビティログ: CloudTrail Lakeと統合し、一時権限でアクセスしたユーザーがどのAWSサービスにアクセスしたかを追跡</li>
+<li>CSVエクスポート: 監査レポート作成のため、履歴データをCSV形式でダウンロード可能</li>
+<li>読み取り専用の監査者ロール: 監査者は履歴を閲覧できるが、設定変更や承認操作はできない</li>
+</ul>
+<h2 is-upgraded>2.6. ポリシー管理</h2>
+<p>管理者は柔軟にポリシーを設定し、組織のセキュリティ要件に合わせた運用が可能です。</p>
+<ul>
+<li>申請者ポリシー（Eligibility Policy）<ul>
+<li>誰が（ユーザーまたはグループ）</li>
+<li>どのアカウント/OUに対して</li>
+<li>どの許可セットを</li>
+<li>何時間まで申請可能か</li>
+<li>承認が必要かどうか</li>
+</ul>
+</li>
+<li>承認者ポリシー（Approver Policy）<ul>
+<li>どのアカウント/OUに対する申請を</li>
+<li>どの承認者グループが承認できるか</li>
+</ul>
+</li>
+</ul>
+<p>これらのポリシーにより、例えば「開発環境は承認不要で最大8時間」「本番環境は承認必須で最大4時間」といった柔軟な設定が可能です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. 運用のポイント" duration="0">
+        <p>TEAMを効果的に運用するためのベストプラクティスと注意点を解説します。</p>
+<h2 is-upgraded>3.1. コスト管理</h2>
+<p>TEAMアプリケーションの運用にかかる主なコストは以下の通りです。</p>
+<p><strong>主なコスト要素:</strong></p>
+<ul>
+<li><strong>AWS Amplify</strong>: Webアプリケーションのホスティング費用（ビルド時間とデータ転送量に応じた従量課金）</li>
+<li><strong>Amazon Cognito</strong>: ユーザー認証の月間アクティブユーザー数に応じた課金</li>
+<li><strong>Amazon DynamoDB</strong>: 申請・承認データの保存（オンデマンドモードの読み書き料金）</li>
+<li><strong>AWS Lambda</strong>: 申請処理、承認処理、権限付与・削除処理の実行時間に応じた課金</li>
+<li><strong>CloudTrail Lake</strong>: セッションアクティビティログの保存（データ取り込みと保存期間に応じた課金）</li>
+<li><strong>Amazon SES</strong>: メール通知を利用する場合の送信料金</li>
+</ul>
+<p><strong>コスト最適化のポイント:</strong></p>
+<ul>
+<li>CloudTrail Lake EventDataStoreの保持期間を適切に設定（365日が推奨ですが、要件に応じて調整可能）</li>
+<li>不要な通知チャネルは無効化し、必要なもののみ有効化する</li>
+<li>開発環境など頻繁にアクセスする環境は、承認不要で直接付与する設定を検討する（申請・承認のオーバーヘッドを削減）</li>
+</ul>
+<p>💡 一般的な中小規模の組織（ユーザー数50名程度、月間申請数100件程度）であれば、月額コストは数十ドル程度に収まります。</p>
+<h2 is-upgraded>3.2. モニタリング</h2>
+<p>TEAMアプリケーションの健全性と利用状況を継続的に監視することが重要です。</p>
+<p><strong>監視すべき項目:</strong></p>
+<p><strong>1. アプリケーションの可用性</strong></p>
+<ul>
+<li>AWS Amplifyのビルド状態とデプロイ状況を確認</li>
+<li>Lambda関数のエラー率と実行時間をCloudWatch メトリクスで監視</li>
+<li>DynamoDBのスロットリングエラーが発生していないか確認</li>
+</ul>
+<p><strong>2. 利用状況の把握</strong></p>
+<ul>
+<li>月間の申請件数と承認率の推移</li>
+<li>承認待ち時間の平均値（承認プロセスのボトルネック検出）</li>
+<li>アカウント別、ユーザー別の申請頻度</li>
+</ul>
+<p><strong>3. セキュリティイベントの監視</strong></p>
+<ul>
+<li>拒否された申請の傾向（不正な申請の兆候）</li>
+<li>期限切れになった申請の数（承認プロセスの遅延検出）</li>
+<li>キャンセルされた申請の理由</li>
+</ul>
+<p><strong>推奨する監視方法:</strong></p>
+<ul>
+<li>CloudWatch ダッシュボードを作成し、Lambda関数のエラー、DynamoDBのメトリクス、Amplifyのビルド状況を可視化</li>
+<li>TEAMの監査者機能を活用し、定期的に承認履歴とセッションアクティビティをレビュー</li>
+<li>SNS通知を有効化し、管理者がリアルタイムで申請状況を把握できるようにする</li>
+</ul>
+<h2 is-upgraded>3.3. セキュリティ</h2>
+<p>TEAMを安全に運用するためのセキュリティベストプラクティスです。</p>
+<h3 is-upgraded>1. 最小権限の原則</h3>
+<ul>
+<li>申請者ポリシーでは、必要最小限のアカウントと許可セットのみを申請可能にする</li>
+<li>本番環境へのアクセスは必ず承認必須とし、非本番環境でも適切なポリシーを設定する</li>
+<li>「AdministratorAccess」のような強力な権限は、真に必要な場合のみ申請可能にする</li>
+</ul>
+<h3 is-upgraded>2. 承認プロセスの設計</h3>
+<ul>
+<li>本番環境の承認者は、技術とビジネスの両面から判断できる経験豊富なメンバーを選定する</li>
+<li>承認者グループは複数名で構成し、単一障害点を避ける（一人が不在でも承認できる体制）</li>
+<li>緊急時の対応手順を事前に定義し、承認者に周知しておく</li>
+</ul>
+<h3 is-upgraded>3. 監査とレビュー</h3>
+<ul>
+<li>定期的（月次または四半期ごと）に承認履歴とセッションアクティビティを監査者がレビューする</li>
+<li>異常なパターン（深夜の申請、長時間のアクセス、頻繁な申請）を検出し、必要に応じて調査する</li>
+<li>CloudTrail Lakeのクエリを活用し、一時権限で実行された操作を詳細に追跡する</li>
+</ul>
+<h3 is-upgraded>4. 設定の定期的な見直し</h3>
+<ul>
+<li>申請者ポリシーと承認者ポリシーを定期的に見直し、組織の変更に合わせて更新する</li>
+<li>退職者や異動者のグループメンバーシップを迅速に削除する</li>
+<li>最大申請期間の設定が適切か（長すぎないか）を定期的に確認する</li>
+</ul>
+<h3 is-upgraded>5. バックアップと災害対策</h3>
+<ul>
+<li>TEAM管理アカウントのCloudFormationテンプレートとパラメータファイルをバージョン管理システムで管理する</li>
+<li>DynamoDBのバックアップを有効化し、データ損失に備える</li>
+<li>GitHub Personal Access Tokenは定期的にローテーションし、AWS Secrets Managerで安全に管理する</li>
+</ul>
+<h3 is-upgraded>6. 通信のセキュリティ</h3>
+<ul>
+<li>TEAMアプリケーションはHTTPSで保護されており、IAM Identity Centerのフェデレーション認証を使用</li>
+<li>Cognitoユーザープールは外部からの直接アクセスを防ぎ、IAM Identity CenterのSAML統合のみを許可する</li>
+<li>必要に応じて、AWS WAFをAmplifyアプリケーションに適用し、不正アクセスから保護する</li>
+</ul>
+<p>💡 セキュリティインシデントが発生した場合は、TEAMアプリケーションの監査ログとCloudTrail Lakeを活用し、影響範囲を迅速に特定できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. デプロイ方法" duration="0">
+        <p>TEAMアプリケーションをTEAM管理用のAWSアカウントへデプロイするまでを解説します。</p>
+<h2 is-upgraded>デプロイの流れ</h2>
+<p>本ガイドで説明するデプロイの主な流れは以下の通りです。</p>
+<ol type="1">
+<li>デプロイ前準備 <ol type="1">
+<li>IAM Identity Centerの管理アカウントからTEAM管理アカウントへ管理の委任を行う</li>
+<li>TEAMのGitリポジトリをCloneし、リポジトリにアクセスするためのpersonal access token (classic)を発行する</li>
+<li>TEAMで使用するIAM Identity Centerのグループを作成する</li>
+</ol>
+</li>
+<li>デプロイ実施 <ol type="1">
+<li>デプロイ用のシェルを実行し、デプロイを行う</li>
+</ol>
+</li>
+<li>（Nextアクション ※本ガイド対象外）「02. Administrator Guide」に従い、設定を行う</li>
+</ol>
+<h2 is-upgraded>デプロイ前準備</h2>
+<h3 is-upgraded>ステップ１： AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#dedicated-team-account" target="_blank">TEAM Deployment guide</a></p>
+<p>**IAM Identity Centerの管理アカウントから、**以下の委任を実行します。</p>
+<p>CloudShellや、ローカルからコマンドで実行が可能です。 ローカルから実行する場合は、コマンドの最後に、<code>--profile xxxxx</code> として管理アカウントのプロファイル名を指定します。</p>
+<ul>
+<li>IAM Identity Center</li>
+</ul>
+<pre><code language="language-bash" class="language-bash">aws organizations register-delegated-administrator \
+  --account-id 111122223333 \
+  --service-principal sso.amazonaws.com
+</code></pre>
+<pre><code language="language-bash" class="language-bash"># 無効化する場合
+aws organizations deregister-delegated-administrator \
+  --account-id 111122223333 \
+  --service-principal sso.amazonaws.com
+</code></pre>
+<ul>
+<li>CloudTrail Lake</li>
+</ul>
+<pre><code language="language-bash" class="language-bash">aws organizations register-delegated-administrator \
+  --account-id 111122223333 \
+  --service-principal cloudtrail.amazonaws.com
+</code></pre>
+<pre><code language="language-bash" class="language-bash"># 無効化する場合
+aws organizations deregister-delegated-administrator \
+  --account-id 111122223333 \
+  --service-principal cloudtrail.amazonaws.com
+</code></pre>
+<ul>
+<li>Account management</li>
+</ul>
+<pre><code language="language-bash" class="language-bash">aws organizations enable-aws-service-access \
+  --service-principal account.amazonaws.com
+
+aws organizations register-delegated-administrator \
+  --account-id 111122223333 \
+  --service-principal account.amazonaws.com
+</code></pre>
+<pre><code language="language-bash" class="language-bash"># 無効化する場合（有効化したときと逆の順番で無効化します）
+aws organizations deregister-delegated-administrator \
+  --account-id 111122223333 \
+  --service-principal account.amazonaws.com
+
+aws organizations disable-aws-service-access \
+  --service-principal account.amazonaws.com
+</code></pre>
+<p>委任状況は以下のコマンドで確認します。</p>
+<pre><code language="language-bash" class="language-bash">aws organizations list-delegated-services-for-account \
+  --account-id 111122223333 \
+  --output text
+</code></pre>
+<p>以下のように出力されます。</p>
+<pre><code language="language-bash" class="language-bash">#DELEGATEDSERVICES       2023-06-29T14:17:46.624000+00:00        account.amazonaws.com
+#DELEGATEDSERVICES       2023-06-25T15:11:09.553000+00:00        cloudtrail.amazonaws.com
+#DELEGATEDSERVICES       2023-06-25T14:56:02.172000+00:00        sso.amazonaws.com
+</code></pre>
+<h3 is-upgraded>ステップ２：personal access token (classic) の作成とAWS Secrets Managerへの登録</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#aws-secrets-manager" target="_blank">TEAM Deployment guide</a></p>
+<p>このTEAMアプリケーションをデプロイするフローの中で、GitHubリポジトリのソースを取得する必要があります。そのためのアクセストークンを発行します。</p>
+<p>発行手順は、GitHub Docsの<a href="https://docs.github.com/ja/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#personal-access-token-classic-%E3%81%AE%E4%BD%9C%E6%88%90" target="_blank">ここ</a>を参照してください。</p>
+<p>権限は以下のように、[repo]をすべて指定します。</p>
+<p class="image-container"><img alt="WS000930.jpg" src="img\\c6c115fed3acdde5.jpg"></p>
+<p>⚠️　現状は、personal access token (classic)しか対応していません。そのため、アクセストークンは個人ユーザー管理になっています。（下記Issue参照）</p>
+<p>Why classic GitHub tokens are required? https://github.com/aws-samples/iam-identity-center-team/issues/401</p>
+<p>発行したアクセストークンを<strong>TEAM管理アカウントの</strong>シークレットマネージャーに登録します。</p>
+<pre><code language="language-bash" class="language-bash"># 新規作成
+SECRET_NAME=&#34;TEAM-IDC-APP&#34;
+aws secretsmanager create-secret \
+    --name &#34;$SECRET_NAME&#34; \
+    --description &#34;GitHub repository credentials for TEAM application&#34; \
+    --secret-string &#39;{&#34;url&#34;: &#34;https://github.com/your-repository-name/iam-identity-center-team.git&#34;, &#34;AccessToken&#34;: &#34;xxxxxxx&#34;}&#39; \
+    --tags Key=Project,Value=YOUR_PROJECT_NAME Key=Env,Value=&#34;YOUR_ENV&#34; \
+    --region &#34;ap-northeast-1&#34;
+</code></pre>
+<pre><code language="language-bash" class="language-bash"># 更新する場合
+aws secretsmanager update-secret \
+    --secret-id &#34;$SECRET_NAME&#34; \
+    --description &#34;GitHub repository credentials for TEAM application&#34; \
+    --secret-string &#39;{&#34;url&#34;: &#34;https://github.com/your-repository-name/iam-identity-center-team.git&#34;,&#34;AccessToken&#34;: &#34;xxxxxxx&#34;}&#39; \
+    --tags Key=Project,Value=YOUR_PROJECT_NAME Key=Env,Value=&#34;YOUR_ENV&#34; \
+    --region &#34;ap-northeast-1&#34;
+</code></pre>
+<h3 is-upgraded>ステップ３：TEAMで利用する IAM Identity Center グループの作成</h3>
+<p><strong>TEAM管理アカウント</strong>のCloudShellまたは、プロファイル名を指定してローカルからAWS CLIにて実行します。</p>
+<pre><code language="language-bash" class="language-bash">STORE_ID=$(aws sso-admin list-instances --query &#34;Instances[0].IdentityStoreId&#34; --output text --no-paginate)
+
+aws identitystore create-group --output yaml \\
+  --identity-store-id &#34;${STORE_ID}&#34; \\
+  --display-name &#34;TEAM-Users&#34; \\
+  --description &#34;TEAM アプリケーションで一時的なアクセス権限をリクエストするユーザーグループ(開発者やオペレーターなど)&#34;
+
+aws identitystore create-group --output yaml \\
+  --identity-store-id &#34;${STORE_ID}&#34; \\
+  --display-name &#34;TEAM-Approvers-Production&#34; \\
+  --description &#34;TEAM アプリケーションで本番アカウントへのリクエストをレビュー・承認 / 拒否する権限を持つユーザーグループ。ただし、自身のリクエストは自身では承認できません&#34;
+
+aws identitystore create-group --output yaml \\
+  --identity-store-id &#34;${STORE_ID}&#34; \\
+  --display-name &#34;TEAM-Approvers-NonProduction&#34; \\
+  --description &#34;TEAM アプリケーションで本番アカウント以外へのリクエストをレビュー・承認 / 拒否する権限を持つユーザーグループ。ただし、自身のリクエストは自身では承認できません&#34;
+
+aws identitystore create-group --output yaml \\
+  --identity-store-id &#34;${STORE_ID}&#34; \\
+  --display-name &#34;TEAM-Admins&#34; \\
+  --description &#34;TEAM アプリケーションの設定管理・ユーザー管理・グループ設定などを行うユーザーグループ&#34;
+
+aws identitystore create-group --output yaml \\
+  --identity-store-id &#34;${STORE_ID}&#34; \\
+  --display-name &#34;TEAM-Auditors&#34; \\
+  --description &#34;TEAMアプリケーションのリクエスト履歴やアクセスログの確認・レビューを行うユーザーグループ (読み取り専用)&#34;
+</code></pre>
+<p>作成したグループは以下のコマンドで確認できます。</p>
+<pre><code language="language-bash" class="language-bash">aws identitystore list-groups --output table \\
+  --identity-store-id &#34;${STORE_ID}&#34; \\
+  --query &#34;Groups[?starts_with(DisplayName, &#39;TEAM&#39;)].[DisplayName,GroupId,Description]&#34;
+</code></pre>
+<p>以下のように表示されます</p>
+<pre><code language="language-bash" class="language-bash">#-------------------------------------------------------------------------------------------------
+#|ListGroups                          |
+#+------------------------------+---------------------------------------+------------------------+
+#|  TEAM-Approvers-Production   |  0744ba98-8031-70a4-061a-ada3cf44ca14 |  xxxxx       |||
+#|  TEAM-Auditors               |  37549a08-5081-702d-0063-15540c1d1abe |  xxxxx       ||
+#|  TEAM-Users                  |  4754aa28-9041-7094-5ccc-3f27cacb7e2e |  xxxxx       |||
+#|  TEAM-Admins                 |  6774ea58-2061-7071-b591-8b4d3fd32f0a |  xxxxx       ||
+#|  TEAM-Approvers-NonProduction|  f7e44ab8-6091-704c-4461-e6f241837f74 |  xxxxx       |||
+#+------------------------------+---------------------------------------+-----------------------+
+</code></pre>
+<h3 is-upgraded>ステップ４：CloudTrail Lake EventDataStoreの作成</h3>
+<p><strong>TEAM管理アカウント</strong>のCloudShellまたは、プロファイル名を指定してローカルからAWS CLIにて実行します。</p>
+<pre><code language="language-bash" class="language-bash">EDS_NAME=&#34;TEAM-audit-logs&#34;
+
+aws cloudtrail create-event-data-store \
+    --name &#34;$EDS_NAME&#34; \
+    --multi-region-enabled \
+    --organization-enabled \
+    --retention-period 365 \
+    --no-termination-protection-enabled \
+    --tags-list Key=Project,Value=YOUR_PROJECT_NAME Key=Env,Value=YOUR_ENV \
+    --region &#34;ap-northeast-1&#34;
+</code></pre>
+<p>削除するときは以下のコマンドを使用します。</p>
+<pre><code language="language-bash" class="language-bash">aws cloudtrail delete-event-data-store \
+    --event-data-store &#34;$EDS_NAME&#34; \
+    --region &#34;ap-northeast-1&#34;
+</code></pre>
+<h2 is-upgraded>デプロイ</h2>
+<h3 is-upgraded>ステップ１：GitHubリポジトリのクローン</h3>
+<pre><code language="language-bash" class="language-bash">git clone https://github.com/aws-samples/iam-identity-center-team.git
+</code></pre>
+<h3 is-upgraded>ステップ２：デプロイ用パラメータの作成</h3>
+<p>すでにデプロイ用パラメータが作成済みの場合は本手順をスキップします。</p>
+<pre><code language="language-bash" class="language-bash">cd deployment
+cp -n parameters-dev.sh parameters_YOUR_ENV.sh
+</code></pre>
+<p>コピーしたデプロイ用パラメータファイルを修正します。</p>
+<h3 is-upgraded>ステップ３：デプロイ実行</h3>
+<p>作成したデプロイ用パラメータファイルを使用してデプロイを実行します。</p>
+<pre><code language="language-bash" class="language-bash">PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./deploy_custom.sh
+</code></pre>
+<p class="image-container"><img alt="WS000938.jpg" src="img\\be44aa24b307f9cb.jpg"></p>
+<p>このデプロイを実行すると、下記２つのCloudFormationスタックが作成されます。「amplify-teamidcapp-main」スタックは「TEAM-IDC-APP」作成後、5分程度時間が経ってから作成されます。また、複数のスタックをネストしており、すべてのスタックが完了するまで15分くらいかかります。</p>
+<ul>
+<li>TEAM-IDC-APP</li>
+<li>amplify-teamidcapp-main-xxxxx</li>
+</ul>
+<h3 is-upgraded>ステップ４：IAM Identity Center SAML Integrationの設定</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html" target="_blank">TEAM Deployment guide</a></p>
+<p>ステップ３ですべてのスタックが「CREATE_COMPLETE」になっていることを確認してから実行します。</p>
+<p class="image-container"><img alt="WS000982.jpg" src="img\\9da6a20655062244.jpg"></p>
+<p>以下のコマンドを実行します。</p>
+<pre><code language="language-bash" class="language-bash">PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./integration_custom.sh
+</code></pre>
+<p class="image-container"><img alt="WS000936.jpg" src="img\\ca2a4898b50cdd5f.jpg"></p>
+<p>実行すると、以下のURLが払い出されます。この値は次の手順で使用しますので、メモしておきます。</p>
+<pre><code language="language-bash" class="language-bash">applicationStartURL: https://xxxxxx-main.auth.amazoncognito.com/authorize?client_id=xxxxxx&amp;response_type=code&amp;scope=aws.cognito.signin.user.admin+email+openid+phone+profile&amp;redirect_uri=https://main.d1s8z5724fsfj7-.amplifyapp.com/&amp;idp_identifier=team
+applicationACSURL: https://xxxxxx-main.auth.amazoncognito.com/saml2/idpresponse
+applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
+</code></pre>
+<p><strong>TEAM管理アカウント</strong>のAWSマネジメントコンソールから、[AWS IAM Identity Center console &gt; Application assignment &gt; Applications &gt; Add application] を開きます。</p>
+<ul>
+<li>[設定するアプリケーションがある &gt; SAML 2.0] を選択し、[次へ]をクリックします</li>
+<li>以下を設定します。<ul>
+<li>表示名: <code>TEAM IDC APP</code></li>
+<li>説明: <code>Temporary elevated access management (TEAM) for AWS IAM Identity Center</code></li>
+</ul>
+</li>
+<li>「IAM Identity Center メタデータ」の<code>IAM Identity Center SAML メタデータファイル</code>のURLはAmazon Cognitoの設定で必要ですので、メモしておきます。<ul>
+<li>IAM Identity Center SAML メタデータファイル: <code>https://portal.sso.ap-northeast-1.amazonaws.com/saml/metadata/xxxxxxxx</code></li>
+</ul>
+</li>
+<li>[Application start URL]に先ほどシェルの実行で表示された<code>applicationStartURL</code>の値を入力します。</li>
+<li>[Application Metadata]では、<code>applicationACSURL</code>と<code>applicationSAMLAudience</code>の値を入力します。<ul>
+<li>applicationACSURL: <code>https://xxxxxx-main.auth.ap-northeast-1.amazoncognito.com/saml2/idpresponse</code></li>
+<li>applicationSAMLAudience: <code>urn:amazon:cognito:sp:ap-northeast-1_xxxxxx</code></li>
+</ul>
+</li>
+<li>作成したアプリケーションを開きます。</li>
+<li>[アクション＞属性マッピング]を開きます。<ul>
+<li><code>Subject</code>と<code>Email</code>を設定します。<img alt="WS000946.jpg" src="img\\c6f77840140599a5.jpg"><ul>
+<li>参考: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html#configure-attribute-mapping</li>
+<li>Subject - ${user:subject} - persistent</li>
+<li>Email - ${user:email} - basic</li>
+</ul>
+</li>
+<li>[変更の保存]をクリックし、保存します。</li>
+</ul>
+</li>
+<li>[割り当てられたユーザーとグループ]にTEAM用のグループ(<code>TEAM-</code>で始まるグループ名)をすべて割り当てます。<img alt="WS000939.jpg" src="img\\b2e18b34a978bbf1.jpg"><img alt="WS000940.jpg" src="img\\477d792483f549ab.jpg"><ul>
+<li>⚠️ アプリケーションにグループを割り当ててもグループのメンバーとして登録されていなければ、アプリケーションを利用できません。「02. Administrator Guide」を参照し、グループにメンバーを割り当ててください。</li>
+<li>⚠️ グループに割り当てても、AWS access portalをログアウトしてから再ログインするまで、アプリケーションが表示されない場合があります。表示されない場合は、ログアウトしてください。</li>
+</ul>
+</li>
+</ul>
+<h3 is-upgraded>ステップ５：Amazon Cognitoの設定</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/cognito.html" target="_blank">TEAM Deployment guide</a></p>
+<p>以下のコマンドでコピーしたJSONファイルを開き、<code>MetadataURL</code>に<code>IAM Identity Center SAML メタデータファイル</code>のURLを記載します。 すでにファイルが存在する場合は、そのまま編集してください。</p>
+<pre><code language="language-bash" class="language-bash">cd deployment
+cp -n details_dev.json details_YOUR_ENV.json
+</code></pre>
+<p>JSONファイルは以下のようになっています。</p>
+<pre><code language="language-json" class="language-json">{
+    &#34;MetadataURL&#34;: &#34;https://portal.sso.ap-northeast-1.amazonaws.com/saml/metadata/xxxxxxxxxxxxxxxx&#34;
+}
+</code></pre>
+<p>以下のコマンドで設定を実行します。</p>
+<pre><code language="language-bash" class="language-bash">PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./cognito_custom.sh
+</code></pre>
+<p>画面出力が複数行でますので、コンソール画面では<code>q</code>を押して表示を終了させます。</p>
+<p class="image-container"><img alt="WS000937.jpg" src="img\\eb370304f71c90ab.jpg"></p>
+<h3 is-upgraded>ステップ６：Amazon SESの設定</h3>
+<p>see: TEAM Deployment guide</p>
+<p>see: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/notifications.html#email-notification-via-amazon-ses</p>
+<p><strong>TEAM管理アカウント</strong>のAWSマネジメントコンソールから、[Amazon SES &gt; 設定: ID]を開きます。</p>
+<ul>
+<li>[IDの作成]</li>
+<li>[ドメイン]を選択し、ドメイン名に<code>example.cloud</code>を入力します。</li>
+<li><code>Easy DKIM</code>を選択し、キーの長さを<code>RSA_2048_BIT</code>に指定します。</li>
+<li>[DNS レコードの発行]の3レコードをRoute 53のホストゾーンへ設定します。</li>
+<li>[ID ステータス]が<code>検証保留中</code>から<code>検証済み</code>になるまで待機します。<img alt="WS000974.jpg" src="img\\ee8f1ec3a3ea9443.jpg"><img alt="WS000977.jpg" src="img\\296a3c2064d4ce91.jpg"></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="5. デプロイ後のステップ" duration="0">
+        <p>「02. Administrator Guide」に従い、設定を行います。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="6. アンインストール" duration="0">
+        <p>TEAMアプリケーションをアンインストールする手順です。<code>destroy_custom.sh</code> を実行することでデプロイ時に作成したスタックが削除されます。</p>
+<p>ただし、Amplify デプロイメントの S3 バケットが削除されないため、手動での削除が必要です。s3バケット名の形式はamplify-teamidcapp-main-xxxx-deploymentです。</p>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/deployment/uninstall.html" target="_blank">TEAM Deployment guide</a></p>
+<h3 is-upgraded>ステップ１：アンインストール</h3>
+<p>カレントディレクトリが<code>deployment</code> ではない場合は移動します。</p>
+<pre><code language="language-bash" class="language-bash">cd deployment
+</code></pre>
+<p>以下のコマンドでアンインストールを実行します。</p>
+<pre><code language="language-bash" class="language-bash">PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./destroy_custom.sh
+</code></pre>
+<p class="image-container"><img alt="deployimage02" src="img\\3f3e6469c884be3c.png"></p>
+<p>：</p>
+<p class="image-container"><img alt="deployimage03" src="img\\26c5ea0ae09af10f.png"></p>
+<p>AWSマネジメントコンソールで、[CloudFormation]にアクセスすると、「DELETE_IN_PROGRESS」となり、削除が実施されます。</p>
+<p class="image-container"><img alt="deployimage04" src="img\\ecbb3dc2ad4e2180.png"></p>
+<p>⚠️アンインストール前に、権限委任の解除が実施されていると「CloudTrail Lake EventDataStore」の削除が権限不足で失敗し、スタックの削除にも失敗します。この場合、リソースは残したうえでスタックの強制削除を行ってください。残ってしまった「CloudTrail Lake EventDataStore」は、IAM Identity Centerの管理アカウント上から手動で削除します。</p>
+<h3 is-upgraded>ステップ２：S3バケットの削除</h3>
+<p>S3バケットを削除します。</p>
+<p class="image-container"><img alt="deployimage05" src="img\\24f4912adcca01a3.png"></p>
+<p><strong>TEAM管理アカウント</strong>のCloudShell上に貼り付けて実行します。</p>
+<pre><code language="language-bash" class="language-bash">aws s3api list-buckets \
+  --query &#34;Buckets[?starts_with(Name, &#39;amplify-teamidcapp-main-&#39;)].Name&#34; \
+  --output text | \
+tr &#39;\t&#39; &#39;\n&#39; | \
+while read -r BUCKET_NAME; do
+  echo &#34;バケットを削除中: ${BUCKET_NAME}&#34;
+  # 1. 通常のオブジェクトを削除
+  echo &#34;  - オブジェクトを削除中...&#34;
+  aws s3 rm &#34;s3://${BUCKET_NAME}&#34; --recursive &gt; /dev/null 2&gt;&amp;1
+  
+  # 2. すべてのバージョンと削除マーカーを削除
+  echo &#34;  - すべてのバージョンを削除中...&#34;
+  aws s3api list-object-versions \
+    --bucket &#34;${BUCKET_NAME}&#34; \
+    --output json \
+    --query &#39;{Objects: Versions[].{Key:Key,VersionId:VersionId}}&#39; 2&gt;/dev/null | \
+  jq -c &#39;if .Objects then . else empty end&#39; | \
+  while read -r DELETE_JSON; do
+    if [ &#34;$DELETE_JSON&#34; != &#34;&#34; ] &amp;&amp; [ &#34;$DELETE_JSON&#34; != &#39;{&#34;Objects&#34;:null}&#39; ]; then
+      aws s3api delete-objects \
+        --bucket &#34;${BUCKET_NAME}&#34; \
+        --delete &#34;$DELETE_JSON&#34; &gt; /dev/null
+    fi
+  done
+  
+  # 3. 削除マーカーを削除
+  echo &#34;  - 削除マーカーを削除中...&#34;
+  aws s3api list-object-versions \
+    --bucket &#34;${BUCKET_NAME}&#34; \
+    --output json \
+    --query &#39;{Objects: DeleteMarkers[].{Key:Key,VersionId:VersionId}}&#39; 2&gt;/dev/null | \
+  jq -c &#39;if .Objects then . else empty end&#39; | \
+  while read -r DELETE_JSON; do
+    if [ &#34;$DELETE_JSON&#34; != &#34;&#34; ] &amp;&amp; [ &#34;$DELETE_JSON&#34; != &#39;{&#34;Objects&#34;:null}&#39; ]; then
+      aws s3api delete-objects \
+        --bucket &#34;${BUCKET_NAME}&#34; \
+        --delete &#34;$DELETE_JSON&#34; &gt; /dev/null
+    fi
+  done
+  
+  # 4. バケット自体を削除
+  echo &#34;  - バケットを削除中...&#34;
+  aws s3api delete-bucket --bucket &#34;${BUCKET_NAME}&#34;
+  
+  if [ $? -eq 0 ]; then
+    echo &#34;✓ 削除成功: ${BUCKET_NAME}&#34;
+  else
+    echo &#34;✗ 削除失敗: ${BUCKET_NAME}&#34;
+  fi
+done
+</code></pre>
+<p class="image-container"><img alt="image06" src="img\\417f01c12e00950f.png"></p>
+<h3 is-upgraded>ステップ３：IAM Identity Center から TEAM アプリの削除</h3>
+<ol type="1">
+<li><strong>TEAM管理アカウント</strong>のAWSマネジメントコンソールを開きます</li>
+<li>IAM Identity Centerコンソールにアクセスします</li>
+<li>左ペインから、[アプリケーションの割り当て＞アプリケーション]を選択します<img alt="deployimage07" src="img\\a79400db819047bc.png"></li>
+<li>[カスタマー管理]タブを開きます<img alt="deployimage08" src="img\\d9c7b21ed222f74f.png"></li>
+<li>削除したいアプリケーションを選択し、右上の[アクション &gt; 削除]を選択します<img alt="deployimage09" src="img\\46017ecaddab4466.png"></li>
+<li>削除確認を行い、削除を実行します<img alt="deployimage10" src="img\\f5e2d7f0f25b6689.png"></li>
+</ol>
+<p>⚠️　ステップ４を先に実行した場合はエラーになります。このエラーは、グループとの紐づけ情報が不正になっているためですので、「割り当てられたユーザーとグループ」をすべて削除することで、削除できるようになります。</p>
+<h3 is-upgraded>ステップ４：TEAMで利用していた IAM Identity Center グループの削除</h3>
+<p><strong>TEAM管理アカウント</strong>のCloudShell上に貼り付けて実行します。</p>
+<pre><code language="language-sh" class="language-sh">STORE_ID=$(aws sso-admin list-instances --query &#34;Instances[0].IdentityStoreId&#34; --output text --no-paginate)
+
+# 各グループを削除
+aws identitystore list-groups \
+  --identity-store-id &#34;${STORE_ID}&#34; \
+  --output json | \
+jq -r &#39;.Groups[] | select(.DisplayName | startswith(&#34;TEAM-&#34;)) | &#34;\(.GroupId)\t\(.DisplayName)&#34;&#39; | \
+while IFS=$&#39;\t&#39; read -r GROUP_ID GROUP_NAME; do
+  echo &#34;グループを削除中: ${GROUP_NAME} (ID: ${GROUP_ID})&#34;
+  aws identitystore delete-group \
+    --identity-store-id &#34;${STORE_ID}&#34; \
+    --group-id &#34;${GROUP_ID}&#34;
+  
+  if [ $? -eq 0 ]; then
+    echo &#34;✓ 削除成功: ${GROUP_NAME}&#34;
+  else
+    echo &#34;✗ 削除失敗: ${GROUP_NAME}&#34;
+  fi
+done
+</code></pre>
+<p class="image-container"><img alt="deployimage11" src="img\\7acc8ca5fa17a52f.png"></p>
+<h2 is-upgraded>TEAM用IAM Identity Centerグループ定義例</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>役割名</p>
+</td><td colspan="1" rowspan="1"><p>主な役割</p>
+</td><td colspan="1" rowspan="1"><p>グループ名</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>申請者</p>
+</td><td colspan="1" rowspan="1"><p>TEAM アプリケーションで一時的なアクセス権限をリクエストするユーザーグループ(開発者やオペレーターなど)</p>
+</td><td colspan="1" rowspan="1"><p>TEAM-Users</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>承認者</p>
+</td><td colspan="1" rowspan="1"><p>TEAM アプリケーションで本番アカウントへのリクエストをレビュー・承認 / 拒否する権限を持つユーザーグループ。ただし、自身のリクエストは自身では承認できません</p>
+</td><td colspan="1" rowspan="1"><p>TEAM-Approvers-Production</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>承認者</p>
+</td><td colspan="1" rowspan="1"><p>TEAM アプリケーションで本番アカウント以外へのリクエストをレビュー・承認 / 拒否する権限を持つユーザーグループ。ただし、自身のリクエストは自身では承認できません</p>
+</td><td colspan="1" rowspan="1"><p>TEAM-Approvers-NonProduction</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>管理者</p>
+</td><td colspan="1" rowspan="1"><p>TEAM アプリケーションの設定管理・ユーザー管理・グループ設定などを行うユーザーグループ</p>
+</td><td colspan="1" rowspan="1"><p>TEAM-Admins</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>監査者</p>
+</td><td colspan="1" rowspan="1"><p>TEAMアプリケーションのリクエスト履歴やアクセスログの確認・レビューを行うユーザーグループ (読み取り専用)</p>
+</td><td colspan="1" rowspan="1"><p>TEAM-Auditors</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="7. 利用者向けガイド" duration="0">
+        <p>TEAMアプリケーションを利用したAWSアカウントへの一時アクセス許可申請を行う方法を説明します。</p>
+<h2 is-upgraded>TEAMアプリケーションにログインする</h2>
+<ol type="1">
+<li>AWSアクセスポータルを開きます <img alt="image02" src="img\\bc0b9552a3db343c.png"></li>
+<li>アプリケーションタブを開きます <img alt="image03" src="img\\99e7f7013f95c301.png"></li>
+<li>「TEAM IDC APP」のアプリケーションが表示されていることを確認し、クリックします ⚠️　「TEAM IDC APP」が表示されていない場合は、TEAM管理者に連絡し、アクセス権限を付与してもらってください。</li>
+<li>[Federated Sign In] ボタンをクリックします <img alt="image04" src="img\\77672c6cab061f8.png"></li>
+<li>[IDC]ボタンをクリックします。AWSマネジメントコンソールにログインするユーザーで認証が行われます <img alt="image05" src="img\\e40ef3fe4ad008cd.png"></li>
+<li>TEAMアプリケーションのトップページが表示されます <img alt="image06" src="img\\754764a578160c68.png"></li>
+</ol>
+<h2 is-upgraded>一時アクセス許可の申請を行う</h2>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/user.html#request-elevated-access" target="_blank">TEAM Requestor guide</a></p>
+<ol type="1">
+<li>TEAMアプリケーションのトップページにある[TEAM Requests]からActions[Create TEAM request]または、左ペインの[Requests]から[Create request]を選択します <img alt="image07" src="img\\22568ade08c1d01c.png"><img alt="image08" src="img\\b99da0339e898973.png"></li>
+<li>リクエストフォームが表示されます <img alt="image09" src="img\\6ea77418c3487d6e.png"></li>
+<li>以下の項目を入力します <ul>
+<li>【変更不可】 Email：ログインしているユーザーのメールアドレスが表示されています</li>
+<li>【必須】 Account：一時アクセスを申請したいAWSアカウントをリストから選択します</li>
+<li>【必須】 Role：一時アクセスのロールをリストから選択します</li>
+<li>【必須】 Start time：一時アクセスを開始する日時を指定します。デフォルトは現在日時となっていますので、忘れずに変更してください</li>
+<li>【必須】 Duration：一時アクセスが許可される時間を数字で指定します。上記[Start time]から何時間作業する予定なのか入力します。 <ul>
+<li>⚠️　TEAM管理者によって最大作業時間が指定されています。最大9時間が指定されている場合、「10」と入れようとすると「0」が入力できずにエラーになります。設定された最大作業時間を超える申請が必要な場合は、TEAM管理者に連絡してください。す <img alt="image10" src="img\\3a32ccb6aeade856.png"></li>
+</ul>
+</li>
+<li>【任意】Ticket no：今回の申請に関係するチケット番号を入力します</li>
+<li>【必須】Justification：今回の申請に関する理由を入力します。できるだけ明確に理由を入力してください</li>
+</ul>
+</li>
+<li>[Submit]ボタンをクリックし、申請を実施します</li>
+<li>申請の状況を確認する場合は、次の手順「申請のステータスを確認する」を実施します</li>
+</ol>
+<h2 is-upgraded>申請のステータスを確認する</h2>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/user.html#review-elevated-access-requests" target="_blank">TEAM Requestor guide</a></p>
+<ol type="1">
+<li>左ペインの[Requests]から[My requests]を選択します <img alt="image11" src="img\\531e74114911f965.png"></li>
+<li>申請の一覧を確認します。ステータスが「pending」になっているものは承認待ちです。承認が完了すると「approved」になります。す <img alt="image12" src="img\\e35b11f80533e71a.png"><ul>
+<li>pending：申請は承認待ちです</li>
+<li>approved：申請が許可されました</li>
+<li>rejected：申請が拒否された</li>
+<li>cancelled：申請をキャンセルされました</li>
+</ul>
+</li>
+<li>詳細を確認したい場合は、確認したい申請を選択し、[View details]をクリックします</li>
+</ol>
+<p>💡　申請ステータスが「approved」になっている場合、申請時に指定した[Start time]以降にAWSアクセスポータルを表示すると、申請したAWSアカウントが表示されるようになります。表示されない場合は、TEAM管理者に連絡してください。</p>
+<p>⚠️　アクセス有無にかかわらず、申請した作業時間が過ぎた場合は自動的にアクセス許可が削除されます。</p>
+<h2 is-upgraded>申請をキャンセルする</h2>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/user.html#cancel-elevated-access-request" target="_blank">TEAM Requestor guide</a></p>
+<ol type="1">
+<li>「申請のステータスを確認する」の手順で、申請の一覧を表示します</li>
+<li>キャンセルしたい申請をクリックし、[View details]をクリックします</li>
+<li>[Cancel request]ボタンをクリックしますす <img alt="image13" src="img\\f51484e361afe7ec.png"></li>
+</ol>
+<p>⚠️　一度キャンセルした申請は、もとに戻すことはできません。再度申請を行ってください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="8. 管理者向けガイド" duration="0">
+        <h2 is-upgraded>TEAMアプリケーション管理者を追加または削除する</h2>
+<p>初期構築時点では、IAM Identity Centerで定義されている「TEAM-Admins」グループに登録されている人が、TEAMアプリケーションを管理できます。</p>
+<p>TEAMアプリケーション管理者はAdministrationメニューにある以下のことが実施できます。</p>
+<p class="image-container"><img alt="image02" src="img\\5db1ed70e6034bd2.png"></p>
+<ul>
+<li>Approver policy <ul>
+<li>承認者ポリシーの管理</li>
+</ul>
+</li>
+<li>Eligibility policy <ul>
+<li>申請者ポリシーの管理</li>
+</ul>
+</li>
+<li>Settings <ul>
+<li>TEAMアプリケーションの全般的な設定の管理</li>
+</ul>
+</li>
+</ul>
+<p>⚠️　「管理者グループ」に所属するメンバーであっても、「承認者グループ」に割り当てない限り、申請承認の操作を行うことはできません。</p>
+<ol type="1">
+<li>「TEAM管理用AWSアカウント」で、AWSマネジメントコンソールを開きます</li>
+<li>最近アクセスしたサービスまたは、検索から[IAM Identity Center]コンソールを開きます<img alt="image03" src="img\\36081ebaaf269dfa.png"></li>
+<li>左ペインから、[グループ]を選択します<img alt="image04" src="img\\206e7d61835708b7.png"></li>
+<li>「TEAM-Admins」のグループを検索してクリックし、グループの詳細を開きます<img alt="image05" src="img\\ee360b3ecfb26235.png"></li>
+<li>[ユーザーをグループに追加]から、ユーザーを追加または削除します<img alt="image06" src="img\\22e13666c14e9cb.png"></li>
+</ol>
+<p>⚠️　グループにユーザーを追加した直後は、AWSアクセスポータルの画面にTEAMアプリケーションが表示されないことがあります。その場合は、AWSアクセスポータルの画面でログオフし、再度ログインを行ってください。</p>
+<h2 is-upgraded>TEAMアプリケーション監査者を追加または削除する</h2>
+<p>初期構築時点では、IAM Identity Centerで定義されている「TEAM-Auditors」グループに登録されている人が、TEAMアプリケーションでの申請承認履歴やアクティビティを参照できます。</p>
+<p>TEAMアプリケーション管理者はAuditメニューにある以下のことが実施できます。</p>
+<p class="image-container"><img alt="image07" src="img\\1fc655761040877e.png"></p>
+<ul>
+<li>Approvals</li>
+<li>Elevated access</li>
+</ul>
+<p>TEAMアプリケーション監査者を追加する手順は、「TEAMアプリケーション管理者」と同様となりますのでそちらを参照してください。「TEAM-Auditors」に対してユーザーを追加または削除します。</p>
+<p class="image-container"><img alt="image08" src="img\\5b8ee702a2af997.png"></p>
+<h2 is-upgraded>申請者管理</h2>
+<h3 is-upgraded>TEAMアプリケーションを使って申請できる人を追加または削除する</h3>
+<p>初期構築時点では、IAM Identity Centerで定義されている「TEAM-Users」グループに登録されている人が、TEAMアプリケーションを利用できます。</p>
+<p>TEAMアプリケーションの利用可否を制御するには、このグループにメンバーを追加または削除します。</p>
+<p>TEAMアプリケーション監査者を追加する手順は、「TEAMアプリケーション管理者」と同様となりますのでそちらを参照してください。「TEAM-Users」に対してユーザーを追加または削除します。</p>
+<p class="image-container"><img alt="image09" src="img\\c7e1e65d471b88db.png"></p>
+<h3 is-upgraded>TEAMアプリケーションの申請者グループを追加、削除する</h3>
+<p>次の手順「申請者ポリシーを管理する」にあるように申請者グループに対して、アカウントやOUの単位で、どの許可セットが申請可能か、といった細かい制御が可能です。</p>
+<p>複数の申請者グループで管理を細分化したい場合は、IAM Identity Centerでグループを作成してください。</p>
+<h3 is-upgraded>申請者ポリシーを管理する</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/admin.html#configure-eligibility-policy" target="_blank">TEAM Administrator guide</a></p>
+<p>申請者のグループごとにAWSアカウントまたは、OU単位で、申請時に選択可能な権限（許可セット）や承認フローが必須かどうかを設定できます。</p>
+<p>初期構築時点では、「TEAM-Users」のグループが[アカウント指定＋許可セット＋承認必須]という定義になっています。</p>
+<p>⚠️　対象アカウントを指定しているので、AWSアカウントを追加した場合は、修正が必要です。</p>
+<p>💡　OU単位でのポリシーを作成すると、AWSアカウントの増減に対するメンテナンスは必要なくなりますが、広い範囲での申請が可能になってしまいます。</p>
+<ol type="1">
+<li>左ペインの[Administration]から[Eligibility policy]を選択します<img alt="image10" src="img\\587d05ed740757b4.png"></li>
+<li>[Add approvers]ボタンまたは、既存のポリシーを選択し[Actions]から[Edit]を選択します<img alt="image11" src="img\\e04cb21fdd9c7ea4.png"></li>
+<li>以下を設定します<ul>
+<li>Entity type：UserかGroupをリストから選択します。ユーザー単位でも定義できますが、グループ単位での管理を推奨します。</li>
+<li>Ticket No：作業を紐づけるチケット番号がある場合は入力します</li>
+<li>Accounts：申請可能なAWSアカウントをリストから選択します。複数選択が可能です</li>
+<li>OUs：OU単位で許可する場合は、許可するOUを選択します。複数選択が可能です</li>
+<li>Permission：許可セットをリストから選択します。複数選択が可能です</li>
+<li>Max duration：一時アクセスの作業時間を数字で指定します <ul>
+<li>💡　[Administration&gt;Settings]で「Maximum request duration」 を超える値の設定が可能です</li>
+</ul>
+</li>
+<li>Approval required：申請の承認が必須かどうかを選択します <ul>
+<li>⚠️　[Administration&gt;Settings]で「Approval workflow」 を <code>Not required</code>にした場合は、この設定に関係なく承認不要になります。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>[Add eligibility policy]をクリックして保存します</li>
+</ol>
+<h2 is-upgraded>承認管理</h2>
+<h3 is-upgraded>承認ポリシーを管理する</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/admin.html#configure-approver-policy" target="_blank">TEAM Administrator guide</a></p>
+<p>see: https://aws-samples.github.io/iam-identity-center-team/docs/guides/admin.html#configure-approver-policy</p>
+<ol type="1">
+<li>左ペインの[Administration]から[Approver policy]を選択します<img alt="image12" src="img\\9066466e3e3190b7.png"></li>
+<li>[Add approvers]ボタンまたは、既存のポリシーを選択し[Actions]から[Edit]を選択します<img alt="image13" src="img\\530be47dcb87126a.png"></li>
+<li>以下を設定します<ul>
+<li>Entity type：[Organizational Unit]か[Account]をリストから選択します。</li>
+<li>Accounts：「Entity type」に[Account]を選択した場合に表示されます。申請可能なAWSアカウントをリストから選択します。複数選択が可能です</li>
+<li>OUs：「Entity type」に[Organizational Unit]を選択した場合に表示されます。OU単位で許可する場合は、許可するOUを選択します。複数選択が可能です</li>
+<li>Ticket No：作業を紐づけるチケット番号がある場合は入力します</li>
+<li>Approver Groups：承認者グループをリストから選択します。複数選択が可能です</li>
+</ul>
+</li>
+<li>[Add approvers]をクリックして保存します</li>
+</ol>
+<p>⚠️　複数アカウント×複数承認グループを設定すると、ポリシーはそれぞれの組み合わせごとに分割されます。修正する場合は、個別に実施する必要があります。</p>
+<p class="image-container"><img alt="image14" src="img\\b067d4fd2991cf63.png"></p>
+<h3 is-upgraded>その他設定</h3>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/admin.html#configure-team-settings" target="_blank">TEAM Administrator guide</a></p>
+<p>see: https://aws-samples.github.io/iam-identity-center-team/docs/guides/admin.html#configure-team-settings</p>
+<ol type="1">
+<li>左ペインの[Administration]から[Settings]を選択します<img alt="image15" src="img\\f9a73add031ed71f.png"></li>
+<li>設定画面が開きます<img alt="image16" src="img\\ad028bdc66bacea1.png"></li>
+<li>[Edit]ボタンをクリックします</li>
+<li>必要箇所を変更します（変更箇所は後述の手順に従います）</li>
+</ol>
+<h4 is-upgraded>申請に対する承認を有効または無効に変更する</h4>
+<p>ここで申請承認を無効にすると、TEAMアプリケーション全体で承認が不要になります。</p>
+<p>申請承認を有効にすると、申請者ポリシーで指定した動作に従って承認の有無が判断されます。</p>
+<ol type="1">
+<li>「Approval workflow」 を<code>Required</code>か<code>Not required</code>に変更します<img alt="image17" src="img\\ba5ac6b9f6144a96.png"><img alt="image18" src="img\\317d8b3dcded1666.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<h4 is-upgraded>申請時のコメント入力を必須または任意に変更する</h4>
+<ol type="1">
+<li>「Comments」を<code>Required</code>か<code>Not required</code>に変更します<img alt="image19" src="img\\f1145e6b113e948.png"><img alt="image20" src="img\\cfff2638e2ec1569.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<h4 is-upgraded>申請時のチケット番号入力を必須または任意に変更する</h4>
+<ol type="1">
+<li>「Require ticket number」を<code>Required</code>か<code>Not required</code>に変更します<img alt="image21" src="img\\3aadbfd233ece64a.png"><img alt="image22" src="img\\f79839b851560ee0.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<h4 is-upgraded>一時権限の最大利用可能時間を設定する</h4>
+<p>ここで指定した時間を超える利用時間で申請ができなくなります。</p>
+<ol type="1">
+<li><code>Maximum request duration</code>に期限切れとなる[時間]を数字で入力します<img alt="image23" src="img\\293864aa58af1e73.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<h4 is-upgraded>未承認リクエストの期限切れとなる時間を設定する</h4>
+<p>未承認リクエストは指定した時間を過ぎると期限切れとなり、再申請が必要になります。</p>
+<ol type="1">
+<li>「Request expiry timeout」に期限切れとなる[時間]を数字で入力します<img alt="image24" src="img\\57e7130b4f6be236.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<h4 is-upgraded>Eメールによる申請通知を有効にする</h4>
+<ol type="1">
+<li>「Send Email notifications」を<code>ON</code>に変更します<img alt="image25" src="img\\62ec1af637c52973.png"><img alt="image26" src="img\\bd98480a1be76c51.png"></li>
+<li><code>Source email</code>を入力します<img alt="image27" src="img\\c40b925a6878a168.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<h4 is-upgraded>SNSによる申請通知を有効にする</h4>
+<ol type="1">
+<li>「Send SNS notifications」を<code>ON</code>に変更します<img alt="image28" src="img\\9711f2052cd27463.png"><img alt="image29" src="img\\8b3a34b471890650.png"></li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+<p>⚠️　SNSはTEAMアプリケーションデプロイ時に作成されています。通知を受信するにはTEAM管理用AWSアカウントのマネジメントコンソールから、「Simple Notification Service」を開き <code>TeamNotifications-main</code> のトピックへのサブスクリプション登録を行ってください。</p>
+<h4 is-upgraded>Slackによる申請通知を有効にする</h4>
+<ol type="1">
+<li>「Send Slack notifications」を<code>ON</code>に変更します<img alt="image30" src="img\\51003f76035539b0.png"><img alt="image31" src="img\\51a83c539cffac5d.png"></li>
+<li>あらかじめSlack通知用のアプリケーションを作成しておく必要があります<img alt="image32" src="img\\b236b254527c987.png"></li>
+<li><code>Slack OAuth token</code>と<code>Slack Audit Channel</code>を入力します</li>
+<li>[Submit]ボタンをクリックして保存します</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="9. 承認者向けガイド" duration="0">
+        <h2 is-upgraded>申請を承認する</h2>
+<ol type="1">
+<li>左ペインの[Approvals]から[Approve requests]を選択します</li>
+<li>自身が承認しなければならない申請の一覧が表示されます ⚠️　自分で行った申請は、承認者権限があったとしても一覧に表示されません</li>
+<li>申請内容を確認する場合は、申請を選択し[View details]をクリックします</li>
+<li>申請を承認する場合は、申請を選択し、[Actions]から[Approve]を選択します</li>
+<li>コメントを入力し、[Confirm]ボタンをクリックします</li>
+<li>承認した履歴を確認する場合は、「自身が実施した承認履歴を確認する」を参照してください</li>
+</ol>
+<h2 is-upgraded>申請を否認する</h2>
+<p>「申請を承認する」の手順と同様ですが、手順4で[Actions]から[Reject]を選択します。</p>
+<h2 is-upgraded>自身が実施した承認履歴を確認する</h2>
+<ol type="1">
+<li>左ペインの[Approvals]から[My approvals]を選択します</li>
+<li>承認を行った履歴が表示されます</li>
+<li>承認の内容を確認したい場合は、確認したい承認を選択し、[View details]ボタンをクリックします</li>
+<li>承認履歴をダウンロードしたい場合は、[Download]ボタンをクリックすることでCSVファイルがダウンロードできます</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="10. 監査者向けガイド" duration="0">
+        <p>TEAMアプリケーションの申請やセッションのアクティビティ等の監査を行う方法を説明します。</p>
+<h2 is-upgraded>承認履歴を閲覧する</h2>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/auditor.html#inspect-approval-history" target="_blank">TEAM Auditor guide</a></p>
+<ol type="1">
+<li>[Adit]メニューより、[Approvals]を選択します <img alt="image02" src="img\\15a3cdbb94431ab7.png"></li>
+<li>承認一覧が表示されているので確認します <img alt="image03" src="img\\9462170b88f1d6e.png"></li>
+<li>詳細を確認したい場合は、確認したい履歴を選択し、[View Details]ボタンをクリックします <img alt="image04" src="img\\d3d083c566761b5e.png"></li>
+<li>表示数や項目を変更したい場合は、⚙アイコンをクリックして変更します <img alt="image05" src="img\\975d02303370a68e.png"></li>
+<li>必要に応じて、[Download]ボタンからCSVファイルをダウンロードして確認します <img alt="image06" src="img\\39f819d9cbfdfb9e.png"></li>
+</ol>
+<h2 is-upgraded>セッションアクティビティを確認する</h2>
+<p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/guides/auditor.html#inspect-session-activity-log" target="_blank">TEAM Auditor guide</a></p>
+<ol type="1">
+<li>[Audit]メニューより、[Elevated access]を選択します <img alt="image07" src="img\\1ff0db1cf556723f.png"></li>
+<li>セッションの一覧が表示されます <img alt="image08" src="img\\990afacceac81fd8.png"></li>
+<li>詳細を確認したい申請を選択し、[View Details]ボタンをクリックします <img alt="image09" src="img\\41689c0612cfdcb.png"></li>
+<li>[Session Logs]を展開すると、接続したセッションの一覧を表示できます。どのサービスにアクセスしたのかといったレベルで確認することができます。 <img alt="image10" src="img\\626f2a5b7e14b083.png"></li>
+<li>必要に応じて、[Download]ボタンからCSVファイルをダウンロードして確認します</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>本記事では、AWS IAM Identity Center向けの一時的な権限昇格管理ソリューション「TEAM（Temporary Elevated Access Management）」について、導入から運用までを包括的に解説しました。</p>
+<h2 is-upgraded>TEAMの主な特徴</h2>
+<p>TEAMは、AWSが提供するオープンソースソリューションとして、以下の特徴を備えています。</p>
+<ul>
+<li><strong>ゼロスタンディング特権の実現</strong>: 常設の管理者権限を排除し、必要な時だけ一時的に権限を付与することで、セキュリティリスクを最小化</li>
+<li><strong>承認ワークフローの統合</strong>: 申請・承認プロセスを通じて、すべての特権アクセスに説明責任と透明性を確保</li>
+<li><strong>完全な監査証跡</strong>: すべての申請、承認、アクセスログが自動的に記録され、コンプライアンス要件に対応</li>
+<li><strong>IAM Identity Centerとのシームレスな統合</strong>: 既存のユーザー管理基盤をそのまま活用でき、追加の認証基盤が不要</li>
+</ul>
+<h2 is-upgraded>導入効果</h2>
+<p>TEAMを導入することで、以下のような効果が期待できます。</p>
+<p><strong>セキュリティの向上:</strong></p>
+<ul>
+<li>常時付与された強力な権限が減少し、攻撃者に悪用されるリスクが低下</li>
+<li>すべての特権アクセスに承認と記録が伴うため、内部不正の抑止効果</li>
+<li>権限の有効期限が自動的に管理され、権限の付けっぱなしを防止</li>
+</ul>
+<p><strong>コンプライアンス対応:</strong></p>
+<ul>
+<li>SOC2、ISO27001、PCIDSSなどの監査基準に対応した特権アクセス管理の実現</li>
+<li>すべてのアクセスに対する「誰が、いつ、なぜ、何をしたか」の完全な記録</li>
+<li>CloudTrail Lakeとの統合により、特権アクセス時の操作を詳細に追跡可能</li>
+</ul>
+<p><strong>運用効率の向上:</strong></p>
+<ul>
+<li>Webベースのダッシュボードにより、申請から承認までをスムーズに処理</li>
+<li>IAM Identity Centerとの統合により、既存のユーザー管理プロセスをそのまま活用</li>
+<li>自動化された権限付与・削除により、手動作業のミスと負荷を削減</li>
+</ul>
+<h2 is-upgraded>導入時の検討ポイント</h2>
+<p>TEAMを導入する際は、以下の点を考慮してください。</p>
+<p><strong>1. 組織のポリシー設計</strong></p>
+<ul>
+<li>どのアカウント/環境で承認を必須とするか（本番環境は必須、開発環境は任意など）</li>
+<li>承認者をどのように配置するか（本番と非本番で承認者グループを分けるなど）</li>
+<li>最大申請期間をどの程度に設定するか（セキュリティと利便性のバランス）</li>
+</ul>
+<p><strong>2. 運用体制の整備</strong></p>
+<ul>
+<li>承認者の選定と教育（承認基準、緊急時の対応手順など）</li>
+<li>監査者の配置と定期的なレビュープロセスの確立</li>
+<li>ユーザーへの利用ガイドの提供と教育</li>
+</ul>
+<p><strong>3. 既存システムとの統合</strong></p>
+<ul>
+<li>既存のチケットシステムとの連携（チケット番号の必須化など）</li>
+<li>Slackなどのコラボレーションツールとの通知連携</li>
+<li>監視・アラートシステムとの統合</li>
+</ul>
+<h2 is-upgraded>次のステップ</h2>
+<p>TEAMを導入した後は、以下のステップで継続的に改善していくことをお勧めします。</p>
+<ol type="1">
+<li><strong>初期運用の観察</strong>: 導入後1〜3ヶ月は、申請・承認の頻度やパターンを観察し、ポリシーが適切か確認する</li>
+<li><strong>ユーザーフィードバックの収集</strong>: 申請者と承認者からフィードバックを集め、運用上の課題を特定する</li>
+<li><strong>ポリシーの最適化</strong>: 観察結果に基づいて、申請者ポリシーと承認者ポリシーを調整する</li>
+<li><strong>監査プロセスの確立</strong>: 定期的な監査レビューのプロセスを確立し、異常なアクセスパターンを検出する</li>
+<li><strong>自動化の拡大</strong>: 必要に応じて、承認プロセスの一部自動化や、他のシステムとの連携を検討する</li>
+</ol>
+<h2 is-upgraded>参考リソース</h2>
+<p>TEAMに関するさらに詳しい情報は、以下の公式リソースを参照してください。</p>
+<ul>
+<li><a href="https://aws-samples.github.io/iam-identity-center-team/" target="_blank">TEAM 公式ドキュメント</a></li>
+<li><a href="https://github.com/aws-samples/iam-identity-center-team/tree/main" target="_blank">GitHub リポジトリ</a></li>
+<li><a href="https://aws.amazon.com/jp/blogs/security/temporary-elevated-access-management-with-iam-identity-center/" target="_blank">AWS Security Blog</a></li>
+<li><a href="https://aws.amazon.com/jp/builders-flash/202505/temporary-elevated-access-management/" target="_blank">builders.flash 記事（AWS Community Hero: 山口 正徳氏）</a></li>
+</ul>
+<p>TEAMは、AWS環境におけるゼロスタンディング特権の実現と、特権アクセス管理の自動化・可視化を実現する強力なソリューションです。本記事が、皆様のセキュリティ向上とコンプライアンス対応の一助となれば幸いです。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
