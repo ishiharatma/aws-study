@@ -1,0 +1,662 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Database Migration Service (DMS)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="dms-overview"
+                  title="AWS Database Migration Service (DMS)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWSに関する個人の勉強および勉強会で使用することを目的に、AWSドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-database-migration-service-dms-%E3%81%A8%E3%81%AF" target="_blank">AWS Database Migration Service (DMS) とは</a></li>
+<li><a href="#dms%E3%81%AE%E5%85%A8%E4%BD%93%E5%83%8F" target="_blank">DMSの全体像</a></li>
+<li><a href="#dms%E3%81%AE%E4%B8%BB%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">DMSの主な機能</a></li>
+<li><a href="#dms%E3%81%AE%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">DMSの構成要素</a></li>
+<li><a href="#%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%95%E3%82%8C%E3%82%8B%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%B3" target="_blank">サポートされるデータベースエンジン</a></li>
+<li><a href="#%E7%A7%BB%E8%A1%8C%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">移行のタイプ</a></li>
+<li><a href="#%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">ソースデータベースの設定</a></li>
+<li><a href="#%E7%A7%BB%E8%A1%8C%E5%AF%BE%E8%B1%A1%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88" target="_blank">移行対象オブジェクト</a></li>
+<li><a href="#dms%E3%81%AE%E6%96%99%E9%87%91" target="_blank">DMSの料金</a></li>
+<li><a href="#dms%E3%81%AE%E3%82%AF%E3%82%A9%E3%83%BC%E3%82%BF" target="_blank">DMSのクォータ</a></li>
+<li><a href="#%E3%83%AC%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AE%E9%81%B8%E6%8A%9E" target="_blank">レプリケーションインスタンスの選択</a></li>
+<li><a href="#%E3%82%BF%E3%82%B9%E3%82%AF%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">タスクの設定</a><ul>
+<li><a href="#%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%83%9E%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0" target="_blank">テーブルマッピング</a></li>
+<li><a href="#%E3%82%BF%E3%82%B9%E3%82%AF%E8%A8%AD%E5%AE%9A" target="_blank">タスク設定</a></li>
+<li><a href="#%E5%A4%89%E6%8F%9B%E3%83%AB%E3%83%BC%E3%83%AB" target="_blank">変換ルール</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%AD%E3%82%B0" target="_blank">モニタリングとログ</a></li>
+<li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a></li>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">トラブルシューティング</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Database Migration Service (DMS) とは" duration="0">
+        <p>AWS Database Migration Service (DMS) は、データベースをAWSに安全かつ簡単に移行するためのフルマネージドサービスです。オンプレミスのデータベースからAWSへの移行、AWSクラウド内でのデータベース間の移行、さらには異なるデータベースエンジン間の移行も可能です。</p>
+<p>移行中もソースデータベースは稼働し続けるため、ダウンタイムを最小限に抑えることができます。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=oopjz4vu9CY" target="_blank">AWS Database Migration Service 概要(YouTube)</a>(37:19)</p>
+<p class="image-container"><img alt="dms-01-overview" src="img\\4c2efd6817704a1f.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=teaU4tWraXE" target="_blank">AWS Database Migration Service ベストプラクティス - 計画編(YouTube)</a>(51:06)</p>
+<p class="image-container"><img alt="dms-02-plan" src="img\\871adac2c1a42575.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=2tE9uCGrk6M" target="_blank">AWS Database Migration Service ベストプラクティス - 実践編(YouTube)</a>(47:01)</p>
+<p class="image-container"><img alt="dms-03-practice" src="img\\d0a8240ae85b091e.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=HDa_f9Tmf-U" target="_blank">AWS Database Migration Service ベストプラクティス - トラブルシューティング編(YouTube)</a>(59:44)</p>
+<p class="image-container"><img alt="dms-04-troubleshooting" src="img\\f6b25b5cc4baec78.jpg"></p>
+<p><a href="https://www.youtube.com/watch?v=qAPNWy4WTGU" target="_blank">生成 AI を活用したデータベースのスキーマ変換で移行を加速しよう：AWS Database Migration Service Schema Conversion（AWS-09）(YouTube)</a>(40:06)</p>
+<p class="image-container"><img alt="dms-10-aws09" src="img\\26fa2a8ab455a59f.jpg"></p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/%E3%81%AF%E3%81%98%E3%82%81%E3%81%A6awsdms%E3%82%92%E6%A4%9C%E8%A8%8E%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AB%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%84%E3%81%9F%E3%81%A0%E3%81%8D%E3%81%9F%E3%81%84/" target="_blank">AWSブログ&gt;はじめてAWS DMSを検討する際に読んでいただきたいこと</a></p>
+<p><a href="https://aws.amazon.com/jp/dms/" target="_blank">AWS Database Migration Service サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/dms/" target="_blank">AWS Database Migration Service ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/dms/faqs/" target="_blank">AWS Database Migration Service よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/dms/pricing/" target="_blank">AWS Database Migration Service 料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DMSの全体像" duration="0">
+        <p class="image-container"><img alt="dms" src="img\\e45077bc5bbd79e3.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DMSの主な機能" duration="0">
+        <p>DMSには次のような特徴があります。</p>
+<ul>
+<li>同種・異種データベース間の移行 <ul>
+<li>同じデータベースエンジン間（例: Oracle → Oracle）だけでなく、異なるデータベースエンジン間（例: Oracle → PostgreSQL）の移行も可能</li>
+</ul>
+</li>
+<li>最小限のダウンタイム <ul>
+<li>継続的なデータレプリケーション (CDC: Change Data Capture) により、移行中もソースデータベースを稼働し続けることが可能</li>
+</ul>
+</li>
+<li>多様なデータベースに対応 <ul>
+<li>商用データベース（Oracle、SQL Server）からオープンソースデータベース（PostgreSQL、MySQL、MariaDB）まで幅広くサポート</li>
+</ul>
+</li>
+<li>データ変換機能 <ul>
+<li>異種間移行の場合は、<a href="https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html" target="_blank">AWS Schema Conversion Tool (SCT)</a> と連携することで、スキーマやコードの変換も支援</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DMSの構成要素" duration="0">
+        <p>DMSを使用する際には、以下の4つの主要コンポーネントを理解する必要があります。</p>
+<ul>
+<li>IAM Role <ul>
+<li><code>dms-vpc-role</code> と <code>dms-cloudwatch-logs-role</code> という<strong>固定名称</strong>のロールが必要です。</li>
+<li>ターゲットデータベースにAmazon Redshiftを指定する場合は、 <code>dms-access-for-endpoint</code> というロールも必要になります。</li>
+<li>参考: <a href="https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html#CHAP_Security.APIRole" target="_blank">Creating the IAM roles to use with AWS DMS</a></li>
+</ul>
+</li>
+<li>エンドポイント <ul>
+<li>ソースエンドポイント <ul>
+<li>移行元のデータベース接続情報を定義</li>
+<li>データベースの種類、ホスト名、ポート番号、認証情報などを設定</li>
+</ul>
+</li>
+<li>ターゲットエンドポイント <ul>
+<li>移行先のデータベース接続情報を定義</li>
+<li>ソースと同様に接続に必要な情報を設定</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>レプリケーションインスタンス <ul>
+<li>プロビジョンドインスタンス <ul>
+<li>実際にデータ移行処理を実行するEC2インスタンス</li>
+<li>VPC内に配置され、ソースとターゲットの両方にアクセス可能である必要がある</li>
+<li>インスタンスタイプによって処理性能が変わる</li>
+</ul>
+</li>
+<li>サーバーレスインスタンス <ul>
+<li>EC2のプロビジョニング、エンジンバージョン、パッチ適用が不要なタイプ</li>
+<li>レプリケーションが稼働している時間のみ課金されます。 <ul>
+<li>ただし、レプリケーションが停止した状態（<code>Stopped</code>）でも<code>Deprovisioned</code>になるまでの48時間は課金が継続しているようです。</li>
+<li>この48時間はレプリケーションが停止したインスタンスを再開可能な猶予時間のようです。48時間以内であれば、初期化などのフェーズを行わず再開が可能だが、この状態が課金対象となっているようです。</li>
+<li>参考: <a href="https://docs.aws.amazon.com/ja_jp/dms/latest/userguide/CHAP_Serverless.Components.html" target="_blank">AWS DMS Serverless Components</a></li>
+</ul>
+</li>
+<li>プロビジョンドインスタンスに比べてサポートしているソースデータベースとターゲットデータベースに制限がある <ul>
+<li>参考: <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.SupportedVersions" target="_blank">DMS Serverless components - Supported Endpoints</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>レプリケーションタスク <ul>
+<li>ソースデータベースからターゲットデータベースへの移行に関する移行方式やテーブルマッピングなどを管理する</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="サポートされるデータベースエンジン" duration="0">
+        <p>DMSがサポートする主なデータベースエンジンは以下のとおりです。</p>
+<p>詳細なサポート状況については、<a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html" target="_blank">Sources for data migration</a> / <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.html" target="_blank">Targets for data migration</a>と<a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.SupportedVersions" target="_blank">DMS Serverless components - Supported Endpoints</a>を参照してください。</p>
+<p>※ *付はサーバーレス</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>データベースエンジン</p>
+</td><td colspan="1" rowspan="1"><p>ソース</p>
+</td><td colspan="1" rowspan="1"><p>ターゲット</p>
+</td><td colspan="1" rowspan="1"><p>*ソース</p>
+</td><td colspan="1" rowspan="1"><p>*ターゲット</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon S3</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon Aurora (MySQL互換、PostgreSQL互換)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon RDS (MySQL, PostgreSQL)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>MySQL</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>GooleCloud for MySQL</p>
+</td><td colspan="4" rowspan="1"><p>✅</p>
+</td><td colspan="3" rowspan="1"></td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>OCI MySQL</p>
+</td><td colspan="4" rowspan="1"><p>✅</p>
+</td><td colspan="3" rowspan="1"></td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>PostgreSQL</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>GoogleCloud for PostgreSQL</p>
+</td><td colspan="4" rowspan="1"><p>✅</p>
+</td><td colspan="3" rowspan="1"></td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon RDS (MariaDB)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>MariaDB</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon RDS (Oracle)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Oracle Database</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon RDS (SQL Server)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Microsoft SQL Server</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Azure SQL Database</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="3" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>MongoDB</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>SAP ASE (Sybase)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="3" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon RDS (Db2)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>IBM Db2 (Linux, Unix, Windows用)</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon DynamoDB</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon Redshift</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon OpenSearch Service</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon Kinesis Data Streams</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon DocumentDB</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon Neptune</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon Managed Streaming for Apache Kafka</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="2" rowspan="1"><p>✅</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="1" rowspan="1"><p>✅</p>
+</td></tr>
+<tr><td colspan="2" rowspan="1"><p>Amazon Timestream</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="3" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="2" rowspan="1"><p>Babelfish</p>
+</td><td colspan="1" rowspan="1"></td><td colspan="3" rowspan="1"><p>✅</p>
+</td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+<tr><td colspan="1" rowspan="1"><p>Redis OSS</p>
+</td><td colspan="4" rowspan="1"><p>✅</p>
+</td><td colspan="3" rowspan="1"></td><td colspan="2" rowspan="1"></td><td colspan="1" rowspan="1"></td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="移行のタイプ" duration="0">
+        <p>DMSでは、要件に応じて3つの移行タイプを選択できます。</p>
+<ul>
+<li>フルロード (Full Load) <ul>
+<li>既存データを一度だけ移行する方式です。移行中にソースデータベースで発生した変更は含まれません。</li>
+</ul>
+</li>
+<li>フルロード + CDC (Change Data Capture) <ul>
+<li>既存データの移行後、継続的にソースの変更をターゲットに反映します。最も一般的な移行パターンです。</li>
+</ul>
+</li>
+<li>CDC のみ <ul>
+<li>既存データは別の方法で移行済みの場合に、変更分のみを継続的に反映します。</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ソースデータベースの設定" duration="0">
+        <p>DMSを使用する前に、ソースデータベースのパラメータを変更する必要があります。 以下に一例を示します。一部のパラメータにはデータベースの再起動が必要なものがありますので、移行前に確認が必要です。</p>
+<p>そのほかについては、<a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html" target="_blank">Sources for data migration</a>を参照してください。</p>
+<p>MySQL or MariaDB:</p>
+<p>参考: <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.MySQL.html" target="_blank">AWSドキュメント&gt;Using a MySQL-compatible database as a source for AWS DMS</a></p>
+<pre><code language="language-text" class="language-text">binlog_format=ROW
+binlog_row_image=FULL
+</code></pre>
+<p>PostgreSQL:</p>
+<p>参考: <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.PostgreSQL.html#CHAP_Source.PostgreSQL.RDSPostgreSQL.CDC" target="_blank">AWSドキュメント&gt;Using a PostgreSQL database as an AWS DMS source</a></p>
+<pre><code language="language-text" class="language-text">logical_replication=1
+synchronous_commit=ON
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="移行対象オブジェクト" duration="0">
+        <p>DMSでは、ソースデータベースの以下のオブジェクトが移行されます。</p>
+<ul>
+<li>テーブル</li>
+<li>プライマリキー</li>
+</ul>
+<p>これ以外のオブジェクトは移行されないため、移行前または移行後に手動で作成する必要があります。 異種間データベース移行の場合は、<a href="https://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Welcome.html" target="_blank">AWS SCT</a>の利用も検討します。</p>
+<ul>
+<li>インデックス</li>
+<li>シーケンス</li>
+<li>ファンクション</li>
+<li>外部キー</li>
+<li>ビュー</li>
+<li>トリガー など。</li>
+</ul>
+<p><a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_BestPractices.html" target="_blank">AWSドキュメント&gt;Migration planning for AWS Database Migration Service</a>を参考にしてください。</p>
+<pre><code language="language-text" class="language-text">Source and target endpoints – Make sure that you know what information and 
+tables in the source database need to be migrated to the target database. 
+AWS DMS supports basic schema migration, including the creation of tables 
+and primary keys. However, AWS DMS doesn&#39;t automatically create secondary 
+indexes, foreign keys, user accounts, and so on, in the target database. 
+Depending on your source and target database engine, you might need to set 
+up supplemental logging or modify other settings for a source or target 
+database. For more information, see Sources for data migration and Targets 
+for data migration.
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DMSの料金" duration="0">
+        <p>DMSの料金は、主に以下の要素で構成されます。</p>
+<ul>
+<li>レプリケーションインスタンスの料金 <ul>
+<li>プロビジョンドインスタンス <ul>
+<li>起動している時間に対して課金（時間単位）</li>
+<li>インスタンスタイプによって料金が異なる</li>
+</ul>
+</li>
+<li>サーバーレスインスタンス</li>
+</ul>
+</li>
+<li>追加ストレージの料金 <ul>
+<li>レプリケーションインスタンスに割り当てたストレージ容量に対して課金</li>
+</ul>
+</li>
+<li>データ転送料金 <ul>
+<li>基本的に、同一リージョン内のデータ転送は無料</li>
+<li>リージョン間のデータ転送には料金が発生</li>
+</ul>
+</li>
+</ul>
+<p>詳細は<a href="https://aws.amazon.com/jp/dms/pricing/" target="_blank">料金ページ</a>を参照してください。</p>
+<ul>
+<li>無料枠 <ul>
+<li>AWS Free Tierの一部として、1 年間、毎月最大 750 時間分のシングルアベイラビリティーゾーン (AZ) dms.t3.microが利用可能です</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DMSのクォータ" duration="0">
+        <p>DMSには以下のような制限があります。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>デフォルト制限</p>
+</td><td colspan="1" rowspan="1"><p>引き上げ可能</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レプリケーションインスタンス数</p>
+</td><td colspan="1" rowspan="1"><p>60/アカウント</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レプリケーションタスク数</p>
+</td><td colspan="1" rowspan="1"><p>600/アカウント</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レプリケーションタスク数</p>
+</td><td colspan="1" rowspan="1"><p>200/レプリケーションインスタンス</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>エンドポイント数</p>
+</td><td colspan="1" rowspan="1"><p>1,000/アカウント</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>エンドポイント数</p>
+</td><td colspan="1" rowspan="1"><p>100/レプリケーションインスタンス</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>サブネットグループ数</p>
+</td><td colspan="1" rowspan="1"><p>60/アカウント</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>レプリケーション インスタンスの合計ストレージ容量</p>
+</td><td colspan="1" rowspan="1"><p>30 TB</p>
+</td><td colspan="1" rowspan="1"><p>はい</p>
+</td></tr>
+</table>
+<p>その他の制限については、<a href="https://docs.aws.amazon.com/ja_jp/dms/latest/userguide/CHAP_Limits.html" target="_blank">AWSドキュメント</a>を参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="レプリケーションインスタンスの選択" duration="0">
+        <p>レプリケーションインスタンスの選択は、移行のパフォーマンスに大きく影響します。</p>
+<p>インスタンスサイズの決定要因:</p>
+<ul>
+<li>移行するデータ量</li>
+<li>移行期間の要件</li>
+<li>ソースとターゲット間のネットワーク帯域幅</li>
+<li>CDCを使用する場合の変更率</li>
+</ul>
+<p>インスタンスサイズの選択例:</p>
+<ul>
+<li>小規模なデータベース（10GB未満）: dms.t3.medium</li>
+<li>中規模なデータベース（10GB～100GB）: dms.c5.xlarge</li>
+<li>大規模なデータベース（100GB以上）: dms.c5.2xlarge以上</li>
+</ul>
+<p>実際の移行では、最初に小さいインスタンスで試験移行を実施し、パフォーマンスを確認してから本番移行用のインスタンスサイズを決定することを推奨します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="タスクの設定" duration="0">
+        <p>レプリケーションタスクには、以下のような重要な設定があります。</p>
+<h2 is-upgraded>テーブルマッピング</h2>
+<p>移行対象のテーブルを指定します。特定のテーブルのみ、または特定のスキーマ全体を対象にすることができます。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;rules&#34;: [
+    {
+      &#34;rule-type&#34;: &#34;selection&#34;,
+      &#34;rule-id&#34;: &#34;1&#34;,
+      &#34;rule-name&#34;: &#34;1&#34;,
+      &#34;object-locator&#34;: {
+        &#34;schema-name&#34;: &#34;myschema&#34;,
+        &#34;table-name&#34;: &#34;%&#34;
+      },
+      &#34;rule-action&#34;: &#34;include&#34;
+    }
+  ]
+}
+</code></pre>
+<h2 is-upgraded>タスク設定</h2>
+<p>タスクの動作を細かく制御できます。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;TargetMetadata&#34;: {
+    &#34;SupportLobs&#34;: true,
+    &#34;FullLobMode&#34;: false,
+    &#34;LobChunkSize&#34;: 64,
+    &#34;LimitedSizeLobMode&#34;: true,
+    &#34;LobMaxSize&#34;: 32
+  },
+  &#34;FullLoadSettings&#34;: {
+    &#34;TargetTablePrepMode&#34;: &#34;DROP_AND_CREATE&#34;,
+    &#34;CreatePkAfterFullLoad&#34;: false,
+    &#34;StopTaskCachedChangesApplied&#34;: false,
+    &#34;StopTaskCachedChangesNotApplied&#34;: false,
+    &#34;MaxFullLoadSubTasks&#34;: 8,
+    &#34;TransactionConsistencyTimeout&#34;: 600,
+    &#34;CommitRate&#34;: 10000
+  }
+}
+</code></pre>
+<p>主な設定項目は以下のとおりです。</p>
+<ul>
+<li>LOB (Large Object) の処理方法 <ul>
+<li>画像やテキストなどの大きなオブジェクトをどう扱うか</li>
+</ul>
+</li>
+<li>フルロード時の動作 <ul>
+<li>ターゲットテーブルを削除して作成するか、データを追加するか</li>
+</ul>
+</li>
+<li>並列処理の数 <ul>
+<li>同時に処理するサブタスクの数</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>変換ルール</h2>
+<p>DMSでは、移行時にテーブル名やカラム名を変換することができます。</p>
+<p>テーブル名の変換</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;rules&#34;: [
+    {
+      &#34;rule-type&#34;: &#34;transformation&#34;,
+      &#34;rule-id&#34;: &#34;1&#34;,
+      &#34;rule-name&#34;: &#34;1&#34;,
+      &#34;rule-target&#34;: &#34;table&#34;,
+      &#34;object-locator&#34;: {
+        &#34;schema-name&#34;: &#34;oldschema&#34;,
+        &#34;table-name&#34;: &#34;%&#34;
+      },
+      &#34;rule-action&#34;: &#34;rename&#34;,
+      &#34;value&#34;: &#34;newschema&#34;,
+      &#34;old-value&#34;: null
+    }
+  ]
+}
+</code></pre>
+<p>カラムの追加や削除</p>
+<p>特定のカラムを移行対象から除外したり、新しいカラムを追加したりすることも可能です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="モニタリングとログ" duration="0">
+        <p>DMSタスクの状態は、Amazon CloudWatchで監視できます。</p>
+<p>主要なメトリクス</p>
+<ul>
+<li>CDCLatencySource <ul>
+<li>ソースエンドポイントでの遅延時間</li>
+</ul>
+</li>
+<li>CDCLatencyTarget <ul>
+<li>ターゲットエンドポイントでの遅延時間</li>
+</ul>
+</li>
+<li>FullLoadThroughputRowsSource <ul>
+<li>フルロード時の処理行数/秒</li>
+</ul>
+</li>
+</ul>
+<p>ログの確認</p>
+<p>CloudWatch Logsにレプリケーションタスクのログが出力されます。エラーが発生した場合は、まずここを確認します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ベストプラクティス" duration="0">
+        <p>DMSを効果的に使用するためのベストプラクティスをいくつか紹介します。</p>
+<p>移行前の準備</p>
+<ul>
+<li>ソースデータベースのバックアップを取得</li>
+<li>ネットワーク帯域幅を確認</li>
+<li>セキュリティグループとネットワークACLの設定を確認</li>
+<li>ソースデータベースでバイナリログやアーカイブログが有効になっているか確認</li>
+</ul>
+<p>パフォーマンスの最適化</p>
+<ul>
+<li>大きなテーブルは分割して移行</li>
+<li>インデックスの作成はフルロード後に実施</li>
+<li>不要なトリガーやストアドプロシージャを一時的に無効化</li>
+<li>レプリケーションインスタンスとデータベースを同じAZに配置</li>
+</ul>
+<p>セキュリティ</p>
+<ul>
+<li>VPC内にレプリケーションインスタンスを配置</li>
+<li>エンドポイントの認証情報はAWS Secrets Managerで管理</li>
+<li>転送中のデータはSSL/TLSで暗号化</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="トラブルシューティング" duration="0">
+        <p>よくある問題と対処方法を紹介します。</p>
+<p>接続エラー</p>
+<p>エンドポイントのテスト接続が失敗する場合は、以下を確認してください。</p>
+<ul>
+<li>セキュリティグループの設定</li>
+<li>ネットワークACLの設定</li>
+<li>データベースのファイアウォール設定</li>
+<li>認証情報の正確性</li>
+</ul>
+<p>レプリケーション遅延</p>
+<p>CDCの遅延が大きい場合は、以下を検討してください。</p>
+<ul>
+<li>レプリケーションインスタンスのサイズアップ</li>
+<li>並列処理数の増加</li>
+<li>ターゲットデータベースのパフォーマンス向上</li>
+<li>不要なインデックスの削除</li>
+</ul>
+<p>メモリ不足エラー</p>
+<p>レプリケーションインスタンスのメモリが不足している場合は、インスタンスタイプを変更するか、LOBの処理方法を見直します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>AWS Database Migration Serviceは、データベース移行を安全かつ効率的に実行するための強力なツールです。この記事では、DMSの基本的な概念から実践的な設定方法まで解説しました。</p>
+<p>重要なポイントをまとめます。</p>
+<ul>
+<li>DMSは最小限のダウンタイムでデータベースを移行できる</li>
+<li>同種・異種データベース間の移行に対応</li>
+<li>フルロード、CDC、またはその組み合わせで移行方式を選択</li>
+<li>レプリケーションインスタンスのサイズ選択が性能に影響</li>
+<li>CloudWatchでの監視とログ確認が重要</li>
+</ul>
+<p>実際の移行では、必ず小規模な環境でテストを実施し、パフォーマンスやデータの整合性を確認してから本番環境に適用することをお勧めします。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
