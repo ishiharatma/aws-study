@@ -1,5 +1,6 @@
 ---
 title: "TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(2)管理者向け" # 記事のタイトル
+emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
@@ -13,14 +14,16 @@ published: false
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+![TEAM](/images/team/home_page.png)
+
 本ガイドは、全6部構成となっています。
 
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./zenn-team-01-overview.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./zenn-team-02-deployment-guide.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./zenn-team-03-deepdive.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./zenn-team-04-guides-01-requestor-and-approver.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./zenn-team-04-guides-02-administrator.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./zenn-team-04-guides-03-auditor.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/承認者向けガイド](./zenn-team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド](./zenn-team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) 監査者向けガイド](./zenn-team-04-guides-03-auditor.md)
 
 本ページでは、管理者向けのガイドラインを解説します。
 
@@ -32,9 +35,7 @@ published: false
 
 <!-- Duration: 00:01:00 -->
 
-- [1. はじめに](#1-はじめに)
-- [2. TEAM用IAM Identity Centerグループ定義例](#2-team用iam-identity-centerグループ定義例)
-- [3. 管理者向けガイド](#3-管理者向けガイド)
+- [1. 管理者向けガイド](#1-管理者向けガイド)
   - [TEAMアプリケーション管理者を追加または削除する](#teamアプリケーション管理者を追加または削除する)
   - [TEAMアプリケーション監査者を追加または削除する](#teamアプリケーション監査者を追加または削除する)
   - [申請者管理](#申請者管理)
@@ -55,27 +56,7 @@ published: false
 - [📖 まとめ](#-まとめ)
   - [参考リソース](#参考リソース)
 
-## 1. はじめに
-
-![TEAM](/images/team/home_page.png)
-
-Temporary elevated access management (TEAM) for AWS IAM Identity Center とは、AWS が提供するオープンソースソリューションで、ユーザーに一時的な管理者権限を付与するための仕組みです。
-
-![TEAM architecture](/images/team/archi.png)
-
-** 画像は TEAM の GitHub より引用
-
-## 2. TEAM用IAM Identity Centerグループ定義例
-
-| 役割名 | 主な役割 | グループ名 |
-| --- | --- | --- |
-| 申請者 | TEAM アプリケーションで一時的なアクセス権限をリクエストするユーザーグループ(開発者やオペレーターなど) | TEAM-Users |
-| 管理者 | TEAM アプリケーションの設定管理・ユーザー管理・グループ設定などを行うユーザーグループ | TEAM-Admins |
-| 承認者 | TEAM アプリケーションで本番アカウントへのリクエストをレビュー・承認 / 拒否する権限を持つユーザーグループ。ただし、自身のリクエストは自身では承認できません | TEAM-Approvers-Production |
-| 承認者 | TEAM アプリケーションで本番アカウント以外へのリクエストをレビュー・承認 / 拒否する権限を持つユーザーグループ。ただし、自身のリクエストは自身では承認できません | TEAM-Approvers-NonProduction |
-| 監査者 | TEAMアプリケーションのリクエスト履歴やアクセスログの確認・レビューを行うユーザーグループ (読み取り専用) | TEAM-Auditors |
-
-## 3. 管理者向けガイド
+## 1. 管理者向けガイド
 
 ### TEAMアプリケーション管理者を追加または削除する
 
@@ -333,6 +314,8 @@ TEAMを効果的に運用するためのポイントは以下のとおりです�
 - 職務分離を考慮した権限ポリシーの定義
 - 定期的な監査ログの確認と異常検知
 - MFAなどの追加セキュリティ制御の活
+
+次の記事「TEAM導入ガイド(6/6) 監査者向けガイドライン編」では、監査者向けにTEAMの監査機能と活用方法を解説します。
 
 ### 参考リソース
 

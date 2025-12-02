@@ -1,5 +1,6 @@
 ---
 title: "TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要" # 記事のタイトル
+emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
@@ -13,14 +14,16 @@ published: false
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+![TEAM](/images/team/home_page.png)
+
 本ガイドは、全6部構成となっています。
 
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./zenn-team-01-overview.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./zenn-team-02-deployment-guide.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./zenn-team-03-deepdive.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./zenn-team-04-guides-01-requestor-and-approver.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./zenn-team-04-guides-02-administrator.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./zenn-team-04-guides-03-auditor.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/承認者向けガイド](./zenn-team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド](./zenn-team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) 監査者向けガイド](./zenn-team-04-guides-03-auditor.md)
 
 本ページでは、TEAMの概要について説明します。
 
@@ -54,7 +57,7 @@ published: false
     - [4. 設定の定期的な見直し](#4-設定の定期的な見直し)
     - [5. バックアップと災害対策](#5-バックアップと災害対策)
     - [6. 通信のセキュリティ](#6-通信のセキュリティ)
-  - [TEAM用IAM Identity Centerグループ定義例](#team用iam-identity-centerグループ定義例)
+- [4. TEAM用IAM Identity Centerグループ定義例](#4-team用iam-identity-centerグループ定義例)
 - [📖 まとめ](#-まとめ)
   - [TEAMの主な特徴](#teamの主な特徴)
   - [導入効果](#導入効果)
@@ -64,13 +67,11 @@ published: false
 
 ## 1. TEAM for AWS IAM Identity Center とは
 
-![TEAM](/images/team/home_page.png)
-
 Temporary elevated access management (TEAM) for AWS IAM Identity Center とは、AWS が提供するオープンソースソリューションで、ユーザーに一時的な管理者権限を付与するための仕組みです。
 
 ![TEAM architecture](/images/team/archi.png)
 
-** 画像は TEAM の GitHub より引用
+※ 画像は TEAM の GitHub より引用
 
 ### 1.1. 公式ドキュメント
 
@@ -88,15 +89,15 @@ TEAMを理解する公式ドキュメントは次のとおりです。
 
 TEAMを導入する主なメリットは以下の5つです。
 
-- 常時管理者権限の排除
+1. 常時管理者権限の排除
   - 常設の管理者権限を削減し、必要な時だけ一時的に権限を付与することで、セキュリティリスクを最小化できます
-- 承認ワークフローの実装
+2. 承認ワークフローの実装
   - 申請・承認プロセスを通じて、権限付与の透明性と説明責任を確保できます
-- 監査証跡の自動記録
+3. 監査証跡の自動記録
   - すべての権限申請、承認、アクセスログが自動的に記録され、コンプライアンス要件に対応できます
-- 柔軟なポリシー設定
+4. 柔軟なポリシー設定
   - グループ、アカウント、OU単位で細かく権限申請のルールを設定でき、組織の要件に合わせた運用が可能です
-- 運用コストの削減
+5. 運用コストの削減
   - IAM Identity Centerと統合されているため、既存のユーザー管理基盤をそのまま活用でき、追加の認証基盤が不要です
 
 ### 1.3. 主なユースケース
@@ -153,40 +154,30 @@ TEAMは以下の主要な機能を提供します。
 TEAMはサーバーレスアーキテクチャで構築されており、以下のAWSサービスが連携して一時権限のライフサイクルを自動管理します。
 基本的に、**AWS Step Functions**が権限のライフサイクル全体を管理しています。
 
-1. 申請データの保存
-   - 承認された申請情報（開始時刻、終了時刻、対象アカウント、権限など）はAmazon DynamoDBに保存されます
-   - 申請データが保存されると、DynamoDB ストリームによってStep Functionsが起動されます。
+ライフサイクルの各フェーズは次のとおりです。
 
-2. 利用開始時刻の自動制御
-   - 承認が完了すると、**Schedule State Machine**が起動します
-   - Step FunctionsのWaitステートが、指定された開始時刻まで待機します
-   - 開始時刻になると、自動的に次のステップ（Grant State Machine）に進みます
+1. 承認フェーズ（Approval State Machine）
+   - 承認者への通知
+   - 承認期限までの待機
+   - 承認/否認の処理
 
-3. 権限の自動付与
-   - Grant State MachineがIAM Identity Center APIを呼び出し、アカウントアサインメント（Account Assignment）を作成します
-   - ユーザーはAWSアクセスポータルにログインすると、付与された権限で対象アカウントにアクセスできるようになります
+2. スケジュールフェーズ（Schedule State Machine）
+   - 権限開始日時までの待機
+   - 申請者への通知
 
-4. 時限制御による自動削除
-   - Grant State Machine内の**Waitステート**が、指定された期間（duration）分の待機を実行します
-     - 例: 8時間の申請なら28,800秒間待機
-     - 待機中は課金が発生せず、効率的に期限を管理
-   - 待機期間が終了すると、自動的に**Revoke State Machine**が起動します
-   - IAM Identity Center APIを呼び出し、該当するアサインメントを削除します
-   - これにより、アクセス期間が終了すると自動的に権限が取り消されます
+3. 権限付与フェーズ（Grant State Machine）
+   - CreateAccountAssignment API実行
+   - 権限終了時刻までの待機
 
-5. 手動取り消しのサポート
-   - 申請者または承認者が期限前に権限を取り消すことも可能
-   - この場合、UIまたはAPIから明示的に**Revoke State Machine**が起動されます
+4. 権限削除フェーズ（Revoke State Machine）
+   - DeleteAccountAssignment API実行
+   - 申請者への通知
 
-6. 監査ログの記録
-   - すべての権限付与・削除操作はAWS CloudTrailに記録され、監査証跡として保持されます
-   - CloudTrail Lakeと統合することで、一時権限を使用したユーザーの操作履歴も追跡可能です
+5. キャンセル/棄却フェーズ（Reject State Machine）
+   - 申請のキャンセル処理
+   - 関係者への通知
 
 この自動化により、手動での権限管理が不要になり、人的ミス（権限の付けっぱなしなど）を防止できます。
-
-💡 **技術的なポイント**: 
-- Step Functionsは最大1年間のWait処理に対応しており、未来の開始時刻指定や数時間から数日間の一時権限管理に最適です
-- 待機中は課金されないため、非常にコスト効率的に時刻制御と期限管理を実現できます
 
 ### 2.4. 通知機能
 
@@ -318,7 +309,7 @@ TEAMを安全に運用するためのセキュリティベストプラクティ�
 
 💡 セキュリティインシデントが発生した場合は、TEAMアプリケーションの監査ログとCloudTrail Lakeを活用し、影響範囲を迅速に特定できます。
 
-### TEAM用IAM Identity Centerグループ定義例
+## 4. TEAM用IAM Identity Centerグループ定義例
 
 | 役割名 | 主な役割 | グループ名 |
 | --- | --- | --- |
@@ -385,6 +376,8 @@ TEAMを導入した後は、以下のステップで継続的に改善してい�
 2. ユーザーフィードバックの収集: 申請者と承認者からフィードバックを集め、運用上の課題を特定する
 3. ポリシーの最適化: 観察結果に基づいて、申請者ポリシーと承認者ポリシーを調整す
 4. 監査プロセスの確立: 定期的な監査レビューのプロセスを確立し、異常なアクセスパターンを検出する
+
+次の記事「TEAM導入ガイド(2/6) デプロイ編」では、AWSインフラ担当者向けにTEAMのデプロイ方法について詳しく解説します。
 
 ### 参考リソース
 

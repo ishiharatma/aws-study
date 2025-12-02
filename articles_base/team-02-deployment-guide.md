@@ -6,27 +6,29 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+![TEAM](/images/team/home_page.png)
+
 本ガイドは、全6部構成となっています。
 
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./zenn-team-01-overview.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./zenn-team-02-deployment-guide.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./zenn-team-03-deepdive.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./zenn-team-04-guides-01-requestor-and-approver.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./zenn-team-04-guides-02-administrator.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./zenn-team-04-guides-03-auditor.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/承認者向けガイド](./zenn-team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド](./zenn-team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) 監査者向けガイド](./zenn-team-04-guides-03-auditor.md)
 
 本ページでは、TEAMのデプロイ方法について解説します。
 
 **📌 対象読者**
 
-- デプロイ担当: TEAM アプリケーションを AWS アカウントにデプロイする技術者
+- TEAM導入担当者: TEAMアプリケーションを初めて導入する方
+- AWSインフラ担当者: AWS CDKを使用してデプロイを行う技術者
 
 ## 👀 Contents<!-- omit in toc -->
 
 <!-- Duration: 00:01:00 -->
 
-- [1. TEAM for AWS IAM Identity Center とは](#1-team-for-aws-iam-identity-center-とは)
-- [2. デプロイ方法](#2-デプロイ方法)
+- [1. デプロイ方法](#1-デプロイ方法)
   - [デプロイの流れ](#デプロイの流れ)
   - [デプロイ前準備](#デプロイ前準備)
     - [ステップ１： AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任](#ステップ１-aws-iam-identity-centerの管理アカウントからteam管理アカウントへの権限委任)
@@ -40,26 +42,18 @@
     - [ステップ４：IAM Identity Center SAML Integrationの設定](#ステップ４iam-identity-center-saml-integrationの設定)
     - [ステップ５：Amazon Cognitoの設定](#ステップ５amazon-cognitoの設定)
     - [ステップ６：Amazon SESの設定](#ステップ６amazon-sesの設定)
-- [3. デプロイ後のステップ](#3-デプロイ後のステップ)
-- [4. アンインストール](#4-アンインストール)
+- [2. デプロイ後のステップ](#2-デプロイ後のステップ)
+- [3. アンインストール](#3-アンインストール)
     - [ステップ１：アンインストール](#ステップ１アンインストール)
     - [ステップ２：S3バケットの削除](#ステップ２s3バケットの削除)
     - [ステップ３：IAM Identity Center から TEAM アプリの削除](#ステップ３iam-identity-center-から-team-アプリの削除)
     - [ステップ４：TEAMで利用していた IAM Identity Center グループの削除](#ステップ４teamで利用していた-iam-identity-center-グループの削除)
 - [📖 まとめ](#-まとめ)
+  - [デプロイの流れ](#デプロイの流れ-1)
+  - [次のステップ](#次のステップ)
   - [参考リソース](#参考リソース)
 
-## 1. TEAM for AWS IAM Identity Center とは
-
-![TEAM](/images/team/home_page.png)
-
-Temporary elevated access management (TEAM) for AWS IAM Identity Center とは、AWS が提供するオープンソースソリューションで、ユーザーに一時的な管理者権限を付与するための仕組みです。
-
-![TEAM architecture](/images/team/archi.png)
-
-** 画像は TEAM の GitHub より引用
-
-## 2. デプロイ方法
+## 1. デプロイ方法
 
 TEAMアプリケーションをTEAM管理用のAWSアカウントへデプロイするまでを解説します。
 
@@ -411,11 +405,11 @@ see: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/conf
     ![WS000977.jpg](/images/team/deploy/WS000977.jpg)
     
 
-## 3. デプロイ後のステップ
+## 2. デプロイ後のステップ
 
-「02. Administrator Guide」に従い、設定を行います。
+[TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド](./zenn-team-04-guides-02-administrator.md)に従い、設定を行います。
 
-## 4. アンインストール
+## 3. アンインストール
 
 TEAMアプリケーションをアンインストールする手順です。`destroy_custom.sh` を実行することでデプロイ時に作成したスタックが削除されます。
 
@@ -566,6 +560,41 @@ done
 ## 📖 まとめ
 
 本記事では、AWS IAM Identity Center向けの一時的な権限昇格管理ソリューション「TEAM（Temporary Elevated Access Management）」について、デプロイ方法について解説しました。
+
+### デプロイの流れ
+
+TEAMのデプロイは以下の手順で行います。
+
+1. 前提条件の確認
+   - AWS Organizationsの有効化
+   - IAM Identity Centerの有効化（委任された管理者アカウントに設定）
+   - Node.js、AWS CLI、AWS CDKのインストール
+
+2. 環境のセットアップ
+   - GitHubリポジトリのクローン
+   - 依存パッケージのインストール
+   - 設定ファイル（config.json）の編集
+
+3. CDKによるデプロイ
+   - `cdk bootstrap`でCDK環境の初期化
+   - `cdk deploy`でAWSリソースの作成
+   - CloudTrail Lakeの有効化とSESメール送信設定
+
+ただし、デプロイ前に以下の点に注意してください。
+
+- **委任された管理者アカウント**へのデプロイが必須
+- **CloudTrail Lakeの有効化**には追加コストが発生
+- **SESの本番環境利用**にはサンドボックス解除申請が必要
+
+### 次のステップ
+
+次の記事「TEAM導入ガイド(3/6) Deep Dive編」では、Step Functionsによる権限ライフサイクル管理やDynamoDBのテーブル設計など、TEAMの内部実装を詳しく解説します。
+
+また、すぐに運用を開始したい方は、以下のガイド記事から役割に応じた記事を参照してください。
+
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/承認者向けガイド](./zenn-team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド](./zenn-team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) 監査者向けガイド](./zenn-team-04-guides-03-auditor.md)
 
 ### 参考リソース
 

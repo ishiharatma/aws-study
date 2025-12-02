@@ -1,5 +1,6 @@
 ---
 title: "TEAM for AWS IAM Identity Center 導入ガイド ── 一時的な権限昇格管理の実践" # 記事のタイトル
+emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
@@ -187,31 +188,41 @@ TEAMは以下の主要な機能を提供します。
 
 TEAMはサーバーレスアーキテクチャで構築されており、以下のAWSサービスが連携して一時権限のライフサイクルを自動管理します。
 
+
 1. 申請データの保存
    - 承認された申請情報（開始時刻、終了時刻、対象アカウント、権限など）はAmazon DynamoDBに保存されます
+   - 申請データが保存されると、DynamoDB ストリームによってStep Functionsが起動されます。
 
-2. 権限の自動付与と削除
-   - **AWS Step Functions**が権限のライフサイクル全体を管理します。
-   - Grant State Machineが起動し、IAM Identity Center APIを呼び出してアカウントアサインメント（Account Assignment）を作成します
+2. 利用開始時刻の自動制御
+   - 承認が完了すると、**Schedule State Machine**が起動します
+   - Step FunctionsのWaitステートが、指定された開始時刻まで待機します
+   - 開始時刻になると、自動的に次のステップ（Grant State Machine）に進みます
+
+3. 権限の自動付与
+   - Grant State MachineがIAM Identity Center APIを呼び出し、アカウントアサインメント（Account Assignment）を作成します
    - ユーザーはAWSアクセスポータルにログインすると、付与された権限で対象アカウントにアクセスできるようになります
 
-3. 時限制御による自動削除
-   - Step FunctionsのWaitステートが、指定された期間（duration）分の待機を実行します
+4. 時限制御による自動削除
+   - Grant State Machine内のWaitステートが、指定された期間（duration）分の待機を実行します
      - 例: 8時間の申請なら28,800秒間待機
      - 待機中は課金が発生せず、効率的に期限を管理
-   - 待機期間が終了すると、自動的にRevoke State Machineが起動します
+   - 待機期間が終了すると、自動的に**Revoke State Machine**が起動します
    - IAM Identity Center APIを呼び出し、該当するアサインメントを削除します
    - これにより、アクセス期間が終了すると自動的に権限が取り消されます
 
-4. ワークフローの調整
-   - AWS Step Functionsが申請から承認、通知、権限付与までの一連のワークフローを統合的に管理します
-   - Amazon API Gateway + Lambdaがフロントエンド（Amplifyアプリ）からのリクエストを処理します
+5. 手動取り消しのサポート
+   - 申請者または承認者が期限前に権限を取り消すことも可能
+   - この場合、UIまたはAPIから明示的に**Revoke State Machine**が起動されます
 
-5. 監査ログの記録
+6. 監査ログの記録
    - すべての権限付与・削除操作はAWS CloudTrailに記録され、監査証跡として保持されます
    - CloudTrail Lakeと統合することで、一時権限を使用したユーザーの操作履歴も追跡可能です
 
 この自動化により、手動での権限管理が不要になり、人的ミス（権限の付けっぱなしなど）を防止できます。
+
+💡 **技術的なポイント**: 
+- Step Functionsは最大1年間のWait処理に対応しており、未来の開始時刻指定や数時間から数日間の一時権限管理に最適です
+- 待機中は課金されないため、非常にコスト効率的に時刻制御と期限管理を実現できます
 
 ### 2.4. 通知機能
 

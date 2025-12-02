@@ -6,51 +6,47 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+![TEAM](/images/team/home_page.png)
+
 本ガイドは、全6部構成となっています。
 
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./zenn-team-01-overview.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./zenn-team-02-deployment-guide.md)
 - [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./zenn-team-03-deepdive.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./zenn-team-04-guides-01-requestor-and-approver.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./zenn-team-04-guides-02-administrator.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./zenn-team-04-guides-03-auditor.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/承認者向けガイド](./zenn-team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド](./zenn-team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) 監査者向けガイド](./zenn-team-04-guides-03-auditor.md)
 
 本ページでは、TEAMの仕組みを詳しく解説します。
 
 **📌 対象読者**
 
-- デプロイ担当: TEAM アプリケーションを AWS アカウントにデプロイする技術者
+- TEAMの内部実装を理解したい技術者
+- カスタマイズを検討している開発者
+- トラブルシューティングを行う必要がある運用担当者
 
 ## 👀 Contents<!-- omit in toc -->
 
 <!-- Duration: 00:01:00 -->
 
-- [1. はじめに](#1-はじめに)
-- [2. アーキテクチャの詳細](#2-アーキテクチャの詳細)
-  - [2.1. 権限ライフサイクル管理の仕組み](#21-権限ライフサイクル管理の仕組み)
-    - [2.2.1. データストア (DynamoDB)](#221-データストア-dynamodb)
-    - [2.2.2. Wait ステートの実装詳細](#222-wait-ステートの実装詳細)
-    - [2.2.3. Step Functions ワークフロー](#223-step-functions-ワークフロー)
+- [1. アーキテクチャの詳細](#1-アーキテクチャの詳細)
+  - [1.1. 権限ライフサイクル管理の仕組み](#11-権限ライフサイクル管理の仕組み)
+    - [1.2.1. データストア (DynamoDB)](#121-データストア-dynamodb)
+    - [1.2.2. Wait ステートの実装詳細](#122-wait-ステートの実装詳細)
+    - [1.2.3. Step Functions ワークフロー](#123-step-functions-ワークフロー)
 - [📖 まとめ](#-まとめ)
+  - [次のステップ](#次のステップ)
   - [参考リソース](#参考リソース)
 
-## 1. はじめに
-
-![TEAM](/images/team/home_page.png)
-
-Temporary elevated access management (TEAM) for AWS IAM Identity Center とは、AWS が提供するオープンソースソリューションで、ユーザーに一時的な管理者権限を付与するための仕組みです。
-
-![TEAM architecture](/images/team/archi.png)
-
-## 2. アーキテクチャの詳細
+## 1. アーキテクチャの詳細
 
 ![TEAM architecture](/images/team/process-flow.png)
 
 <!-- Duration: 0:01:30 -->
 
-### 2.1. 権限ライフサイクル管理の仕組み
+### 1.1. 権限ライフサイクル管理の仕組み
 
-#### 2.2.1. データストア (DynamoDB)
+#### 1.2.1. データストア (DynamoDB)
 
 TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全体を管理します。
 以下の5つのテーブルで構成されています。
@@ -59,15 +55,15 @@ TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全�
 - Approver Table: 承認者ポリシーの定義を管理
 - Eligibility Table: 申請可能な権限の定義を管理
 - Settings Table: アプリケーション設定を管理
-- Sessions Table: CloudTrail Lake に StartQuery API 実行したクエリIDを管理。取得結果をポーリングするために利用。TTL有効（項目：`expireAt`）
+- Sessions Table: CloudTrail Lake に StartQuery APIを実行したクエリIDを管理。取得結果をポーリングするために利用。TTL有効（項目: `expireAt`）
 
-#### 2.2.2. Wait ステートの実装詳細
+#### 1.2.2. Wait ステートの実装詳細
 
 TEAMではStep Functionsで権限申請のライフサイクルを管理していますが、ライフサイクル管理の重要なポイントである Waitステートについて解説します。
 
 Step Functionsの[Waitステート](https://docs.aws.amazon.com/step-functions/latest/dg/state-wait.html)の特徴は次のとおりです。
 
-Waitの指定は、相対時間と絶対時間があります。
+Waitステートの指定は、相対時間と絶対時間があります。
 
 - 相対時間（秒）: `SecondsPath`
   - 0～99,999,999
@@ -75,7 +71,7 @@ Waitの指定は、相対時間と絶対時間があります。
   - 例：2024-08-18T17:33:00Z
 
 指定できる最大待機時間は、[Standard Workflows]が1年で、[Express Workflows]が5分となります。(厳密には、ステートマシン全体の実行時間)
-TEAMでは、[Standard Workflows]を使用していますので最大時間は１年（8,760時間）となります。
+TEAMでは、[Standard Workflows]を使用していますので最大時間は1年（8,760時間）となります。
 ただし、TEAMでは最大時間は「8000時間」に制限をしています。
 
 これはドキュメント(参考: [Eligibility policy](https://aws-samples.github.io/iam-identity-center-team/docs/overview/policies.html))でも以下のように明記されています。
@@ -90,15 +86,15 @@ Maximum duration: Determines the maximum elevated access duration in hours
 [iam-identity-center-team/src/components/Admin/Eligible.js](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Admin/Eligible.js)
 
 ```javascript
-if (!duration || isNaN(duration) || Number(duration ) > 8000 || Number(duration ) < 1) {
+if (!duration || isNaN(duration) || Number(duration ) > 8000 || Number(duration) < 1) {
   setDurationError(`Enter number between 1-8000`);
   valid = false;
 }
 ```
 
-#### 2.2.3. Step Functions ワークフロー
+#### 1.2.3. Step Functions ワークフロー
 
-TEAMは5つのStep Functions State Machineで権限のライフサイクルを管理します。
+TEAMは5つの Step Functions State Machine で権限のライフサイクルを管理します。
 
 1. Approval State Machine: 申請者への通知、申請期限切れまで待機
 2. Schedule State Machine: 申請者への通知、権限利用開始日時まで待機
@@ -108,14 +104,14 @@ TEAMは5つのStep Functions State Machineで権限のライフサイクルを�
 
 各State Machineの処理フローは次のとおりです。
 
-1. Approval State Machine
+1. Approval State Machine（承認フェーズ）
 
 ![approval-sm](/images/team/sfn/team-approval-sm.jpg)
 
 このステートマシンでは、以下の処理を行います。
 
 - 承認者への通知
-- 設定された承認期限（相対時間（秒数））まで待機
+- 設定された承認期限（相対時間（秒数））まで待機（Waitステート）
   ```json
   "Wait": {
     "Next": "DynamoDB GetStatus",
@@ -136,7 +132,7 @@ TEAMは5つのStep Functions State Machineで権限のライフサイクルを�
   ```
 - 承認/否認されない場合、リクエストステータスを `expired` に変更
 
-2. Schedule State Machine
+2. Schedule State Machine（スケジュールフェーズ）
 
 ![schedule-sm](/images/team/sfn/team-schedule-sm.jpg)
 
@@ -144,7 +140,7 @@ TEAMは5つのStep Functions State Machineで権限のライフサイクルを�
 
 - リクエストステータスを `scheduled` に更新
 - 申請者へ通知
-- 申請時に指定した"Start Time"（絶対時刻（ISO 8601形式））まで待機
+- 申請時に指定した"Start Time"（絶対時刻（ISO 8601形式））まで待機（Waitステート）
   ```json
   "Schedule": {
     "Next": "DynamoDB GetStatus",
@@ -165,17 +161,17 @@ TEAMは5つのStep Functions State Machineで権限のライフサイクルを�
   ```
 - Grant State Machineを起動
 
-3. Grant State Machine
+3. Grant State Machine（権限付与フェーズ）
 
 ![grant-sm](/images/team/sfn/team-grant-sm.jpg)
 
 このステートマシンでは、以下の処理を行います。
 
-- `CreateAccountAssignment` API実行（権限付与）
+- [CreateAccountAssignment API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateAccountAssignment.html)実行（権限付与）
 - リクエストステータスを `in progress` に更新
 - DynamoDBに開始時刻を記録
 - 申請者への通知
-- 申請時に指定した"Duration"（相対時間（秒数））まで待機
+- 申請時に指定した"Duration"（相対時間（秒数））まで待機（Waitステート）
   ```json
   "Wait": {
     "Next": "Revoke Permission",
@@ -185,18 +181,18 @@ TEAMは5つのStep Functions State Machineで権限のライフサイクルを�
   ```
 - Revoke State Machineを起動
 
-4. Revoke State Machine
+4. Revoke State Machine（権限削除フェーズ）
 
 ![revoke-sm](/images/team/sfn/team-revoke-sm.jpg)
 
 このステートマシンでは、以下の処理を行います。
 
-- `DeleteAccountAssignment` API実行（権限削除）
+- [DeleteAccountAssignment API](https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_DeleteAccountAssignment.html)実行（権限削除）
 - リクエストステータスを `ended` または `revoked` に更新
 - DynamoDB に終了時刻を記録
 - 申請者への通知
 
-5. Reject State Machine
+5. Reject State Machine（キャンセル/棄却フェーズ）
 
 ![reject-sm](/images/team/sfn/team-reject-sm.jpg)
 
@@ -217,6 +213,10 @@ TEAMのコアとなる仕組みは以下の3つです。
 3. Waitステートによる時間制御: 最大8000時間（約11ヶ月）の柔軟な権限期間設定
 
 特に、Step FunctionsのWaitステートを活用した実装は、AWSのサーバーレスアーキテクチャを最大限に活用した設計です。申請期限、権限開始時刻、権限終了時刻をすべて自動管理することで、運用負荷を大幅に削減しています。
+
+### 次のステップ
+
+次の記事「TEAM導入ガイド(4/6) 申請者/承認者向けガイドライン編」では、申請者および承認者向けのガイドラインについて詳しく解説します。
 
 ### 参考リソース
 
