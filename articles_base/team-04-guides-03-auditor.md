@@ -8,12 +8,12 @@
 
 本ガイドは、全6部構成となっています。
 
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./team-01-overview.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./team-02-deployment-guide.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./team-03-deepdive.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./team-04-guides-01-requestor-and-approver.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./team-04-guides-02-administrator.md)
-- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./team-04-guides-03-auditor.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./zenn-team-01-overview.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./zenn-team-02-deployment-guide.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./zenn-team-03-deepdive.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./zenn-team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./zenn-team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./zenn-team-04-guides-03-auditor.md)
   
 本ページでは、監査者向けのガイドラインを解説します。
 
