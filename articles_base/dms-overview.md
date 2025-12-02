@@ -27,7 +27,14 @@
   - [変換ルール](#変換ルール)
 - [モニタリングとログ](#モニタリングとログ)
 - [ベストプラクティス](#ベストプラクティス)
+  - [移行前の準備](#移行前の準備)
+  - [パフォーマンスの最適化](#パフォーマンスの最適化)
+  - [セキュリティ](#セキュリティ)
+- [AWS DMS Fleet Advisor](#aws-dms-fleet-advisor)
 - [トラブルシューティング](#トラブルシューティング)
+  - [接続エラー](#接続エラー)
+  - [レプリケーション遅延](#レプリケーション遅延)
+  - [メモリ不足エラー](#メモリ不足エラー)
 - [📖 まとめ](#-まとめ)
 
 ## AWS Database Migration Service (DMS) とは
@@ -282,6 +289,8 @@ DMSには以下のような制限があります。
 ### テーブルマッピング
 
 移行対象のテーブルを指定します。特定のテーブルのみ、または特定のスキーマ全体を対象にすることができます。
+ルールタイプ（`rule-type`）に`selection`を指定して定義します。
+ルールアクション（`rule-action`）に`exclude`を指定すると除外条件になります。
 
 ```json
 {
@@ -300,9 +309,16 @@ DMSには以下のような制限があります。
 }
 ```
 
+ルールタイプには以下のものがあります。
+
+- selection: 選択
+- transformation: 変換
+
 ### タスク設定
 
 タスクの動作を細かく制御できます。
+
+参考: [Task settings example](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html#CHAP_Tasks.CustomizingTasks.TaskSettings.Example)
 
 ```json
 {
@@ -340,6 +356,8 @@ DMSでは、移行時にテーブル名やカラム名を変換することが�
 
 テーブル名の変換:
 
+ルールアクション（`rule-action`）に`rename`を指定します。
+
 ```json
 {
   "rules": [
@@ -363,12 +381,76 @@ DMSでは、移行時にテーブル名やカラム名を変換することが�
 カラムの追加や削除:
 
 特定のカラムを移行対象から除外したり、新しいカラムを追加したりすることも可能です。
+ルールアクション（`rule-action`）に`add-column`や`remove-column`を指定します。
+
+```json
+{
+  "rules": [
+    {
+      "rule-type": "transformation",
+      "rule-id": "1",
+      "rule-name": "1",
+      "rule-target": "column",
+      "object-locator": {
+          "schema-name": "Test",
+          "table-name": "ITEM"
+      },
+      "value": "FULL_NAME",
+      "expression": "$FIRST_NAME||'_'||$LAST_NAME",
+      "data-type": {
+            "type": "string",
+            "length": 50
+      }
+    }
+  ]
+}
+```
+
+データマスキング:
+
+機密データを隠すためのデータマスキングを行うことができます。
+
+指定できるルールアクションは次のとおりです。
+
+- data-masking-digits-mask：数字を指定した文字に置き換えます
+- data-masking-digits-randomize: 数字をランダムに置き換えます
+- data-masking-hash-mask: 64 文字の長いハッシュ値に置き換えます
+
+参考: [Using data masking to hide sensitive information](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Masking.html)
+
+```json
+{
+    "rule-type": "transformation",
+    "rule-id": "2",
+    "rule-name": "2",
+    "rule-target": "column",
+    "object-locator": {
+        "schema-name": "cust_schema",
+        "table-name": "customer_master",
+        "column-name": "cust_passport_no"
+    },
+    "rule-action": "data-masking-digits-mask",
+    "value": "#"
+},
+{
+    "rule-type": "transformation",
+    "rule-id": "3",
+    "rule-name": "2",
+    "rule-target": "column",
+    "object-locator": {
+        "schema-name": "cust_schema",
+        "table-name": "customer_master",
+        "column-name": "email"
+    },
+    "rule-action": "data-masking-hash-mask"
+}
+```
 
 ## モニタリングとログ
 
 DMSタスクの状態は、Amazon CloudWatchで監視できます。
 
-主要なメトリクス
+主要なメトリクスは次のとおりです。
 
 - CDCLatencySource
   - ソースエンドポイントでの遅延時間
@@ -385,31 +467,39 @@ CloudWatch Logsにレプリケーションタスクのログが出力されま�
 
 DMSを効果的に使用するためのベストプラクティスをいくつか紹介します。
 
-移行前の準備
+### 移行前の準備
 
 - ソースデータベースのバックアップを取得
 - ネットワーク帯域幅を確認
 - セキュリティグループとネットワークACLの設定を確認
 - ソースデータベースでバイナリログやアーカイブログが有効になっているか確認
 
-パフォーマンスの最適化
+### パフォーマンスの最適化
 
 - 大きなテーブルは分割して移行
 - インデックスの作成はフルロード後に実施
 - 不要なトリガーやストアドプロシージャを一時的に無効化
 - レプリケーションインスタンスとデータベースを同じAZに配置
 
-セキュリティ
+### セキュリティ
 
 - VPC内にレプリケーションインスタンスを配置
 - エンドポイントの認証情報はAWS Secrets Managerで管理
 - 転送中のデータはSSL/TLSで暗号化
 
+## AWS DMS Fleet Advisor
+
+⚠️ [2026 年 5 月 20 日 サポート終了](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html)
+
+データベースと分析の移行プランを構築します。
+
+![dms-fleet-advisor-diagram](/images/dms/dms-fleet-advisor-diagram.png)
+
 ## トラブルシューティング
 
 よくある問題と対処方法を紹介します。
 
-接続エラー
+### 接続エラー
 
 エンドポイントのテスト接続が失敗する場合は、以下を確認してください。
 
@@ -418,7 +508,7 @@ DMSを効果的に使用するためのベストプラクティスをいくつ�
 - データベースのファイアウォール設定
 - 認証情報の正確性
 
-レプリケーション遅延
+### レプリケーション遅延
 
 CDCの遅延が大きい場合は、以下を検討してください。
 
@@ -427,7 +517,7 @@ CDCの遅延が大きい場合は、以下を検討してください。
 - ターゲットデータベースのパフォーマンス向上
 - 不要なインデックスの削除
 
-メモリ不足エラー
+### メモリ不足エラー
 
 レプリケーションインスタンスのメモリが不足している場合は、インスタンスタイプを変更するか、LOBの処理方法を見直します。
 

@@ -54,8 +54,19 @@
 </ul>
 </li>
 <li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%AD%E3%82%B0" target="_blank">モニタリングとログ</a></li>
-<li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a></li>
-<li><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">トラブルシューティング</a></li>
+<li><a href="#%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">ベストプラクティス</a><ul>
+<li><a href="#%E7%A7%BB%E8%A1%8C%E5%89%8D%E3%81%AE%E6%BA%96%E5%82%99" target="_blank">移行前の準備</a></li>
+<li><a href="#%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%81%AE%E6%9C%80%E9%81%A9%E5%8C%96" target="_blank">パフォーマンスの最適化</a></li>
+<li><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">セキュリティ</a></li>
+</ul>
+</li>
+<li><a href="#aws-dms-fleet-advisor" target="_blank">AWS DMS Fleet Advisor</a></li>
+<li><a href="#%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">トラブルシューティング</a><ul>
+<li><a href="#%E6%8E%A5%E7%B6%9A%E3%82%A8%E3%83%A9%E3%83%BC" target="_blank">接続エラー</a></li>
+<li><a href="#%E3%83%AC%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E9%81%85%E5%BB%B6" target="_blank">レプリケーション遅延</a></li>
+<li><a href="#%E3%83%A1%E3%83%A2%E3%83%AA%E4%B8%8D%E8%B6%B3%E3%82%A8%E3%83%A9%E3%83%BC" target="_blank">メモリ不足エラー</a></li>
+</ul>
+</li>
 <li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 
@@ -482,7 +493,7 @@ for data migration.
       <google-codelab-step label="タスクの設定" duration="0">
         <p>レプリケーションタスクには、以下のような重要な設定があります。</p>
 <h2 is-upgraded>テーブルマッピング</h2>
-<p>移行対象のテーブルを指定します。特定のテーブルのみ、または特定のスキーマ全体を対象にすることができます。</p>
+<p>移行対象のテーブルを指定します。特定のテーブルのみ、または特定のスキーマ全体を対象にすることができます。 ルールタイプ（<code>rule-type</code>）に<code>selection</code>を指定して定義します。 ルールアクション（<code>rule-action</code>）に<code>exclude</code>を指定すると除外条件になります。</p>
 <pre><code language="language-json" class="language-json">{
   &#34;rules&#34;: [
     {
@@ -498,8 +509,14 @@ for data migration.
   ]
 }
 </code></pre>
+<p>ルールタイプには以下のものがあります。</p>
+<ul>
+<li>selection: 選択</li>
+<li>transformation: 変換</li>
+</ul>
 <h2 is-upgraded>タスク設定</h2>
 <p>タスクの動作を細かく制御できます。</p>
+<p>参考: <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.html#CHAP_Tasks.CustomizingTasks.TaskSettings.Example" target="_blank">Task settings example</a></p>
 <pre><code language="language-json" class="language-json">{
   &#34;TargetMetadata&#34;: {
     &#34;SupportLobs&#34;: true,
@@ -537,6 +554,7 @@ for data migration.
 <h2 is-upgraded>変換ルール</h2>
 <p>DMSでは、移行時にテーブル名やカラム名を変換することができます。</p>
 <p>テーブル名の変換:</p>
+<p>ルールアクション（<code>rule-action</code>）に<code>rename</code>を指定します。</p>
 <pre><code language="language-json" class="language-json">{
   &#34;rules&#34;: [
     {
@@ -556,14 +574,70 @@ for data migration.
 }
 </code></pre>
 <p>カラムの追加や削除:</p>
-<p>特定のカラムを移行対象から除外したり、新しいカラムを追加したりすることも可能です。</p>
+<p>特定のカラムを移行対象から除外したり、新しいカラムを追加したりすることも可能です。 ルールアクション（<code>rule-action</code>）に<code>add-column</code>や<code>remove-column</code>を指定します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;rules&#34;: [
+    {
+      &#34;rule-type&#34;: &#34;transformation&#34;,
+      &#34;rule-id&#34;: &#34;1&#34;,
+      &#34;rule-name&#34;: &#34;1&#34;,
+      &#34;rule-target&#34;: &#34;column&#34;,
+      &#34;object-locator&#34;: {
+          &#34;schema-name&#34;: &#34;Test&#34;,
+          &#34;table-name&#34;: &#34;ITEM&#34;
+      },
+      &#34;value&#34;: &#34;FULL_NAME&#34;,
+      &#34;expression&#34;: &#34;$FIRST_NAME||&#39;_&#39;||$LAST_NAME&#34;,
+      &#34;data-type&#34;: {
+            &#34;type&#34;: &#34;string&#34;,
+            &#34;length&#34;: 50
+      }
+    }
+  ]
+}
+</code></pre>
+<p>データマスキング:</p>
+<p>機密データを隠すためのデータマスキングを行うことができます。</p>
+<p>指定できるルールアクションは次のとおりです。</p>
+<ul>
+<li>data-masking-digits-mask：数字を指定した文字に置き換えます</li>
+<li>data-masking-digits-randomize: 数字をランダムに置き換えます</li>
+<li>data-masking-hash-mask: 64 文字の長いハッシュ値に置き換えます</li>
+</ul>
+<p>参考: <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.Masking.html" target="_blank">Using data masking to hide sensitive information</a></p>
+<pre><code language="language-json" class="language-json">{
+    &#34;rule-type&#34;: &#34;transformation&#34;,
+    &#34;rule-id&#34;: &#34;2&#34;,
+    &#34;rule-name&#34;: &#34;2&#34;,
+    &#34;rule-target&#34;: &#34;column&#34;,
+    &#34;object-locator&#34;: {
+        &#34;schema-name&#34;: &#34;cust_schema&#34;,
+        &#34;table-name&#34;: &#34;customer_master&#34;,
+        &#34;column-name&#34;: &#34;cust_passport_no&#34;
+    },
+    &#34;rule-action&#34;: &#34;data-masking-digits-mask&#34;,
+    &#34;value&#34;: &#34;#&#34;
+},
+{
+    &#34;rule-type&#34;: &#34;transformation&#34;,
+    &#34;rule-id&#34;: &#34;3&#34;,
+    &#34;rule-name&#34;: &#34;2&#34;,
+    &#34;rule-target&#34;: &#34;column&#34;,
+    &#34;object-locator&#34;: {
+        &#34;schema-name&#34;: &#34;cust_schema&#34;,
+        &#34;table-name&#34;: &#34;customer_master&#34;,
+        &#34;column-name&#34;: &#34;email&#34;
+    },
+    &#34;rule-action&#34;: &#34;data-masking-hash-mask&#34;
+}
+</code></pre>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="モニタリングとログ" duration="0">
         <p>DMSタスクの状態は、Amazon CloudWatchで監視できます。</p>
-<p>主要なメトリクス</p>
+<p>主要なメトリクスは次のとおりです。</p>
 <ul>
 <li>CDCLatencySource <ul>
 <li>ソースエンドポイントでの遅延時間</li>
@@ -586,21 +660,21 @@ for data migration.
     
       <google-codelab-step label="ベストプラクティス" duration="0">
         <p>DMSを効果的に使用するためのベストプラクティスをいくつか紹介します。</p>
-<p>移行前の準備</p>
+<h2 is-upgraded>移行前の準備</h2>
 <ul>
 <li>ソースデータベースのバックアップを取得</li>
 <li>ネットワーク帯域幅を確認</li>
 <li>セキュリティグループとネットワークACLの設定を確認</li>
 <li>ソースデータベースでバイナリログやアーカイブログが有効になっているか確認</li>
 </ul>
-<p>パフォーマンスの最適化</p>
+<h2 is-upgraded>パフォーマンスの最適化</h2>
 <ul>
 <li>大きなテーブルは分割して移行</li>
 <li>インデックスの作成はフルロード後に実施</li>
 <li>不要なトリガーやストアドプロシージャを一時的に無効化</li>
 <li>レプリケーションインスタンスとデータベースを同じAZに配置</li>
 </ul>
-<p>セキュリティ</p>
+<h2 is-upgraded>セキュリティ</h2>
 <ul>
 <li>VPC内にレプリケーションインスタンスを配置</li>
 <li>エンドポイントの認証情報はAWS Secrets Managerで管理</li>
@@ -610,9 +684,17 @@ for data migration.
 
       </google-codelab-step>
     
+      <google-codelab-step label="AWS DMS Fleet Advisor" duration="0">
+        <p>⚠️ <a href="https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html" target="_blank">2026 年 5 月 20 日 サポート終了</a></p>
+<p>データベースと分析の移行プランを構築します。</p>
+<p class="image-container"><img alt="dms-fleet-advisor-diagram" src="img\\55047ae21191aef.png"></p>
+
+
+      </google-codelab-step>
+    
       <google-codelab-step label="トラブルシューティング" duration="0">
         <p>よくある問題と対処方法を紹介します。</p>
-<p>接続エラー</p>
+<h2 is-upgraded>接続エラー</h2>
 <p>エンドポイントのテスト接続が失敗する場合は、以下を確認してください。</p>
 <ul>
 <li>セキュリティグループの設定</li>
@@ -620,7 +702,7 @@ for data migration.
 <li>データベースのファイアウォール設定</li>
 <li>認証情報の正確性</li>
 </ul>
-<p>レプリケーション遅延</p>
+<h2 is-upgraded>レプリケーション遅延</h2>
 <p>CDCの遅延が大きい場合は、以下を検討してください。</p>
 <ul>
 <li>レプリケーションインスタンスのサイズアップ</li>
@@ -628,7 +710,7 @@ for data migration.
 <li>ターゲットデータベースのパフォーマンス向上</li>
 <li>不要なインデックスの削除</li>
 </ul>
-<p>メモリ不足エラー</p>
+<h2 is-upgraded>メモリ不足エラー</h2>
 <p>レプリケーションインスタンスのメモリが不足している場合は、インスタンスタイプを変更するか、LOBの処理方法を見直します。</p>
 
 
