@@ -491,7 +491,7 @@ DMSを効果的に使用するためのベストプラクティスをいくつ�
 
 ⚠️ [2026 年 5 月 20 日 サポート終了](https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html)
 
-データベースと分析の移行プランを構築します。
+データベースの分析と移行プランを構築します。
 
 ![dms-fleet-advisor-diagram](/images/dms/dms-fleet-advisor-diagram.png)
 
