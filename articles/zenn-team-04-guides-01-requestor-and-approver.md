@@ -1,5 +1,5 @@
 ---
-title: "TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) ガイドライン(1)申請者/承認者向け" # 記事のタイトル
+title: "TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/承認者向けガイド" # 記事のタイトル
 emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
@@ -33,8 +33,6 @@ published: false
 - 承認者: TEAM アプリケーションでリクエストをレビュー・承認 / 拒否するユーザー
 
 ## 👀 Contents<!-- omit in toc -->
-
-<!-- Duration: 00:01:00 -->
 
 - [1. 申請者向けガイド](#1-申請者向けガイド)
   - [TEAMアプリケーションにログインする](#teamアプリケーションにログインする)
@@ -124,6 +122,7 @@ see: [TEAM Requestor guide](https://aws-samples.github.io/iam-identity-center-te
 
 1. 左ペインの[Approvals]から[Approve requests]を選択します
 2. 自身が承認しなければならない申請の一覧が表示されます
+   ![approve_requests](/images/team/approver/approve_requests.jpg)
    ⚠️　自分で行った申請は、承認者権限があったとしても一覧に表示されません
 3. 申請内容を確認する場合は、申請を選択し[View details]をクリックします
 4. 申請を承認する場合は、申請を選択し、[Actions]から[Approve]を選択します

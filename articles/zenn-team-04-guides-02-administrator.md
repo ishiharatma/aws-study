@@ -1,5 +1,5 @@
 ---
-title: "TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(2)管理者向け" # 記事のタイトル
+title: "TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者向けガイド" # 記事のタイトル
 emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
@@ -32,8 +32,6 @@ published: false
 - 管理者: TEAM アプリケーションの設定管理・ユーザー管理・グループ設定などを行うユーザー
 
 ## 👀 Contents<!-- omit in toc -->
-
-<!-- Duration: 00:01:00 -->
 
 - [1. 管理者向けガイド](#1-管理者向けガイド)
   - [TEAMアプリケーション管理者を追加または削除する](#teamアプリケーション管理者を追加または削除する)

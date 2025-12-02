@@ -26,8 +26,6 @@
 
 ## 👀 Contents<!-- omit in toc -->
 
-<!-- Duration: 00:01:00 -->
-
 - [1. 申請者向けガイド](#1-申請者向けガイド)
   - [TEAMアプリケーションにログインする](#teamアプリケーションにログインする)
   - [一時アクセス許可の申請を行う](#一時アクセス許可の申請を行う)
@@ -116,6 +114,7 @@ see: [TEAM Requestor guide](https://aws-samples.github.io/iam-identity-center-te
 
 1. 左ペインの[Approvals]から[Approve requests]を選択します
 2. 自身が承認しなければならない申請の一覧が表示されます
+   ![approve_requests](/images/team/approver/approve_requests.jpg)
    ⚠️　自分で行った申請は、承認者権限があったとしても一覧に表示されません
 3. 申請内容を確認する場合は、申請を選択し[View details]をクリックします
 4. 申請を承認する場合は、申請を選択し、[Actions]から[Approve]を選択します

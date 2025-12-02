@@ -35,13 +35,14 @@ published: false
 
 ## 👀 Contents<!-- omit in toc -->
 
-<!-- Duration: 00:01:00 -->
-
 - [1. アーキテクチャの詳細](#1-アーキテクチャの詳細)
   - [1.1. 権限ライフサイクル管理の仕組み](#11-権限ライフサイクル管理の仕組み)
-    - [1.2.1. データストア (DynamoDB)](#121-データストア-dynamodb)
-    - [1.2.2. Wait ステートの実装詳細](#122-wait-ステートの実装詳細)
-    - [1.2.3. Step Functions ワークフロー](#123-step-functions-ワークフロー)
+    - [1.1.1. データストア (DynamoDB)](#111-データストア-dynamodb)
+    - [1.1.2. Waitステートの実装詳細](#112-waitステートの実装詳細)
+    - [1.1.3. Step Functionsワークフロー](#113-step-functionsワークフロー)
+  - [1.2. トラブルシューティング](#12-トラブルシューティング)
+    - [1.2.1. 申請一覧に自分の申請が表示されない](#121-申請一覧に自分の申請が表示されない)
+    - [1.2.2. 特定の権限セットが選択できない](#122-特定の権限セットが選択できない)
 - [📖 まとめ](#-まとめ)
   - [次のステップ](#次のステップ)
   - [参考リソース](#参考リソース)
@@ -54,7 +55,7 @@ published: false
 
 ### 1.1. 権限ライフサイクル管理の仕組み
 
-#### 1.2.1. データストア (DynamoDB)
+#### 1.1.1. データストア (DynamoDB)
 
 TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全体を管理します。
 以下の5つのテーブルで構成されています。
@@ -65,7 +66,7 @@ TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全�
 - Settings Table: アプリケーション設定を管理
 - Sessions Table: CloudTrail Lake に StartQuery APIを実行したクエリIDを管理。取得結果をポーリングするために利用。TTL有効（項目: `expireAt`）
 
-#### 1.2.2. Wait ステートの実装詳細
+#### 1.1.2. Waitステートの実装詳細
 
 TEAMではStep Functionsで権限申請のライフサイクルを管理していますが、ライフサイクル管理の重要なポイントである Waitステートについて解説します。
 
@@ -94,15 +95,15 @@ Maximum duration: Determines the maximum elevated access duration in hours
 [iam-identity-center-team/src/components/Admin/Eligible.js](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Admin/Eligible.js)
 
 ```javascript
-if (!duration || isNaN(duration) || Number(duration ) > 8000 || Number(duration) < 1) {
+if (!duration || isNaN(duration) || Number(duration) > 8000 || Number(duration) < 1) {
   setDurationError(`Enter number between 1-8000`);
   valid = false;
 }
 ```
 
-#### 1.2.3. Step Functions ワークフロー
+#### 1.1.3. Step Functionsワークフロー
 
-TEAMは5つの Step Functions State Machine で権限のライフサイクルを管理します。
+TEAMは5つの Step FunctionsState Machine で権限のライフサイクルを管理します。
 
 1. Approval State Machine: 申請者への通知、申請期限切れまで待機
 2. Schedule State Machine: 申請者への通知、権限利用開始日時まで待機
@@ -209,6 +210,125 @@ TEAMは5つの Step Functions State Machine で権限のライフサイクルを
 - ステータスが `rejected` か `cancelled` かを判定
 - 申請者/承認者への通知
 
+### 1.2. トラブルシューティング
+
+#### 1.2.1. 申請一覧に自分の申請が表示されない
+
+申請一覧に表示される申請には、自分自身が行った申請は表示されません。
+
+![approve_requests](/images/team/approver/approve_requests.jpg)
+
+申請一覧では、GraphQLクエリのフィルタ条件として`"email": {"ne": "ログインユーザーのメールアドレス"}`を指定しています。これにより、自分自身が申請したリクエストは除外されます。
+
+以下は実際のGraphQLクエリの抜粋です。
+
+```json
+{
+	"query": "query ListRequests($filter: ModelRequestsFilterInput, $limit: Int, $nextToken: String) {\n  listRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {\n    items {\n      id\n      email\n      accountId\n      accountName\n      role\n      roleId\n      startTime\n      duration\n      justification\n      status\n      comment\n      username\n      approver\n      approverId\n      approvers\n      approver_ids\n      revoker\n      revokerId\n      endTime\n      ticketNo\n      revokeComment\n      session_duration\n      createdAt\n      updatedAt\n      owner\n      __typename\n    }\n    nextToken\n    __typename\n  }\n}\n",
+	"variables": {
+		"filter": {
+			"and": [
+				{
+					"email": {
+						"ne": "your-name@example.com"
+					}
+				},
+				{
+					"status": {
+						"eq": "pending"
+					}
+				},
+				{
+					"approvers": {
+						"contains": "your-name@example.com"
+					}
+				}
+			]
+		},
+		"nextToken": null
+	}
+}
+```
+
+#### 1.2.2. 特定の権限セットが選択できない
+
+TEAMアプリケーションの申請画面に、特定の権限セットが表示されない場合があります。
+この理由は、[iam-identity-center-team\amplify\backend\function\teamGetPermissionSets\src\index.py]にあります。
+
+このコードでは、以下のロジックで権限セットをフィルタリングしています。
+
+1. TEAMが委任されたアカウントにデプロイされている場合（`deployed_in_mgmt == False`）
+2. AWS Organizationsの管理アカウントに割り当てられた権限セット（`mgmt_ps`）を除外（14行目）
+3. それ以外の権限セットのみを申請可能として表示
+
+結果として、以下の権限セットは申請画面に表示されません。
+
+- `AdministratorAccess`
+- `ReadOnlyAccess`
+- その他、AWS Organizationsの管理アカウントに割り当てられているAWS管理ポリシー
+
+💡 この制約の理由：
+
+AWS Organizationsの管理アカウント割り当てられている権限セットは、組織全体のセキュリティに重大な影響を与える可能性があります。TEAMはこのリスクを考慮し、管理アカウントに割り当てられた権限セットは一時的なアクセスに使用できないよう、意図的に制限しているのだと考えます。
+
+```python
+ 1  def handler(event, context):
+ 2      print(event)
+ 3      id = event['id']
+ 4      permissions = []
+ 5      mgmt_ps = get_mgmt_ps()
+ 6      deployed_in_mgmt = True if ACCOUNT_ID == mgmt_account_id else False
+ 7      try:
+ 8          p = client.get_paginator('list_permission_sets')
+ 9          paginator = p.paginate(InstanceArn=sso_instance['InstanceArn'])
+10
+11          for page in paginator:
+12              for permission in page['PermissionSets']:
+13                  if not deployed_in_mgmt:
+14                      if permission not in mgmt_ps:
+15                          permissions.append(getPS(permission))
+16                  else:
+17                      permissions.append(getPS(permission))
+18          permissions =  sorted(permissions, key=itemgetter('Name')) 
+19
+20          result = {
+21              'id': id,
+22              'permissions': permissions
+23          }    
+24          print(result)    
+25          return publishPermissions(result) 
+26      except ClientError as e:
+27          print(e.response['Error']['Message'])
+```
+
+```python
+# AWS Organizationsの管理アカウントIDを取得
+# see: https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/sso-admin/client/list_permission_sets_provisioned_to_account.html
+def get_mgmt_account_id():
+    org_client = boto3.client('organizations')
+    try:
+        response = org_client.describe_organization()
+        return response['Organization']['MasterAccountId']
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+
+mgmt_account_id = get_mgmt_account_id()
+
+# AWS Organizationsの管理アカウントにプロビジョニングされた権限セットを取得
+def get_mgmt_ps():
+    try:
+        p = client.get_paginator('list_permission_sets_provisioned_to_account')
+        paginator = p.paginate(
+            InstanceArn=sso_instance['InstanceArn'],
+            AccountId=mgmt_account_id,)
+        all_permissions = []
+        for page in paginator:
+            all_permissions.extend(page["PermissionSets"])
+        return all_permissions
+    except ClientError as e:
+        print(e.response['Error']['Message'])
+        return []
+```
 
 ## 📖 まとめ
 
