@@ -1,5 +1,5 @@
 ---
-title: "TEAM for AWS IAM Identity Center 導入ガイド ──(2/4) デプロイ" # 記事のタイトル
+title: "TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
@@ -12,6 +12,21 @@ published: false
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+
+本ガイドは、全6部構成となっています。
+
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./team-01-overview.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./team-02-deployment-guide.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./team-03-deepdive.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./team-04-guides-03-auditor.md)
+
+本ページでは、TEAMのデプロイ方法について解説します。
+
+**📌 対象読者**
+
+- デプロイ担当: TEAM アプリケーションを AWS アカウントにデプロイする技術者
 
 ## 👀 Contents<!-- omit in toc -->
 
@@ -50,8 +65,6 @@ Temporary elevated access management (TEAM) for AWS IAM Identity Center とは�
 ![TEAM architecture](/images/team/archi.png)
 
 ** 画像は TEAM の GitHub より引用
-
-本ページでは、TEAMのデプロイ方法について解説します。
 
 ## 2. デプロイ方法
 
@@ -569,5 +582,3 @@ TEAMに関するさらに詳しい情報は、以下の公式リソースを参�
 - [GitHub リポジトリ](https://github.com/aws-samples/iam-identity-center-team/tree/main)
 - [AWS Security Blog](https://aws.amazon.com/jp/blogs/security/temporary-elevated-access-management-with-iam-identity-center/)
 - [builders.flash 記事（AWS Community Hero: 山口 正徳氏）](https://aws.amazon.com/jp/builders-flash/202505/temporary-elevated-access-management/)
-
-TEAMは、AWS環境におけるゼロスタンディング特権の実現と、特権アクセス管理の自動化・可視化を実現する強力なソリューションです。本記事が、皆様のセキュリティ向上とコンプライアンス対応の一助となれば幸いです。

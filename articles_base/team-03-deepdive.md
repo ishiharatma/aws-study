@@ -6,6 +6,21 @@
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
 
+本ガイドは、全6部構成となっています。
+
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(1/6) 概要](./team-01-overview.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロイ](./team-02-deployment-guide.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive](./team-03-deepdive.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) ガイドライン(1)申請者/承認者向け](./team-04-guides-01-requestor-and-approver.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(6/6) ガイドライン(2)管理者向け](./team-04-guides-02-administrator.md)
+- [TEAM for AWS IAM Identity Center 導入ガイド ──(7/6) ガイドライン(3)監査者向け](./team-04-guides-03-auditor.md)
+
+本ページでは、TEAMの仕組みを詳しく解説します。
+
+**📌 対象読者**
+
+- デプロイ担当: TEAM アプリケーションを AWS アカウントにデプロイする技術者
+
 ## 👀 Contents<!-- omit in toc -->
 
 <!-- Duration: 00:01:00 -->
@@ -27,8 +42,6 @@ Temporary elevated access management (TEAM) for AWS IAM Identity Center とは�
 
 ![TEAM architecture](/images/team/archi.png)
 
-本ページでは、TEAMの仕組みを詳しく解説します。
-
 ## 2. アーキテクチャの詳細
 
 ![TEAM architecture](/images/team/process-flow.png)
@@ -46,7 +59,7 @@ TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全�
 - Approver Table: 承認者ポリシーの定義を管理
 - Eligibility Table: 申請可能な権限の定義を管理
 - Settings Table: アプリケーション設定を管理
-- Sessions Table: CloudTrail Lake に StartQuery APIを実行したクエリIDを管理。取得結果をポーリングするために利用。TTL有効（項目：`expireAt`）
+- Sessions Table: CloudTrail Lake に StartQuery API 実行したクエリIDを管理。取得結果をポーリングするために利用。TTL有効（項目：`expireAt`）
 
 #### 2.2.2. Wait ステートの実装詳細
 
@@ -61,7 +74,7 @@ Waitの指定は、相対時間と絶対時間があります。
 - 絶対時間（ISO 8601）: `TimestampPath`
   - 例：2024-08-18T17:33:00Z
 
-指定できる最大待機時間は、[Standard Workflows]が１年で、[Express Workflows]が５分となります。(厳密には、ステートマシン全体の実行時間)
+指定できる最大待機時間は、[Standard Workflows]が1年で、[Express Workflows]が5分となります。(厳密には、ステートマシン全体の実行時間)
 TEAMでは、[Standard Workflows]を使用していますので最大時間は１年（8,760時間）となります。
 ただし、TEAMでは最大時間は「8000時間」に制限をしています。
 
@@ -195,8 +208,15 @@ TEAMは5つのStep Functions State Machineで権限のライフサイクルを�
 
 ## 📖 まとめ
 
-本記事では、「TEAM（Temporary Elevated Access Management）」の実装について深堀しました。
+本記事では、TEAMの内部実装について詳しく解説しました。
 
+TEAMのコアとなる仕組みは以下の3つです。
+
+1. DynamoDBによるデータ管理: 5つのテーブルで申請情報、承認者、権限定義を管理
+2. Step Functionsによるライフサイクル管理: 5つのState Machineで権限の承認から削除までを自動化
+3. Waitステートによる時間制御: 最大8000時間（約11ヶ月）の柔軟な権限期間設定
+
+特に、Step FunctionsのWaitステートを活用した実装は、AWSのサーバーレスアーキテクチャを最大限に活用した設計です。申請期限、権限開始時刻、権限終了時刻をすべて自動管理することで、運用負荷を大幅に削減しています。
 
 ### 参考リソース
 
