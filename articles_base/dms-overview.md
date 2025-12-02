@@ -127,7 +127,7 @@ DMSがサポートする主なデータベースエンジンは以下のとお�
 
 詳細なサポート状況については、[Sources for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html) / [Targets for data migration](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.html)と[DMS Serverless components - Supported Endpoints](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.SupportedVersions)を参照してください。
 
-※ *付はサーバーレス
+※ *付はサーバーレスインスタンスがサポートするものです
 
 | データベースエンジン | ソース | ターゲット | *ソース | *ターゲット |
 | :--- | :---: | :---: | :---: | :---: |
