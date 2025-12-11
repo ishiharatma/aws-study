@@ -3,6 +3,7 @@ title: "【初心者向け】Amazon VPC Lattice 入門！完全ガイド" # 記�
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
+emoji: "🕸️"
 ---
 
 <!--# Amazon VPC Lattice<!-- omit in toc -->

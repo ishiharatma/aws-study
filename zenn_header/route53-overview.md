@@ -3,5 +3,6 @@ title: "【初心者向け】Amazon Route 53 入門！完全ガイド" # 記事�
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: true
+emoji: "🧭"
 ---
 

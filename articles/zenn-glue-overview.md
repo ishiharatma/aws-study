@@ -3,6 +3,7 @@ title: "【初心者向け】AWS Glue 入門！完全ガイド" # 記事のタ�
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
+emoji: "🦠"
 ---
 
 # AWS Glue<!-- omit in toc -->

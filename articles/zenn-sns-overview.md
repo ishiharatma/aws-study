@@ -3,6 +3,7 @@ title: "【初心者向け】Amazon Simple Notification Service (SNS) 入門！�
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: true
+emoji: "🗣"
 ---
 
 # Amazon Simple Notification Service (SNS)<!-- omit in toc -->

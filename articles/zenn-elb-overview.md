@@ -3,6 +3,7 @@ title: "【初心者向け】Elastic Load Balancing(ELB) 入門！完全ガイ�
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: true
+emoji: "⚖"
 ---
 
 # Elastic Load Balancing(ELB)<!-- omit in toc -->

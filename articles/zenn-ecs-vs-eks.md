@@ -3,6 +3,7 @@ title: "【初心者向け】Amazon ECS と EKS 入門！完全ガイド" # 記�
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: true
+emoji: "🆚"
 ---
 
 # ECS（Elastic Container Service）と EKS（Elastic Kubernetes Service）<!-- omit in toc -->
