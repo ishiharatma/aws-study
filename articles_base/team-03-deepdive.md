@@ -5,6 +5,7 @@
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+手順画像などの一部は公式ドキュメントの画像を流用しております。
 
 ![TEAM](/images/team/home_page.png)
 
@@ -49,6 +50,8 @@
 
 #### 1.1.1. データストア (DynamoDB)
 
+![dynamodb](/images/team/archi-dynamodb.png)
+
 TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全体を管理します。
 以下の5つのテーブルで構成されています。
 
@@ -69,7 +72,7 @@ Waitステートの指定は、相対時間と絶対時間があります。
 - 相対時間（秒）: `SecondsPath`
   - 0～99,999,999
 - 絶対時間（ISO 8601）: `TimestampPath`
-  - 例：2024-08-18T17:33:00Z
+  - 例: 2024-08-18T17:33:00Z
 
 指定できる最大待機時間は、[Standard Workflows]が1年で、[Express Workflows]が5分となります。(厳密には、ステートマシン全体の実行時間)
 TEAMでは、[Standard Workflows]を使用していますので最大時間は1年（8,760時間）となります。
@@ -84,7 +87,7 @@ Maximum duration: Determines the maximum elevated access duration in hours
 
 コード上でも以下の実装が確認できます。
 
-[iam-identity-center-team/src/components/Admin/Eligible.js](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Admin/Eligible.js)
+[iam-identity-center-team/src/components/Admin/Eligible.js#L537](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Admin/Eligible.js#L537)
 
 ```javascript
 if (!duration || isNaN(duration) || Number(duration) > 8000 || Number(duration) < 1) {
@@ -94,6 +97,8 @@ if (!duration || isNaN(duration) || Number(duration) > 8000 || Number(duration) 
 ```
 
 #### 1.1.3. Step Functionsワークフロー
+
+![sfn](/images/team/archi-sfn.png)
 
 TEAMは5つの Step FunctionsState Machine で権限のライフサイクルを管理します。
 
@@ -242,10 +247,18 @@ TEAMは5つの Step FunctionsState Machine で権限のライフサイクルを�
 }
 ```
 
+参考:
+
+[iam-identity-center-team/src/graphql
+/queries.js>ListRequests](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/graphql/queries.js#L36)
+
+[iam-identity-center-team/src/components/Approvals
+/Approvals.js#L234](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Approvals/Approvals.js#L234)
+
 #### 1.2.2. 特定の権限セットが選択できない
 
 TEAMアプリケーションの申請画面に、特定の権限セットが表示されない場合があります。
-この理由は、[iam-identity-center-team\amplify\backend\function\teamGetPermissionSets\src\index.py]にあります。
+この理由は、[iam-identity-center-team\amplify\backend\function\teamGetPermissionSets\src\index.py](https://github.com/aws-samples/iam-identity-center-team/blob/main/amplify/backend/function/teamGetPermissionSets/src/index.py#L120)にあります。
 
 このコードでは、以下のロジックで権限セットをフィルタリングしています。
 
@@ -259,7 +272,7 @@ TEAMアプリケーションの申請画面に、特定の権限セットが表�
 - `ReadOnlyAccess`
 - その他、AWS Organizationsの管理アカウントに割り当てられているAWS管理ポリシー
 
-💡 この制約の理由：
+💡 この制約の理由: 
 
 AWS Organizationsの管理アカウント割り当てられている権限セットは、組織全体のセキュリティに重大な影響を与える可能性があります。TEAMはこのリスクを考慮し、管理アカウントに割り当てられた権限セットは一時的なアクセスに使用できないよう、意図的に制限しているのだと考えます。
 

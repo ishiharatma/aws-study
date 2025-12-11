@@ -5,6 +5,7 @@
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+手順画像などの一部は公式ドキュメントの画像を流用しております。
 
 ![TEAM](/images/team/home_page.png)
 
@@ -70,10 +71,10 @@ see: [TEAM Auditor guide](https://aws-samples.github.io/iam-identity-center-team
 
 **承認履歴**では、以下を確認できます。
 
-- 誰が（Who）：申請者と承認者
-- いつ（When）：申請日時と承認日時
-- 何を（What）：アカウントとロール
-- なぜ（Why）：Justification（申請理由）
+- 誰が（Who）: 申請者と承認者
+- いつ（When）: 申請日時と承認日時
+- 何を（What）: アカウントとロール
+- なぜ（Why）: Justification（申請理由）
 
 **セッションアクティビティ**では、CloudTrail Lakeと連携して以下を追跡できます。
 
