@@ -3,7 +3,7 @@ title: "TEAM for AWS IAM Identity Center 導入ガイド ──(2/6) デプロ�
 emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 <!--# Temporary elevated access management (TEAM) for AWS IAM Identity Center <!-- omit in toc -->
@@ -13,6 +13,7 @@ published: false
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+手順画像などの一部は公式ドキュメントの画像を流用しております。
 
 ![TEAM](/images/team/home_page.png)
 
@@ -37,23 +38,24 @@ published: false
 - [1. デプロイ方法](#1-デプロイ方法)
   - [デプロイの流れ](#デプロイの流れ)
   - [デプロイ前準備](#デプロイ前準備)
-    - [ステップ１： AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任](#ステップ１-aws-iam-identity-centerの管理アカウントからteam管理アカウントへの権限委任)
-    - [ステップ２：personal access token (classic) の作成とAWS Secrets Managerへの登録](#ステップ２personal-access-token-classic-の作成とaws-secrets-managerへの登録)
-    - [ステップ３：TEAMで利用する IAM Identity Center グループの作成](#ステップ３teamで利用する-iam-identity-center-グループの作成)
-    - [ステップ４：CloudTrail Lake EventDataStoreの作成](#ステップ４cloudtrail-lake-eventdatastoreの作成)
+    - [ステップ１:  AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任](#ステップ１--aws-iam-identity-centerの管理アカウントからteam管理アカウントへの権限委任)
+    - [ステップ２: personal access token (classic) の作成とAWS Secrets Managerへの登録](#ステップ２-personal-access-token-classic-の作成とaws-secrets-managerへの登録)
+    - [ステップ３: TEAMで利用する IAM Identity Center グループの作成](#ステップ３-teamで利用する-iam-identity-center-グループの作成)
+    - [ステップ４: CloudTrail Lake EventDataStoreの作成](#ステップ４-cloudtrail-lake-eventdatastoreの作成)
   - [デプロイ](#デプロイ)
-    - [ステップ１：GitHubリポジトリのクローン](#ステップ１githubリポジトリのクローン)
-    - [ステップ２：デプロイ用パラメータの作成](#ステップ２デプロイ用パラメータの作成)
-    - [ステップ３：デプロイ実行](#ステップ３デプロイ実行)
-    - [ステップ４：IAM Identity Center SAML Integrationの設定](#ステップ４iam-identity-center-saml-integrationの設定)
-    - [ステップ５：Amazon Cognitoの設定](#ステップ５amazon-cognitoの設定)
-    - [ステップ６：Amazon SESの設定](#ステップ６amazon-sesの設定)
+    - [ステップ１: GitHubリポジトリのクローン](#ステップ１-githubリポジトリのクローン)
+      - [💡Tips](#tips)
+    - [ステップ２: デプロイ用パラメータの作成](#ステップ２-デプロイ用パラメータの作成)
+    - [ステップ３: デプロイ実行](#ステップ３-デプロイ実行)
+    - [ステップ４: IAM Identity Center SAML Integrationの設定](#ステップ４-iam-identity-center-saml-integrationの設定)
+    - [ステップ５: Amazon Cognitoの設定](#ステップ５-amazon-cognitoの設定)
+    - [ステップ６: Amazon SESの設定](#ステップ６-amazon-sesの設定)
 - [2. デプロイ後のステップ](#2-デプロイ後のステップ)
 - [3. アンインストール](#3-アンインストール)
-    - [ステップ１：アンインストール](#ステップ１アンインストール)
-    - [ステップ２：S3バケットの削除](#ステップ２s3バケットの削除)
-    - [ステップ３：IAM Identity Center から TEAM アプリの削除](#ステップ３iam-identity-center-から-team-アプリの削除)
-    - [ステップ４：TEAMで利用していた IAM Identity Center グループの削除](#ステップ４teamで利用していた-iam-identity-center-グループの削除)
+    - [ステップ１: アンインストール](#ステップ１-アンインストール)
+    - [ステップ２: S3バケットの削除](#ステップ２-s3バケットの削除)
+    - [ステップ３: IAM Identity Center から TEAM アプリの削除](#ステップ３-iam-identity-center-から-team-アプリの削除)
+    - [ステップ４: TEAMで利用していた IAM Identity Center グループの削除](#ステップ４-teamで利用していた-iam-identity-center-グループの削除)
 - [📖 まとめ](#-まとめ)
   - [デプロイの流れ](#デプロイの流れ-1)
   - [次のステップ](#次のステップ)
@@ -77,9 +79,9 @@ TEAMアプリケーションをTEAM管理用のAWSアカウントへデプロイ
 
 ### デプロイ前準備
 
-#### ステップ１： AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任
+#### ステップ１:  AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#dedicated-team-account)
+see: TEAM Deployment guide > [Dedicated TEAM account](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#dedicated-team-account)
 
 **IAM Identity Centerの管理アカウントから、**以下の委任を実行します。
 
@@ -148,14 +150,14 @@ aws organizations list-delegated-services-for-account \
 以下のように出力されます。
 
 ```bash
-#DELEGATEDSERVICES       2023-06-29T14:17:46.624000+00:00        account.amazonaws.com
-#DELEGATEDSERVICES       2023-06-25T15:11:09.553000+00:00        cloudtrail.amazonaws.com
-#DELEGATEDSERVICES       2023-06-25T14:56:02.172000+00:00        sso.amazonaws.com
+#DELEGATEDSERVICES       2023-0X-ZZT12:34:56.123456+00:00        account.amazonaws.com
+#DELEGATEDSERVICES       2023-0X-ZZT11:22:33.123456+00:00        cloudtrail.amazonaws.com
+#DELEGATEDSERVICES       2023-0X-ZZT22:33:44.123456+00:00        sso.amazonaws.com
 ```
 
-#### ステップ２：personal access token (classic) の作成とAWS Secrets Managerへの登録
+#### ステップ２: personal access token (classic) の作成とAWS Secrets Managerへの登録
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#aws-secrets-manager)
+see: TEAM Deployment guide > [AWS Secrets Manager](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#aws-secrets-manager)
 
 このTEAMアプリケーションをデプロイするフローの中で、GitHubリポジトリのソースを取得する必要があります。そのためのアクセストークンを発行します。
 
@@ -165,10 +167,8 @@ see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-t
 
 ![WS000930.jpg](/images/team/deploy/WS000930.jpg)
 
-⚠️　現状は、personal access token (classic)しか対応していません。そのため、アクセストークンは個人ユーザー管理になっています。（下記Issue参照）
+⚠️　現状は、personal access token (classic)しか対応していません。そのため、アクセストークンは個人ユーザー管理になっています。（Issue参照>[Why classic GitHub tokens are required?](https://github.com/aws-samples/iam-identity-center-team/issues/401)）
 
-Why classic GitHub tokens are required?
-https://github.com/aws-samples/iam-identity-center-team/issues/401
 
 発行したアクセストークンを**TEAM管理アカウントの**シークレットマネージャーに登録します。
 
@@ -179,7 +179,7 @@ aws secretsmanager create-secret \
     --name "$SECRET_NAME" \
     --description "GitHub repository credentials for TEAM application" \
     --secret-string '{"url": "https://github.com/your-repository-name/iam-identity-center-team.git", "AccessToken": "xxxxxxx"}' \
-    --tags Key=Project,Value=YOUR_PROJECT_NAME Key=Env,Value="YOUR_ENV" \
+    --tags Key=Project,Value="YOUR_PROJECT_NAME" Key=Env,Value="YOUR_ENV" \
     --region "ap-northeast-1"
 ```
 
@@ -189,11 +189,11 @@ aws secretsmanager update-secret \
     --secret-id "$SECRET_NAME" \
     --description "GitHub repository credentials for TEAM application" \
     --secret-string '{"url": "https://github.com/your-repository-name/iam-identity-center-team.git","AccessToken": "xxxxxxx"}' \
-    --tags Key=Project,Value=YOUR_PROJECT_NAME Key=Env,Value="YOUR_ENV" \
+    --tags Key=Project,Value="YOUR_PROJECT_NAME" Key=Env,Value="YOUR_ENV" \
     --region "ap-northeast-1"
 ```
 
-#### ステップ３：TEAMで利用する IAM Identity Center グループの作成
+#### ステップ３: TEAMで利用する IAM Identity Center グループの作成
 
 **TEAM管理アカウント**のCloudShellまたは、プロファイル名を指定してローカルからAWS CLIにて実行します。
 
@@ -248,7 +248,7 @@ aws identitystore list-groups --output table \\
 #+------------------------------+---------------------------------------+-----------------------+
 ```
 
-#### ステップ４：CloudTrail Lake EventDataStoreの作成
+#### ステップ４: CloudTrail Lake EventDataStoreの作成
 
 **TEAM管理アカウント**のCloudShellまたは、プロファイル名を指定してローカルからAWS CLIにて実行します。
 
@@ -275,29 +275,71 @@ aws cloudtrail delete-event-data-store \
 
 ### デプロイ
 
-#### ステップ１：GitHubリポジトリのクローン
+#### ステップ１: GitHubリポジトリのクローン
 
 ```bash
 git clone https://github.com/aws-samples/iam-identity-center-team.git
 ```
 
-#### ステップ２：デプロイ用パラメータの作成
+##### 💡Tips
+
+公式のデプロイ手順では、パラメータファイルは`parameters.sh`固定を想定したものとなっております。
+ただ、検証中のTEAM管理アカウントと本番導入のTEAMアカウントが異なる場合など、環境別でパラメータファイルを切り替えたい場合があります。
+
+そのような場合、以下のような関数を呼び出すように変更したカスタムシェルにすることで対応が可能です。
+
+実装例: 
+
+```bash
+function load_parameters_file() {
+    local parameters_file="${PARAMETERS_FILE:-${DEFAULT_PARAMETERS_FILE:-"./parameters.sh"}}"
+    
+    if [ ! -f "$parameters_file" ]; then
+        echo "エラー: パラメータファイル '$parameters_file' が見つかりません。" >&2
+        exit 1
+    fi
+    
+    echo "パラメータファイルを読み込み中: $parameters_file"
+    # shellcheck source=/dev/null
+    . "$parameters_file"
+}
+```
+
+```bash
+# Before
+# パラメータファイルの読み込み
+. "./parameters.sh"
+
+# After
+# パラメータファイルの読み込み
+load_parameters_file
+```
+
+⚠️ 本手順で示す画像では、環境別パラメータファイルを指定できる方法で実行した画像となっています。実行コマンドは異なりますが、画面表示内容は同一です。
+
+#### ステップ２: デプロイ用パラメータの作成
 
 すでにデプロイ用パラメータが作成済みの場合は本手順をスキップします。
 
 ```bash
 cd deployment
-cp -n parameters-dev.sh parameters_YOUR_ENV.sh
+cp -n parameters-template.sh parameters.sh
+
+#環境別パラメータファイルを使う場合
+#cp -n parameters-template.sh parameters_YOUR_ENV.sh
 ```
 
 コピーしたデプロイ用パラメータファイルを修正します。
 
-#### ステップ３：デプロイ実行
+#### ステップ３: デプロイ実行
 
 作成したデプロイ用パラメータファイルを使用してデプロイを実行します。
 
 ```bash
-PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./deploy_custom.sh
+./deploy.sh
+
+#環境別パラメータファイルを使う場合
+#PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./deploy_custom.sh
 ```
 
 ![WS000938.jpg](/images/team/deploy/WS000938.jpg)
@@ -307,9 +349,9 @@ PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./deploy_custom.sh
 - TEAM-IDC-APP
 - amplify-teamidcapp-main-xxxxx
 
-#### ステップ４：IAM Identity Center SAML Integrationの設定
+#### ステップ４: IAM Identity Center SAML Integrationの設定
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html)
+see: TEAM Deployment guide > [IAM Identity Center Integration](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html)
 
 ステップ３ですべてのスタックが「CREATE_COMPLETE」になっていることを確認してから実行します。
 
@@ -318,7 +360,10 @@ see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-t
 以下のコマンドを実行します。
 
 ```bash
-PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./integration_custom.sh
+./integrations.sh
+
+#環境別パラメータファイルを使う場合
+#PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./integration_custom.sh
 ```
 
 ![WS000936.jpg](/images/team/deploy/WS000936.jpg)
@@ -326,7 +371,7 @@ PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./integration_custom.sh
 実行すると、以下のURLが払い出されます。この値は次の手順で使用しますので、メモしておきます。
 
 ```bash
-applicationStartURL: https://xxxxxx-main.auth.amazoncognito.com/authorize?client_id=xxxxxx&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://main.d1s8z5724fsfj7-.amplifyapp.com/&idp_identifier=team
+applicationStartURL: https://xxxxxx-main.auth.amazoncognito.com/authorize?client_id=xxxxxx&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://xxxxx.amplifyapp.com/&idp_identifier=team
 applicationACSURL: https://xxxxxx-main.auth.amazoncognito.com/saml2/idpresponse
 applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
 ```
@@ -346,12 +391,12 @@ applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
 - 作成したアプリケーションを開きます。
 - [アクション＞属性マッピング]を開きます。
     - `Subject`と`Email`を設定します。
+        - Subject - ${user:subject} - persistent
+        - Email - ${user:email} - basic
         
         ![WS000946.jpg](/images/team/deploy/WS000946.jpg)
         
-        - 参考: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html#configure-attribute-mapping
-        - Subject - ${user:subject} - persistent
-        - Email - ${user:email} - basic
+        - 参考: [Configure Attribute Mapping](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html#configure-attribute-mapping)
     - [変更の保存]をクリックし、保存します。
 - [割り当てられたユーザーとグループ]にTEAM用のグループ(`TEAM-`で始まるグループ名)をすべて割り当てます。
     
@@ -362,9 +407,9 @@ applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
     - ⚠️ アプリケーションにグループを割り当ててもグループのメンバーとして登録されていなければ、アプリケーションを利用できません。「02. Administrator Guide」を参照し、グループにメンバーを割り当ててください。
     - ⚠️ グループに割り当てても、AWS access portalをログアウトしてから再ログインするまで、アプリケーションが表示されない場合があります。表示されない場合は、ログアウトしてください。
 
-#### ステップ５：Amazon Cognitoの設定
+#### ステップ５: Amazon Cognitoの設定
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/cognito.html)
+see: TEAM Deployment guide > [Cognito user pool configuration](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/cognito.html)
 
 以下のコマンドでコピーしたJSONファイルを開き、`MetadataURL`に`IAM Identity Center SAML メタデータファイル`のURLを記載します。
 すでにファイルが存在する場合は、そのまま編集してください。
@@ -385,18 +430,19 @@ JSONファイルは以下のようになっています。
 以下のコマンドで設定を実行します。
 
 ```bash
-PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./cognito_custom.sh
+./cognito.sh
+
+#環境別パラメータファイルを使う場合
+#COGNITO_IDP_JSON=details_YOUR_ENV.json PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./cognito_custom.sh
 ```
 
 画面出力が複数行でますので、コンソール画面では`q`を押して表示を終了させます。
 
 ![WS000937.jpg](/images/team/deploy/WS000937.jpg)
 
-#### ステップ６：Amazon SESの設定
+#### ステップ６: Amazon SESの設定
 
-see: TEAM Deployment guide
-
-see: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/notifications.html#email-notification-via-amazon-ses
+see: TEAM Deployment guide > [Email notification via Amazon SES](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/notifications.html#email-notification-via-amazon-ses)
 
 **TEAM管理アカウント**のAWSマネジメントコンソールから、[Amazon SES > 設定: ID]を開きます。
 
@@ -421,9 +467,9 @@ TEAMアプリケーションをアンインストールする手順です。`des
 
 ただし、Amplify デプロイメントの S3 バケットが削除されないため、手動での削除が必要です。s3バケット名の形式はamplify-teamidcapp-main-xxxx-deploymentです。
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/uninstall.html)
+see: TEAM Deployment guide > [Uninstall TEAM solution](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/uninstall.html)
 
-#### ステップ１：アンインストール
+#### ステップ１: アンインストール
 
 カレントディレクトリが`deployment` ではない場合は移動します。
 
@@ -439,7 +485,7 @@ PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./destroy_custom.sh
 
 ![deployimage02](/images/team/deploy/image_02.png)
 
-：
+: 
 
 ![deployimage03](/images/team/deploy/image_03.png)
 
@@ -449,7 +495,7 @@ AWSマネジメントコンソールで、[CloudFormation]にアクセスする�
 
 ⚠️アンインストール前に、権限委任の解除が実施されていると「CloudTrail Lake EventDataStore」の削除が権限不足で失敗し、スタックの削除にも失敗します。この場合、リソースは残したうえでスタックの強制削除を行ってください。残ってしまった「CloudTrail Lake EventDataStore」は、IAM Identity Centerの管理アカウント上から手動で削除します。
 
-#### ステップ２：S3バケットの削除
+#### ステップ２: S3バケットの削除
 
 S3バケットを削除します。
 
@@ -512,7 +558,7 @@ done
 
 ![image06](/images/team/deploy/image_06.png)
 
-#### ステップ３：IAM Identity Center から TEAM アプリの削除
+#### ステップ３: IAM Identity Center から TEAM アプリの削除
 
 1. **TEAM管理アカウント**のAWSマネジメントコンソールを開きます
 2. IAM Identity Centerコンソールにアクセスします
@@ -535,7 +581,7 @@ done
 
 ⚠️　ステップ４を先に実行した場合はエラーになります。このエラーは、グループとの紐づけ情報が不正になっているためですので、「割り当てられたユーザーとグループ」をすべて削除することで、削除できるようになります。
 
-#### ステップ４：TEAMで利用していた IAM Identity Center グループの削除
+#### ステップ４: TEAMで利用していた IAM Identity Center グループの削除
 
 **TEAM管理アカウント**のCloudShell上に貼り付けて実行します。
 

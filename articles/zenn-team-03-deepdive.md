@@ -3,7 +3,7 @@ title: "TEAM for AWS IAM Identity Center 導入ガイド ──(3/6) DeepDive" #
 emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 <!--# Temporary elevated access management (TEAM) for AWS IAM Identity Center <!-- omit in toc -->
@@ -13,6 +13,7 @@ published: false
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+手順画像などの一部は公式ドキュメントの画像を流用しております。
 
 ![TEAM](/images/team/home_page.png)
 
@@ -57,6 +58,8 @@ published: false
 
 #### 1.1.1. データストア (DynamoDB)
 
+![dynamodb](/images/team/archi-dynamodb.png)
+
 TEAMは、AWS DynamoDBを使用して、権限申請のライフサイクル全体を管理します。
 以下の5つのテーブルで構成されています。
 
@@ -77,7 +80,7 @@ Waitステートの指定は、相対時間と絶対時間があります。
 - 相対時間（秒）: `SecondsPath`
   - 0～99,999,999
 - 絶対時間（ISO 8601）: `TimestampPath`
-  - 例：2024-08-18T17:33:00Z
+  - 例: 2024-08-18T17:33:00Z
 
 指定できる最大待機時間は、[Standard Workflows]が1年で、[Express Workflows]が5分となります。(厳密には、ステートマシン全体の実行時間)
 TEAMでは、[Standard Workflows]を使用していますので最大時間は1年（8,760時間）となります。
@@ -92,7 +95,7 @@ Maximum duration: Determines the maximum elevated access duration in hours
 
 コード上でも以下の実装が確認できます。
 
-[iam-identity-center-team/src/components/Admin/Eligible.js](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Admin/Eligible.js)
+[iam-identity-center-team/src/components/Admin/Eligible.js#L537](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Admin/Eligible.js#L537)
 
 ```javascript
 if (!duration || isNaN(duration) || Number(duration) > 8000 || Number(duration) < 1) {
@@ -102,6 +105,8 @@ if (!duration || isNaN(duration) || Number(duration) > 8000 || Number(duration) 
 ```
 
 #### 1.1.3. Step Functionsワークフロー
+
+![sfn](/images/team/archi-sfn.png)
 
 TEAMは5つの Step FunctionsState Machine で権限のライフサイクルを管理します。
 
@@ -224,24 +229,20 @@ TEAMは5つの Step FunctionsState Machine で権限のライフサイクルを�
 
 ```json
 {
-	"query": "query ListRequests($filter: ModelRequestsFilterInput, $limit: Int, $nextToken: String) {\n  listRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {\n    items {\n      id\n      email\n      accountId\n      accountName\n      role\n      roleId\n      startTime\n      duration\n      justification\n      status\n      comment\n      username\n      approver\n      approverId\n      approvers\n      approver_ids\n      revoker\n      revokerId\n      endTime\n      ticketNo\n      revokeComment\n      session_duration\n      createdAt\n      updatedAt\n      owner\n      __typename\n    }\n    nextToken\n    __typename\n  }\n}\n",
+	"query": "query ListRequests($filter: ModelRequestsFilterInput, $limit: Int, $nextToken: String) {\n
+  listRequests(filter: $filter, limit: $limit, nextToken: $nextToken) {\n items {\nid\nemail\naccountId\naccountName...}
+  \n}\n",
 	"variables": {
 		"filter": {
 			"and": [
 				{
-					"email": {
-						"ne": "your-name@example.com"
-					}
+					"email": {"ne": "your-name@example.com"}
 				},
 				{
-					"status": {
-						"eq": "pending"
-					}
+					"status": {"eq": "pending"}
 				},
 				{
-					"approvers": {
-						"contains": "your-name@example.com"
-					}
+					"approvers": {"contains": "your-name@example.com"}
 				}
 			]
 		},
@@ -250,15 +251,45 @@ TEAMは5つの Step FunctionsState Machine で権限のライフサイクルを�
 }
 ```
 
+参考:
+
+[iam-identity-center-team/src/graphql
+/queries.js>ListRequests](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/graphql/queries.js#L36)
+
+[iam-identity-center-team/src/components/Approvals
+/Approvals.js#L234](https://github.com/aws-samples/iam-identity-center-team/blob/main/src/components/Approvals/Approvals.js#L234)
+
 #### 1.2.2. 特定の権限セットが選択できない
 
 TEAMアプリケーションの申請画面に、特定の権限セットが表示されない場合があります。
-この理由は、[iam-identity-center-team\amplify\backend\function\teamGetPermissionSets\src\index.py]にあります。
+この理由は、[iam-identity-center-team\amplify\backend\function\teamGetPermissionSets\src\index.py#L120](https://github.com/aws-samples/iam-identity-center-team/blob/main/amplify/backend/function/teamGetPermissionSets/src/index.py#L120)にあります。
+
+```python
+109 def handler(event, context):
+110     print(event)
+111     id = event['id']
+112     permissions = []
+113     mgmt_ps = get_mgmt_ps()
+114     deployed_in_mgmt = True if ACCOUNT_ID == mgmt_account_id else False
+115     try:
+116         p = client.get_paginator('list_permission_sets')
+117         paginator = p.paginate(InstanceArn=sso_instance['InstanceArn'])
+118
+119          for page in paginator:
+120              for permission in page['PermissionSets']:
+121                  if not deployed_in_mgmt:
+122                      if permission not in mgmt_ps:
+123                          permissions.append(getPS(permission))
+124                  else:
+125                      permissions.append(getPS(permission))
+126          permissions =  sorted(permissions, key=itemgetter('Name')) 
+:
+```
 
 このコードでは、以下のロジックで権限セットをフィルタリングしています。
 
 1. TEAMが委任されたアカウントにデプロイされている場合（`deployed_in_mgmt == False`）
-2. AWS Organizationsの管理アカウントに割り当てられた権限セット（`mgmt_ps`）を除外（14行目）
+2. AWS Organizationsの管理アカウントに割り当てられた権限セット（`mgmt_ps`）を除外（122行目）
 3. それ以外の権限セットのみを申請可能として表示
 
 結果として、以下の権限セットは申請画面に表示されません。
@@ -267,39 +298,9 @@ TEAMアプリケーションの申請画面に、特定の権限セットが表�
 - `ReadOnlyAccess`
 - その他、AWS Organizationsの管理アカウントに割り当てられているAWS管理ポリシー
 
-💡 この制約の理由：
+💡 この制約の理由: 
 
 AWS Organizationsの管理アカウント割り当てられている権限セットは、組織全体のセキュリティに重大な影響を与える可能性があります。TEAMはこのリスクを考慮し、管理アカウントに割り当てられた権限セットは一時的なアクセスに使用できないよう、意図的に制限しているのだと考えます。
-
-```python
- 1  def handler(event, context):
- 2      print(event)
- 3      id = event['id']
- 4      permissions = []
- 5      mgmt_ps = get_mgmt_ps()
- 6      deployed_in_mgmt = True if ACCOUNT_ID == mgmt_account_id else False
- 7      try:
- 8          p = client.get_paginator('list_permission_sets')
- 9          paginator = p.paginate(InstanceArn=sso_instance['InstanceArn'])
-10
-11          for page in paginator:
-12              for permission in page['PermissionSets']:
-13                  if not deployed_in_mgmt:
-14                      if permission not in mgmt_ps:
-15                          permissions.append(getPS(permission))
-16                  else:
-17                      permissions.append(getPS(permission))
-18          permissions =  sorted(permissions, key=itemgetter('Name')) 
-19
-20          result = {
-21              'id': id,
-22              'permissions': permissions
-23          }    
-24          print(result)    
-25          return publishPermissions(result) 
-26      except ClientError as e:
-27          print(e.response['Error']['Message'])
-```
 
 ```python
 # AWS Organizationsの管理アカウントIDを取得

@@ -3,7 +3,7 @@ title: "TEAM for AWS IAM Identity Center 導入ガイド ──(4/6) 申請者/�
 emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 <!--# Temporary elevated access management (TEAM) for AWS IAM Identity Center <!-- omit in toc -->
@@ -13,6 +13,7 @@ published: false
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+手順画像などの一部は公式ドキュメントの画像を流用しております。
 
 ![TEAM](/images/team/home_page.png)
 
@@ -75,15 +76,15 @@ see: [TEAM Requestor guide](https://aws-samples.github.io/iam-identity-center-te
 2. リクエストフォームが表示されます
    ![image09](/images/team/requestor/image_09.png)
 3. 以下の項目を入力します
-    - 【変更不可】 Email：ログインしているユーザーのメールアドレスが表示されています
-    - 【必須】 Account：一時アクセスを申請したいAWSアカウントをリストから選択します
-    - 【必須】 Role：一時アクセスのロールをリストから選択します
-    - 【必須】 Start time：一時アクセスを開始する日時を指定します。デフォルトでは現在日時が設定されますが、即座にアクセスを開始しない場合は、作業開始予定日時に変更してください。
-    - 【必須】 Duration：一時アクセスが許可される時間数（数値）を指定します。上記[Start time]から何時間作業する予定なのか入力します。
+    - 【変更不可】 Email: ログインしているユーザーのメールアドレスが表示されています
+    - 【必須】 Account: 一時アクセスを申請したいAWSアカウントをリストから選択します
+    - 【必須】 Role: 一時アクセスのロールをリストから選択します
+    - 【必須】 Start time: 一時アクセスを開始する日時を指定します。デフォルトでは現在日時が設定されますが、即座にアクセスを開始しない場合は、作業開始予定日時に変更してください。
+    - 【必須】 Duration: 一時アクセスが許可される時間数（数値）を指定します。上記[Start time]から何時間作業する予定なのか入力します。
         - ⚠️　TEAM管理者によって最大作業時間が指定されています。最大9時間が指定されている場合、「10」と入れようとすると「0」が入力できずにエラーになります。設定された最大作業時間を超える申請が必要な場合は、TEAM管理者に連絡してください。
         ![image10](/images/team/requestor/image_10.png)
-    - 【任意】Ticket no：今回の申請に関係するチケット番号を入力します
-    - 【必須】Justification：今回の申請に関する理由を入力します。できるだけ明確に理由を入力してください
+    - 【任意】Ticket no: 今回の申請に関係するチケット番号を入力します
+    - 【必須】Justification: 今回の申請に関する理由を入力します。できるだけ明確に理由を入力してください
 4. [Submit]ボタンをクリックし、申請を実施します
 5. 申請の状況を確認する場合は、次の手順「申請のステータスを確認する」を実施します
 
@@ -95,10 +96,10 @@ see: [TEAM Requestor guide](https://aws-samples.github.io/iam-identity-center-te
    ![image11](/images/team/requestor/image_11.png)
 2. 申請の一覧を確認します。ステータスが「pending」になっているものは承認待ちです。承認が完了すると「approved」になります
    ![image12](/images/team/requestor/image_12.png)
-   - pending：申請は承認待ちです
-   - approved：申請が許可されました
-   - rejected：申請が拒否された
-   - cancelled：申請をキャンセルされました
+   - pending: 申請は承認待ちです
+   - approved: 申請が許可されました
+   - rejected: 申請が拒否された
+   - cancelled: 申請をキャンセルされました
 3. 詳細を確認したい場合は、確認したい申請を選択し、[View details]をクリックします
 
 💡　申請ステータスが「approved」になっている場合、申請時に指定した[Start time]以降にAWSアクセスポータルを表示すると、申請したAWSアカウントが表示されるようになります。表示されない場合は、TEAM管理者に連絡してください。
@@ -144,13 +145,13 @@ see: [TEAM Requestor guide](https://aws-samples.github.io/iam-identity-center-te
 
 本記事では、TEAMアプリケーションを使用した一時権限の申請方法と承認方法について解説しました。
 
-申請者：
+申請者: 
 
 - TEAMアプリケーションにログインし、必要な権限と期間を明確に申請します
 - Justification（申請理由）は、承認者が判断しやすいよう具体的に記載しましょう
 - 申請ステータスは「My requests」から確認でき、承認後は指定した開始時刻から自動的に権限が付与されます
 
-承認者：
+承認者: 
 
 - 申請内容（アカウント、ロール、期間、理由）を確認し、妥当性を判断します
 - 自分自身の申請は承認できないため、別の承認者に依頼する必要があります

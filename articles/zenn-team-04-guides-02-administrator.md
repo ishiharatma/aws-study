@@ -3,7 +3,7 @@ title: "TEAM for AWS IAM Identity Center 導入ガイド ──(5/6) 管理者�
 emoji: "🫂"
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 ---
 
 <!--# Temporary elevated access management (TEAM) for AWS IAM Identity Center <!-- omit in toc -->
@@ -13,6 +13,7 @@ published: false
 本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。
 
 最新の情報については、AWS 公式ドキュメントをご参照ください。
+手順画像などの一部は公式ドキュメントの画像を流用しております。
 
 ![TEAM](/images/team/home_page.png)
 
@@ -147,14 +148,14 @@ see: [TEAM Administrator guide](https://aws-samples.github.io/iam-identity-cente
     ![image11](/images/team/administrator/image_11.png)
     
 3. 以下を設定します
-    - Entity type：UserかGroupをリストから選択します。ユーザー単位でも定義できますが、グループ単位での管理を推奨します。
-    - Ticket No：作業を紐づけるチケット番号がある場合は入力します
-    - Accounts：申請可能なAWSアカウントをリストから選択します。複数選択が可能です
-    - OUs：OU単位で許可する場合は、許可するOUを選択します。複数選択が可能です
-    - Permission：許可セットをリストから選択します。複数選択が可能です
-    - Max duration：一時アクセスの作業時間を数字で指定します
+    - Entity type: UserかGroupをリストから選択します。ユーザー単位でも定義できますが、グループ単位での管理を推奨します。
+    - Ticket No: 作業を紐づけるチケット番号がある場合は入力します
+    - Accounts: 申請可能なAWSアカウントをリストから選択します。複数選択が可能です
+    - OUs: OU単位で許可する場合は、許可するOUを選択します。複数選択が可能です
+    - Permission: 許可セットをリストから選択します。複数選択が可能です
+    - Max duration: 一時アクセスの作業時間を数字で指定します
         - 💡　[Administration>Settings]で「Maximum request duration」 を超える値の設定が可能です
-    - Approval required：申請の承認が必須かどうかを選択します
+    - Approval required: 申請の承認が必須かどうかを選択します
         - ⚠️　[Administration>Settings]で「Approval workflow」 を `Not required`にした場合は、この設定に関係なく承認不要になります。
 4. [Add eligibility policy]をクリックして保存します
 
@@ -175,11 +176,11 @@ see: https://aws-samples.github.io/iam-identity-center-team/docs/guides/admin.ht
     ![image13](/images/team/administrator/image_13.png)
     
 3. 以下を設定します
-    - Entity type：[Organizational Unit]か[Account]をリストから選択します。
-    - Accounts：「Entity type」に[Account]を選択した場合に表示されます。申請可能なAWSアカウントをリストから選択します。複数選択が可能です
-    - OUs：「Entity type」に[Organizational Unit]を選択した場合に表示されます。OU単位で許可する場合は、許可するOUを選択します。複数選択が可能です
-    - Ticket No：作業を紐づけるチケット番号がある場合は入力します
-    - Approver Groups：承認者グループをリストから選択します。複数選択が可能です
+    - Entity type: [Organizational Unit]か[Account]をリストから選択します。
+    - Accounts: 「Entity type」に[Account]を選択した場合に表示されます。申請可能なAWSアカウントをリストから選択します。複数選択が可能です
+    - OUs: 「Entity type」に[Organizational Unit]を選択した場合に表示されます。OU単位で許可する場合は、許可するOUを選択します。複数選択が可能です
+    - Ticket No: 作業を紐づけるチケット番号がある場合は入力します
+    - Approver Groups: 承認者グループをリストから選択します。複数選択が可能です
 4. [Add approvers]をクリックして保存します
 
 ⚠️　複数アカウント×複数承認グループを設定すると、ポリシーはそれぞれの組み合わせごとに分割されます。修正する場合は、個別に実施する必要があります。

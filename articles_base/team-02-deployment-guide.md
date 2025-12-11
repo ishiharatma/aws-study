@@ -73,7 +73,7 @@ TEAMアプリケーションをTEAM管理用のAWSアカウントへデプロイ
 
 #### ステップ１:  AWS IAM Identity Centerの管理アカウントからTEAM管理アカウントへの権限委任
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#dedicated-team-account)
+see: TEAM Deployment guide > [Dedicated TEAM account](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#dedicated-team-account)
 
 **IAM Identity Centerの管理アカウントから、**以下の委任を実行します。
 
@@ -149,7 +149,7 @@ aws organizations list-delegated-services-for-account \
 
 #### ステップ２: personal access token (classic) の作成とAWS Secrets Managerへの登録
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#aws-secrets-manager)
+see: TEAM Deployment guide > [AWS Secrets Manager](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/prerequisites.html#aws-secrets-manager)
 
 このTEAMアプリケーションをデプロイするフローの中で、GitHubリポジトリのソースを取得する必要があります。そのためのアクセストークンを発行します。
 
@@ -159,10 +159,8 @@ see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-t
 
 ![WS000930.jpg](/images/team/deploy/WS000930.jpg)
 
-⚠️　現状は、personal access token (classic)しか対応していません。そのため、アクセストークンは個人ユーザー管理になっています。（下記Issue参照）
+⚠️　現状は、personal access token (classic)しか対応していません。そのため、アクセストークンは個人ユーザー管理になっています。（Issue参照>[Why classic GitHub tokens are required?](https://github.com/aws-samples/iam-identity-center-team/issues/401)）
 
-Why classic GitHub tokens are required?
-https://github.com/aws-samples/iam-identity-center-team/issues/401
 
 発行したアクセストークンを**TEAM管理アカウントの**シークレットマネージャーに登録します。
 
@@ -345,7 +343,7 @@ cp -n parameters-template.sh parameters.sh
 
 #### ステップ４: IAM Identity Center SAML Integrationの設定
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html)
+see: TEAM Deployment guide > [IAM Identity Center Integration](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html)
 
 ステップ３ですべてのスタックが「CREATE_COMPLETE」になっていることを確認してから実行します。
 
@@ -365,7 +363,7 @@ see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-t
 実行すると、以下のURLが払い出されます。この値は次の手順で使用しますので、メモしておきます。
 
 ```bash
-applicationStartURL: https://xxxxxx-main.auth.amazoncognito.com/authorize?client_id=xxxxxx&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://main.d1s8z5724fsfj7-.amplifyapp.com/&idp_identifier=team
+applicationStartURL: https://xxxxxx-main.auth.amazoncognito.com/authorize?client_id=xxxxxx&response_type=code&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://xxxxx.amplifyapp.com/&idp_identifier=team
 applicationACSURL: https://xxxxxx-main.auth.amazoncognito.com/saml2/idpresponse
 applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
 ```
@@ -385,12 +383,12 @@ applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
 - 作成したアプリケーションを開きます。
 - [アクション＞属性マッピング]を開きます。
     - `Subject`と`Email`を設定します。
+        - Subject - ${user:subject} - persistent
+        - Email - ${user:email} - basic
         
         ![WS000946.jpg](/images/team/deploy/WS000946.jpg)
         
-        - 参考: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html#configure-attribute-mapping
-        - Subject - ${user:subject} - persistent
-        - Email - ${user:email} - basic
+        - 参考: [Configure Attribute Mapping](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html#configure-attribute-mapping)
     - [変更の保存]をクリックし、保存します。
 - [割り当てられたユーザーとグループ]にTEAM用のグループ(`TEAM-`で始まるグループ名)をすべて割り当てます。
     
@@ -403,7 +401,7 @@ applicationSAMLAudience: urn:amazon:cognito:sp:us-east-1_xxxxxx
 
 #### ステップ５: Amazon Cognitoの設定
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/cognito.html)
+see: TEAM Deployment guide > [Cognito user pool configuration](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/cognito.html)
 
 以下のコマンドでコピーしたJSONファイルを開き、`MetadataURL`に`IAM Identity Center SAML メタデータファイル`のURLを記載します。
 すでにファイルが存在する場合は、そのまま編集してください。
@@ -436,9 +434,7 @@ JSONファイルは以下のようになっています。
 
 #### ステップ６: Amazon SESの設定
 
-see: TEAM Deployment guide
-
-see: https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/notifications.html#email-notification-via-amazon-ses
+see: TEAM Deployment guide > [Email notification via Amazon SES](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/notifications.html#email-notification-via-amazon-ses)
 
 **TEAM管理アカウント**のAWSマネジメントコンソールから、[Amazon SES > 設定: ID]を開きます。
 
@@ -463,7 +459,7 @@ TEAMアプリケーションをアンインストールする手順です。`des
 
 ただし、Amplify デプロイメントの S3 バケットが削除されないため、手動での削除が必要です。s3バケット名の形式はamplify-teamidcapp-main-xxxx-deploymentです。
 
-see: [TEAM Deployment guide](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/uninstall.html)
+see: TEAM Deployment guide > [Uninstall TEAM solution](https://aws-samples.github.io/iam-identity-center-team/docs/deployment/uninstall.html)
 
 #### ステップ１: アンインストール
 
