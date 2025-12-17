@@ -46,10 +46,8 @@
 </li>
 <li><a href="#2-%E6%96%99%E9%87%91%E4%BD%93%E7%B3%BB" target="_blank">2. 料金体系</a><ul>
 <li><a href="#21-%E7%84%A1%E6%96%99%E5%88%A9%E7%94%A8%E6%9E%A0free-tier" target="_blank">2.1. 無料利用枠（Free Tier）</a></li>
-<li><a href="#22-amazon-q-developer-pro" target="_blank">2.2. Amazon Q Developer Pro</a><ul>
-<li><a href="#221-pro%E3%81%B8%E3%81%AE%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E3%83%A9%E3%82%A4%E3%83%96%E6%96%B9%E6%B3%95" target="_blank">2.2.1. Proへのサブスクライブ方法</a></li>
-</ul>
-</li>
+<li><a href="#22-amazon-q-developer-pro" target="_blank">2.2. Amazon Q Developer Pro</a></li>
+<li><a href="#223-amazon-q-developer-pro%E3%81%AE%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95" target="_blank">2.2.3. Amazon Q Developer Proの利用方法</a></li>
 </ul>
 </li>
 <li><a href="#3-amazon-q-developer-%E3%82%92%E5%AE%89%E5%85%A8%E3%81%AB%E4%BD%BF%E3%81%86%E3%81%9F%E3%82%81%E3%81%AE%E3%82%AA%E3%83%97%E3%83%88%E3%82%A2%E3%82%A6%E3%83%88" target="_blank">3. Amazon Q Developer を安全に使うためのオプトアウト</a><ul>
@@ -182,14 +180,15 @@
 <li>コード変換: アカウントレベルで 1 ユーザーあたり毎月 4,000 行</li>
 <li>データ収集: 自動的にオプトアウト</li>
 <li>高度な機能: カスタマイズ、セキュリティスキャン強化など</li>
-<li>認証: IAM Identity Center</li>
+<li>認証: IAM Identity Center or Builder ID(2025.6.11 New!!)</li>
 </ul>
-<h3 is-upgraded>2.2.1. Proへのサブスクライブ方法</h3>
+<h2 is-upgraded>2.2.3. Amazon Q Developer Proの利用方法</h2>
 <p>Amazon Q Developer Proを利用するには以下の方法があります。</p>
-<p class="image-container"><img alt="q-pro" src="img\\6207f0ceca88129e.png"></p>
+<p>⚠️ 説明に出てくる「スタンドアロンAWSアカウント」とは、AWS Organizationsの管理下にないAWSアカウントのことを言います。</p>
+<p class="image-container"><img alt="q-pro" src="img\\efc58ec7bf2e07d4.png"></p>
 <ol type="1">
-<li>Builder IDを使用したFreeプランでの利用です</li>
-<li>Builder IDを特定のAWSアカウントに紐づけて、ProへUpgradeする</li>
+<li>Builder IDを使用したFreeプランでの利用</li>
+<li>Builder IDを特定のスタンドアロンAWSアカウントに紐づけて、ProへUpgradeする</li>
 </ol>
 <ul>
 <li><a href="https://aws.amazon.com/jp/about-aws/whats-new/2025/06/amazon-q-developer-pro-tier-upgrades-builder-ids/" target="_blank">2025.6.11 Amazon Q Developer がビルダー ID ユーザー向けに Pro 階層へのアップグレード機能を導入</a></li>

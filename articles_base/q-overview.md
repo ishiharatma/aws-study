@@ -17,7 +17,7 @@
 - [2. 料金体系](#2-料金体系)
   - [2.1. 無料利用枠（Free Tier）](#21-無料利用枠free-tier)
   - [2.2. Amazon Q Developer Pro](#22-amazon-q-developer-pro)
-    - [2.2.1. Proへのサブスクライブ方法](#221-proへのサブスクライブ方法)
+  - [2.2.3. Amazon Q Developer Proの利用方法](#223-amazon-q-developer-proの利用方法)
 - [3. Amazon Q Developer を安全に使うためのオプトアウト](#3-amazon-q-developer-を安全に使うためのオプトアウト)
   - [3.1. VS Codeでの設定例](#31-vs-codeでの設定例)
     - [テレメトリの共有からオプトアウト](#テレメトリの共有からオプトアウト)
@@ -138,16 +138,18 @@ Amazon Qは便利なサービスですが、生成AIを利用する上で以下�
 - コード変換: アカウントレベルで 1 ユーザーあたり毎月 4,000 行
 - データ収集: 自動的にオプトアウト
 - 高度な機能: カスタマイズ、セキュリティスキャン強化など
-- 認証: IAM Identity Center
+- 認証: IAM Identity Center or Builder ID(2025.6.11 New!!)
 
-#### 2.2.1. Proへのサブスクライブ方法
+### 2.2.3. Amazon Q Developer Proの利用方法
 
 Amazon Q Developer Proを利用するには以下の方法があります。
 
+⚠️ 説明に出てくる「スタンドアロンAWSアカウント」とは、AWS Organizationsの管理下にないAWSアカウントのことを言います。
+
 ![q-pro](/images/q/q-dev-pro.png)
 
-1. Builder IDを使用したFreeプランでの利用です
-2. Builder IDを特定のAWSアカウントに紐づけて、ProへUpgradeする
+1. Builder IDを使用したFreeプランでの利用
+2. Builder IDを特定のスタンドアロンAWSアカウントに紐づけて、ProへUpgradeする
   - [2025.6.11 Amazon Q Developer がビルダー ID ユーザー向けに Pro 階層へのアップグレード機能を導入](https://aws.amazon.com/jp/about-aws/whats-new/2025/06/amazon-q-developer-pro-tier-upgrades-builder-ids/)
   - 請求は紐づけたAWSアカウントになります
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/upgrade-to-pro.html#upgrade-builder-id)を参照してください
