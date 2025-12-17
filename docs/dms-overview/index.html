@@ -182,7 +182,7 @@
       <google-codelab-step label="サポートされるデータベースエンジン" duration="0">
         <p>DMSがサポートする主なデータベースエンジンは以下のとおりです。</p>
 <p>詳細なサポート状況については、<a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.html" target="_blank">Sources for data migration</a> / <a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.html" target="_blank">Targets for data migration</a>と<a href="https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Serverless.Components.html#CHAP_Serverless.SupportedVersions" target="_blank">DMS Serverless components - Supported Endpoints</a>を参照してください。</p>
-<p>※ *付はサーバーレス</p>
+<p>※ *付はサーバーレスインスタンスがサポートするものです</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>データベースエンジン</p>
 </td><td colspan="1" rowspan="1"><p>ソース</p>
@@ -552,7 +552,7 @@ for data migration.
 </li>
 </ul>
 <h2 is-upgraded>変換ルール</h2>
-<p>DMSでは、移行時にテーブル名やカラム名を変換することができます。</p>
+<p>DMSでは、移行時にテーブル名やカラム名を変換することができます。 ルールタイプ（<code>rule-type</code>）に<code>transformation</code>を指定して定義します。</p>
 <p>テーブル名の変換:</p>
 <p>ルールアクション（<code>rule-action</code>）に<code>rename</code>を指定します。</p>
 <pre><code language="language-json" class="language-json">{
@@ -686,7 +686,7 @@ for data migration.
     
       <google-codelab-step label="AWS DMS Fleet Advisor" duration="0">
         <p>⚠️ <a href="https://docs.aws.amazon.com/dms/latest/userguide/dms_fleet.advisor-end-of-support.html" target="_blank">2026 年 5 月 20 日 サポート終了</a></p>
-<p>データベースと分析の移行プランを構築します。</p>
+<p>データベースの分析と移行プランを構築します。</p>
 <p class="image-container"><img alt="dms-fleet-advisor-diagram" src="img\\55047ae21191aef.png"></p>
 
 

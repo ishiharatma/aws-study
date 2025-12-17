@@ -246,28 +246,34 @@
 <ol type="1">
 <li>申請データの保存<ul>
 <li>承認された申請情報（開始時刻、終了時刻、対象アカウント、権限など）はAmazon DynamoDBに保存されます</li>
+<li>申請データが保存されると、DynamoDB ストリームによってStep Functionsが起動されます。</li>
 </ul>
 </li>
-<li>権限の自動付与と削除<ul>
-<li><strong>AWS Step Functions</strong>が権限のライフサイクル全体を管理します。</li>
-<li>Grant State Machineが起動し、IAM Identity Center APIを呼び出してアカウントアサインメント（Account Assignment）を作成します</li>
+<li>利用開始時刻の自動制御<ul>
+<li>承認が完了すると、<strong>Schedule State Machine</strong>が起動します</li>
+<li>Step FunctionsのWaitステートが、指定された開始時刻まで待機します</li>
+<li>開始時刻になると、自動的に次のステップ（Grant State Machine）に進みます</li>
+</ul>
+</li>
+<li>権限の自動付与<ul>
+<li>Grant State MachineがIAM Identity Center APIを呼び出し、アカウントアサインメント（Account Assignment）を作成します</li>
 <li>ユーザーはAWSアクセスポータルにログインすると、付与された権限で対象アカウントにアクセスできるようになります</li>
 </ul>
 </li>
 <li>時限制御による自動削除<ul>
-<li>Step FunctionsのWaitステートが、指定された期間（duration）分の待機を実行します <ul>
+<li>Grant State Machine内のWaitステートが、指定された期間（duration）分の待機を実行します <ul>
 <li>例: 8時間の申請なら28,800秒間待機</li>
 <li>待機中は課金が発生せず、効率的に期限を管理</li>
 </ul>
 </li>
-<li>待機期間が終了すると、自動的にRevoke State Machineが起動します</li>
+<li>待機期間が終了すると、自動的に<strong>Revoke State Machine</strong>が起動します</li>
 <li>IAM Identity Center APIを呼び出し、該当するアサインメントを削除します</li>
 <li>これにより、アクセス期間が終了すると自動的に権限が取り消されます</li>
 </ul>
 </li>
-<li>ワークフローの調整<ul>
-<li>AWS Step Functionsが申請から承認、通知、権限付与までの一連のワークフローを統合的に管理します</li>
-<li>Amazon API Gateway + Lambdaがフロントエンド（Amplifyアプリ）からのリクエストを処理します</li>
+<li>手動取り消しのサポート<ul>
+<li>申請者または承認者が期限前に権限を取り消すことも可能</li>
+<li>この場合、UIまたはAPIから明示的に<strong>Revoke State Machine</strong>が起動されます</li>
 </ul>
 </li>
 <li>監査ログの記録<ul>
@@ -277,6 +283,11 @@
 </li>
 </ol>
 <p>この自動化により、手動での権限管理が不要になり、人的ミス（権限の付けっぱなしなど）を防止できます。</p>
+<p>💡 <strong>技術的なポイント</strong>:</p>
+<ul>
+<li>Step Functionsは最大1年間のWait処理に対応しており、未来の開始時刻指定や数時間から数日間の一時権限管理に最適です</li>
+<li>待機中は課金されないため、非常にコスト効率的に時刻制御と期限管理を実現できます</li>
+</ul>
 <h2 is-upgraded>2.4. 通知機能</h2>
 <p>申請や承認のステータス変化を、複数のチャネルで通知できます。</p>
 <p>サポートされる通知方法は次のとおりです。</p>
@@ -597,7 +608,7 @@ cp -n parameters-dev.sh parameters_YOUR_ENV.sh
 <h3 is-upgraded>ステップ４：IAM Identity Center SAML Integrationの設定</h3>
 <p>see: <a href="https://aws-samples.github.io/iam-identity-center-team/docs/deployment/configuration/idc.html" target="_blank">TEAM Deployment guide</a></p>
 <p>ステップ３ですべてのスタックが「CREATE_COMPLETE」になっていることを確認してから実行します。</p>
-<p class="image-container"><img alt="WS000982.jpg" src="img\\9da6a20655062244.jpg"></p>
+<p class="image-container"><img alt="WS000982.jpg" src="img\\5ccb74daab794cef.jpg"></p>
 <p>以下のコマンドを実行します。</p>
 <pre><code language="language-bash" class="language-bash">PARAMETERS_FILE=./parameters_YOUR_ENV.sh ./integration_custom.sh
 </code></pre>
@@ -692,13 +703,13 @@ cp -n details_dev.json details_YOUR_ENV.json
 </code></pre>
 <p class="image-container"><img alt="deployimage02" src="img\\3f3e6469c884be3c.png"></p>
 <p>：</p>
-<p class="image-container"><img alt="deployimage03" src="img\\26c5ea0ae09af10f.png"></p>
+<p class="image-container"><img alt="deployimage03" src="img\\53a67d8f1daa625.png"></p>
 <p>AWSマネジメントコンソールで、[CloudFormation]にアクセスすると、「DELETE_IN_PROGRESS」となり、削除が実施されます。</p>
-<p class="image-container"><img alt="deployimage04" src="img\\ecbb3dc2ad4e2180.png"></p>
+<p class="image-container"><img alt="deployimage04" src="img\\e64b202665e4e37.png"></p>
 <p>⚠️アンインストール前に、権限委任の解除が実施されていると「CloudTrail Lake EventDataStore」の削除が権限不足で失敗し、スタックの削除にも失敗します。この場合、リソースは残したうえでスタックの強制削除を行ってください。残ってしまった「CloudTrail Lake EventDataStore」は、IAM Identity Centerの管理アカウント上から手動で削除します。</p>
 <h3 is-upgraded>ステップ２：S3バケットの削除</h3>
 <p>S3バケットを削除します。</p>
-<p class="image-container"><img alt="deployimage05" src="img\\24f4912adcca01a3.png"></p>
+<p class="image-container"><img alt="deployimage05" src="img\\a5f3449c2aa02dae.png"></p>
 <p><strong>TEAM管理アカウント</strong>のCloudShell上に貼り付けて実行します。</p>
 <pre><code language="language-bash" class="language-bash">aws s3api list-buckets \
   --query &#34;Buckets[?starts_with(Name, &#39;amplify-teamidcapp-main-&#39;)].Name&#34; \
@@ -751,7 +762,7 @@ while read -r BUCKET_NAME; do
   fi
 done
 </code></pre>
-<p class="image-container"><img alt="image06" src="img\\417f01c12e00950f.png"></p>
+<p class="image-container"><img alt="image06" src="img\\999ee51e91e651ee.png"></p>
 <h3 is-upgraded>ステップ３：IAM Identity Center から TEAM アプリの削除</h3>
 <ol type="1">
 <li><strong>TEAM管理アカウント</strong>のAWSマネジメントコンソールを開きます</li>
