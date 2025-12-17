@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="splmFTSngPwkQVR_eumV" name="Page-1">
-        <mxGraphModel dx="347" dy="305" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
+        <mxGraphModel dx="461" dy="605" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -203,10 +203,10 @@
                 <mxCell id="109" value="5. Organizations Member Pattern" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=24;fontStyle=5" parent="1" vertex="1">
                     <mxGeometry x="14" y="539" width="372" height="41" as="geometry"/>
                 </mxCell>
-                <mxCell id="16" value="AWS Builder Id" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=20;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;labelBackgroundColor=default;" parent="1" vertex="1">
+                <mxCell id="16" value="AWS Builder ID" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=20;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;labelBackgroundColor=default;" parent="1" vertex="1">
                     <mxGeometry x="260" y="183.35" width="50" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="61" value="AWS Builder Id" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=20;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;labelBackgroundColor=default;" parent="1" vertex="1">
+                <mxCell id="61" value="AWS Builder ID" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#232F3D;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=20;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.user;labelBackgroundColor=default;" parent="1" vertex="1">
                     <mxGeometry x="90" y="58.650000000000006" width="50" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="6" value="Stand-alone Account" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=none;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=20;fontStyle=0;aspect=fixed;pointerEvents=1;shape=mxgraph.aws4.organizations_account;labelBackgroundColor=default;" parent="1" vertex="1">

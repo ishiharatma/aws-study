@@ -146,8 +146,8 @@ Amazon Q Developer Proを利用するには以下の方法があります。
 
 ![q-pro](/images/q/q-dev-pro.png)
 
-1. Builder Idを使用したFreeプランでの利用です
-2. Builder Idを特定のAWSアカウントに紐づけて、ProへUpgradeする
+1. Builder IDを使用したFreeプランでの利用です
+2. Builder IDを特定のAWSアカウントに紐づけて、ProへUpgradeする
   - [2025.6.11 Amazon Q Developer がビルダー ID ユーザー向けに Pro 階層へのアップグレード機能を導入](https://aws.amazon.com/jp/about-aws/whats-new/2025/06/amazon-q-developer-pro-tier-upgrades-builder-ids/)
   - 請求は紐づけたAWSアカウントになります
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/upgrade-to-pro.html#upgrade-builder-id)を参照してください
