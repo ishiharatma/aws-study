@@ -159,15 +159,20 @@ Amazon Q Developer Proを利用するには以下の方法があります。
 2. Builder IDを特定のスタンドアロンAWSアカウントに紐づけて、ProへUpgradeする
   - [2025.6.11 Amazon Q Developer がビルダー ID ユーザー向けに Pro 階層へのアップグレード機能を導入](https://aws.amazon.com/jp/about-aws/whats-new/2025/06/amazon-q-developer-pro-tier-upgrades-builder-ids/)
   - 請求は紐づけたAWSアカウントになります
+  - 追加の設定が不要で、Builder IDでのログインをそのまま継続したい場合はこちらの方法を選択します。
+  - ただし、通常のPro利用に比べると一部制限があります。[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/getting-started-builderid.html#builder-id-limitations)を参照してください。
+    - 参考記事: [Developers IO](https://dev.classmethod.jp/articles/q-developer-pro-tier-upgrades-builder-ids/#AWS%2520Builder%2520ID%2520%25E3%2581%25AE%2520Pro%2520%25E7%2589%2588%25E3%2581%25AF%25E5%2588%25B6%25E9%2599%2590%25E4%25BA%258B%25E9%25A0%2585%25E3%2581%258C%25E3%2581%2582%25E3%2582%258B)
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/upgrade-to-pro.html#upgrade-builder-id)を参照してください
 3. スタンドアロンAWSアカウントで、IAM Identity Centerのアカウントインスタンスを設定し、各ユーザーにProをサブスクライブする
   - 請求はAWSアカウントになります
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-standalone.html)を参照してください
 4. AWS Organizationsと紐づけたIAM Identity Centerの組織インスタンスで、各ユーザーにProをサブスクライブする
   - 請求は管理アカウントになります
+  - AWS Organizationsの場合は、組織全体で管理で一元管理できるこちらの方法を選択することがが推奨されます。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-management.html)を参照してください
 5. AWS OrganizationsのメンバーアカウントでIAM Identity Centerのアカウントインスタンスを設定し、各ユーザーにProをサブスクライブする
   - 請求は管理アカウントになります
+  - 何らかの理由でAWSアカウント単位で個別に管理したい場合に選択します。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-member.html)を参照してください
 
 
