@@ -172,7 +172,7 @@ Amazon Q Developer Proを利用するには以下の方法があります。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-management.html)を参照してください
 5. AWS OrganizationsのメンバーアカウントでIAM Identity Centerのアカウントインスタンスを設定し、各ユーザーにProをサブスクライブする
   - 請求は管理アカウントになります
-  - 何らかの理由でAWSアカウント単位で個別に管理したい場合に選択します。
+  - 何らかの理由でAWSアカウント単位で管理したい場合に選択します。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-member.html)を参照してください
 
 

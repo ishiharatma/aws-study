@@ -17,7 +17,7 @@
 - [2. 料金体系](#2-料金体系)
   - [2.1. 無料利用枠（Free Tier）](#21-無料利用枠free-tier)
   - [2.2. Amazon Q Developer Pro](#22-amazon-q-developer-pro)
-  - [2.2.3. Amazon Q Developer Proの利用方法](#223-amazon-q-developer-proの利用方法)
+  - [2.3. Amazon Q Developer Proの利用方法](#23-amazon-q-developer-proの利用方法)
 - [3. Amazon Q Developer を安全に使うためのオプトアウト](#3-amazon-q-developer-を安全に使うためのオプトアウト)
   - [3.1. VS Codeでの設定例](#31-vs-codeでの設定例)
     - [テレメトリの共有からオプトアウト](#テレメトリの共有からオプトアウト)
@@ -140,7 +140,7 @@ Amazon Qは便利なサービスですが、生成AIを利用する上で以下�
 - 高度な機能: カスタマイズ、セキュリティスキャン強化など
 - 認証: IAM Identity Center or Builder ID(2025.6.11 New!!)
 
-### 2.2.3. Amazon Q Developer Proの利用方法
+### 2.3. Amazon Q Developer Proの利用方法
 
 Amazon Q Developer Proを利用するには以下の方法があります。
 
@@ -161,11 +161,11 @@ Amazon Q Developer Proを利用するには以下の方法があります。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-standalone.html)を参照してください
 4. AWS Organizationsと紐づけたIAM Identity Centerの組織インスタンスで、各ユーザーにProをサブスクライブする
   - 請求は管理アカウントになります
-  - AWS Organizationsの場合は、組織全体で管理で一元管理できるこちらの方法を選択することがが推奨されます。
+  - AWS Organizationsの場合は、組織全体で一元管理できるこちらの方法を選択することが推奨されます。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-management.html)を参照してください
 5. AWS OrganizationsのメンバーアカウントでIAM Identity Centerのアカウントインスタンスを設定し、各ユーザーにProをサブスクライブする
   - 請求は管理アカウントになります
-  - 何らかの理由でAWSアカウント単位で個別に管理したい場合に選択します。
+  - 何らかの理由でAWSアカウント単位で管理したい場合に選択します。
   - 実施方法は、[こちら](https://docs.aws.amazon.com/amazonq/latest/qdeveloper-ug/subscribe-member.html)を参照してください
 
 
