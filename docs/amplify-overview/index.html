@@ -1,0 +1,364 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Amplify</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="amplify-overview"
+                  title="AWS Amplify"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-amplify-%E3%81%A8%E3%81%AF" target="_blank">AWS Amplify とは</a></li>
+<li><a href="#gen-1-%E3%81%A8-gen-2-%E3%81%AE%E9%81%95%E3%81%84" target="_blank">Gen 1 と Gen 2 の違い</a><ul>
+<li><a href="#%E3%82%B3%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%83%BC%E3%82%B9%E3%83%88%E3%81%B8%E3%81%AE%E5%A4%89%E5%8C%96" target="_blank">コードファーストへの変化</a></li>
+<li><a href="#cdk-%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E6%8B%A1%E5%BC%B5%E6%80%A7" target="_blank">CDK ベースの拡張性</a></li>
+</ul>
+</li>
+<li><a href="#%E8%AA%8D%E8%A8%BCauth" target="_blank">認証（Auth）</a><ul>
+<li><a href="#authenticator-ui-%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%83%8D%E3%83%B3%E3%83%88" target="_blank">Authenticator UI コンポーネント</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%87%E3%83%BC%E3%82%BFdata" target="_blank">データ（Data）</a><ul>
+<li><a href="#%E8%AA%8D%E5%8F%AF%E3%83%AB%E3%83%BC%E3%83%AB" target="_blank">認可ルール</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8storage" target="_blank">ストレージ（Storage）</a></li>
+<li><a href="#%E9%96%A2%E6%95%B0functions" target="_blank">関数（Functions）</a></li>
+<li><a href="#%E3%83%9B%E3%82%B9%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">ホスティング</a><ul>
+<li><a href="#ssr-%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88" target="_blank">SSR サポート</a></li>
+<li><a href="#git-%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE-cicd" target="_blank">Git ベースの CI/CD</a></li>
+</ul>
+</li>
+<li><a href="#ai-%E9%80%A3%E6%90%BA" target="_blank">AI 連携</a></li>
+<li><a href="#%E3%82%B5%E3%83%B3%E3%83%89%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%E7%92%B0%E5%A2%83" target="_blank">サンドボックス環境</a></li>
+<li><a href="#gen-1-%E3%81%8B%E3%82%89%E3%81%AE%E7%A7%BB%E8%A1%8C" target="_blank">Gen 1 からの移行</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Amplify とは" duration="0">
+        <p>フロントエンド開発者がフルスタックアプリケーションを迅速に構築・デプロイできるようにする開発プラットフォームです。データモデル、ビジネスロジック、認証・認可ルールを TypeScript で記述するだけで、適切なクラウドリソースが自動的にプロビジョニングされます。</p>
+<p>2024 年 5 月に Amplify Gen 2 が一般提供（GA）開始され、TypeScript ベースのコードファーストな開発者体験（DX）が提供されるようになりました。内部的には AWS CDK（Cloud Development Kit）をベースとしており、CloudFormation スタックとしてリソースが管理されます。</p>
+<p>Gen 2 では、Auth、Data、Storage、Functions の 4 つのカテゴリが組み込みでサポートされており、その他のユースケースは AWS CDK コンストラクトを使用して拡張できます。</p>
+<p>【AWS Black Belt Online Seminar】AWS Amplify Gen2(YouTube)-なし</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=A4HOzn7ERqE" target="_blank">AWS Amplify Gen1(YouTube)</a>(1:02:59)</p>
+<p><a href="https://aws.amazon.com/jp/amplify/" target="_blank">AWS Amplify サービス概要</a></p>
+<p><a href="https://docs.amplify.aws/" target="_blank">AWS Amplify Gen 2 ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/amplify/faqs/" target="_blank">AWS Amplify よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/amplify/pricing/" target="_blank">AWS Amplify 料金</a></p>
+<p><a href="https://www.youtube.com/watch?v=HsMUZLDX38Y" target="_blank">AWS Amplify で加速する生成 AI アプリケーション開発（AWS-16）(YouTube)</a>(40:30)</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Gen 1 と Gen 2 の違い" duration="0">
+        <p>Gen 2 は Gen 1 からの大きなパラダイムシフトです。主な違いは以下のとおりです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>Gen 1</p>
+</td><td colspan="1" rowspan="1"><p>Gen 2</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>開発アプローチ</p>
+</td><td colspan="1" rowspan="1"><p>Amplify CLI（対話型コマンド）</p>
+</td><td colspan="1" rowspan="1"><p>TypeScript コードファースト</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>バックエンド定義</p>
+</td><td colspan="1" rowspan="1"><p>CLI が CloudFormation テンプレートを自動生成</p>
+</td><td colspan="1" rowspan="1"><p>CDK ベースで TypeScript でリソースを定義</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>開発環境</p>
+</td><td colspan="1" rowspan="1"><p>共有のバックエンド環境</p>
+</td><td colspan="1" rowspan="1"><p>開発者ごとに分離されたサンドボックス</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>デプロイ速度</p>
+</td><td colspan="1" rowspan="1"><p>通常のデプロイ</p>
+</td><td colspan="1" rowspan="1"><p>最大 8 倍高速（インテリジェントキャッシュ）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>環境管理</p>
+</td><td colspan="1" rowspan="1"><p>CLI/Console で手動設定</p>
+</td><td colspan="1" rowspan="1"><p>Git ブランチと 1:1 対応（ゼロコンフィグ）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>拡張性</p>
+</td><td colspan="1" rowspan="1"><p>Amplify プラグイン</p>
+</td><td colspan="1" rowspan="1"><p>CDK コンストラクトで任意の AWS サービスを追加</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>コンソール</p>
+</td><td colspan="1" rowspan="1"><p>Amplify Studio と Hosting が別々</p>
+</td><td colspan="1" rowspan="1"><p>統合コンソール</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>型安全性</p>
+</td><td colspan="1" rowspan="1"><p>codegen コマンドで明示的に生成</p>
+</td><td colspan="1" rowspan="1"><p>自動的に型を生成</p>
+</td></tr>
+</table>
+<h2 is-upgraded>コードファーストへの変化</h2>
+<p>Gen 1 では <code>amplify add auth</code> や <code>amplify add api</code> などの CLI コマンドを対話的に実行してバックエンドを構築していました。Gen 2 では、<code>amplify/auth/resource.ts</code> や <code>amplify/data/resource.ts</code> といった TypeScript ファイルにバックエンドの定義を記述します。</p>
+<pre><code language="language-text" class="language-text">Gen 1: CLI ベース → 対話的にリソースを生成 → CloudFormation テンプレートが自動生成
+Gen 2: コードファースト → TypeScript でリソースを定義 → CDK 経由で CloudFormation にデプロイ
+</code></pre>
+<h2 is-upgraded>CDK ベースの拡張性</h2>
+<p>Gen 2 は AWS CDK の上に構築されているため、Amplify が標準提供しない AWS サービスも CDK コンストラクトとして追加できます。Data や Auth の機能は L3 CDK コンストラクトをラップしているため、Amplify が生成するリソースの拡張に特別な設定は不要です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="認証（Auth）" duration="0">
+        <p>Amplify Auth は <strong>Amazon Cognito</strong> を基盤としたユーザー認証機能を提供します。<code>amplify/auth/resource.ts</code> で <code>defineAuth</code> 関数を使用して認証リソースを定義します。</p>
+<pre><code language="language-ts" class="language-ts">// amplify/auth/resource.ts
+import { defineAuth } from &#34;@aws-amplify/backend&#34;;
+
+export const auth = defineAuth({
+  loginWith: {
+    email: true,
+  },
+});
+</code></pre>
+<p>デフォルトではメールアドレスによるログインが設定されますが、以下のような認証方式もサポートしています。</p>
+<ul>
+<li>電話番号によるサインイン</li>
+<li>外部プロバイダー（Google、Facebook、Amazon、Sign in with Apple）</li>
+<li>パスワードレス認証（Email OTP、SMS OTP、WebAuthn パスキー）</li>
+<li>多要素認証（MFA）</li>
+</ul>
+<p>AWS ドキュメント &gt; <a href="https://docs.amplify.aws/react/build-a-backend/auth/set-up-auth/" target="_blank">Set up Amplify Auth</a></p>
+<h2 is-upgraded>Authenticator UI コンポーネント</h2>
+<p>Amplify は認証フローを迅速に構築するための UI コンポーネントを提供しています。<code>amplify/auth/resource.ts</code> の設定と自動的に連携し、バックエンドリソースに接続します。</p>
+<p>対応フレームワーク:</p>
+<ul>
+<li>React / Vue / Angular</li>
+<li>React Native</li>
+<li>Swift / Android / Flutter</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="データ（Data）" duration="0">
+        <p>Amplify Data は <code>amplify/data/resource.ts</code> で <code>defineData</code> 関数を使用してデータスキーマを定義します。定義されたスキーマから <strong>AWS AppSync GraphQL API</strong> と <strong>Amazon DynamoDB</strong> テーブルが自動的にプロビジョニングされます。</p>
+<pre><code language="language-ts" class="language-ts">// amplify/data/resource.ts
+import { type ClientSchema, a, defineData } from &#34;@aws-amplify/backend&#34;;
+
+const schema = a.schema({
+  Todo: a
+    .model({
+      content: a.string(),
+      isDone: a.boolean(),
+    })
+    .authorization((allow) =&gt; [allow.owner()]),
+});
+
+export type Schema = ClientSchema&lt;typeof schema&gt;;
+
+export const data = defineData({
+  schema,
+  authorizationModes: {
+    defaultAuthorizationMode: &#34;userPool&#34;,
+  },
+});
+</code></pre>
+<p>TypeScript で定義するため、ドット補完、IntelliSense、型バリデーションが利用できます。Gen 1 で必要だった明示的な codegen ステップは不要で、型は自動的に生成されます。</p>
+<p><code>observeQuery</code> を使用することで、バックエンドデータのライブフィードをサブスクライブし、リアルタイムなデータ同期が可能です。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.amplify.aws/react/build-a-backend/data/set-up-data/" target="_blank">Set up Amplify Data</a></p>
+<h2 is-upgraded>認可ルール</h2>
+<p>Amplify Data では、データモデル全体、特定のモデル、特定のフィールドに対して認可ルールを適用できます。Amplify は常に最も具体的なルールを適用します。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>認可戦略</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>public</strong></p>
+</td><td colspan="1" rowspan="1"><p>全員にアクセスを許可（API キーまたは未認証 IAM ロール）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>owner</strong></p>
+</td><td colspan="1" rowspan="1"><p>レコードの所有者のみに操作を制限</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>private</strong></p>
+</td><td colspan="1" rowspan="1"><p>サインイン済みユーザーのみにアクセスを制限（IAM / Cognito / OIDC）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>group</strong></p>
+</td><td colspan="1" rowspan="1"><p>特定のユーザーグループにアクセスを制限（静的/動的グループ）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>custom</strong></p>
+</td><td colspan="1" rowspan="1"><p>Lambda 関数によるカスタム認可ルール</p>
+</td></tr>
+</table>
+<p>AWS ドキュメント &gt; <a href="https://docs.amplify.aws/react/build-a-backend/data/customize-authz/" target="_blank">Customize your auth rules</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ストレージ（Storage）" duration="0">
+        <p>Amplify Storage は <strong>Amazon S3</strong> と連携し、Cognito によるアクセス制御が適用されたオブジェクトストレージを提供します。</p>
+<p>ブラウザやモバイルデバイスから直接メディア、ドキュメント、ユーザーコンテンツをアップロードでき、プリサイン URL のロジックを手書きする必要はありません。</p>
+<pre><code language="language-ts" class="language-ts">// amplify/storage/resource.ts
+import { defineStorage } from &#34;@aws-amplify/backend&#34;;
+
+export const storage = defineStorage({
+  name: &#34;myProjectFiles&#34;,
+  access: (allow) =&gt; ({
+    &#34;profile-pictures/{entity_id}/*&#34;: [
+      allow.guest.to([&#34;read&#34;]),
+      allow.entity(&#34;identity&#34;).to([&#34;read&#34;, &#34;write&#34;, &#34;delete&#34;]),
+    ],
+    &#34;media/*&#34;: [
+      allow.authenticated.to([&#34;read&#34;, &#34;write&#34;]),
+    ],
+  }),
+});
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="関数（Functions）" duration="0">
+        <p>Amplify Functions は <strong>AWS Lambda</strong> と連携し、TypeScript でサーバーサイドのビジネスロジックを定義できます。</p>
+<pre><code language="language-ts" class="language-ts">// amplify/functions/say-hello/resource.ts
+import { defineFunction } from &#34;@aws-amplify/backend&#34;;
+
+export const sayHello = defineFunction({
+  name: &#34;say-hello&#34;,
+  entry: &#34;./handler.ts&#34;,
+});
+</code></pre>
+<pre><code language="language-ts" class="language-ts">// amplify/functions/say-hello/handler.ts
+export const handler = async (event: any) =&gt; {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: &#34;Hello from Amplify!&#34; }),
+  };
+};
+</code></pre>
+<p>定義した関数は Data のカスタムリゾルバや Auth のトリガーとしても利用できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ホスティング" duration="0">
+        <p>Amplify Hosting は、静的サイト、SSR アプリケーション、ハイブリッド Web アプリのデプロイとホスティングを提供します。</p>
+<h2 is-upgraded>SSR サポート</h2>
+<p>以下のフレームワークがサポートされています。</p>
+<ul>
+<li><strong>Next.js</strong> — アダプターなしで Next.js 15 をサポート</li>
+<li><strong>Nuxt</strong> — オープンソースのビルドアダプター経由</li>
+<li><strong>Astro</strong> — オープンソースのビルドアダプター経由</li>
+<li><strong>SvelteKit</strong> — オープンソースのビルドアダプター経由</li>
+</ul>
+<pre><code language="language-text" class="language-text">2025 年 9 月 15 日以降、Node.js 14/16/18 ランタイムのサポートが終了します。
+Node.js 20 または Node.js 22 への移行が必要です。
+</code></pre>
+<p>2025 年 2 月には SSR アプリケーション向けに IAM ロールのサポートが追加されました。これにより、環境変数でクレデンシャルを定義する必要がなくなり、一時的な資格情報による安全なアクセスが可能になりました。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/amplify/latest/userguide/server-side-rendering-amplify.html" target="_blank">Deploying server-side rendered applications with Amplify Hosting</a></p>
+<h2 is-upgraded>Git ベースの CI/CD</h2>
+<p>Amplify Hosting は GitHub、GitLab、CodeCommit に接続し、コミットごとに自動ビルド・デプロイを実行します。</p>
+<ul>
+<li>本番、ステージングなどの共有環境は Git ブランチと 1:1 で対応</li>
+<li>プルリクエストプレビューで本番マージ前に検証可能</li>
+<li>即時ロールバックとゼロダウンタイムデプロイ</li>
+<li>カスタムドメインの設定</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AI 連携" duration="0">
+        <p>Amplify は <strong>Amazon Bedrock</strong> との連携機能を提供しており、バンドルされたチャット UI コンポーネントと型付きクライアントにより、LLM（大規模言語モデル）を数分でアプリケーションに統合できます。</p>
+<p>Amplify のロードマップでは、CDK 統合の深化と AI サービスプラグインの拡張が重点項目として挙げられています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="サンドボックス環境" duration="0">
+        <p>Gen 2 の特徴的な機能の一つが、開発者ごとに分離されたクラウドサンドボックス環境です。</p>
+<ul>
+<li>各開発者が独立した AWS バックエンド環境を持つ</li>
+<li>他の開発者の環境に影響を与えずに変更をテストできる</li>
+<li>イテレーションの更新は Gen 1 比で最大 8 倍高速</li>
+<li>インテリジェントキャッシュにより、変更のない部分はビルドをスキップ</li>
+</ul>
+<pre><code language="language-text" class="language-text">サンドボックス環境は開発時のみ使用します。
+本番環境やステージング環境は Git ブランチベースの共有環境を使用します。
+</code></pre>
+<p>サンドボックスの起動は以下のコマンドで行います。</p>
+<pre><code language="language-sh" class="language-sh">npx ampx sandbox
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Gen 1 からの移行" duration="0">
+        <p>AWS は Gen 1 のサポート継続を明言していますが、新規アプリケーションには Gen 2 が推奨されています。</p>
+<p>移行時の主な注意点:</p>
+<ul>
+<li>DataStore など、一部機能が Gen 2 で未対応の場合がある</li>
+<li>CDK や AWS リソース管理の知識が新たに求められる</li>
+<li>2026 年 1 月の AWS Amplify Conference 2026 にて、Gen 1 から Gen 2 へのマイグレーションツールのベータ提供が発表</li>
+</ul>
+<p>AWS ドキュメント &gt; <a href="https://docs.amplify.aws/react/start/migrate-to-gen2/" target="_blank">Gen 2 for Gen 1 customers</a></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>ユースケース</p>
+</td><td colspan="1" rowspan="1"><p>推奨</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>新規アプリケーション</p>
+</td><td colspan="1" rowspan="1"><p>Gen 2</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>大人数チームでの並行開発</p>
+</td><td colspan="1" rowspan="1"><p>Gen 2（ブランチごとのフルスタックデプロイが有利）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>長期運用・高トラフィック</p>
+</td><td colspan="1" rowspan="1"><p>Gen 2</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>DataStore 必須のモバイルアプリ</p>
+</td><td colspan="1" rowspan="1"><p>Gen 1（Gen 2 では未対応の可能性）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>既存 Gen 1 アプリ</p>
+</td><td colspan="1" rowspan="1"><p>慎重に移行を検討</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

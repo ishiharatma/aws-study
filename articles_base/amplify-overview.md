@@ -38,7 +38,7 @@ Gen 2 では、Auth、Data、Storage、Functions の 4 つのカテゴリが組�
 
 【AWS Black Belt Online Seminar】AWS Amplify Gen2(YouTube)-なし
 
-![blackbelt_amplify](/images/amplify/blackbelt-amplify-320.jpg)
+![blackbelt_amplify]()
 
 【AWS Black Belt Online Seminar】[AWS Amplify Gen1(YouTube)](https://www.youtube.com/watch?v=A4HOzn7ERqE)(1:02:59)
 
@@ -308,4 +308,4 @@ AWS ドキュメント > [Gen 2 for Gen 1 customers](https://docs.amplify.aws/re
 
 ## 📖 まとめ
 
-![amplify](/images/all/amplify.png)
+![amplify]()
