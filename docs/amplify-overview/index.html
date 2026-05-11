@@ -285,6 +285,8 @@ Node.js 20 または Node.js 22 への移行が必要です。
 <li>即時ロールバックとゼロダウンタイムデプロイ</li>
 <li>カスタムドメインの設定</li>
 </ul>
+<p>:::message <strong>AWS CodeCommit について</strong> 2024 年 7 月に新規サインアップが停止されましたが、2025 年 11 月 24 日に GA へ復活しました。新規顧客も含めて引き続き利用できます。</p>
+<p><a href="https://aws.amazon.com/jp/blogs/devops/aws-codecommit-returns-to-general-availability/" target="_blank">The Future of AWS CodeCommit</a> :::</p>
 
 
       </google-codelab-step>
@@ -320,7 +322,7 @@ Node.js 20 または Node.js 22 への移行が必要です。
 <ul>
 <li>DataStore など、一部機能が Gen 2 で未対応の場合がある</li>
 <li>CDK や AWS リソース管理の知識が新たに求められる</li>
-<li>2026 年 1 月の AWS Amplify Conference 2026 にて、Gen 1 から Gen 2 へのマイグレーションツールのベータ提供が発表</li>
+<li>2026 年 1 月の AWS Amplify Conference 2026 にて、Gen 1 から Gen 2 へのマイグレーションツールのベータ提供が発表されました</li>
 </ul>
 <p>AWS ドキュメント &gt; <a href="https://docs.amplify.aws/react/start/migrate-to-gen2/" target="_blank">Gen 2 for Gen 1 customers</a></p>
 <table>
@@ -348,7 +350,15 @@ Node.js 20 または Node.js 22 への移行が必要です。
       </google-codelab-step>
     
       <google-codelab-step label="📖 まとめ" duration="0">
-        
+        <p>AWS Amplify Gen 2 は、TypeScript でバックエンドをコードとして定義できるフルスタック開発プラットフォームです。</p>
+<ul>
+<li><strong>Auth</strong>（Cognito）、<strong>Data</strong>（AppSync + DynamoDB）、<strong>Storage</strong>（S3）、<strong>Functions</strong>（Lambda）が組み込みでサポート</li>
+<li>開発者ごとのサンドボックス環境でチーム開発が快適になり、デプロイ速度は Gen 1 比で最大 8 倍高速</li>
+<li>CDK ベースのため、Amplify が標準提供しない AWS サービスも自由に追加できる</li>
+<li>Amplify Hosting は Next.js / Nuxt / Astro / SvelteKit をサポートし、Git ブランチと連動した CI/CD が利用できる</li>
+</ul>
+<p>Gen 1 からの移行は必須ではありませんが、新規アプリケーションは Gen 2 が推奨です。</p>
+
 
       </google-codelab-step>
     
