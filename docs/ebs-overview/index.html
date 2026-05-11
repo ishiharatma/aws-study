@@ -46,9 +46,14 @@
 </ul>
 </li>
 <li><a href="#ebs-%E3%83%9E%E3%83%AB%E3%83%81%E3%82%A2%E3%82%BF%E3%83%83%E3%83%81" target="_blank">EBS マルチアタッチ</a></li>
-<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%9C%E3%83%AA%E3%83%A5%E3%83%BC%E3%83%A0%E3%82%92%E7%BD%AE%E3%81%8D%E6%8F%9B%E3%81%88%E3%82%8B" target="_blank">ルートボリュームを置き換える</a></li>
 <li><a href="#%E3%82%B9%E3%83%8A%E3%83%83%E3%83%97%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88" target="_blank">スナップショット</a><ul>
 <li><a href="#%E3%82%B9%E3%83%8A%E3%83%83%E3%83%97%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%E3%81%AE%E3%82%B3%E3%83%94%E3%83%BC" target="_blank">スナップショットのコピー</a></li>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%9C%E3%83%AA%E3%83%A5%E3%83%BC%E3%83%A0%E3%82%92%E7%BD%AE%E3%81%8D%E6%8F%9B%E3%81%88%E3%82%8B" target="_blank">ルートボリュームを置き換える</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">バックアップ</a><ul>
+<li><a href="#amazon-data-lifecycle-manager-dlm" target="_blank">Amazon Data Lifecycle Manager (DLM)</a></li>
+<li><a href="#aws-backup" target="_blank">AWS Backup</a></li>
 </ul>
 </li>
 <li><a href="#%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">暗号化</a><ul>
@@ -58,6 +63,7 @@
 </li>
 <li><a href="#%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9" target="_blank">パフォーマンス</a></li>
 <li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">モニタリングとトラブルシューティング</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 
 
@@ -66,7 +72,7 @@
       <google-codelab-step label="Amazon EBS とは" duration="0">
         <p>Amazon Elastic Block Store (EBS) は、AWS EC2 インスタンスで使用するための永続的な<strong>ブロックストレージ</strong>サービスです。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=ffND-tX1Qxs" target="_blank">Amazon Elastic Block Store(YouTube)</a>(0:55:30)</p>
-<p class="image-container"><img alt="xx" src="img\\678728fbd0dc3954.jpg"></p>
+<p class="image-container"><img alt="blackbelt-ebs" src="img\\678728fbd0dc3954.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/ebs/" target="_blank">Amazon EBS サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/?id=docs_gateway" target="_blank">Amazon EBS ドキュメント</a></p>
 <p><a href="https://aws.amazon.com/jp/ebs/faqs/" target="_blank">Amazon EBS よくある質問</a></p>
@@ -101,7 +107,7 @@
 <li>HDD タイプは、大容量の処理に優れている</li>
 </ul>
 </li>
-<li>オンプレサーバの物理的なディスクに近いイメージを持つかもしれないが、EBS はネットワーク接続型です。Windows でいうとネットワークドライブを割り当てているイメージが近いかもしれません。 <ul>
+<li>オンプレサーバの物理的なディスクに近いイメージを持つかもしれませんが、EBS はネットワーク接続型です。Windows でいうとネットワークドライブを割り当てているイメージが近いかもしれません。 <ul>
 <li><img alt="ebs-nw" src="img\\b418717cbbfb9f16.png"></li>
 </ul>
 </li>
@@ -114,7 +120,7 @@
         <p>EBS を知る上では、IOPS を理解しておく必要があります。</p>
 <p>Input/Output Operations Per Second という意味であり、1 秒間に読み取り/書き込みできる量で、小さなランダム I/O 操作（通常 4KB または 16KB→<a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/volume_constraints.html#block_size" target="_blank">ブロックサイズを参照</a>）の処理能力を示します。</p>
 <p>データベース、トランザクション処理システムなど、高頻度の小規模 I/O 操作を必要とするワークロードのパフォーマンスに直接影響しますので、重要な指標です。</p>
-<p>IOPS が高いからといって、例レイテンシであるとは限らない点には注意が必要です。</p>
+<p>IOPS が高いからといって、低レイテンシであるとは限らない点には注意が必要です。</p>
 <p>IOPS を最適化する上で <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ebs-optimized.html" target="_blank">EBS 最適化インスタンス</a>の利用も考慮します。 一部のインスタンスではデフォルトで有効になっている EBS 専用の帯域が確保される機能です。 また、IOPS は単純に高ければよいというものではないので、アプリケーションの要件、コスト、インスタンスタイプなどを総合的に考慮する必要があります。</p>
 <p class="image-container"><img alt="ebs-optimized" src="img\\9e58cceb0bb24937.png"></p>
 
@@ -122,7 +128,8 @@
       </google-codelab-step>
     
       <google-codelab-step label="EBS の種類" duration="0">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-volume-types.html" target="_blank">Amazon EBS ボリュームタイプ</a></p>
+        <p>EBS には大きく分けて <strong>SSD タイプ</strong>と <strong>HDD タイプ</strong>があります。 SSD タイプはランダム I/O 性能を重視するワークロード向け、HDD タイプはシーケンシャル I/O や大容量データ処理向けです。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-volume-types.html" target="_blank">Amazon EBS ボリュームタイプ</a></p>
 <p class="image-container"><img alt="volume-type" src="img\\ca8c5d39893651a5.png"></p>
 <h2 is-upgraded>SSD</h2>
 <ul>
@@ -169,7 +176,7 @@
 </ul>
 </li>
 <li>スループット: 4,000 MiB/s <ul>
-<li>0.256 MiB/s/IOPS なので 16,000 IOPS で最大値に達する</li>
+<li>0.256 MiB/s/IOPS なので、最大スループットを実現するには 16,000 IOPS が必要</li>
 </ul>
 </li>
 <li>マルチアタッチ: OK</li>
@@ -183,7 +190,7 @@
 </ul>
 </li>
 <li>スループット: 1,000 MiB/s <ul>
-<li>0.016 MiB/s/IOPS なので 640,000 IOPS で最大値に達する</li>
+<li>最大スループットを実現するには 64,000 IOPS が必要（プロビジョンド IOPS あたり 16 KiB × 64,000 IOPS = 1,000 MiB/秒）</li>
 </ul>
 </li>
 <li>マルチアタッチ: OK</li>
@@ -259,8 +266,8 @@
     
       <google-codelab-step label="EBS マルチアタッチ" duration="0">
         <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-volumes-multi.html" target="_blank">Amazon EBS マルチアタッチを使用した複数のインスタンスへのボリュームのアタッチ</a></p>
-<p>プロビジョンド IOPS SSD で利用できる機能で、同一の AZ にある複数のインスタンスにボリュームをアタッチできます。 クラスタリングされたデータベースや High Availability シナリオに有用</p>
-<p>以下の制約があります。</p>
+<p>プロビジョンド IOPS SSD で利用できる機能で、同一の AZ にある複数のインスタンスにボリュームをアタッチできます。 クラスタリングされたデータベースや High Availability シナリオに有用です。</p>
+<p>ただし、以下の制約があります。</p>
 <ul>
 <li>EC2 と同一の AZ のみ</li>
 <li>最大 16 のインスタンスに同時アタッチ可能</li>
@@ -282,24 +289,9 @@
 
       </google-codelab-step>
     
-      <google-codelab-step label="ルートボリュームを置き換える" duration="0">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/replace-root.html#replace" target="_blank">ルートボリュームを置き換える</a></p>
-<ul>
-<li>EC2 インスタンスを停止することなく、ルートボリュームを置き換えることができます。</li>
-<li>インスタンスが実行中のみ置き換えることができます。</li>
-<li>ただし、再起動によるダウンタイムは発生します。</li>
-<li>ルートボリュームを置き換えるスナップショットは 置き換える EBS から作成されたものでなくてはいけません。 <ul>
-<li>スナップショットのコピーで作成したものは置き換えに使用できません。</li>
-</ul>
-</li>
-</ul>
-<p class="image-container"><img alt="root-volume" src="img\\6448900a2f503d07.png"></p>
-
-
-      </google-codelab-step>
-    
       <google-codelab-step label="スナップショット" duration="0">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-snapshots.html#how_snapshots_work" target="_blank">スナップショットの仕組み</a></p>
+        <p>スナップショットは EBS ボリュームの特定時点のバックアップで、S3 に保存されます。 増分バックアップ方式を採用しており、コスト効率よくデータを保護できます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-snapshots.html#how_snapshots_work" target="_blank">スナップショットの仕組み</a></p>
 <p class="image-container"><img alt="ebs-snapshot" src="img\\efaa79f4e3bc81dd.png"></p>
 <ul>
 <li>増分スナップショット <ul>
@@ -340,12 +332,76 @@
 </li>
 <li>リージョンまたはアカウント間でのコピーの場合、初回コピーはフルサイズ、1 回でもフルバックアップのスナップショットをコピーしたことがある場合は、増分コピーとなる</li>
 </ul>
+<h2 is-upgraded>ルートボリュームを置き換える</h2>
+<p>OS の破損や設定ミスが発生した場合に、EC2 インスタンスを停止せずにルートボリュームを以前の状態に戻せる機能です。 スナップショットからルートボリュームを復元するため、事前にスナップショットを取得しておく必要があります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/replace-root.html#replace" target="_blank">ルートボリュームを置き換える</a></p>
+<ul>
+<li>EC2 インスタンスを停止することなく、ルートボリュームを置き換えることができます。</li>
+<li>インスタンスが実行中のみ置き換えることができます。</li>
+<li>ただし、再起動によるダウンタイムは発生します。</li>
+<li>ルートボリュームを置き換えるスナップショットは 置き換える EBS から作成されたものでなくてはいけません。 <ul>
+<li>スナップショットのコピーで作成したものは置き換えに使用できません。</li>
+</ul>
+</li>
+</ul>
+<p class="image-container"><img alt="root-volume" src="img\\6448900a2f503d07.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="バックアップ" duration="0">
+        <p>EBS のバックアップには、主に <strong>Amazon Data Lifecycle Manager (DLM)</strong> と <strong>AWS Backup</strong> の 2 つのサービスを利用できます。 EBS スナップショット専用のシンプルな自動化には DLM、複数サービスを横断して一元管理したい場合は AWS Backup が適しています。</p>
+<h2 is-upgraded>Amazon Data Lifecycle Manager (DLM)</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/snapshot-lifecycle.html" target="_blank">Amazon Data Lifecycle Manager</a></p>
+<p>EBS スナップショットの作成・保持・削除を自動化するサービスです。</p>
+<ul>
+<li>タグベースのポリシーで対象ボリュームを指定</li>
+<li>スケジュール設定で自動的にスナップショットを作成</li>
+<li>保持期間の設定により古いスナップショットを自動削除</li>
+<li>クロスリージョンコピーや共有ポリシーもサポート</li>
+</ul>
+<h2 is-upgraded>AWS Backup</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/aws-backup/latest/devguide/whatisbackup.html" target="_blank">AWS Backup</a></p>
+<p>複数の AWS サービスのバックアップを一元管理できるフルマネージドサービスです。</p>
+<ul>
+<li>EBS 以外にも RDS、DynamoDB、EFS、S3 など多数のサービスに対応</li>
+<li>バックアッププランを定義してスケジュールや保持期間を管理</li>
+<li>クロスリージョン・クロスアカウントのバックアップをサポート</li>
+<li>バックアップポリシーによるコンプライアンス対応と監査レポート機能</li>
+</ul>
+<table>
+<tr><td colspan="1" rowspan="1"><p>機能</p>
+</td><td colspan="1" rowspan="1"><p>Amazon DLM</p>
+</td><td colspan="1" rowspan="1"><p>AWS Backup</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>主な対象</p>
+</td><td colspan="1" rowspan="1"><p>EBS スナップショット</p>
+</td><td colspan="1" rowspan="1"><p>EBS・RDS・DynamoDB・EFS・S3 など</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>設定の複雑さ</p>
+</td><td colspan="1" rowspan="1"><p>シンプル</p>
+</td><td colspan="1" rowspan="1"><p>多機能</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>クロスリージョン</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>クロスアカウント</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>コンプライアンス管理</p>
+</td><td colspan="1" rowspan="1"><p>△</p>
+</td><td colspan="1" rowspan="1"><p>○</p>
+</td></tr>
+</table>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="暗号化" duration="0">
-        <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/EBSEncryption.html" target="_blank">Amazon EBS ボリュームの暗号化</a></p>
+        <p>EBS ボリュームは KMS を使用して保存データを暗号化できます。暗号化はパフォーマンスへの影響がほぼなく、有効にすることを推奨します。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/EBSEncryption.html" target="_blank">Amazon EBS ボリュームの暗号化</a></p>
 <p>EBS ボリュームの暗号化では、以下が暗号化されます。</p>
 <ul>
 <li>ボリューム内で保管中のデータ</li>
@@ -359,7 +415,8 @@
 <li>デフォルトでは、AWS 管理の<code>aws/ebs</code> キーで暗号化されます。</li>
 <li>CMK を指定することもできます。</li>
 </ul>
-<p>EBS 作成時に暗号化有無を指定できますが、デフォルトで暗号化するようにもできます。 <a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default" target="_blank">デフォルトで暗号化の有効化</a></p>
+<p>EBS 作成時に暗号化有無を指定できますが、AWSアカウント全体でデフォルトで暗号化するようにもできます。ただし、この設定は<strong>リージョン固有の設定</strong>となっていますので、<strong>使用するリージョンごとに有効化する</strong>必要があります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/work-with-ebs-encr.html#encryption-by-default" target="_blank">デフォルトで暗号化の有効化</a></p>
 <p class="image-container"><img alt="default-encryption" src="img\\b6976d30fa9f5bf8.png"></p>
 <p class="image-container"><img alt="default-encryption" src="img\\43a534590c52913f.png"></p>
 <p>AWS CLI で実施する場合</p>
@@ -370,6 +427,7 @@ aws ec2 get-ebs-encryption-by-default --region region
 aws ec2 enable-ebs-encryption-by-default --region region
 </code></pre>
 <h2 is-upgraded>暗号化されていないボリュームを暗号化するには？</h2>
+<p>作成済みのボリュームを直接暗号化することはできないため、スナップショットのコピーを経由した手順が必要です。 「デフォルト暗号化」を有効化する前に作成したボリュームや、セキュリティポリシーへの対応により暗号化が必要になった場合に必要な手順です。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-encryption.html#encrypt-unencrypted" target="_blank">暗号化されていないリソースの暗号化</a></p>
 <p>暗号化なしで作成した既存のボリュームまたはスナップショットを直接暗号化することはできません。</p>
 <ul>
@@ -384,6 +442,7 @@ aws ec2 enable-ebs-encryption-by-default --region region
 </ul>
 <p class="image-container"><img alt="dec-enc" src="img\\a7dbb7cc493a3d45.png"></p>
 <h2 is-upgraded>暗号化されているボリュームの暗号化を解除するには？</h2>
+<p>暗号化の解除も直接は行えないため、レスキューインスタンスを使って手動でデータをコピーする手順が必要です。 暗号化した KMS キーが使えなくなった場合や、暗号化をサポートしないサービス・ツールへデータを移行する必要がある場合に必要な手順です。</p>
 <p><a href="https://repost.aws/ja/knowledge-center/create-unencrypted-volume-kms-key" target="_blank">Linux で暗号化された EBS ボリュームの暗号化を解除するにはどうすればいいですか?</a></p>
 <p>こちらの記事にある手順によると、次のように実施します。</p>
 <ul>
@@ -401,7 +460,8 @@ aws ec2 enable-ebs-encryption-by-default --region region
       </google-codelab-step>
     
       <google-codelab-step label="パフォーマンス" duration="0">
-        <ul>
+        <p>EBS のパフォーマンスは、ボリュームタイプの選択だけでなく、インスタンスの設定やデータのレイアウトによっても左右されます。 アプリケーションの要件に合わせて以下のポイントを考慮することが重要です。</p>
+<ul>
 <li>EBS 最適化されたインスタンスを使用</li>
 <li>適切なボリュームサイズの選択</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/raid-config.html" target="_blank">RAID</a><ul>
@@ -431,7 +491,8 @@ aws ec2 enable-ebs-encryption-by-default --region region
       </google-codelab-step>
     
       <google-codelab-step label="モニタリングとトラブルシューティング" duration="0">
-        <ul>
+        <p>CloudWatch を使用して EBS のパフォーマンスやヘルスを監視できます。 I/O の遅延やキューの積み上がりを検知し、ボトルネックの特定や容量不足の予防に活用します。</p>
+<ul>
 <li>CloudWatch <ul>
 <li>メトリクスはデフォルトで 1 分間隔で送信される（無料）</li>
 <li>空き容量を AWS が提供するデフォルトのメトリクスで取得することはできない。CloudWatch エージェントを設定してインスタンスから送信する。参考：<a href="https://docs.aws.amazon.com/ja_jp/ebs/latest/userguide/ebs-describing-volumes.html#ebs-view-free-disk-space-lin" target="_blank">空きディスク容量の表示</a></li>
@@ -458,6 +519,12 @@ aws ec2 enable-ebs-encryption-by-default --region region
 </ul>
 </li>
 </ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Amazon EBS は、EC2 インスタンスにアタッチして使用する永続的なブロックストレージサービスです。 ワークロードに応じて SSD（gp3/io2）や HDD（st1/sc1）を使い分けることがコスト最適化のポイントです。 スナップショットによる増分バックアップ、KMS による暗号化、マルチアタッチなど、可用性・セキュリティ面での機能も充実しています。 パフォーマンス面では IOPS・スループット・レイテンシーの特性を理解した上で、EBS 最適化インスタンスや適切なボリュームタイプを選択することが重要です。</p>
 
 
       </google-codelab-step>
