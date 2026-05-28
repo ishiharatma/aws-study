@@ -304,8 +304,8 @@ RDS（DB への直接接続・調査・マイグレーション）
 | Amazon Route 53 | DNS ルーティング |
 | Elastic Load Balancing | 負荷分散 |
 | Amazon EC2 | アプリケーションサーバー |
-| Amazon RDS | データベース |
 | Amazon EC2 Auto Scaling ★ | アクセス増減に合わせて EC2 を自動スケール |
+| Amazon RDS | データベース |
 
 **シナリオ：** セール時などのアクセス急増でも自動スケールアウトし、コストも最適化する構成。
 
