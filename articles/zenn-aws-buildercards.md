@@ -5,7 +5,7 @@ topics: ["aws", "study"]
 published: true
 emoji: "🃏"
 ---
-# AWS BuilderCards 2nd Edition<!-- omit in toc -->
+# 【AWS学習】AWS BuilderCards 2nd Edition 完全ガイド<!-- omit in toc -->
 
 ![whats-buildercards](/images/buildercards/01-whats-buildercards.png)
 
@@ -301,7 +301,7 @@ RDS（DB への直接接続・調査・マイグレーション）
 
 ---
 
-### 構成例 6：自動スケールする Web アプリ（5 枚）
+### 構成例 6：オートスケールする Web アプリ（5 枚）
 
 | ![Route 53](/images/icons/64/Arch_Amazon-Route-53_64.png) | ![ELB](/images/icons/64/Arch_Elastic-Load-Balancing_64.png) | ![EC2](/images/icons/64/Arch_Amazon-EC2_64.png) | ![Autoscaling](/images/icons/64/Arch_Amazon-EC2-Auto-Scaling_64.png) | ![RDS](/images/icons/64/Arch_Amazon-RDS_64.png) |
 |:---:|:---:|:---:|:---:|:---:|
@@ -311,10 +311,10 @@ RDS（DB への直接接続・調査・マイグレーション）
 | Amazon Route 53 | DNS ルーティング |
 | Elastic Load Balancing | 負荷分散 |
 | Amazon EC2 | アプリケーションサーバー |
-| Amazon EC2 Auto Scaling ★ | アクセス増減に合わせて EC2 を自動スケール |
+| Amazon EC2 Auto Scaling ★ | アクセス増減に合わせて EC2 を自動的にスケール |
 | Amazon RDS | データベース |
 
-**シナリオ：** セール時などのアクセス急増でも自動スケールアウトし、コストも最適化する構成。
+**シナリオ：** セール時などのアクセス急増でも自動でスケールアウトし、コストも最適化する構成。
 
 > **CDP：** [ウェブサイト構築 応用編](https://aws.amazon.com/jp/cdp/ec-scaleup/)
 
@@ -437,6 +437,8 @@ S3 にファイル着信
 
 **シナリオ：** 注文処理・審査フロー・データ変換バッチなど、複数の Lambda を順番や並列に制御したい場合。リトライ・タイムアウト・分岐処理を Step Functions に任せることで、各 Lambda のコードをシンプルに保てる。
 
+参考：[TEAM](https://aws-samples.github.io/iam-identity-center-team/)の権限ライフサイクルの仕組み| [Zenn記事](https://zenn.dev/issy/articles/zenn-team-03-deepdive#1.1.-%E6%A8%A9%E9%99%90%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E7%AE%A1%E7%90%86%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF)
+
 ---
 
 ### 構成例 10：DevOps / インフラ自動化パイプライン（5 枚）
@@ -466,3 +468,5 @@ IAM Identity Center → 各アカウントへの権限を SSO で管理
 ```
 
 **シナリオ：** インフラ変更をコードレビュー → 自動テスト → 自動デプロイで管理する IaC パイプライン。環境ごとにスタックを切り替えることで dev / staging / prod を同じコードベースで管理でき、手作業によるリソース変更（コンソール操作）を排除できる。★ カードが 2 枚含まれる。
+
+[AWSブログ：Amazon CodeCatalyst で Environment を利用したマルチアカウントのデプロイ](https://aws.amazon.com/jp/blogs/news/using-environments-multi-account-deployments-with-amazon-codecatalyst/)

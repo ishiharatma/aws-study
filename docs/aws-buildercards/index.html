@@ -523,7 +523,7 @@ EC2 インスタンス（SSM エージェント経由）
 RDS（DB への直接接続・調査・マイグレーション）
 </code></pre>
 <p><strong>シナリオ：</strong> EC2 への SSH（22番ポート）を閉じたまま、IAM 権限を持つ開発者だけがマネジメントコンソールや CLI からセキュアに接続できる運用パターン。接続操作は CloudTrail・Session Manager ログとして監査記録に残り、踏み台（Bastion）サーバーの運用コストも不要になる。</p>
-<h2 is-upgraded>構成例 6：自動スケールする Web アプリ（5 枚）</h2>
+<h2 is-upgraded>構成例 6：オートスケールする Web アプリ（5 枚）</h2>
 <table>
 <tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="Route 53" src="img\\65e67df78a34a3a0.png"></p>
 </td><td colspan="1" rowspan="1"><p class="image-container"><img alt="ELB" src="img\\5ad9ce830ead30d4.png"></p>
@@ -546,13 +546,13 @@ RDS（DB への直接接続・調査・マイグレーション）
 </td><td colspan="1" rowspan="1"><p>アプリケーションサーバー</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Amazon EC2 Auto Scaling ★</p>
-</td><td colspan="1" rowspan="1"><p>アクセス増減に合わせて EC2 を自動スケール</p>
+</td><td colspan="1" rowspan="1"><p>アクセス増減に合わせて EC2 を自動的にスケール</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Amazon RDS</p>
 </td><td colspan="1" rowspan="1"><p>データベース</p>
 </td></tr>
 </table>
-<p><strong>シナリオ：</strong> セール時などのアクセス急増でも自動スケールアウトし、コストも最適化する構成。</p>
+<p><strong>シナリオ：</strong> セール時などのアクセス急増でも自動でスケールアウトし、コストも最適化する構成。</p>
 <p><strong>CDP： </strong><a href="https://aws.amazon.com/jp/cdp/ec-scaleup/" target="_blank">ウェブサイト構築 応用編</a></p>
 <h2 is-upgraded>構成例 7：コンテナ Web サービス（5 枚）</h2>
 <table>
@@ -749,6 +749,7 @@ Aurora（DB への直接接続・調査・マイグレーション）
   └─ 成功 → SNS で完了通知 / 失敗 → 自動リトライ → SNS でエラー通知
 </code></pre>
 <p><strong>シナリオ：</strong> 注文処理・審査フロー・データ変換バッチなど、複数の Lambda を順番や並列に制御したい場合。リトライ・タイムアウト・分岐処理を Step Functions に任せることで、各 Lambda のコードをシンプルに保てる。</p>
+<p>参考：<a href="https://aws-samples.github.io/iam-identity-center-team/" target="_blank">TEAM</a>の権限ライフサイクルの仕組み| <a href="https://zenn.dev/issy/articles/zenn-team-03-deepdive#1.1.-%E6%A8%A9%E9%99%90%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E7%AE%A1%E7%90%86%E3%81%AE%E4%BB%95%E7%B5%84%E3%81%BF" target="_blank">Zenn記事</a></p>
 <h2 is-upgraded>構成例 10：DevOps / インフラ自動化パイプライン（5 枚）</h2>
 <table>
 <tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="CodeCatalyst" src="img\\c53e2b95fda32f7e.png"></p>
@@ -789,6 +790,7 @@ CloudWatch → アラーム監視・ダッシュボード確認
 IAM Identity Center → 各アカウントへの権限を SSO で管理
 </code></pre>
 <p><strong>シナリオ：</strong> インフラ変更をコードレビュー → 自動テスト → 自動デプロイで管理する IaC パイプライン。環境ごとにスタックを切り替えることで dev / staging / prod を同じコードベースで管理でき、手作業によるリソース変更（コンソール操作）を排除できる。★ カードが 2 枚含まれる。</p>
+<p><a href="https://aws.amazon.com/jp/blogs/news/using-environments-multi-account-deployments-with-amazon-codecatalyst/" target="_blank">AWSブログ：Amazon CodeCatalyst で Environment を利用したマルチアカウントのデプロイ</a></p>
 
 
       </google-codelab-step>
