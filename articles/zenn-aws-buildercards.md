@@ -119,7 +119,7 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 
 ## カード構成例
 
-BuilderCards を組み合わせたアーキテクチャ例です。少ない枚数のシンプルな構成から最大 5 枚の応用例まで、初心者が段階的に学べるよう並べています。カード効果によっては 5 枚以上での構成が可能ですので、慣れてきたら追加の構成を考えてみましょう。
+BuilderCards を組み合わせたアーキテクチャ例 10種類です。少ない枚数のシンプルな構成から最大 5 枚の応用例まで、初心者が段階的に学べるよう並べています。カード効果によっては 5 枚以上での構成が可能ですので、慣れてきたら追加の構成を考えてみましょう。
 
 ★ は **コストありカード** を示します。
 
@@ -408,3 +408,61 @@ Aurora（DB への直接接続・調査・マイグレーション）
 **シナリオ：** IoT センサーや Web アクセスログをリアルタイムに収集し、分析・レポート化したい場合。
 
 > **CDP：** [IoT デバイス制御のための クラウド構成と料金試算例](https://aws.amazon.com/jp/cdp/iot-device-control/)
+
+---
+
+### 構成例 9：ステートマシンによるワークフロー自動化（5 枚）
+
+| ![Step Functions](/images/icons/64/Arch_AWS-Step-Functions_64.png) | ![Lambda](/images/icons/64/Arch_AWS-Lambda_64.png) | ![S3](/images/icons/64/Arch_Amazon-Simple-Storage-Service_64.png) | ![DynamoDB](/images/icons/64/Arch_Amazon-DynamoDB_64.png) | ![SNS](/images/icons/64/Arch_Amazon-Simple-Notification-Service_64.png) |
+|:---:|:---:|:---:|:---:|:---:|
+
+| カード | 役割 |
+|-------|------|
+| AWS Step Functions | 複数の Lambda をシーケンシャル・並列・分岐で制御するワークフローを定義 |
+| AWS Lambda | 各ステップの処理を実行（入力検証・外部 API 呼び出し・変換など） |
+| Amazon S3 | 処理対象ファイルの入力・処理結果の出力先 |
+| Amazon DynamoDB | ワークフローの処理状態・履歴を記録 |
+| Amazon SNS | 処理完了・エラー発生をメールや Slack へ通知 |
+
+**ワークフローの例：**
+
+```
+S3 にファイル着信
+  ↓ Step Functions が起動
+  ├─ Lambda①：入力ファイルのバリデーション
+  ├─ Lambda②：データ変換・加工（並列実行も可）
+  ├─ Lambda③：外部 API 連携・DB 書き込み
+  └─ 成功 → SNS で完了通知 / 失敗 → 自動リトライ → SNS でエラー通知
+```
+
+**シナリオ：** 注文処理・審査フロー・データ変換バッチなど、複数の Lambda を順番や並列に制御したい場合。リトライ・タイムアウト・分岐処理を Step Functions に任せることで、各 Lambda のコードをシンプルに保てる。
+
+---
+
+### 構成例 10：DevOps / インフラ自動化パイプライン（5 枚）
+
+| ![CodeCatalyst](/images/icons/64/Arch_Amazon-CodeCatalyst_64.png) | ![CDK](/images/icons/64/Arch_AWS-Cloud-Development-Kit_64.png) | ![CloudFormation](/images/icons/64/Arch_AWS-CloudFormation_64.png) | ![CloudWatch](/images/icons/64/Arch_Amazon-CloudWatch_64.png) | ![IAM Identity Center](/images/icons/64/Arch_AWS-IAM-Identity-Center_64.png) |
+|:---:|:---:|:---:|:---:|:---:|
+
+| カード | 役割 |
+|-------|------|
+| Amazon CodeCatalyst | ソースリポジトリ・CI/CD パイプラインを一元管理 |
+| AWS CDK ★ | インフラをプログラミング言語（TypeScript / Python など）で定義 |
+| AWS CloudFormation ★ | CDK が生成したテンプレートをスタックとしてデプロイ・管理 |
+| Amazon CloudWatch | デプロイ後のアプリケーション・インフラをモニタリング |
+| AWS IAM Identity Center | 複数の AWS アカウントへの開発者アクセスを SSO で一元制御 |
+
+**パイプラインの流れ：**
+
+```
+開発者 → CodeCatalyst へコードプッシュ
+  ↓ CI（自動テスト・CDK synth）
+CDK → CloudFormation テンプレートを生成
+  ↓ CD（自動デプロイ）
+CloudFormation → スタックを更新・リソースをプロビジョニング
+  ↓ デプロイ後
+CloudWatch → アラーム監視・ダッシュボード確認
+IAM Identity Center → 各アカウントへの権限を SSO で管理
+```
+
+**シナリオ：** インフラ変更をコードレビュー → 自動テスト → 自動デプロイで管理する IaC パイプライン。環境ごとにスタックを切り替えることで dev / staging / prod を同じコードベースで管理でき、手作業によるリソース変更（コンソール操作）を排除できる。★ カードが 2 枚含まれる。

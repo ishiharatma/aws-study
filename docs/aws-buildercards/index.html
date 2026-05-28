@@ -257,7 +257,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="カード構成例" duration="0">
-        <p>BuilderCards を組み合わせたアーキテクチャ例です。少ない枚数のシンプルな構成から最大 5 枚の応用例まで、初心者が段階的に学べるよう並べています。カード効果によっては 5 枚以上での構成が可能ですので、慣れてきたら追加の構成を考えてみましょう。</p>
+        <p>BuilderCards を組み合わせたアーキテクチャ例 10種類です。少ない枚数のシンプルな構成から最大 5 枚の応用例まで、初心者が段階的に学べるよう並べています。カード効果によっては 5 枚以上での構成が可能ですので、慣れてきたら追加の構成を考えてみましょう。</p>
 <p>★ は <strong>コストありカード</strong> を示します。</p>
 <p>「<a href="https://aws.amazon.com/jp/cdp/" target="_blank">目的別 クラウド構成と概算料金例</a>」から各構成に近いものをリンクしています。</p>
 <h2 is-upgraded>構成例 1：静的 Web サイト配信（2 枚）</h2>
@@ -711,6 +711,84 @@ Aurora（DB への直接接続・調査・マイグレーション）
 </table>
 <p><strong>シナリオ：</strong> IoT センサーや Web アクセスログをリアルタイムに収集し、分析・レポート化したい場合。</p>
 <p><strong>CDP： </strong><a href="https://aws.amazon.com/jp/cdp/iot-device-control/" target="_blank">IoT デバイス制御のための クラウド構成と料金試算例</a></p>
+<h2 is-upgraded>構成例 9：ステートマシンによるワークフロー自動化（5 枚）</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="Step Functions" src="img\\a01644266b185f44.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="Lambda" src="img\\4061ef592b790d16.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="S3" src="img\\65f79886087c06fb.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="DynamoDB" src="img\\ed91e623f098750d.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="SNS" src="img\\e595915e6f021a8c.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><p>カード</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS Step Functions</p>
+</td><td colspan="1" rowspan="1"><p>複数の Lambda をシーケンシャル・並列・分岐で制御するワークフローを定義</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS Lambda</p>
+</td><td colspan="1" rowspan="1"><p>各ステップの処理を実行（入力検証・外部 API 呼び出し・変換など）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon S3</p>
+</td><td colspan="1" rowspan="1"><p>処理対象ファイルの入力・処理結果の出力先</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon DynamoDB</p>
+</td><td colspan="1" rowspan="1"><p>ワークフローの処理状態・履歴を記録</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon SNS</p>
+</td><td colspan="1" rowspan="1"><p>処理完了・エラー発生をメールや Slack へ通知</p>
+</td></tr>
+</table>
+<p><strong>ワークフローの例：</strong></p>
+<pre><code>S3 にファイル着信
+  ↓ Step Functions が起動
+  ├─ Lambda①：入力ファイルのバリデーション
+  ├─ Lambda②：データ変換・加工（並列実行も可）
+  ├─ Lambda③：外部 API 連携・DB 書き込み
+  └─ 成功 → SNS で完了通知 / 失敗 → 自動リトライ → SNS でエラー通知
+</code></pre>
+<p><strong>シナリオ：</strong> 注文処理・審査フロー・データ変換バッチなど、複数の Lambda を順番や並列に制御したい場合。リトライ・タイムアウト・分岐処理を Step Functions に任せることで、各 Lambda のコードをシンプルに保てる。</p>
+<h2 is-upgraded>構成例 10：DevOps / インフラ自動化パイプライン（5 枚）</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="CodeCatalyst" src="img\\c53e2b95fda32f7e.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="CDK" src="img\\10a53200c11ad160.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="CloudFormation" src="img\\2aa018971505670f.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="CloudWatch" src="img\\918a0e4784289bcb.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="IAM Identity Center" src="img\\a660c465483045f3.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><p>カード</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon CodeCatalyst</p>
+</td><td colspan="1" rowspan="1"><p>ソースリポジトリ・CI/CD パイプラインを一元管理</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS CDK ★</p>
+</td><td colspan="1" rowspan="1"><p>インフラをプログラミング言語（TypeScript / Python など）で定義</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS CloudFormation ★</p>
+</td><td colspan="1" rowspan="1"><p>CDK が生成したテンプレートをスタックとしてデプロイ・管理</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon CloudWatch</p>
+</td><td colspan="1" rowspan="1"><p>デプロイ後のアプリケーション・インフラをモニタリング</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS IAM Identity Center</p>
+</td><td colspan="1" rowspan="1"><p>複数の AWS アカウントへの開発者アクセスを SSO で一元制御</p>
+</td></tr>
+</table>
+<p><strong>パイプラインの流れ：</strong></p>
+<pre><code>開発者 → CodeCatalyst へコードプッシュ
+  ↓ CI（自動テスト・CDK synth）
+CDK → CloudFormation テンプレートを生成
+  ↓ CD（自動デプロイ）
+CloudFormation → スタックを更新・リソースをプロビジョニング
+  ↓ デプロイ後
+CloudWatch → アラーム監視・ダッシュボード確認
+IAM Identity Center → 各アカウントへの権限を SSO で管理
+</code></pre>
+<p><strong>シナリオ：</strong> インフラ変更をコードレビュー → 自動テスト → 自動デプロイで管理する IaC パイプライン。環境ごとにスタックを切り替えることで dev / staging / prod を同じコードベースで管理でき、手作業によるリソース変更（コンソール操作）を排除できる。★ カードが 2 枚含まれる。</p>
 
 
       </google-codelab-step>
