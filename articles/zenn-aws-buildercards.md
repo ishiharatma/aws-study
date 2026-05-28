@@ -1,5 +1,5 @@
 ---
-title: "【初心者向け】AWSBuilderCards 2nd Editionn 入門！完全ガイド" # 記事のタイトル
+title: "【初心者向け】AWSBuilderCards 2nd Edition 入門！完全ガイド" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
 published: false
@@ -60,7 +60,7 @@ _図：ヒント_
 
 ## カードセット内容
 
-合計：144枚
+**合計：**144枚
 
 - Starter Cards：40枚
 - Builder Cards：91枚
