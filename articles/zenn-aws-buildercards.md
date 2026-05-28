@@ -1,3 +1,10 @@
+---
+title: "【初心者向け】AWSBuilderCards 2nd Editionn 入門！完全ガイド" # 記事のタイトル
+type: "tech" # tech: 技術記事 / idea: アイデア記事
+topics: ["aws", "study"]
+published: false
+emoji: "🃏"
+---
 # AWS BuilderCards 2nd Edition<!-- omit in toc -->
 
 ![whats-buildercards](/images/buildercards/01-whats-buildercards.png)
