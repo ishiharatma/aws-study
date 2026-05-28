@@ -1,4 +1,4 @@
-# AWS BuilderCards 2nd Edition<!-- omit in toc -->
+# 【AWS学習】AWS BuilderCards 2nd Edition 完全ガイド<!-- omit in toc -->
 
 ![whats-buildercards](/images/buildercards/01-whats-buildercards.png)
 
