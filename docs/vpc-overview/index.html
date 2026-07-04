@@ -1,0 +1,635 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon Virtual Private Cloud（VPC）</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="vpc-overview"
+                  title="Amazon Virtual Private Cloud（VPC）"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#vpc-%E3%81%A8%E3%81%AF" target="_blank">VPC とは</a><ul>
+<li><a href="#aws-%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">AWS ドキュメント</a></li>
+<li><a href="#%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">学習リソース</a></li>
+</ul>
+</li>
+<li><a href="#vpc-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">VPC の基本</a><ul>
+<li><a href="#vpc-%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E8%A6%81%E7%B4%A0" target="_blank">VPC を構成する要素</a></li>
+</ul>
+</li>
+<li><a href="#cidr-%E8%A8%AD%E8%A8%88" target="_blank">CIDR 設計</a><ul>
+<li><a href="#%E3%82%BB%E3%82%AB%E3%83%B3%E3%83%80%E3%83%AA-cidr-%E3%81%AE%E8%BF%BD%E5%8A%A0" target="_blank">セカンダリ CIDR の追加</a></li>
+</ul>
+</li>
+<li><a href="#dhcp-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%BB%E3%83%83%E3%83%88" target="_blank">DHCP オプションセット</a><ul>
+<li><a href="#%E3%83%87%E3%83%95%E3%82%A9%E3%83%AB%E3%83%88%E3%81%AE%E8%A8%AD%E5%AE%9A" target="_blank">デフォルトの設定</a></li>
+<li><a href="#%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0-dhcp-%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%BB%E3%83%83%E3%83%88%E3%81%8C%E5%BF%85%E8%A6%81%E3%81%AA%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">カスタム DHCP オプションセットが必要なケース</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%8D%E3%83%83%E3%83%88%E3%82%B2%E3%83%BC%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A4" target="_blank">インターネットゲートウェイ</a></li>
+<li><a href="#nat%E3%82%B2%E3%83%BC%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A4" target="_blank">NATゲートウェイ</a><ul>
+<li><a href="#%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%8A%E3%83%AB-nat-%E3%82%B2%E3%83%BC%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A42025%E5%B9%B411%E6%9C%88" target="_blank">リージョナル NAT ゲートウェイ（2025年11月〜）</a></li>
+<li><a href="#nat-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9" target="_blank">NAT インスタンス</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88" target="_blank">サブネット</a></li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88%E3%81%AE%E7%A8%AE%E5%88%A5" target="_blank">サブネットの種別</a><ul>
+<li><a href="#aws%E3%81%8C%E4%BA%88%E7%B4%84%E3%81%99%E3%82%8B5%E3%81%A4%E3%81%AEip%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9" target="_blank">AWSが予約する5つのIPアドレス</a></li>
+<li><a href="#%E3%82%B5%E3%83%96%E3%83%8D%E3%83%83%E3%83%88%E6%A7%8B%E6%88%90%E4%BE%8B" target="_blank">サブネット構成例</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB" target="_blank">ルートテーブル</a></li>
+<li><a href="#%E3%83%AB%E3%83%BC%E3%83%88%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E3%81%AE%E4%BE%8B" target="_blank">ルートテーブルの例</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97sg" target="_blank">セキュリティグループ（SG）</a><ul>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%95%E3%83%AB%E3%81%A8%E3%81%AF" target="_blank">ステートフルとは</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF-aclnacl" target="_blank">ネットワーク ACL（NACL）</a><ul>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%AC%E3%82%B9%E3%81%A8%E3%81%AF" target="_blank">ステートレスとは</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%81%A8-nacl-%E3%81%AE%E6%AF%94%E8%BC%83" target="_blank">セキュリティグループと NACL の比較</a></li>
+<li><a href="#vpc-%E3%82%A8%E3%83%B3%E3%83%89%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">VPC エンドポイント</a></li>
+<li><a href="#vpc-%E3%83%95%E3%83%AD%E3%83%BC%E3%83%AD%E3%82%B0" target="_blank">VPC フローログ</a><ul>
+<li><a href="#%E3%83%95%E3%83%AD%E3%83%BC%E3%83%AD%E3%82%B0%E3%81%AE%E4%B8%BB%E3%81%AA%E3%83%95%E3%82%A3%E3%83%BC%E3%83%AB%E3%83%89v2" target="_blank">フローログの主なフィールド（v2）</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="VPC とは" duration="0">
+        <p>VPCとは、Virtual Private Cloudの略で、AWSアカウント内に専用の仮想ネットワーク空間を構築できるサービスです。</p>
+<p>オンプレミスにおいて、このようなネットワーク環境を構築するには、主に以下のものが必要になります。</p>
+<ul>
+<li>データセンター</li>
+<li>電源</li>
+<li>ラック</li>
+<li>サーバ</li>
+<li>空調</li>
+<li>回線</li>
+<li>ストレージ　など</li>
+</ul>
+<p>物理的な機器をそろえるには、労力と手間、初期コストがかかります。これらの手間やコストを抑えてネットワークが構築できる点が、このVPCの最大のメリットです。</p>
+<h2 is-upgraded>AWS ドキュメント</h2>
+<p><a href="https://aws.amazon.com/jp/vpc/" target="_blank">VPC サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/?id=docs_gateway" target="_blank">VPC ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/vpc/faqs/" target="_blank">vpc よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/vpc/pricing/" target="_blank">vpc の料金</a></p>
+<h2 is-upgraded>学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=JAzsGRS_o4c" target="_blank">Amazon VPC(YouTube)</a>(0:53:33)</p>
+<p class="image-container"><img alt="blackbelt-vpc" src="img\\b75ea056109e2b5f.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=WCq_2-zkV44" target="_blank">Amazon VPC Advanced(YouTube)</a>(0:46:32)</p>
+<p class="image-container"><img alt="blackbelt-vpc-advanced" src="img\\394927d2e5bd0eb5.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="VPC の基本" duration="0">
+        <h2 is-upgraded>VPC を構成する要素</h2>
+<p>VPC は以下のコンポーネントで構成されます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>要素</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>サブネット</p>
+</td><td colspan="1" rowspan="1"><p>VPC の IP アドレス範囲を分割する単位</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ルートテーブル</p>
+</td><td colspan="1" rowspan="1"><p>サブネットのアウトバウンド経路を定義</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>インターネットゲートウェイ（IGW）</p>
+</td><td colspan="1" rowspan="1"><p>VPC とインターネット間の双方向通信を担う</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>NAT ゲートウェイ（NAT GW）</p>
+</td><td colspan="1" rowspan="1"><p>プライベートサブネットからのアウトバウンドのみ許可</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>セキュリティグループ（SG）</p>
+</td><td colspan="1" rowspan="1"><p>ENI 単位のステートフルなトラフィック制御</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ネットワーク ACL（NACL）</p>
+</td><td colspan="1" rowspan="1"><p>サブネット単位のステートレスなトラフィック制御</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>VPC Router</p>
+</td><td colspan="1" rowspan="1"><p>各サブネットの <code>.1</code> に暗黙的に存在する仮想ルーター</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>DHCP オプションセット</p>
+</td><td colspan="1" rowspan="1"><p>DNS・NTP 設定を VPC 内リソースに配布</p>
+</td></tr>
+</table>
+<p class="image-container"><img alt="vpc-overview.png" src="img\\ab1535d960f2401e.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="CIDR 設計" duration="0">
+        <p>VPC を作成する際に、VPC 全体の IP アドレス範囲を CIDR ブロックで指定します。</p>
+<ul>
+<li>指定できる範囲は <code>/16</code>（65,536 アドレス）〜 <code>/28</code>（16 アドレス）</li>
+<li><a href="http://www.faqs.org/rfcs/rfc1918.html" target="_blank">RFC 1918</a> のプライベートアドレス帯（<code>10.0.0.0/8</code>、<code>172.16.0.0/12</code>、<code>192.168.0.0/16</code>）を使うのが一般的</li>
+<li><strong>VPC 作成後に既存の CIDR を変更・削除することはできない</strong></li>
+</ul>
+<p>:::message alert オンプレミスや他の VPC と CIDR が重複すると、VPC Peering や Transit Gateway での接続ができなくなります。マルチアカウント・ハイブリッド環境を想定する場合は、アドレス帯を事前に整理してから設計してください。 :::</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/vpc-cidr-blocks.html" target="_blank">VPC CIDR ブロック（公式）</a></p>
+<h2 is-upgraded>セカンダリ CIDR の追加</h2>
+<p>VPC 作成後に、セカンダリ CIDR ブロックを追加することができます。IP アドレスが枯渇してきた場合や、用途別にアドレス帯を分けたい場合に利用します。</p>
+<pre><code>プライマリ CIDR  : 10.0.0.0/16（作成時に設定）
+セカンダリ CIDR  : 10.1.0.0/16（後から追加可能）
+</code></pre>
+<p>ただし、以下の制約があります。</p>
+<ul>
+<li>1 つの VPC に追加できる CIDR ブロックは最大 <strong>5 つ</strong>（デフォルト） <ul>
+<li>参考：<a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/amazon-vpc-limits.html" target="_blank">VPCクォータ</a></li>
+</ul>
+</li>
+<li>既存の CIDR と重複するアドレス帯は追加できない</li>
+<li>追加した CIDR の削除は可能だが、そのアドレス帯を使用中のサブネットがある場合は削除できない</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DHCP オプションセット" duration="0">
+        <p>DHCP オプションセットは、VPC 内のリソースに対して DNS サーバーや NTP サーバーなどのネットワーク設定を自動配布する仕組みです。VPC 作成時にデフォルトの DHCP オプションセットが自動的に関連付けられます。</p>
+<h2 is-upgraded>デフォルトの設定</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>オプション</p>
+</td><td colspan="1" rowspan="1"><p>デフォルト値</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>domain-name-servers</p>
+</td><td colspan="1" rowspan="1"><p>AmazonProvidedDNS</p>
+</td><td colspan="1" rowspan="1"><p>VPC の DNS リゾルバー（ベースアドレス +2）を使用</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>domain-name</p>
+</td><td colspan="1" rowspan="1"><p>リージョンによる（例：<code>ap-northeast-1.compute.internal</code>）</p>
+</td><td colspan="1" rowspan="1"><p>EC2 インスタンスのデフォルトドメイン名</p>
+</td></tr>
+</table>
+<p><code>AmazonProvidedDNS</code> は各サブネットの CIDR ベースアドレス +2 の IP（例：<code>10.0.0.2</code>）で動作する AWS 提供の DNS サーバーです。</p>
+<p>:::message <strong>Route 53 Resolver との関係</strong></p>
+<p><code>AmazonProvidedDNS</code> の実体は <strong>Route 53 Resolver</strong> です。VPC 内のリソースが <code>amazonaws.com</code> などの AWS サービスや、Route 53 で管理するプライベートホストゾーンの名前解決を行う際に使われます。オンプレミスとのハイブリッド環境では、Route 53 Resolver のインバウンド／アウトバウンドエンドポイントを使って、VPC とオンプレミス間の DNS 解決を双方向に構成できます。 :::</p>
+<h2 is-upgraded>カスタム DHCP オプションセットが必要なケース</h2>
+<ul>
+<li>オンプレミスの DNS サーバーを使わせたい場合</li>
+<li>NTP サーバーを独自に指定したい場合</li>
+</ul>
+<p>:::message alert DHCP オプションセットは<strong>作成後に変更できません。</strong> VPC の設定を変えたい場合は、新しい DHCP オプションセットを作成して VPC に関連付け直す必要があります。</p>
+<p>また、VPC に新しい DHCP オプションセットを関連付けた後、インスタンスの<strong>再起動は不要</strong>です。DHCP リースが更新されるタイミング（数時間以内）で自動的に反映されます。即時反映したい場合は OS 側でリース更新を実行してください。 :::</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/DHCPOptionSet.html" target="_blank">DHCP オプションセット（公式）</a></p>
+<h2 is-upgraded>インターネットゲートウェイ</h2>
+<p>IGW は、VPC 内のリソースとインターネット間の双方向通信を可能にするコンポーネントです。</p>
+<ul>
+<li>VPC に 1 つアタッチする（AZ をまたいで利用可能）</li>
+<li>AWS 側で冗長化・高可用性が担保されている</li>
+<li>IGW 自体の料金は無料（データ転送料金は別途発生）</li>
+</ul>
+<p>パブリックサブネットのリソース（ALB、NAT GW、EIP を持つ EC2 など）が、インターネットと通信する際に使用します。</p>
+<h2 is-upgraded>NATゲートウェイ</h2>
+<p>NAT GW は、プライベートサブネット内のリソースがインターネットへアウトバウンド通信をする際に使用します。インターネット側からの接続開始（インバウンド）はできません。</p>
+<ul>
+<li><strong>パブリックサブネット</strong>に配置する</li>
+<li>AZ ごとに配置することで冗長性を確保する</li>
+<li>データ処理量とアイドル時間で課金が発生する</li>
+</ul>
+<p>:::message コスト最適化として、S3 や DynamoDB へのアクセスは NAT GW を経由させず、<strong>VPC エンドポイント（Gateway 型、無料）</strong> を使うことを推奨します。 :::</p>
+<h3 is-upgraded>リージョナル NAT ゲートウェイ（2025年11月〜）</h3>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2025/11/aws-nat-gateway-regional-availability/" target="_blank">2025年11月19日のアップデート</a>で、<strong>リージョナル NAT ゲートウェイ</strong>が利用可能になりました。</p>
+<p>従来の NAT GW（ゾーナル NAT GW）は AZ 単位で固定されていたため、マルチ AZ 環境では以下の作業が必要でした。</p>
+<ul>
+<li>AZ ごとに NAT GW を作成する</li>
+<li>AZ ごとにパブリックサブネットを用意する</li>
+<li>新しい AZ にワークロードを追加するたびにルートテーブルを手動更新する</li>
+</ul>
+<p>リージョナル NAT GW では、これらが不要になります。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>観点</p>
+</td><td colspan="1" rowspan="1"><p>ゾーナル NAT GW（従来）</p>
+</td><td colspan="1" rowspan="1"><p>リージョナル NAT GW（新）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>配置単位</p>
+</td><td colspan="1" rowspan="1"><p>AZ 単位</p>
+</td><td colspan="1" rowspan="1"><p>リージョン単位</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリックサブネット</p>
+</td><td colspan="1" rowspan="1"><p>AZ ごとに必要</p>
+</td><td colspan="1" rowspan="1"><p>不要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>マルチ AZ 対応</p>
+</td><td colspan="1" rowspan="1"><p>手動で AZ 数分作成</p>
+</td><td colspan="1" rowspan="1"><p>自動でスケール</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ルートテーブル</p>
+</td><td colspan="1" rowspan="1"><p>AZ ごとに設定</p>
+</td><td colspan="1" rowspan="1"><p>単一の NAT GW ID に集約可</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベート NAT</p>
+</td><td colspan="1" rowspan="1"><p>✅ 対応</p>
+</td><td colspan="1" rowspan="1"><p>❌ 非対応</p>
+</td></tr>
+</table>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/nat-gateways-regional.html" target="_blank">リージョン NAT ゲートウェイ（公式）</a></p>
+<h3 is-upgraded>NAT インスタンス</h3>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/VPC_NAT_Instance.html" target="_blank">NAT インスタンス</a>は、EC2 インスタンスに NAT 機能を持たせることで、NAT GW の代替とする方法です。</p>
+<p>:::message alert これまでは、AWS が公式に提供していた NAT 専用 AMI(Amazon Linux 2) がありましたが、すでに廃止されており、<strong>NAT GW への移行を推奨</strong>しています。要件によってNATインスタンスが必要な場合は、Amazon Linux 2023 などから<a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/work-with-nat-instances.html#create-nat-ami" target="_blank">自前でセットアップ</a>する必要があります。 :::</p>
+<p>NAT インスタンスが選択肢に上がるのは、主に<strong>開発・検証環境のコスト削減</strong>が目的の場合です。EC2 料金のみで安価で利用できるのはもちろんのこと、NATゲートウェイでは簡単に実現できなかった一時的に停止することが可能です。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>観点</p>
+</td><td colspan="1" rowspan="1"><p>NAT GW</p>
+</td><td colspan="1" rowspan="1"><p>NAT インスタンス</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>管理</p>
+</td><td colspan="1" rowspan="1"><p>AWS マネージド</p>
+</td><td colspan="1" rowspan="1"><p>自己管理（OS パッチ等）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>可用性</p>
+</td><td colspan="1" rowspan="1"><p>AWS が担保</p>
+</td><td colspan="1" rowspan="1"><p>自前で冗長化が必要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>コスト</p>
+</td><td colspan="1" rowspan="1"><p>比較的高め</p>
+</td><td colspan="1" rowspan="1"><p>EC2 料金のみで安価</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>帯域</p>
+</td><td colspan="1" rowspan="1"><p>自動スケール</p>
+</td><td colspan="1" rowspan="1"><p>インスタンスタイプに依存</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>推奨環境</p>
+</td><td colspan="1" rowspan="1"><p>本番環境</p>
+</td><td colspan="1" rowspan="1"><p>開発・検証環境のみ</p>
+</td></tr>
+</table>
+<p>NAT インスタンスを使う場合は、以下の設定が必須です。</p>
+<pre><code language="language-bash" class="language-bash"># ソース/デスティネーションチェックの無効化（必須）
+aws ec2 modify-instance-attribute \
+  --instance-id i-xxxxxxxxxx \
+  --no-source-dest-check
+
+# OS側のIPフォワード有効化（必須）
+sudo sysctl -w net.ipv4.ip_forward=1
+</code></pre>
+<p>AWS CDK の <code>NatInstanceProviderV2</code> を使うことで、NAT インスタンスを手軽に利用することもできます。この L2 コンストラクトでは、以下の<a href="https://github.com/aws/aws-cdk/blob/v2.261.0/packages/aws-cdk-lib/aws-ec2/lib/nat.ts#L486" target="_blank">ユーザーデータ</a>を実行しています。</p>
+<pre><code language="language-typescript" class="language-typescript">  public static readonly DEFAULT_USER_DATA_COMMANDS = [
+    &#39;yum install iptables-services -y&#39;,
+    &#39;systemctl enable iptables&#39;,
+    &#39;systemctl start iptables&#39;,
+    &#39;echo &#34;net.ipv4.ip_forward=1&#34; &gt; /etc/sysctl.d/custom-ip-forwarding.conf&#39;,
+    &#39;sudo sysctl -p /etc/sysctl.d/custom-ip-forwarding.conf&#39;,
+    &#34;sudo /sbin/iptables -t nat -A POSTROUTING -o $(route | awk &#39;/^default/{print $NF}&#39;) -j MASQUERADE&#34;,
+    &#39;sudo /sbin/iptables -F FORWARD&#39;,
+    &#39;sudo service iptables save&#39;,
+  ];
+</code></pre>
+<h2 is-upgraded>サブネット</h2>
+<p>サブネットとは、VPCで利用可能なIPアドレスの範囲を分割したものです。サブネットはかならず単一のAZ単位に属します。</p>
+<pre><code language="language-text" class="language-text">Region (ap-northeast-1)
+└── VPC (10.0.0.0/16)
+    ├── Subnet-Public-A   (10.0.0.0/24)  ← AZ: ap-northeast-1a
+    ├── Subnet-Private-A  (10.0.10.0/23) ← AZ: ap-northeast-1a
+    ├── Subnet-Public-C   (10.0.1.0/24)  ← AZ: ap-northeast-1c
+    └── Subnet-Private-C  (10.0.11.0/23) ← AZ: ap-northeast-1c
+</code></pre>
+<p class="image-container"><img alt="subnet-diagram.png" src="img\\2e1fd1ac9d6a34e9.png"></p>
+<h2 is-upgraded>サブネットの種別</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/configure-subnets.html#subnet-types" target="_blank">AWS 公式ドキュメント</a>ではサブネットを以下の 5 種に分類しています。 サブネット定義にこのような設定があるのではなく、後述するルートテーブルで定義されるルートによってそのような役割で呼んでいるだけとなります。プライベートサブネットのつもりでも、IGWのルートをもてば事実上のパブリックサブネットとなってしまいます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種別</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td><td colspan="1" rowspan="1"><p>用途例</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリックサブネット</p>
+</td><td colspan="1" rowspan="1"><p>ルートテーブルに IGW へのルートが存在する</p>
+</td><td colspan="1" rowspan="1"><p>ALB、NAT GW、踏み台 EC2</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット</p>
+</td><td colspan="1" rowspan="1"><p>IGW へのルートがない（NAT 経由でアウトバウンドのみ可）</p>
+</td><td colspan="1" rowspan="1"><p>アプリ層、コンテナ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>VPN-only サブネット</p>
+</td><td colspan="1" rowspan="1"><p>VGW へのルートのみ存在する</p>
+</td><td colspan="1" rowspan="1"><p>Direct Connect 延伸環境</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Isolated サブネット</p>
+</td><td colspan="1" rowspan="1"><p>VPC 外へのルートが一切ない</p>
+</td><td colspan="1" rowspan="1"><p>DB 層、高セキュリティ要件</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>EVS サブネット</p>
+</td><td colspan="1" rowspan="1"><p>Amazon EVS を使用して作成</p>
+</td><td colspan="1" rowspan="1"><p>Amazon EVS を使用して作成</p>
+</td></tr>
+</table>
+<h3 is-upgraded>AWSが予約する5つのIPアドレス</h3>
+<p>サブネットに指定した CIDR ブロックで、先頭 4 つと末尾 1 つは AWS に<a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/subnet-sizing.html" target="_blank">予約</a>されています。</p>
+<p>例：<code>10.0.0.0/24</code> の場合</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>アドレス</p>
+</td><td colspan="1" rowspan="1"><p>用途</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.0.0.0</p>
+</td><td colspan="1" rowspan="1"><p>ネットワークアドレス</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.0.0.1</p>
+</td><td colspan="1" rowspan="1"><p>VPC ルーター</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.0.0.2</p>
+</td><td colspan="1" rowspan="1"><p>DNS サーバー（VPC ベース +2）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.0.0.3</p>
+</td><td colspan="1" rowspan="1"><p>AWS 将来利用予約</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.0.0.255</p>
+</td><td colspan="1" rowspan="1"><p>ブロードキャスト（VPC では未使用だが予約）</p>
+</td></tr>
+</table>
+<p><code>/24</code>（256 アドレス）で実際に使えるのは <strong>251 個</strong>です。設計時に必ずこの 5 つを差し引いて計算してください。 このような予約アドレスが存在するため、サブネットを細かくすると利用できないIPアドレスが多くなります。 サブネットは多すぎず、少なすぎず適切な単位で分けることを検討してください。</p>
+<p>また、AWSリソースによっては、推奨するサブネットマスクのサイズが記載されているものもありますのでサブネット設計時には利用するサービスのドキュメントを把握しておきましょう。</p>
+<p>AWSドキュメント＞<a href="https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/application/application-load-balancers.html#subnets-load-balancer" target="_blank">ロードバランサーのサブネット</a></p>
+<pre><code language="language-text" class="language-text">ロードバランサーが正しくスケールできるように、ロードバランサーのアベイラビリティーゾーンサブネットごとに
+ CIDR ブロックを最低でも /27 ビットマスク (例: 10.0.0.0/27) にし、
+ 少なくとも各サブネットにつき 8 個の空き IP アドレスを用意してください。
+</code></pre>
+<h3 is-upgraded>サブネット構成例</h3>
+<p class="image-container"><img alt="subet-example.png" src="img\\f45fe2c6a5a43a31.png"></p>
+<p>アプリケーション用サブネットからアドレス範囲を割り当てています。<code>/24</code>のほうから割り当てると、パブリックサブネットとデータレイヤー用の <code>/26</code> が <code>10.0.2.x</code> 台に収まります。 これをパブリックサブネットから割り当てると、パブリックサブネット <code>/26</code> とアプリケーション用サブネット <code>/24</code> の間に <code>10.0.0.128–10.0.0.255</code> 、つまり <code>10.0.0.128/25</code> という分割しにくい空アドレス空間が発生してしまうためです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>CIDR</p>
+</td><td colspan="1" rowspan="1"><p>ネットワーク範囲</p>
+</td><td colspan="1" rowspan="1"><p>総ホスト数</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>VPC</p>
+</td><td colspan="1" rowspan="1"><p>10.0.0.0/22</p>
+</td><td colspan="1" rowspan="1"><p>10.0.0.0 - 10.0.3.255</p>
+</td><td colspan="1" rowspan="1"><p>1,024</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリックサブネット①</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.0/26</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.0 - 10.0.2.63</p>
+</td><td colspan="1" rowspan="1"><p>64</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリックサブネット①</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.64/26</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.64 - 10.0.2.127</p>
+</td><td colspan="1" rowspan="1"><p>64</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(アプリケーション用①)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.0.0/24</p>
+</td><td colspan="1" rowspan="1"><p>10.0.0.0 - 10.0.0.255</p>
+</td><td colspan="1" rowspan="1"><p>256</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(アプリケーション用②)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.1.0/24</p>
+</td><td colspan="1" rowspan="1"><p>10.0.1.0 - 10.0.1.255</p>
+</td><td colspan="1" rowspan="1"><p>256</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(データレイヤー用①)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.128/26</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.128 - 10.0.2.191</p>
+</td><td colspan="1" rowspan="1"><p>64</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(データレイヤー用②)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.192/26</p>
+</td><td colspan="1" rowspan="1"><p>10.0.2.192 - 10.0.2.255</p>
+</td><td colspan="1" rowspan="1"><p>64</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>空き(15.6%)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.0/25, 10.0.3.128/27</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.0-10.0.3.159</p>
+</td><td colspan="1" rowspan="1"><p>160</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(VPCエンドポイント用①)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.160/27</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.160 - 10.0.3.191</p>
+</td><td colspan="1" rowspan="1"><p>32</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(VPCエンドポイント用②)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.192/27</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.192 - 10.0.3.223</p>
+</td><td colspan="1" rowspan="1"><p>32</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(Transit Gateway用①)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.224/28</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.224 - 10.0.3.239</p>
+</td><td colspan="1" rowspan="1"><p>16</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベートサブネット(Transit Gateway用②)</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.240/28</p>
+</td><td colspan="1" rowspan="1"><p>10.0.3.240 - 10.0.3.255</p>
+</td><td colspan="1" rowspan="1"><p>16</p>
+</td></tr>
+</table>
+<h2 is-upgraded>ルートテーブル</h2>
+<p>ルートテーブルは、サブネットから出るトラフィックがどこに向かうかを定義します。各サブネットは必ず 1 つのルートテーブルに関連付けします。</p>
+<h2 is-upgraded>ルートテーブルの例</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>Destination</p>
+</td><td colspan="1" rowspan="1"><p>Target</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.0.0.0/16</p>
+</td><td colspan="1" rowspan="1"><p>local</p>
+</td><td colspan="1" rowspan="1"><p>VPC 内部通信（自動生成・削除不可）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>0.0.0.0/0</p>
+</td><td colspan="1" rowspan="1"><p>igw-xxxx</p>
+</td><td colspan="1" rowspan="1"><p>インターネット宛て（パブリックサブネット用）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>0.0.0.0/0</p>
+</td><td colspan="1" rowspan="1"><p>nat-xxxx</p>
+</td><td colspan="1" rowspan="1"><p>インターネット宛て（プライベートサブネット用）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>10.1.0.0/16</p>
+</td><td colspan="1" rowspan="1"><p>tgw-xxxx</p>
+</td><td colspan="1" rowspan="1"><p>オンプレや別 VPC 宛て（TGW 経由）</p>
+</td></tr>
+</table>
+<p>:::message alert プライベートサブネットのルートテーブルに誤って IGW へのルートを追加してしまうと、そのサブネットは事実上パブリックになります。セキュリティグループでインバウンドを制限していても、<strong>ルートテーブルレベルで IGW ルートがある = パブリックサブネット</strong>です。 :::</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="セキュリティグループ（SG）" duration="0">
+        <p>セキュリティグループは、ENI（Elastic Network Interface）単位でトラフィックを制御する<strong>ステートフル</strong>なファイアウォールです。</p>
+<p>EC2 インスタンスへ適用しているように見えますが、実際には EC2 に紐づく ENI に対してセキュリティグループが関連付けられています。</p>
+<ul>
+<li>インバウンドとアウトバウンドのルールを個別に定義する</li>
+<li><strong>Allow ルールのみ</strong>設定可能（Deny ルールは設定できない）</li>
+<li>ステートフルのため、許可したインバウンドへの戻りトラフィックは自動的に許可される</li>
+<li>デフォルトでは全インバウンド拒否・全アウトバウンド許可</li>
+</ul>
+<h2 is-upgraded>ステートフルとは</h2>
+<p>ステートフルとは、<strong>通信の状態を追跡する</strong>ことを意味します。</p>
+<p>SG はステートフルなため、インバウンドで許可した通信の戻りトラフィック（レスポンス）は、 アウトバウンドルールに記載がなくても自動的に許可されます。</p>
+<p>例：クライアントから EC2 の TCP 443 へのリクエストを許可した場合</p>
+<ul>
+<li>インバウンド：TCP 443 を許可 → ✅ 通信が届く</li>
+<li>アウトバウンド：設定不要 → ✅ レスポンスが自動的に返る</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ネットワーク ACL（NACL）" duration="0">
+        <p>ネットワーク ACL は、<strong>サブネット単位</strong>でトラフィックを制御する<strong>ステートレス</strong>なファイアウォールです。</p>
+<ul>
+<li>インバウンドとアウトバウンドのルールを個別に定義する</li>
+<li><strong>Allow と Deny の両方</strong>を設定できる</li>
+<li>ステートレスのため、インバウンドを許可しても、戻りトラフィック用のアウトバウンドルールを別途設定する必要がある</li>
+<li>ルール番号の昇順で評価され、最初にマッチしたルールが適用される</li>
+<li>デフォルトでは全トラフィック許可</li>
+</ul>
+<p>:::message alert NACL で Deny ルールを設定する場合、<strong>エフェメラルポート（1024〜65535）のアウトバウンドを開けているか</strong>を確認してください。ステートレスのため戻りパケットが弾かれ、「つながらない」というトラブルが発生します。 :::</p>
+<h2 is-upgraded>ステートレスとは</h2>
+<p>ステートレスとは、<strong>通信の状態を追跡しない</strong>ことを意味します。</p>
+<p>NACL はステートレスなため、インバウンドを許可しても戻りトラフィックは自動許可されません。インバウンドとアウトバウンドを<strong>それぞれ個別に</strong>設定する必要があります。</p>
+<p>例：クライアントから EC2 の TCP 443 へのリクエストを許可した場合</p>
+<ul>
+<li>インバウンド：TCP 443 を許可 → ✅ 通信が届く</li>
+<li>アウトバウンド：エフェメラルポート（1024〜65535）を許可 → ✅ レスポンスが返る <ul>
+<li>※ 設定しないと ❌ レスポンスが弾かれる</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="セキュリティグループと NACL の比較" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>観点</p>
+</td><td colspan="1" rowspan="1"><p>セキュリティグループ（SG）</p>
+</td><td colspan="1" rowspan="1"><p>ネットワーク ACL（NACL）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>適用単位</p>
+</td><td colspan="1" rowspan="1"><p>ENI（リソース）単位</p>
+</td><td colspan="1" rowspan="1"><p>サブネット単位</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ステートフル</p>
+</td><td colspan="1" rowspan="1"><p>✅ Yes</p>
+</td><td colspan="1" rowspan="1"><p>❌ No</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Allow / Deny</p>
+</td><td colspan="1" rowspan="1"><p>Allow のみ</p>
+</td><td colspan="1" rowspan="1"><p>Allow と Deny 両方</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ルール評価</p>
+</td><td colspan="1" rowspan="1"><p>全ルールを評価</p>
+</td><td colspan="1" rowspan="1"><p>番号順（最初にマッチで終了）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>デフォルト状態</p>
+</td><td colspan="1" rowspan="1"><p>全インバウンド拒否</p>
+</td><td colspan="1" rowspan="1"><p>全トラフィック許可</p>
+</td></tr>
+</table>
+<p>使い分けの指針は以下のとおりです。</p>
+<ul>
+<li><strong>基本はセキュリティグループ</strong>でリソース単位の制御を行う</li>
+<li><strong>NACL は補助的</strong>に使う（特定 IP からの通信を一括 Deny したいときなど）</li>
+</ul>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/infrastructure-security.html#VPC_Security_Comparison" target="_blank">セキュリティグループとネットワーク ACL を比較する（公式）</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="VPC エンドポイント" duration="0">
+        <p>VPC エンドポイントは、インターネットを経由せずに AWS サービスへ接続するための仕組みです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>仕組み</p>
+</td><td colspan="1" rowspan="1"><p>対応サービス例</p>
+</td><td colspan="1" rowspan="1"><p>料金</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Gateway エンドポイント</strong></p>
+</td><td colspan="1" rowspan="1"><p>ルートテーブルにエントリを追加</p>
+</td><td colspan="1" rowspan="1"><p>S3、DynamoDB</p>
+</td><td colspan="1" rowspan="1"><p><strong>無料</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>Interface エンドポイント</strong></p>
+</td><td colspan="1" rowspan="1"><p>サブネット内に ENI として配置（PrivateLink）</p>
+</td><td colspan="1" rowspan="1"><p>ほぼ全 AWS サービス</p>
+</td><td colspan="1" rowspan="1"><p>有料</p>
+</td></tr>
+</table>
+<p>:::message S3 と DynamoDB は必ず <strong>Gateway エンドポイント</strong>を使いましょう。設定するだけで NAT GW 経由のデータ転送料金を削減できます。 :::</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="VPC フローログ" duration="0">
+        <p>VPC フローログは、VPC 内の ENI を通過する IP トラフィックのメタデータを記録する機能です。</p>
+<ul>
+<li>出力先は、CloudWatch Logs / S3 / Kinesis Data Firehose です</li>
+<li>パケットの中身（ペイロード）は記録しない</li>
+<li><code>action</code> フィールドが <code>REJECT</code> のレコードを確認することで、SG や NACL に弾かれた通信を特定できる</li>
+</ul>
+<h2 is-upgraded>フローログの主なフィールド（v2）</h2>
+<pre><code>version  account-id  interface-id  srcaddr  dstaddr  srcport  dstport  protocol  packets  bytes  start  end  action  log-status
+</code></pre>
+<table>
+<tr><td colspan="1" rowspan="1"><p>フィールド</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>srcaddr / dstaddr</p>
+</td><td colspan="1" rowspan="1"><p>送信元・送信先 IP アドレス</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>srcport / dstport</p>
+</td><td colspan="1" rowspan="1"><p>送信元・送信先ポート番号</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>action</p>
+</td><td colspan="1" rowspan="1"><p>ACCEPT または REJECT</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>log-status</p>
+</td><td colspan="1" rowspan="1"><p>OK / NODATA / SKIPDATA</p>
+</td></tr>
+</table>
+<p><a href="https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/flow-logs.html" target="_blank">VPC フローログ（公式）</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p class="image-container"><img alt="vpc-summary.png" src="img\\2a4ca3cd475183c.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

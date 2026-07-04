@@ -9,3 +9,4 @@ permalink: /compute/
 - AWS Elastic Beanstalk
 - Amazon Lightsail
 - AWS Batch
+- Amazon EC2

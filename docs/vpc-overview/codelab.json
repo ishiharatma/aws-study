@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2026-07-04T16:14:16+09:00",
+  "id": "vpc-overview",
+  "duration": 0,
+  "title": "Amazon Virtual Private Cloud（VPC）",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_vpc-overview.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "amazonvpc"
+  ],
+  "url": "vpc-overview"
+}

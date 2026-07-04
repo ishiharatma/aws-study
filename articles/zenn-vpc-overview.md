@@ -1,3 +1,11 @@
+---
+title: "【初心者向け】Amazon VPC 入門！完全ガイド" # 記事のタイトル
+type: "tech" # tech: 技術記事 / idea: アイデア記事
+topics: ["aws", "study"]
+published: false
+emoji: "🕸️"
+---
+
 # Amazon Virtual Private Cloud（VPC）<!-- omit in toc -->
 
 ![icon](/images/icons/64/Arch_Amazon-Virtual-Private-Cloud_64.png)
