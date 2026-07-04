@@ -445,4 +445,4 @@ version  account-id  interface-id  srcaddr  dstaddr  srcport  dstport  protocol 
 
 ## 📖 まとめ
 
-![vpc-summary.png](/images/vpc/vpc-summary.png)
+![vpc-summary.png](/images/vpc/vpc-summary-320.jpg)
