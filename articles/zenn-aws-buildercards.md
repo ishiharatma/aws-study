@@ -89,7 +89,7 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 | [AWS Step Functions](https://docs.aws.amazon.com/ja_jp/step-functions/latest/dg/welcome.html)          | 2  | application integration         |            |
 | [Amazon API Gateway](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/welcome.html)          | 2  | application integration         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-apigw-overview) |
 | [Amazon Route 53](https://docs.aws.amazon.com/ja_jp/Route53/latest/DeveloperGuide/Welcome.html)             | 2  | networking & content delivery   | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-route53-overview) |
-| [Amazon VPC](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/what-is-amazon-vpc.html)                  | 2  | networking & content delivery   |            |
+| [Amazon VPC](https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/what-is-amazon-vpc.html)                  | 2  | networking & content delivery   | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-vpc-overview) |
 | [Elastic Load Balancing](https://docs.aws.amazon.com/ja_jp/elasticloadbalancing/latest/userguide/what-is-load-balancing.html)      | 2  | networking & content delivery   | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-elb-overview) |
 | [Amazon CloudFront](https://docs.aws.amazon.com/ja_jp/AmazonCloudFront/latest/DeveloperGuide/Introduction.html)           | 2  | networking & content delivery   | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-cloudfront-overview) |
 | [Amazon RDS](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/UserGuide/Welcome.html)                  | 2  | database                        | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-rds-overview) |
