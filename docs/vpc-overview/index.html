@@ -448,6 +448,8 @@ sudo sysctl -w net.ipv4.ip_forward=1
 </td><td colspan="1" rowspan="1"><p>16</p>
 </td></tr>
 </table>
+<p>サブネットの計算には<a href="https://v2.awssubnetcalculator.com/" target="_blank">AWS Subnet Calculator</a>というツールがあるようです。 このツールだと、Transit Gateway用サブネットをCIDRの後ろから、というのができなかったので、自作してみました。</p>
+<p>https://ishiharatma.github.io/aws-vpc-subnet-calculator/</p>
 <h2 is-upgraded>ルートテーブル</h2>
 <p>ルートテーブルは、サブネットから出るトラフィックがどこに向かうかを定義します。各サブネットは必ず 1 つのルートテーブルに関連付けします。</p>
 <h2 is-upgraded>ルートテーブルの例</h2>

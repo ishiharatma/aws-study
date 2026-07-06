@@ -326,6 +326,11 @@ AWSドキュメント＞[ロードバランサーのサブネット](https://doc
 | プライベートサブネット(Transit Gateway用①)| 10.0.3.224/28 | 10.0.3.224 - 10.0.3.239 | 16 |
 | プライベートサブネット(Transit Gateway用②)| 10.0.3.240/28 | 10.0.3.240 - 10.0.3.255  | 16 |
 
+サブネットの計算には[AWS Subnet Calculator](https://v2.awssubnetcalculator.com/)というツールがあるようです。
+このツールだと、Transit Gateway用サブネットをCIDRの後ろから、というのができなかったので、自作してみました。
+
+https://ishiharatma.github.io/aws-vpc-subnet-calculator/
+
 ### ルートテーブル
 
 ルートテーブルは、サブネットから出るトラフィックがどこに向かうかを定義します。各サブネットは必ず 1 つのルートテーブルに関連付けします。
