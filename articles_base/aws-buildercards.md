@@ -28,6 +28,18 @@
 
 [AWS ビルダーカード、第 2 版 |YouTube](https://www.youtube.com/watch?v=bYCsNjrcTbE)
 
+### プレイマット
+
+これ以外も[公式ページ](https://aws.amazon.com/jp/gametech/buildercards/)の「Play Mats」からダウンロードできます。
+
+- [Console](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-BuilderCards-console-A3.pdf)
+
+![console-mat](/images/buildercards/console.png)
+
+- [Player](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-BuilderCards-2player-A3.pdf)
+
+![player-mat](/images/buildercards/player.png)
+
 ## 概要とルールをAI生成グラレコで
 
 ![game-over](/images/buildercards/07-end.png)
@@ -57,7 +69,11 @@ _図：ヒント_
 
 - Starter Cards：40枚
 - Builder Cards：91枚
+  - コストなしカード：77枚
+  - コストありカード：14枚
 - Well-Architected Cards：12枚
+  - 1点：7枚
+  - 3点：5枚
 - マニュアル：1枚
 
 ## BuilderCards詳細
