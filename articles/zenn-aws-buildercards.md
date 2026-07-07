@@ -92,7 +92,7 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 | サービス名                       | 枚数 | カテゴリ                            | Zenn記事リンク |
 |-----------------------------|----|---------------------------------|------------|
 | [AWS Marketplace](https://docs.aws.amazon.com/ja_jp/marketplace/latest/buyerguide/what-is-marketplace.html)             | 2  |                                 |            |
-| [Amazon EC2](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/concepts.html)                  | 8  | compute                         |            |
+| [Amazon EC2](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/concepts.html)                  | 8  | compute                         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ec2-overview) |
 | [AWS Lambda](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/welcome.html)                  | 6  | compute                         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-lambda-overview) |
 | [AWS Fargate](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/AWS_Fargate.html)                 | 2  | containers                      |            |
 | [Amazon ECS](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)                  | 2  | containers                      | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ecs-overview) |
