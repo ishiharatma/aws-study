@@ -1,0 +1,604 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon EC2</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ec2-overview"
+                  title="Amazon EC2"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#amazon-ec2-%E3%81%A8%E3%81%AF" target="_blank">Amazon EC2 とは</a><ul>
+<li><a href="#%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+</ul>
+</li>
+<li><a href="#ec2-%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E4%B8%BB%E8%A6%81%E3%81%AA%E8%A6%81%E7%B4%A0" target="_blank">EC2 を構成する主要な要素</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">インスタンスタイプ</a><ul>
+<li><a href="#%E5%91%BD%E5%90%8D%E8%A6%8F%E5%89%87" target="_blank">命名規則</a></li>
+<li><a href="#%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">オプション</a></li>
+<li><a href="#%E3%82%B7%E3%83%AA%E3%83%BC%E3%82%BA" target="_blank">シリーズ</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%B5%E3%82%A4%E3%82%BA" target="_blank">インスタンスサイズ</a></li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE%E9%81%B8%E3%81%B3%E6%96%B9" target="_blank">インスタンスタイプの選び方</a></li>
+</ul>
+</li>
+<li><a href="#amiamazon-machine-image" target="_blank">AMI（Amazon Machine Image）</a><ul>
+<li><a href="#ami-%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">AMI の種類</a></li>
+<li><a href="#%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%A0-ami%E3%82%B4%E3%83%BC%E3%83%AB%E3%83%87%E3%83%B3-ami" target="_blank">カスタム AMI（ゴールデン AMI）</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8" target="_blank">ストレージ</a><ul>
+<li><a href="#amazon-ebselastic-block-store" target="_blank">Amazon EBS（Elastic Block Store）</a><ul>
+<li><a href="#ebs-%E3%83%9C%E3%83%AA%E3%83%A5%E3%83%BC%E3%83%A0%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">EBS ボリュームタイプ</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%B9%E3%83%88%E3%82%A2" target="_blank">インスタンスストア</a></li>
+</ul>
+</li>
+<li><a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF" target="_blank">ネットワーク</a><ul>
+<li><a href="#ip-%E3%82%A2%E3%83%89%E3%83%AC%E3%82%B9%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">IP アドレスの種類</a></li>
+<li><a href="#enielastic-network-interface" target="_blank">ENI（Elastic Network Interface）</a></li>
+<li><a href="#%E3%83%97%E3%83%AC%E3%82%A4%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97" target="_blank">プレイスメントグループ</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">セキュリティ</a><ul>
+<li><a href="#%E3%82%AD%E3%83%BC%E3%83%9A%E3%82%A2" target="_blank">キーペア</a></li>
+<li><a href="#iam-%E3%83%AD%E3%83%BC%E3%83%AB" target="_blank">IAM ロール</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B3%BC%E5%85%A5%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">購入オプション</a><ul>
+<li><a href="#ri-%E3%81%A8-savings-plans-%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91" target="_blank">RI と Savings Plans の使い分け</a></li>
+</ul>
+</li>
+<li><a href="#%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AE%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB" target="_blank">インスタンスのライフサイクル</a><ul>
+<li><a href="#%E5%86%8D%E8%B5%B7%E5%8B%95%E3%81%A8%E3%83%91%E3%83%96%E3%83%AA%E3%83%83%E3%82%AF-ip" target="_blank">再起動とパブリック IP</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Amazon EC2 とは" duration="0">
+        <p>Amazon EC2（Elastic Compute Cloud）は、AWS クラウド上で仮想サーバー（インスタンス）を起動・管理できるサービスです。物理サーバーを購入・管理することなく、数分でサーバーを用意でき、必要に応じてスペックを変更したり、不要になったら削除したりできます。 料金は秒単位で請求されるため、使用しなかったコンピューティング時間のコストは請求されません。最小課金時間は 60 秒です。60秒未満で停止や終了した場合でも60秒分の料金が請求されます。</p>
+<h2 is-upgraded>公式ドキュメント</h2>
+<p>Amazon EC2を理解する公式ドキュメントは次のとおりです。</p>
+<p><a href="https://aws.amazon.com/jp/ec2/" target="_blank">Amazon EC2 サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/ec2/?id=docs_gateway" target="_blank">Amazon EC2 ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/ec2/faqs/" target="_blank">Amazon EC2 よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/ec2/pricing/" target="_blank">Amazon EC2 の料金</a></p>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=P5zX4DdlYOE" target="_blank">Amazon EC2(YouTube)</a>(0:55:18)</p>
+<p class="image-container"><img alt="blackbelt-ec2-1" src="img\\31a8c921de4feb22.jpg"></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=1ALvDtb2ziM" target="_blank">Amazon EC2入門(YouTube)</a>(0:32:12)</p>
+<p class="image-container"><img alt="blackbelt-ec2" src="img\\35edb3cb156455db.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="EC2 を構成する主要な要素" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>要素</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>インスタンスタイプ</p>
+</td><td colspan="1" rowspan="1"><p>vCPU・メモリ・ネットワーク性能などのスペック定義</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AMI</p>
+</td><td colspan="1" rowspan="1"><p>OS やソフトウェア構成を含む起動テンプレート</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ストレージ（EBS）</p>
+</td><td colspan="1" rowspan="1"><p>インスタンスにアタッチするブロックストレージ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>セキュリティグループ</p>
+</td><td colspan="1" rowspan="1"><p>インスタンスへの通信を制御するファイアウォール</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>キーペア</p>
+</td><td colspan="1" rowspan="1"><p>SSH 接続に使用する公開鍵認証の仕組み</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Elastic IP</p>
+</td><td colspan="1" rowspan="1"><p>インスタンスに固定できるパブリック IP アドレス</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>IAM ロール</p>
+</td><td colspan="1" rowspan="1"><p>インスタンスに付与する AWS サービスへのアクセス権限</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="インスタンスタイプ" duration="0">
+        <p>インスタンスタイプとは、EC2 で利用できる仮想サーバーのスペック（vCPU 数、メモリ容量、ネットワーク帯域など）を定めたものです。用途に応じて最適なタイプを選択します。</p>
+<h2 is-upgraded>命名規則</h2>
+<p>インスタンスタイプの名前は以下の形式になっています。</p>
+<p><code>シリーズ</code> + <code>世代</code> + <code>オプション</code> を合わせた部分（m7g）を <code>インスタンスファミリー</code> と呼びます。</p>
+<p><code>インスタンスファミリー</code> + <code>インスタンスサイズ</code> を合わせた部分（m7g.xlarge）をインスタンスタイプと呼びます。</p>
+<pre><code language="language-text" class="language-text">m 7 g.xlarge
+│ │ │   └─ インスタンスサイズ（nano / micro / small / medium / large / xlarge / 2xlarge ...）
+│ │ └── オプション（追加機能）
+│ └─── 世代（数字が大きいほど新しい）
+└───── シリーズ（用途・特性を示す）
+</code></pre>
+<h2 is-upgraded>オプション</h2>
+<pre><code language="language-text" class="language-text">m 7 g.xlarge
+    └── オプション（追加機能）
+</code></pre>
+<p>末尾のアルファベット（<code>g</code>, <code>i</code>, <code>n</code> など）は追加機能を示します。<code>g</code> だけのものや、<code>gn</code> のように複数組み合わせたものも存在します。 詳細は、<a href="https://docs.aws.amazon.com/ja_jp/ec2/latest/instancetypes/instance-type-names.html" target="_blank">AWSドキュメント</a>を参照してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>記号</p>
+</td><td colspan="1" rowspan="1"><p>意味</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>g</p>
+</td><td colspan="1" rowspan="1"><p>AWS Graviton プロセッサ（ARM ベース）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>i</p>
+</td><td colspan="1" rowspan="1"><p>Intel プロセッサ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>a</p>
+</td><td colspan="1" rowspan="1"><p>AMD プロセッサ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>n</p>
+</td><td colspan="1" rowspan="1"><p>ネットワーク最適化</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>d</p>
+</td><td colspan="1" rowspan="1"><p>インスタンスストア（NVMe SSD）搭載</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>z</p>
+</td><td colspan="1" rowspan="1"><p>高 CPU 周波数</p>
+</td></tr>
+</table>
+<p>:::message <strong>Graviton（g 系）を積極的に検討してください。</strong> AWS 独自の ARM ベースプロセッサで、同世代の x86 インスタンスと比較してコストパフォーマンスが高く、消費電力も低いです。Linux ワークロードであれば互換性の問題はほぼありません。 :::</p>
+<h2 is-upgraded>シリーズ</h2>
+<pre><code language="language-text" class="language-text">m 7 g.xlarge
+└───── シリーズ（用途・特性を示す）
+</code></pre>
+<p>シリーズの主なものは以下のとおりです。詳細は、<a href="https://docs.aws.amazon.com/ja_jp/ec2/latest/instancetypes/instance-type-names.html" target="_blank">AWSドキュメント</a>を参照してください。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>ファミリー</p>
+</td><td colspan="1" rowspan="1"><p>特性</p>
+</td><td colspan="1" rowspan="1"><p>用途例</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>M（汎用）</p>
+</td><td colspan="1" rowspan="1"><p>CPU・メモリ・ネットワークがバランス型</p>
+</td><td colspan="1" rowspan="1"><p>Web サーバー、業務システム</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>T（バースト可能）</p>
+</td><td colspan="1" rowspan="1"><p>低負荷時はコスト抑制、必要時に CPU をバースト</p>
+</td><td colspan="1" rowspan="1"><p>開発環境、小規模 Web サイト</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>C（コンピューティング最適化）</p>
+</td><td colspan="1" rowspan="1"><p>vCPU 性能重視</p>
+</td><td colspan="1" rowspan="1"><p>バッチ処理、機械学習推論</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>R（メモリ最適化）</p>
+</td><td colspan="1" rowspan="1"><p>大容量メモリ</p>
+</td><td colspan="1" rowspan="1"><p>DB、インメモリキャッシュ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>G（GPU 搭載）</p>
+</td><td colspan="1" rowspan="1"><p>GPU 演算</p>
+</td><td colspan="1" rowspan="1"><p>機械学習学習、グラフィクス処理</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>I（ストレージ最適化）</p>
+</td><td colspan="1" rowspan="1"><p>高速 NVMe SSD</p>
+</td><td colspan="1" rowspan="1"><p>NoSQL DB、データウェアハウス</p>
+</td></tr>
+</table>
+<h2 is-upgraded>インスタンスサイズ</h2>
+<pre><code language="language-text" class="language-text">m 7 g.xlarge
+        └─ インスタンスサイズ（nano / micro / small / medium / large ...）
+</code></pre>
+<p>インスタンスサイズは、同じシリーズ内でのスペックの大小を表します。サイズが大きいほど vCPU 数・メモリ容量・ネットワーク帯域が増えます。</p>
+<p>C（コンピューティング最適化）シリーズの場合は次のようになっています。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>インスタンスサイズ</p>
+</td><td colspan="1" rowspan="1"><p>vCPU</p>
+</td><td colspan="1" rowspan="1"><p>メモリ</p>
+</td><td colspan="1" rowspan="1"><p>EBS帯域幅(Gbps)</p>
+</td><td colspan="1" rowspan="1"><p>NW帯域幅(Gbps)</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>c7g.medium</p>
+</td><td colspan="1" rowspan="1"><p>1</p>
+</td><td colspan="1" rowspan="1"><p>2 GiB</p>
+</td><td colspan="1" rowspan="1"><p>最大 10</p>
+</td><td colspan="1" rowspan="1"><p>最大 12.5</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>c7g.large</p>
+</td><td colspan="1" rowspan="1"><p>2</p>
+</td><td colspan="1" rowspan="1"><p>4 GiB</p>
+</td><td colspan="1" rowspan="1"><p>最大 10</p>
+</td><td colspan="1" rowspan="1"><p>最大 12.5</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>c7g.xlarge</p>
+</td><td colspan="1" rowspan="1"><p>4</p>
+</td><td colspan="1" rowspan="1"><p>8 GiB</p>
+</td><td colspan="1" rowspan="1"><p>最大 10</p>
+</td><td colspan="1" rowspan="1"><p>最大 12.5</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>c7g.2xlarge</p>
+</td><td colspan="1" rowspan="1"><p>8</p>
+</td><td colspan="1" rowspan="1"><p>16 GiB</p>
+</td><td colspan="1" rowspan="1"><p>最大 10</p>
+</td><td colspan="1" rowspan="1"><p>最大 15</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>c7g.4xlarge</p>
+</td><td colspan="1" rowspan="1"><p>16</p>
+</td><td colspan="1" rowspan="1"><p>32 GiB</p>
+</td><td colspan="1" rowspan="1"><p>最大 10</p>
+</td><td colspan="1" rowspan="1"><p>最大 15</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>c7g.8xlarge</p>
+</td><td colspan="1" rowspan="1"><p>32</p>
+</td><td colspan="1" rowspan="1"><p>64 GiB</p>
+</td><td colspan="1" rowspan="1"><p>最大 10</p>
+</td><td colspan="1" rowspan="1"><p>最大 15</p>
+</td></tr>
+</table>
+<h2 is-upgraded>インスタンスタイプの選び方</h2>
+<p>こちらの資料「<a href="https://pages.awscloud.com/rs/112-TZM-766/images/C2-07.pdf" target="_blank">インスタンスタイプの選び方ガイド（AWS Summit Tokyo/C2-07）</a>」が参考になります。</p>
+<ul>
+<li>シリーズ <ul>
+<li>開発や小規模な検証の場合は、T（バースト）系を検討する</li>
+<li>これ以外の場合で、高スペックを要求されるワークロードでない限りは、M（汎用）を第一候補とする</li>
+</ul>
+</li>
+<li>世代 <ul>
+<li>最新のものを選択する</li>
+<li>最新世代のほうがコストが低く設定されているケースもあるので確認すること</li>
+<li>すでに稼働しているインスタンスも古い世代の場合は新しい世代にするだけでコスト削減できる可能性があります</li>
+</ul>
+</li>
+<li>オプション <ul>
+<li>実装したいサービス次第だが、Graviton（g 系）を積極的に検討する</li>
+</ul>
+</li>
+<li>インスタンスサイズ <ul>
+<li>必要なスペックを選択する</li>
+<li>中規模程度であれば、「medium」や「large」で十分な場合もあります。</li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AMI（Amazon Machine Image）" duration="0">
+        <p>AMI は、EC2 インスタンスを起動するためのテンプレートです。OS、ミドルウェア、アプリケーション設定などを含んでいます。 EC2 インスタンスが稼働中でも AMI を取得することが可能です。この時、再起動するかどうかをオプション選択できます。 再起動をしなくても AMI 取得可能ですが、再起動を行うと、メモリ上のデータやキャッシュがディスクに書き込まれ、ファイルシステムの整合性が保たれます。</p>
+<h2 is-upgraded>AMI の種類</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS 提供 AMI</p>
+</td><td colspan="1" rowspan="1"><p>Amazon Linux、Ubuntu、Windows Server など</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS Marketplace AMI</p>
+</td><td colspan="1" rowspan="1"><p>サードパーティが提供する商用 AMI（RHEL、HULFT、Oracle など）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>コミュニティ AMI</p>
+</td><td colspan="1" rowspan="1"><p>一般ユーザーが公開した AMI</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>カスタム AMI</p>
+</td><td colspan="1" rowspan="1"><p>自分で作成・管理する AMI</p>
+</td></tr>
+</table>
+<p>:::message <strong>Amazon Linux 2023（AL2023）が現在の推奨 AMI です。</strong> Amazon Linux 2（AL2）は 2026 年 6 月 30 日にサポートが終了しています。新規構築では必ず AL2023 を使用してください。 :::</p>
+<p>Amazon または検証済み Amazon パートナーが所有するパブリック AMI には [検証済みプロバイダー] のマークが付されます。</p>
+<h2 is-upgraded>カスタム AMI（ゴールデン AMI）</h2>
+<p>セキュリティパッチ適用済みの状態や、共通ミドルウェアをインストールした状態をカスタム AMI として保存しておくことで、同一構成のインスタンスを素早く複数台起動できます。これを<strong>ゴールデン AMI</strong> と呼ぶことがあります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ストレージ" duration="0">
+        <p>EC2 インスタンスで使用できるストレージは主に 2 種類あります。</p>
+<h2 is-upgraded>Amazon EBS（Elastic Block Store）</h2>
+<p>EBS は EC2 にネットワーク経由でアタッチするブロックストレージです。</p>
+<ul>
+<li>インスタンスを停止・削除してもデータは保持される</li>
+<li>スナップショット（バックアップ）を S3 に保存できる</li>
+<li>1 つの EBS を複数の EC2 にアタッチすることも可能（マルチアタッチ対応ボリュームのみ）</li>
+<li>インスタンスとは別に料金が発生する</li>
+</ul>
+<h3 is-upgraded>EBS ボリュームタイプ</h3>
+<table>
+<tr><td colspan="1" rowspan="1"><p>タイプ</p>
+</td><td colspan="1" rowspan="1"><p>特性</p>
+</td><td colspan="1" rowspan="1"><p>用途</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>gp3</strong></p>
+</td><td colspan="1" rowspan="1"><p>汎用 SSD（推奨）</p>
+</td><td colspan="1" rowspan="1"><p>ほとんどのユースケース</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>gp2</strong></p>
+</td><td colspan="1" rowspan="1"><p>汎用 SSD（旧世代）</p>
+</td><td colspan="1" rowspan="1"><p>新規では非推奨</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>io2 Block Express</strong></p>
+</td><td colspan="1" rowspan="1"><p>プロビジョンド IOPS SSD</p>
+</td><td colspan="1" rowspan="1"><p>高 I/O が必要な DB</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>st1</strong></p>
+</td><td colspan="1" rowspan="1"><p>スループット最適化 HDD</p>
+</td><td colspan="1" rowspan="1"><p>ビッグデータ、ログ処理</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><strong>sc1</strong></p>
+</td><td colspan="1" rowspan="1"><p>コールド HDD</p>
+</td><td colspan="1" rowspan="1"><p>アクセス頻度が低いデータ</p>
+</td></tr>
+</table>
+<p>:::message 新規で EBS を作成する際は <strong>gp3 を選択してください。</strong> gp3 は gp2 よりも安価で、IOPS とスループットを独立してプロビジョニングできます。 :::</p>
+<h2 is-upgraded>インスタンスストア</h2>
+<p>インスタンスストアは、EC2 ホストサーバーに物理的に内蔵されたディスクです。</p>
+<ul>
+<li>高速（NVMe SSD）</li>
+<li><strong>インスタンスを停止・終了するとデータが消える（一時的なストレージ）</strong></li>
+<li>料金はインスタンス料金に含まれる（EBS 料金は別途不要）</li>
+<li>一部のインスタンスタイプでのみ利用可能（オプションに<code>d</code>がつく場合など） <ul>
+<li>詳しくは<a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/instance-store-volumes.html" target="_blank">AWSドキュメント</a>を参照してください。</li>
+</ul>
+</li>
+</ul>
+<p>:::message alert インスタンスストアのデータはインスタンス停止時に<strong>完全に消去</strong>されます。永続化が必要なデータは必ず EBS または S3 に保存してください。 :::</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ネットワーク" duration="0">
+        <h2 is-upgraded>IP アドレスの種類</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td><td colspan="1" rowspan="1"><p>停止後の動作</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>プライベート IP</p>
+</td><td colspan="1" rowspan="1"><p>VPC 内で使用する IP。必ず割り当てられる</p>
+</td><td colspan="1" rowspan="1"><p>変わらない</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリック IP</p>
+</td><td colspan="1" rowspan="1"><p>インターネットと通信するための IP。ランダム割り当て</p>
+</td><td colspan="1" rowspan="1"><p><strong>変わる</strong></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Elastic IP（EIP）</p>
+</td><td colspan="1" rowspan="1"><p>固定のパブリック IP。明示的に確保して割り当てる</p>
+</td><td colspan="1" rowspan="1"><p>変わらない</p>
+</td></tr>
+</table>
+<p>:::message alert <a href="https://aws.amazon.com/jp/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/" target="_blank">2024 年 2 月以降</a>、<strong>パブリック IPv4 アドレスの使用にも課金</strong>（$0.005/時間）が発生するようになりました。EIP・パブリック IP いずれも対象です。 EIPは、EC2に割り当てられていなくても課金対象となりました。 :::</p>
+<h2 is-upgraded>ENI（Elastic Network Interface）</h2>
+<p>ENI は仮想ネットワークインターフェースです。EC2 インスタンスには必ず 1 つ以上の ENI が紐づいており、セキュリティグループは ENI に対して適用されます。</p>
+<ul>
+<li>1 台の EC2 に複数の ENI をアタッチできる</li>
+<li>ENI を別のインスタンスに移動させることができる（フェイルオーバー等に活用）</li>
+</ul>
+<h2 is-upgraded>プレイスメントグループ</h2>
+<p><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/placement-groups.html" target="_blank">プレイスメントグループ</a>は、複数の EC2 インスタンスを物理的にどのように配置するかを制御する機能です。プレイスメントグループの利用料金は無料です。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>特性</p>
+</td><td colspan="1" rowspan="1"><p>用途</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>クラスター</p>
+</td><td colspan="1" rowspan="1"><p>単一のアベイラビリティーゾーン内のインスタンスを論理的にグループ化。低レイテンシ・高スループット</p>
+</td><td colspan="1" rowspan="1"><p>HPC、機械学習学習</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パーティション</p>
+</td><td colspan="1" rowspan="1"><p>複数のパーティション（ラックグループ）に分散</p>
+</td><td colspan="1" rowspan="1"><p>HDFS、Cassandra</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>スプレッド</p>
+</td><td colspan="1" rowspan="1"><p>異なるハードウェアに分散配置</p>
+</td><td colspan="1" rowspan="1"><p>少数の重要なインスタンスの可用性向上</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="セキュリティ" duration="0">
+        <h2 is-upgraded>キーペア</h2>
+<p>EC2 インスタンスへの SSH（Linux）または RDP（Windows）接続に使用します。</p>
+<ul>
+<li>AWS 側に公開鍵を登録し、秘密鍵はユーザー側で管理する</li>
+<li><strong>秘密鍵は一度しかダウンロードできません。紛失した場合は再作成が必要です。</strong></li>
+<li>キーペアを使わず <strong>AWS Systems Manager Session Manager</strong> で接続する方法も推奨されています</li>
+</ul>
+<p>:::message <strong>Session Manager を使うと、SSH ポート（22番）を開放する必要がなくなります。</strong> キーペア管理も不要になるため、セキュリティとオペレーション両面でメリットがあります。新規構築では積極的に検討してください。 :::</p>
+<h2 is-upgraded>IAM ロール</h2>
+<p>EC2 インスタンスが S3 や DynamoDB などの AWS サービスにアクセスするには、IAM ロールをインスタンスプロファイルとして EC2 にアタッチします。</p>
+<p>アクセスキーをインスタンス内に直接埋め込む方法は、漏洩リスクがあるため<strong>絶対に行わないでください。</strong></p>
+<pre><code># NG（アクセスキーをハードコード）
+aws configure set aws_access_key_id AKIAXXXXXXXXXXXXXXXX
+
+# OK（IAM ロールをインスタンスにアタッチして使う）
+# インスタンスメタデータから自動的に認証情報が取得される
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="購入オプション" duration="0">
+        <p>Amazon EC2 には、ニーズに基づいてコストを最適化できるよう、さまざまな購入オプションが用意されています。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>オプション</p>
+</td><td colspan="1" rowspan="1"><p>概要</p>
+</td><td colspan="1" rowspan="1"><p>割引</p>
+</td><td colspan="1" rowspan="1"><p>向いているユースケース</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>オンデマンド</p>
+</td><td colspan="1" rowspan="1"><p>使った分だけ秒単位で課金</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td><td colspan="1" rowspan="1"><p>短期・一時利用、開発環境</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>リザーブドインスタンス（RI）</p>
+</td><td colspan="1" rowspan="1"><p>1〜3 年間の利用をコミット</p>
+</td><td colspan="1" rowspan="1"><p>最大 72%</p>
+</td><td colspan="1" rowspan="1"><p>長期間固定スペックで稼働するシステム</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Savings Plans</p>
+</td><td colspan="1" rowspan="1"><p>1〜3 年間、時間あたりの利用額をコミット</p>
+</td><td colspan="1" rowspan="1"><p>最大 72%</p>
+</td><td colspan="1" rowspan="1"><p>長期利用かつ柔軟にインスタンスタイプを変えたい場合</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>スポットインスタンス</p>
+</td><td colspan="1" rowspan="1"><p>AWS の余剰キャパシティを利用</p>
+</td><td colspan="1" rowspan="1"><p>最大 90%</p>
+</td><td colspan="1" rowspan="1"><p>バッチ処理、機械学習学習など中断を許容できるワークロード</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Dedicated Hosts</p>
+</td><td colspan="1" rowspan="1"><p>物理ホストを専有</p>
+</td><td colspan="1" rowspan="1"><p>—</p>
+</td><td colspan="1" rowspan="1"><p>BYOL（ライセンス持ち込み）が必要な場合</p>
+</td></tr>
+</table>
+<h2 is-upgraded>RI と Savings Plans の使い分け</h2>
+<p>Savings Plans には、インスタンスファミリーやリージョンをまたいで柔軟に適用できる <strong>Compute Savings Plans</strong> と、特定のインスタンスファミリー・リージョンに限定される代わりに割引率が高い <strong>EC2 Instance Savings Plans</strong> の 2 種類があります。</p>
+<ul>
+<li>柔軟性重視：Compute Savings Plans（Fargate・Lambda にも適用可）</li>
+<li>割引率重視：EC2 Instance Savings Plans または RI</li>
+</ul>
+<p>:::message alert オンデマンド料金が最大 90% 割引になるスポットインスタンスがあります。<strong>スポットインスタンスは突然中断される可能性があります。</strong> AWS からの中断通知は 2 分前です。ステートレスなワークロードや、中断・再起動に対応した設計でのみ使用してください。 :::</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="インスタンスのライフサイクル" duration="0">
+        <p>EC2 インスタンスは以下の<a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-instance-lifecycle.html" target="_blank">状態</a>を持ちます。</p>
+<pre><code language="language-mermaid" class="language-mermaid">stateDiagram-v2
+    [*] --&gt; pending
+    pending --&gt; running
+    running --&gt; stopping
+    running --&gt; running : reboot
+    stopping --&gt; stopped
+    stopped --&gt; shutting_down
+    running --&gt; shutting_down
+    shutting_down --&gt; terminated
+    terminated --&gt; [*]
+
+    shutting_down: shutting-down
+</code></pre>
+<table>
+<tr><td colspan="1" rowspan="1"><p>状態</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td><td colspan="1" rowspan="1"><p>課金</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>pending</p>
+</td><td colspan="1" rowspan="1"><p>起動処理中</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>running</p>
+</td><td colspan="1" rowspan="1"><p>稼働中</p>
+</td><td colspan="1" rowspan="1"><p>あり</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>stopping</p>
+</td><td colspan="1" rowspan="1"><p>停止処理中</p>
+</td><td colspan="1" rowspan="1"><p>なし（hibernate の場合はあり）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>stopped</p>
+</td><td colspan="1" rowspan="1"><p>停止中</p>
+</td><td colspan="1" rowspan="1"><p>インスタンス料金なし（EBS 料金は発生）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>shutting-down</p>
+</td><td colspan="1" rowspan="1"><p>削除準備中</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>terminated</p>
+</td><td colspan="1" rowspan="1"><p>削除済み（復元不可）</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+</table>
+<p>:::message <strong>「停止」と「終了（削除）」は別操作です。</strong></p>
+<ul>
+<li><strong>停止（Stop）</strong>：再起動可能。EBS のデータは保持される</li>
+<li><strong>終了（Terminate）</strong>：完全削除。デフォルトでルートボリュームも削除される</li>
+</ul>
+<p>誤操作を防ぐために、本番インスタンスには<strong>終了保護（Termination Protection）</strong> を有効化することを推奨します。 :::</p>
+<h2 is-upgraded>再起動とパブリック IP</h2>
+<p>インスタンスを停止 ＞起動すると、パブリック IP アドレスが変わります（Elastic IP を使用している場合を除く）。固定 IP が必要な場合は Elastic IP を使用してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>押さえるポイント</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>インスタンスタイプ</p>
+</td><td colspan="1" rowspan="1"><p>Graviton（g 系）はコストパフォーマンスが高い。T 系はバースト可能</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AMI</p>
+</td><td colspan="1" rowspan="1"><p>新規構築は Amazon Linux 2023（AL2023）を使用</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>EBS</p>
+</td><td colspan="1" rowspan="1"><p>新規は gp3 を選択。gp2 は非推奨</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>インスタンスストア</p>
+</td><td colspan="1" rowspan="1"><p>停止でデータ消去。一時領域としてのみ使用</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Elastic IP</p>
+</td><td colspan="1" rowspan="1"><p>割り当てていない状態でも課金。不要なら解放</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリック IPv4</p>
+</td><td colspan="1" rowspan="1"><p>2024 年 2 月以降、使用に課金が発生</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>IAM ロール</p>
+</td><td colspan="1" rowspan="1"><p>アクセスキーの直接埋め込みは厳禁。ロールを使う</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>接続方法</p>
+</td><td colspan="1" rowspan="1"><p>Session Manager を使えば SSH ポート不要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>購入オプション</p>
+</td><td colspan="1" rowspan="1"><p>長期利用は Savings Plans または RI。スポットは中断前提で設計</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>終了保護</p>
+</td><td colspan="1" rowspan="1"><p>本番環境では有効を推奨</p>
+</td></tr>
+</table>
+<p>:::message 本記事では扱いませんでしたが、EC2 には以下のような関連機能・サービスもあります。</p>
+<ul>
+<li>Auto Recovery：ハードウェア障害時に CloudWatch アラームと連携してインスタンスを自動復旧する機能</li>
+<li>AWS Auto Scaling：負荷に応じてインスタンス数を自動増減するサービス（別サービス） :::</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

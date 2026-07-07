@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2026-07-07T21:46:26+09:00",
-  "id": "iam-identity-center-overview",
+  "id": "ec2-overview",
   "duration": 0,
-  "title": "AWS IAM Identity Center",
+  "title": "Amazon EC2",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_iam-identity-center-overview.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_ec2-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "awsiam"
+    "amazonec2"
   ],
-  "url": "iam-identity-center-overview"
+  "url": "ec2-overview"
 }
