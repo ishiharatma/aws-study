@@ -1,0 +1,221 @@
+---
+layout: default
+---
+<style>
+/* =========================================
+   AWS Study – Card Grid Home Page Styles
+   Bootstrap 4 ベースの既存テーマに追加
+   ========================================= */
+
+/* ---- Search ---- */
+#search-input {
+  border-radius: 50px;
+  padding-left: 1.25rem;
+  border: 2px solid #dee2e6;
+  max-width: 520px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+#search-input:focus {
+  border-color: #FF9900;
+  box-shadow: 0 0 0 0.18rem rgba(255, 153, 0, 0.25);
+  outline: none;
+}
+
+/* ---- Category Filter ---- */
+.category-btn {
+  border-radius: 50px;
+  padding: 4px 15px;
+  font-size: 0.78rem;
+  transition: background-color 0.18s, border-color 0.18s, color 0.18s;
+}
+.category-btn.active,
+.category-btn:hover {
+  background-color: #FF9900 !important;
+  border-color:     #FF9900 !important;
+  color:            #fff    !important;
+}
+
+/* ---- Card ---- */
+.article-card {
+  border: 1px solid rgba(0, 0, 0, 0.08) !important;
+  border-radius: 10px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #fff;
+}
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.13) !important;
+}
+
+/* AWS service icon (64px → displayed 52px) */
+.aws-service-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+/* Fallback placeholder when no icon */
+.aws-service-icon-placeholder {
+  width: 52px;
+  height: 52px;
+  background: #232F3E;
+  color: #FF9900;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* Category badge */
+.badge-category {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  background-color: #232F3E;
+  color: #FF9900;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+/* Title: 3行クランプ */
+.article-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.45;
+  color: #1a1a2e;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Description: 2行クランプ */
+.article-card-desc {
+  font-size: 0.78rem;
+  color: #6c757d;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+/* Date */
+.article-date {
+  font-size: 0.73rem;
+  color: #999;
+}
+
+/* Read button */
+.btn-read {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background-color: #FF9900;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 13px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.18s, transform 0.18s;
+}
+.btn-read:hover,
+.btn-read:focus {
+  background-color: #d87800;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+/* Results count */
+.results-info {
+  color: #888;
+  font-size: 0.83rem;
+  margin-bottom: 1rem;
+}
+
+/* Scroll-to-top */
+#scroll-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  background: #FF9900;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  display: none;            /* shown via JS */
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  cursor: pointer;
+  z-index: 1050;
+  transition: background-color 0.18s, transform 0.18s;
+}
+#scroll-to-top:hover {
+  background: #d87800;
+  transform: translateY(-2px);
+}
+
+/* Section divider */
+.filter-section {
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  padding: 1rem 0 0.5rem;
+  margin-bottom: 1.5rem;
+}
+</style>
+
+<!-- ===== Search & Category Filter ===== -->
+<div class="filter-section mx-n3 px-3">
+  <div class="mb-3">
+    <input type="text" id="search-input" class="form-control"
+           placeholder="サービス名やキーワードで検索..." aria-label="記事を検索">
+  </div>
+  <div id="category-filter" class="d-flex flex-wrap">
+    <!-- Category buttons injected by app.js -->
+  </div>
+</div>
+
+<!-- ===== Results Count ===== -->
+<p class="results-info">
+  <span id="article-count">0</span> 件の記事
+</p>
+
+<!-- ===== Card Grid ===== -->
+<div class="row" id="cards-grid">
+  <!-- Article cards injected by app.js -->
+</div>
+
+<!-- ===== No Results ===== -->
+<div id="no-results" style="display:none; text-align:center; padding:3rem 0; color:#aaa;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16" class="mb-3 d-block mx-auto"><path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/></svg>
+  <p class="mb-0">条件に一致する記事が見つかりませんでした</p>
+</div>
+
+<!-- ===== Scroll to Top ===== -->
+<button id="scroll-to-top" aria-label="ページトップへ戻る" title="トップへ">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+  </svg>
+</button>
+
+<!-- ===== Article Data (Jekyll Liquid → JS) ===== -->
+<script>
+/* global variables referenced by app.js */
+const ARTICLES  = {{ site.data.articles | jsonify }};
+const ICON_BASE = 'https://raw.githubusercontent.com/ishiharatma/aws-study/main/images/icons/64/';
+</script>
+<script src="app.js"></script>

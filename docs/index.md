@@ -1,7 +1,6 @@
 ---
-layout: home
+layout: home-cards
 ---
-<img src="./banner2.png"  width="50%"/>
 
 ## AWS 勉強会資料公開ページ<!-- omit in toc -->
 
