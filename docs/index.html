@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS 勉強会資料</title>
+  <meta name="description" content="AWSに関する個人の勉強・勉強会資料の公開サイト">
+  <link rel="icon" href="https://ishiharatma.github.io/favicon.ico">
+
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn"
+        crossorigin="anonymous">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-01ZZ95D1K9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-01ZZ95D1K9');
+  </script>
+
+  <style>
+    /* ================================================
+       AWS Study — Card Grid  (Bootstrap 4 ベース)
+       ================================================ */
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: #f5f6fa;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* ---- Header ---- */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #232F3E;
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .site-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      color: inherit;
+      flex-shrink: 0;
+    }
+    .site-brand:hover { text-decoration: none; color: #fff; }
+    .brand-badge {
+      background: #FF9900;
+      color: #232F3E;
+      width: 44px;
+      height: 44px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.62rem;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .brand-sub {
+      font-size: 0.67rem;
+      color: #AAB7B8;
+      font-weight: 400;
+      margin-top: 1px;
+    }
+    .header-nav { display: flex; align-items: center; gap: 4px; }
+    .header-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #AAB7B8;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 5px 11px;
+      border-radius: 6px;
+      transition: color 0.18s, background-color 0.18s;
+      white-space: nowrap;
+    }
+    .header-nav-link:hover {
+      color: #FF9900;
+      background: rgba(255,153,0,0.12);
+      text-decoration: none;
+    }
+
+    /* ---- Filter section ---- */
+    .filter-section {
+      background: #fff;
+      border-bottom: 1px solid #e9ecef;
+      padding: 1rem 0 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    #search-input {
+      border-radius: 50px;
+      padding-left: 1.25rem;
+      border: 2px solid #dee2e6;
+      max-width: 520px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #search-input:focus {
+      border-color: #FF9900;
+      box-shadow: 0 0 0 0.18rem rgba(255,153,0,0.25);
+      outline: none;
+    }
+    .category-btn {
+      border-radius: 50px;
+      padding: 4px 15px;
+      font-size: 0.78rem;
+      transition: background-color 0.18s, border-color 0.18s, color 0.18s;
+    }
+    .category-btn.active,
+    .category-btn:hover {
+      background-color: #FF9900 !important;
+      border-color:     #FF9900 !important;
+      color:            #fff    !important;
+    }
+
+    /* ---- Results count ---- */
+    .results-info {
+      color: #888;
+      font-size: 0.83rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ---- Article card ---- */
+    .article-card {
+      border: 1px solid rgba(0,0,0,0.08) !important;
+      border-radius: 10px !important;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      background: #fff;
+    }
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.13) !important;
+    }
+    .aws-service-icon {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+    .aws-service-icon-placeholder {
+      width: 52px;
+      height: 52px;
+      background: #232F3E;
+      color: #FF9900;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+    .badge-category {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      background-color: #232F3E;
+      color: #FF9900;
+      white-space: nowrap;
+      align-self: flex-start;
+    }
+    .article-card-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.45;
+      color: #1a1a2e;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .article-card-desc {
+      font-size: 0.78rem;
+      color: #6c757d;
+      line-height: 1.55;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 0;
+    }
+    .article-date {
+      font-size: 0.73rem;
+      color: #999;
+    }
+    .btn-read {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      background-color: #FF9900;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 13px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background-color 0.18s, transform 0.18s;
+    }
+    .btn-read:hover,
+    .btn-read:focus {
+      background-color: #d87800;
+      color: #fff;
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+
+    /* ---- Scroll to top ---- */
+    #scroll-to-top {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 44px;
+      height: 44px;
+      background: #FF9900;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+      cursor: pointer;
+      z-index: 1050;
+      transition: background-color 0.18s, transform 0.18s;
+    }
+    #scroll-to-top:hover {
+      background: #d87800;
+      transform: translateY(-2px);
+    }
+
+    /* ---- Footer ---- */
+    .site-footer {
+      background: #232F3E;
+      color: #AAB7B8;
+      padding: 1.1rem 0;
+      margin-top: auto;
+    }
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .footer-links { display: flex; align-items: center; gap: 18px; }
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #AAB7B8;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .footer-link:hover { color: #FF9900; text-decoration: none; }
+    .footer-copyright { font-size: 0.75rem; color: #5d7278; }
+  </style>
+</head>
+<body>
+
+<!-- ===== Header ===== -->
+<header class="site-header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="." class="site-brand">
+        <div class="brand-badge">AWS<br>Study</div>
+        <div class="brand-text">
+          <span class="brand-title">AWS 勉強会資料</span>
+          <span class="brand-sub">学習・勉強会リソース公開サイト</span>
+        </div>
+      </a>
+      <nav class="header-nav" aria-label="外部リンク">
+        <a href="https://github.com/ishiharatma/aws-study"
+           target="_blank" rel="noopener noreferrer"
+           class="header-nav-link"
+           aria-label="GitHubリポジトリ aws-study">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          aws-study
+        </a>
+        <a href="https://ishiharatma.github.io/"
+           target="_blank" rel="noopener noreferrer"
+           class="header-nav-link"
+           aria-label="Portfolio">
+          <img src="https://ishiharatma.github.io/favicon.ico"
+               width="16" height="16" alt="" loading="lazy"
+               style="border-radius:3px;opacity:0.75;">
+          Portfolio
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Main ===== -->
+<main style="flex:1;">
+  <div class="container py-4">
+
+    <!-- Filter Section -->
+    <div class="filter-section">
+      <div class="mb-3">
+        <input type="text" id="search-input" class="form-control"
+               placeholder="サービス名やキーワードで検索..." aria-label="記事を検索">
+      </div>
+      <div id="category-filter" class="d-flex flex-wrap"></div>
+    </div>
+
+    <!-- Results count -->
+    <p class="results-info"><span id="article-count">0</span> 件の記事</p>
+
+    <!-- Card grid -->
+    <div class="row" id="cards-grid"></div>
+
+    <!-- No results -->
+    <div id="no-results" style="display:none; text-align:center; padding:3rem 0; color:#aaa;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16" class="mb-3 d-block mx-auto">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.099zm-5.242 1.656a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11z"/>
+      </svg>
+      <p class="mb-0">条件に一致する記事が見つかりませんでした</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://github.com/ishiharatma/aws-study"
+           target="_blank" rel="noopener noreferrer"
+           class="footer-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+          </svg>
+          aws-study
+        </a>
+        <a href="https://ishiharatma.github.io/"
+           target="_blank" rel="noopener noreferrer"
+           class="footer-link">
+          <img src="https://ishiharatma.github.io/favicon.ico"
+               width="14" height="14" alt="" loading="lazy"
+               style="border-radius:2px;opacity:0.7;">
+          Portfolio
+        </a>
+      </div>
+      <p class="footer-copyright mb-0">&copy; 2026 issy. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== Scroll to Top ===== -->
+<button id="scroll-to-top" aria-label="ページトップへ戻る" title="トップへ">
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+    <path fill-rule="evenodd" d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"/>
+  </svg>
+</button>
+
+<script src="app.js"></script>
+</body>
+</html>

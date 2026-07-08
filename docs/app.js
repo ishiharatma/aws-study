@@ -2,8 +2,10 @@
 
 /**
  * AWS Study - Article Card Grid
- * ARTICLES と ICON_BASE はレイアウト(home-cards.html)の Liquid テンプレートで埋め込まれます。
+ * articles.json を fetch して記事一覧を描画・フィルタリングします。
  */
+
+const ICON_BASE = 'https://raw.githubusercontent.com/ishiharatma/aws-study/main/images/icons/64/';
 
 const CATEGORIES = [
   { key: 'all',                     label: 'すべて' },
@@ -22,6 +24,7 @@ const CATEGORIES = [
   { key: 'other',                   label: 'その他' },
 ];
 
+let ARTICLES        = [];
 let currentCategory = 'all';
 let currentSearch   = '';
 
@@ -182,8 +185,20 @@ function setupEventListeners() {
 
 // ---- Boot ----
 
-document.addEventListener('DOMContentLoaded', () => {
+async function loadArticles() {
+  try {
+    const res = await fetch('articles.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    ARTICLES = await res.json();
+  } catch (err) {
+    console.error('articles.json の読み込みに失敗しました:', err);
+    const grid = document.getElementById('cards-grid');
+    if (grid) grid.innerHTML = '<div class="col-12 text-center text-danger py-5">記事データの読み込みに失敗しました</div>';
+    return;
+  }
   buildCategoryFilter();
   renderCards();
   setupEventListeners();
-});
+}
+
+document.addEventListener('DOMContentLoaded', loadArticles);
