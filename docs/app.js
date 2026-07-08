@@ -95,7 +95,7 @@ function getFilteredArticles() {
         (article.description || '').toLowerCase().includes(currentSearch);
       return matchesCat && matchesSearch;
     })
-    .sort((a, b) => new Date(b.date) - new Date(a.date)); // 新しい順
+    .sort((a, b) => new Date(b.created) - new Date(a.created)); // 新しい順
 }
 
 // ---- Card HTML ----
@@ -110,10 +110,13 @@ function createCardHTML(article) {
     : `<div class="aws-service-icon-placeholder">AWS</div>`;
 
   const categoryLabel = escapeHtml(getCategoryLabel(article.category));
-  const url           = `${escapeHtml(article.id)}/index.html`;
+  const url           = `${escapeHtml(article.id)}/index.html#0`;
   const safeTitle     = escapeHtml(article.title);
   const safeDesc      = escapeHtml(article.description || '');
-  const dateFormatted = formatDate(article.date);
+  const dateFormatted = formatDate(article.created);
+  const updatedBadge  = article.updated
+    ? `<span class="badge-updated ml-1">更新: ${formatDate(article.updated)}</span>`
+    : '';
 
   return `
     <div class="col-12 col-sm-6 col-lg-4 mb-4 article-col" data-category="${escapeHtml(article.category)}">
@@ -123,6 +126,7 @@ function createCardHTML(article) {
           <div class="d-flex align-items-start mb-3">
             ${iconEl}
             <span class="badge-category ml-2">${categoryLabel}</span>
+            ${updatedBadge}
           </div>
           <!-- Title -->
           <h5 class="article-card-title mb-2">${safeTitle}</h5>
