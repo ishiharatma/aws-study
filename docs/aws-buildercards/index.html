@@ -44,7 +44,7 @@
 <p><a href="https://speakerdeck.com/coosuke/awssummitjapan-jawsugchiba-buildercards-jp" target="_blank">AWS BuilderCards 日本語版開発に向けた思い |SpeakerDeck</a></p>
 <p><a href="https://www.youtube.com/watch?v=bYCsNjrcTbE" target="_blank">AWS ビルダーカード、第 2 版 |YouTube</a></p>
 <h2 is-upgraded>プレイマット</h2>
-<p>これ以外も<a href="https://aws.amazon.com/jp/gametech/buildercards/" target="_blank">公式ページ</a>の「Play Mats」からダウンロードできます。</p>
+<p>これ以外も<a href="https://aws.amazon.com/jp/gametech/buildercards/" target="_blank">公式ページ</a>の「Play Mats」からダウンロードできます。カード配置に慣れないうちは利用するのもよいでしょう。</p>
 <ul>
 <li><a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-BuilderCards-console-A3.pdf" target="_blank">Console</a></li>
 </ul>
@@ -272,6 +272,74 @@
 </td><td colspan="2" rowspan="1"><p>cloud finalcial management</p>
 </td><td colspan="1" rowspan="1"></td></tr>
 </table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Starter Card のリタイア" duration="0">
+        <p>山札から手札としてカードを5枚出した時点で、<code>Builder Card の枚数</code> &gt; <code>Starter Card の枚数</code> となった場合に、Starter Card をゲームから除外することができます。 これを <code>リタイヤ</code> と呼びます。リタイヤしたカードは、それ以降使用しないカードとなります。</p>
+<p>Starter Card をリタイヤさせることで、山札から Starter Card が出る確率が下がる（＝ Builder Cardが出やすくなる）ため、アーキテクチャを組みやすくなります。</p>
+<h2 is-upgraded>どれをリタイヤさせるか</h2>
+<p>Starter Card の中で組み合わせることでエフェクトが発動するものがあります。これ以外からリタイヤさせるとよいでしょう。</p>
+<ul>
+<li><code>Virtual Machine</code> + <code>Bare Metal Host</code><ul>
+<li>組み合わせによるエフェクト発動あり</li>
+<li>Builder Cardsとの組み合わせ可能</li>
+</ul>
+</li>
+<li><code>Corporate Identity Provider</code> + <code>AWS IAM Identity Center</code><ul>
+<li>組み合わせによるエフェクト発動あり</li>
+</ul>
+</li>
+</ul>
+<p>:::message 💡リタイヤさせたカードは山札および捨て札と区別できるように置きましょう。 :::</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="エフェクト" duration="0">
+        <h2 is-upgraded>山札から1枚追加できる</h2>
+<p><code>黒背景に +1</code> と書かれたカードをアーキテクチャに組み込んだ場合、山札から1枚追加することができます。 ここでよいカードを引くことができれば、アーキテクチャをさらに進化させ、クレジットを多く獲得できるチャンスとなります。</p>
+<h2 is-upgraded>コンソールから1枚多く取得できる</h2>
+<p><code>白い雲に +1</code> と書かれたカードをアーキテクチャに組み込んだ場合、取得フェーズで取得できるカードの枚数が1枚増えます。</p>
+<p>通常は、アーキテクチャで獲得したクレジットがオーバーしていても1枚しか取得できないところ、複数枚取得することが可能になります。 例えば、クレジットが<code>10</code>となった場合、コストありのBuilder Cardsを10クレジット分、複数枚取得することができます。 公式ルールでは触れられていないが、コストありBuilder Cardsが複数枚取得できるのであれば、Well-Architectedカードも複数枚取得可能であると思われる。 Well-Architectedカードについては、<strong>開始前に確認する</strong>ことをオススメします。</p>
+<h2 is-upgraded>1回切りのカード</h2>
+<p><code>太陽が沈むマーク</code>のカードはエフェクト発動後にリタイヤするカードです。ただし、エフェクトを発動させない場合は、クレジットのみの効果として利用後、捨て札に入れて再び利用することができます。エフェクトを使うタイミングを見極めてください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ゲーム初心者はどのBuilder Cardを集めればいいか？" duration="0">
+        <p>無条件でアーキテクチャに組み込める以下のカードは優先して取得するのをオススメします。 この中で、個人的にクレジット増加効果が高いのは、<code>Amazon CloudWatch</code> だと思っています。ゲーム後半に高クレジットの Well-Architected カードを取得するのに活躍するはずです！</p>
+<ul>
+<li>コストなし <ul>
+<li>Amazon VPC</li>
+<li>AWS CloudTrail</li>
+<li>Amazon CloudWatch</li>
+<li>AWS IAM Identity Center</li>
+</ul>
+</li>
+<li>コストあり <ul>
+<li>AWS CDK</li>
+<li>AWS CloudFormation</li>
+<li>AWS Systems Manager</li>
+<li>AWS Well-Architected Tool</li>
+<li>Cloud Financial Management</li>
+</ul>
+</li>
+</ul>
+<p>次に、使い方の幅が広い <code>compute/containers</code> カテゴリのカードの取得します。</p>
+<ul>
+<li>Amazon EC2</li>
+<li>AWS Lambda</li>
+<li>Amazon ECS / EKS</li>
+</ul>
+<p>そして、さらに以下があると初心者向けのアーキテクチャが組めるようになります。</p>
+<ul>
+<li>Elastic Load Balancing</li>
+<li>Amazon RDS</li>
+<li>Amazon Aurora</li>
+</ul>
 
 
       </google-codelab-step>
@@ -605,6 +673,16 @@ RDS（DB への直接接続・調査・マイグレーション）
 </table>
 <p><strong>シナリオ：</strong> Docker コンテナで動くアプリを、インフラ管理なしで本番運用したい場合。</p>
 <p><strong>CDP： </strong><a href="https://aws.amazon.com/jp/cdp/ec-container/" target="_blank">コンテナ ECS/Fargate</a></p>
+<p>:::message 💡<strong>実際のアーキテクチャと違うが、データプレーンのカードがなくても ゲーム上の構成としては有効</strong> :::</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="ELB" src="img\\5ad9ce830ead30d4.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="ECS" src="img\\a98904db9169c02a.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="Aurora" src="img\\9ba5e3ca8aa2fb84.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="ElastiCache" src="img\\d350d33a7900e01.png"></p>
+</td></tr>
+</table>
+<p>ECS および EKS は「フルマネージドなコンテナオーケストレータ」サービスです。実際はコンテナ環境が稼働する「データプレーン」と呼ばれる部分が必要になります。これに該当するものは「EC2 / Fargate」です。EKSの場合は「EC2 / Fargate / EKS Auto Mode マネージドノード」があります。</p>
+<p>ゲーム上ではEC2 / Fargate を組み合わせた追加効果が得られないが、ECS / EKS のみでのアーキテクチャは有効です。</p>
 <h3 is-upgraded>派生：ECS + EC2 起動タイプ（5 枚）</h3>
 <table>
 <tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="ELB" src="img\\5ad9ce830ead30d4.png"></p>
@@ -657,6 +735,56 @@ RDS（DB への直接接続・調査・マイグレーション）
 </td></tr>
 </table>
 <p><strong>シナリオ：</strong> GPU インスタンスが必要な場合などに EC2 起動タイプを選択。</p>
+<h3 is-upgraded>派生：ECS / EKS Anywhereでオンプレリソースを利用</h3>
+<p>アーキテクチャとして構成できますが、Starter Cardであるオンプレリソースのカードはクレジットが得られません。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="ELB" src="img\\5ad9ce830ead30d4.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="ECS" src="img\\a98904db9169c02a.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="VM" src="img\\d9d4c0dcc57f60b5.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="Bare" src="img\\c416aa2f5498b967.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><p>カード</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Elastic Load Balancing</p>
+</td><td colspan="1" rowspan="1"><p>トラフィックをコンテナホストへ分散</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon ECS Anywhere</p>
+</td><td colspan="1" rowspan="1"><p>コンテナのオーケストレーション</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Virtual Machine</p>
+</td><td colspan="1" rowspan="1"><p>オンプレ仮想マシン（アプリケーションサーバー）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Bare Metal Host</p>
+</td><td colspan="1" rowspan="1"><p>オンプレ物理サーバー</p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="ELB" src="img\\5ad9ce830ead30d4.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="EKS" src="img\\824022bb7e2886de.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="VM" src="img\\d9d4c0dcc57f60b5.png"></p>
+</td><td colspan="1" rowspan="1"><p class="image-container"><img alt="Bare" src="img\\c416aa2f5498b967.png"></p>
+</td></tr>
+</table>
+<table>
+<tr><td colspan="1" rowspan="1"><p>カード</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Elastic Load Balancing</p>
+</td><td colspan="1" rowspan="1"><p>トラフィックをコンテナホストへ分散</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Amazon EKS Anywhere</p>
+</td><td colspan="1" rowspan="1"><p>コンテナのオーケストレーション</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Virtual Machine</p>
+</td><td colspan="1" rowspan="1"><p>オンプレ仮想マシン（アプリケーションサーバー）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Bare Metal Host</p>
+</td><td colspan="1" rowspan="1"><p>オンプレ物理サーバー</p>
+</td></tr>
+</table>
 <h3 is-upgraded>派生：Systems Manager Session Manager でコンテナへセキュアアクセス（6 枚）</h3>
 <table>
 <tr><td colspan="1" rowspan="1"><p class="image-container"><img alt="ELB" src="img\\5ad9ce830ead30d4.png"></p>

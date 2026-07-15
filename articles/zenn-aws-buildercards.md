@@ -37,7 +37,7 @@ emoji: "🃏"
 
 ### プレイマット
 
-これ以外も[公式ページ](https://aws.amazon.com/jp/gametech/buildercards/)の「Play Mats」からダウンロードできます。
+これ以外も[公式ページ](https://aws.amazon.com/jp/gametech/buildercards/)の「Play Mats」からダウンロードできます。カード配置に慣れないうちは利用するのもよいでしょう。
 
 - [Console](https://pages.awscloud.com/rs/112-TZM-766/images/AWS-BuilderCards-console-A3.pdf)
 
@@ -132,6 +132,76 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 | [AWS Systems Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/what-is-systems-manager.html)        | 3  | management & governance    | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ssm-overview) |
 | [AWS Well-Architected Tool](https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/userguide/intro.html)  | 2  | management & governance    |            |
 | [Cloud Financial Management](https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/what-is-costmanagement.html) | 2  | cloud finalcial management |            |
+
+## Starter Card のリタイア
+
+山札から手札としてカードを5枚出した時点で、`Builder Card の枚数` > `Starter Card の枚数` となった場合に、Starter Card をゲームから除外することができます。
+これを `リタイヤ` と呼びます。リタイヤしたカードは、それ以降使用しないカードとなります。
+
+Starter Card をリタイヤさせることで、山札から Starter Card が出る確率が下がる（＝ Builder Cardが出やすくなる）ため、アーキテクチャを組みやすくなります。
+
+### どれをリタイヤさせるか
+
+Starter Card の中で組み合わせることでエフェクトが発動するものがあります。これ以外からリタイヤさせるとよいでしょう。
+
+- `Virtual Machine` + `Bare Metal Host`
+  - 組み合わせによるエフェクト発動あり
+  - Builder Cardsとの組み合わせ可能
+- `Corporate Identity Provider` + `AWS IAM Identity Center`
+  - 組み合わせによるエフェクト発動あり
+
+:::message
+💡リタイヤさせたカードは山札および捨て札と区別できるように置きましょう。
+:::
+
+## エフェクト
+
+### 山札から1枚追加できる
+
+`黒背景に +1` と書かれたカードをアーキテクチャに組み込んだ場合、山札から1枚追加することができます。
+ここでよいカードを引くことができれば、アーキテクチャをさらに進化させ、クレジットを多く獲得できるチャンスとなります。
+
+### コンソールから1枚多く取得できる
+
+`白い雲に +1` と書かれたカードをアーキテクチャに組み込んだ場合、取得フェーズで取得できるカードの枚数が1枚増えます。
+
+通常は、アーキテクチャで獲得したクレジットがオーバーしていても1枚しか取得できないところ、複数枚取得することが可能になります。
+例えば、クレジットが`10`となった場合、コストありのBuilder Cardsを10クレジット分、複数枚取得することができます。
+公式ルールでは触れられていないが、コストありBuilder Cardsが複数枚取得できるのであれば、Well-Architectedカードも複数枚取得可能であると思われる。
+Well-Architectedカードについては、**開始前に確認する**ことをオススメします。
+
+### 1回切りのカード
+
+`太陽が沈むマーク`のカードはエフェクト発動後にリタイヤするカードです。ただし、エフェクトを発動させない場合は、クレジットのみの効果として利用後、捨て札に入れて再び利用することができます。エフェクトを使うタイミングを見極めてください。
+
+## ゲーム初心者はどのBuilder Cardを集めればいいか？
+
+無条件でアーキテクチャに組み込める以下のカードは優先して取得するのをオススメします。
+この中で、個人的にクレジット増加効果が高いのは、`Amazon CloudWatch` だと思っています。ゲーム後半に高クレジットの Well-Architected カードを取得するのに活躍するはずです！
+
+- コストなし
+  - Amazon VPC
+  - AWS CloudTrail
+  - Amazon CloudWatch
+  - AWS IAM Identity Center
+- コストあり
+  - AWS CDK
+  - AWS CloudFormation
+  - AWS Systems Manager
+  - AWS Well-Architected Tool
+  - Cloud Financial Management	
+
+次に、使い方の幅が広い `compute/containers` カテゴリのカードの取得します。
+
+- Amazon EC2
+- AWS Lambda
+- Amazon ECS / EKS
+
+そして、さらに以下があると初心者向けのアーキテクチャが組めるようになります。
+
+- Elastic Load Balancing
+- Amazon RDS
+- Amazon Aurora
 
 ## カード構成例
 
@@ -353,6 +423,18 @@ RDS（DB への直接接続・調査・マイグレーション）
 
 > **CDP：** [コンテナ ECS/Fargate](https://aws.amazon.com/jp/cdp/ec-container/)
 
+:::message
+💡**実際のアーキテクチャと違うが、データプレーンのカードがなくても
+ゲーム上の構成としては有効**
+:::
+
+| ![ELB](/images/icons/64/Arch_Elastic-Load-Balancing_64.png) | ![ECS](/images/icons/64/Arch_Amazon-Elastic-Container-Service_64.png) | ![Aurora](/images/icons/64/Arch_Amazon-Aurora_64.png) | ![ElastiCache](/images/icons/64/Arch_Amazon-ElastiCache_64.png) |
+|:---:|:---:|:---:|:---:|
+
+ECS および EKS は「フルマネージドなコンテナオーケストレータ」サービスです。実際はコンテナ環境が稼働する「データプレーン」と呼ばれる部分が必要になります。これに該当するものは「EC2 / Fargate」です。EKSの場合は「EC2 / Fargate / EKS Auto Mode マネージドノード」があります。
+
+ゲーム上ではEC2 / Fargate を組み合わせた追加効果が得られないが、ECS / EKS のみでのアーキテクチャは有効です。
+
 #### 派生：ECS + EC2 起動タイプ（5 枚）
 
 | ![ELB](/images/icons/64/Arch_Elastic-Load-Balancing_64.png) | ![ECS](/images/icons/64/Arch_Amazon-Elastic-Container-Service_64.png) | ![EC2](/images/icons/64/Arch_Amazon-EC2_64.png) | ![Aurora](/images/icons/64/Arch_Amazon-Aurora_64.png) | ![ElastiCache](/images/icons/64/Arch_Amazon-ElastiCache_64.png) |
@@ -376,6 +458,30 @@ RDS（DB への直接接続・調査・マイグレーション）
 | 初心者向け | ◎ | △ |
 
 **シナリオ：** GPU インスタンスが必要な場合などに EC2 起動タイプを選択。
+
+#### 派生：ECS / EKS Anywhereでオンプレリソースを利用
+
+アーキテクチャとして構成できますが、Starter Cardであるオンプレリソースのカードはクレジットが得られません。
+
+| ![ELB](/images/icons/64/Arch_Elastic-Load-Balancing_64.png) | ![ECS](/images/icons/64/Arch_Amazon-Elastic-Container-Service_64.png) | ![VM](/images/icons/64/Res_Forums_48_Light.png) | ![Bare](/images/icons/64/Res_Servers_48_Light.png) |
+|:---:|:---:|:---:|:---:|
+
+| カード | 役割 |
+|-------|------|
+| Elastic Load Balancing | トラフィックをコンテナホストへ分散 |
+| Amazon ECS Anywhere | コンテナのオーケストレーション |
+| Virtual Machine | オンプレ仮想マシン（アプリケーションサーバー） |
+| Bare Metal Host | オンプレ物理サーバー |
+
+| ![ELB](/images/icons/64/Arch_Elastic-Load-Balancing_64.png) | ![EKS](/images/icons/64/Arch_Amazon-Elastic-Kubernetes-Service_64.png) | ![VM](/images/icons/64/Res_Forums_48_Light.png) | ![Bare](/images/icons/64/Res_Servers_48_Light.png) |
+|:---:|:---:|:---:|:---:|
+
+| カード | 役割 |
+|-------|------|
+| Elastic Load Balancing | トラフィックをコンテナホストへ分散 |
+| Amazon EKS Anywhere | コンテナのオーケストレーション |
+| Virtual Machine | オンプレ仮想マシン（アプリケーションサーバー） |
+| Bare Metal Host | オンプレ物理サーバー |
 
 #### 派生：Systems Manager Session Manager でコンテナへセキュアアクセス（6 枚）
 
@@ -486,3 +592,5 @@ IAM Identity Center → 各アカウントへの権限を SSO で管理
 **シナリオ：** インフラ変更をコードレビュー → 自動テスト → 自動デプロイで管理する IaC パイプライン。環境ごとにスタックを切り替えることで dev / staging / prod を同じコードベースで管理でき、手作業によるリソース変更（コンソール操作）を排除できる。★ カードが 2 枚含まれる。
 
 [AWSブログ：Amazon CodeCatalyst で Environment を利用したマルチアカウントのデプロイ](https://aws.amazon.com/jp/blogs/news/using-environments-multi-account-deployments-with-amazon-codecatalyst/)
+
+
