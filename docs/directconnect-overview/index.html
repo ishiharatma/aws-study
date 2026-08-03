@@ -36,7 +36,10 @@
     
       <google-codelab-step label="👀 Contents" duration="0">
         <ul>
-<li><a href="#aws-direct-connect-%E3%81%A8%E3%81%AF" target="_blank">AWS Direct Connect とは</a></li>
+<li><a href="#aws-direct-connect-%E3%81%A8%E3%81%AF" target="_blank">AWS Direct Connect とは</a><ul>
+<li><a href="#workshop-studio" target="_blank">workshop studio</a></li>
+</ul>
+</li>
 <li><a href="#aws-%E3%81%B8%E3%81%AE%E6%8E%A5%E7%B6%9A%E6%96%B9%E6%B3%95" target="_blank">AWS への接続方法</a></li>
 <li><a href="#direct-connect-%E3%82%92%E4%BD%BF%E3%81%86%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E3%81%A8%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">Direct Connect を使うメリットとデメリット</a><ul>
 <li><a href="#%E8%BB%A2%E9%80%81%E4%B8%AD%E3%81%AE%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">転送中の暗号化</a></li>
@@ -75,6 +78,9 @@
 <p><a href="https://docs.aws.amazon.com/ja_jp/directconnect/?icmpid=docs_homepage_networking" target="_blank">AWS Direct Connect ドキュメント</a></p>
 <p><a href="https://aws.amazon.com/jp/directconnect/faqs/" target="_blank">AWS Direct Connect よくある質問</a></p>
 <p><a href="https://aws.amazon.com/jp/directconnect/pricing/" target="_blank">AWS Direct Connect の料金</a></p>
+<h2 is-upgraded>workshop studio</h2>
+<p><a href="https://catalog.us-east-1.prod.workshops.aws/workshops/5a1ba4bb-e16a-4e40-9fdb-6c1925e73a73/en-US" target="_blank">AWS Direct Connect + Hybrid DNS Workshop</a></p>
+<p><a href="https://catalog.workshops.aws/workshops/6bce0ae3-2ab1-4541-b014-2647b429b710/en-US" target="_blank">AWS Direct Connect Resiliency Workshop</a></p>
 
 
       </google-codelab-step>
@@ -228,24 +234,24 @@
 <p>クリティカルなワークロードの場合に使用します。</p>
 <p class="image-container"><img alt="resiliency_01" src="img\\26b936529954d10a.png"></p>
 <ul>
-<li><img src="img\\69f6f0fa9ba1a500.png">接続、デバイスの障害があっても回復できる</li>
-<li><img src="img\\69f6f0fa9ba1a500.png">ロケーション障害があっても回復できる</li>
-<li><img src="img\\69f6f0fa9ba1a500.png">ロケーション障害でも、冗長性が保たれる</li>
+<li>✅接続、デバイスの障害があっても回復できる</li>
+<li>✅ロケーション障害があっても回復できる</li>
+<li>✅ロケーション障害でも、冗長性が保たれる</li>
 </ul>
 <h2 is-upgraded>高い回復性</h2>
 <p>クリティカルなワークロードの場合に使用します。</p>
 <p class="image-container"><img alt="resiliency_02" src="img\\4f768840c977c3ac.png"></p>
 <ul>
-<li><img src="img\\69f6f0fa9ba1a500.png">接続、デバイスの障害があっても回復できる</li>
-<li><img src="img\\69f6f0fa9ba1a500.png">ロケーション障害があっても回復できる</li>
-<li><img src="img\\aa0eb7dd51e7544d.png">ロケーション障害で、冗長性が失われる</li>
+<li>✅接続、デバイスの障害があっても回復できる</li>
+<li>✅ロケーション障害があっても回復できる</li>
+<li>⚠️ロケーション障害で、冗長性が失われる</li>
 </ul>
 <h2 is-upgraded>開発とテスト</h2>
 <p>非クリティカルなワークロードの場合に使用します。</p>
 <p class="image-container"><img alt="resiliency_03" src="img\\4a44b5ad71ee7db2.png"></p>
 <ul>
-<li><img src="img\\69f6f0fa9ba1a500.png">接続、デバイスの障害があっても回復できる</li>
-<li><img src="img\\9bab6848322d5dac.png">ロケーション障害で、接続できない</li>
+<li>✅接続、デバイスの障害があっても回復できる</li>
+<li>❌ロケーション障害で、接続できない</li>
 </ul>
 
 
@@ -310,9 +316,10 @@
       </google-codelab-step>
     
       <google-codelab-step label="AWS 専用線アクセス体験ラボトレーニング" duration="0">
-        <p>こういうのもあります。</p>
-<p><a href="https://aws.amazon.com/jp/dx_labo/" target="_blank">https://aws.amazon.com/jp/dx_labo/</a></p>
+        <p>こういうのもありま<strong>した</strong>。（2026年現在、リンク先は存在しません）</p>
+<p><a href="https://aws.amazon.com/jp/dx_labo/" target="_blank">~~https://aws.amazon.com/jp/dx_labo/~~</a></p>
 <p class="image-container"><img alt="dx_labo" src="img\\e4d27c771c1f7cdb.png"></p>
+<p><a href="https://pages.awscloud.com/JAPAN-event-OE-DX-Handson-20200715-reg-event-LP.html" target="_blank">このようなトレーニング</a>もありましたが、現在は募集していないようです。</p>
 
 
       </google-codelab-step>

@@ -21,6 +21,7 @@ emoji: "🔌"
 <!-- Duration: 00:01:00 -->
 
 - [AWS Direct Connect とは](#aws-direct-connect-とは)
+  - [workshop studio](#workshop-studio)
 - [AWS への接続方法](#aws-への接続方法)
 - [Direct Connect を使うメリットとデメリット](#direct-connect-を使うメリットとデメリット)
   - [転送中の暗号化](#転送中の暗号化)
@@ -62,6 +63,12 @@ AWS Direct Connect は、企業や組織が AWS クラウドへの高速かつ�
 [AWS Direct Connect よくある質問](https://aws.amazon.com/jp/directconnect/faqs/)
 
 [AWS Direct Connect の料金](https://aws.amazon.com/jp/directconnect/pricing/)
+
+### workshop studio
+
+[AWS Direct Connect + Hybrid DNS Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/5a1ba4bb-e16a-4e40-9fdb-6c1925e73a73/en-US)
+
+[AWS Direct Connect Resiliency Workshop](https://catalog.workshops.aws/workshops/6bce0ae3-2ab1-4541-b014-2647b429b710/en-US)
 
 ## AWS への接続方法
 
@@ -200,9 +207,9 @@ APN パートナーと契約すると、これらの対応が不要になり、�
 
 ![resiliency_01](/images/directconnect/resiliency_01.png)
 
-- ![](/images/directconnect/icon-ok.png)接続、デバイスの障害があっても回復できる
-- ![](/images/directconnect/icon-ok.png)ロケーション障害があっても回復できる
-- ![](/images/directconnect/icon-ok.png)ロケーション障害でも、冗長性が保たれる
+- ✅接続、デバイスの障害があっても回復できる
+- ✅ロケーション障害があっても回復できる
+- ✅ロケーション障害でも、冗長性が保たれる
 
 ### 高い回復性
 
@@ -210,9 +217,9 @@ APN パートナーと契約すると、これらの対応が不要になり、�
 
 ![resiliency_02](/images/directconnect/resiliency_02.png)
 
-- ![](/images/directconnect/icon-ok.png)接続、デバイスの障害があっても回復できる
-- ![](/images/directconnect/icon-ok.png)ロケーション障害があっても回復できる
-- ![](/images/directconnect/icon-mid.png)ロケーション障害で、冗長性が失われる
+- ✅接続、デバイスの障害があっても回復できる
+- ✅ロケーション障害があっても回復できる
+- ⚠️ロケーション障害で、冗長性が失われる
 
 ### 開発とテスト
 
@@ -220,8 +227,8 @@ APN パートナーと契約すると、これらの対応が不要になり、�
 
 ![resiliency_03](/images/directconnect/resiliency_03.png)
 
-- ![](/images/directconnect/icon-ok.png)接続、デバイスの障害があっても回復できる
-- ![](/images/directconnect/icon-ng.png)ロケーション障害で、接続できない
+- ✅接続、デバイスの障害があっても回復できる
+- ❌ロケーション障害で、接続できない
 
 ## Direct Connect のバックアップとしての AWS Site to Site VPN 接続
 
@@ -281,11 +288,14 @@ Direct Connect ゲートウェイに接続する VPC の数を制限したい場
 
 ## AWS 専用線アクセス体験ラボトレーニング
 
-こういうのもあります。
+こういうのもありま**した**。（2026年現在、リンク先は存在しません）
 
-[https://aws.amazon.com/jp/dx_labo/](https://aws.amazon.com/jp/dx_labo/)
+[~~https://aws.amazon.com/jp/dx_labo/~~](https://aws.amazon.com/jp/dx_labo/)
 
 ![dx_labo](/images/directconnect/dx_lab.png)
+
+[このようなトレーニング](https://pages.awscloud.com/JAPAN-event-OE-DX-Handson-20200715-reg-event-LP.html)もありましたが、現在は募集していないようです。
+
 
 ## MTU とジャンボフレーム
 
