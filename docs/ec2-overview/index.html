@@ -38,7 +38,7 @@
         <ul>
 <li><a href="#amazon-ec2-%E3%81%A8%E3%81%AF" target="_blank">Amazon EC2 とは</a><ul>
 <li><a href="#%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">公式ドキュメント</a></li>
-<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+<li><a href="#%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">学習リソース</a></li>
 </ul>
 </li>
 <li><a href="#ec2-%E3%82%92%E6%A7%8B%E6%88%90%E3%81%99%E3%82%8B%E4%B8%BB%E8%A6%81%E3%81%AA%E8%A6%81%E7%B4%A0" target="_blank">EC2 を構成する主要な要素</a></li>
@@ -89,14 +89,14 @@
       </google-codelab-step>
     
       <google-codelab-step label="Amazon EC2 とは" duration="0">
-        <p>Amazon EC2（Elastic Compute Cloud）は、AWS クラウド上で仮想サーバー（インスタンス）を起動・管理できるサービスです。物理サーバーを購入・管理することなく、数分でサーバーを用意でき、必要に応じてスペックを変更したり、不要になったら削除したりできます。 料金は秒単位で請求されるため、使用しなかったコンピューティング時間のコストは請求されません。最小課金時間は 60 秒です。60秒未満で停止や終了した場合でも60秒分の料金が請求されます。</p>
+        <p>Amazon EC2（Elastic Compute Cloud）は、AWS クラウド上で仮想サーバー（インスタンス）を起動・管理できるサービスです。物理サーバーを購入・管理することなく、数分でサーバーを用意でき、必要に応じてスペックを変更したり、不要になったら削除したりできます。 料金は秒単位で計算され、使わなかったコンピューティング時間には課金されません。最小課金時間は 60 秒で、60 秒未満で停止・終了した場合も 60 秒分が請求されます。</p>
 <h2 is-upgraded>公式ドキュメント</h2>
 <p>Amazon EC2を理解する公式ドキュメントは次のとおりです。</p>
 <p><a href="https://aws.amazon.com/jp/ec2/" target="_blank">Amazon EC2 サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/ec2/?id=docs_gateway" target="_blank">Amazon EC2 ドキュメント</a></p>
 <p><a href="https://aws.amazon.com/jp/ec2/faqs/" target="_blank">Amazon EC2 よくある質問</a></p>
 <p><a href="https://aws.amazon.com/jp/ec2/pricing/" target="_blank">Amazon EC2 の料金</a></p>
-<h2 is-upgraded>1.2. 学習リソース</h2>
+<h2 is-upgraded>学習リソース</h2>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=P5zX4DdlYOE" target="_blank">Amazon EC2(YouTube)</a>(0:55:18)</p>
 <p class="image-container"><img alt="blackbelt-ec2-1" src="img\\31a8c921de4feb22.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=1ALvDtb2ziM" target="_blank">Amazon EC2入門(YouTube)</a>(0:32:12)</p>
@@ -205,7 +205,7 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>G（GPU 搭載）</p>
 </td><td colspan="1" rowspan="1"><p>GPU 演算</p>
-</td><td colspan="1" rowspan="1"><p>機械学習学習、グラフィクス処理</p>
+</td><td colspan="1" rowspan="1"><p>機械学習トレーニング、グラフィックス処理</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>I（ストレージ最適化）</p>
 </td><td colspan="1" rowspan="1"><p>高速 NVMe SSD</p>
@@ -273,7 +273,7 @@
 <li>世代 <ul>
 <li>最新のものを選択する</li>
 <li>最新世代のほうがコストが低く設定されているケースもあるので確認すること</li>
-<li>すでに稼働しているインスタンスも古い世代の場合は新しい世代にするだけでコスト削減できる可能性があります</li>
+<li>すでに稼働しているインスタンスも、古い世代なら新しい世代にするだけでコスト削減できる場合がある</li>
 </ul>
 </li>
 <li>オプション <ul>
@@ -282,7 +282,7 @@
 </li>
 <li>インスタンスサイズ <ul>
 <li>必要なスペックを選択する</li>
-<li>中規模程度であれば、「medium」や「large」で十分な場合もあります。</li>
+<li>中規模程度であれば、「medium」や「large」で十分な場合もある</li>
 </ul>
 </li>
 </ul>
@@ -311,7 +311,7 @@
 </td></tr>
 </table>
 <p>:::message <strong>Amazon Linux 2023（AL2023）が現在の推奨 AMI です。</strong> Amazon Linux 2（AL2）は 2026 年 6 月 30 日にサポートが終了しています。新規構築では必ず AL2023 を使用してください。 :::</p>
-<p>Amazon または検証済み Amazon パートナーが所有するパブリック AMI には [検証済みプロバイダー] のマークが付されます。</p>
+<p>Amazon または検証済み Amazon パートナーが所有するパブリック AMI には [検証済みプロバイダー] のマークが付きます。</p>
 <h2 is-upgraded>カスタム AMI（ゴールデン AMI）</h2>
 <p>セキュリティパッチ適用済みの状態や、共通ミドルウェアをインストールした状態をカスタム AMI として保存しておくことで、同一構成のインスタンスを素早く複数台起動できます。これを<strong>ゴールデン AMI</strong> と呼ぶことがあります。</p>
 
@@ -360,7 +360,7 @@
 <p>インスタンスストアは、EC2 ホストサーバーに物理的に内蔵されたディスクです。</p>
 <ul>
 <li>高速（NVMe SSD）</li>
-<li><strong>インスタンスを停止・終了するとデータが消える（一時的なストレージ）</strong></li>
+<li>インスタンスを停止・終了すると<strong>データが消える</strong>（一時的なストレージ）</li>
 <li>料金はインスタンス料金に含まれる（EBS 料金は別途不要）</li>
 <li>一部のインスタンスタイプでのみ利用可能（オプションに<code>d</code>がつく場合など） <ul>
 <li>詳しくは<a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/instance-store-volumes.html" target="_blank">AWSドキュメント</a>を参照してください。</li>
@@ -392,7 +392,7 @@
 </td><td colspan="1" rowspan="1"><p>変わらない</p>
 </td></tr>
 </table>
-<p>:::message alert <a href="https://aws.amazon.com/jp/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/" target="_blank">2024 年 2 月以降</a>、<strong>パブリック IPv4 アドレスの使用にも課金</strong>（$0.005/時間）が発生するようになりました。EIP・パブリック IP いずれも対象です。 EIPは、EC2に割り当てられていなくても課金対象となりました。 :::</p>
+<p>:::message alert <a href="https://aws.amazon.com/jp/blogs/aws/new-aws-public-ipv4-address-charge-public-ip-insights/" target="_blank">2024 年 2 月以降</a>、<strong>パブリック IPv4 アドレスの使用にも課金</strong>（$0.005/時間）が発生するようになりました。EIP・パブリック IP いずれも対象です。 EIP は、EC2 に割り当てられていなくても課金対象となりました。 :::</p>
 <h2 is-upgraded>ENI（Elastic Network Interface）</h2>
 <p>ENI は仮想ネットワークインターフェースです。EC2 インスタンスには必ず 1 つ以上の ENI が紐づいており、セキュリティグループは ENI に対して適用されます。</p>
 <ul>
@@ -408,7 +408,7 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>クラスター</p>
 </td><td colspan="1" rowspan="1"><p>単一のアベイラビリティーゾーン内のインスタンスを論理的にグループ化。低レイテンシ・高スループット</p>
-</td><td colspan="1" rowspan="1"><p>HPC、機械学習学習</p>
+</td><td colspan="1" rowspan="1"><p>HPC、機械学習トレーニング</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>パーティション</p>
 </td><td colspan="1" rowspan="1"><p>複数のパーティション（ラックグループ）に分散</p>
@@ -428,14 +428,14 @@
 <p>EC2 インスタンスへの SSH（Linux）または RDP（Windows）接続に使用します。</p>
 <ul>
 <li>AWS 側に公開鍵を登録し、秘密鍵はユーザー側で管理する</li>
-<li><strong>秘密鍵は一度しかダウンロードできません。紛失した場合は再作成が必要です。</strong></li>
-<li>キーペアを使わず <strong>AWS Systems Manager Session Manager</strong> で接続する方法も推奨されています</li>
+<li>秘密鍵は<strong>一度しかダウンロードできません</strong>。紛失した場合は再作成が必要です</li>
+<li>キーペアを使わず AWS Systems Manager Session Manager で接続する方法も推奨されています</li>
 </ul>
 <p>:::message <strong>Session Manager を使うと、SSH ポート（22番）を開放する必要がなくなります。</strong> キーペア管理も不要になるため、セキュリティとオペレーション両面でメリットがあります。新規構築では積極的に検討してください。 :::</p>
 <h2 is-upgraded>IAM ロール</h2>
 <p>EC2 インスタンスが S3 や DynamoDB などの AWS サービスにアクセスするには、IAM ロールをインスタンスプロファイルとして EC2 にアタッチします。</p>
 <p>アクセスキーをインスタンス内に直接埋め込む方法は、漏洩リスクがあるため<strong>絶対に行わないでください。</strong></p>
-<pre><code># NG（アクセスキーをハードコード）
+<pre><code language="language-sh" class="language-sh"># NG（アクセスキーをハードコード）
 aws configure set aws_access_key_id AKIAXXXXXXXXXXXXXXXX
 
 # OK（IAM ロールをインスタンスにアタッチして使う）
@@ -471,7 +471,7 @@ aws configure set aws_access_key_id AKIAXXXXXXXXXXXXXXXX
 <tr><td colspan="1" rowspan="1"><p>スポットインスタンス</p>
 </td><td colspan="1" rowspan="1"><p>AWS の余剰キャパシティを利用</p>
 </td><td colspan="1" rowspan="1"><p>最大 90%</p>
-</td><td colspan="1" rowspan="1"><p>バッチ処理、機械学習学習など中断を許容できるワークロード</p>
+</td><td colspan="1" rowspan="1"><p>バッチ処理、機械学習トレーニングなど中断を許容できるワークロード</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Dedicated Hosts</p>
 </td><td colspan="1" rowspan="1"><p>物理ホストを専有</p>
@@ -537,10 +537,10 @@ aws configure set aws_access_key_id AKIAXXXXXXXXXXXXXXXX
 </table>
 <p>:::message <strong>「停止」と「終了（削除）」は別操作です。</strong></p>
 <ul>
-<li><strong>停止（Stop）</strong>：再起動可能。EBS のデータは保持される</li>
-<li><strong>終了（Terminate）</strong>：完全削除。デフォルトでルートボリュームも削除される</li>
+<li>停止（Stop）：再起動可能。EBS のデータは保持される</li>
+<li>終了（Terminate）：完全削除。デフォルトでルートボリュームも削除される</li>
 </ul>
-<p>誤操作を防ぐために、本番インスタンスには<strong>終了保護（Termination Protection）</strong> を有効化することを推奨します。 :::</p>
+<p>誤操作を防ぐために、本番インスタンスには終了保護（Termination Protection）を有効化することを推奨します。 :::</p>
 <h2 is-upgraded>再起動とパブリック IP</h2>
 <p>インスタンスを停止 ＞起動すると、パブリック IP アドレスが変わります（Elastic IP を使用している場合を除く）。固定 IP が必要な場合は Elastic IP を使用してください。</p>
 
@@ -548,41 +548,10 @@ aws configure set aws_access_key_id AKIAXXXXXXXXXXXXXXXX
       </google-codelab-step>
     
       <google-codelab-step label="📖 まとめ" duration="0">
-        <table>
-<tr><td colspan="1" rowspan="1"><p>項目</p>
-</td><td colspan="1" rowspan="1"><p>押さえるポイント</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>インスタンスタイプ</p>
-</td><td colspan="1" rowspan="1"><p>Graviton（g 系）はコストパフォーマンスが高い。T 系はバースト可能</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>AMI</p>
-</td><td colspan="1" rowspan="1"><p>新規構築は Amazon Linux 2023（AL2023）を使用</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>EBS</p>
-</td><td colspan="1" rowspan="1"><p>新規は gp3 を選択。gp2 は非推奨</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>インスタンスストア</p>
-</td><td colspan="1" rowspan="1"><p>停止でデータ消去。一時領域としてのみ使用</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>Elastic IP</p>
-</td><td colspan="1" rowspan="1"><p>割り当てていない状態でも課金。不要なら解放</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>パブリック IPv4</p>
-</td><td colspan="1" rowspan="1"><p>2024 年 2 月以降、使用に課金が発生</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>IAM ロール</p>
-</td><td colspan="1" rowspan="1"><p>アクセスキーの直接埋め込みは厳禁。ロールを使う</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>接続方法</p>
-</td><td colspan="1" rowspan="1"><p>Session Manager を使えば SSH ポート不要</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>購入オプション</p>
-</td><td colspan="1" rowspan="1"><p>長期利用は Savings Plans または RI。スポットは中断前提で設計</p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>終了保護</p>
-</td><td colspan="1" rowspan="1"><p>本番環境では有効を推奨</p>
-</td></tr>
-</table>
+        <p>新規に EC2 を構築するときの出発点は、ほぼ決まっている。AMI は Amazon Linux 2023、EBS は gp3、接続は Session Manager。この 3 つを既定にすれば、SSH ポート（22 番）の開放もキーペアの受け渡しも不要になり、あとから見直す箇所が減る。インスタンスタイプは M（汎用）の最新世代を第一候補に、開発や小規模検証なら T 系のバースト、Linux ワークロードなら Graviton（g 系）を積極的に検討する。</p>
+<p>コストを抑える軸は購入オプションと世代選択の 2 つ。スペックが長期間固定なら RI、インスタンスタイプを変える可能性があるなら Savings Plans、中断を許容できるバッチや機械学習トレーニングならスポットインスタンスが候補になる。世代は新しいほうが単価が低いことも多く、既存インスタンスを新世代に載せ替えるだけでコストが下がる場合がある。</p>
+<p>運用とセキュリティでは、EC2 から AWS サービスを呼ぶときは必ず IAM ロールを使い、アクセスキーをインスタンスに埋め込まない。本番インスタンスは終了保護を有効化しておくと、誤操作による削除を防げる。インスタンスストアは停止でデータが消える一時領域なので、永続化が必要なものは EBS か S3 に置く。</p>
+<p>課金の落とし穴はパブリック IPv4 アドレス。2024 年 2 月以降、EIP もパブリック IP も使用しているだけで時間課金され、EIP は EC2 に割り当てていない状態でも対象になる。使わない EIP は解放しておく。</p>
 <p>:::message 本記事では扱いませんでしたが、EC2 には以下のような関連機能・サービスもあります。</p>
 <ul>
 <li>Auto Recovery：ハードウェア障害時に CloudWatch アラームと連携してインスタンスを自動復旧する機能</li>

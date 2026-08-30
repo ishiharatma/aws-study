@@ -1,0 +1,582 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Amazon EC2 応用ガイド</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="ec2-advanced"
+                  title="Amazon EC2 応用ガイド"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+<p>本記事は基礎編の続編です。インスタンスタイプの命名規則、AMI、EBS ボリュームタイプ、IP アドレス、購入オプションの一覧、ライフサイクルといった基本事項は「Amazon EC2 入門」で解説しているため、本記事では重複を避け、応用的なトピックに絞っています。記載内容は 2026 年 8 月時点の情報です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#1-aws-nitro-system" target="_blank">1. AWS Nitro System</a><ul>
+<li><a href="#11-nitro-system-%E3%81%A8%E3%81%AF" target="_blank">1.1. Nitro System とは</a></li>
+<li><a href="#12-%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">1.2. 構成要素</a></li>
+<li><a href="#13-%E3%83%99%E3%82%A2%E3%83%A1%E3%82%BF%E3%83%AB%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9" target="_blank">1.3. ベアメタルインスタンス</a></li>
+<li><a href="#14-nitro-%E3%82%92%E5%89%8D%E6%8F%90%E3%81%A8%E3%81%99%E3%82%8B%E6%A9%9F%E8%83%BD" target="_blank">1.4. Nitro を前提とする機能</a></li>
+</ul>
+</li>
+<li><a href="#2-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%97-deep-dive" target="_blank">2. インスタンスタイプ Deep Dive</a><ul>
+<li><a href="#21-%E4%B8%96%E4%BB%A3%E3%83%9E%E3%83%83%E3%83%972026-%E5%B9%B4-8-%E6%9C%88%E6%99%82%E7%82%B9" target="_blank">2.1. 世代マップ（2026 年 8 月時点）</a></li>
+<li><a href="#22-%E3%83%90%E3%83%BC%E3%82%B9%E3%83%88%E5%8F%AF%E8%83%BD%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9t-%E7%B3%BB%E3%81%AE%E5%86%85%E9%83%A8%E5%8B%95%E4%BD%9C" target="_blank">2.2. バースト可能インスタンス（T 系）の内部動作</a></li>
+<li><a href="#23-%E3%83%99%E3%82%A2%E3%83%A1%E3%82%BF%E3%83%AB%E3%81%A8%E5%B0%82%E6%9C%89%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">2.3. ベアメタルと専有オプション</a></li>
+<li><a href="#24-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%97%E3%81%AE%E5%A4%89%E6%9B%B4" target="_blank">2.4. インスタンスタイプの変更</a></li>
+</ul>
+</li>
+<li><a href="#3-%E3%82%AD%E3%83%A3%E3%83%91%E3%82%B7%E3%83%86%E3%82%A3%E3%81%AE%E7%A2%BA%E4%BF%9D%E3%81%A8%E8%B3%BC%E5%85%A5%E3%82%AA%E3%83%97%E3%82%B7%E3%83%A7%E3%83%B3" target="_blank">3. キャパシティの確保と購入オプション</a><ul>
+<li><a href="#31-on-demand-capacity-reservations" target="_blank">3.1. On-Demand Capacity Reservations</a></li>
+<li><a href="#32-capacity-blocks-for-ml" target="_blank">3.2. Capacity Blocks for ML</a></li>
+<li><a href="#33-%E3%82%B9%E3%83%9D%E3%83%83%E3%83%88%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AE%E5%AE%9F%E9%81%8B%E7%94%A8%E8%A8%AD%E8%A8%88" target="_blank">3.3. スポットインスタンスの実運用設計</a></li>
+<li><a href="#34-ec2-fleet-%E3%81%A8%E5%B1%9E%E6%80%A7%E3%83%99%E3%83%BC%E3%82%B9%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%82%BF%E3%82%A4%E3%83%97%E9%81%B8%E6%8A%9E" target="_blank">3.4. EC2 Fleet と属性ベースのインスタンスタイプ選択</a></li>
+<li><a href="#35-dedicated-hosts" target="_blank">3.5. Dedicated Hosts</a></li>
+</ul>
+</li>
+<li><a href="#4-ec2-auto-scaling" target="_blank">4. EC2 Auto Scaling</a><ul>
+<li><a href="#41-%E6%A7%8B%E6%88%90%E8%A6%81%E7%B4%A0" target="_blank">4.1. 構成要素</a></li>
+<li><a href="#42-%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">4.2. スケーリングポリシー</a></li>
+<li><a href="#43-%E4%BA%88%E6%B8%AC%E3%82%B9%E3%82%B1%E3%83%BC%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">4.3. 予測スケーリング</a></li>
+<li><a href="#44-%E6%B7%B7%E5%9C%A8%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">4.4. 混在インスタンスポリシー</a></li>
+<li><a href="#45-%E3%82%A6%E3%82%A9%E3%83%BC%E3%83%A0%E3%83%97%E3%83%BC%E3%83%AB" target="_blank">4.5. ウォームプール</a></li>
+<li><a href="#46-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AE%E3%83%AA%E3%83%95%E3%83%AC%E3%83%83%E3%82%B7%E3%83%A5" target="_blank">4.6. インスタンスのリフレッシュ</a></li>
+<li><a href="#47-%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%95%E3%83%83%E3%82%AF%E3%81%A8%E3%82%AD%E3%83%A3%E3%83%91%E3%82%B7%E3%83%86%E3%82%A3%E3%83%AA%E3%83%90%E3%83%A9%E3%83%B3%E3%82%B7%E3%83%B3%E3%82%B0" target="_blank">4.7. ライフサイクルフックとキャパシティリバランシング</a></li>
+</ul>
+</li>
+<li><a href="#5-%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AD%E3%83%B3%E3%82%B0" target="_blank">5. ネットワーキング</a><ul>
+<li><a href="#51-enhanced-networking-%E3%81%A8-ena-express" target="_blank">5.1. Enhanced Networking と ENA Express</a></li>
+<li><a href="#52-elastic-fabric-adapterefa" target="_blank">5.2. Elastic Fabric Adapter（EFA）</a></li>
+<li><a href="#53-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E5%B8%AF%E5%9F%9F%E5%B9%85%E3%81%AE%E8%80%83%E3%81%88%E6%96%B9" target="_blank">5.3. インスタンス帯域幅の考え方</a></li>
+<li><a href="#54-%E8%A4%87%E6%95%B0-eni-%E3%81%A8%E3%82%BB%E3%82%AB%E3%83%B3%E3%83%80%E3%83%AA-ip" target="_blank">5.4. 複数 ENI とセカンダリ IP</a></li>
+<li><a href="#55-%E3%83%97%E3%83%AC%E3%82%A4%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%BF%9C%E7%94%A8" target="_blank">5.5. プレイスメントグループ（応用）</a></li>
+</ul>
+</li>
+<li><a href="#6-%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E7%AE%A1%E7%90%86%E3%81%A8%E3%82%AC%E3%83%90%E3%83%8A%E3%83%B3%E3%82%B9" target="_blank">6. イメージ管理とガバナンス</a><ul>
+<li><a href="#61-ec2-image-builder" target="_blank">6.1. EC2 Image Builder</a></li>
+<li><a href="#62-ami-%E3%81%AE%E3%82%AC%E3%83%90%E3%83%8A%E3%83%B3%E3%82%B9" target="_blank">6.2. AMI のガバナンス</a></li>
+<li><a href="#63-windows-fast-launch" target="_blank">6.3. Windows Fast Launch</a></li>
+</ul>
+</li>
+<li><a href="#7-%E9%81%8B%E7%94%A8%E3%81%A8%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB" target="_blank">7. 運用とライフサイクル</a><ul>
+<li><a href="#71-hibernation%E4%BC%91%E6%AD%A2%E7%8A%B6%E6%85%8B" target="_blank">7.1. Hibernation（休止状態）</a></li>
+<li><a href="#72-%E8%87%AA%E5%8B%95%E5%BE%A9%E6%97%A7" target="_blank">7.2. 自動復旧</a></li>
+<li><a href="#73-%E3%82%B9%E3%82%B1%E3%82%B8%E3%83%A5%E3%83%BC%E3%83%AB%E3%81%95%E3%82%8C%E3%81%9F%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%81%A8%E3%83%A1%E3%83%B3%E3%83%86%E3%83%8A%E3%83%B3%E3%82%B9" target="_blank">7.3. スケジュールされたイベントとメンテナンス</a></li>
+<li><a href="#74-%E3%82%A4%E3%83%B3%E3%82%B9%E3%82%BF%E3%83%B3%E3%82%B9%E3%81%AE%E4%BF%9D%E8%AD%B7" target="_blank">7.4. インスタンスの保護</a></li>
+<li><a href="#75-%E6%8E%A5%E7%B6%9A%E6%96%B9%E5%BC%8F%E3%81%AE%E4%BD%BF%E3%81%84%E5%88%86%E3%81%91" target="_blank">7.5. 接続方式の使い分け</a></li>
+<li><a href="#76-%E5%8F%B3%E3%82%B5%E3%82%A4%E3%82%B8%E3%83%B3%E3%82%B0%E3%81%A8-compute-optimizer" target="_blank">7.6. 右サイジングと Compute Optimizer</a></li>
+</ul>
+</li>
+<li><a href="#8-%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3%E5%BF%9C%E7%94%A8" target="_blank">8. セキュリティ（応用）</a><ul>
+<li><a href="#81-imdsv2" target="_blank">8.1. IMDSv2</a></li>
+<li><a href="#82-nitro-enclaves" target="_blank">8.2. Nitro Enclaves</a></li>
+<li><a href="#83-uefi-%E3%82%BB%E3%82%AD%E3%83%A5%E3%82%A2%E3%83%96%E3%83%BC%E3%83%88%E3%81%A8-nitrotpm" target="_blank">8.3. UEFI セキュアブートと NitroTPM</a></li>
+<li><a href="#84-%E3%82%AD%E3%83%BC%E3%83%9A%E3%82%A2%E3%81%A8%E8%AA%8D%E8%A8%BC%E6%83%85%E5%A0%B1" target="_blank">8.4. キーペアと認証情報</a></li>
+<li><a href="#85-%E3%83%87%E3%83%BC%E3%82%BF%E4%BF%9D%E8%AD%B7" target="_blank">8.5. データ保護</a></li>
+</ul>
+</li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a><ul>
+<li><a href="#%E5%8F%82%E8%80%83%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">参考リソース</a></li>
+</ul>
+</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="1. AWS Nitro System" duration="0">
+        <h2 is-upgraded>1.1. Nitro System とは</h2>
+<p>AWS Nitro System は、現行世代の EC2 インスタンスの基盤となっているハードウェアとソフトウェアの仕組みです。従来の仮想化ではハイパーバイザーがホストの CPU やメモリを消費し、ネットワークやストレージの I/O もソフトウェアで処理していました。Nitro System では、これらの処理を専用のハードウェア（Nitro カード）にオフロードし、ハイパーバイザーを最小限まで軽量化しています。</p>
+<p>その結果、ホストサーバーのリソースをほぼすべてお客様のインスタンスに割り当てられるようになり、ベアメタルに近いパフォーマンスと、一貫した I/O 性能が得られます。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-nitro-instances.html" target="_blank">AWS Nitro System</a></p>
+<p class="image-container"><img alt="nitro-system" src="img\\aee70c3193e0320.svg"></p>
+<h2 is-upgraded>1.2. 構成要素</h2>
+<p>Nitro System は大きく 3 つの要素で構成されます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>要素</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Nitro カード</p>
+</td><td colspan="1" rowspan="1"><p>VPC ネットワーク、Amazon EBS、インスタンスストレージ、システム管理・モニタリングを専用ハードウェアで処理する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Nitro セキュリティチップ</p>
+</td><td colspan="1" rowspan="1"><p>ハードウェアレベルの Root of Trust。ファームウェアの検証を行い、ホストへの管理アクセスを排除する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Nitro ハイパーバイザー</p>
+</td><td colspan="1" rowspan="1"><p>メモリと CPU の割り当てだけを担う軽量なハイパーバイザー。通常時はほとんどリソースを消費しない</p>
+</td></tr>
+</table>
+<p>Nitro セキュリティチップにより、AWS の従業員であってもインスタンスへの対話的なアクセス（SSH 等）ができない設計になっています。</p>
+<h2 is-upgraded>1.3. ベアメタルインスタンス</h2>
+<p>インスタンスタイプ名の末尾が <code>.metal</code> のものはベアメタルインスタンスで、ハイパーバイザーを介さずに物理サーバーへ直接アクセスします。</p>
+<ul>
+<li>ハードウェアの仮想化支援機能（VT-x など）を必要とするワークロードや、独自ハイパーバイザーの実行に使える</li>
+<li>ライセンス上、物理コアやソケットの情報が必要なソフトウェアに対応できる</li>
+<li>EBS、ENA、セキュリティグループなど Nitro ベースの機能はベアメタルでも利用できる</li>
+</ul>
+<h2 is-upgraded>1.4. Nitro を前提とする機能</h2>
+<p>本記事で扱う次の機能は、いずれも Nitro System 上でのみ利用できます。Enhanced Networking（ENA / EFA）、EBS 最適化のデフォルト有効化、インスタンスストアの自動暗号化、Hibernation、Nitro Enclaves、NitroTPM、UEFI セキュアブートが該当します。2026 年 6 月に一般提供された AWS Graviton5 搭載の M9g / M9gd インスタンスは、第 6 世代の Nitro System 上で動作しています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2. インスタンスタイプ Deep Dive" duration="0">
+        <h2 is-upgraded>2.1. 世代マップ（2026 年 8 月時点）</h2>
+<p>基礎編では命名規則を説明しました。ここでは、プロセッサ系統ごとの最新世代を整理します。世代が新しいほど価格性能比が高く、旧世代より単価が安く設定されることもあるため、新規構築では最新世代を第一候補にします。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>系統</p>
+</td><td colspan="1" rowspan="1"><p>最新世代の例</p>
+</td><td colspan="1" rowspan="1"><p>補足</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AWS Graviton（Arm）</p>
+</td><td colspan="1" rowspan="1"><p>Graviton4: <code>C8g</code> / <code>M8g</code> / <code>R8g</code> / <code>X8g</code>、Graviton5: <code>M9g</code> / <code>M9gd</code></p>
+</td><td colspan="1" rowspan="1"><p>M9g / M9gd は 2026 年 6 月に一般提供開始。<code>C9g</code> / <code>R9g</code> は提供予定</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Intel</p>
+</td><td colspan="1" rowspan="1"><p><code>M7i</code> / <code>M7i-flex</code>、<code>C8in</code> / <code>C8ib</code>、<code>X8i</code></p>
+</td><td colspan="1" rowspan="1"><p><code>C8in</code> / <code>C8ib</code> は 2026 年 4 月に一般提供開始。ネットワーク最大 600 Gbps</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>AMD</p>
+</td><td colspan="1" rowspan="1"><p><code>M7a</code> / <code>C7a</code> / <code>R7a</code></p>
+</td><td colspan="1" rowspan="1"><p>高い定格クロックを求めるワークロード向け</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>GPU / アクセラレーテッド</p>
+</td><td colspan="1" rowspan="1"><p><code>P6-B200</code> / <code>P6e-GB200</code>、<code>G7</code>、<code>Trn2</code>、<code>Inf2</code></p>
+</td><td colspan="1" rowspan="1"><p><code>P6-B200</code>（NVIDIA Blackwell）は 2026 年 5 月、<code>G7</code>（NVIDIA RTX PRO Blackwell）は 2026 年 6 月に提供開始</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>HPC</p>
+</td><td colspan="1" rowspan="1"><p><code>Hpc7g</code> / <code>Hpc7a</code></p>
+</td><td colspan="1" rowspan="1"><p>クラスタープレイスメントグループと EFA を併用する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ハイメモリ</p>
+</td><td colspan="1" rowspan="1"><p><code>U7i</code> 系、<code>X8g</code></p>
+</td><td colspan="1" rowspan="1"><p>SAP HANA など大規模インメモリ DB 向け。<code>U7i</code> はメモリ最大 32 TiB 級</p>
+</td></tr>
+</table>
+<p>最新の対応リージョンやスペックは、インスタンスタイプ別のページで確認します。</p>
+<p>AWS ドキュメント &gt; <a href="https://aws.amazon.com/jp/ec2/instance-types/" target="_blank">Amazon EC2 インスタンスタイプ</a></p>
+<h2 is-upgraded>2.2. バースト可能インスタンス（T 系）の内部動作</h2>
+<p>T 系インスタンス（<code>T3</code> / <code>T3a</code> / <code>T4g</code> など）は CPU クレジットという仕組みで動作します。基本的な考え方は次のとおりです。</p>
+<ul>
+<li>1 CPU クレジットは、1 個の vCPU を 100 % で 1 分間動かす処理量に相当する</li>
+<li>インスタンスサイズごとに「ベースライン使用率」が決まっており、その使用率を下回っている間はクレジットが貯まる</li>
+<li>ベースラインを超えて CPU を使うとクレジットを消費し、クレジットが尽きるとベースラインまで性能が制限される</li>
+</ul>
+<p>クレジットが不足したときの挙動は、モードによって変わります。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>モード</p>
+</td><td colspan="1" rowspan="1"><p>挙動</p>
+</td><td colspan="1" rowspan="1"><p>備考</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>standard</p>
+</td><td colspan="1" rowspan="1"><p>クレジットが尽きるとベースライン性能に制限される</p>
+</td><td colspan="1" rowspan="1"><p>追加課金は発生しない</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>unlimited</p>
+</td><td colspan="1" rowspan="1"><p>クレジット不足時も高性能を維持し、超過分を課金する</p>
+</td><td colspan="1" rowspan="1"><p><code>T3</code> / <code>T3a</code> / <code>T4g</code> の起動時デフォルト</p>
+</td></tr>
+</table>
+<p>継続的に CPU 使用率が高いワークロードでは、unlimited モードの超過課金がオンデマンドの M 系より割高になることがあります。CloudWatch の <code>CPUCreditBalance</code> や <code>CPUSurplusCreditBalance</code> を監視し、恒常的にクレジットが枯渇している場合は M 系や C 系への変更を検討します。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/burstable-performance-instances.html" target="_blank">バースト可能パフォーマンスインスタンス</a></p>
+<h2 is-upgraded>2.3. ベアメタルと専有オプション</h2>
+<p>macOS のビルドや CI に使う EC2 Mac インスタンス（<code>mac2</code>（Apple M2）、<code>mac2-m2pro</code> など）は、Dedicated Host 上のベアメタルインスタンスとしてのみ起動できます。Apple のライセンス条項に合わせて、Dedicated Host には最低 24 時間の割り当て課金が発生し、1 ホストにつき 1 インスタンスを起動します。</p>
+<h2 is-upgraded>2.4. インスタンスタイプの変更</h2>
+<p>稼働中のインスタンスは、いったん停止してからタイプを変更し、再度起動することでスペックを変えられます。変更時は次の点に注意します。</p>
+<ul>
+<li>変更後のタイプが、現在の AMI の仮想化方式やドライバ（ENA、NVMe）に対応している必要がある</li>
+<li>x86 と Arm（Graviton）の間でタイプを変更する場合は、アーキテクチャに対応した AMI を別途用意する</li>
+<li>インスタンスストアを使っている場合、停止した時点でデータは失われる</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3. キャパシティの確保と購入オプション" duration="0">
+        <p>基礎編ではオンデマンド、リザーブドインスタンス、Savings Plans、スポット、Dedicated Hosts の一覧を紹介しました。ここでは、キャパシティを能動的に確保する仕組みと、スポットを本番で使うための設計を扱います。</p>
+<h2 is-upgraded>3.1. On-Demand Capacity Reservations</h2>
+<p>特定のアベイラビリティーゾーンで、指定したインスタンスタイプの容量をあらかじめ押さえておく仕組みが On-Demand Capacity Reservations（ODCR）です。予約している間は、インスタンスを起動していなくてもオンデマンド料金が発生します。Savings Plans やリージョン別リザーブドインスタンスの割引を、ODCR 上のインスタンスに適用することもできます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>動作</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>open</p>
+</td><td colspan="1" rowspan="1"><p>予約条件（タイプ・AZ・プラットフォーム）に一致するインスタンスが自動的に予約枠を使う</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>targeted</p>
+</td><td colspan="1" rowspan="1"><p>予約を明示的に指定して起動したインスタンスだけが予約枠を使う</p>
+</td></tr>
+</table>
+<p>複数の予約をまとめて扱う Capacity Reservation group や、需要に応じて予約数を維持する Capacity Reservation Fleet も利用できます。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/capacity-reservation-overview.html" target="_blank">オンデマンドキャパシティ予約</a></p>
+<h2 is-upgraded>3.2. Capacity Blocks for ML</h2>
+<p>機械学習の学習ジョブのように、短期間だけ大量の GPU をまとめて確保したいことがあります。これに応えるのが Capacity Blocks for ML で、GPU などのアクセラレーテッドインスタンスを将来の特定期間だけ予約します。</p>
+<ul>
+<li>1 〜 64 インスタンスのクラスター単位で予約する</li>
+<li>最長で約 6 か月、最大 8 週間先まで予約できる</li>
+<li>予約されたインスタンスは低レイテンシのクラスター配置となり、EFA を利用できる</li>
+</ul>
+<p>Capacity Blocks for ML と中断可能なキャパシティ予約は、Capacity Reservation Resource Group にまとめて管理できます。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-capacity-blocks.html" target="_blank">Capacity Blocks for ML</a></p>
+<h2 is-upgraded>3.3. スポットインスタンスの実運用設計</h2>
+<p>スポットインスタンスは中断を前提に設計すれば大幅なコスト削減につながります。安定して使うための要点は配分戦略と中断ハンドリングです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>配分戦略</p>
+</td><td colspan="1" rowspan="1"><p>内容</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>price-capacity-optimized</p>
+</td><td colspan="1" rowspan="1"><p>中断されにくく、かつ価格が低いプールから起動する。多くのワークロードで推奨</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>capacity-optimized</p>
+</td><td colspan="1" rowspan="1"><p>中断されにくさを最優先する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>lowest-price</p>
+</td><td colspan="1" rowspan="1"><p>価格を最優先する。中断が増えやすい</p>
+</td></tr>
+</table>
+<p>中断は 2 分前に通知されます。加えて、より早いタイミングで「リバランス推奨（Rebalance Recommendation）」が発行されることがあり、これを検知して新しいインスタンスへ処理を移すことで、中断の影響を抑えられます。</p>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart TD
+    A[スポットインスタンス稼働中] --&gt; B{リバランス推奨を受信}
+    B --&gt;|Yes| C[代替インスタンスを起動しドレイン開始]
+    B --&gt;|No| D{中断通知を受信}
+    D --&gt;|Yes| E[2分以内にチェックポイント保存・接続をドレイン]
+    D --&gt;|No| A
+    C --&gt; F[処理を移行して旧インスタンスを終了]
+    E --&gt; F
+</code></pre>
+<p>設計上の推奨は、10 種類以上のインスタンスタイプと全 AZ に分散すること、処理をステートレスに保つかチェックポイントを取ること、Auto Scaling や EC2 Fleet の Capacity Rebalancing を有効にすることです。特定タイプへの依存度は、事前に Spot Placement Score で確認できます。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/spot-best-practices.html" target="_blank">スポットインスタンスのベストプラクティス</a></p>
+<h2 is-upgraded>3.4. EC2 Fleet と属性ベースのインスタンスタイプ選択</h2>
+<p>EC2 Fleet と Spot Fleet は、オンデマンドとスポットを組み合わせて、1 回の API 呼び出しで複数のインスタンスタイプ・AZ にまたがる容量を確保する仕組みです。</p>
+<p>属性ベースのインスタンスタイプ選択（Attribute-Based Instance Type Selection）を使うと、インスタンスタイプを列挙する代わりに、必要な vCPU 数、メモリ量、プロセッサ世代、アクセラレータの有無といった属性を指定できます。条件に合うタイプを AWS が自動的に選ぶため、新しいタイプが登場すると自動的に候補に加わります。指定属性から外れた高額なタイプを誤って使わないよう、価格保護の仕組みも用意されています。</p>
+<h2 is-upgraded>3.5. Dedicated Hosts</h2>
+<p>Dedicated Hosts は物理サーバーを丸ごと専有するオプションで、Dedicated Instances とは目的が異なります。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>Dedicated Instances</p>
+</td><td colspan="1" rowspan="1"><p>Dedicated Hosts</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>分離の単位</p>
+</td><td colspan="1" rowspan="1"><p>アカウント単位でハードウェアを分離</p>
+</td><td colspan="1" rowspan="1"><p>物理サーバーを指定して専有</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ソケット・コアの可視性</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td><td colspan="1" rowspan="1"><p>あり（コア単位・ソケット単位の BYOL に対応）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>用途</p>
+</td><td colspan="1" rowspan="1"><p>ハードウェア分離の要件を満たす</p>
+</td><td colspan="1" rowspan="1"><p>持ち込みライセンスの管理、ホスト配置の制御</p>
+</td></tr>
+</table>
+<p>Dedicated Hosts は AWS License Manager と連携し、ライセンスの消費状況を追跡できます。ホストをまとめて管理する Host Resource Group や、ホスト障害時に別ホストへ復旧する Host Recovery も利用できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4. EC2 Auto Scaling" duration="0">
+        <p>EC2 Auto Scaling は、負荷や障害に応じてインスタンス数を自動で増減させ、必要な台数を維持するサービスです。基礎編で触れた Auto Recovery が単一インスタンスの復旧であるのに対し、こちらはグループ全体の台数を管理します。</p>
+<h2 is-upgraded>4.1. 構成要素</h2>
+<p>Auto Scaling グループ（ASG）は、最小・希望・最大の台数と、対象の AZ を指定して作成します。ヘルスチェックには EC2 のステータスチェック、ELB のヘルスチェック、カスタムヘルスチェックがあり、異常と判断されたインスタンスは自動的に置き換えられます。</p>
+<p>インスタンスの起動設定には起動テンプレートを使います。旧来の起動設定（Launch Configuration）は新規の利用ができなくなっており、最新のインスタンス機能にも対応しないため、既存のものは起動テンプレートへ移行します。</p>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart LR
+    LT[起動テンプレート] --&gt; ASG[Auto Scaling グループ]
+    CW[CloudWatch アラーム] --&gt; POL[スケーリングポリシー]
+    POL --&gt; ASG
+    ALB[Application Load Balancer] --&gt; AZa
+    ALB --&gt; AZc
+    ASG --&gt; AZa
+    ASG --&gt; AZc
+    ALB -. ヘルスチェック .-&gt; ASG
+    subgraph VPC
+      subgraph AZa[&#34;アベイラビリティーゾーン a&#34;]
+        I1[EC2]
+        I2[EC2]
+      end
+      subgraph AZc[&#34;アベイラビリティーゾーン c&#34;]
+        I3[EC2]
+        I4[EC2]
+      end
+    end
+</code></pre>
+<h2 is-upgraded>4.2. スケーリングポリシー</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>ポリシー</p>
+</td><td colspan="1" rowspan="1"><p>動作</p>
+</td><td colspan="1" rowspan="1"><p>主な用途</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ターゲット追跡</p>
+</td><td colspan="1" rowspan="1"><p>指標（CPU 使用率やリクエスト数）を目標値に保つよう台数を調整</p>
+</td><td colspan="1" rowspan="1"><p>一般的な Web アプリケーション</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ステップスケーリング</p>
+</td><td colspan="1" rowspan="1"><p>指標の乖離幅に応じて増減する台数を段階的に指定</p>
+</td><td colspan="1" rowspan="1"><p>急峻な負荷変動</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>シンプルスケーリング</p>
+</td><td colspan="1" rowspan="1"><p>1 つのアラームで一定台数を増減</p>
+</td><td colspan="1" rowspan="1"><p>シンプルな構成（現在はターゲット追跡が推奨）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>スケジュールスケーリング</p>
+</td><td colspan="1" rowspan="1"><p>日時を指定して台数を変更</p>
+</td><td colspan="1" rowspan="1"><p>営業時間やバッチ処理の時間帯が決まっている場合</p>
+</td></tr>
+</table>
+<h2 is-upgraded>4.3. 予測スケーリング</h2>
+<p>予測スケーリングは、過去の負荷履歴を機械学習で分析し、将来の需要を予測して事前にインスタンスを増やすポリシーです。最大 48 時間先までを予測し、1 時間ごとに予測を更新します。曜日や時間帯で周期的に負荷が変動するワークロードで、立ち上がりの遅延を避けたい場合に有効です。実際のスケーリングを行わず予測値だけを生成する「予測のみ」モードで、事前に精度を確認できます。</p>
+<h2 is-upgraded>4.4. 混在インスタンスポリシー</h2>
+<p>混在インスタンスポリシー（Mixed Instances Policy）を使うと、1 つの ASG でオンデマンドとスポットを組み合わせ、複数のインスタンスタイプから起動できます。ベースとなる台数をオンデマンドで確保し、それを超える分をスポットでまかなう、といった構成が可能です。ここでも属性ベースのインスタンスタイプ選択を指定でき、スポットの分散要件を満たしやすくなります。</p>
+<h2 is-upgraded>4.5. ウォームプール</h2>
+<p>起動に数分かかるアプリケーションでは、スケールアウトのたびに AMI の展開や初期化を待つ時間が無視できません。ウォームプールは、初期化を済ませたインスタンスを停止状態（または Running、Hibernate 状態）で待機させておき、スケールアウト時にそこから引き出す仕組みです。混在インスタンスポリシーを持つ ASG でも利用できます。</p>
+<h2 is-upgraded>4.6. インスタンスのリフレッシュ</h2>
+<p>インスタンスのリフレッシュ（Instance Refresh）は、ASG 内のインスタンスをローリング方式で置き換え、新しい起動テンプレートや AMI を反映する機能です。</p>
+<ul>
+<li>スキップマッチングにより、すでに最新設定のインスタンスは置き換えをスキップする</li>
+<li>「最小正常率」「最大正常率」で、更新中に維持する稼働台数を制御する</li>
+<li>チェックポイントを設定して段階的に進められる</li>
+<li>異常を検知した場合は自動でロールバックできる</li>
+</ul>
+<p>インスタンスのリフレッシュは AWS CloudFormation からも定義でき、デプロイ手順に組み込めます。</p>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart LR
+    A[新しい起動テンプレート版を指定] --&gt; B[リフレッシュ開始]
+    B --&gt; C{各インスタンスを順に判定}
+    C --&gt;|設定が最新| D[スキップ]
+    C --&gt;|設定が古い| E[新インスタンスを起動]
+    E --&gt; F[ヘルスチェック通過を待機]
+    F --&gt;|正常| G[旧インスタンスを終了]
+    F --&gt;|異常| H[ロールバック]
+    D --&gt; I[完了]
+    G --&gt; I
+</code></pre>
+<h2 is-upgraded>4.7. ライフサイクルフックとキャパシティリバランシング</h2>
+<p>インスタンスの起動直後にデータをロードしたい、終了前にログを退避したい。こうした処理を待機状態で挟み込むのがライフサイクルフックです。キャパシティリバランシングを有効にすると、スポットのリバランス推奨を受けた時点で ASG が先回りして代替インスタンスを起動します。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html" target="_blank">Amazon EC2 Auto Scaling とは</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="5. ネットワーキング" duration="0">
+        <p>基礎編では ENI と IP アドレスの基本を扱いました。ここでは高性能ネットワークと帯域幅の考え方を扱います。</p>
+<h2 is-upgraded>5.1. Enhanced Networking と ENA Express</h2>
+<p>Enhanced Networking は、SR-IOV により仮想化のオーバーヘッドを抑え、高いスループットと低いレイテンシ、少ない CPU 使用率を実現する仕組みです。現行世代では Elastic Network Adapter（ENA）を使い、インスタンスタイプによって最大 100 〜 200 Gbps（一部の高性能タイプでは 400 Gbps 以上）のネットワーク帯域に対応します。</p>
+<p>ENA Express は、AWS の Scalable Reliable Datagram（SRD）プロトコルを使って、単一フローの帯域とテールレイテンシを改善する機能です。単一フローの上限が 5 Gbps から 25 Gbps に広がり、混雑時の P99.9 レイテンシが大きく改善します。同一リージョン内であれば、AZ をまたぐ通信でも ENA Express を利用できます。</p>
+<h2 is-upgraded>5.2. Elastic Fabric Adapter（EFA）</h2>
+<p>EFA は、HPC や分散機械学習向けのネットワークインターフェースです。OS カーネルをバイパスして通信することで、MPI や NCCL を使ったノード間通信のレイテンシを下げ、スケールアウト時の効率を高めます。クラスタープレイスメントグループと組み合わせて使います。現在は ENA から分離した EFA 専用インターフェースも選べ、アクセラレータ間の通信に帯域を専有できます。</p>
+<h2 is-upgraded>5.3. インスタンス帯域幅の考え方</h2>
+<p>インスタンスの「ネットワーク帯域幅」には、常時利用できるベースラインと、一時的に到達できるバースト上限があります。スペック表で「最大 12.5 Gbps」のように書かれている値はバースト上限で、継続的に出せる帯域ではない点に注意します。</p>
+<ul>
+<li>単一フロー（5 タプルが同一の通信）には上限があり、同一 AZ 内では 5 Gbps、ENA Express 利用時は 25 Gbps が目安</li>
+<li>インターネットゲートウェイ経由や他リージョンへの通信では、インスタンス帯域の一定割合が上限になる</li>
+<li>高い集約帯域が必要な場合は、通信を複数フローに分散する</li>
+</ul>
+<h2 is-upgraded>5.4. 複数 ENI とセカンダリ IP</h2>
+<p>1 つのインスタンスに複数の ENI をアタッチでき、アタッチできる ENI 数と ENI あたりの IP 数はインスタンスタイプで決まります。コンテナを高密度に配置する場合は、IP を 1 つずつ払い出す代わりに、プレフィックス委任で ENI に IPv4 の <code>/28</code> や IPv6 の <code>/80</code> をまとめて割り当てられます。IPv6 のみのサブネットに対応したインスタンスタイプもあります。</p>
+<h2 is-upgraded>5.5. プレイスメントグループ（応用）</h2>
+<p>基礎編で 3 種類の配置戦略を紹介しました。運用時に関わる制限は次のとおりです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>主な制限</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>クラスター</p>
+</td><td colspan="1" rowspan="1"><p>単一 AZ 内。EFA と組み合わせて HPC・分散学習に使う</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パーティション</p>
+</td><td colspan="1" rowspan="1"><p>1 AZ あたり最大 7 パーティション。分散データストア向け</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>スプレッド</p>
+</td><td colspan="1" rowspan="1"><p>1 AZ あたり最大 7 インスタンス（ラックレベル）。重要インスタンスの分散に使う</p>
+</td></tr>
+</table>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="6. イメージ管理とガバナンス" duration="0">
+        <h2 is-upgraded>6.1. EC2 Image Builder</h2>
+<p>EC2 Image Builder は、カスタム AMI やコンテナイメージの作成・テスト・配布を自動化するマネージドサービスです。基礎編で触れたゴールデン AMI を、手作業ではなくパイプラインで継続的に更新できます。</p>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart LR
+    R[&#34;レシピ（ベースイメージ + コンポーネント）&#34;] --&gt; P[イメージパイプライン]
+    P --&gt; B[ビルド用インスタンスで構築]
+    B --&gt; T[テスト用インスタンスで検証]
+    T --&gt; D[配布設定に沿って複数アカウント・リージョンへ共有]
+    D --&gt; L[ライフサイクルポリシーで古いイメージを削除]
+</code></pre>
+<p>構築したイメージは AWS 提供のテストや独自テストで検証でき、CVE スキャンによる脆弱性チェックも行えます。ライフサイクルポリシーはワイルドカードに対応しており、複数のレシピのイメージを 1 つのポリシーでまとめて管理できます。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/imagebuilder/latest/userguide/what-is-image-builder.html" target="_blank">EC2 Image Builder とは</a></p>
+<h2 is-upgraded>6.2. AMI のガバナンス</h2>
+<p>意図しない AMI の利用や、誤操作による AMI の削除を防ぐ機能が拡充されています。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>機能</p>
+</td><td colspan="1" rowspan="1"><p>内容</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Allowed AMIs</p>
+</td><td colspan="1" rowspan="1"><p>アカウントや組織単位で、起動に使える AMI を提供元・作成日・名前パターン・Marketplace コードなどの条件で制限する。2025 年 9 月に条件のパラメータが拡充された</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>登録解除保護</p>
+</td><td colspan="1" rowspan="1"><p>AMI を保護対象に指定すると、保護を明示的に解除するまで登録解除できない。24 時間のクールダウン期間も設定できる</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>スナップショットの自動削除</p>
+</td><td colspan="1" rowspan="1"><p>AMI の登録解除時に、元になった EBS スナップショットもまとめて削除できる（2025 年 6 月）</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>非推奨（Deprecation）</p>
+</td><td colspan="1" rowspan="1"><p>AMI に非推奨日を設定し、既定の検索結果から除外する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Recycle Bin</p>
+</td><td colspan="1" rowspan="1"><p>削除した AMI やスナップショットを保持期間内は復元できる</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パブリックアクセスのブロック</p>
+</td><td colspan="1" rowspan="1"><p>アカウント単位で AMI の一般公開を禁止する</p>
+</td></tr>
+</table>
+<h2 is-upgraded>6.3. Windows Fast Launch</h2>
+<p>Windows Fast Launch は、Sysprep 後の状態を事前にスナップショットとして準備しておき、そこからインスタンスを起動する機能です。通常は初回起動時に実行される処理を省けるため、Windows インスタンスの起動時間を短縮できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="7. 運用とライフサイクル" duration="0">
+        <h2 is-upgraded>7.1. Hibernation（休止状態）</h2>
+<p>Hibernation は、インスタンスのメモリ内容を暗号化したルート EBS ボリュームに書き出して停止し、再開時にメモリを復元してプロセスを継続させる機能です。通常の停止と異なり、OS やアプリケーションの再起動が不要になります。</p>
+<pre><code language="language-mermaid" class="language-mermaid">stateDiagram-v2
+    running --&gt; stopping: hibernate 実行
+    stopping --&gt; stopped: メモリを暗号化 EBS に退避
+    stopped --&gt; pending: start 実行
+    pending --&gt; running: メモリを復元しプロセス継続
+</code></pre>
+<p>利用には次の前提があります。</p>
+<ul>
+<li>起動時に Hibernation を有効化しておく（後から有効化できない）</li>
+<li>ルートボリュームが暗号化されている</li>
+<li>対応するインスタンスタイプ・AMI で、RAM が 150 GiB 未満を目安とする</li>
+<li>休止状態を維持できる期間には上限がある（60 日を目安）</li>
+</ul>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/Hibernate.html" target="_blank">Amazon EC2 インスタンスの休止状態</a></p>
+<h2 is-upgraded>7.2. 自動復旧</h2>
+<p>現行世代のインスタンスでは、ハードウェア障害を検知すると、同じインスタンス ID のまま別のハードウェアで再起動する「簡易自動復旧」がデフォルトで有効です。プライベート IP、Elastic IP、メタデータは維持されます。より細かく制御したい場合は、CloudWatch アラームの復旧アクションを設定します。インスタンスストアを使っている場合など、自動復旧の対象外となる条件があります。</p>
+<h2 is-upgraded>7.3. スケジュールされたイベントとメンテナンス</h2>
+<p>AWS は、インスタンスの再起動や停止、退役（Retirement）、システムメンテナンスを事前にスケジュールし、通知します。通知は AWS Health や Amazon EventBridge から受け取れるため、これらを起点に事前対応を自動化できます。OS のパッチ適用は Systems Manager Patch Manager のメンテナンスウィンドウで管理します。</p>
+<h2 is-upgraded>7.4. インスタンスの保護</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>保護</p>
+</td><td colspan="1" rowspan="1"><p>内容</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>終了保護</p>
+</td><td colspan="1" rowspan="1"><p>API やコンソールからの終了操作をブロックする</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>停止保護</p>
+</td><td colspan="1" rowspan="1"><p>停止操作をブロックする。停止でデータが失われる構成の保護に使う</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>シャットダウン動作</p>
+</td><td colspan="1" rowspan="1"><p>OS 内からのシャットダウン時に、停止と終了のどちらにするかを指定する</p>
+</td></tr>
+</table>
+<p>本番インスタンスでは終了保護を有効にしておくと、誤操作による削除を防げます。</p>
+<h2 is-upgraded>7.5. 接続方式の使い分け</h2>
+<p>基礎編ではキーペアと Session Manager に触れました。現在は用途に応じて次の方式を選べます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>方式</p>
+</td><td colspan="1" rowspan="1"><p>特徴</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>SSH / RDP + キーペア</p>
+</td><td colspan="1" rowspan="1"><p>従来の方式。ポート開放と鍵管理が必要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>EC2 Instance Connect</p>
+</td><td colspan="1" rowspan="1"><p>コンソールや CLI から一時鍵で接続。パブリックサブネット向け</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>EC2 Instance Connect Endpoint</p>
+</td><td colspan="1" rowspan="1"><p>プライベートサブネットのインスタンスへ、踏み台なしで SSH / RDP 接続する</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Session Manager</p>
+</td><td colspan="1" rowspan="1"><p>エージェント経由でシェルを取得。ポート開放も鍵も不要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Serial Console</p>
+</td><td colspan="1" rowspan="1"><p>ネットワーク不通時にシリアル接続でトラブルシュートする</p>
+</td></tr>
+</table>
+<p>EC2 Instance Connect Endpoint は、VPC 内に配置したエンドポイント経由で接続を中継します。インバウンドのポート開放や踏み台サーバーが不要になり、接続は IAM で認可され、操作は CloudTrail に記録されます。</p>
+<p>運用の入口を絞るなら、SSM エージェントを入れられる環境では Session Manager、SSH クライアントをそのまま使いたい場合は EC2 Instance Connect Endpoint を既定にすると、鍵とポート開放の管理から解放されます。</p>
+<pre><code language="language-mermaid" class="language-mermaid">flowchart LR
+    U[運用者] --&gt;|HTTPS 443 / IAM 認可| EICE
+    subgraph VPC
+      subgraph SN[&#34;プライベートサブネット&#34;]
+        EICE[EC2 Instance Connect Endpoint]
+        I[&#34;EC2 インスタンス（パブリック IP なし）&#34;]
+      end
+    end
+    EICE --&gt;|SSH / RDP| I
+</code></pre>
+<h2 is-upgraded>7.6. 右サイジングと Compute Optimizer</h2>
+<p>AWS Compute Optimizer は、CloudWatch のメトリクスを分析し、インスタンスが過剰または不足しているかを判定して、適切なタイプとサイズを推奨します。Graviton への移行候補も示されます。Cost Explorer の Savings Plans 推奨と合わせて、定期的にインスタンスの構成を見直します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="8. セキュリティ（応用）" duration="0">
+        <h2 is-upgraded>8.1. IMDSv2</h2>
+<p>インスタンスメタデータサービスは、セッション指向のトークンを必要とする IMDSv2 の使用が推奨されています。リージョン単位で新規インスタンスの既定値を「IMDSv2 のみ」に設定でき、IMDSv1 での呼び出しが拒否された回数は CloudWatch の <code>MetadataNoTokenRejected</code> で確認できます。詳細は個別記事で扱っています。</p>
+<h2 is-upgraded>8.2. Nitro Enclaves</h2>
+<p>Nitro Enclaves は、EC2 インスタンスから CPU とメモリを切り出して作る、分離された実行環境です。親インスタンスとは vsock（ローカルソケット）でのみ通信でき、永続ストレージ、対話的アクセス、外部ネットワークを持ちません。親インスタンスの管理者（root）からも中身にアクセスできない設計です。</p>
+<p>暗号による構成証明（アテステーション）と AWS KMS の連携により、「許可されたコードを実行しているエンクレーブだけが特定の鍵を使える」といった制御ができます。個人情報や鍵の処理など、機密性の高いデータを扱う用途に向いています。追加料金はなく、利用する EC2 インスタンスの料金だけがかかります。</p>
+<p>AWS ドキュメント &gt; <a href="https://docs.aws.amazon.com/ja_jp/enclaves/latest/user/nitro-enclave.html" target="_blank">AWS Nitro Enclaves とは</a></p>
+<h2 is-upgraded>8.3. UEFI セキュアブートと NitroTPM</h2>
+<p>UEFI ブートモードのインスタンスでは、UEFI セキュアブートによりブートチェーンの各コンポーネントの署名を検証し、改ざんされたブートローダーやカーネルの実行を防げます。NitroTPM は仮想的な TPM 2.0 デバイスで、測定値の保存や、Windows の BitLocker のような TPM を前提とする機能に利用できます。</p>
+<h2 is-upgraded>8.4. キーペアと認証情報</h2>
+<p>キーペアは RSA に加えて ed25519 を選べます。Session Manager や EC2 Instance Connect を使えば、恒久的な鍵を配置せずに接続できます。AWS サービスへのアクセスには IAM ロールをインスタンスプロファイルとしてアタッチし、認証情報はメタデータ経由で自動的に取得・更新されます。この認証情報を保護するため、IMDSv2 の強制を併用します。</p>
+<h2 is-upgraded>8.5. データ保護</h2>
+<p>アカウント単位で EBS のデフォルト暗号化を有効にすると、新規に作成するボリュームとスナップショットが常に暗号化されます。AMI は暗号化した状態でコピーでき、Nitro System 上ではインスタンスストア（ローカル NVMe）も自動的に暗号化されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>応用トピックを扱いましたが、日々の設計判断に落とすと次のようになります。</p>
+<p>新規構築は Nitro System 前提の最新世代インスタンスから入ります。Enhanced Networking、Enclaves、Hibernation といった応用機能はいずれも Nitro 上でのみ動くため、世代選定が使える機能の幅を左右します。定常的に CPU を使うのに T 系を選ぶと、unlimited モードの超過課金が M 系を上回ることがあります。用途に合うファミリーかは CloudWatch のクレジット指標で見極めます。</p>
+<p>キャパシティは、確実性が要るなら ODCR や Capacity Blocks で先に押さえ、コスト重視ならスポットを price-capacity-optimized とキャパシティリバランシングで安定させます。台数管理の基本形は起動テンプレートとターゲット追跡ポリシー。周期的な負荷には予測スケーリング、起動の遅いアプリにはウォームプールを足します。</p>
+<p>ネットワークはスペック表のバースト値と常時出せるベースラインを分けて考え、単一フローの上限に当たるなら通信を分散するか ENA Express / EFA を使います。イメージは Image Builder でゴールデン AMI を継続更新し、Allowed AMIs と登録解除保護で組織のガバナンスを効かせます。</p>
+<p>運用では簡易自動復旧がデフォルトで効くこと、接続は EC2 Instance Connect Endpoint や Session Manager でポート開放と踏み台を不要にできることを押さえます。セキュリティは IMDSv2 の強制、機密データの処理は Nitro Enclaves、そしてアカウント単位の EBS デフォルト暗号化を最初に有効化しておきます。</p>
+<h2 is-upgraded>参考リソース</h2>
+<ul>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/" target="_blank">Amazon EC2 ユーザーガイド</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-nitro-instances.html" target="_blank">AWS Nitro System</a></li>
+<li><a href="https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/" target="_blank">Amazon EC2 Auto Scaling ユーザーガイド</a></li>
+<li><a href="https://aws.amazon.com/jp/ec2/instance-types/" target="_blank">Amazon EC2 インスタンスタイプ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
