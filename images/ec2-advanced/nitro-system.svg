@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Segoe UI',Meiryo,sans-serif">
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#232F3E">AWS Nitro System の構成</text>
+
+  <!-- Host server box -->
+  <rect x="40" y="60" width="480" height="360" rx="10" fill="#F2F6FC" stroke="#8C4FFF" stroke-width="2"/>
+  <text x="60" y="86" font-size="15" font-weight="bold" fill="#4D27AA">Nitro コントローラ / ホストサーバー</text>
+
+  <!-- Customer instances -->
+  <rect x="64" y="104" width="432" height="196" rx="8" fill="#FFF3E8" stroke="#ED7100" stroke-width="2"/>
+  <text x="280" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#B4590E">お客様の EC2 インスタンス</text>
+  <rect x="86" y="146" width="120" height="130" rx="6" fill="#ffffff" stroke="#ED7100"/>
+  <rect x="220" y="146" width="120" height="130" rx="6" fill="#ffffff" stroke="#ED7100"/>
+  <rect x="354" y="146" width="120" height="130" rx="6" fill="#ffffff" stroke="#ED7100"/>
+  <text x="146" y="216" text-anchor="middle" font-size="13" fill="#666">インスタンス</text>
+  <text x="280" y="216" text-anchor="middle" font-size="13" fill="#666">インスタンス</text>
+  <text x="414" y="216" text-anchor="middle" font-size="13" fill="#666">インスタンス</text>
+  <text x="280" y="292" text-anchor="middle" font-size="12" fill="#8a6d3b">ホストリソースのほぼ全量を割り当て</text>
+
+  <!-- Nitro Hypervisor -->
+  <rect x="64" y="312" width="432" height="44" rx="8" fill="#EDE7FA" stroke="#8C4FFF" stroke-width="2"/>
+  <text x="280" y="339" text-anchor="middle" font-size="14" font-weight="bold" fill="#4D27AA">Nitro Hypervisor（軽量・CPU をほぼ消費しない）</text>
+
+  <!-- Nitro Security Chip -->
+  <rect x="64" y="368" width="432" height="40" rx="8" fill="#FDECEE" stroke="#DD344C" stroke-width="2"/>
+  <text x="280" y="393" text-anchor="middle" font-size="14" font-weight="bold" fill="#B02A3A">Nitro セキュリティチップ（ハードウェア Root of Trust）</text>
+
+  <!-- Nitro cards column -->
+  <text x="690" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#4D27AA">Nitro カード（専用ハードウェアにオフロード）</text>
+  <g font-size="13" fill="#232F3E">
+    <rect x="560" y="104" width="300" height="60" rx="8" fill="#EDE7FA" stroke="#8C4FFF" stroke-width="2"/>
+    <text x="710" y="130" text-anchor="middle" font-weight="bold">VPC ネットワーク</text>
+    <text x="710" y="150" text-anchor="middle" fill="#666">Enhanced Networking / ENA・EFA</text>
+
+    <rect x="560" y="176" width="300" height="60" rx="8" fill="#EDE7FA" stroke="#8C4FFF" stroke-width="2"/>
+    <text x="710" y="202" text-anchor="middle" font-weight="bold">Amazon EBS</text>
+    <text x="710" y="222" text-anchor="middle" fill="#666">NVMe 変換 / 転送中の暗号化</text>
+
+    <rect x="560" y="248" width="300" height="60" rx="8" fill="#EDE7FA" stroke="#8C4FFF" stroke-width="2"/>
+    <text x="710" y="274" text-anchor="middle" font-weight="bold">インスタンスストレージ</text>
+    <text x="710" y="294" text-anchor="middle" fill="#666">ローカル NVMe SSD の暗号化</text>
+
+    <rect x="560" y="320" width="300" height="60" rx="8" fill="#EDE7FA" stroke="#8C4FFF" stroke-width="2"/>
+    <text x="710" y="346" text-anchor="middle" font-weight="bold">システム管理・モニタリング</text>
+    <text x="710" y="366" text-anchor="middle" fill="#666">API 制御 / ハードウェア監視</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#8C4FFF" stroke-width="2" fill="none" marker-end="url(#ah)">
+    <path d="M520 134 H556"/>
+    <path d="M520 206 H556"/>
+    <path d="M520 278 H556"/>
+    <path d="M520 348 H556"/>
+  </g>
+  <defs>
+    <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8C4FFF"/>
+    </marker>
+  </defs>
+</svg>
