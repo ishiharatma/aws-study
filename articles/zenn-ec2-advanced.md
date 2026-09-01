@@ -1,5 +1,5 @@
 ---
-title: "Amazon EC2 応用ガイド！Nitro・キャパシティ確保・Auto Scaling" # 記事のタイトル
+title: "【中級者向け】Amazon EC2 応用！完全ガイド - Nitro・キャパシティ確保・Auto Scaling" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "ec2", "study"]
 published: true
@@ -78,7 +78,7 @@ emoji: "🖥️"
 
 ### 1.1. Nitro System とは
 
-AWS Nitro System（ナイトロシステム） は、2012年から開発を開始し、2017年に発表しました。現行世代の EC2 インスタンスの基盤となっている仮想化パフォーマンスとセキュリティを飛躍的に向上させたハードウェアおよびソフトウェアの専用基盤です。
+AWS Nitro System（ナイトロシステム）は、現行世代の EC2 インスタンスの基盤となっているハードウェアとソフトウェアの専用基盤です。仮想化のパフォーマンスとセキュリティを飛躍的に高めています。2012 年から開発が始まり、2017 年に発表されました。
 
 従来の仮想化ではハイパーバイザーがホストの CPU やメモリを消費し、ネットワークやストレージの I/O もソフトウェアで処理していました。（雑に表現すると、パソコンにグラフィックボードを増設したイメージ）
 
@@ -238,7 +238,7 @@ AWS ドキュメント > [スポットインスタンスのベストプラクテ
 
 EC2 Fleet と Spot Fleet は、オンデマンドとスポットを組み合わせて、1 回の API 呼び出しで複数のインスタンスタイプ・AZ にまたがる容量を確保する仕組みです。
 
-属性ベースのインスタンスタイプ選択（Attribute-Based Instance Type Selection）を使うと、インスタンスタイプを列挙する代わりに、必要な vCPU 数、メモリ量、プロセッサ世代、アクセラレータの有無といった属性を指定できます。条件に合うタイプを AWS が自動的に選ぶため、新しいタイプが登場すると自動的に候補に加わります。指定属性から外れた高額なタイプを誤って使わないよう、価格保護の仕組みも用意されています。
+属性ベースのインスタンスタイプ選択（Attribute-Based Instance Type Selection）を使うと、インスタンスタイプを列挙する代わりに、必要な vCPU 数、メモリ量、プロセッサ世代、アクセラレータの有無といった属性を指定できます。条件に合うタイプを AWS が選ぶため、新しいタイプが登場すると自動的に候補に加わります。指定属性から外れた高額なタイプを誤って使わないよう、価格保護の仕組みも用意されています。
 
 ### 3.5. Dedicated Hosts
 
@@ -258,13 +258,13 @@ Dedicated Hosts は AWS License Manager と連携し、ライセンスの消費�
 
 EC2 Auto Scaling は、負荷や障害に応じてインスタンス数を自動で増減させ、必要な台数を維持するサービスです。基礎編で触れた Auto Recovery が単一インスタンスの復旧であるのに対し、こちらはグループ全体の台数を管理します。
 
-- AWS ドキュメント > [Amazon EC2 Auto Scaling とは](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
+AWS ドキュメント > [Amazon EC2 Auto Scaling とは](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
 
 ### 4.1. 構成要素
 
 Auto Scaling グループ（ASG）は、最小・希望・最大の台数と、対象の AZ を指定して作成します。ヘルスチェックには EC2 のステータスチェック、ELB のヘルスチェック、カスタムヘルスチェックがあり、異常と判断されたインスタンスは自動的に置き換えられます。
 
-インスタンスの起動設定には起動テンプレートを使います。旧来の起動設定（Launch Configuration）は新規の利用ができなくなっており、最新のインスタンス機能にも対応しないため、既存のものは起動テンプレートへ移行します。
+インスタンスの起動設定には起動テンプレートを使います。旧来の起動設定（Launch Configuration）は新規に作成できなくなっており、最新のインスタンス機能にも対応しないため、既存のものは起動テンプレートへ移行します。
 
 ```mermaid
 flowchart LR
@@ -299,7 +299,7 @@ flowchart LR
 
 ### 4.3. 予測スケーリング
 
-[予測スケーリング](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)は、過去の負荷履歴を機械学習で分析し、将来の需要を予測して事前にインスタンスを増やすポリシーです。最大 48 時間先までを予測し、1 時間ごとに予測を更新します。曜日や時間帯で周期的に負荷が変動するワークロードで、立ち上がりの遅延を避けたい場合に有効です。実際のスケーリングを行わず予測値だけを生成する「予測のみ」モードで、事前に精度を確認できます。
+[予測スケーリング](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)は、過去の負荷履歴を機械学習で分析し、将来の需要を予測して事前にインスタンスを増やすポリシーです。最大 48 時間先までを予測し、1 時間ごとに更新します。曜日や時間帯で周期的に負荷が変動するワークロードで、立ち上がりの遅延を避けたい場合に有効です。実際のスケーリングを行わず予測値だけを生成する「予測のみ」モードで、事前に精度を確認できます。
 
 ### 4.4. 混在インスタンスポリシー
 
@@ -337,7 +337,7 @@ flowchart LR
 
 インスタンスの起動直後にデータをロードしたい、終了前にログを退避したい。こうした処理を待機状態で挟み込むのが[ライフサイクルフック](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/lifecycle-hooks.html)です。
 
-[キャパシティリバランシング](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)を有効にすると、中断のリスクがあるとして、スポットのリバランス推奨を受けた時点で ASG が先回りして代替インスタンスを起動します。
+[キャパシティリバランシング](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)を有効にすると、スポットのリバランス推奨を受けた時点で ASG が先回りして代替インスタンスを起動します。
 
 
 ## 5. ネットワーキング
@@ -452,7 +452,7 @@ AWS ドキュメント > [Amazon EC2 インスタンスの休止状態](https://
 
 ![auto-recovery.png](/images/ec2-advanced/auto-recovery.png)
 
-また、デフォルトで有効化されている「簡易自動復旧」と「CloudWatch アラーム復旧」が同時に設定されているときは、二重で実行されないようになっているが、どちらが実行されるかは保証されない、とのことです。
+また、デフォルトで有効化されている「簡易自動復旧」と「CloudWatch アラーム復旧」が同時に設定されているときは、二重で実行されないようになっていますが、どちらが実行されるかは保証されないとのことです。
 
 簡易自動復旧が行われた場合には、EventBridgeで検知できますので、以下のような設定をしておくとよいでしょう。
 
@@ -469,13 +469,13 @@ AWS ドキュメント > [Amazon EC2 インスタンスの休止状態](https://
 }
 ```
 
-- [インスタンスの自動復旧](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-instance-recover.html)
+AWS ドキュメント > [インスタンスの自動復旧](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-instance-recover.html)
 
 ### 7.3. スケジュールされたイベントとメンテナンス
 
 AWS は、インスタンスの再起動や停止、退役（Retirement）、システムメンテナンスを事前にスケジュールし、通知します。通知は AWS Health や Amazon EventBridge から受け取れるため、これらを起点に事前対応を自動化できます。OS のパッチ適用は Systems Manager Patch Manager のメンテナンスウィンドウで管理します。
 
-- AWSドキュメント > [Amazon EC2 インスタンスの予定されているイベント](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html)
+AWS ドキュメント > [Amazon EC2 インスタンスの予定されているイベント](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html)
 
 ### 7.4. インスタンスの保護
 

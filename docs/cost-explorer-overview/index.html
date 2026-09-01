@@ -1,0 +1,221 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Cost Explorer</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="cost-explorer-overview"
+                  title="AWS Cost Explorer"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#cost-explorer-%E3%81%A8%E3%81%AF" target="_blank">Cost Explorer とは</a></li>
+<li><a href="#cost-explorer-%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">Cost Explorer を有効にする</a></li>
+<li><a href="#%E7%94%BB%E9%9D%A2%E3%81%AE%E6%A7%8B%E6%88%90%E3%81%A8%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E8%A6%8B%E6%96%B9" target="_blank">画面の構成とレポートの見方</a></li>
+<li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">コストの種類</a></li>
+<li><a href="#%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%A7%E6%B7%B1%E6%8E%98%E3%82%8A%E3%81%99%E3%82%8B" target="_blank">フィルターとグループ化で深掘りする</a></li>
+<li><a href="#%E6%99%82%E9%96%93%E5%8D%98%E4%BD%8D%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE%E7%B2%92%E5%BA%A6" target="_blank">時間単位・リソースレベルの粒度</a></li>
+<li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E4%BA%88%E6%B8%AC" target="_blank">コスト予測</a></li>
+<li><a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E4%BF%9D%E5%AD%98%E3%81%A8%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF" target="_blank">レポートの保存とブックマーク</a></li>
+<li><a href="#%E8%B3%BC%E5%85%A5%E6%8E%A8%E5%A5%A8reserved-instances--savings-plans" target="_blank">購入推奨（Reserved Instances / Savings Plans）</a></li>
+<li><a href="#cost-explorer-api" target="_blank">Cost Explorer API</a></li>
+<li><a href="#%E8%87%AA%E7%84%B6%E8%A8%80%E8%AA%9E%E3%81%A7%E3%82%B3%E3%82%B9%E3%83%88%E3%82%92%E5%88%86%E6%9E%90%E3%81%99%E3%82%8B" target="_blank">自然言語でコストを分析する</a></li>
+<li><a href="#%E9%96%A2%E9%80%A3%E3%81%99%E3%82%8B%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84" target="_blank">関連するコスト管理サービスとの違い</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cost Explorer とは" duration="0">
+        <p>AWS Cost Explorer は、AWS の利用コストと使用量をグラフと表で可視化し、対話的に分析するためのツールです。「どのサービスに」「どのアカウントで」「どのリージョンで」いくらかかっているのかを、期間や切り口を変えながら追いかけられます。</p>
+<p>参照できる範囲は、過去 13 か月分の実績、当月の発生済みコスト、そして今後 12 か月分の予測です。マネジメントコンソールでの表示は無料で、後述する時間単位・リソースレベルのデータと API 呼び出しのみ課金対象になります。</p>
+<p><a href="https://aws.amazon.com/jp/aws-cost-management/aws-cost-explorer/" target="_blank">AWS Cost Explorer サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/awsaccountbilling/latest/aboutv2/cost-explorer-what-is.html" target="_blank">AWS Cost Explorer を使用してコストと使用状況を分析する（ドキュメント）</a></p>
+<p><a href="https://aws.amazon.com/jp/aws-cost-management/aws-cost-explorer/pricing/" target="_blank">AWS Cost Explorer の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cost Explorer を有効にする" duration="0">
+        <p>Cost Explorer は、コスト管理コンソールで一度開くと有効になります。有効化した直後は履歴データの準備に最大 24 時間ほどかかり、当月分のデータもおよそ 24 時間遅れで反映されます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-enable.html" target="_blank">Cost Explorer を有効にする</a></p>
+<p>注意したいのが、IAM ユーザーや IAM ロールからのアクセスです。AWS アカウントを作成した直後は、ルートユーザーしか請求情報を参照できません。まずルートユーザーでサインインし、アカウント設定の「IAM ユーザー/ロールによる請求情報へのアクセス」を有効化します。そのうえで、対象の IAM ユーザーやロールに Cost Explorer 用のアクセス許可（<code>ce:</code> で始まるアクション）を付与します。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/tutorial_billing.html" target="_blank">アカウントで請求データへのアクセスをアクティブ化する</a></p>
+<p class="image-container"><img alt="cost_explorer" src="img\\1c238d5bc0bd88a4.png"></p>
+<p>AWS Organizations を使っている場合、Cost Explorer は管理アカウント（支払いアカウント）で有効にすると、メンバーアカウントを含む組織全体のコストを扱えます。メンバーアカウント側の利用可否は、管理アカウントの設定で制御します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="画面の構成とレポートの見方" duration="0">
+        <p>Cost Explorer のレポート画面は、上部のグラフと下部の明細表、右側のコントロールパネルで構成されます。分析の起点になるのは、次の 4 つの設定です。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>設定項目</p>
+</td><td colspan="1" rowspan="1"><p>役割</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>期間（Date Range）</p>
+</td><td colspan="1" rowspan="1"><p>分析対象の開始日と終了日。過去 6 か月、今年、カスタム範囲などから選ぶ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>粒度（Granularity）</p>
+</td><td colspan="1" rowspan="1"><p>集計単位。月別・日別が標準で、時間別は別途有効化が必要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>グループ化（Group by）</p>
+</td><td colspan="1" rowspan="1"><p>棒グラフの積み上げを分ける軸。サービス別、アカウント別、タグ別など</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>フィルター（Filters）</p>
+</td><td colspan="1" rowspan="1"><p>特定のサービスやアカウントなどに表示を絞り込む</p>
+</td></tr>
+</table>
+<p>グラフは既定で棒グラフですが、線グラフにも切り替えられます。グループ化を「サービス」にして数か月を眺めると、コストの内訳と増減の傾向がつかめます。そこから「先月だけ跳ねているサービス」をフィルターで絞り、さらにアカウントや使用タイプでグループ化し直す、という流れで原因を掘り下げていきます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-reports.html" target="_blank">Cost Explorer レポートを使用してコストを把握する</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コストの種類" duration="0">
+        <p>Cost Explorer では、同じ利用実績を複数の集計方法で表示できます。どれを見ているかで金額が変わるため、違いを押さえておきます。</p>
+<p>非ブレンドコスト（Unblended Cost）は、その時点で実際に請求される金額です。既定の表示で、多くの場面ではこれを見れば十分です。</p>
+<p>AWS Organizations 内の複数アカウントをまたいで、リザーブドインスタンスやボリューム割引の単価を平均化したものが、ブレンドコスト（Blended Cost）です。組織全体で均すといくらになるか、という見方をするときに使います。</p>
+<p>前払いがからむときに見るのが償却コスト（Amortized Cost）です。リザーブドインスタンスや Savings Plans の前払い分を利用期間に按分し、日割りで配分します。前払いした月だけコストが跳ね上がるのを避け、実質的な負担を平準化して見たいときに選びます。</p>
+<p>このほか、クレジット、返金、税金、前払い金といった項目は、表示に含めるかどうかをチェックボックスで切り替えられます。純粋な利用料だけを見たいときはクレジットや税金を除外します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="フィルターとグループ化で深掘りする" duration="0">
+        <p>フィルターとグループ化で指定できる軸（ディメンション）には、次のようなものがあります。</p>
+<ul>
+<li>サービス、連結アカウント、リージョン、アベイラビリティゾーン</li>
+<li>インスタンスタイプ、使用タイプ、使用タイプグループ、API 操作</li>
+<li>購入オプション（オンデマンド、Savings Plans、スポットなど）、テナンシー</li>
+<li>コスト配分タグ、コストカテゴリ</li>
+</ul>
+<p>コスト配分タグを軸にするには、事前に請求コンソールでタグを有効化しておく必要があります。有効化した時点以降のコストにのみタグが適用され、遡って付与はされません。プロジェクトや環境（本番・検証）ごとにコストを分けたい場合は、早い段階でタグ付けの運用を決めておくと後が楽になります。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html" target="_blank">コスト配分タグの使用</a></p>
+<p>タグだけでは表現しにくい「複数アカウントと複数タグをまとめてひとつのチーム扱いにする」といった分類は、AWS Cost Categories でルールを定義しておくと、その分類軸で Cost Explorer をグループ化できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="時間単位・リソースレベルの粒度" duration="0">
+        <p>既定の粒度は月別と日別です。より細かく見たい場合、コスト管理の設定から時間単位・リソースレベルの粒度を有効化できます。</p>
+<ul>
+<li>時間単位のデータは直近 14 日分をさかのぼって参照できます</li>
+<li>リソースレベルのデータでは、EC2 の個々のインスタンス ID などが確認できます</li>
+<li>時間単位の粒度は、Cost Explorer に加えて Savings Plans 使用率・カバレッジのレポートでも使えます</li>
+</ul>
+<p>この粒度は有料で、使用量レコード 1,000 件あたり月額 $0.01（1 レコードあたり 1 日 $0.00000033）が発生します。バッチ処理の実行時間帯を特定したい、といった短期の調査で有効にし、不要になったら無効化する使い方が無難です。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-granular-data.html" target="_blank">時間単位およびリソースレベルの詳細</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="コスト予測" duration="0">
+        <p>期間の終了日を未来の日付にすると、Cost Explorer は過去の使用実績をもとに予測値を表示します。予測は最長で 12 か月先まで指定でき、予測値には 80 % の予測区間が併記されます。</p>
+<p>予測はあくまで過去の傾向の延長です。利用量の変動が大きいワークロードや、新しいサービスを使い始めた直後は、実績と大きくずれることがあります。予測の細かい数字を追うよりも、「このままだと月末におおよそいくらになりそうか」を早めに把握する用途に向いています。しきい値を決めて自動で通知したい場合は、AWS Budgets の予測ベースのアラートを組み合わせます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="レポートの保存とブックマーク" duration="0">
+        <p>Cost Explorer には、月別コスト（サービス別）、日別コスト、RI・Savings Plans の使用率とカバレッジなど、あらかじめ用意されたレポートがあります。これらを出発点にフィルターやグループ化を調整し、画面右上の「レポートライブラリに保存」で名前を付けて保存できます。</p>
+<p>もうひとつ覚えておくと便利なのが、表示条件が URL のクエリパラメータに反映される点です。よく見る条件の画面をブラウザのブックマークに登録しておけば、次回はその条件のまま開けます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-bookmarks.html" target="_blank">Cost Explorer の設定をブックマークまたはお気に入りとして保存する</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="購入推奨（Reserved Instances / Savings Plans）" duration="0">
+        <p>Cost Explorer は、過去の利用実績を分析して、リザーブドインスタンスと Savings Plans の購入推奨を出します。オンデマンドで動かし続けているリソースについて、どのプランをどれだけ購入すると、どの程度の割引が見込めるかが提示されます。</p>
+<p>推奨の計算には、直近 7 日・30 日・60 日のいずれかのルックバック期間を選べます。推奨内容は 72 時間ごとに更新され、支払いアカウント単位・メンバーアカウント単位のどちらでも確認できます。実際に購入する前に、対象ワークロードを今後も同じ規模で使い続ける見込みがあるかを確認しておきます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Cost Explorer API" duration="0">
+        <p>コンソールで見ている分析結果は、Cost Explorer API 経由でも取得できます。代表的な操作は次のとおりです。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>API</p>
+</td><td colspan="1" rowspan="1"><p>用途</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>GetCostAndUsage</code></p>
+</td><td colspan="1" rowspan="1"><p>期間・粒度・グループ化を指定してコストと使用量を取得</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>GetCostForecast</code></p>
+</td><td colspan="1" rowspan="1"><p>指定期間のコスト予測を取得</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>GetSavingsPlansPurchaseRecommendation</code></p>
+</td><td colspan="1" rowspan="1"><p>Savings Plans の購入推奨を取得</p>
+</td></tr>
+</table>
+<p>API の呼び出しは、プライマリ請求ビューに対するリクエスト 1 件ごとに $0.01 が発生します。結果がページ分割される場合は、ページ単位で課金される点に注意します。日次でコストを Slack に通知する、社内ダッシュボードに取り込む、といった自動化で利用します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="自然言語でコストを分析する" duration="0">
+        <p>2026 年 4 月に、Amazon Q を利用した自然言語クエリが Cost Explorer に追加されました。「先月コストが最も増えたサービスは何か」「今四半期の EC2 コストの推移を見せて」といった質問を入力すると、対応するレポートが生成されます。フィルターやグループ化の設定に慣れていなくても、聞きたいことを文章で投げれば分析を始められます。</p>
+<p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2026/04/aws-cost-explorer-natural-language-query/" target="_blank">AWS Cost Explorer が Amazon Q を利用した自然言語クエリ機能を導入</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="関連するコスト管理サービスとの違い" duration="0">
+        <p>Cost Explorer は、素早く傾向をつかむためのツールです。厳密な分析や通知は、隣接するサービスと役割を分担します。</p>
+<p>AWS Cost and Usage Report（CUR、現在は Data Exports として提供）は、課金の行レベルの詳細をすべて S3 に出力します。1 円単位でリソースを突き合わせたい、独自の集計軸で長期分析したい、という場合は CUR を Amazon Athena や Amazon QuickSight と組み合わせます。Cost Explorer はこの詳細データを対話的に見やすくした画面、という位置づけです。</p>
+<p>AWS Budgets は、月額予算に対して実績や予測が一定のしきい値を超えたときに通知します。コスト異常検出は、機械学習で普段と異なる支出パターンを検知します。可視化は Cost Explorer、しきい値による通知は Budgets、想定外の急増の検知は異常検出、と使い分けます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>AWS Cost Explorer は、AWS のコストと使用量を期間・粒度・グループ化・フィルターの組み合わせで可視化し、原因を掘り下げていくためのツールです。過去 13 か月の実績と 12 か月先までの予測を、追加設定なしの無料で参照できます。</p>
+<p>運用に組み込むうえでの要点は次の 3 点です。</p>
+<ul>
+<li>アカウント作成後、早めに「IAM ユーザー/ロールによる請求情報へのアクセス」を有効化し、コスト配分タグの運用も決めておく</li>
+<li>見ている金額が非ブレンド・ブレンド・償却のどれかを意識する</li>
+<li>時間単位・リソースレベルの粒度と API は課金対象。短期調査や自動化で使い、常用しない</li>
+</ul>
+<p>より詳細な行レベル分析は CUR、閾値通知は AWS Budgets、急増の検知はコスト異常検出と、目的に応じて組み合わせます。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

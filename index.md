@@ -11,6 +11,10 @@
 
 ### コンピューティング
 
+[EC2 概要](/articles_base/ec2-overview.md)
+
+[EC2 応用](/articles_base/ec2-advanced.md)
+
 [ELB 概要](/articles_base/elb-overview.md)
 
 [AWS Lambda 概要](/articles_base/lambda-overview.md)
@@ -37,6 +41,10 @@ Amazon Redshift
 
 ### ネットワーキング
 
+[Amazon VPC 概要](/articles_base/vpc-overview.md)
+
+[Amazon VPC Lattice 概要](/articles_base/vpc-lattice-overview.md)
+
 [Amazon Route 53 概要](/articles_base/route53-overview.md)
 
 [Amazon API Gateway 概要](/articles_base/apigw-overview.md)
@@ -53,17 +61,15 @@ AWS Global Accelerator
 
 AWS PrivateLink
 
-[Amazon VPC Lattice 概要](/articles_base/vpc-lattice-overview.md)
-
 ### ストレージ
 
 [Amazon S3 概要](/articles_base/s3-overview.md)
 
 [Amazon EBS 概要](/articles_base/ebs-overview.md)
 
-Amazon EFS
+[Amazon EFS 概要](/articles_base/efs-overview.md)
 
-Amazon FSx
+[Amazon FSx 概要](/articles_base/fsx-overview.md)
 
 AWS Storage Gateway
 
@@ -89,7 +95,7 @@ AWS Backup
 
 [AWS Secrets Manager 概要](/articles_base/secretsmanager-overview.md)
 
-Amazon Cognito
+[Amazon Cognito 概要](/articles_base/cognito-overview.md)
 
 ### コンテナ
 
@@ -116,6 +122,8 @@ Amazon Cognito
 [AWS Systems Manager ⑤ 変更管理機能編](/articles_base/ssm-changes-overview.md)
 
 [AWS CloudFormation 概要](/articles_base/cfn-overview.md)
+
+[AWS Cost Explorer 概要](/articles_base/cost-explorer-overview.md)
 
 AWS Organizations
 
@@ -163,8 +171,10 @@ Amazon Kinesis
 
 Amazon QuickSight
 
-## 認定資格
+## 認定資格、その他
 
 [AWS 認定概要](/articles_base/aws-certification.md)
 
 [AWS Certified Developer - Associate 認定](/articles_base/aws-certified-dva-keyword.md)
+
+[AWS Builder Cards](/articles_base/aws-buildercards.md)

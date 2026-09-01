@@ -4,12 +4,12 @@
   "prefix": "https://storage.googleapis.com",
   "mainga": "G-01ZZ95D1K9",
   "updated": "2026-09-01T17:23:12+09:00",
-  "id": "cognito-overview",
+  "id": "cost-explorer-overview",
   "duration": 0,
-  "title": "Amazon Cognito",
+  "title": "AWS Cost Explorer",
   "authors": "ishr",
   "summary": "Summary",
-  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_cognito-overview.md",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_cost-explorer-overview.md",
   "theme": "",
   "status": [
     "published"
@@ -18,7 +18,7 @@
     "aws"
   ],
   "tags": [
-    "amazoncognito"
+    "awscostexplorer"
   ],
-  "url": "cognito-overview"
+  "url": "cost-explorer-overview"
 }

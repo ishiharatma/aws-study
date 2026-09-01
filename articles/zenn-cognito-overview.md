@@ -2,7 +2,7 @@
 title: "【初心者向け】Amazon Cognito 入門！完全ガイド" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "study"]
-published: false
+published: true
 emoji: "🪪"
 ---
 
@@ -52,10 +52,10 @@ emoji: "🪪"
   - [①Webアプリケーションでの一般的な実装パターン](#webアプリケーションでの一般的な実装パターン)
   - [②静的ウェブサイトへの認証機能実装パターン](#静的ウェブサイトへの認証機能実装パターン)
   - [③サーバーレス認証パターン](#サーバーレス認証パターン)
-- [3. Cognito と CDK](#3-cognito-と-cdk)
-- [4. 運用のポイント](#4-運用のポイント)
-  - [4.1. ロギングとモニタリング](#41-ロギングとモニタリング)
-  - [4.2. セキュリティ](#42-セキュリティ)
+- [4. Cognito と CDK](#4-cognito-と-cdk)
+- [5. 運用のポイント](#5-運用のポイント)
+  - [5.1. ロギングとモニタリング](#51-ロギングとモニタリング)
+  - [5.2. セキュリティ](#52-セキュリティ)
 - [📖 まとめ](#-まとめ)
 
 ## 1. Amazon Cognito とは
@@ -99,7 +99,7 @@ Amazon Cognitoを理解する公式ドキュメントは次のとおりです。
 
 ### 1.4. 導入のメリット
 
-Cognito の主な利点は以下の通りです：
+Cognito の主な利点は次のとおりです。
 
 - アプリケーションにユーザー登録・認証機能を簡単に追加できる
 - ソーシャルIDプロバイダーとの連携が容易
@@ -126,7 +126,7 @@ Amazon Cognito は主に2つのコンポーネントで構成されています�
 
 ![cognito_user_pool](/images/cognito/cognito_user_pool.png)
 
-ユーザープールの主な特徴は以下の通りです：
+ユーザープールでできることは幅広い。主なものは次のとおり。
 
 - ユーザーの登録と認証
 - カスタマイズ可能なサインインページの提供
@@ -140,7 +140,7 @@ Amazon Cognito は主に2つのコンポーネントで構成されています�
 
 [2024年11月22日 Amazon Cognito 新しい機能ティア Essentials と Plus のお知らせ](https://aws.amazon.com/jp/about-aws/whats-new/2024/11/new-feature-tiers-essentials-plus-amazon-cognito/)
 
-Cognitoユーザープールに[機能と料金の異なる３つのプラン](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/cognito-sign-in-feature-plans.html)(Lite / Essentials / Plus)が追加されました。
+Cognitoユーザープールに[機能と料金の異なる3つのプラン](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/cognito-sign-in-feature-plans.html)(Lite / Essentials / Plus)が追加されました。
 
 - Lite：月間アクティブユーザー数が少ないサービス向け。
   - **アップデート前のユーザープールはLiteとなる**
@@ -186,7 +186,7 @@ Liteプランでは従来の「高度なセキュリティ機能」が追加コ�
 | 次の 50,000    | USD 0.035        |
 | 次の 90 万     | USD 0.020        |
 | 次の 900 万    | USD 0.015        |
-| 10,00 万超     | USD 0.010        |
+| 1,000 万超     | USD 0.010        |
 
 ##### プラン選択の観点
 
@@ -217,7 +217,7 @@ Liteプランでは従来の「高度なセキュリティ機能」が追加コ�
 
 ##### 「高度なセキュリティ機能」を使用した場合の比較：MAU 500万まで
 
-MAU 500万までを比較してみます。最初は `Essensials < Plus < Lite = 既存` となっていますが、MAU 350万を超えたあたりで、Plusのほうが既存+ASFよりコストが高くなり始めます。
+MAU 500万までを比較してみます。最初は `Essentials < Plus < Lite = 既存` となっていますが、MAU 350万を超えたあたりで、Plusのほうが既存+ASFよりコストが高くなり始めます。
 
 ![allplan-comparison-mau5m](/images/cognito/allplan-comparison-mau5m.jpg)
 
@@ -232,7 +232,7 @@ MAU 2,500万以上の場合は、コストをしっかり算出し、適切な�
 
 #### 2.2.2. サインアップとサインインのカスタマイズ
 
-Amazon Cognito では、サインアップとサインインのプロセスを以下のようにカスタマイズできます：
+サインアップ／サインインは、収集する属性や検証方法、パスワードポリシーなどを細かくカスタマイズできます。
 
 - **必須属性の設定**: ユーザー登録時に収集する必須情報の指定
 - **属性検証**: メールアドレスや電話番号の検証要件
@@ -262,7 +262,7 @@ Amazon Cognito ユーザープールは、複数の[認証フロー](https://doc
     パスワードをハッシュ化して送信する。ALLOW_USER_PASSWORD_AUTHよりもセキュア。
     ```json
     {
-      "AuthFlow": "USER_PASSWORD_AUTH",
+      "AuthFlow": "USER_SRP_AUTH",
       "AuthParameters": { 
           "USERNAME" : "testuser",
           "SRP_A" : "g^a"
@@ -290,7 +290,7 @@ Amazon Cognito ユーザープールは、複数の[認証フロー](https://doc
 
 #### 2.2.5. ユーザープールのセキュリティ機能
 
-ユーザープールには、以下のようなセキュリティ機能が含まれています：
+ユーザープールには次のようなセキュリティ機能があります。
 
 - **パスワードポリシー**: 最小長、必要な文字種類などの設定
 - **アカウントタイムアウト**: 連続した認証失敗後のアカウントロック
@@ -304,7 +304,7 @@ Amazon Cognito ユーザープールは、複数の[認証フロー](https://doc
 
 Amazon Cognito は、カスタマイズ可能なホスト型のウェブUIを提供しています。これにより、アプリケーションは独自のサインインページを構築することなく、すぐに認証機能を利用できます。
 
-ホストされた UI の主な特徴：
+ホストされた UI の主な特徴は次のとおりです。
 
 - **ユーザー登録／サインイン画面**: 基本的な認証フローのUI
 - **多言語サポート**: 複数言語での表示をサポート
@@ -379,11 +379,11 @@ Amazon Cognito は認証後に以下の種類のトークンを発行します�
 
 [ID プールの認証フロー](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/authentication-flow.html)は以下の通りです：
 
-1. ユーザーがIDP（ユーザープールまたは外部プロバイダー）で認証
-2. 認証後、IDPからトークンを受け取る
+1. ユーザーがIdP（ユーザープールまたは外部プロバイダー）で認証
+2. 認証後、IdPからトークンを受け取る
 3. このトークンをID プールに提示
-4. IDプールが一時クレデンシャルを要求
-5. 生成された一時クレデンシャルをIDプールが受領
+4. ID プールが一時クレデンシャルを要求
+5. 生成された一時クレデンシャルをID プールが受領
 6. ID プールが一時的なAWS認証情報を提供
 7. これらの認証情報を使用してAWSリソースにアクセス
 
@@ -391,7 +391,7 @@ Amazon Cognito は認証後に以下の種類のトークンを発行します�
 
 #### 2.3.2. 認証プロバイダー
 
-ID プールは以下のような様々な[認証プロバイダー（IDP）をサポート](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/external-identity-providers.html)しています：
+ID プールは以下のような様々な[認証プロバイダー（IdP）をサポート](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/external-identity-providers.html)しています：
 
 - **Amazon Cognito ユーザープール**
 - **パブリックプロバイダー**: Google、Facebook、Apple、Amazon
@@ -431,7 +431,7 @@ AppSync の主な利点：
 
 Amazon Cognito の料金は以下の要素に基づきます：
 
-- **機能プラン**: Lite / Essensials / Plus
+- **機能プラン**: Lite / Essentials / Plus
 - **アクティブユーザー**: 月間のアクティブユーザー数（MAU）
 - **ユーザープール高度なセキュリティ機能**: 特定のセキュリティ機能の使用料
 - **ID プール**: 認証されたIDの数と認証リクエスト数
@@ -439,7 +439,7 @@ Amazon Cognito の料金は以下の要素に基づきます：
 [Amazon Cognito 料金ページ](https://aws.amazon.com/jp/cognito/pricing/)で最新の料金情報を確認することができます。
 
 基本的な料金構造：
-- Lite / Essensials は、月間アクティブユーザー (MAU) 10,000人までは無料（旧ユーザープールは50,000まで）
+- Lite / Essentials は、月間アクティブユーザー (MAU) 10,000人までは無料（旧ユーザープールは50,000まで）
 - それ以降は段階的な料金体系（ユーザー数が増えるほど単価は下がる）
 - 無料利用枠は常に適用（毎月最初の10,000 MAUは無料）
 
@@ -453,9 +453,9 @@ Amazon Cognito には以下のようなサービスクォータがあります�
 - APIリクエストのレート制限: 各API操作によって異なる
 
 **ID プール**:
-- AWSアカウントあたりのIDプール数: 1,000（デフォルト）
+- AWSアカウントあたりのID プール数: 1,000（デフォルト）
 - トークンサイズ制限: 4KB
-- ロールベースのアクセス制御 (RBAC) ルール: IDプールあたり25
+- ロールベースのアクセス制御 (RBAC) ルール: ID プールあたり25
 
 クォータの詳細と引き上げ方法については、[Amazon Cognito サービスクォータ](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/limits.html)を参照してください。
 
@@ -464,7 +464,7 @@ Amazon Cognito には以下のようなサービスクォータがあります�
 
 ### ①Webアプリケーションでの一般的な実装パターン
 
-Amplify ライブラリを使用したReact/Vue.jsなどでの実装したフロントエンドでCognitoによる認証を行い、認証情報を使って、API Gatewayを呼び出す実装例です。
+Amplify ライブラリを使用して React/Vue.js などで実装したフロントエンドで Cognito による認証を行い、認証情報を使って API Gateway を呼び出す実装例です。
 API Gateway のオーソライザーにCognitoを設定します。
 
 ![web_pattern](/images/cognito/web-pattern-diagram.png)
@@ -480,11 +480,11 @@ Lambda@EdgeによってCognito認証を行います。
 
 ### ③サーバーレス認証パターン
 
-①と②を組み合わせたパターンで、認証部分をフロントエンドで実装せずに、Lambda@EdgeでCognito認証を行います。ログイン画面は「CognitoのホストされたUIを使用」を使用することができます。
+①と②を組み合わせたパターンで、認証部分をフロントエンドで実装せずに、Lambda@Edge で Cognito 認証を行います。ログイン画面には Cognito のホストされた UI を利用できます。
 
 ![serverless-pattern](/images/cognito/serverless-pattern-diagram.png)
 
-## 3. Cognito と CDK
+## 4. Cognito と CDK
 
 [GitHub＞aws-samples/cdk-cognito-idp](https://github.com/aws-samples/cdk-cognito-idp)
 
@@ -494,10 +494,10 @@ AWS CDK を使用してCognitoリソースをデプロイする例：
 
 1. ユーザープール - ユーザー登録と認証のためのディレクトリ
 2. ユーザープールクライアント - アプリケーションがユーザープールにアクセスするための設定
-3. IDプール - 認証されたユーザーにAWSリソースへのアクセスを提供
+3. ID プール - 認証されたユーザーにAWSリソースへのアクセスを提供
 
 <details>
-  <summary>実装例：CognitoユーザープールとIDプール作成のCDKコード(クリックしてください)</summary>
+  <summary>実装例：CognitoユーザープールとID プール作成のCDKコード(クリックしてください)</summary>
 
 ```typescript
 import * as cdk from 'aws-cdk-lib';
@@ -537,7 +537,7 @@ export class CognitoStack extends cdk.Stack {
         requireUppercase: true, // 大文字
         requireDigits: true, // 数字
         requireSymbols: true, // 記号
-        temporaryPasswordValidityDays: Duration.days(3), // 一時パスワードが有効な日数
+        tempPasswordValidity: cdk.Duration.days(3), // 一時パスワードが有効な日数
       },
       lambdaTriggers: { // トリガー
         preSignUp: '', // サインアップ前の Lambda トリガー
@@ -617,9 +617,9 @@ export class CognitoStack extends cdk.Stack {
 ```
 </details>
 
-## 4. 運用のポイント
+## 5. 運用のポイント
 
-### 4.1. ロギングとモニタリング
+### 5.1. ロギングとモニタリング
 
 - ロギング
   - AWS CloudTrail
@@ -628,10 +628,11 @@ export class CognitoStack extends cdk.Stack {
   - Amazon CloudWatch メトリクス
   - Amazon CloudWatch Logs Insights
 
-### 4.2. セキュリティ
+### 5.2. セキュリティ
 
 - データ保護
-  - 
+  - 保管中のデータはAWSが管理する暗号化キーで暗号化され、転送中のデータはTLSで保護されます。
+  - 詳細は「[Amazon Cognito でのデータ保護](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/data-protection.html)」を参照してください
 - アクセス管理
   - AWS IAMによってアクセス制御を行います。
   - 詳細は「[Amazon Cognito 向けの Identity and access management](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/security-iam.html)」を参照してください
