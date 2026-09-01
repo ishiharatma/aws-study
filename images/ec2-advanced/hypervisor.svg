@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" font-family="'Segoe UI',Meiryo,sans-serif">
+  <rect width="900" height="470" fill="#ffffff"/>
+  <text x="450" y="34" text-anchor="middle" font-size="19" font-weight="bold" fill="#232F3E">従来の仮想化（ソフトウェアハイパーバイザー）の構成</text>
+
+  <!-- Host server box -->
+  <rect x="40" y="60" width="520" height="360" rx="10" fill="#F2F6FC" stroke="#232F3E" stroke-width="2"/>
+  <text x="60" y="86" font-size="15" font-weight="bold" fill="#232F3E">ホストサーバー</text>
+
+  <!-- Guest VMs -->
+  <rect x="64" y="104" width="472" height="150" rx="8" fill="#FFF3E8" stroke="#ED7100" stroke-width="2"/>
+  <text x="300" y="130" text-anchor="middle" font-size="15" font-weight="bold" fill="#B4590E">お客様の仮想マシン（ゲスト OS）</text>
+  <rect x="86" y="144" width="130" height="88" rx="6" fill="#ffffff" stroke="#ED7100"/>
+  <rect x="236" y="144" width="130" height="88" rx="6" fill="#ffffff" stroke="#ED7100"/>
+  <rect x="386" y="144" width="130" height="88" rx="6" fill="#ffffff" stroke="#ED7100"/>
+  <text x="151" y="193" text-anchor="middle" font-size="13" fill="#666">仮想マシン</text>
+  <text x="301" y="193" text-anchor="middle" font-size="13" fill="#666">仮想マシン</text>
+  <text x="451" y="193" text-anchor="middle" font-size="13" fill="#666">仮想マシン</text>
+  <text x="300" y="248" text-anchor="middle" font-size="12" fill="#8a6d3b">ホストリソースの一部はオーバーヘッドで目減り</text>
+
+  <!-- Management domain / host OS -->
+  <rect x="64" y="264" width="472" height="44" rx="8" fill="#FDF3E0" stroke="#B4590E" stroke-width="2"/>
+  <text x="300" y="285" text-anchor="middle" font-size="12" font-weight="bold" fill="#B4590E">管理ドメイン（Dom0 / ホスト OS）</text>
+  <text x="300" y="301" text-anchor="middle" font-size="11" fill="#8a6d3b">仮想スイッチ・デバイスエミュレーションで I/O をソフトウェア処理</text>
+
+  <!-- Hypervisor -->
+  <rect x="64" y="316" width="472" height="44" rx="8" fill="#EDE7FA" stroke="#8C4FFF" stroke-width="2"/>
+  <text x="300" y="343" text-anchor="middle" font-size="14" font-weight="bold" fill="#4D27AA">ハイパーバイザー（ホストの CPU・メモリを消費）</text>
+
+  <!-- Physical hardware -->
+  <rect x="64" y="366" width="472" height="42" rx="8" fill="#EAEDED" stroke="#879596" stroke-width="2"/>
+  <text x="300" y="392" text-anchor="middle" font-size="13" font-weight="bold" fill="#232F3E">物理ハードウェア（CPU / メモリ / NIC / ディスク）</text>
+
+  <!-- Software I/O column -->
+  <text x="734" y="86" text-anchor="middle" font-size="15" font-weight="bold" fill="#B02A3A">I/O をホスト CPU で処理（オフロードなし）</text>
+  <g font-size="13" fill="#232F3E">
+    <rect x="592" y="104" width="284" height="60" rx="8" fill="#FDECEE" stroke="#DD344C" stroke-width="2"/>
+    <text x="734" y="130" text-anchor="middle" font-weight="bold">ネットワーク I/O</text>
+    <text x="734" y="150" text-anchor="middle" fill="#666">仮想スイッチ / パケット処理</text>
+
+    <rect x="592" y="176" width="284" height="60" rx="8" fill="#FDECEE" stroke="#DD344C" stroke-width="2"/>
+    <text x="734" y="202" text-anchor="middle" font-weight="bold">ストレージ I/O</text>
+    <text x="734" y="222" text-anchor="middle" fill="#666">ブロック変換 / 暗号化</text>
+
+    <rect x="592" y="248" width="284" height="60" rx="8" fill="#FDECEE" stroke="#DD344C" stroke-width="2"/>
+    <text x="734" y="274" text-anchor="middle" font-weight="bold">デバイスエミュレーション</text>
+    <text x="734" y="294" text-anchor="middle" fill="#666">NIC・ディスクをソフトウェアで模倣</text>
+
+    <rect x="592" y="320" width="284" height="60" rx="8" fill="#FDECEE" stroke="#DD344C" stroke-width="2"/>
+    <text x="734" y="346" text-anchor="middle" font-weight="bold">システム管理・監視</text>
+    <text x="734" y="366" text-anchor="middle" fill="#666">管理エージェントがホスト上で稼働</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#DD344C" stroke-width="2" fill="none" marker-end="url(#ah2)">
+    <path d="M560 134 H588"/>
+    <path d="M560 206 H588"/>
+    <path d="M560 278 H588"/>
+    <path d="M560 350 H588"/>
+  </g>
+  <defs>
+    <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#DD344C"/>
+    </marker>
+  </defs>
+</svg>

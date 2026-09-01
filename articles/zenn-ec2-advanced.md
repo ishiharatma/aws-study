@@ -2,7 +2,7 @@
 title: "Amazon EC2 応用ガイド！Nitro・キャパシティ確保・Auto Scaling" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
 topics: ["aws", "ec2", "study"]
-published: false
+published: true
 emoji: "🖥️"
 ---
 
@@ -51,7 +51,7 @@ emoji: "🖥️"
   - [5.2. Elastic Fabric Adapter（EFA）](#52-elastic-fabric-adapterefa)
   - [5.3. インスタンス帯域幅の考え方](#53-インスタンス帯域幅の考え方)
   - [5.4. 複数 ENI とセカンダリ IP](#54-複数-eni-とセカンダリ-ip)
-  - [5.5. プレイスメントグループ（応用）](#55-プレイスメントグループ応用)
+  - [5.5. プレイスメントグループ](#55-プレイスメントグループ)
 - [6. イメージ管理とガバナンス](#6-イメージ管理とガバナンス)
   - [6.1. EC2 Image Builder](#61-ec2-image-builder)
   - [6.2. AMI のガバナンス](#62-ami-のガバナンス)
@@ -62,8 +62,8 @@ emoji: "🖥️"
   - [7.3. スケジュールされたイベントとメンテナンス](#73-スケジュールされたイベントとメンテナンス)
   - [7.4. インスタンスの保護](#74-インスタンスの保護)
   - [7.5. 接続方式の使い分け](#75-接続方式の使い分け)
-  - [7.6. 右サイジングと Compute Optimizer](#76-右サイジングと-compute-optimizer)
-- [8. セキュリティ（応用）](#8-セキュリティ応用)
+  - [7.6. サイジングと Compute Optimizer](#76-サイジングと-compute-optimizer)
+- [8. セキュリティ](#8-セキュリティ)
   - [8.1. IMDSv2](#81-imdsv2)
   - [8.2. Nitro Enclaves](#82-nitro-enclaves)
   - [8.3. UEFI セキュアブートと NitroTPM](#83-uefi-セキュアブートと-nitrotpm)
@@ -78,13 +78,21 @@ emoji: "🖥️"
 
 ### 1.1. Nitro System とは
 
-AWS Nitro System は、現行世代の EC2 インスタンスの基盤となっているハードウェアとソフトウェアの仕組みです。従来の仮想化ではハイパーバイザーがホストの CPU やメモリを消費し、ネットワークやストレージの I/O もソフトウェアで処理していました。Nitro System では、これらの処理を専用のハードウェア（Nitro カード）にオフロードし、ハイパーバイザーを最小限まで軽量化しています。
+AWS Nitro System（ナイトロシステム） は、2012年から開発を開始し、2017年に発表しました。現行世代の EC2 インスタンスの基盤となっている仮想化パフォーマンスとセキュリティを飛躍的に向上させたハードウェアおよびソフトウェアの専用基盤です。
 
-その結果、ホストサーバーのリソースをほぼすべてお客様のインスタンスに割り当てられるようになり、ベアメタルに近いパフォーマンスと、一貫した I/O 性能が得られます。
+従来の仮想化ではハイパーバイザーがホストの CPU やメモリを消費し、ネットワークやストレージの I/O もソフトウェアで処理していました。（雑に表現すると、パソコンにグラフィックボードを増設したイメージ）
 
-AWS ドキュメント > [AWS Nitro System](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-nitro-instances.html)
+![hypervisor](/images/ec2-advanced/hypervisor.svg)
+
+Nitro System では、これらの処理を専用のハードウェア（Nitro カード）にオフロードし、ハイパーバイザーを最小限まで軽量化しています。
 
 ![nitro-system](/images/ec2-advanced/nitro-system.svg)
+
+その結果、ホストサーバーのリソースをほぼすべて、利用者のインスタンスに割り当てられるようになり、ベアメタルに近いパフォーマンスと、一貫した I/O 性能が得られます。
+
+- AWS ドキュメント > [AWS Nitro System](https://docs.aws.amazon.com/ja_jp/ec2/latest/instancetypes/ec2-nitro-instances.html)
+- Whitepaper > [The Security Design of the AWS Nitro System](https://docs.aws.amazon.com/whitepapers/latest/security-design-of-aws-nitro-system/security-design-of-aws-nitro-system.html)
+- Whitepaper > [The components of the Nitro System](https://docs.aws.amazon.com/whitepapers/latest/security-design-of-aws-nitro-system/the-components-of-the-nitro-system.html)
 
 ### 1.2. 構成要素
 
@@ -99,6 +107,8 @@ Nitro System は大きく 3 つの要素で構成されます。
 Nitro セキュリティチップにより、AWS の従業員であってもインスタンスへの対話的なアクセス（SSH 等）ができない設計になっています。
 
 ### 1.3. ベアメタルインスタンス
+
+Nitro ハイパーバイザーは CPU とメモリの割り当てだけを担う薄い層ですが、その層すら介さない構成がベアメタルインスタンスです。Nitro System の延長線上にあるため、ここで併せて扱います（調達・ライセンス面は [2.3](#23-ベアメタルと専有オプション) を参照）。
 
 インスタンスタイプ名の末尾が `.metal` のものはベアメタルインスタンスで、ハイパーバイザーを介さずに物理サーバーへ直接アクセスします。
 
@@ -145,6 +155,10 @@ T 系インスタンス（`T3` / `T3a` / `T4g` など）は CPU クレジット�
 | --- | --- | --- |
 | standard | クレジットが尽きるとベースライン性能に制限される | 追加課金は発生しない |
 | unlimited | クレジット不足時も高性能を維持し、超過分を課金する | `T3` / `T3a` / `T4g` の起動時デフォルト |
+
+EC2起動時にモードを変更できます。
+
+![credit-specification.png](/images/ec2-advanced/credit-specification.png)
 
 継続的に CPU 使用率が高いワークロードでは、unlimited モードの超過課金がオンデマンドの M 系より割高になることがあります。CloudWatch の `CPUCreditBalance` や `CPUSurplusCreditBalance` を監視し、恒常的にクレジットが枯渇している場合は M 系や C 系への変更を検討します。
 
@@ -244,6 +258,8 @@ Dedicated Hosts は AWS License Manager と連携し、ライセンスの消費�
 
 EC2 Auto Scaling は、負荷や障害に応じてインスタンス数を自動で増減させ、必要な台数を維持するサービスです。基礎編で触れた Auto Recovery が単一インスタンスの復旧であるのに対し、こちらはグループ全体の台数を管理します。
 
+- AWS ドキュメント > [Amazon EC2 Auto Scaling とは](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
+
 ### 4.1. 構成要素
 
 Auto Scaling グループ（ASG）は、最小・希望・最大の台数と、対象の AZ を指定して作成します。ヘルスチェックには EC2 のステータスチェック、ELB のヘルスチェック、カスタムヘルスチェックがあり、異常と判断されたインスタンスは自動的に置き換えられます。
@@ -283,15 +299,15 @@ flowchart LR
 
 ### 4.3. 予測スケーリング
 
-予測スケーリングは、過去の負荷履歴を機械学習で分析し、将来の需要を予測して事前にインスタンスを増やすポリシーです。最大 48 時間先までを予測し、1 時間ごとに予測を更新します。曜日や時間帯で周期的に負荷が変動するワークロードで、立ち上がりの遅延を避けたい場合に有効です。実際のスケーリングを行わず予測値だけを生成する「予測のみ」モードで、事前に精度を確認できます。
+[予測スケーリング](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)は、過去の負荷履歴を機械学習で分析し、将来の需要を予測して事前にインスタンスを増やすポリシーです。最大 48 時間先までを予測し、1 時間ごとに予測を更新します。曜日や時間帯で周期的に負荷が変動するワークロードで、立ち上がりの遅延を避けたい場合に有効です。実際のスケーリングを行わず予測値だけを生成する「予測のみ」モードで、事前に精度を確認できます。
 
 ### 4.4. 混在インスタンスポリシー
 
-混在インスタンスポリシー（Mixed Instances Policy）を使うと、1 つの ASG でオンデマンドとスポットを組み合わせ、複数のインスタンスタイプから起動できます。ベースとなる台数をオンデマンドで確保し、それを超える分をスポットでまかなう、といった構成が可能です。ここでも属性ベースのインスタンスタイプ選択を指定でき、スポットの分散要件を満たしやすくなります。
+[混在インスタンスポリシー（Mixed Instances Policy）](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_MixedInstancesPolicy.html)を使うと、1 つの ASG でオンデマンドとスポットを組み合わせ、複数のインスタンスタイプから起動できます。ベースとなる台数をオンデマンドで確保し、それを超える分をスポットでまかなう、といった構成が可能です。ここでも属性ベースのインスタンスタイプ選択を指定でき、スポットの分散要件を満たしやすくなります。
 
 ### 4.5. ウォームプール
 
-起動に数分かかるアプリケーションでは、スケールアウトのたびに AMI の展開や初期化を待つ時間が無視できません。ウォームプールは、初期化を済ませたインスタンスを停止状態（または Running、Hibernate 状態）で待機させておき、スケールアウト時にそこから引き出す仕組みです。混在インスタンスポリシーを持つ ASG でも利用できます。
+起動に数分かかるアプリケーションでは、スケールアウトのたびに AMI の展開や初期化を待つ時間が無視できません。[ウォームプール](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)は、初期化を済ませたインスタンスを停止状態（または Running、Hibernate 状態）で待機させておき、スケールアウト時にそこから引き出す仕組みです。混在インスタンスポリシーを持つ ASG でも利用できます。
 
 ### 4.6. インスタンスのリフレッシュ
 
@@ -319,9 +335,10 @@ flowchart LR
 
 ### 4.7. ライフサイクルフックとキャパシティリバランシング
 
-インスタンスの起動直後にデータをロードしたい、終了前にログを退避したい。こうした処理を待機状態で挟み込むのがライフサイクルフックです。キャパシティリバランシングを有効にすると、スポットのリバランス推奨を受けた時点で ASG が先回りして代替インスタンスを起動します。
+インスタンスの起動直後にデータをロードしたい、終了前にログを退避したい。こうした処理を待機状態で挟み込むのが[ライフサイクルフック](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/lifecycle-hooks.html)です。
 
-AWS ドキュメント > [Amazon EC2 Auto Scaling とは](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)
+[キャパシティリバランシング](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/ec2-auto-scaling-capacity-rebalancing.html)を有効にすると、中断のリスクがあるとして、スポットのリバランス推奨を受けた時点で ASG が先回りして代替インスタンスを起動します。
+
 
 ## 5. ネットワーキング
 
@@ -345,13 +362,16 @@ EFA は、HPC や分散機械学習向けのネットワークインターフェ
 
 - 単一フロー（5 タプルが同一の通信）には上限があり、同一 AZ 内では 5 Gbps、ENA Express 利用時は 25 Gbps が目安
 - インターネットゲートウェイ経由や他リージョンへの通信では、インスタンス帯域の一定割合が上限になる
+  - インターネットゲートウェイを通過する利用可能な帯域幅の 50%
 - 高い集約帯域が必要な場合は、通信を複数フローに分散する
 
 ### 5.4. 複数 ENI とセカンダリ IP
 
-1 つのインスタンスに複数の ENI をアタッチでき、アタッチできる ENI 数と ENI あたりの IP 数はインスタンスタイプで決まります。コンテナを高密度に配置する場合は、IP を 1 つずつ払い出す代わりに、プレフィックス委任で ENI に IPv4 の `/28` や IPv6 の `/80` をまとめて割り当てられます。IPv6 のみのサブネットに対応したインスタンスタイプもあります。
+1 つのインスタンスに複数の ENI をアタッチでき、アタッチできる ENI 数と ENI あたりの IP 数はインスタンスタイプで決まります。コンテナを高密度に配置する場合は、IP を 1 つずつ払い出す代わりに、[プレフィックス委任](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-prefix-eni.html)で ENI に IPv4 の `/28` や IPv6 の `/80` をまとめて割り当てられます。IPv6 のみのサブネットに対応したインスタンスタイプもあります。
 
-### 5.5. プレイスメントグループ（応用）
+![eni-prefix.png](/images/ec2-advanced/eni-prefix.png)
+
+### 5.5. プレイスメントグループ
 
 基礎編で 3 種類の配置戦略を紹介しました。運用時に関わる制限は次のとおりです。
 
@@ -422,15 +442,40 @@ stateDiagram-v2
 - 対応するインスタンスタイプ・AMI で、RAM が 150 GiB 未満を目安とする
 - 休止状態を維持できる期間には上限がある（60 日を目安）
 
+![hibernation.png](/images/ec2-advanced/hibernation.png)
+
 AWS ドキュメント > [Amazon EC2 インスタンスの休止状態](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/Hibernate.html)
 
 ### 7.2. 自動復旧
 
-現行世代のインスタンスでは、ハードウェア障害を検知すると、同じインスタンス ID のまま別のハードウェアで再起動する「簡易自動復旧」がデフォルトで有効です。プライベート IP、Elastic IP、メタデータは維持されます。より細かく制御したい場合は、CloudWatch アラームの復旧アクションを設定します。インスタンスストアを使っている場合など、自動復旧の対象外となる条件があります。
+現行世代のインスタンスでは、ハードウェア障害を検知すると、同じインスタンス ID のまま別のハードウェアで再起動する「簡易自動復旧」がデフォルトで有効です。プライベート IP、Elastic IP、メタデータは維持されます。より細かく制御したい場合は、[CloudWatch アラームの復旧アクション](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/quickref-cloudwatch.html#cloudwatch-sample-recover-instance)を設定します。インスタンスストアを使っている場合など、自動復旧の対象外となる条件があります。
+
+![auto-recovery.png](/images/ec2-advanced/auto-recovery.png)
+
+また、デフォルトで有効化されている「簡易自動復旧」と「CloudWatch アラーム復旧」が同時に設定されているときは、二重で実行されないようになっているが、どちらが実行されるかは保証されない、とのことです。
+
+簡易自動復旧が行われた場合には、EventBridgeで検知できますので、以下のような設定をしておくとよいでしょう。
+
+```json
+{
+  "source": ["aws.health"],
+  "detail-type": ["AWS Health Event"],
+  "detail": {
+    "service": ["EC2"],
+    "eventTypeCategory": ["accountNotification"],
+    "eventTypeCode": ["AWS_EC2_SIMPLIFIED_AUTO_RECOVERY_FAILURE", "AWS_EC2_SIMPLIFIED_AUTO_RECOVERY_SUCCESS"]
+  },
+  "resources": ["i-xxxxxxxxxxxxxxxxx"]
+}
+```
+
+- [インスタンスの自動復旧](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/ec2-instance-recover.html)
 
 ### 7.3. スケジュールされたイベントとメンテナンス
 
 AWS は、インスタンスの再起動や停止、退役（Retirement）、システムメンテナンスを事前にスケジュールし、通知します。通知は AWS Health や Amazon EventBridge から受け取れるため、これらを起点に事前対応を自動化できます。OS のパッチ適用は Systems Manager Patch Manager のメンテナンスウィンドウで管理します。
+
+- AWSドキュメント > [Amazon EC2 インスタンスの予定されているイベント](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/monitoring-instances-status-check_sched.html)
 
 ### 7.4. インスタンスの保護
 
@@ -442,13 +487,19 @@ AWS は、インスタンスの再起動や停止、退役（Retirement）、シ
 
 本番インスタンスでは終了保護を有効にしておくと、誤操作による削除を防げます。
 
+![termination-protection.png](/images/ec2-advanced/termination-protection.png)
+
+![stop-protection.png](/images/ec2-advanced/stop-protection.png)
+
+![shutdown-behavior.png](/images/ec2-advanced/shutdown-behavior.png)
+
 ### 7.5. 接続方式の使い分け
 
 基礎編ではキーペアと Session Manager に触れました。現在は用途に応じて次の方式を選べます。
 
 | 方式 | 特徴 |
 | --- | --- |
-| SSH / RDP + キーペア | 従来の方式。ポート開放と鍵管理が必要 |
+| SSH / RDP + キーペア | 従来の方式。ポート開放と鍵管理が必要。現在ではあまり推奨されない。他の方式を優先して選択する。 |
 | EC2 Instance Connect | コンソールや CLI から一時鍵で接続。パブリックサブネット向け |
 | EC2 Instance Connect Endpoint | プライベートサブネットのインスタンスへ、踏み台なしで SSH / RDP 接続する |
 | Session Manager | エージェント経由でシェルを取得。ポート開放も鍵も不要 |
@@ -470,23 +521,25 @@ flowchart LR
     EICE -->|SSH / RDP| I
 ```
 
-### 7.6. 右サイジングと Compute Optimizer
+### 7.6. サイジングと Compute Optimizer
 
 AWS Compute Optimizer は、CloudWatch のメトリクスを分析し、インスタンスが過剰または不足しているかを判定して、適切なタイプとサイズを推奨します。Graviton への移行候補も示されます。Cost Explorer の Savings Plans 推奨と合わせて、定期的にインスタンスの構成を見直します。
 
-## 8. セキュリティ（応用）
+## 8. セキュリティ
 
 <!-- Duration: 00:03:00 -->
 
 ### 8.1. IMDSv2
 
-インスタンスメタデータサービスは、セッション指向のトークンを必要とする IMDSv2 の使用が推奨されています。リージョン単位で新規インスタンスの既定値を「IMDSv2 のみ」に設定でき、IMDSv1 での呼び出しが拒否された回数は CloudWatch の `MetadataNoTokenRejected` で確認できます。詳細は個別記事で扱っています。
+インスタンスメタデータサービスは、セッション指向のトークンを必要とする IMDSv2 の使用が推奨されています。リージョン単位で新規インスタンスの既定値を「IMDSv2 のみ」に設定でき、IMDSv1 での呼び出しが拒否された回数は CloudWatch の `MetadataNoTokenRejected` で確認できます。詳細は[個別記事](https://zenn.dev/issy/articles/zenn-ec2-imdsv2-only)で扱っています。
 
 ### 8.2. Nitro Enclaves
 
 Nitro Enclaves は、EC2 インスタンスから CPU とメモリを切り出して作る、分離された実行環境です。親インスタンスとは vsock（ローカルソケット）でのみ通信でき、永続ストレージ、対話的アクセス、外部ネットワークを持ちません。親インスタンスの管理者（root）からも中身にアクセスできない設計です。
 
 暗号による構成証明（アテステーション）と AWS KMS の連携により、「許可されたコードを実行しているエンクレーブだけが特定の鍵を使える」といった制御ができます。個人情報や鍵の処理など、機密性の高いデータを扱う用途に向いています。追加料金はなく、利用する EC2 インスタンスの料金だけがかかります。
+
+![nitro-enclaves.png](/images/ec2-advanced/nitro-enclaves.png)
 
 AWS ドキュメント > [AWS Nitro Enclaves とは](https://docs.aws.amazon.com/ja_jp/enclaves/latest/user/nitro-enclave.html)
 
@@ -496,7 +549,9 @@ UEFI ブートモードのインスタンスでは、UEFI セキュアブート�
 
 ### 8.4. キーペアと認証情報
 
-キーペアは RSA に加えて ed25519 を選べます。Session Manager や EC2 Instance Connect を使えば、恒久的な鍵を配置せずに接続できます。AWS サービスへのアクセスには IAM ロールをインスタンスプロファイルとしてアタッチし、認証情報はメタデータ経由で自動的に取得・更新されます。この認証情報を保護するため、IMDSv2 の強制を併用します。
+キーペアは RSA に加えて ed25519 を選べます。Session Manager や EC2 Instance Connect を使えば、恒久的な鍵を配置せずに接続できます。不要な場合はキーペアを作成しないようにしましょう。
+
+AWS サービスへのアクセスには IAM ロールをインスタンスプロファイルとしてアタッチし、認証情報はメタデータ経由で自動的に取得・更新されます。この認証情報を保護するため、IMDSv2 の強制を併用します。
 
 ### 8.5. データ保護
 
@@ -504,15 +559,12 @@ UEFI ブートモードのインスタンスでは、UEFI セキュアブート�
 
 ## 📖 まとめ
 
-応用トピックを扱いましたが、日々の設計判断に落とすと次のようになります。
-
-新規構築は Nitro System 前提の最新世代インスタンスから入ります。Enhanced Networking、Enclaves、Hibernation といった応用機能はいずれも Nitro 上でのみ動くため、世代選定が使える機能の幅を左右します。定常的に CPU を使うのに T 系を選ぶと、unlimited モードの超過課金が M 系を上回ることがあります。用途に合うファミリーかは CloudWatch のクレジット指標で見極めます。
-
-キャパシティは、確実性が要るなら ODCR や Capacity Blocks で先に押さえ、コスト重視ならスポットを price-capacity-optimized とキャパシティリバランシングで安定させます。台数管理の基本形は起動テンプレートとターゲット追跡ポリシー。周期的な負荷には予測スケーリング、起動の遅いアプリにはウォームプールを足します。
-
-ネットワークはスペック表のバースト値と常時出せるベースラインを分けて考え、単一フローの上限に当たるなら通信を分散するか ENA Express / EFA を使います。イメージは Image Builder でゴールデン AMI を継続更新し、Allowed AMIs と登録解除保護で組織のガバナンスを効かせます。
-
-運用では簡易自動復旧がデフォルトで効くこと、接続は EC2 Instance Connect Endpoint や Session Manager でポート開放と踏み台を不要にできることを押さえます。セキュリティは IMDSv2 の強制、機密データの処理は Nitro Enclaves、そしてアカウント単位の EBS デフォルト暗号化を最初に有効化しておきます。
+- 新規構築は Nitro System 前提の最新世代から選ぶ。応用機能の多くが Nitro 上でのみ動く
+- 定常的に CPU を使うワークロードに T 系は不向き。M 系・C 系を検討する
+- キャパシティは、確実性重視なら ODCR / Capacity Blocks、コスト重視ならスポット
+- Auto Scaling は起動テンプレート + ターゲット追跡が基本形
+- ネットワークはバースト値とベースラインを分けて考える
+- セキュリティは IMDSv2 の強制と EBS デフォルト暗号化を先に有効化しておく
 
 ### 参考リソース
 
