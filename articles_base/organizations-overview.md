@@ -60,9 +60,90 @@
 
 例えば、特定のリージョン以外でのリソース作成を禁止する、特定の高コストなインスタンスタイプの起動を禁止する、といった全社共通のガードレールを、管理アカウント側から一括して適用できます。
 
+SCP は IAM ポリシーと同じく JSON で記述します。次の例は、組織のメンバーアカウントが `organizations:LeaveOrganization`（組織からの離脱）を実行できないようにする、代表的な SCP です。
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyLeaveOrganization",
+      "Effect": "Deny",
+      "Action": "organizations:LeaveOrganization",
+      "Resource": "*"
+    }
+  ]
+}
+```
+
+次の例は、許可されたリージョン（東京・バージニア北部）以外でのリソース操作を禁止するリージョン制限の SCP です。IAM や Organizations 自体の操作、CloudFront のようにグローバルにしか存在しないサービスの操作まで巻き込んで拒否してしまわないよう、`NotAction` で除外リストを指定するのが典型的な書き方です。
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyOutsideAllowedRegions",
+      "Effect": "Deny",
+      "NotAction": [
+        "iam:*",
+        "organizations:*",
+        "route53:*",
+        "cloudfront:*",
+        "support:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:RequestedRegion": ["ap-northeast-1", "us-east-1"]
+        }
+      }
+    }
+  ]
+}
+```
+
+SCP は「許可の上限（許可されうる最大値）」を定義するものであり、SCP に書いていない操作を許可する効果はありません。実際にその操作を行うには、IAM 側でも許可されている必要がある点に注意が必要です。
+
+[Service control policy examples（AWS Organizations Developer Guide）](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_examples.html)
+
 ## リソースコントロールポリシー（RCP）
 
 SCP がアカウント内の IAM プリンシパル（ユーザーやロール）が実行できる操作を制限するのに対し、RCP はリソース側（S3 バケットや KMS キーなど）に対して、組織外からのアクセスを制限するなど、リソースを保護する観点でのガードレールを定義できるポリシーです。SCP と組み合わせることで、より網羅的なガードレールを構築できます。
+
+次の例は、S3 や KMS、Secrets Manager などのリソースに対して、組織内（指定した組織 ID）のプリンシパルからのアクセスのみを許可し、それ以外（組織外のプリンシパル）からのアクセスを拒否する RCP です（AWS サービスプリンシパルからのアクセスは除外しています）。IAM ポリシーで誤って組織外のアカウントにリソースへのアクセスを許可してしまった場合でも、この RCP が最終的な防波堤として働きます。
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EnforceOrgIdentities",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": [
+        "s3:*",
+        "sqs:*",
+        "kms:*",
+        "secretsmanager:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEqualsIfExists": {
+          "aws:PrincipalOrgID": "o-xxxxxxxxxx"
+        },
+        "BoolIfExists": {
+          "aws:PrincipalIsAWSService": "false"
+        }
+      }
+    }
+  ]
+}
+```
+
+RCP は SCP と異なり、対象となるリソース・サービスが限定されています（S3、KMS、SQS、Secrets Manager、STS など）。また RCP は IAM プリンシパルではなくリソースに対する「リソースベースポリシーが許可できる範囲の上限」を定義するものなので、`Principal` 要素を持つ点や、対象サービスが決まっている点が SCP との構文上の違いです。
+
+[Resource control policy examples（AWS Organizations Developer Guide）](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_rcps_examples.html)
 
 ## その他のポリシータイプ
 
