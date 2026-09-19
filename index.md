@@ -19,6 +19,12 @@
 
 [AWS Lambda 概要](/articles_base/lambda-overview.md)
 
+[AWS Lambda MicroVMs 概要](/articles_base/lambda-microvms-overview.md)
+
+[AWS Lambda Web Adapter (LWA) 概要](/articles_base/lambda-web-adapter-overview.md)
+
+[AWS Lambda Durable Functions 概要](/articles_base/lambda-durable-functions-overview.md)
+
 AWS Elastic Beanstalk
 
 Amazon Lightsail
