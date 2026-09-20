@@ -7,7 +7,9 @@
 
 [AWS 学習教材完全ガイド 2023 年最新版](/articles_base/aws-study-guide-2023.md)
 
-[AWS アカウント作成後に行うべき設定事項](/articles_base/aws-account-Initial-setting.md)
+[AWS アカウント作成後に行うべき設定事項](/articles_base/aws-account-initial-setting.md)
+
+[AWS アカウントのデフォルトリージョン](/articles_base/aws-account-default-region.md)
 
 ### コンピューティング
 
@@ -25,7 +27,7 @@
 
 [AWS Lambda Durable Functions 概要](/articles_base/lambda-durable-functions-overview.md)
 
-AWS Elastic Beanstalk
+[AWS Elastic Beanstalk 概要](/articles_base/elastic-beanstalk-overview.md)
 
 Amazon Lightsail
 
@@ -43,7 +45,7 @@ AWS Batch
 
 [Amazon ElastiCache 概要](/articles_base/elasticache-overview.md)
 
-Amazon Redshift
+[Amazon Redshift 概要](/articles_base/redshift-overview.md)
 
 ### ネットワーキング
 
@@ -79,11 +81,13 @@ AWS PrivateLink
 
 AWS Storage Gateway
 
-AWS Backup
+[AWS Backup 概要](/articles_base/backup-overview.md)
 
 ### セキュリティ、アイデンティティ、コンプライアンス
 
 [AWS IAM 概要](/articles_base/iam-overview.md)
+
+[AWS IAM ポリシー](/articles_base/iam-policy.md)
 
 [AWS IAM マルチアカウント管理](/articles_base/iam-multi-account.md)
 
@@ -96,6 +100,8 @@ AWS Backup
 [AWS WAF & Shield 概要](/articles_base/waf-and-shield-overview.md)
 
 [Amazon GuardDuty 概要](/articles_base/guardduty-overview.md)
+
+[GuardDuty Malware Protection for S3](/articles_base/guardduty-s3-malware-protection-overview.md)
 
 [AWS Security Hub 概要](/articles_base/securityhub-overview.md)
 
@@ -110,6 +116,8 @@ AWS Backup
 [Amazon ECS と EKS 概要](/articles_base/ecs-vs-eks.md)
 
 [Amazon ECS 概要](/articles_base/ecs-overview.md)
+
+[Amazon EKS 概要](/articles_base/eks-overview.md)
 
 ### マネジメントとガバナンス
 
@@ -131,7 +139,9 @@ AWS Backup
 
 [AWS Cost Explorer 概要](/articles_base/cost-explorer-overview.md)
 
-AWS Organizations
+[AWS Cost Management](/articles_base/cost-management.md)
+
+[AWS Organizations 概要](/articles_base/organizations-overview.md)
 
 AWS Trusted Advisor
 
@@ -143,6 +153,10 @@ AWS Config
 
 [Amazon SQS 概要](/articles_base/sqs-overview.md)
 
+[AWS Step Functions 概要](/articles_base/stepfunctions-overview.md)
+
+[Amazon EventBridge 概要](/articles_base/eventbridge-overview.md)
+
 ### デベロッパーツール
 
 AWS CloudChell
@@ -153,15 +167,21 @@ AWS Cloud9
 
 [AWS CDK 概要](/articles_base/cdk-overview.md)
 
+[AWS X-Ray 概要](/articles_base/x-ray-overview.md)
+
 AWS CLI
 
 AWS SDK
+
+### フロントエンド Web・モバイル
+
+[AWS Amplify 概要](/articles_base/amplify-overview.md)
 
 ### 移行とデータ転送
 
 AWS Application Discovery Service
 
-AWS Database Migration Service
+[AWS Database Migration Service 概要](/articles_base/dms-overview.md)
 
 AWS Migration Hub
 
@@ -173,9 +193,17 @@ AWS Application Migration Service
 
 [Amazon Athena](/articles_base/athena-overview.md)
 
-Amazon Kinesis
+[Amazon Kinesis Data Streams 概要](/articles_base/kinesisdatastreams-overview.md)
 
 Amazon QuickSight
+
+### 機械学習
+
+[Amazon Bedrock 概要](/articles_base/bedrock-overview.md)
+
+[Amazon SageMaker 概要](/articles_base/sagemaker-overview.md)
+
+[Amazon Q 概要](/articles_base/q-overview.md)
 
 ## 認定資格、その他
 
@@ -184,3 +212,5 @@ Amazon QuickSight
 [AWS Certified Developer - Associate 認定](/articles_base/aws-certified-dva-keyword.md)
 
 [AWS Builder Cards](/articles_base/aws-buildercards.md)
+
+[AWS Builder Cards セキュリティ拡張パック](/articles_base/aws-buildercards-security-ex-pack.md)
