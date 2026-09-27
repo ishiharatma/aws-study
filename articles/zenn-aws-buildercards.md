@@ -112,8 +112,8 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 | [Amazon Aurora](https://docs.aws.amazon.com/ja_jp/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)               | 2  | database                        | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-aurora-overview) | 2 |
 | [Amazon DynamoDB](https://docs.aws.amazon.com/ja_jp/amazondynamodb/latest/developerguide/Introduction.html)             | 3  | database                        | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-dynamodb-overview) | 2 |
 | [Amazon ElastiCache](https://docs.aws.amazon.com/ja_jp/AmazonElastiCache/latest/dg/WhatIs.html)          | 2  | database                        | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-elasticache-overview) | 2 |
-| [Amazon Kinesis Data Streams](https://docs.aws.amazon.com/ja_jp/streams/latest/dev/introduction.html) | 2  | analytics                       |            | 2 |
-| [Amazon Data Firehose](https://docs.aws.amazon.com/ja_jp/firehose/latest/dev/what-is-this-service.html)        | 2  | analytics                       | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-kinesisdatastreams-overview) | 2 |
+| [Amazon Kinesis Data Streams](https://docs.aws.amazon.com/ja_jp/streams/latest/dev/introduction.html) | 2  | analytics                       | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-kinesisdatastreams-overview) | 2 |
+| [Amazon Data Firehose](https://docs.aws.amazon.com/ja_jp/firehose/latest/dev/what-is-this-service.html)        | 2  | analytics                       |            | 2 |
 | [Amazon Redshift](https://docs.aws.amazon.com/ja_jp/redshift/latest/mgmt/welcome.html)             | 2  | analytics                       |            | 2 |
 | [Amazon Athena](https://docs.aws.amazon.com/ja_jp/athena/latest/ug/what-is.html)               | 2  | analytics                       | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-athena-overview) | 2 |
 | [Amazon OpenSearch Service](https://docs.aws.amazon.com/ja_jp/opensearch-service/latest/developerguide/what-is.html)   | 2  | analytics                       |            | 2 |
