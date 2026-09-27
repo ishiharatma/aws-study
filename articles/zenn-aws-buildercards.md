@@ -98,7 +98,7 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 | [Amazon ECS](https://docs.aws.amazon.com/ja_jp/AmazonECS/latest/developerguide/Welcome.html)                  | 2  | containers                      | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ecs-overview) | 2 |
 | [Amazon EKS](https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/what-is-eks.html)                  | 2  | containers                      | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ecs-vs-eks) | 2 |
 | [Amazon S3](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/userguide/Welcome.html)                   | 4  | storage                         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-s3-overview) | 2 |
-| [Amazon EFS](https://docs.aws.amazon.com/ja_jp/efs/latest/ug/whatisefs.html)                  | 2  | storage                         |            | 2 |
+| [Amazon EFS](https://docs.aws.amazon.com/ja_jp/efs/latest/ug/whatisefs.html)                  | 2  | storage                         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-efs-overview) | 2 |
 | [Amazon SNS](https://docs.aws.amazon.com/ja_jp/sns/latest/dg/welcome.html)                  | 3  | application integration         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-sns-overview) | 2 |
 | [Amazon SQS](https://docs.aws.amazon.com/ja_jp/AWSSimpleQueueService/latest/SQSDeveloperGuide/welcome.html)                  | 3  | application integration         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-sqs-overview) | 2 |
 | [Amazon EventBridge](https://docs.aws.amazon.com/ja_jp/eventbridge/latest/userguide/eb-what-is.html)          | 2  | application integration         |            | 2 |
