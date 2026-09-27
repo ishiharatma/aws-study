@@ -8,7 +8,7 @@ emoji: "🌊"
 
 # Amazon Kinesis Data Streams<!-- omit in toc -->
 
-![icon](/images/icons/64/Arch_Amazon-Kinesis-Data-Streams_64.png)
+![icon](/images/icons/64/Arch_Amazon-Kinesis_64.png)
 
 ## ☘️ はじめに<!-- omit in toc -->
 
@@ -108,7 +108,7 @@ Kinesis Data Streamsを導入する主なメリットは次の5つです。
 
 Kinesis Data Streamsは以下の主要コンポーネントで構成されています。
 
-![kinesis_architecture](/images/kinesis-data-streams/overview.drawio.svg)
+![kinesis_architecture](/images/kinesis-data-streams/overview.png)
 
 基本的なデータフロー:
 
@@ -121,7 +121,7 @@ Kinesis Data Streamsは以下の主要コンポーネントで構成されてい
 
 シャードは、Kinesis Data Streamの基本的なスケーリング単位です。
 
-![shard](/images/kinesis-data-streams/kinesis-shard.drawio.svg)
+![shard](/images/kinesis-data-streams/kinesis-shard.png)
 
 シャードの特徴:
 
@@ -146,7 +146,6 @@ Kinesis Data Streamsは以下の主要コンポーネントで構成されてい
 - パーティションキー: データの分散を決定するキー（最大256文字）
 - データBLOB: 実際のデータ（最大10MiB。Base64エンコード前のサイズ）
 - シーケンス番号: Kinesisが自動的に割り当てる一意識別子
-
 
 ### 2.4. プロデューサー
 
@@ -239,7 +238,7 @@ while True:
 
 コンシューマーのタイプは次のようなものがあります。
 
-![consumer-type](/images/kinesis-data-streams/consumer-type.drawio.svg)
+![consumer-type](/images/kinesis-data-streams/consumer-type.png)
 
 - [共有スループットコンシューマー（Shared-Throughput Consumer）](https://docs.aws.amazon.com/ja_jp/streams/latest/dev/developing-consumers-with-sdk.html): 複数のコンシューマーでシャードの読み取り容量（2MB/秒）を共有
 - [拡張ファンアウトコンシューマー（Enhanced Fan-Out Consumer）](https://docs.aws.amazon.com/ja_jp/streams/latest/dev/building-enhanced-consumers-api.html): 専用の読み取り容量を持つコンシューマー（各コンシューマーが2MB/秒の専用スループット）

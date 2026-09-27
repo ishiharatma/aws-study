@@ -122,7 +122,7 @@
       <google-codelab-step label="2. 基本機能" duration="0">
         <h2 is-upgraded>2.1. アーキテクチャ概要</h2>
 <p>Kinesis Data Streamsは以下の主要コンポーネントで構成されています。</p>
-<p class="image-container"><img alt="kinesis_architecture" src="img\\9b2e4676311f7d62.svg"></p>
+<p class="image-container"><img alt="kinesis_architecture" src="img\\f41e82645c123e9a.png"></p>
 <p>基本的なデータフロー:</p>
 <ol type="1">
 <li>プロデューサーがデータレコードをストリームに送信</li>
@@ -132,7 +132,7 @@
 </ol>
 <h2 is-upgraded>2.2. シャード</h2>
 <p>シャードは、Kinesis Data Streamの基本的なスケーリング単位です。</p>
-<p class="image-container"><img alt="shard" src="img\\6dfb42a3ab57b53c.svg"></p>
+<p class="image-container"><img alt="shard" src="img\\48ba881b61782d77.png"></p>
 <p>シャードの特徴:</p>
 <ul>
 <li>各シャードは1秒間に1MBまたは1,000レコードまでの書き込みをサポート</li>
@@ -233,7 +233,7 @@ while True:
 #}
 </code></pre>
 <p>コンシューマーのタイプは次のようなものがあります。</p>
-<p class="image-container"><img alt="consumer-type" src="img\\7b28e169e5b1d0d4.svg"></p>
+<p class="image-container"><img alt="consumer-type" src="img\\c69ff1710d4b42e.png"></p>
 <ul>
 <li><a href="https://docs.aws.amazon.com/ja_jp/streams/latest/dev/developing-consumers-with-sdk.html" target="_blank">共有スループットコンシューマー（Shared-Throughput Consumer）</a>: 複数のコンシューマーでシャードの読み取り容量（2MB/秒）を共有</li>
 <li><a href="https://docs.aws.amazon.com/ja_jp/streams/latest/dev/building-enhanced-consumers-api.html" target="_blank">拡張ファンアウトコンシューマー（Enhanced Fan-Out Consumer）</a>: 専用の読み取り容量を持つコンシューマー（各コンシューマーが2MB/秒の専用スループット）</li>
