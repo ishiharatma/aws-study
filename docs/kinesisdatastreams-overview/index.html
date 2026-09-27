@@ -75,7 +75,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="1. Amazon Kinesis Data Streams とは" duration="0">
-        <p>Amazon Kinesis Data Streams は、リアルタイムでストリーミングデータを収集、処理、分析できるフルマネージドサービスです。大量のデータを毎秒数千から数百万のレコードレベルで、複数のソースから継続的に収集し、リアルタイムでの処理を可能にします。</p>
+        <p>Amazon Kinesis Data Streams は、リアルタイムでストリーミングデータを収集、処理、分析できるフルマネージドサービスです。毎秒数百万レコード規模のデータを複数のソースから継続的に収集し、リアルタイムに処理できます。</p>
 <h2 is-upgraded>1.1. 公式ドキュメント</h2>
 <p>Amazon Kinesis Data Streamsを理解する公式ドキュメントは次のとおりです。</p>
 <p><a href="https://aws.amazon.com/jp/kinesis/data-streams/" target="_blank">Amazon Kinesis Data Streams サービス概要</a></p>
@@ -99,7 +99,7 @@
 <li>Amazon Kinesis AWS のストリーミングデータソリューションを使用する</li>
 </ul>
 <h2 is-upgraded>1.4. 導入のメリット</h2>
-<p>Kinesis Data Streamsを導入する主なメリットは以下の5つです。</p>
+<p>Kinesis Data Streamsを導入する主なメリットは次の5つです。</p>
 <ul>
 <li>リアルタイム処理: ミリ秒単位の低レイテンシでデータを処理し、リアルタイム分析やアプリケーションを構築</li>
 <li>高い耐久性: データは複数のAZに複製され、24時間から最大365日まで保持可能</li>
@@ -139,20 +139,20 @@
 <li>各シャードは1秒間に2MBまでの読み取りをサポート（最大5トランザクション/秒）</li>
 <li>データは最大24時間から365日まで保持可能（デフォルト24時間）</li>
 <li>パーティションキーによってデータがシャードに分散される</li>
-<li>シャードごとにシーケンス番号によって順序が保証されるが、ストリーム全体での順序番号ではないので区別するにはパーティションキーか、データセットごとにストリームを分ける</li>
+<li>順序が保証されるのはシャード内のみで、ストリーム全体の順序は保証されない。順序を保ちたいデータは同じパーティションキーにそろえるか、データセットごとにストリームを分ける</li>
 </ul>
 <p>シャード管理:</p>
 <ul>
 <li>リシャーディング: シャード分割（SplitShard）やマージ（MergeShards）による容量調整</li>
-<li>オートスケーリング: On-Demandモードまたは自動スケーリング設定による動的調整</li>
-<li>デフォルトクォータ: US East (N. Virginia)、US West (Oregon)、Europe (Ireland)では20,000シャード/ストリーム、その他のリージョンでは1,000または6,000シャード/ストリーム</li>
+<li>オートスケーリング: On-Demandモード、または Kinesis Scaling Utility による自動調整</li>
+<li>デフォルトクォータ（プロビジョンドモード）: US East (N. Virginia)、US West (Oregon)、Europe (Ireland)では20,000シャード/アカウント、その他のリージョンでは1,000または6,000シャード/アカウント。On-Demandモードにはシャード数の上限がない</li>
 </ul>
 <h2 is-upgraded>2.3. データレコード</h2>
 <p class="image-container"><img alt="datarecord" src="img\\7fed25c6e6445ebf.jpg"></p>
 <p>データレコードは以下の要素で構成されます。</p>
 <ul>
 <li>パーティションキー: データの分散を決定するキー（最大256文字）</li>
-<li>データBLOB: 実際のデータ（最大1MB）</li>
+<li>データBLOB: 実際のデータ（最大10MiB。Base64エンコード前のサイズ）</li>
 <li>シーケンス番号: Kinesisが自動的に割り当てる一意識別子</li>
 </ul>
 <h2 is-upgraded>2.4. プロデューサー</h2>
@@ -167,9 +167,13 @@
 <li>AWSサービス: AWSサービスから直接送信</li>
 </ul>
 <p>Pythonを使用した送信方法（<a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis/client/put_record.html" target="_blank">put_record</a>）の例:</p>
-<pre><code language="language-python" class="language-python">import boto3
+<pre><code language="language-python" class="language-python">import json
+
+import boto3
 
 kinesis = boto3.client(&#39;kinesis&#39;)
+
+data = {&#39;user_id&#39;: &#39;u001&#39;, &#39;action&#39;: &#39;click&#39;}
 
 response = kinesis.put_record(
     StreamName=&#39;my-stream&#39;,
@@ -190,7 +194,7 @@ response = kinesis.put_record(
 <ul>
 <li>Kinesis Client Library (KCL): 複数インスタンスでの並列処理</li>
 <li>AWS Lambda: サーバーレスでのイベント処理</li>
-<li>Kinesis Data Firehose: S3、Redshift等への配信</li>
+<li>Amazon Data Firehose（旧 Kinesis Data Firehose）: S3、Redshift等への配信</li>
 <li>Managed Service for Apache Flink(<a href="https://aws.amazon.com/jp/blogs/news/announcing-amazon-managed-service-for-apache-flink-renamed-from-amazon-kinesis-data-analytics/" target="_blank">旧Kinesis Data Analytics</a>) : Java、Scala、Python、または SQL を使用してストリーミングデータを処理および分析</li>
 </ul>
 <p>Pythonを使用したデータ取得方法（<a href="https://boto3.amazonaws.com/v1/documentation/api/latest/reference/services/kinesis/client/get_records.html" target="_blank">get_records</a>）の例:</p>
@@ -202,7 +206,7 @@ shard_iterator = kinesis.get_shard_iterator(
     StreamName=&#39;your-stream-name&#39;,
     ShardId=shard_id,
     ShardIteratorType=&#39;LATEST&#39;
-)
+)[&#39;ShardIterator&#39;]
 
 while True:
     records = kinesis.get_records(ShardIterator=shard_iterator, Limit=100)
@@ -236,12 +240,12 @@ while True:
 </ul>
 <p>AWS CLI（<a href="https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kinesis/register-stream-consumer.html" target="_blank">register-stream-consumer</a>）で拡張ファンアウトコンシューマーを追加する例:</p>
 <pre><code language="language-sh" class="language-sh">aws kinesis register-stream-consumer \
-    --stream-arn arn:aws:kinesis:ap-northeast-1:123456789012:stream/stream-name \    
+    --stream-arn arn:aws:kinesis:ap-northeast-1:123456789012:stream/stream-name \
     --consumer-name SampleDataStreamConsumer
 </code></pre>
 <h2 is-upgraded>2.6. データストリーム容量モード</h2>
 <p>データストリームの容量の管理方法と、データストリームの使用に対する課金方法を決定します。 データストリームのオンデマンドモードとプロビジョンドモードのどちらかを選択できます。</p>
-<p>また、 AWS アカウントのデータストリームごとに、オンデマンド容量モードとプロビジョンド容量モードを 24 時間で 2 回切り替えることができます。</p>
+<p>また、データストリームごとに、オンデマンド容量モードとプロビジョンド容量モードを 24 時間で 2 回まで切り替えられます。</p>
 <ul>
 <li>Provisioned Mode（プロビジョンドモード） <ul>
 <li>手動でシャード数を管理</li>
@@ -262,6 +266,7 @@ while True:
   --stream-mode-details ON_DEMAND
 </code></pre>
 <h2 is-upgraded>2.7. 料金体系</h2>
+<p>以下は東京リージョンの料金例です（要確認: 最新の<a href="https://aws.amazon.com/jp/kinesis/data-streams/pricing/" target="_blank">料金ページ</a>で確認してください）。</p>
 <p>Provisioned Mode:</p>
 <ul>
 <li>シャード時間: 1シャード時間あたり $0.0195</li>
@@ -289,7 +294,7 @@ while True:
 <li>顧客管理キー: AWS KMSで管理するカスタマーキー</li>
 </ul>
 <pre><code language="language-sh" class="language-sh">aws kinesis create-stream --stream-name Foo \
-    --shard-count 3
+    --shard-count 3 \
     --stream-mode-details PROVISIONED
 
 aws kinesis start-stream-encryption \
@@ -304,6 +309,7 @@ aws kinesis start-stream-encryption \
 <li>手動スケーリング: コマンドラインから実行可能で、EC2 Auto Scalingグループと同様の方式でスケールアップ・スケールダウンが可能</li>
 <li>自動スケーリング: CloudWatch統計を監視し、PUT率やGET率に基づいて自動的にシャード数を調整</li>
 </ul>
+<p>On-Demandモードなら容量を自動調整できるため、新規に構築する場合は Scaling Utility を使う場面は限られます。Provisionedモードのまま運用する場合の選択肢です。</p>
 <h2 is-upgraded>3.3. Kinesis Client Library (KCL)</h2>
 <p>複数インスタンスでの分散処理を簡単にするライブラリです。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/streams/latest/dev/kcl.html" target="_blank">KCL</a>の特徴:</p>
@@ -332,7 +338,7 @@ class RecordProcessor(kcl.RecordProcessorBase):
 <p>主な統合パターン:</p>
 <ul>
 <li>Lambda: サーバーレスでのリアルタイム処理</li>
-<li>Kinesis Data Firehose: S3、Redshift、OpenSearchへの配信</li>
+<li>Amazon Data Firehose: S3、Redshift、OpenSearchへの配信</li>
 <li>Managed Service for Apache Flink(<a href="https://aws.amazon.com/jp/blogs/news/announcing-amazon-managed-service-for-apache-flink-renamed-from-amazon-kinesis-data-analytics/" target="_blank">旧Kinesis Data Analytics</a>) : Java、Scala、Python、または SQL を使用してストリーミングデータを処理および分析</li>
 <li>EMR: 大規模データ処理</li>
 <li>CloudWatch: メトリクス監視とアラート</li>
@@ -355,13 +361,13 @@ def lambda_handler(event, context):
     print(f&#34;Successfully processed {len(event[&#39;Records&#39;])} records.&#34;)
 </code></pre>
 <p>CloudFormationでのLambda統合例:</p>
-<pre><code language="language-yaml" class="language-yaml">LambdaFunction:
-  Type: AWS::Lambda::Function
+<pre><code language="language-yaml" class="language-yaml">KinesisEventSourceMapping:
+  Type: AWS::Lambda::EventSourceMapping
   Properties:
-    EventSourceMappings:
-      - EventSourceArn: !GetAtt KinesisStream.Arn
-        StartingPosition: TRIM_HORIZON | LATEST | AT_TIMESTAMP
-        BatchSize: 100　# 最大レコード数
+    FunctionName: !Ref LambdaFunction
+    EventSourceArn: !GetAtt KinesisStream.Arn
+    StartingPosition: LATEST  # TRIM_HORIZON / LATEST / AT_TIMESTAMP から選択
+    BatchSize: 100  # 1回の呼び出しで処理する最大レコード数
 </code></pre>
 
 
@@ -432,10 +438,14 @@ aws cloudwatch put-metric-alarm \
       &#34;Action&#34;: [
         &#34;kinesis:GetRecords&#34;,
         &#34;kinesis:GetShardIterator&#34;,
-        &#34;kinesis:DescribeStream&#34;,
-        &#34;kinesis:ListStreams&#34;
+        &#34;kinesis:DescribeStream&#34;
       ],
       &#34;Resource&#34;: &#34;arn:aws:kinesis:region:account:stream/my-stream&#34;
+    },
+    {
+      &#34;Effect&#34;: &#34;Allow&#34;,
+      &#34;Action&#34;: &#34;kinesis:ListStreams&#34;,
+      &#34;Resource&#34;: &#34;*&#34;
     }
   ]
 }
@@ -453,15 +463,13 @@ aws cloudwatch put-metric-alarm \
       </google-codelab-step>
     
       <google-codelab-step label="📖 まとめ" duration="0">
-        <p>Amazon Kinesis Data Streams は、リアルタイムストリーミングデータ処理のための強力なサービスとして以下の価値を提供します。</p>
+        <p>Kinesis Data Streams は、大量のデータを低レイテンシで受け取り、複数のコンシューマーが読み取れるストリーミング基盤です。設計で迷いやすいのは次の3点です。</p>
 <ul>
-<li>リアルタイム処理: 低レイテンシでの大量データ処理により、即座の意思決定をサポート</li>
-<li>高い可用性: マルチAZ冗長化と自動フェイルオーバーによる継続的なサービス提供</li>
-<li>柔軟なスケーリング: On-DemandモードとProvisionedモードによる最適な容量管理</li>
-<li>豊富な統合: AWSエコシステム内の他サービスとのシームレスな連携</li>
-<li>セキュリティ: 暗号化とアクセス制御による企業レベルのデータ保護</li>
+<li>容量モード: 流量が読めるならProvisioned、読めない・運用の手間を減らしたいならOn-Demand</li>
+<li>順序: 保証されるのはシャード内のみ。順序が必要なデータは同じパーティションキーにそろえる</li>
+<li>コンシューマー: 複数のアプリが同じデータを読むなら、共有スループットの2MB/秒を取り合わないよう拡張ファンアウトを検討する</li>
 </ul>
-<p>リアルタイムデータ分析、IoTデータ処理、ログ集約など、ストリーミングデータを扱うシステムを構築する際は、Kinesis Data Streamsを検討しましょう。特に高スループット・低レイテンシが要求されるアプリケーションにおいて威力を発揮します。</p>
+<p>S3 への配信だけが目的なら Amazon Data Firehose の方が手軽です。ストリームを複数のアプリで読み分けたい、レコードの順序や再読み取りが必要といった場合に Kinesis Data Streams を選びます。</p>
 
 
       </google-codelab-step>

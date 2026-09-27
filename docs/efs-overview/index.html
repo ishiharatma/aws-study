@@ -37,12 +37,17 @@
       <google-codelab-step label="👀 Contents" duration="0">
         <ul>
 <li><a href="#efs-%E3%81%A8%E3%81%AF" target="_blank">EFS とは</a></li>
+<li><a href="#ebss3fsx-%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84" target="_blank">EBS・S3・FSx との違い</a></li>
 <li><a href="#efs-%E3%81%AE%E5%9F%BA%E6%9C%AC%E6%A7%8B%E6%88%90" target="_blank">EFS の基本構成</a></li>
 <li><a href="#%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E3%81%AE%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">ファイルシステムのタイプ</a></li>
 <li><a href="#%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8%E3%82%AF%E3%83%A9%E3%82%B9" target="_blank">ストレージクラス</a></li>
 <li><a href="#%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC" target="_blank">ライフサイクルポリシー</a></li>
+<li><a href="#%E3%83%91%E3%83%95%E3%82%A9%E3%83%BC%E3%83%9E%E3%83%B3%E3%82%B9%E3%83%A2%E3%83%BC%E3%83%89%E3%81%A8%E3%82%B9%E3%83%AB%E3%83%BC%E3%83%97%E3%83%83%E3%83%88%E3%83%A2%E3%83%BC%E3%83%89" target="_blank">パフォーマンスモードとスループットモード</a></li>
+<li><a href="#%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">セキュリティ</a></li>
+<li><a href="#%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%83%9D%E3%82%A4%E3%83%B3%E3%83%88" target="_blank">アクセスポイント</a></li>
 <li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">バックアップ</a></li>
 <li><a href="#ec2%E3%81%A7%E3%81%AE%E5%88%A9%E7%94%A8" target="_blank">EC2での利用</a></li>
+<li><a href="#ec2%E4%BB%A5%E5%A4%96%E3%81%8B%E3%82%89%E3%81%AE%E5%88%A9%E7%94%A8" target="_blank">EC2以外からの利用</a></li>
 <li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%86%E3%82%A3%E3%83%B3%E3%82%B0" target="_blank">モニタリングとトラブルシューティング</a></li>
 <li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E5%89%8A%E6%B8%9B%E3%81%AE%E3%83%99%E3%82%B9%E3%83%88%E3%83%97%E3%83%A9%E3%82%AF%E3%83%86%E3%82%A3%E3%82%B9" target="_blank">コスト削減のベストプラクティス</a></li>
 <li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
@@ -52,7 +57,7 @@
       </google-codelab-step>
     
       <google-codelab-step label="EFS とは" duration="0">
-        <p>フルマネージド型ファイルストレージサービスで、複数のEC2インスタンスで利用する共有ファイルシステムなどによく利用されます。</p>
+        <p>フルマネージド型ファイルストレージサービスで、複数のコンピューティングリソースから同時にマウントできる共有ファイルシステムとしてよく利用されます。EC2だけでなく、Lambda、ECS、EKSなどからも使えます。</p>
 <p>ネットワークファイルシステムバージョン 4 (NFSv4.1 および NFSv4.0) プロトコルを使用し、Linuxワークロード向けに設計されています。 Windows Serverの場合は、Amazon FSx for Windows File Serverを利用します。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=srLHV0ualZs" target="_blank">Amazon Elastic File System (Amazon EFS)(YouTube)</a>(0:40:25)</p>
 <p class="image-container"><img alt="01" src="img\\d0c97647f5fdc684.jpg"></p>
@@ -60,8 +65,42 @@
 <p class="image-container"><img alt="02" src="img\\81bc6540d01d86f.jpg"></p>
 <p><a href="https://aws.amazon.com/jp/efs/" target="_blank">EFS サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/efs/?id=docs_gateway" target="_blank">EFS ドキュメント</a></p>
-<p><a href="https://aws.amazon.com/jp/efs/" target="_blank">EFS よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/efs/faq/" target="_blank">EFS よくある質問</a></p>
 <p><a href="https://aws.amazon.com/jp/efs/pricing/" target="_blank">EFS の料金</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="EBS・S3・FSx との違い" duration="0">
+        <p>AWSのストレージは、データの扱い方で使い分けます。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>サービス</p>
+</td><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>特徴</p>
+</td><td colspan="1" rowspan="1"><p>主な用途</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>EFS</p>
+</td><td colspan="1" rowspan="1"><p>ファイルストレージ（NFS）</p>
+</td><td colspan="1" rowspan="1"><p>複数のクライアントから同時にマウントできる。Linux向け</p>
+</td><td colspan="1" rowspan="1"><p>複数サーバーで共有するコンテンツ、Lambda・コンテナの共有ストレージ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>EBS</p>
+</td><td colspan="1" rowspan="1"><p>ブロックストレージ</p>
+</td><td colspan="1" rowspan="1"><p>単一のEC2インスタンスから低レイテンシーでアクセス</p>
+</td><td colspan="1" rowspan="1"><p>OSやデータベースのディスク</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>S3</p>
+</td><td colspan="1" rowspan="1"><p>オブジェクトストレージ</p>
+</td><td colspan="1" rowspan="1"><p>APIでどこからでもアクセスできる</p>
+</td><td colspan="1" rowspan="1"><p>静的ファイル、バックアップ、データレイク</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>FSx for Windows File Server</p>
+</td><td colspan="1" rowspan="1"><p>ファイルストレージ（SMB）</p>
+</td><td colspan="1" rowspan="1"><p>Windows向けの共有ファイルサーバー</p>
+</td><td colspan="1" rowspan="1"><p>Windowsのファイル共有</p>
+</td></tr>
+</table>
+<p>「ファイルシステムとして複数のLinuxインスタンスから同時に読み書きしたい」なら EFS、「1台のEC2のディスク」なら EBS、「APIで出し入れするデータ」なら S3 が基本の選び方です。</p>
 
 
       </google-codelab-step>
@@ -71,26 +110,27 @@
 <ul>
 <li>マウントターゲット <ul>
 <li>EC2から接続するエンドポイントのことで、実体はENIであり、プライベートIPアドレスが割り当てられます。</li>
-<li>AZに１つだけ作成できます。</li>
-<li>セキュリティグループでアクセス制御を行います。</li>
+<li>AZに1つだけ作成できます。</li>
+<li>セキュリティグループでアクセス制御を行います（詳細は「セキュリティ」を参照）。</li>
+<li>パブリックIPアドレスは持てません。VPC内、接続済みのVPC、Direct ConnectやVPN経由のオンプレミスから利用します。</li>
 </ul>
 </li>
 <li>DNS名 <ul>
 <li>EC2から接続する場合はDNS名を指定します。</li>
-<li>DNS名は２種類あります。 <ul>
+<li>DNS名は2種類あります。 <ul>
 <li>ファイルシステム： <code>file-system-id.efs.aws-region.amazonaws.com</code><ul>
-<li>同一AZのマウントターゲットのIPを返す。別AZのIPは返さない。</li>
+<li>同一AZのマウントターゲットのIPを返します。別AZのIPは返しません。</li>
 </ul>
 </li>
 <li>マウントターゲット： <code>availability-zone.file-system-id.efs.aws-region.amazonaws.com</code><ul>
-<li>別AZからでも参照可能</li>
+<li>別AZからでも参照できます。</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li>別のVPCから接続したい場合は、VPCピアリングやTransitGatewayなどで接続しておく。</li>
+<li>別のVPCから接続したい場合は、VPCピアリングやTransitGatewayなどで事前に接続しておきます。</li>
 </ul>
 
 
@@ -100,15 +140,15 @@
         <p class="image-container"><img alt="efs-filesystem-type" src="img\\b98a097cba507589.jpg"></p>
 <ol type="1">
 <li><strong>リージョン</strong><ul>
-<li>3つのアベイラビリティゾーンにデータを複製</li>
+<li>3つ以上のアベイラビリティゾーンにデータを複製</li>
 <li>99.999999999%（11ナイン）の耐久性</li>
 <li>頻繁にアクセスされるデータ向け</li>
 </ul>
 </li>
-<li><strong>1ゾーン ストレージクラス</strong><ul>
+<li><strong>1ゾーン</strong><ul>
 <li>単一AZでの運用によるコスト最適化</li>
 <li>99.999999999%（11ナイン）の耐久性</li>
-<li>開発環境やバックアップなどに最適</li>
+<li>AZ障害には耐えられないため、開発環境やバックアップ取得済みのデータ向け</li>
 </ul>
 </li>
 </ol>
@@ -139,8 +179,71 @@
     
       <google-codelab-step label="ライフサイクルポリシー" duration="0">
         <p class="image-container"><img alt="efs-lifecycle-settings" src="img\\30c378edc5c23f31.jpg"></p>
-<p>S3バケットのライフサイクルと同様に低頻度アクセスのデータを低コストのストレージクラスに移動させることでコストを最適化することができます。 さらに、EFSでは標準ストレージクラスに戻すことが可能です（デフォルトでは戻さない）。</p>
+<p>S3バケットのライフサイクルと同様に低頻度アクセスのデータを低コストのストレージクラスに移動させることでコストを最適化できます。 デフォルトでは、標準ストレージクラスで30日間アクセスのないファイルがIAに、90日間アクセスのないファイルがアーカイブに移ります。 S3と違い、EFSでは最初のアクセス時に標準ストレージクラスへ戻す設定も選べます（デフォルトでは戻しません）。</p>
 <p class="image-container"><img alt="efs-lifecycle" src="img\\686bdef21502963.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="パフォーマンスモードとスループットモード" duration="0">
+        <p><a href="https://docs.aws.amazon.com/ja_jp/efs/latest/ug/performance.html" target="_blank">Amazon EFS のパフォーマンス</a>は、パフォーマンスモードとスループットモードの組み合わせで決まります。</p>
+<p>パフォーマンスモードは、汎用と最大 I/O の2種類です。</p>
+<ul>
+<li>汎用: デフォルトで推奨。レイテンシーが最も低く、1ゾーンのファイルシステムでは汎用のみ使えます</li>
+<li>最大 I/O: 旧世代。レイテンシーが高くなるため、すべてのファイルシステムで汎用を推奨。1ゾーンと Elastic スループットでは使えません</li>
+</ul>
+<p>スループットモードは3種類です。</p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>モード</p>
+</td><td colspan="1" rowspan="1"><p>特徴</p>
+</td><td colspan="1" rowspan="1"><p>向いているワークロード</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Elastic</p>
+</td><td colspan="1" rowspan="1"><p>デフォルトで推奨。ワークロードに応じて自動でスループットが増減し、指定は不要</p>
+</td><td colspan="1" rowspan="1"><p>負荷が読めない・変動が大きい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Provisioned</p>
+</td><td colspan="1" rowspan="1"><p>ファイルシステムのサイズと無関係に、スループットを固定値で指定。指定量に応じて課金</p>
+</td><td colspan="1" rowspan="1"><p>必要な性能が分かっている・持続的に必要</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>Bursting</p>
+</td><td colspan="1" rowspan="1"><p>標準ストレージの容量に比例（1GiBあたり 50KiB/秒）。バーストクレジットを消費して一時的に上回る</p>
+</td><td colspan="1" rowspan="1"><p>容量に応じたスループットで足りる</p>
+</td></tr>
+</table>
+<p>Provisioned に切り替えた直後の24時間は、Elastic・Bursting への変更やスループット量の引き下げができません。設定は慎重に行います。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="セキュリティ" duration="0">
+        <p>EFSへのアクセスは、次の層で制御します。</p>
+<ul>
+<li>ネットワーク: マウントターゲットのセキュリティグループで、EC2のセキュリティグループからのTCP 2049番ポート（NFS）を許可します。EC2側は、マウントターゲットのセキュリティグループへの2049番ポートのアウトバウンドを許可します。</li>
+<li>IAM: IAMポリシーとファイルシステムポリシーで、操作を許可するIAMプリンシパルを制限します。マウント時に <code>iam</code> オプションを指定すると、IAM認証を使えます。</li>
+<li>POSIXパーミッション: ファイルやディレクトリのユーザー・グループ・パーミッションで、NFSレベルのアクセスを制御します。</li>
+<li>アクセスポイント: アプリケーションごとにルートディレクトリとPOSIXユーザーを固定します（次の節を参照）。</li>
+</ul>
+<p>暗号化は、保管時と転送中の2つがあります。</p>
+<ul>
+<li>保管時の暗号化: AWS KMSキーで暗号化します。AWS所有のキー（<code>aws/elasticfilesystem</code>）か、カスタマー管理キーを選べます。</li>
+<li>転送中の暗号化: マウント時に <code>tls</code> オプションを指定すると、TLSで暗号化します。</li>
+</ul>
+<p>:::message alert 保管時の暗号化は、ファイルシステムの作成時にしか設定できません。作成後に暗号化なし→ありへ変更することはできません。マネジメントコンソールではデフォルトで有効ですが、AWS CLI・API・SDKで作成する場合は明示的に有効化が必要です。暗号化なしで作成してしまった場合は、EFSレプリケーションで暗号化済みの新しいファイルシステムへコピーします。 :::</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="アクセスポイント" duration="0">
+        <p>アクセスポイントは、EFSファイルシステムへのアプリケーション専用の入口です。次の2つを強制できます。</p>
+<ul>
+<li>ルートディレクトリ: アクセスポイント経由のクライアントは、指定したディレクトリ以下しか参照できません</li>
+<li>POSIXユーザー: アクセスポイント経由のリクエストすべてに、指定したユーザー・グループを適用します</li>
+</ul>
+<p>IAMポリシーと組み合わせると、「このアプリケーションはこのアクセスポイントしか使えない」という制御ができます。1つのファイルシステムを複数のアプリで共有しつつ、データを分けられます。</p>
+<p>マウントヘルパーでは、アクセスポイントIDを指定してマウントします（マウントターゲットの作成が前提です）。</p>
+<pre><code language="language-sh" class="language-sh">sudo mount -t efs -o tls,accesspoint=fsap-abcdef0123456789a file-system-id: efs/
+</code></pre>
 
 
       </google-codelab-step>
@@ -152,16 +255,39 @@
       </google-codelab-step>
     
       <google-codelab-step label="EC2での利用" duration="0">
-        <p>EFSマウントヘルパーを使用します。</p>
+        <p>EFSマウントヘルパー（<code>amazon-efs-utils</code> パッケージ）を使用します。事前にEC2へインストールしておきます。</p>
 <pre><code language="language-sh" class="language-sh"># マウントするディレクトリを作成します
 sudo mkdir efs
 
 # ファイルシステムIDを指定してマウントします
-sudo mount -t efs file-system-id マウントするディレクトリ/
+sudo mount -t efs file-system-id efs/
 
-# ファイルシステム DNS 名を使用してマウントする場合
-sudo mount -t efs -o tls file-system-dns-name マウントするディレクトリ/
+# 転送中の暗号化（TLS）を有効にしてマウントする場合
+sudo mount -t efs -o tls file-system-id efs/
 </code></pre>
+<p>この方法だと、再起動するとマウントが外れます。永続化するには <code>/etc/fstab</code> に追記します。</p>
+<pre><code language="language-text" class="language-text">file-system-id:/ efs-mount-point efs _netdev,noresvport,tls 0 0
+</code></pre>
+<ul>
+<li><code>_netdev</code>: ネットワークが有効になるまでマウントを待ちます。指定しないと、起動時にインスタンスが応答しなくなることがあります</li>
+<li><code>noresvport</code>: 再接続時に新しいTCPソースポートを使い、ネットワーク復旧後も途切れず接続できます</li>
+<li><code>tls</code>: 転送中の暗号化を有効にします</li>
+</ul>
+<p>追記後は <code>sudo mount -fav</code> で、<code>/etc/fstab</code> の記述を検証できます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="EC2以外からの利用" duration="0">
+        <p>EFSはEC2以外からもマウントできます。</p>
+<ul>
+<li>Lambda: <a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/configuration-filesystem-efs.html" target="_blank">関数の設定でEFSファイルシステムを指定</a>します。関数をVPCに接続しておく必要があります。マウント先のローカルパスは <code>/mnt/</code> で始めます。アクセスポイントの利用が推奨されており、実行ロールには <code>elasticfilesystem:ClientMount</code>（書き込みには <code>elasticfilesystem:ClientWrite</code> も）が必要です</li>
+<li>ECS（EC2・Fargate）: タスク定義でEFSボリュームを指定します</li>
+<li>EKS: EFS CSIドライバーを使い、Podから利用します（EC2・Fargate）</li>
+<li>SageMaker: トレーニングジョブやStudioのホームディレクトリで利用できます</li>
+<li>オンプレミス: Direct ConnectまたはVPN経由でマウントできます。既存データの移行には AWS DataSync が使えます</li>
+</ul>
+<p>Lambdaのようにサイズや永続性に制限がある環境で、大きなファイルや共有データを扱いたい場合に便利です。</p>
 
 
       </google-codelab-step>
@@ -174,7 +300,7 @@ sudo mount -t efs -o tls file-system-dns-name マウントするディレクト�
 </ul>
 </li>
 <li>BurstCreditBalance <ul>
-<li>ファイルシステムのバーストクレジットの数</li>
+<li>ファイルシステムのバーストクレジットの数（Bursting スループットモードのみ）。バースト容量の80%以上を使っている、またはクレジットが枯渇する場合は、Elastic か Provisioned への変更を検討します</li>
 </ul>
 </li>
 <li>StorageBytes <ul>
@@ -188,9 +314,9 @@ sudo mount -t efs -o tls file-system-dns-name マウントするディレクト�
     
       <google-codelab-step label="コスト削減のベストプラクティス" duration="0">
         <ul>
-<li>IAストレージクラスの活用</li>
-<li>適切なパフォーマンスモードの選択</li>
-<li>不要なプロビジョンドスループットの見直し</li>
+<li>IAストレージクラスを使う</li>
+<li>必要な性能に合ったスループットモードを選ぶ（負荷が読めないなら Elastic）</li>
+<li>不要なプロビジョンドスループットを見直す</li>
 </ul>
 
 
@@ -198,9 +324,9 @@ sudo mount -t efs -o tls file-system-dns-name マウントするディレクト�
     
       <google-codelab-step label="📖 まとめ" duration="0">
         <ul>
-<li>Amazon EFSは、柔軟でスケーラブルなファイルストレージソリューションを提供</li>
-<li>適切な設計と運用管理により、高可用性とコスト効率の両立が可能</li>
-<li>定期的なパフォーマンス評価とコスト分析を行い、必要に応じて設定を調整することで、最適なストレージ環境を維持</li>
+<li>複数のLinuxインスタンスから同じファイルを読み書きしたいなら、EFSを選ぶ。Windowsの場合はFSx for Windows File Server</li>
+<li>開発環境など、AZ障害を許容できる用途なら1ゾーンでコストを抑えられる</li>
+<li>長期間触らないデータが多いなら、ライフサイクルポリシーでIA・アーカイブへ移す。移行までの日数はデフォルトの30日・90日から調整できる</li>
 </ul>
 
 

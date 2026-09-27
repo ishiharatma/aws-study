@@ -119,21 +119,23 @@ EC2、Lambda、S3が多く、その他は2～3枚という構成です。
 | [Amazon OpenSearch Service](https://docs.aws.amazon.com/ja_jp/opensearch-service/latest/developerguide/what-is.html)   | 2  | analytics                       |            | 2 |
 | [AWS CloudTrail](https://docs.aws.amazon.com/ja_jp/awscloudtrail/latest/userguide/cloudtrail-user-guide.html)              | 2  | management & governance         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-cloudtrail-overview) | 2 |
 | [Amazon CloudWatch](https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html)           | 2  | management & governance         | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-cloudwatch-overview) | 2 |
-| [AWS IAM Identity Center](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/what-is.html)     | 4  | security, identity & compliance |  | 2 |
+| [AWS IAM Identity Center](https://docs.aws.amazon.com/ja_jp/singlesignon/latest/userguide/what-is.html)     | 4  | security, identity & compliance | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-iam-identity-center-overview) | 2 |
 | [Amazon CodeCatalyst](https://docs.aws.amazon.com/ja_jp/codecatalyst/latest/userguide/welcome.html)         | 2  | developer tools                 |            | 2 |
 
 **コストありカード：** 14枚
 
 | サービス名                      | 枚数 | カテゴリ                       | Zenn記事リンク | 獲得クレジット |
 |----------------------------|----|----------------------------|------------|---:|
-| [Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)    | 2  | compute                    |            | 2 |
+| [Amazon EC2 Auto Scaling](https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html)    | 2  | compute                    | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ec2-advanced) | 2 |
 | [AWS CDK](https://docs.aws.amazon.com/ja_jp/cdk/v2/guide/home.html)                    | 3  | developer tools            | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-cdk-overview) | 1 |
 | [AWS CloudFormation](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/Welcome.html)         | 2  | management & governance    | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-cfn-overview) | 2 |
 | [AWS Systems Manager](https://docs.aws.amazon.com/ja_jp/systems-manager/latest/userguide/what-is-systems-manager.html)        | 3  | management & governance    | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-ssm-overview) | 2 |
 | [AWS Well-Architected Tool](https://docs.aws.amazon.com/ja_jp/wellarchitected/latest/userguide/intro.html)  | 2  | management & governance    |            | 1 |
-| [Cloud Financial Management](https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/what-is-costmanagement.html) | 2  | cloud finalcial management |            | 2 |
+| [Cloud Financial Management](https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/what-is-costmanagement.html) | 2  | cloud finalcial management | [Zenn記事はこちら](https://zenn.dev/issy/articles/zenn-cost-explorer-overview) | 2 |
 
 ## Starter Card のリタイア
+
+![retirement.png](/images/buildercards/retirement.png)
 
 山札から手札としてカードを5枚出した時点で、`Builder Card の枚数` > `Starter Card の枚数` となった場合に、Starter Card をゲームから除外することができます。
 これを `リタイヤ` と呼びます。リタイヤしたカードは、それ以降使用しないカードとなります。
