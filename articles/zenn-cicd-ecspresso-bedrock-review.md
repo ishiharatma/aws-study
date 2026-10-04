@@ -4,7 +4,9 @@ emoji: "🚦"
 type: "tech"
 topics: ["aws", "cdk", "bedrock", "codepipeline", "ecs"]
 published: false
----# AWS CodePipeline に Agentic Code Reviewを組み込む<!-- omit in toc -->
+---
+
+# AWS CodePipeline に Agentic Code Reviewを組み込む<!-- omit in toc -->
 
 ## はじめに
 
