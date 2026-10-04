@@ -1,4 +1,10 @@
-# AWS CodePipeline に Agentic Code Reviewを組み込む<!-- omit in toc -->
+---
+title: "ECS Fargate CI/CDにAmazon Bedrockの並列コードレビューゲートを組み込む"
+emoji: "🚦"
+type: "tech"
+topics: ["aws", "cdk", "bedrock", "codepipeline", "ecs"]
+published: false
+---# AWS CodePipeline に Agentic Code Reviewを組み込む<!-- omit in toc -->
 
 ## はじめに
 

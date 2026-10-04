@@ -12,6 +12,7 @@ permalink: /management-and-governance/
 - <a href="../ssm-ops-overview/index.html#0" target="_blank">【初心者向け】AWS Systems Manager ④ 運用管理機能編</a>
 - <a href="../ssm-changes-overview/index.html#0" target="_blank">【初心者向け】AWS Systems Manager ⑤ 変更管理機能編</a>
 - <a href="../cfn-overview/index.html#0" target="_blank">【初心者向け】AWS CloudFormation 入門！完全ガイド</a>
+- <a href="../cost-explorer-overview/index.html#0" target="_blank">【初心者向け】AWS Cost Explorer 入門！完全ガイド</a>
 - AWS Organizations
 - AWS Trusted Advisor
 - AWS Config

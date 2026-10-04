@@ -36,132 +36,213 @@
     
       <google-codelab-step label="👀 Contents" duration="0">
         <ul>
-<li><a href="#cost-explorer-%E3%81%A8%E3%81%AF" target="_blank">Cost Explorer とは</a></li>
-<li><a href="#cost-explorer-%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">Cost Explorer を有効にする</a></li>
-<li><a href="#%E7%94%BB%E9%9D%A2%E3%81%AE%E6%A7%8B%E6%88%90%E3%81%A8%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E8%A6%8B%E6%96%B9" target="_blank">画面の構成とレポートの見方</a></li>
-<li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">コストの種類</a></li>
-<li><a href="#%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%A7%E6%B7%B1%E6%8E%98%E3%82%8A%E3%81%99%E3%82%8B" target="_blank">フィルターとグループ化で深掘りする</a></li>
-<li><a href="#%E6%99%82%E9%96%93%E5%8D%98%E4%BD%8D%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE%E7%B2%92%E5%BA%A6" target="_blank">時間単位・リソースレベルの粒度</a></li>
-<li><a href="#%E3%82%B3%E3%82%B9%E3%83%88%E4%BA%88%E6%B8%AC" target="_blank">コスト予測</a></li>
-<li><a href="#%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E4%BF%9D%E5%AD%98%E3%81%A8%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF" target="_blank">レポートの保存とブックマーク</a></li>
-<li><a href="#%E8%B3%BC%E5%85%A5%E6%8E%A8%E5%A5%A8reserved-instances--savings-plans" target="_blank">購入推奨（Reserved Instances / Savings Plans）</a></li>
-<li><a href="#cost-explorer-api" target="_blank">Cost Explorer API</a></li>
-<li><a href="#%E8%87%AA%E7%84%B6%E8%A8%80%E8%AA%9E%E3%81%A7%E3%82%B3%E3%82%B9%E3%83%88%E3%82%92%E5%88%86%E6%9E%90%E3%81%99%E3%82%8B" target="_blank">自然言語でコストを分析する</a></li>
-<li><a href="#%E9%96%A2%E9%80%A3%E3%81%99%E3%82%8B%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84" target="_blank">関連するコスト管理サービスとの違い</a></li>
+<li><a href="#1-cost-explorer-%E3%81%A8%E3%81%AF" target="_blank">1. Cost Explorer とは</a><ul>
+<li><a href="#11-%E5%85%AC%E5%BC%8F%E3%83%89%E3%82%AD%E3%83%A5%E3%83%A1%E3%83%B3%E3%83%88" target="_blank">1.1. 公式ドキュメント</a></li>
+<li><a href="#12-%E5%AD%A6%E7%BF%92%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">1.2. 学習リソース</a></li>
+</ul>
+</li>
+<li><a href="#2-%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B%E3%81%AB%E3%81%AF" target="_blank">2. 使い始めるには</a><ul>
+<li><a href="#21-cost-explorer-%E3%82%92%E6%9C%89%E5%8A%B9%E3%81%AB%E3%81%99%E3%82%8B" target="_blank">2.1. Cost Explorer を有効にする</a></li>
+<li><a href="#22-iam-%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%83%AD%E3%83%BC%E3%83%AB%E3%81%AB%E3%82%A2%E3%82%AF%E3%82%BB%E3%82%B9%E3%82%92%E8%A8%B1%E5%8F%AF%E3%81%99%E3%82%8B" target="_blank">2.2. IAM ユーザー/ロールにアクセスを許可する</a></li>
+</ul>
+</li>
+<li><a href="#3-%E5%9F%BA%E6%9C%AC%E7%9A%84%E3%81%AA%E4%BD%BF%E3%81%84%E6%96%B9" target="_blank">3. 基本的な使い方</a><ul>
+<li><a href="#31-%E7%94%BB%E9%9D%A2%E3%81%AE%E6%A7%8B%E6%88%90%E3%81%A8%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E8%A6%8B%E6%96%B9" target="_blank">3.1. 画面の構成とレポートの見方</a></li>
+<li><a href="#32-%E3%83%95%E3%82%A3%E3%83%AB%E3%82%BF%E3%83%BC%E3%81%A8%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E5%8C%96%E3%81%A7%E6%B7%B1%E6%8E%98%E3%82%8A%E3%81%99%E3%82%8B" target="_blank">3.2. フィルターとグループ化で深掘りする</a></li>
+<li><a href="#33-%E3%82%B3%E3%82%B9%E3%83%88%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">3.3. コストの種類</a></li>
+<li><a href="#34-%E3%82%B3%E3%82%B9%E3%83%88%E4%BA%88%E6%B8%AC" target="_blank">3.4. コスト予測</a></li>
+<li><a href="#35-%E3%83%AC%E3%83%9D%E3%83%BC%E3%83%88%E3%81%AE%E4%BF%9D%E5%AD%98%E3%81%A8%E3%83%96%E3%83%83%E3%82%AF%E3%83%9E%E3%83%BC%E3%82%AF" target="_blank">3.5. レポートの保存とブックマーク</a></li>
+</ul>
+</li>
+<li><a href="#4-%E3%82%B1%E3%83%BC%E3%82%B9%E3%82%B9%E3%82%BF%E3%83%87%E3%82%A3" target="_blank">4. ケーススタディ</a><ul>
+<li><a href="#41-%E3%82%B1%E3%83%BC%E3%82%B9-1%E5%85%88%E6%9C%88%E3%81%AE%E3%82%B3%E3%82%B9%E3%83%88%E3%81%8C%E6%80%A5%E3%81%AB%E5%A2%97%E3%81%88%E3%81%9F" target="_blank">4.1. ケース 1：先月のコストが急に増えた</a></li>
+<li><a href="#42-%E3%82%B1%E3%83%BC%E3%82%B9-2%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E7%92%B0%E5%A2%83%E3%81%94%E3%81%A8%E3%81%AE%E3%82%B3%E3%82%B9%E3%83%88%E3%82%92%E7%9F%A5%E3%82%8A%E3%81%9F%E3%81%84" target="_blank">4.2. ケース 2：プロジェクト・環境ごとのコストを知りたい</a></li>
+<li><a href="#43-%E3%82%B1%E3%83%BC%E3%82%B9-3%E5%A4%9C%E9%96%93%E3%81%AB%E6%A4%9C%E8%A8%BC%E7%92%B0%E5%A2%83%E3%82%92%E6%AD%A2%E3%82%81%E3%81%9F%E5%8A%B9%E6%9E%9C%E3%82%92%E7%A2%BA%E3%81%8B%E3%82%81%E3%82%8B" target="_blank">4.3. ケース 3：夜間に検証環境を止めた効果を確かめる</a></li>
+</ul>
+</li>
+<li><a href="#5-%E3%81%9D%E3%81%AE%E4%BB%96%E3%81%AE%E6%A9%9F%E8%83%BD" target="_blank">5. その他の機能</a><ul>
+<li><a href="#51-%E6%99%82%E9%96%93%E5%8D%98%E4%BD%8D%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E3%83%AC%E3%83%99%E3%83%AB%E3%81%AE%E7%B2%92%E5%BA%A6" target="_blank">5.1. 時間単位・リソースレベルの粒度</a></li>
+<li><a href="#52-reserved-instances--savings-plans-%E3%81%AE%E6%8E%A8%E5%A5%A8" target="_blank">5.2. Reserved Instances / Savings Plans の推奨</a></li>
+<li><a href="#53-cost-explorer-api" target="_blank">5.3. Cost Explorer API</a></li>
+<li><a href="#54-amazon-q-developer-%E3%81%A7%E8%87%AA%E7%84%B6%E8%A8%80%E8%AA%9E%E5%88%86%E6%9E%90%E3%81%99%E3%82%8B" target="_blank">5.4. Amazon Q Developer で自然言語分析する</a><ul>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B" target="_blank">使用例</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#6-%E9%96%A2%E9%80%A3%E3%81%99%E3%82%8B%E3%82%B3%E3%82%B9%E3%83%88%E7%AE%A1%E7%90%86%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E9%81%95%E3%81%84" target="_blank">6. 関連するコスト管理サービスとの違い</a></li>
 <li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
 </ul>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Cost Explorer とは" duration="0">
-        <p>AWS Cost Explorer は、AWS の利用コストと使用量をグラフと表で可視化し、対話的に分析するためのツールです。「どのサービスに」「どのアカウントで」「どのリージョンで」いくらかかっているのかを、期間や切り口を変えながら追いかけられます。</p>
-<p>参照できる範囲は、過去 13 か月分の実績、当月の発生済みコスト、そして今後 12 か月分の予測です。マネジメントコンソールでの表示は無料で、後述する時間単位・リソースレベルのデータと API 呼び出しのみ課金対象になります。</p>
+      <google-codelab-step label="1. Cost Explorer とは" duration="0">
+        <p>AWS Cost Explorer は、AWS の利用コストと使用量をグラフと表で可視化し、対話的に分析するためのツールです。「どのサービスに」「どのアカウントで」「どのリージョンで」いくらかかっているのかを、期間や切り口を変えながら分析できます。</p>
+<p>参照できる範囲は、既定で過去 13 か月分の実績、当月の発生済みコスト、そして今後 18 か月分の予測です（月次であれば、設定により最大 38 か月前まで遡れます）。マネジメントコンソールでの表示は無料で、後述する時間単位・リソースレベルのデータと API 呼び出しのみ課金対象になります。</p>
+<h2 is-upgraded>1.1. 公式ドキュメント</h2>
 <p><a href="https://aws.amazon.com/jp/aws-cost-management/aws-cost-explorer/" target="_blank">AWS Cost Explorer サービス概要</a></p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/awsaccountbilling/latest/aboutv2/cost-explorer-what-is.html" target="_blank">AWS Cost Explorer を使用してコストと使用状況を分析する（ドキュメント）</a></p>
 <p><a href="https://aws.amazon.com/jp/aws-cost-management/aws-cost-explorer/pricing/" target="_blank">AWS Cost Explorer の料金</a></p>
+<h2 is-upgraded>1.2. 学習リソース</h2>
+<p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=poZiRvLYkoo" target="_blank">AWS  Cost Explorer(YouTube)</a>(32:10)</p>
+<p class="image-container"><img alt="blackbelt" src="img\\e27ef82d64104b29.jpg"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Cost Explorer を有効にする" duration="0">
-        <p>Cost Explorer は、コスト管理コンソールで一度開くと有効になります。有効化した直後は履歴データの準備に最大 24 時間ほどかかり、当月分のデータもおよそ 24 時間遅れで反映されます。</p>
+      <google-codelab-step label="2. 使い始めるには" duration="0">
+        <h2 is-upgraded>2.1. Cost Explorer を有効にする</h2>
+<p>Cost Explorer は、コスト管理コンソールで一度開くと有効になります。有効化した直後は履歴データの準備に数日かかり、当月分のデータはおよそ 24 時間後に参照できるようになります。以降、データは少なくとも 24 時間に 1 回更新されます。なお、一度有効化すると無効化はできません。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-enable.html" target="_blank">Cost Explorer を有効にする</a></p>
-<p>注意したいのが、IAM ユーザーや IAM ロールからのアクセスです。AWS アカウントを作成した直後は、ルートユーザーしか請求情報を参照できません。まずルートユーザーでサインインし、アカウント設定の「IAM ユーザー/ロールによる請求情報へのアクセス」を有効化します。そのうえで、対象の IAM ユーザーやロールに Cost Explorer 用のアクセス許可（<code>ce:</code> で始まるアクション）を付与します。</p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/tutorial_billing.html" target="_blank">アカウントで請求データへのアクセスをアクティブ化する</a></p>
-<p class="image-container"><img alt="cost_explorer" src="img\\1c238d5bc0bd88a4.png"></p>
 <p>AWS Organizations を使っている場合、Cost Explorer は管理アカウント（支払いアカウント）で有効にすると、メンバーアカウントを含む組織全体のコストを扱えます。メンバーアカウント側の利用可否は、管理アカウントの設定で制御します。</p>
+<h2 is-upgraded>2.2. IAM ユーザー/ロールにアクセスを許可する</h2>
+<p>AWS アカウントを作成した直後は、ルートユーザーしか請求情報を参照できません。IAM ユーザーや IAM ロールからのアクセスさせるには、ルートユーザーでサインインし、アカウント設定の「IAM ユーザー/ロールによる請求情報へのアクセス」を有効化します。そのうえで、対象の IAM ユーザーやロールに Cost Explorer 用のアクセス許可（<code>ce:</code> で始まるアクション）を付与します。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-access.html#grant-ce-access" target="_blank">Cost Explorer へのアクセス権を付与する</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-access.html#ce-iam-users" target="_blank">ユーザーの Cost Explorer へのアクセス権を管理する</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="画面の構成とレポートの見方" duration="0">
-        <p>Cost Explorer のレポート画面は、上部のグラフと下部の明細表、右側のコントロールパネルで構成されます。分析の起点になるのは、次の 4 つの設定です。</p>
+      <google-codelab-step label="3. 基本的な使い方" duration="0">
+        <h2 is-upgraded>3.1. 画面の構成とレポートの見方</h2>
+<p class="image-container"><img alt="ce" src="img\\1c44eb3cdb46d8f6.png"></p>
+<p>Cost Explorer のレポート画面は、上部のグラフと下部の明細表、右側のコントロールパネルで構成されます。分析の起点になるのは、次の 4 つの設定です。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>設定項目</p>
 </td><td colspan="1" rowspan="1"><p>役割</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>期間（Date Range）</p>
-</td><td colspan="1" rowspan="1"><p>分析対象の開始日と終了日。過去 6 か月、今年、カスタム範囲などから選ぶ</p>
+</td><td colspan="1" rowspan="1"><p>分析対象の開始日と終了日。過去 6 か月、年初来、カスタム範囲などから選ぶ</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>粒度（Granularity）</p>
 </td><td colspan="1" rowspan="1"><p>集計単位。月別・日別が標準で、時間別は別途有効化が必要</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>グループ化（Group by）</p>
-</td><td colspan="1" rowspan="1"><p>棒グラフの積み上げを分ける軸。サービス別、アカウント別、タグ別など</p>
+</td><td colspan="1" rowspan="1"><p>グラフの積み上げを分ける軸。サービス別、アカウント別、タグ別など</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>フィルター（Filters）</p>
 </td><td colspan="1" rowspan="1"><p>特定のサービスやアカウントなどに表示を絞り込む</p>
 </td></tr>
 </table>
-<p>グラフは既定で棒グラフですが、線グラフにも切り替えられます。グループ化を「サービス」にして数か月を眺めると、コストの内訳と増減の傾向がつかめます。そこから「先月だけ跳ねているサービス」をフィルターで絞り、さらにアカウントや使用タイプでグループ化し直す、という流れで原因を掘り下げていきます。</p>
+<p>グラフのスタイルは、棒グラフ、積み上げ棒グラフ、線グラフから選べます。グループ化を「サービス」にすると、サービス別のコスト内訳と増減の傾向がつかめます。そこから「先月だけコストが増加しているサービス」をフィルターで絞り、さらにアカウントや使用タイプでグループ化し直す、という流れで原因を掘り下げていきます。</p>
+<p>まずは、次の手順を試すのが分かりやすいです。</p>
+<ol type="1">
+<li>期間を「過去 6 か月」、粒度を「月別」にする</li>
+<li>グループ化を「サービス」にして、コストの大きいサービスを確認する</li>
+<li>気になるサービスをフィルターで絞り、グループ化を「使用タイプ」に変えて内訳を見る</li>
+</ol>
 <p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-reports.html" target="_blank">Cost Explorer レポートを使用してコストを把握する</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="コストの種類" duration="0">
-        <p>Cost Explorer では、同じ利用実績を複数の集計方法で表示できます。どれを見ているかで金額が変わるため、違いを押さえておきます。</p>
-<p>非ブレンドコスト（Unblended Cost）は、その時点で実際に請求される金額です。既定の表示で、多くの場面ではこれを見れば十分です。</p>
-<p>AWS Organizations 内の複数アカウントをまたいで、リザーブドインスタンスやボリューム割引の単価を平均化したものが、ブレンドコスト（Blended Cost）です。組織全体で均すといくらになるか、という見方をするときに使います。</p>
-<p>前払いがからむときに見るのが償却コスト（Amortized Cost）です。リザーブドインスタンスや Savings Plans の前払い分を利用期間に按分し、日割りで配分します。前払いした月だけコストが跳ね上がるのを避け、実質的な負担を平準化して見たいときに選びます。</p>
-<p>このほか、クレジット、返金、税金、前払い金といった項目は、表示に含めるかどうかをチェックボックスで切り替えられます。純粋な利用料だけを見たいときはクレジットや税金を除外します。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="フィルターとグループ化で深掘りする" duration="0">
-        <p>フィルターとグループ化で指定できる軸（ディメンション）には、次のようなものがあります。</p>
+<h2 is-upgraded>3.2. フィルターとグループ化で深掘りする</h2>
+<p>フィルターとグループ化で指定できる軸（ディメンション）には、次のようなものがあります。</p>
 <ul>
 <li>サービス、連結アカウント、リージョン、アベイラビリティゾーン</li>
 <li>インスタンスタイプ、使用タイプ、使用タイプグループ、API 操作</li>
 <li>購入オプション（オンデマンド、Savings Plans、スポットなど）、テナンシー</li>
 <li>コスト配分タグ、コストカテゴリ</li>
 </ul>
-<p>コスト配分タグを軸にするには、事前に請求コンソールでタグを有効化しておく必要があります。有効化した時点以降のコストにのみタグが適用され、遡って付与はされません。プロジェクトや環境（本番・検証）ごとにコストを分けたい場合は、早い段階でタグ付けの運用を決めておくと後が楽になります。</p>
+<p>コスト配分タグを軸にするには、事前に請求コンソールでタグ キーを有効化しておく必要があります。タグを付けただけでは Cost Explorer に表示されず、有効化の反映にも最大 24 時間ほどかかります。プロジェクトや環境（本番・検証）ごとにコストを分けたい場合は、早い段階でタグ付けの運用を決めておくことで分析しやすくなります。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html" target="_blank">コスト配分タグの使用</a></p>
 <p>タグだけでは表現しにくい「複数アカウントと複数タグをまとめてひとつのチーム扱いにする」といった分類は、AWS Cost Categories でルールを定義しておくと、その分類軸で Cost Explorer をグループ化できます。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="時間単位・リソースレベルの粒度" duration="0">
-        <p>既定の粒度は月別と日別です。より細かく見たい場合、コスト管理の設定から時間単位・リソースレベルの粒度を有効化できます。</p>
+<h2 is-upgraded>3.3. コストの種類</h2>
+<p>Cost Explorer では、同じ利用実績を複数の集計方法で表示できます。どれを見ているかで金額が変わるため、違いを押さえておきます。設定は右側の「詳細オプション」の「コストの集計方法」で切り替えます。</p>
+<p class="image-container"><img alt="Aggregate costs by" src="img\\9f95175c6038b438.png"></p>
+<table>
+<tr><td colspan="1" rowspan="1"><p>種類</p>
+</td><td colspan="1" rowspan="1"><p>概要</p>
+</td><td colspan="1" rowspan="1"><p>使いどころ</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>非ブレンドコスト（Unblended）</p>
+</td><td colspan="1" rowspan="1"><p>利用に対して発生した金額。既定の表示。グループ化で「請求タイプ」を選ぶと割引が別項目になる</p>
+</td><td colspan="1" rowspan="1"><p>通常はこれで十分</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>非ブレンド純コスト（Net Unblended）</p>
+</td><td colspan="1" rowspan="1"><p>割引適用後のコスト</p>
+</td><td colspan="1" rowspan="1"><p>割引後の実際の負担額を見たい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ブレンドコスト（Blended）</p>
+</td><td colspan="1" rowspan="1"><p>一括請求（Organizations）内で、使用量に応じた単価を平均化したコスト</p>
+</td><td colspan="1" rowspan="1"><p>組織全体で平均するといくらか、という見方をしたい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>償却コスト（Amortized）</p>
+</td><td colspan="1" rowspan="1"><p>RI / Savings Plans の前払い・月額料金を期間に按分した実質コスト</p>
+</td><td colspan="1" rowspan="1"><p>前払いした月だけ跳ね上がるのを避け、実質的な負担を平準化したい</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>償却純コスト（Net Amortized）</p>
+</td><td colspan="1" rowspan="1"><p>償却コストに、RI のボリューム割引などの割引も反映したコスト</p>
+</td><td colspan="1" rowspan="1"><p>割引込みの実質負担を見たい</p>
+</td></tr>
+</table>
+<p>このほか、クレジット、返金、税金、前払い金といった項目は、表示に含めるかどうかをチェックボックスで切り替えられます。純粋な利用料だけを見たいときはクレジットや税金を除外します。</p>
+<h2 is-upgraded>3.4. コスト予測</h2>
+<p>期間の終了日を未来の日付にすると、Cost Explorer は過去の使用実績をもとに予測値を表示します。月別の粒度では最長 18 か月先まで、日別の粒度では 3 か月先まで指定でき、予測値には 80 % の予測区間が併記されます。</p>
+<p><img alt="ce-forecast-confirm" src="img\\435b18d9fc9c7539.png"><em>コスト予測有効化確認</em></p>
+<p><img alt="ce-forecast-daily" src="img\\f32ca138f9ce0b79.png"><em>コスト予測日別</em></p>
+<p>予測を使ううえでの注意点は次のとおりです。</p>
 <ul>
-<li>時間単位のデータは直近 14 日分をさかのぼって参照できます</li>
-<li>リソースレベルのデータでは、EC2 の個々のインスタンス ID などが確認できます</li>
-<li>時間単位の粒度は、Cost Explorer に加えて Savings Plans 使用率・カバレッジのレポートでも使えます</li>
+<li>グループ化を指定したグラフでは予測を表示できません。予測を見るときはグループ化を外します</li>
+<li>請求サイクルが 1 回分に満たない新しいアカウントなど、データが足りない場合は予測が表示されません</li>
+<li>組織にメンバーアカウントを追加した直後は、新しい支出パターンが分析されるまで予測に反映されません</li>
 </ul>
-<p>この粒度は有料で、使用量レコード 1,000 件あたり月額 $0.01（1 レコードあたり 1 日 $0.00000033）が発生します。バッチ処理の実行時間帯を特定したい、といった短期の調査で有効にし、不要になったら無効化する使い方が無難です。</p>
-<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-granular-data.html" target="_blank">時間単位およびリソースレベルの詳細</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="コスト予測" duration="0">
-        <p>期間の終了日を未来の日付にすると、Cost Explorer は過去の使用実績をもとに予測値を表示します。予測は最長で 12 か月先まで指定でき、予測値には 80 % の予測区間が併記されます。</p>
 <p>予測はあくまで過去の傾向の延長です。利用量の変動が大きいワークロードや、新しいサービスを使い始めた直後は、実績と大きくずれることがあります。予測の細かい数字を追うよりも、「このままだと月末におおよそいくらになりそうか」を早めに把握する用途に向いています。しきい値を決めて自動で通知したい場合は、AWS Budgets の予測ベースのアラートを組み合わせます。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="レポートの保存とブックマーク" duration="0">
-        <p>Cost Explorer には、月別コスト（サービス別）、日別コスト、RI・Savings Plans の使用率とカバレッジなど、あらかじめ用意されたレポートがあります。これらを出発点にフィルターやグループ化を調整し、画面右上の「レポートライブラリに保存」で名前を付けて保存できます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-forecast.html" target="_blank">Cost Explorer による予測</a></p>
+<h2 is-upgraded>3.5. レポートの保存とブックマーク</h2>
+<p>Cost Explorer には、月別コスト（サービス別）、日別コスト、RI・Savings Plans の使用率とカバレッジなど、あらかじめ用意されたレポートがあります。これらを出発点にフィルターやグループ化を調整し、画面右上の「レポートライブラリに保存」で名前を付けて保存できます。</p>
 <p>もうひとつ覚えておくと便利なのが、表示条件が URL のクエリパラメータに反映される点です。よく見る条件の画面をブラウザのブックマークに登録しておけば、次回はその条件のまま開けます。</p>
 <p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-bookmarks.html" target="_blank">Cost Explorer の設定をブックマークまたはお気に入りとして保存する</a></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="購入推奨（Reserved Instances / Savings Plans）" duration="0">
-        <p>Cost Explorer は、過去の利用実績を分析して、リザーブドインスタンスと Savings Plans の購入推奨を出します。オンデマンドで動かし続けているリソースについて、どのプランをどれだけ購入すると、どの程度の割引が見込めるかが提示されます。</p>
-<p>推奨の計算には、直近 7 日・30 日・60 日のいずれかのルックバック期間を選べます。推奨内容は 72 時間ごとに更新され、支払いアカウント単位・メンバーアカウント単位のどちらでも確認できます。実際に購入する前に、対象ワークロードを今後も同じ規模で使い続ける見込みがあるかを確認しておきます。</p>
+      <google-codelab-step label="4. ケーススタディ" duration="0">
+        <p>ここまでの機能を、よくある場面に当てはめてみます。画面の操作手順は変更されることがあるため、考え方の流れとして読んでください。</p>
+<h2 is-upgraded>4.1. ケース 1：先月のコストが急に増えた</h2>
+<p>「先月の請求が想定より多い」ときは、次の順に絞り込みます。</p>
+<ol type="1">
+<li>期間を「過去 3 か月」、粒度を「月別」、グループ化を「サービス」にして、どのサービスが増えたかを特定する（例：EC2 - Other が増加）</li>
+<li>そのサービスだけをフィルターで絞り、粒度を「日別」に変えて、いつから増えたかを見る（例：月の途中から急増）</li>
+<li>グループ化を「使用タイプ」に変えて、何に対する料金かを見る（例：<code>NatGateway-Bytes</code> が増加していれば、NAT Gateway 経由の通信量が原因の可能性）</li>
+<li>グループ化を「連結アカウント」「リージョン」に変えて、どこで起きているかを絞る</li>
+</ol>
+<p>原因の仮説が立ったら、CloudWatch メトリクスや VPC フローログなど、サービス側の情報で裏付けを取ります。Cost Explorer は「どこで何が増えたか」を示すところまでで、「なぜ」はリソース側で確認するのが基本です。</p>
+<h2 is-upgraded>4.2. ケース 2：プロジェクト・環境ごとのコストを知りたい</h2>
+<p>「本番と検証でいくらかかっているか」を見たい場合は、コスト配分タグを使います。</p>
+<ol type="1">
+<li>リソースに <code>Project</code> や <code>Env</code> といったタグを付ける</li>
+<li>請求コンソールの「コスト配分タグ」で、そのタグ キーを有効化する</li>
+<li>Cost Explorer のグループ化で、そのタグを選ぶ</li>
+</ol>
+<p>有効化直後は反映まで時間がかかります。また、タグが付いていないリソースのコストは「タグなし」としてまとまって表示されます。詳細オプションの「タグ付けされていないリソースのみを表示」を使うと、タグ付けが漏れているリソースの費用を洗い出せます。</p>
+<h2 is-upgraded>4.3. ケース 3：夜間に検証環境を止めた効果を確かめる</h2>
+<p>「夜間停止の仕組みを入れたので、効果を確認したい」場合は、時間単位の粒度が役立ちます。</p>
+<ol type="1">
+<li>管理アカウントでコスト管理の設定を開き、時間単位の粒度を有効化する（反映まで最大 48 時間）</li>
+<li>粒度を「時間別」にして、サービスを EC2 に絞る</li>
+<li>停止時間帯にコストが下がっているかを確認する</li>
+</ol>
+<p>確認が済んだら、時間単位の粒度は無効化して課金を止めておきます。恒常的な効果の確認は、日別・月別の粒度で前月比を見れば十分なことが多いです。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Cost Explorer API" duration="0">
-        <p>コンソールで見ている分析結果は、Cost Explorer API 経由でも取得できます。代表的な操作は次のとおりです。</p>
+      <google-codelab-step label="5. その他の機能" duration="0">
+        <h2 is-upgraded>5.1. 時間単位・リソースレベルの粒度</h2>
+<p>既定の粒度は月別と日別です。より細かく見たい場合、コスト管理の設定（管理アカウントで操作）から、次の粒度を有効化できます。</p>
+<ul>
+<li>すべての AWS サービスの時間単位のデータ（リソースレベルなし）</li>
+<li>EC2 インスタンスのリソースレベルの時間単位のデータ</li>
+<li>サービスを選択したリソースレベルの日別データ</li>
+</ul>
+<p>時間単位のデータとリソースレベルのデータは、直近 14 日分を参照できます。リソースレベルのデータでは、EC2 の個々のインスタンス ID などが確認できます。設定の反映には最大 48 時間かかり、保存後 48 時間は再変更できません。</p>
+<p>時間単位の粒度は有料で、使用量レコード 1,000 件あたり月額 0.01ドル（1 レコードあたり 0.00000033ドル）が発生します。バッチ処理の実行時間帯を特定したい、といった短期の調査で有効にし、不要になったら無効化する使い方が無難です。</p>
+<p>なお、月次の粒度で最大 38 か月前まで遡れる「マルチイヤーデータ」も、同じ設定画面から有効化できます。</p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-granular-data.html" target="_blank">時間単位およびリソースレベルの詳細</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/cost-management/latest/userguide/ce-multi-year-data.html" target="_blank">月単位の詳細度の複数年データ</a></p>
+<h2 is-upgraded>5.2. Reserved Instances / Savings Plans の推奨</h2>
+<p>Cost Explorer は、過去の利用実績を分析して、リザーブドインスタンスと Savings Plans の購入推奨を出します。オンデマンドで動かし続けているリソースについて、どのプランをどれだけ購入すると、どの程度の割引が見込めるかが提示されます。</p>
+<p>推奨の計算には、直近 7 日・30 日・60 日のいずれかのルックバック期間を選べます。推奨内容は定期的に更新され、支払いアカウント単位・メンバーアカウント単位のどちらでも確認できます。実際に購入する前に、対象ワークロードを今後も同じ規模で使い続ける見込みがあるかを確認しておきます。</p>
+<h2 is-upgraded>5.3. Cost Explorer API</h2>
+<p>コンソールで見ている分析結果は、Cost Explorer API 経由でも取得できます。代表的な操作は次のとおりです。</p>
 <table>
 <tr><td colspan="1" rowspan="1"><p>API</p>
 </td><td colspan="1" rowspan="1"><p>用途</p>
@@ -176,29 +257,40 @@
 </td><td colspan="1" rowspan="1"><p>Savings Plans の購入推奨を取得</p>
 </td></tr>
 </table>
-<p>API の呼び出しは、プライマリ請求ビューに対するリクエスト 1 件ごとに $0.01 が発生します。結果がページ分割される場合は、ページ単位で課金される点に注意します。日次でコストを Slack に通知する、社内ダッシュボードに取り込む、といった自動化で利用します。</p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="自然言語でコストを分析する" duration="0">
-        <p>2026 年 4 月に、Amazon Q を利用した自然言語クエリが Cost Explorer に追加されました。「先月コストが最も増えたサービスは何か」「今四半期の EC2 コストの推移を見せて」といった質問を入力すると、対応するレポートが生成されます。フィルターやグループ化の設定に慣れていなくても、聞きたいことを文章で投げれば分析を始められます。</p>
+<p>API の呼び出しは、プライマリ請求ビューに対するリクエスト 1 件ごとに 0.01ドルが発生します。結果がページ分割される場合は、ページ単位で課金される点に注意します。日次でコストを Slack に通知する、社内ダッシュボードに取り込む、といった自動化で利用します。</p>
+<h2 is-upgraded>5.4. Amazon Q Developer で自然言語分析する</h2>
+<p>2026 年 4 月に、Amazon Q Developer を利用した自然言語クエリが Cost Explorer に追加されました（追加料金なし）。「先月コストが最も増えたサービスは何か」といった質問を、おすすめの質問や「質問する」ボタンから入力すると、Cost Explorer のグラフ・表・フィルター・グループ化・期間が回答に合わせて自動で更新されます。また、各レポートの「Amazon Q で分析」を選ぶと、コストの傾向、主な要因、異常についての説明を得られます。フィルターやグループ化の設定に慣れていなくても、聞きたいことを文章で投げれば分析を始められます。</p>
 <p><a href="https://aws.amazon.com/jp/about-aws/whats-new/2026/04/aws-cost-explorer-natural-language-query/" target="_blank">AWS Cost Explorer が Amazon Q を利用した自然言語クエリ機能を導入</a></p>
+<h3 is-upgraded>使用例</h3>
+<p>実際に次の 4 つの質問を試しました。いずれも画面右側の Cost Explorer が、回答に合わせて期間やグループ化を自動で切り替えます。回答の下には、どのような条件でデータを取得したか（期間、粒度、指標、フィルター、グループ化）が表示されます。</p>
+<p>Q1. 先月最もコストが増えたサービスは何ですか</p>
+<p>「前月比で増えたサービス」を、手動の比較操作なしで特定できます。</p>
+<p class="image-container"><img alt="ce-amazonq-q1.png" src="img\\9d2ce18bafae9f39.png"></p>
+<p>Q2. 過去 3 か月のサービス別コストを教えてください</p>
+<p>期間を「過去 3 か月」、グループ化を「サービス」にした画面（3.1 の手順）が、質問ひとつで表示されます。増減の傾向も文章でまとめてくれます。</p>
+<p class="image-container"><img alt="ce-amazonq-q2.png" src="img\\fb59fa6a4f5737a5.png"></p>
+<p>Q3. 今月の予測コストと、その要因を教えてください</p>
+<p>予測額（約 60.66 ドル）と 80 % の予測区間、サービス別の内訳が表で返ってきました。この質問だけは、右側のグラフが空になります。サービス別の内訳を求めるためにグループ化が指定され、グループ化中は予測を表示できない（3.4）ためです。内訳は回答の表で確認します。</p>
+<p class="image-container"><img alt="ce-amazonq-q3.png" src="img\\bb461adae250fe76.png"></p>
+<p>Q4. リージョン別のコストを教えてください</p>
+<p>リージョンごとの偏りが一目で分かります。</p>
+<p class="image-container"><img alt="ce-amazonq-q4.png" src="img\\22399f3524ac9a50.png"></p>
+<p>回答は生成 AI によるもので、画面にも「回答を確認する必要がある場合があります」と表示されます。実際に Q4 では、回答の表の金額（東京リージョン 72.18 ドルなど）が、右側のグラフの金額（東京 11.67 ドル）と一致していませんでした。また Q1 と Q2 でも、集計条件の違い（クレジットの扱いなど）により、合計額が異なって見えます。数字を使うときは、回答の文章だけでなく、右側のグラフと表、そして取得条件を確認してください。</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="関連するコスト管理サービスとの違い" duration="0">
+      <google-codelab-step label="6. 関連するコスト管理サービスとの違い" duration="0">
         <p>Cost Explorer は、素早く傾向をつかむためのツールです。厳密な分析や通知は、隣接するサービスと役割を分担します。</p>
-<p>AWS Cost and Usage Report（CUR、現在は Data Exports として提供）は、課金の行レベルの詳細をすべて S3 に出力します。1 円単位でリソースを突き合わせたい、独自の集計軸で長期分析したい、という場合は CUR を Amazon Athena や Amazon QuickSight と組み合わせます。Cost Explorer はこの詳細データを対話的に見やすくした画面、という位置づけです。</p>
+<p>AWS Cost and Usage Report（CUR、現在は Data Exports として提供）は、課金の行レベルの詳細をすべて S3 に出力します。1 円単位でリソースを突き合わせたい、独自の集計軸で長期分析したい、という場合は CUR を Amazon Athena や Amazon QuickSight と組み合わせます。Cost Explorer は CUR と同じデータセットを、対話的に見やすくした画面、という位置づけです。</p>
 <p>AWS Budgets は、月額予算に対して実績や予測が一定のしきい値を超えたときに通知します。コスト異常検出は、機械学習で普段と異なる支出パターンを検知します。可視化は Cost Explorer、しきい値による通知は Budgets、想定外の急増の検知は異常検出、と使い分けます。</p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="📖 まとめ" duration="0">
-        <p>AWS Cost Explorer は、AWS のコストと使用量を期間・粒度・グループ化・フィルターの組み合わせで可視化し、原因を掘り下げていくためのツールです。過去 13 か月の実績と 12 か月先までの予測を、追加設定なしの無料で参照できます。</p>
-<p>運用に組み込むうえでの要点は次の 3 点です。</p>
+        <p>AWS Cost Explorer は、AWS のコストと使用量を期間・粒度・グループ化・フィルターの組み合わせで可視化し、原因を掘り下げていくためのツールです。過去 13 か月の実績と 18 か月先までの予測を、コンソールから無料で参照できます。</p>
+<p>運用を行う上で、重要な点は次の 3 点です。</p>
 <ul>
 <li>アカウント作成後、早めに「IAM ユーザー/ロールによる請求情報へのアクセス」を有効化し、コスト配分タグの運用も決めておく</li>
 <li>見ている金額が非ブレンド・ブレンド・償却のどれかを意識する</li>
