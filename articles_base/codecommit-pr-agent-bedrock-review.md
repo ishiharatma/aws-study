@@ -1,4 +1,4 @@
-# Amazon Bedrock で CodeCommit の PR レビューを自動化実装～効果測定まで<!-- omit in toc -->
+<!-- # Amazon Bedrock で CodeCommit の PR レビューを自動化実装～効果測定まで<!-- omit in toc -->
 
 ## 結論
 

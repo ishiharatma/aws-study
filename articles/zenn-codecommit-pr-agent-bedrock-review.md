@@ -1,12 +1,12 @@
 ---
-title: "CodeCommit の PR レビューを Bedrock で自動化～効果測定"
+title: "Amazon Bedrock で CodeCommit の PR レビューを自動化実装～効果測定まで"
 emoji: "🤖"
 type: "tech"
 topics: ["aws", "codecommit", "bedrock", "cdk", "codereview"]
 published: false
 ---
 
-# Amazon Bedrock で CodeCommit の PR レビューを自動化実装～効果測定まで<!-- omit in toc -->
+<!-- # Amazon Bedrock で CodeCommit の PR レビューを自動化実装～効果測定まで<!-- omit in toc -->
 
 ## 結論
 
