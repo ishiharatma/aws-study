@@ -21,8 +21,7 @@
 ## はじめに
 
 CodeCommit は AWS 上で開発環境を完結させられるとても便利なサービスです。しかし、GitHub と比べると周辺のエコシステムは限定的です。[Qodo AIのPR-AgentのようなOSS](https://github.com/The-PR-Agent/pr-agent) には CodeCommit 向けの provider がありますが、機能は限定的で CLI での利用が前提です。
-本記事の仕組みは、この OSS の PR-Agent を使ったものではなく、EventBridge と Lambda で PR の作成・更新時に自動で動くよう独自に作ったものです。
-そこで、CodeCommit の Pull Request(以下 PR)を Amazon Bedrock でレビューし、コメントとして投稿する仕組みを作りました。参考にした記事では「コメントを投稿したら終わり」というものが多かったのですが、運用を考えると次のことも可視化しなければいけません。
+そこで、CodeCommit の Pull Request(以下 PR)を Amazon Bedrock でレビューし、コメントとして投稿する仕組みを作りました。この OSS の PR-Agent は使わず、EventBridge と Lambda で PR の作成・更新時に自動で動くよう独自に作っています。参考にした記事では「コメントを投稿したら終わり」というものが多かったのですが、運用を考えると次のことも可視化しなければいけません。
 
 - 月にいくらかかっているのか
 - 誰の PR で、どのモデルがどれだけトークンを使っているのか
