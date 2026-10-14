@@ -66,5 +66,5 @@
   <text x="828" y="378" text-anchor="middle" font-size="12" fill="#232f3e">Email / Slack / Teams via SNS</text>
   <text x="828" y="398" text-anchor="middle" font-size="12" fill="#232f3e">Read by the usage dashboard</text>
 
-  <text x="24" y="466" font-size="12" fill="#545b64">The CloudWatch dashboard shows the metrics of ① as they are. The JSON of ③ is only recorded for now; aggregation and visualization are not implemented yet.</text>
+  <text x="24" y="466" font-size="12" fill="#545b64">The CloudWatch dashboard shows the metrics of ① as they are. The JSON of ③ is viewed on the usage dashboard (before/after comparison is not available yet).</text>
 </svg>

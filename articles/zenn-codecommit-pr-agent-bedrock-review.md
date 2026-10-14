@@ -51,7 +51,7 @@ CodeCommit は AWS 上で開発環境を完結させられるとても便利な�
 
 PRを行ったあとのレビューの流れはこのようになっています。
 
-![PR レビューの流れ](/images/codecommit-pr-agent/architecture.svg)
+![PR レビューの流れ](/images/codecommit-pr-agent/architecture.png)
 
 PR の作成・更新を EventBridge で受け、Lambda(Python)が差分を作って Bedrock に渡します。その結果を PR コメントとして CodeCommit に投稿します。投稿されるコメントは次のようになります(冒頭部分のみ抜粋)。コードとドキュメントは、別々のコメントとして投稿されます。
 
@@ -63,7 +63,7 @@ PR の作成・更新を EventBridge で受け、Lambda(Python)が差分を作�
 
 この仕組みで力を入れたのは、可視化に必要な 3 種類のデータを残す部分です。
 
-![効果を測る 3 つの層](/images/codecommit-pr-agent/measurement-layers.svg)
+![効果を測る 3 つの層](/images/codecommit-pr-agent/measurement-layers.png)
 
 | 層 | 分かること | 元データ | 保存先 |
 | --- | --- | --- | --- |

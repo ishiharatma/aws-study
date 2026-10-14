@@ -66,5 +66,5 @@
   <text x="828" y="378" text-anchor="middle" font-size="12" fill="#232f3e">SNS でメール / Slack / Teams</text>
   <text x="828" y="398" text-anchor="middle" font-size="12" fill="#232f3e">利用状況ダッシュボードが参照</text>
 
-  <text x="24" y="466" font-size="12" fill="#545b64">CloudWatch ダッシュボードは①のメトリクスをそのまま表示する。③の JSON は現状「記録」までで、集計・可視化は未対応。</text>
+  <text x="24" y="466" font-size="12" fill="#545b64">CloudWatch ダッシュボードは①のメトリクスをそのまま表示する。③の JSON は利用状況ダッシュボードで見られる(導入前後の比較は未対応)。</text>
 </svg>
