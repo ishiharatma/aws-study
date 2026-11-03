@@ -45,6 +45,7 @@ published: false
   - [8.3. データバックアップでは「クリーンな世代を残す期間」として効く](#83-データバックアップではクリーンな世代を残す期間として効く)
 - [9. ログ種別ごとの設計例](#9-ログ種別ごとの設計例)
 - [10. 落とし穴](#10-落とし穴)
+- [11. 方針を決めるためのチェックリスト](#11-方針を決めるためのチェックリスト)
 - [📖 まとめ](#-まとめ)
 - [参考資料](#参考資料)
 
@@ -73,7 +74,7 @@ published: false
 | ログ | 主な出力先 | 補足 |
 | --- | --- | --- |
 | AWS CloudTrail（証跡） | S3（必須）、CloudWatch Logs（任意） | イベント履歴は証跡がなくても管理イベントを 90 日間参照できる |
-| AWS Config | S3（設定履歴・スナップショット） | 設定項目の履歴は Config 内にも保持される |
+| AWS Config | S3（設定履歴・スナップショット） | 設定項目の履歴は Config 内にも保持される。Object Lock 有効バケットへの配信は非対応 |
 | Amazon GuardDuty（検出結果） | S3 へのエクスポート、EventBridge | S3 エクスポートには KMS キーが必須 |
 | AWS Security Hub CSPM（検出結果） | EventBridge 経由で Firehose → S3 など | ネイティブの S3 エクスポート機能はない |
 | Aurora（RDS）のログ | CloudWatch Logs | Aurora MySQL は audit / error / general / slowquery、Aurora PostgreSQL は postgresql など |
@@ -256,6 +257,8 @@ Object Lock と CRR を組み合わせる場合の要件は次のとおりです
 
 ログ集約用の専用アカウント（AWS Control Tower の Log Archive アカウントなど）に集め、そこからさらに別リージョンへ CRR する構成にすると、ワークロードアカウントが侵害されても保管済みのログには手が届きません。
 
+AWS Control Tower を使う場合、ログアーカイブ用バケットの保持期間は既定で 1 年、そのアクセスログ用バケットは 10 年に設定され、最長 15 年まで変更できます。Control Tower の既定値は保持期間を決める際の出発点として使えますが、Object Lock は既定では設定されません。
+
 CRR を運用するうえでは、次の点も押さえておきます。
 
 - 送信先バケットは、送信元とは独立した KMS キーで暗号化する（送信元のキーが削除されても、レプリカは読める状態で残る）
@@ -273,11 +276,21 @@ Object Lock は削除・上書きを防ぎますが、次のリスクは残り�
 | KMS キーの削除・無効化 | SSE-KMS で暗号化したログは、キーが削除されると読めなくなる | キーポリシーと SCP で `kms:ScheduleKeyDeletion` / `kms:DisableKey` を制限、削除予約を検知 |
 | ログ出力の停止 | 既存ログは消えなくても、以降のログが出なくなる | CloudTrail の `StopLogging`、`DeleteTrail`、レプリケーション設定変更を SCP で拒否・検知 |
 | バケットポリシーの変更 | 読み取り権限を奪われると調査に使えない | ログアーカイブアカウントへの分離、SCP |
-| 出力元が Object Lock バケットに非対応 | S3 サーバーアクセスログは Object Lock 有効バケットを出力先にできない | CloudTrail の S3 データイベントで代替、または別バケット経由 |
+| 出力元が Object Lock バケットに非対応 | S3 サーバーアクセスログと AWS Config の配信チャネルは、Object Lock 有効バケットを出力先にできない | 後述 |
 
 Session Manager のセッションログは、EC2 インスタンスロールの権限で S3 に書き込まれます。インスタンスロールには書き込み先のプレフィックスを自インスタンス・自アカウント分だけに絞った `s3:PutObject` を与え、他のログを上書きされないようにします。
 
 ALB アクセスログは出力先バケットの暗号化が SSE-S3 のみサポートされており、SSE-KMS のバケットには出力できません。ALB 用のログバケットは SSE-S3 で作成します。また、サービスが直接 Object Lock バケットへ書き込む構成にする場合は、各サービスのドキュメントで要件を確認し、テスト環境で配信を確かめてから本番に適用してください。
+
+出力元が Object Lock に対応していないログは、次のいずれかで保護します。
+
+| 方法 | 内容 | 注意点 |
+| --- | --- | --- |
+| AWS Backup + Vault Lock | Object Lock なしのバケットを AWS Backup の対象にする | 7 章で「ログには原則不要」とした AWS Backup が、ここでは有効な選択肢になる |
+| 別手段で記録を補う | S3 サーバーアクセスログの代わりに CloudTrail の S3 データイベントを使う | データイベントは件数に応じて課金される |
+| Object Lock バケットへの複製 | Object Lock なしの配信先から、Object Lock ありのバケットへ CRR する | Object Lock なしの送信元から複製したレプリカに、送信先のデフォルト保持期間が適用されるかは公式ドキュメントで明記されていない。採用前に検証が必要 |
+
+AWS Config については、設定項目の履歴が Config 内にも最大 2,557 日保持されること、Config の設定変更自体が CloudTrail に記録されることも踏まえて、どこまで保護するかを決めます。AWS Control Tower が作成するログアーカイブ用バケットには CloudTrail と Config のログが同じバケットに集約されるため、Control Tower 環境で Object Lock を追加する場合はこの制約に注意が必要です。
 
 CloudTrail は Object Lock とは別に、ログファイルの整合性検証機能を持っています。有効にすると 1 時間ごとにダイジェストファイル（SHA-256 ハッシュと RSA 署名）が配信され、ログファイルが変更・削除されていないことを AWS CLI で検証できます。Object Lock は「消させない」、整合性検証は「改ざんされていないことを示す」機能なので、監査ログでは両方を有効にします。
 
@@ -392,6 +405,8 @@ EBS や Aurora のバックアップは、Vault Lock で削除を防いでも、
 
 AWS Backup を検討すべきなのは、次のような場合です。
 
+- 出力元が Object Lock 有効バケットに対応していないログ（AWS Config、S3 サーバーアクセスログ）を保護したい
+
 - 組織のポリシーで「すべての保護対象を AWS Backup で一元管理し、Audit Manager でレポートする」ことが求められている
 - S3 に置いているのがログではなく、アプリケーションが更新するデータ（ユーザーのアップロードファイル等）である
 - マルウェアスキャン済みの「クリーンな時点」を特定して復元する運用が要件になっている
@@ -497,7 +512,7 @@ flowchart TD
 | ログ | 分類 | CloudWatch Logs | S3 保管 | Object Lock | CRR | AWS Backup |
 | --- | --- | --- | --- | --- | --- | --- |
 | CloudTrail（組織の証跡） | A | 90 日（アラート用） | 1 年以上、小さいファイルは Standard のまま | コンプライアンス | ○ | 不要 |
-| AWS Config | A | - | 1 年以上 | コンプライアンス | ○ | 不要 |
+| AWS Config | A | - | 1 年以上 | 不可（配信先として非対応） | ○ | Vault Lock 付きで検討 |
 | Session Manager | A | 90 日 | 1 年以上 | コンプライアンス | ○ | 不要 |
 | Aurora 監査ログ | A | 90 日 | Firehose 経由で 1 年以上 | コンプライアンス | ○ | 不要（DB 本体は Backup 対象） |
 | GuardDuty 検出結果 | B | - | エクスポートで 1 年以上 | ガバナンス〜コンプライアンス | ○ | 不要 |
@@ -517,7 +532,8 @@ EC2 の OS ログのうち、`/var/log/secure` などの認証ログは侵害調
 
 | バケット（例） | ログ | 暗号化 |
 | --- | --- | --- |
-| 監査証跡 | CloudTrail、Config、Session Manager | SSE-KMS |
+| 監査証跡 | CloudTrail、Session Manager | SSE-KMS |
+| Config | AWS Config（Object Lock なし、AWS Backup で保護） | SSE-KMS |
 | DB 監査 | Aurora 監査ログ（SQL にデータ値が含まれるため分ける） | SSE-KMS |
 | セキュリティ分析 | GuardDuty、Security Hub CSPM、WAF、VPC フローログ、Resolver クエリログ、CloudFront | SSE-KMS |
 | ALB | ALB アクセスログ | SSE-S3 |
@@ -555,6 +571,58 @@ AWS Backup の S3 継続的バックアップは、EventBridge 経由で S3 の�
 
 CloudTrail Lake は 2026 年 5 月 31 日をもって新規顧客の受付を終了しました。これから長期保管と検索を設計する場合、CloudTrail Lake は前提にできません。AWS は代替として CloudWatch を案内しています。従来の証跡（Trails）は影響を受けません。
 
+## 11. 方針を決めるためのチェックリスト
+
+<!-- Duration: 00:05:00 -->
+
+AWS Security Reference Architecture（AWS SRA）や Well-Architected フレームワークのセキュリティの柱では、ログについて次のような方針が示されています。
+
+- ログアーカイブアカウントのログ保管は、変更できない状態にしなければならない（MUST）
+- ログへのアクセスは、管理・自動化・監視された仕組みに限定しなければならない（MUST）
+- ログは複製・アーカイブして耐久性を確保すべき（SHOULD）
+- セキュリティログのバケットは、カスタマーマネージドキーによる SSE-KMS を使うべき（SHOULD）。S3 の読み取り権限に加えて KMS の復号権限も必要になり、アクセス制御が二重になる
+- ログ保護の設定が想定外に変更されたことを、AWS Config や IAM Access Analyzer で検知すべき（SHOULD）
+- 長期保管はコストとライフサイクルの柔軟性から S3 を使い、ログの種類ごとにライフサイクルルールを設定する
+
+これらを踏まえ、ログ保管の方針を決める際に確認したい項目を、ここまでの内容とあわせてまとめます。
+
+### 保持期間<!-- omit in toc -->
+
+| 確認項目 | 補足 |
+| --- | --- |
+| 保持期間の下限の根拠（法令・業界基準・契約・社内規程） | 根拠がないなら、調査要件（潜伏期間 + 調査期間）から決める |
+| 保持期間の上限の根拠 | 個人情報保護法は、利用する必要がなくなった個人データを遅滞なく消去するよう努めることを求めている（努力義務）。コンプライアンスモードの期間が上限を超えないようにする |
+| 即時検索が必要な期間と、アーカイブでよい期間の区別 | Glacier Flexible Retrieval / Deep Archive は取り出しに時間がかかる |
+| 調査用ログの保持期間がバックアップの保持期間以上か | 8.2 を参照 |
+| サービス側の保持期間（90 日など）を超える分のエクスポートを設定しているか | GuardDuty、Security Hub CSPM、CloudTrail イベント履歴 |
+
+### 保管場所と保護<!-- omit in toc -->
+
+| 確認項目 | 補足 |
+| --- | --- |
+| ログアーカイブ用の専用アカウントに集約しているか | ワークロードアカウントの侵害から切り離す |
+| 組織の証跡（マルチリージョン）を使っているか | 複数の国のリージョンをまたぐ場合は、データの越境・所在地の要件を確認する |
+| Object Lock のモードと、非対応のログ（Config、S3 サーバーアクセスログ）の代替策 | 5.4 を参照 |
+| CRR の送信先が別リージョン・独立した KMS キーか | 5.3 を参照 |
+| ログを止める・消す・設定を変える操作を SCP で制限しているか | `StopLogging`、`DeleteLogGroup`、`PutReplicationConfiguration`、`ScheduleKeyDeletion` など |
+
+### 読み取りと活用<!-- omit in toc -->
+
+| 確認項目 | 補足 |
+| --- | --- |
+| ログを読めるプリンシパルを限定しているか | ログには個人情報や機密情報が含まれる。AWS SRA は、`AWSCloudTrail_FullAccess` を付与するプリンシパルを最小限にするよう求めている |
+| 個人情報のマスキング | CloudWatch Logs のデータ保護ポリシーで、取り込み時に機密データを検出・マスクできる。ポリシー設定前に取り込んだログはマスクされない。マスク前の値は `logs:Unmask` 権限を持つプリンシパルだけが見られる |
+| 横断的に検索する仕組み | CloudWatch Logs のクロスアカウント・クロスリージョンのログ集約（2025 年 9 月提供開始）、Amazon Security Lake（OCSF 形式・Parquet で保存）、Athena など。CloudWatch の集約機能は、ルール作成後に届いたログだけが対象 |
+| アーカイブから実際に読めるかの訓練 | Glacier からの取り出し時間、KMS の権限不足、Athena のクエリを本番前に確認する |
+
+### 運用監視<!-- omit in toc -->
+
+| 確認項目 | 補足 |
+| --- | --- |
+| ログの配信が止まったことを検知できるか | 配信失敗、Firehose の配信エラー、レプリケーション失敗、CloudTrail の `StopLogging` |
+| 保持期間未設定のロググループを防いでいるか | IaC で保持期間を必ず指定する（4.1 を参照） |
+| コストの定期的な見直し | S3 Storage Lens でオブジェクト数・サイズの推移を確認する（5.5 を参照） |
+
 ## 📖 まとめ
 
 ログの保管設計では、まず「アーカイブ」「バックアップ」「イミュータブル保管」を区別し、ログの性質ごとに必要なものを選びます。
@@ -562,6 +630,7 @@ CloudTrail Lake は 2026 年 5 月 31 日をもって新規顧客の受付を終
 - 追記のみのログに必要なのは「戻す」ことではなく「消えない・改ざんされない・必要な期間読める」こと。監査・証跡系のログは S3 Object Lock + バージョニング + 別アカウントへの CRR で要件を満たせ、AWS Backup は原則不要
 - CloudTrail などの小さいログファイルは、ストレージクラスを移行すると最小課金サイズ・オーバーヘッド・移行リクエスト料金でかえって高くなりやすい。128 KB 未満は Standard のまま保持期間で削除し、移行はサイズの分布を確認してから決める
 - CloudWatch Logs は既定で無期限保存、WORM 機能なし、AWS Backup の対象外。「直近の検索・アラート用」として保持期間を区切り、長期保管と改ざん防止は S3 側に任せる
+- AWS Config と S3 サーバーアクセスログは Object Lock 有効バケットに出力できない。これらは AWS Backup + Vault Lock などの代替策で保護する
 - 逆に、アプリが更新する S3 の業務データは、時点を指定して戻せて元の KMS キーにも依存しない AWS Backup + Vault Lock が向いている
 - マルウェアの潜伏期間は、ログでは「さかのぼって調査できる期間」、データバックアップでは「クリーンな世代を残す期間」として効く。中央値（11〜14 日）ではなく、検知が遅れるケースを前提に決める。調査用ログの保持期間はバックアップの保持期間以上にする
 - 定期バックアップの保持期間は「潜伏期間 + 取得間隔 + 1 日」以上。検知後はリーガルホールドで復旧ポイントの失効を止める
@@ -570,6 +639,13 @@ CloudTrail Lake は 2026 年 5 月 31 日をもって新規顧客の受付を終
 
 ## 参考資料
 
+- AWS Prescriptive Guidance > [Security OU – Log Archive account（AWS Security Reference Architecture）](https://docs.aws.amazon.com/prescriptive-guidance/latest/security-reference-architecture/log-archive.html)
+- AWS Well-Architected > [SEC04-BP01 Configure service and application logging](https://docs.aws.amazon.com/wellarchitected/latest/framework/sec_detect_investigate_events_app_service_logging.html)
+- AWS ドキュメント > [Optionally configure log retention（AWS Control Tower）](https://docs.aws.amazon.com/controltower/latest/userguide/configure-log-retention.html)
+- AWS ドキュメント > [AWS::Config::DeliveryChannel（CDK リファレンス）](https://docs.aws.amazon.com/cdk/api/v2/python/aws_cdk.aws_config/CfnDeliveryChannel.html)
+- [AWS Configのログ配信用S3バケットでオブジェクトロックを有効化した際にはまった点について（サーバーワークスエンジニアブログ）](https://blog.serverworks.co.jp/ConfigS3ObjectLock)
+- AWS ドキュメント > [Cross-account cross-Region log centralization（CloudWatch Logs）](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CloudWatchLogs_Centralization.html)
+- AWS ドキュメント > [Understanding data protection policies（CloudWatch Logs）](https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/cloudwatch-logs-data-protection-policies.html)
 - AWS ドキュメント > [Locking objects with Object Lock](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock.html)
 - AWS ドキュメント > [Object Lock considerations](https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lock-managing.html)
 - AWS ドキュメント > [Transitioning objects using Amazon S3 Lifecycle](https://docs.aws.amazon.com/AmazonS3/latest/userguide/lifecycle-transition-general-considerations.html)
