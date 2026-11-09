@@ -1,7 +1,7 @@
 ---
 title: "【初心者向け】AWS Lambda 入門！完全ガイド" # 記事のタイトル
 type: "tech" # tech: 技術記事 / idea: アイデア記事
-topics: ["aws", "study"]
+topics: ["aws", "study", "lambda"]
 published: true
 emoji: "⚡"
 ---
@@ -22,7 +22,7 @@ emoji: "⚡"
 - [ネットワーク](#ネットワーク)
 - [実行環境](#実行環境)
   - [コールドスタート問題](#コールドスタート問題)
-  - [SnapStart for Java](#snapstart-for-java)
+  - [SnapStart](#snapstart)
 - [命令セットアーキテクチャ](#命令セットアーキテクチャ)
 - [Lambda のアクセス権限](#lambda-のアクセス権限)
 - [トリガー](#トリガー)
@@ -50,6 +50,8 @@ emoji: "⚡"
 <!-- Duration: 4:01:22 -->
 
 サーバーをプロビジョニングまたは管理せずにコードを実行できるようにするコンピューティングサービスです。FaaS(Function as a Service：ファース、エフアース)に分類されるサービスです。
+
+2026 年 10 月に Lambda Web Functions が登場し、Lambda のコンピュートプリミティブは Event Functions、Web Functions、MicroVMs の 3 種類になりました。従来の Lambda 関数は Event Functions と呼ばれるようになりましたが、変わったのは呼称だけで、API、`AWS::Lambda::Function`、ARN、コードはそのままです。本ページの内容は Event Functions についての説明です。3 種類の違いは [AWS Lambda の 3 つのコンピュートプリミティブ比較](./lambda-event-vs-web-vs-microvms.md) を参照してください。
 
 【AWS Black Belt Online Seminar】[AWS Lambda Part1(YouTube)](https://www.youtube.com/watch?v=QvPgjEwgiew)(1:02:22)
 
@@ -99,9 +101,9 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.ht
 安全で分離されたランタイムを実行するための環境で、実行環境のライフサイクルは次のようになっています。
 
 - 通常
-  - INIT(初期化) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）
+  - INIT(初期化) → INVOKE（呼び出し） → SHUTDOWN（シャットダウン）
 - SnapStart を利用している場合
-  - RESTORE(復元) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）
+  - RESTORE(復元) → INVOKE（呼び出し） → SHUTDOWN（シャットダウン）
 
 ### コールドスタート問題
 
@@ -118,7 +120,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtime-environment.ht
     ![many-enis-1024x616-320.jpg](/images/lambda/many-enis-1024x616-320.jpg)
   - 現在は、事前に作成した 共通利用する ENI を利用して VPC に接続しているため ENI の作成に関する問題は解消されました。
 
-### SnapStart for Java
+### SnapStart
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/snapstart.html
 
@@ -127,14 +129,13 @@ https://aws.amazon.com/jp/blogs/news/reducing-java-cold-starts-on-aws-lambda-fun
 Lambda の起動時のレイテンシー（主に、コールドスタート時間）の最大要因は関数の初期化です。
 それを解消するために、関数のバージョンを発行するときに関数を初期化し、その実行環境（メモリとディスク状態）のスナップショットをキャッシュさせ、キャッシュさせたスナップショットから実行環境を再開することで起動時のレイテンシーが短縮される機能です。
 
-SnapStart の使用に追加コストは発生しませんが、利用するには以下の制約があります。
+対応ランタイムは Java 11 以降、Python 3.12 以降、.NET 8 以降で、公開バージョンとそれを指すエイリアスでのみ動作します。Java には追加料金がありませんが、Python と .NET はスナップショットのキャッシュ（Caching）と復元（Restoration）に課金されます。
 
-- サポートしているのは、`Java 11` のみ
-- エフェメラルストレージのサイズが 512 MB 以下
-- プロビジョニングされた同時実行ではない
-- arm 64 アーキテクチャではない
-- EFS を利用していない
-- X-Ray を利用していない
+次の機能とは併用できません。
+
+- プロビジョニングされた同時実行
+- Amazon EFS、Amazon S3 Files
+- 512 MB を超えるエフェメラルストレージ
 
 ## 命令セットアーキテクチャ
 
@@ -142,9 +143,9 @@ SnapStart の使用に追加コストは発生しませんが、利用するに�
 
 https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html
 
-- arm64 — AWS Graviton2 プロセッサ用の 64 ビット ARM アーキテクチャ
+- arm64 — AWS Graviton プロセッサ用の 64 ビット ARM アーキテクチャ
   - アームろくよん
-  - x86_64 アーキテクチャより 34%のコスト効率よく利用できる
+  - x86_64 アーキテクチャと比べて、コストパフォーマンスが最大 34% 向上する
   - 実際のコストは 東京リージョンでは 20%ほど低い。
   - 利用できる場合は、こちらを選ぶ。
 - x86_64 — x86 ベースプロセッサ用の 64 ビット x86 アーキテクチャ
@@ -180,9 +181,10 @@ Pull モデルと Push モデルがあります。
 
 ### Pull モデル
 
-Pull モデルは、ポーリング型の実行です。Lambda の[イベントソースマッピング](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/invocation-eventsourcemapping.html)で指定されたイベントソースをポーリングして読み取りを行うものです。イベントが一度ストリームまたはキューに格納されるので、処理順序が保証されています。
+Pull モデルは、ポーリング型の実行です。Lambda の[イベントソースマッピング](https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/invocation-eventsourcemapping.html)で指定されたイベントソースをポーリングして読み取りを行うものです。イベントは一度ストリームまたはキューに格納されます。DynamoDB や Kinesis のストリームではシャード単位で順序が保たれますが、SQS 標準キューのように順序が保証されないソースもあります。配信は at-least-once のため、同じイベントが重複して処理される場合があります。
 以下のサービスとの連携が対象です。
 
+- Amazon DocumentDB
 - Amazon DynamoDB
 - Amazon Kinesis
 - Amazon MQ
@@ -193,7 +195,7 @@ Pull モデルは、ポーリング型の実行です。Lambda の[イベント�
 ### Push モデル
 
 Push モデルは、イベント駆動型の実行です。Lambda がイベントソースから直接呼び出されるものです。発生したイベントの実行順序は保証されていません。発生したイベントの順番に処理される場合もありますし、タイミングによっては前後する場合もあります。
-イベントソースとなるサービスによって、Lmabda の呼び出しタイプ（同期、非同期）が決まっています。
+イベントソースとなるサービスによって、Lambda の呼び出しタイプ（同期、非同期）が決まっています。
 
 主に以下のようなサービスがあります。
 
@@ -221,7 +223,7 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
 
   # Response
   {
-        "StatusCode": 202,
+        "StatusCode": 200,
         "ExecutedVersion": "$LATEST",
         "FunctionError": "...."
   }
@@ -255,8 +257,7 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
 
   # Response
   {
-        "StatusCode": 204,
-        "FunctionError": "...."
+        "StatusCode": 204
   }
   ```
 
@@ -264,38 +265,36 @@ AWS SDK や CLI から実行する際に、`InvocationType` を指定するこ�
 
 <!-- Duration: 0:01:30 -->
 
+https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtimes.html
+
+2026 年 11 月時点の主なマネージドランタイムは次のとおりです。
+
 - Node.js
-  - 18,16,14,12
-  - 非推奨：12 (2023-3-31)
+  - 24, 22（26 はパブリックプレビュー）
 - Python
-  - 3.9,3.8,3.7
+  - 3.14, 3.13, 3.12, 3.11（3.15 はプレビュー）
 - Java
-  - 11,8
-- .NET Code
-  - 非推奨：3.1 (2023-4-3)
+  - 25, 21, 17, 11, 8
 - .NET
-  - 6,5
-- Go
-  - 1
+  - 10, 8（8 は 2026-11-10 に非推奨予定）
 - Ruby
-  - 2.7
-- カスタムランタイム
+  - 4.0, 3.4, 3.3
+- OS 専用ランタイム
+  - `provided.al2023` など。Go や Rust はこちらを使う
 
-ランタイムの非推奨化は、２つのフェーズで発生します。
+ランタイムの非推奨化は、次の順に進みます。
 
-- フェーズ１
-  - ランタイムに対するセキュリティパッチの更新停止
-  - 既存関数は更新可能
-  - 新規関数は作成不可
-- フェーズ２
-  - フェーズ１から少なくとも 30 日経過したものがフェーズ２になる
-    - Python 3.6 の場合、非推奨フェーズ１（2022-7-18）→ フェーズ２（2022-8-29）
-  - 新規関数、既存関数ともに作成、更新不可
-  - ただし、既存関数は継続して実行可能
-  - サポートされているランタイムに移行が必要
+- Deprecation date（非推奨日）
+  - セキュリティパッチの更新が停止し、サポート対象外になる
+  - コンソールから新規作成できなくなる
+- Block function create（関数の作成をブロック）
+  - 非推奨日から少なくとも 30 日後
+- Block function update（関数の更新をブロック）
+  - 非推奨日から少なくとも 60 日後
 
-サポート終了がスケジュールされている場合、60 日以内なったら E メールで通知が来るようになります。
-また、Trusted Advisor では、[非推奨となる 120 日の前チェック](https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes)が出来ます。
+どの段階でも、既存関数の呼び出しは継続できます。ただしサポートされているランタイムへの移行が必要です。
+
+非推奨の少なくとも 180 日前に E メールで通知され、[Trusted Advisor](https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes) でも同じ時期からチェックできます。
 
 ## Layer
 
@@ -327,7 +326,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/getting-started.html
 
 ### CloudFormation
 
-CLoudFormation で関数をデプロイするには、次の方法があります。
+CloudFormation で関数をデプロイするには、次の方法があります。
 
 - S3 バケットにコードの .zip ファイルをアップロードする
 
@@ -383,8 +382,8 @@ CLoudFormation で関数をデプロイするには、次の方法がありま�
           path.join(__dirname, `${srcLambdaDirBase}/hello_world`)
         ),
         handler: 'index.lambda_handler',
-        runtime: lambda.Runtime.PYTHON_3_9,
-        timeout: cdk.<!-- Duration.seconds(300), -->
+        runtime: lambda.Runtime.PYTHON_3_13,
+        timeout: cdk.Duration.seconds(300),
         architecture: lambda.Architecture.ARM_64,
         environment: {
           LOG_LEVEL: props.lambdaLogLevel ?? 'INFO',
@@ -406,7 +405,7 @@ Function1:
   Properties:
     CodeUri: hello_world/
     Handler: app.lambda_handler
-    Runtime: python3.9
+    Runtime: python3.13
     Architectures:
       - arm64
 ```
@@ -425,7 +424,7 @@ https://aws.amazon.com/jp/blogs/news/aws-lambda-now-supports-up-to-10-gb-ephemer
 <!-- Duration: 0:00:30 -->
 
 ある時点で実行されているリクエストの数のことです。
-Lambda 関数の同時実行数は同一アカウントの同一リージョン内につき、1,000 に制限されています。
+Lambda 関数の同時実行数のクォータは、同一アカウントの同一リージョン内で既定 1,000 です。新規アカウントではこれより低い値から始まり、利用状況に応じて自動で引き上げられます。
 Lambda の同時実行数の計測は以下のように考えます。
 
 ```text
@@ -479,13 +478,13 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-monitoring.html
 監視するメトリクスとしては次のようなものがあります。
 
 - Invocations
-  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。
+  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、statistics として「Sum」を利用することを推奨します。
 - Errors
-  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。
+  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、statistics として「Sum」を利用することを推奨します。
 - Throttles
-  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。
+  このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、statistics として「Sum」を利用することを推奨します。
 
-その他、Lambda 関数のメモリをモニタリングするしたい場合は、次のドキュメントを参照します。
+その他、Lambda 関数のメモリをモニタリングしたい場合は、次のドキュメントを参照します。
 https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory-usage-monitoring/
 
 ## ベストプラクティス
@@ -504,7 +503,7 @@ https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/best-practices.html
 - レイヤー使う
   - 共通化しよう
 - 再帰呼び出しを行わない
-  - 位置しない処理で料金が急増するリスクがあるため
+  - 意図しない処理で料金が急増するリスクがあるため
 - 環境変数を使う
   - ハードコーディングしない。
 - 冪等性のコード
