@@ -11,6 +11,7 @@
 ## 👀 Contents<!-- omit in toc -->
 
 - [AWS Lambda Web Adapter とは](#aws-lambda-web-adapter-とは)
+- [Lambda Web Functions との関係](#lambda-web-functions-との関係)
 - [なぜ必要になるのか](#なぜ必要になるのか)
 - [仕組み](#仕組み)
 - [対応イベントソース](#対応イベントソース)
@@ -33,11 +34,19 @@
 
 ## AWS Lambda Web Adapter とは
 
-AWS Labs（AWS Open Source）が公開している OSS ツールで、Express.js、Next.js、Flask、FastAPI、Spring Boot、ASP.NET、Laravel、Nginx などの既存の Web フレームワークで作られたアプリケーションを、コードをほとんど、あるいはまったく変更せずに AWS Lambda 上で動かせるようにするアダプタです。
+AWS が GitHub の `aws` organization で公開している OSS ツールで、Express.js、Next.js、Flask、FastAPI、Spring Boot、ASP.NET、Laravel、Nginx などの既存の Web フレームワークで作られたアプリケーションを、コードをほとんど、あるいはまったく変更せずに AWS Lambda 上で動かせるようにするアダプタです。
 
 [aws/aws-lambda-web-adapter（GitHub）](https://github.com/aws/aws-lambda-web-adapter)
 
 Lambda 関数は本来、`event` と `context` を受け取るハンドラー関数として実装するものであり、通常の Web フレームワークが前提とする「HTTP サーバーとして listen する」というモデルとは異なります。このギャップを埋め、Web アプリケーションの資産をそのままサーバーレス化するために作られたのが Lambda Web Adapter です。
+
+## Lambda Web Functions との関係
+
+2026 年 10 月に、HTTP サーバーをそのまま動かせる Lambda Web Functions が登場しました。目的は近いものの、Web Functions は Lambda のプリミティブそのもので、1 つの実行環境で複数のリクエストを同時に処理します。Lambda Web Adapter は Event Functions の上で動く拡張で、1 環境 1 リクエストのモデルのままです。
+
+Web Functions の対応ランタイムは現在 Node.js 24 のみです。Lambda Web Adapter の README では、新規の Node.js Web アプリには Web Functions を、それ以外のランタイムやコンテナイメージでは引き続き Lambda Web Adapter を使うことを勧めています。
+
+種類ごとの違いは [AWS Lambda の 3 つのコンピュートプリミティブ比較](./lambda-event-vs-web-vs-microvms.md) を参照してください。
 
 ## なぜ必要になるのか
 
@@ -59,9 +68,9 @@ Lambda Web Adapter は、Lambda Extension の仕組みを利用して、関数�
 - Amazon API Gateway（HTTP API）
 - Lambda 関数 URL（Function URLs）
 - Application Load Balancer（ALB）
-- SQS など非 HTTP のイベントソース（拡張的な対応）
+- SQS など非 HTTP のイベントソース
 
-いずれも最終的には HTTP リクエスト／レスポンスの形に正規化してアプリケーションとやり取りします。
+HTTP 系のイベントは HTTP リクエスト／レスポンスの形に正規化してアプリケーションとやり取りします。非 HTTP のイベントは、`AWS_LWA_PASS_THROUGH_PATH` で指定したパス（既定は `/events`）へ渡されます。
 
 ## 対応フレームワーク
 
@@ -88,7 +97,7 @@ Lambda の関数 URL などがサポートするレスポンスストリーミ�
 
 ### レスポンス圧縮
 
-`AWS_LWA_ENABLE_COMPRESSION` を有効にすることで、gzip や Brotli によるレスポンス圧縮を Adapter 側で行えます。
+`AWS_LWA_ENABLE_COMPRESSION` を有効にすることで、gzip や Brotli によるレスポンス圧縮を Adapter 側で行えます。圧縮が効くのは `buffered` モードのときだけです。
 
 ### グレースフルシャットダウン
 
@@ -109,9 +118,9 @@ Lambda の SnapStart（実行環境の初期化状態をスナップショット
 Dockerfile 内で Lambda Web Adapter のバイナリをマルチステージビルドの `COPY --from` でコンテナイメージに取り込みます。
 
 ```dockerfile
-FROM public.ecr.aws/awsguru/aws-lambda-adapter:0.9.1 AS lambda-adapter
+FROM public.ecr.aws/awsguru/aws-lambda-adapter:1.1.0 AS lambda-adapter
 
-FROM node:20-alpine
+FROM node:24-alpine
 COPY --from=lambda-adapter /lambda-adapter /opt/extensions/lambda-adapter
 WORKDIR /app
 COPY . .
@@ -122,16 +131,24 @@ CMD ["npm", "start"]
 
 ### Zip パッケージ（Lambda Layer）での導入
 
-コンテナイメージを使わない場合は、Lambda Layer として公開されている Lambda Web Adapter を関数にアタッチし、関数の起動コマンドをアプリケーションの起動スクリプトに向ける形でも利用できます。
+コンテナイメージを使わない場合は、Lambda Layer として公開されている Lambda Web Adapter を関数にアタッチします。環境変数 `AWS_LAMBDA_EXEC_WRAPPER` に `/opt/bootstrap` を設定し、関数のハンドラーにはアプリケーションの起動スクリプト（例: `run.sh`）を指定します。
+
+```text
+arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:30
+arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerArm64:30
+```
+
+Layer のバージョンは更新されるため、利用時に README で確認してください。
 
 ## 主な環境変数
 
 | 環境変数 | 説明 | デフォルト |
 | --- | --- | --- |
-| `AWS_LWA_PORT` | アプリケーションが listen するポート番号 | `8080` |
+| `AWS_LWA_PORT` | アプリケーションが listen するポート番号（未設定時は `PORT` を参照） | `8080` |
 | `AWS_LWA_READINESS_CHECK_PATH` | 起動時のヘルスチェックに使うパス | `/` |
-| `AWS_LWA_ENABLE_COMPRESSION` | レスポンス圧縮の有効化 | `false` |
+| `AWS_LWA_ENABLE_COMPRESSION` | レスポンス圧縮の有効化（`buffered` モードのみ） | `false` |
 | `AWS_LWA_INVOKE_MODE` | `buffered` または `response_stream` | `buffered` |
+| `AWS_LWA_PASS_THROUGH_PATH` | 非 HTTP イベントの転送先パス | `/events` |
 | `AWS_LWA_SNAPSTART_BEFORE_CHECKPOINT_PATH` | SnapStart のスナップショット取得前に呼び出すパス | 未設定 |
 | `AWS_LWA_SNAPSTART_AFTER_RESTORE_PATH` | SnapStart の復元後に呼び出すパス | 未設定 |
 
@@ -157,6 +174,8 @@ app.listen(port, () => {
 
 このアプリケーションを Lambda Web Adapter を組み込んだコンテナイメージでビルドし、Lambda 関数として API Gateway や関数 URL に紐づけるだけで、既存の Express アプリケーションがそのまま Lambda 上で稼働します。
 
+API Gateway と組み合わせた CDK の実装は [apigw-lambda-web-adapter](https://github.com/ishiharatma/aws-cdk-reference-architectures/tree/main/infrastructure/workspaces/apigw-lambda-web-adapter) にあります。
+
 ## ユースケース
 
 - 既存の Web アプリケーション（Express、Flask、Spring Boot など）を、書き換えを最小限にしてサーバーレス化したい場合
@@ -180,4 +199,4 @@ app.listen(port, () => {
 
 ## 📖 まとめ
 
-Lambda Web Adapter は、「Lambda 専用のハンドラーを書き直す」というサーバーレス移行のハードルを取り除き、使い慣れた Web フレームワークの資産をそのまま Lambda に持ち込むための橋渡し役です。レスポンスストリーミングや SnapStart 連携など、Lambda ならではの機能とも統合されており、既存アプリケーションのサーバーレス化や、EC2／Fargate とのハイブリッド運用を検討する際の有力な選択肢になります。
+Lambda Web Adapter は、「Lambda 専用のハンドラーを書き直す」というサーバーレス移行のハードルを取り除き、使い慣れた Web フレームワークの資産をそのまま Lambda に持ち込むための橋渡し役です。レスポンスストリーミングや SnapStart 連携など、Lambda ならではの機能とも統合されており、既存アプリケーションのサーバーレス化や、EC2／Fargate とのハイブリッド運用を検討する際の有力な選択肢になります。新規の Node.js アプリであれば、Lambda Web Functions も候補に入れて比較してください。

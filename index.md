@@ -21,11 +21,13 @@
 
 [AWS Lambda 概要](/articles_base/lambda-overview.md)
 
+[AWS Lambda の 3 つのコンピュートプリミティブ比較](/articles_base/lambda-event-vs-web-vs-microvms.md)
+
 [AWS Lambda MicroVMs 概要](/articles_base/lambda-microvms-overview.md)
 
 [AWS Lambda Web Adapter (LWA) 概要](/articles_base/lambda-web-adapter-overview.md)
 
-[AWS Lambda Durable Functions 概要](/articles_base/lambda-durable-functions-overview.md)
+[AWS Lambda durable functions 概要](/articles_base/lambda-durable-functions-overview.md)
 
 [AWS Elastic Beanstalk 概要](/articles_base/elastic-beanstalk-overview.md)
 
@@ -82,6 +84,8 @@ AWS PrivateLink
 AWS Storage Gateway
 
 [AWS Backup 概要](/articles_base/backup-overview.md)
+
+[AWS Backup 応用](/articles_base/backup-advanced.md)
 
 ### セキュリティ、アイデンティティ、コンプライアンス
 
