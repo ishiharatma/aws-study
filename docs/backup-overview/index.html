@@ -1,0 +1,331 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Backup 概要</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="backup-overview"
+                  title="AWS Backup 概要"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+<p>本ページは 1 つの AWS アカウントで AWS Backup を使い始めるための内容です。Organizations を使った複数アカウントの保護やランサムウェア対策は <a href="./backup-advanced.md" target="_blank">AWS Backup 応用</a> で解説します。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-backup-%E3%81%A8%E3%81%AF" target="_blank">AWS Backup とは</a></li>
+<li><a href="#%E3%82%B5%E3%83%9D%E3%83%BC%E3%83%88%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9" target="_blank">サポートされているサービス</a></li>
+<li><a href="#dr-%E6%88%A6%E7%95%A5%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">DR 戦略の基本</a><ul>
+<li><a href="#dr-%E3%81%A8%E9%AB%98%E5%8F%AF%E7%94%A8%E6%80%A7%E3%81%AE%E9%81%95%E3%81%84" target="_blank">DR と高可用性の違い</a></li>
+<li><a href="#rpo-%E3%81%A8-rto" target="_blank">RPO と RTO</a></li>
+<li><a href="#4-%E3%81%A4%E3%81%AE%E3%82%B7%E3%83%8A%E3%83%AA%E3%82%AA" target="_blank">4 つのシナリオ</a></li>
+</ul>
+</li>
+<li><a href="#aws-backup-%E3%81%AE%E5%9F%BA%E6%9C%AC" target="_blank">AWS Backup の基本</a><ul>
+<li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%83%97%E3%83%A9%E3%83%B3" target="_blank">バックアッププラン</a></li>
+<li><a href="#%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%83%9C%E3%83%BC%E3%83%AB%E3%83%88%E3%81%A8%E6%9A%97%E5%8F%B7%E5%8C%96" target="_blank">バックアップボールトと暗号化</a></li>
+<li><a href="#%E3%83%A9%E3%82%A4%E3%83%95%E3%82%B5%E3%82%A4%E3%82%AF%E3%83%AB%E3%81%A8%E3%82%B3%E3%83%BC%E3%83%AB%E3%83%89%E3%82%B9%E3%83%88%E3%83%AC%E3%83%BC%E3%82%B8" target="_blank">ライフサイクルとコールドストレージ</a></li>
+<li><a href="#%E3%83%AA%E3%83%BC%E3%82%B8%E3%83%A7%E3%83%B3%E9%96%93%E3%82%B3%E3%83%94%E3%83%BC" target="_blank">リージョン間コピー</a></li>
+<li><a href="#%E5%BE%A9%E5%85%83%E3%81%A8%E5%BE%A9%E5%85%83%E3%83%86%E3%82%B9%E3%83%88" target="_blank">復元と復元テスト</a></li>
+<li><a href="#%E7%9B%A3%E8%A6%96%E3%81%A8%E6%A4%9C%E7%B4%A2" target="_blank">監視と検索</a></li>
+</ul>
+</li>
+<li><a href="#pitr%E7%B6%99%E7%B6%9A%E7%9A%84%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97" target="_blank">PITR（継続的バックアップ）</a><ul>
+<li><a href="#%E5%85%B1%E9%80%9A%E3%81%AE%E5%88%B6%E7%B4%84" target="_blank">共通の制約</a></li>
+<li><a href="#s3-%E3%81%A8-rdsaurora-%E3%81%AE%E9%81%95%E3%81%84" target="_blank">S3 と RDS、Aurora の違い</a></li>
+<li><a href="#%E5%AE%9A%E6%9C%9F%E3%83%90%E3%83%83%E3%82%AF%E3%82%A2%E3%83%83%E3%83%97%E3%81%A8%E3%81%AE%E4%BD%B5%E7%94%A8" target="_blank">定期バックアップとの併用</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%99%E9%87%91" target="_blank">料金</a></li>
+<li><a href="#%E5%AE%9F%E8%A3%85%E4%BE%8B" target="_blank">実装例</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Backup とは" duration="0">
+        <p><a href="https://aws.amazon.com/jp/backup/" target="_blank">AWS Backup サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/ja_jp/aws-backup/?id=docs_gateway" target="_blank">AWS Backup ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/jp/backup/faqs/" target="_blank">AWS Backup よくある質問</a></p>
+<p><a href="https://aws.amazon.com/jp/backup/pricing/" target="_blank">AWS Backup の料金</a></p>
+<p>AWS Backup は、AWS の各サービスのバックアップを一元管理するフルマネージドサービスです。これまでサービスごとに設定していたスケジュール、保持期間、別リージョンへのコピーを、1 つのプランにまとめて定義できます。</p>
+<pre><code language="language-text" class="language-text">AWS Backup で守れるのは主にデータです。
+VPC や IAM ロールなどは、CloudFormation や CDK で復旧先にデプロイできるように別途準備しておく必要があります。
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="サポートされているサービス" duration="0">
+        <ul>
+<li>コンピューティング <ul>
+<li>EC2、EKS（クラスタの状態と永続ボリューム）、VMware、Windows VSS</li>
+</ul>
+</li>
+<li>ストレージ <ul>
+<li>S3、EBS、EFS、FSx（4 種類）、Storage Gateway（Volume Gateway）</li>
+</ul>
+</li>
+<li>データベース <ul>
+<li>RDS、Aurora、Aurora DSQL、DynamoDB、DocumentDB、Neptune、Redshift、Redshift Serverless、Timestream for LiveAnalytics</li>
+</ul>
+</li>
+<li>その他 <ul>
+<li>CloudFormation スタック、SAP HANA on EC2</li>
+</ul>
+</li>
+</ul>
+<p>コピーやコールドストレージなどの対応状況はリソースごとに異なります。設計時は <a href="https://docs.aws.amazon.com/ja_jp/aws-backup/latest/devguide/backup-feature-availability.html" target="_blank">リソース別の機能の可用性</a> を確認してください。</p>
+<p>対応リソースは、AWS Backup が完全に管理するもの（Fully managed。S3、EFS など）と、そうでないもの（EBS、RDS など）に分かれます。暗号化キーやコピー時の課金先の扱いがこの区分で変わります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="DR 戦略の基本" duration="0">
+        <p>バックアップの設計は「どの災害から、どこまで戻すか」を決めるところから始まります。AWS Black Belt の DR 戦略シリーズの流れに沿って整理します。</p>
+<h2 is-upgraded>DR と高可用性の違い</h2>
+<p>高可用性（HA）は AZ 以下の障害を対象に、サービスを止めない設計を可用性のメトリクスで評価します。一方 DR（Disaster Recovery）はリージョン単位の災害を対象に、RPO と RTO で評価します。</p>
+<p>マルチ AZ 構成で HA を確保していても、誤操作で消したデータやリージョン全体の障害からは復旧できません。バックアップは HA の代わりではなく、別の障害に備えるものです。</p>
+<h2 is-upgraded>RPO と RTO</h2>
+<ul>
+<li>RPO（Recovery Point Objective） <ul>
+<li>どの時点のデータまで戻せればよいか。許容できるデータ損失の量</li>
+</ul>
+</li>
+<li>RTO（Recovery Time Objective） <ul>
+<li>復旧にどれだけ時間をかけてよいか。許容できる停止時間</li>
+</ul>
+</li>
+</ul>
+<p>どちらも短くするほどコストが増えるので、業務側と合意して決めます。</p>
+<h2 is-upgraded>4 つのシナリオ</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>シナリオ</p>
+</td><td colspan="1" rowspan="1"><p>RPO / RTO の目安</p>
+</td><td colspan="1" rowspan="1"><p>コスト</p>
+</td><td colspan="1" rowspan="1"><p>復旧先の状態</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>バックアップ&amp;リストア</p>
+</td><td colspan="1" rowspan="1"><p>数時間</p>
+</td><td colspan="1" rowspan="1"><p>$</p>
+</td><td colspan="1" rowspan="1"><p>データのコピーのみ。インフラは復旧時に作成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>パイロットライト</p>
+</td><td colspan="1" rowspan="1"><p>数十分</p>
+</td><td colspan="1" rowspan="1"><p>$$</p>
+</td><td colspan="1" rowspan="1"><p>データは同期し、コンピュートは停止または未作成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>ウォームスタンバイ</p>
+</td><td colspan="1" rowspan="1"><p>数分</p>
+</td><td colspan="1" rowspan="1"><p>$$$</p>
+</td><td colspan="1" rowspan="1"><p>縮小した構成で常時稼働</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>マルチサイト アクティブ/アクティブ</p>
+</td><td colspan="1" rowspan="1"><p>リアルタイム</p>
+</td><td colspan="1" rowspan="1"><p>$$$$</p>
+</td><td colspan="1" rowspan="1"><p>全リージョンで本番同等に稼働</p>
+</td></tr>
+</table>
+<p>AWS Backup が直接担うのは、バックアップ&amp;リストアのシナリオです。進め方は「設計、保護、自動化、復旧」の順になります。リージョン障害時に手順書どおり動くかは、データだけでなくインフラのデプロイまで含めて試さないとわかりません。</p>
+<p>東京と大阪で 4 戦略を実装して計測した例では、切り替え完了までの時間は次のようになりました。<a href="https://github.com/ishiharatma/aws-cdk-reference-architectures/tree/main/infrastructure/workspaces/multi-region-dr-strategies" target="_blank">multi-region-dr-strategies</a> の実測値で、構成によって変わります。</p>
+<ul>
+<li>アクティブ/アクティブ: 約 34 秒</li>
+<li>ウォームスタンバイ: 約 36 秒</li>
+<li>パイロットライト: 約 84 秒</li>
+<li>バックアップ&amp;リストア: 6 分以上</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Backup の基本" duration="0">
+        <ul>
+<li>バックアッププラン <ul>
+<li>いつ、どのリソースを、どのボールトに、どれだけの期間保持するかの定義</li>
+</ul>
+</li>
+<li>バックアップボールト <ul>
+<li>復旧ポイントを格納するコンテナ。KMS で暗号化される</li>
+</ul>
+</li>
+<li>復旧ポイント <ul>
+<li>バックアップされた 1 回分のデータ</li>
+</ul>
+</li>
+<li>オンデマンドバックアップ <ul>
+<li>プランを介さず、その場で 1 回取得するバックアップ</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>バックアッププラン</h2>
+<p>プランは「ルール」と「リソースの割り当て」で構成されます。</p>
+<p>ルールにはスケジュール、バックアップウィンドウ、保持期間、ライフサイクル、コピー先を指定します。スケジュールの最短間隔は、スナップショットで 1 時間です。保持は日数で指定し、世代数の指定はありません。</p>
+<p>リソースの割り当ては、リソースタイプ、リソース ID、タグで指定します。タグで割り当てておくと、新しく作ったリソースもタグを付けるだけで保護の対象になります。</p>
+<h2 is-upgraded>バックアップボールトと暗号化</h2>
+<p>既定では <code>aws/backup</code> の AWS マネージドキーが使われ、カスタマーマネージドキー（CMK）も指定できます。</p>
+<pre><code language="language-text" class="language-text">ボールトのキーが適用されるのは Fully managed のリソースのみです。
+それ以外のリソースは、元のリソースの暗号化キーを引き継ぎます。
+</code></pre>
+<p>ボールトにはアクセスポリシーを設定できます。次の例では、特定のロール以外による復旧ポイントの削除を拒否します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Version&#34;: &#34;2012-10-17&#34;,
+  &#34;Statement&#34;: [
+    {
+      &#34;Effect&#34;: &#34;Deny&#34;,
+      &#34;Principal&#34;: &#34;*&#34;,
+      &#34;Action&#34;: &#34;backup:DeleteRecoveryPoint&#34;,
+      &#34;Resource&#34;: &#34;*&#34;,
+      &#34;Condition&#34;: {
+        &#34;ArnNotEquals&#34;: {
+          &#34;aws:PrincipalArn&#34;: &#34;arn:aws:iam::111122223333:role/BackupAdmin&#34;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<h2 is-upgraded>ライフサイクルとコールドストレージ</h2>
+<p>一定期間が過ぎた復旧ポイントは、低コストのコールドストレージへ移行できます。ただしコールドへ移行すると最低 90 日は保持する必要があるので、保持期間は移行日数に 90 日を足した値以上にします。</p>
+<p>料金ページでコールドストレージの単価が示されているのは EBS、EFS、DynamoDB、Timestream、SAP HANA on EC2、VMware です。</p>
+<h2 is-upgraded>リージョン間コピー</h2>
+<p>バックアップルールにコピー先のリージョンとボールトを指定すると、バックアップのたびに別リージョンへコピーされます。コピー先のボールトは事前に作成しておきます。</p>
+<h2 is-upgraded>復元と復元テスト</h2>
+<p>復元は既存のリソースを上書きせず、新しいリソースを作成します。接続先の切り替えは別途必要です。</p>
+<p>復元テストを使うと、プランに沿って定期的に復元し、所要時間を計測して、終わったら自動で削除できます。EventBridge と Lambda を組み合わせれば、復元したデータの中身も検証できます。</p>
+<ul>
+<li>対象 <ul>
+<li>Aurora、DocumentDB、DynamoDB、EBS、EC2、EFS、FSx、Neptune、RDS、Redshift、S3</li>
+</ul>
+</li>
+<li>検証用リソースの保持 <ul>
+<li>1〜168 時間</li>
+</ul>
+</li>
+<li>開始ウィンドウ <ul>
+<li>1〜168 時間</li>
+</ul>
+</li>
+</ul>
+<h2 is-upgraded>監視と検索</h2>
+<p>ジョブの状態は EventBridge、SNS、CloudWatch で監視し、API の呼び出しは CloudTrail に記録されます。失敗に気づけないバックアップは、取っていないのと同じなので、少なくとも失敗の通知は設定しておきましょう。</p>
+<p>Backup search を使うと、S3 と EBS の復旧ポイントの中からファイルやオブジェクトを探せます。インデックス作成のオプトインが必要で、インデックスの作成、保管、検索に課金されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="PITR（継続的バックアップ）" duration="0">
+        <p>継続的バックアップを有効にすると、保持期間内の任意の時点に 1 秒の精度で復元できます。誤更新の直前に戻したいケースで効果があります。対応しているのは S3、RDS（マルチ AZ DB クラスターを除く）、Aurora、SAP HANA on EC2 です。</p>
+<p>ルールの設定で有効にします（CLI では <code>EnableContinuousBackup</code>）。作られる復旧ポイントは 1 つで、ID が <code>continuous</code> で始まり、タイプは「連続」と表示されます。PITR に対応しないリソースで有効にしても、通常のスナップショットとして動作します。</p>
+<h2 is-upgraded>共通の制約</h2>
+<ul>
+<li>保持期間は最大 35 日</li>
+<li>1 つのリソースに継続的バックアップは 1 つだけ</li>
+<li>オンデマンドでは取得できず、コールドストレージへの移行もできない</li>
+</ul>
+<p>PITR 自体はコピーできません。コピーのオプションを有効にすると、スナップショットがコピーされます。つまりコピー先のリージョンでは任意の時点には戻せず、RPO はスナップショットの取得間隔で決まります。</p>
+<h2 is-upgraded>S3 と RDS、Aurora の違い</h2>
+<table>
+<tr><td colspan="1" rowspan="1"><p>項目</p>
+</td><td colspan="1" rowspan="1"><p>S3</p>
+</td><td colspan="1" rowspan="1"><p>RDS</p>
+</td><td colspan="1" rowspan="1"><p>Aurora</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>復元できる最新時点</p>
+</td><td colspan="1" rowspan="1"><p>直近 15 分まで</p>
+</td><td colspan="1" rowspan="1"><p>直近 5 分まで</p>
+</td><td colspan="1" rowspan="1"><p>直近 5 分まで</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>前提</p>
+</td><td colspan="1" rowspan="1"><p>バージョニングの有効化</p>
+</td><td colspan="1" rowspan="1"><p>RDS の自動バックアップ機能を利用</p>
+</td><td colspan="1" rowspan="1"><p>同左</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>対象外</p>
+</td><td colspan="1" rowspan="1"><p>Glacier Flexible Retrieval、Deep Archive</p>
+</td><td colspan="1" rowspan="1"><p>RDS Custom</p>
+</td><td colspan="1" rowspan="1"><p>なし</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>復元の結果</p>
+</td><td colspan="1" rowspan="1"><p>復元先に同じ名前のオブジェクトがあればスキップ</p>
+</td><td colspan="1" rowspan="1"><p>新しい DB インスタンスを作成</p>
+</td><td colspan="1" rowspan="1"><p>新しいクラスターのみ作成。インスタンスは手動で作成</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p>復旧ポイントの削除</p>
+</td><td colspan="1" rowspan="1"><p>「保持をやめる」を選ぶと継続は停止し、期限までは復元可能</p>
+</td><td colspan="1" rowspan="1"><p>完全に削除すると自動バックアップも無効</p>
+</td><td colspan="1" rowspan="1"><p>Aurora 側に残り、保持期間は 1 日に</p>
+</td></tr>
+</table>
+<p>⚠️ S3 は EventBridge でオブジェクトの変更を追跡しています。バケットの EventBridge 通知を無効にするとバックアップが止まるので注意が必要です。バケットの設定自体はバックアップの対象外です。</p>
+<p>⚠️ RDS と Aurora では、継続的バックアップを有効にすると AWS Backup が自動バックアップを管理するため、バックアップウィンドウを手動で設定できなくなります。</p>
+<h2 is-upgraded>定期バックアップとの併用</h2>
+<p>S3 では、定期バックアップのたびにバケット全体をスキャンして各オブジェクトの ACL とタグを取得します。オブジェクト数が多いほどリクエスト料金が増えますが、継続的バックアップと組み合わせるとこのスキャンが発生しません。</p>
+<p>直近は PITR で細かく戻し、長期保管やコピーは定期のスナップショットに任せる構成が扱いやすいです。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="料金" duration="0">
+        <p><a href="https://aws.amazon.com/jp/backup/pricing/" target="_blank">AWS Backup の料金</a> は次の要素で決まります。単価はリソースとリージョンで異なるので、料金ページで確認してください。</p>
+<ul>
+<li>バックアップストレージ（ウォーム、コールド）</li>
+<li>リージョン間のデータ転送</li>
+<li>復元したデータの量</li>
+<li>復元テスト、Backup search、Audit Manager（使った場合）</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="実装例" duration="0">
+        <p><a href="https://github.com/ishiharatma/aws-cdk-reference-architectures/tree/main/infrastructure/workspaces/aws-backup-cross-region" target="_blank">aws-backup-cross-region</a> は、東京から大阪へのコピーを CDK で実装したものです。単一のタグベースの割り当てで EC2、RDS、S3、CloudFormation スタックを保護し、プライマリで 35 日、セカンダリで 90 日保持します。</p>
+<p><a href="https://github.com/ishiharatma/aws-cdk-reference-architectures/tree/main/infrastructure/workspaces/multi-region-dr-strategies" target="_blank">multi-region-dr-strategies</a> は、DR の 4 戦略を東京と大阪で実装した構成です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>バックアップの設計は RPO と RTO を決めるところから始め、AWS Backup のプランとタグで対象を揃えます。直近の誤操作には PITR、リージョン障害にはコピーと、失敗のパターンごとに手段を分けて考えると整理しやすくなります。</p>
+<p>取得できていても、戻せなければ意味がありません。復元テストを運用に組み込むところまでが設計です。</p>
+<p>参考資料は次のとおりです。</p>
+<p>【AWS Black Belt Online Seminar】<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2025_AWS-Backup-DR-Strategy-Basic_0430_v1.pdf" target="_blank">AWS Backup で考える DR 戦略 #1 基本編</a></p>
+<p>【AWS Black Belt Online Seminar】<a href="https://pages.awscloud.com/rs/112-TZM-766/images/AWS-Black-Belt_2025_AWS-Backup-DR-Strategy-PITR_1130_v1.pdf" target="_blank">AWS Backup で考える DR 戦略 #2 PITR 編</a></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
