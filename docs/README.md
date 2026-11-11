@@ -41,6 +41,10 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 
 - <a href="./elb-overview/index.html#0" target="_blank">【初心者向け】ELB 入門！完全ガイド</a>
 - <a href="./lambda-overview/index.html#0" target="_blank">【初心者向け】AWS Lambda 入門！完全ガイド</a>
+- <a href="./lambda-event-vs-web-vs-microvms/index.html#0" target="_blank">AWS Lambda の 3 つのコンピュートプリミティブ比較（Event / Web / MicroVMs）</a>
+- <a href="./lambda-microvms-overview/index.html#0" target="_blank">【初心者向け】AWS Lambda MicroVMs 入門！完全ガイド</a>
+- <a href="./lambda-web-adapter-overview/index.html#0" target="_blank">【初心者向け】AWS Lambda Web Adapter (LWA) 入門！完全ガイド</a>
+- <a href="./lambda-durable-functions-overview/index.html#0" target="_blank">【初心者向け】AWS Lambda durable functions 入門！完全ガイド</a>
 - AWS Elastic Beanstalk
 - Amazon Lightsail
 - AWS Batch
@@ -72,7 +76,8 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - Amazon EFS
 - Amazon FSx
 - AWS Storage Gateway
-- AWS Backup
+- <a href="./backup-overview/index.html#0" target="_blank">AWS Backup 概要（基本と DR 戦略、PITR）</a>
+- <a href="./backup-advanced/index.html#0" target="_blank">AWS Backup 応用（Organizations 連携と論理エアギャップボールト）</a>
 
 ### セキュリティ、アイデンティティ、コンプライアンス
 
@@ -114,6 +119,7 @@ AWS ドキュメントなどを参照し作成しておりますが、記載の�
 - Amazon EventBridge
 - <a href="./sns-overview/index.html#0" target="_blank">【初心者向け】Amazon SNS 入門！完全ガイド</a>
 - <a href="./sqs-overview/index.html#0" target="_blank">【初心者向け】Amazon SQS 入門！完全ガイド</a>
+- <a href="./stepfunctions-overview/index.html#0" target="_blank">【初心者向け】AWS Step Functions 入門！完全ガイド</a>
 
 ### デベロッパーツール
 

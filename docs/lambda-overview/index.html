@@ -40,7 +40,7 @@
 <li><a href="#%E3%83%8D%E3%83%83%E3%83%88%E3%83%AF%E3%83%BC%E3%82%AF" target="_blank">ネットワーク</a></li>
 <li><a href="#%E5%AE%9F%E8%A1%8C%E7%92%B0%E5%A2%83" target="_blank">実行環境</a><ul>
 <li><a href="#%E3%82%B3%E3%83%BC%E3%83%AB%E3%83%89%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%88%E5%95%8F%E9%A1%8C" target="_blank">コールドスタート問題</a></li>
-<li><a href="#snapstart-for-java" target="_blank">SnapStart for Java</a></li>
+<li><a href="#snapstart" target="_blank">SnapStart</a></li>
 </ul>
 </li>
 <li><a href="#%E5%91%BD%E4%BB%A4%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%BC%E3%82%AD%E3%83%86%E3%82%AF%E3%83%81%E3%83%A3" target="_blank">命令セットアーキテクチャ</a></li>
@@ -75,6 +75,7 @@
     
       <google-codelab-step label="AWS Lambda とは" duration="0">
         <p>サーバーをプロビジョニングまたは管理せずにコードを実行できるようにするコンピューティングサービスです。FaaS(Function as a Service：ファース、エフアース)に分類されるサービスです。</p>
+<p>2026 年 10 月に Lambda Web Functions が登場し、Lambda のコンピュートプリミティブは Event Functions、Web Functions、MicroVMs の 3 種類になりました。従来の Lambda 関数は Event Functions と呼ばれるようになりましたが、変わったのは呼称だけで、API、<code>AWS::Lambda::Function</code>、ARN、コードはそのままです。本ページの内容は Event Functions についての説明です。3 種類の違いは <a href="./lambda-event-vs-web-vs-microvms.md" target="_blank">AWS Lambda の 3 つのコンピュートプリミティブ比較</a> を参照してください。</p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=QvPgjEwgiew" target="_blank">AWS Lambda Part1(YouTube)</a>(1:02:22)</p>
 <p class="image-container"><img alt="AWS Lambda Part1" src="img\\514d02dbfb45c038.jpg"></p>
 <p>【AWS Black Belt Online Seminar】<a href="https://www.youtube.com/watch?v=96ku2x1NCaE" target="_blank">AWS Lambda Part2(YouTube)</a>(1:01:17)</p>
@@ -105,11 +106,11 @@
 <p>安全で分離されたランタイムを実行するための環境で、実行環境のライフサイクルは次のようになっています。</p>
 <ul>
 <li>通常 <ul>
-<li>INIT(初期化) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）</li>
+<li>INIT(初期化) → INVOKE（呼び出し） → SHUTDOWN（シャットダウン）</li>
 </ul>
 </li>
 <li>SnapStart を利用している場合 <ul>
-<li>RESTORE(復元) → INVOLE（呼び出し） → SHUTDOWN（シャットダウン）</li>
+<li>RESTORE(復元) → INVOKE（呼び出し） → SHUTDOWN（シャットダウン）</li>
 </ul>
 </li>
 </ul>
@@ -129,18 +130,16 @@
 </ul>
 </li>
 </ul>
-<h2 is-upgraded>SnapStart for Java</h2>
+<h2 is-upgraded>SnapStart</h2>
 <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/snapstart.html</p>
 <p>https://aws.amazon.com/jp/blogs/news/reducing-java-cold-starts-on-aws-lambda-functions-with-snapstart/</p>
 <p>Lambda の起動時のレイテンシー（主に、コールドスタート時間）の最大要因は関数の初期化です。 それを解消するために、関数のバージョンを発行するときに関数を初期化し、その実行環境（メモリとディスク状態）のスナップショットをキャッシュさせ、キャッシュさせたスナップショットから実行環境を再開することで起動時のレイテンシーが短縮される機能です。</p>
-<p>SnapStart の使用に追加コストは発生しませんが、利用するには以下の制約があります。</p>
+<p>対応ランタイムは Java 11 以降、Python 3.12 以降、.NET 8 以降で、公開バージョンとそれを指すエイリアスでのみ動作します。Java には追加料金がありませんが、Python と .NET はスナップショットのキャッシュ（Caching）と復元（Restoration）に課金されます。</p>
+<p>次の機能とは併用できません。</p>
 <ul>
-<li>サポートしているのは、<code>Java 11</code> のみ</li>
-<li>エフェメラルストレージのサイズが 512 MB 以下</li>
-<li>プロビジョニングされた同時実行ではない</li>
-<li>arm 64 アーキテクチャではない</li>
-<li>EFS を利用していない</li>
-<li>X-Ray を利用していない</li>
+<li>プロビジョニングされた同時実行</li>
+<li>Amazon EFS、Amazon S3 Files</li>
+<li>512 MB を超えるエフェメラルストレージ</li>
 </ul>
 
 
@@ -149,9 +148,9 @@
       <google-codelab-step label="命令セットアーキテクチャ" duration="0">
         <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/foundation-arch.html</p>
 <ul>
-<li>arm64 — AWS Graviton2 プロセッサ用の 64 ビット ARM アーキテクチャ <ul>
+<li>arm64 — AWS Graviton プロセッサ用の 64 ビット ARM アーキテクチャ <ul>
 <li>アームろくよん</li>
-<li>x86_64 アーキテクチャより 34%のコスト効率よく利用できる</li>
+<li>x86_64 アーキテクチャと比べて、コストパフォーマンスが最大 34% 向上する</li>
 <li>実際のコストは 東京リージョンでは 20%ほど低い。</li>
 <li>利用できる場合は、こちらを選ぶ。</li>
 </ul>
@@ -200,8 +199,9 @@
       <google-codelab-step label="トリガー" duration="0">
         <p>Pull モデルと Push モデルがあります。</p>
 <h2 is-upgraded>Pull モデル</h2>
-<p>Pull モデルは、ポーリング型の実行です。Lambda の<a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/invocation-eventsourcemapping.html" target="_blank">イベントソースマッピング</a>で指定されたイベントソースをポーリングして読み取りを行うものです。イベントが一度ストリームまたはキューに格納されるので、処理順序が保証されています。 以下のサービスとの連携が対象です。</p>
+<p>Pull モデルは、ポーリング型の実行です。Lambda の<a href="https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/invocation-eventsourcemapping.html" target="_blank">イベントソースマッピング</a>で指定されたイベントソースをポーリングして読み取りを行うものです。イベントは一度ストリームまたはキューに格納されます。DynamoDB や Kinesis のストリームではシャード単位で順序が保たれますが、SQS 標準キューのように順序が保証されないソースもあります。配信は at-least-once のため、同じイベントが重複して処理される場合があります。 以下のサービスとの連携が対象です。</p>
 <ul>
+<li>Amazon DocumentDB</li>
 <li>Amazon DynamoDB</li>
 <li>Amazon Kinesis</li>
 <li>Amazon MQ</li>
@@ -210,7 +210,7 @@
 <li>Amazon Simple Queue Service (Amazon SQS)</li>
 </ul>
 <h2 is-upgraded>Push モデル</h2>
-<p>Push モデルは、イベント駆動型の実行です。Lambda がイベントソースから直接呼び出されるものです。発生したイベントの実行順序は保証されていません。発生したイベントの順番に処理される場合もありますし、タイミングによっては前後する場合もあります。 イベントソースとなるサービスによって、Lmabda の呼び出しタイプ（同期、非同期）が決まっています。</p>
+<p>Push モデルは、イベント駆動型の実行です。Lambda がイベントソースから直接呼び出されるものです。発生したイベントの実行順序は保証されていません。発生したイベントの順番に処理される場合もありますし、タイミングによっては前後する場合もあります。 イベントソースとなるサービスによって、Lambda の呼び出しタイプ（同期、非同期）が決まっています。</p>
 <p>主に以下のようなサービスがあります。</p>
 <ul>
 <li>Amazon S3（非同期）</li>
@@ -236,7 +236,7 @@
 
 # Response
 {
-      &#34;StatusCode&#34;: 202,
+      &#34;StatusCode&#34;: 200,
       &#34;ExecutedVersion&#34;: &#34;$LATEST&#34;,
       &#34;FunctionError&#34;: &#34;....&#34;
 }
@@ -266,8 +266,7 @@
 
 # Response
 {
-      &#34;StatusCode&#34;: 204,
-      &#34;FunctionError&#34;: &#34;....&#34;
+      &#34;StatusCode&#34;: 204
 }
 </code></pre>
 </li>
@@ -277,58 +276,52 @@
       </google-codelab-step>
     
       <google-codelab-step label="対応ランタイム" duration="0">
-        <ul>
+        <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/lambda-runtimes.html</p>
+<p>2026 年 11 月時点の主なマネージドランタイムは次のとおりです。</p>
+<ul>
 <li>Node.js <ul>
-<li>18,16,14,12</li>
-<li>非推奨：12 (2023-3-31)</li>
+<li>24, 22（26 はパブリックプレビュー）</li>
 </ul>
 </li>
 <li>Python <ul>
-<li>3.9,3.8,3.7</li>
+<li>3.14, 3.13, 3.12, 3.11（3.15 はプレビュー）</li>
 </ul>
 </li>
 <li>Java <ul>
-<li>11,8</li>
-</ul>
-</li>
-<li>.NET Code <ul>
-<li>非推奨：3.1 (2023-4-3)</li>
+<li>25, 21, 17, 11, 8</li>
 </ul>
 </li>
 <li>.NET <ul>
-<li>6,5</li>
-</ul>
-</li>
-<li>Go <ul>
-<li>1</li>
+<li>10, 8（8 は 2026-11-10 に非推奨予定）</li>
 </ul>
 </li>
 <li>Ruby <ul>
-<li>2.7</li>
+<li>4.0, 3.4, 3.3</li>
 </ul>
 </li>
-<li>カスタムランタイム</li>
+<li>OS 専用ランタイム <ul>
+<li><code>provided.al2023</code> など。Go や Rust はこちらを使う</li>
 </ul>
-<p>ランタイムの非推奨化は、２つのフェーズで発生します。</p>
+</li>
+</ul>
+<p>ランタイムの非推奨化は、次の順に進みます。</p>
 <ul>
-<li>フェーズ１ <ul>
-<li>ランタイムに対するセキュリティパッチの更新停止</li>
-<li>既存関数は更新可能</li>
-<li>新規関数は作成不可</li>
+<li>Deprecation date（非推奨日） <ul>
+<li>セキュリティパッチの更新が停止し、サポート対象外になる</li>
+<li>コンソールから新規作成できなくなる</li>
 </ul>
 </li>
-<li>フェーズ２ <ul>
-<li>フェーズ１から少なくとも 30 日経過したものがフェーズ２になる <ul>
-<li>Python 3.6 の場合、非推奨フェーズ１（2022-7-18）→ フェーズ２（2022-8-29）</li>
+<li>Block function create（関数の作成をブロック） <ul>
+<li>非推奨日から少なくとも 30 日後</li>
 </ul>
 </li>
-<li>新規関数、既存関数ともに作成、更新不可</li>
-<li>ただし、既存関数は継続して実行可能</li>
-<li>サポートされているランタイムに移行が必要</li>
+<li>Block function update（関数の更新をブロック） <ul>
+<li>非推奨日から少なくとも 60 日後</li>
 </ul>
 </li>
 </ul>
-<p>サポート終了がスケジュールされている場合、60 日以内なったら E メールで通知が来るようになります。 また、Trusted Advisor では、<a href="https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes" target="_blank">非推奨となる 120 日の前チェック</a>が出来ます。</p>
+<p>どの段階でも、既存関数の呼び出しは継続できます。ただしサポートされているランタイムへの移行が必要です。</p>
+<p>非推奨の少なくとも 180 日前に E メールで通知され、<a href="https://docs.aws.amazon.com/ja_jp/awssupport/latest/user/security-checks.html#aws-lambda-functions-deprecated-runtimes" target="_blank">Trusted Advisor</a> でも同じ時期からチェックできます。</p>
 
 
       </google-codelab-step>
@@ -353,7 +346,7 @@
 <p>https://docs.aws.amazon.com/ja_jp/lambda/latest/dg/getting-started.html</p>
 <p class="image-container"><img alt="lambda-console" src="img\\e089d9b9a5086d67.png"></p>
 <h2 is-upgraded>CloudFormation</h2>
-<p>CLoudFormation で関数をデプロイするには、次の方法があります。</p>
+<p>CloudFormation で関数をデプロイするには、次の方法があります。</p>
 <ul>
 <li>S3 バケットにコードの .zip ファイルをアップロードする<pre><code language="language-yaml" class="language-yaml">Resources:
   Function1:
@@ -399,8 +392,8 @@ Function3:
           path.join(__dirname, `${srcLambdaDirBase}/hello_world`)
         ),
         handler: &#39;index.lambda_handler&#39;,
-        runtime: lambda.Runtime.PYTHON_3_9,
-        timeout: cdk.&lt;!-- Duration.seconds(300), --&gt;
+        runtime: lambda.Runtime.PYTHON_3_13,
+        timeout: cdk.Duration.seconds(300),
         architecture: lambda.Architecture.ARM_64,
         environment: {
           LOG_LEVEL: props.lambdaLogLevel ?? &#39;INFO&#39;,
@@ -418,7 +411,7 @@ Function3:
   Properties:
     CodeUri: hello_world/
     Handler: app.lambda_handler
-    Runtime: python3.9
+    Runtime: python3.13
     Architectures:
       - arm64
 </code></pre>
@@ -434,7 +427,7 @@ Function3:
       </google-codelab-step>
     
       <google-codelab-step label="同時実行" duration="0">
-        <p>ある時点で実行されているリクエストの数のことです。 Lambda 関数の同時実行数は同一アカウントの同一リージョン内につき、1,000 に制限されています。 Lambda の同時実行数の計測は以下のように考えます。</p>
+        <p>ある時点で実行されているリクエストの数のことです。 Lambda 関数の同時実行数のクォータは、同一アカウントの同一リージョン内で既定 1,000 です。新規アカウントではこれより低い値から始まり、利用状況に応じて自動で引き上げられます。 Lambda の同時実行数の計測は以下のように考えます。</p>
 <pre><code language="language-text" class="language-text">同時実行=（1秒あたりの呼び出し数）x（平均実行時間（秒））
 </code></pre>
 <p>Lambda 関数が平均 10 秒かかり、1 秒あたり 100 個のイベントを発行すると Lambda 関数を 1000 同時に実行することになり、制限ぎりぎりとなります。</p>
@@ -468,11 +461,11 @@ Function3:
 <p class="image-container"><img alt="monitoring-320.jpg" src="img\\846474b453a3839d.jpg"></p>
 <p>監視するメトリクスとしては次のようなものがあります。</p>
 <ul>
-<li>Invocations このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。</li>
-<li>Errors このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。</li>
-<li>Throttles このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、stastics として「Sum」を利用することを推奨します。</li>
+<li>Invocations このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、statistics として「Sum」を利用することを推奨します。</li>
+<li>Errors このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、statistics として「Sum」を利用することを推奨します。</li>
+<li>Throttles このメトリクスは監視間隔として 300 秒(5 分)若しくは 60 秒(1 分)を設定してください。監視の際には、statistics として「Sum」を利用することを推奨します。</li>
 </ul>
-<p>その他、Lambda 関数のメモリをモニタリングするしたい場合は、次のドキュメントを参照します。 https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory-usage-monitoring/</p>
+<p>その他、Lambda 関数のメモリをモニタリングしたい場合は、次のドキュメントを参照します。 https://aws.amazon.com/jp/premiumsupport/knowledge-center/lambda-function-memory-usage-monitoring/</p>
 
 
       </google-codelab-step>
@@ -495,7 +488,7 @@ Function3:
 </ul>
 </li>
 <li>再帰呼び出しを行わない <ul>
-<li>位置しない処理で料金が急増するリスクがあるため</li>
+<li>意図しない処理で料金が急増するリスクがあるため</li>
 </ul>
 </li>
 <li>環境変数を使う <ul>

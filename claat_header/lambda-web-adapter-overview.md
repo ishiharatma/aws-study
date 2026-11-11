@@ -5,4 +5,3 @@ tags: AWS Lambda Web Adapter
 status: Published
 authors: ishr
 Feedback Link: 
-

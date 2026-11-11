@@ -1,0 +1,277 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Lambda Web Adapter (LWA)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="lambda-web-adapter-overview"
+                  title="AWS Lambda Web Adapter (LWA)"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-lambda-web-adapter-%E3%81%A8%E3%81%AF" target="_blank">AWS Lambda Web Adapter とは</a></li>
+<li><a href="#lambda-web-functions-%E3%81%A8%E3%81%AE%E9%96%A2%E4%BF%82" target="_blank">Lambda Web Functions との関係</a></li>
+<li><a href="#%E3%81%AA%E3%81%9C%E5%BF%85%E8%A6%81%E3%81%AB%E3%81%AA%E3%82%8B%E3%81%AE%E3%81%8B" target="_blank">なぜ必要になるのか</a></li>
+<li><a href="#%E4%BB%95%E7%B5%84%E3%81%BF" target="_blank">仕組み</a></li>
+<li><a href="#%E5%AF%BE%E5%BF%9C%E3%82%A4%E3%83%99%E3%83%B3%E3%83%88%E3%82%BD%E3%83%BC%E3%82%B9" target="_blank">対応イベントソース</a></li>
+<li><a href="#%E5%AF%BE%E5%BF%9C%E3%83%95%E3%83%AC%E3%83%BC%E3%83%A0%E3%83%AF%E3%83%BC%E3%82%AF" target="_blank">対応フレームワーク</a></li>
+<li><a href="#%E4%B8%BB%E3%81%AA%E6%A9%9F%E8%83%BD" target="_blank">主な機能</a><ul>
+<li><a href="#%E3%83%AC%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B9%E3%82%B9%E3%83%88%E3%83%AA%E3%83%BC%E3%83%9F%E3%83%B3%E3%82%B0" target="_blank">レスポンスストリーミング</a></li>
+<li><a href="#%E3%83%AC%E3%82%B9%E3%83%9D%E3%83%B3%E3%82%B9%E5%9C%A7%E7%B8%AE" target="_blank">レスポンス圧縮</a></li>
+<li><a href="#%E3%82%B0%E3%83%AC%E3%83%BC%E3%82%B9%E3%83%95%E3%83%AB%E3%82%B7%E3%83%A3%E3%83%83%E3%83%88%E3%83%80%E3%82%A6%E3%83%B3" target="_blank">グレースフルシャットダウン</a></li>
+<li><a href="#snapstart-%E3%81%A8%E3%81%AE%E9%80%A3%E6%90%BA" target="_blank">SnapStart との連携</a></li>
+<li><a href="#%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%93%E3%83%AA%E3%83%86%E3%82%A3" target="_blank">ポータビリティ</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B0%8E%E5%85%A5%E6%96%B9%E6%B3%95" target="_blank">導入方法</a><ul>
+<li><a href="#%E3%82%B3%E3%83%B3%E3%83%86%E3%83%8A%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8%E3%81%A7%E3%81%AE%E5%B0%8E%E5%85%A5" target="_blank">コンテナイメージでの導入</a></li>
+<li><a href="#zip-%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8lambda-layer%E3%81%A7%E3%81%AE%E5%B0%8E%E5%85%A5" target="_blank">Zip パッケージ（Lambda Layer）での導入</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%BB%E3%81%AA%E7%92%B0%E5%A2%83%E5%A4%89%E6%95%B0" target="_blank">主な環境変数</a></li>
+<li><a href="#%E5%88%A9%E7%94%A8%E4%BE%8B" target="_blank">利用例</a></li>
+<li><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">ユースケース</a></li>
+<li><a href="#%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">メリット</a></li>
+<li><a href="#%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E6%B3%A8%E6%84%8F%E7%82%B9" target="_blank">デメリット・注意点</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Lambda Web Adapter とは" duration="0">
+        <p>AWS が GitHub の <code>aws</code> organization で公開している OSS ツールで、Express.js、Next.js、Flask、FastAPI、Spring Boot、ASP.NET、Laravel、Nginx などの既存の Web フレームワークで作られたアプリケーションを、コードをほとんど、あるいはまったく変更せずに AWS Lambda 上で動かせるようにするアダプタです。</p>
+<p><a href="https://github.com/aws/aws-lambda-web-adapter" target="_blank">aws/aws-lambda-web-adapter（GitHub）</a></p>
+<p>Lambda 関数は本来、<code>event</code> と <code>context</code> を受け取るハンドラー関数として実装するものであり、通常の Web フレームワークが前提とする「HTTP サーバーとして listen する」というモデルとは異なります。このギャップを埋め、Web アプリケーションの資産をそのままサーバーレス化するために作られたのが Lambda Web Adapter です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lambda Web Functions との関係" duration="0">
+        <p>2026 年 10 月に、HTTP サーバーをそのまま動かせる Lambda Web Functions が登場しました。目的は近いものの、Web Functions は Lambda のプリミティブそのもので、1 つの実行環境で複数のリクエストを同時に処理します。Lambda Web Adapter は Event Functions の上で動く拡張で、1 環境 1 リクエストのモデルのままです。</p>
+<p>Web Functions の対応ランタイムは現在 Node.js 24 のみです。Lambda Web Adapter の README では、新規の Node.js Web アプリには Web Functions を、それ以外のランタイムやコンテナイメージでは引き続き Lambda Web Adapter を使うことを勧めています。</p>
+<p>種類ごとの違いは <a href="./lambda-event-vs-web-vs-microvms.md" target="_blank">AWS Lambda の 3 つのコンピュートプリミティブ比較</a> を参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="なぜ必要になるのか" duration="0">
+        <p>多くの Web フレームワークは、特定のポートで HTTP サーバーを起動し、リクエストを受け付ける作りになっています。これを Lambda で動かそうとすると、本来はフレームワーク側のルーティングやミドルウェア機構を Lambda 用に書き換える（あるいは専用のアダプタライブラリを個別に組み込む）必要があり、フレームワークやランタイムごとに実装がバラバラになりがちでした。</p>
+<p>Lambda Web Adapter は、この変換処理を Lambda 拡張（Extension）として切り出すことで、アプリケーション側のコード変更を最小限に抑えつつ、任意の HTTP ベースのフレームワークを Lambda に載せられるようにしています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="仕組み" duration="0">
+        <p>Lambda Web Adapter は、Lambda Extension の仕組みを利用して、関数の実行環境内で独立した Rust 製のプロセスとして動作します。この拡張プロセスが、Lambda に届いた API Gateway・ALB・Function URL などのイベントを受け取り、それを通常の HTTP リクエストに変換して、同じ実行環境内でローカルに起動している Web アプリケーション（既定では 8080 番ポートなど）へ転送します。アプリケーションから返された HTTP レスポンスは、再び Lambda が期待する形式に変換されて呼び出し元へ返されます。</p>
+<p>アプリケーション自身は「自分が Lambda 上で動いている」ことをほぼ意識せず、ローカル環境や EC2、Fargate 上で動かすときと同じように、ポートを listen する通常の HTTP サーバーとして実装できます。</p>
+<p><a href="https://github.com/aws/aws-lambda-web-adapter/blob/main/docs/design.md" target="_blank">Design（aws-lambda-web-adapter, GitHub）</a></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="対応イベントソース" duration="0">
+        <ul>
+<li>Amazon API Gateway（REST API）</li>
+<li>Amazon API Gateway（HTTP API）</li>
+<li>Lambda 関数 URL（Function URLs）</li>
+<li>Application Load Balancer（ALB）</li>
+<li>SQS など非 HTTP のイベントソース</li>
+</ul>
+<p>HTTP 系のイベントは HTTP リクエスト／レスポンスの形に正規化してアプリケーションとやり取りします。非 HTTP のイベントは、<code>AWS_LWA_PASS_THROUGH_PATH</code> で指定したパス（既定は <code>/events</code>）へ渡されます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="対応フレームワーク" duration="0">
+        <p>HTTP/1.0 または HTTP/1.1 で通信するフレームワークであれば、基本的に言語やフレームワークを問わず利用できます。公式リポジトリのサンプルには、次のような多数のフレームワーク・言語向けの例が用意されています。</p>
+<ul>
+<li>Node.js：Express.js、Next.js、NestJS など</li>
+<li>Python：Flask、FastAPI、Django など</li>
+<li>Java：Spring Boot</li>
+<li>.NET：ASP.NET Core</li>
+<li>PHP：Laravel</li>
+<li>Go：Gin</li>
+<li>Rust：Actix、Axum</li>
+<li>その他：Nginx をそのまま前段に立てる構成 など</li>
+</ul>
+<p>40 種類以上のフレームワーク・構成のサンプルが公式リポジトリの <code>examples</code> 配下に公開されています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="主な機能" duration="0">
+        <h2 is-upgraded>レスポンスストリーミング</h2>
+<p>Lambda の関数 URL などがサポートするレスポンスストリーミング（Response Streaming）に対応しており、<code>AWS_LWA_INVOKE_MODE</code> を <code>response_stream</code> に設定することで、Server-Sent Events や大きめのペイロードを、バッファリングせずに逐次クライアントへ返すことができます。生成 AI のトークンをストリーミングで返すようなユースケースと相性が良い機能です。</p>
+<p><a href="https://aws.amazon.com/blogs/compute/using-response-streaming-with-aws-lambda-web-adapter-to-optimize-performance/" target="_blank">Using response streaming with AWS Lambda Web Adapter to optimize performance（AWS Compute Blog）</a></p>
+<h2 is-upgraded>レスポンス圧縮</h2>
+<p><code>AWS_LWA_ENABLE_COMPRESSION</code> を有効にすることで、gzip や Brotli によるレスポンス圧縮を Adapter 側で行えます。圧縮が効くのは <code>buffered</code> モードのときだけです。</p>
+<h2 is-upgraded>グレースフルシャットダウン</h2>
+<p>Lambda の実行環境が終了する際のシグナルを Adapter が仲介し、アプリケーション側に猶予を持たせた終了処理を行わせることができます。</p>
+<h2 is-upgraded>SnapStart との連携</h2>
+<p>Lambda の SnapStart（実行環境の初期化状態をスナップショットして再利用する機能）を利用する場合、スナップショット取得の前後でコネクションの切断・再接続などの後処理・前処理が必要になることがあります。Lambda Web Adapter は、<code>AWS_LWA_SNAPSTART_BEFORE_CHECKPOINT_PATH</code> と <code>AWS_LWA_SNAPSTART_AFTER_RESTORE_PATH</code> という 2 つのフックパスを提供しており、それぞれスナップショット取得直前・復元直後にアプリケーションへ空の POST リクエストを送ります。アプリケーション側はこれを受けてリソースの解放・再確立を行い、2xx を返すことで正常完了を通知します。</p>
+<h2 is-upgraded>ポータビリティ</h2>
+<p>同じコンテナイメージを Lambda、Amazon EC2、AWS Fargate、そしてローカルの開発環境でそのまま動かせる点も特徴です。Lambda 固有のコードをアプリケーションに書き込む必要がないため、実行基盤を移行する際の書き換えコストを抑えられます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="導入方法" duration="0">
+        <h2 is-upgraded>コンテナイメージでの導入</h2>
+<p>Dockerfile 内で Lambda Web Adapter のバイナリをマルチステージビルドの <code>COPY --from</code> でコンテナイメージに取り込みます。</p>
+<pre><code language="language-dockerfile" class="language-dockerfile">FROM public.ecr.aws/awsguru/aws-lambda-adapter:1.1.0 AS lambda-adapter
+
+FROM node:24-alpine
+COPY --from=lambda-adapter /lambda-adapter /opt/extensions/lambda-adapter
+WORKDIR /app
+COPY . .
+RUN npm install
+ENV PORT=8080
+CMD [&#34;npm&#34;, &#34;start&#34;]
+</code></pre>
+<h2 is-upgraded>Zip パッケージ（Lambda Layer）での導入</h2>
+<p>コンテナイメージを使わない場合は、Lambda Layer として公開されている Lambda Web Adapter を関数にアタッチします。環境変数 <code>AWS_LAMBDA_EXEC_WRAPPER</code> に <code>/opt/bootstrap</code> を設定し、関数のハンドラーにはアプリケーションの起動スクリプト（例: <code>run.sh</code>）を指定します。</p>
+<pre><code language="language-text" class="language-text">arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerX86:30
+arn:aws:lambda:${AWS::Region}:753240598075:layer:LambdaAdapterLayerArm64:30
+</code></pre>
+<p>Layer のバージョンは更新されるため、利用時に README で確認してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="主な環境変数" duration="0">
+        <table>
+<tr><td colspan="1" rowspan="1"><p>環境変数</p>
+</td><td colspan="1" rowspan="1"><p>説明</p>
+</td><td colspan="1" rowspan="1"><p>デフォルト</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_PORT</code></p>
+</td><td colspan="1" rowspan="1"><p>アプリケーションが listen するポート番号（未設定時は <code>PORT</code> を参照）</p>
+</td><td colspan="1" rowspan="1"><p><code>8080</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_READINESS_CHECK_PATH</code></p>
+</td><td colspan="1" rowspan="1"><p>起動時のヘルスチェックに使うパス</p>
+</td><td colspan="1" rowspan="1"><p><code>/</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_ENABLE_COMPRESSION</code></p>
+</td><td colspan="1" rowspan="1"><p>レスポンス圧縮の有効化（<code>buffered</code> モードのみ）</p>
+</td><td colspan="1" rowspan="1"><p><code>false</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_INVOKE_MODE</code></p>
+</td><td colspan="1" rowspan="1"><p><code>buffered</code> または <code>response_stream</code></p>
+</td><td colspan="1" rowspan="1"><p><code>buffered</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_PASS_THROUGH_PATH</code></p>
+</td><td colspan="1" rowspan="1"><p>非 HTTP イベントの転送先パス</p>
+</td><td colspan="1" rowspan="1"><p><code>/events</code></p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_SNAPSTART_BEFORE_CHECKPOINT_PATH</code></p>
+</td><td colspan="1" rowspan="1"><p>SnapStart のスナップショット取得前に呼び出すパス</p>
+</td><td colspan="1" rowspan="1"><p>未設定</p>
+</td></tr>
+<tr><td colspan="1" rowspan="1"><p><code>AWS_LWA_SNAPSTART_AFTER_RESTORE_PATH</code></p>
+</td><td colspan="1" rowspan="1"><p>SnapStart の復元後に呼び出すパス</p>
+</td><td colspan="1" rowspan="1"><p>未設定</p>
+</td></tr>
+</table>
+<p>これら以外にも多数の設定項目が用意されているため、詳細は README を参照してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="利用例" duration="0">
+        <p>Express.js アプリケーションであれば、Lambda 用に特別なハンドラーを書く必要はなく、通常どおりポートを listen するだけで済みます。</p>
+<pre><code language="language-js" class="language-js">const express = require(&#34;express&#34;);
+const app = express();
+
+app.get(&#34;/&#34;, (req, res) =&gt; {
+  res.send(&#34;Hello from Express on Lambda!&#34;);
+});
+
+const port = process.env.PORT || 8080;
+app.listen(port, () =&gt; {
+  console.log(`listening on port ${port}`);
+});
+</code></pre>
+<p>このアプリケーションを Lambda Web Adapter を組み込んだコンテナイメージでビルドし、Lambda 関数として API Gateway や関数 URL に紐づけるだけで、既存の Express アプリケーションがそのまま Lambda 上で稼働します。</p>
+<p>API Gateway と組み合わせた CDK の実装は <a href="https://github.com/ishiharatma/aws-cdk-reference-architectures/tree/main/infrastructure/workspaces/apigw-lambda-web-adapter" target="_blank">apigw-lambda-web-adapter</a> にあります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ユースケース" duration="0">
+        <ul>
+<li>既存の Web アプリケーション（Express、Flask、Spring Boot など）を、書き換えを最小限にしてサーバーレス化したい場合</li>
+<li>EC2／ECS／Fargate からサーバーレスへの移行を段階的に進めたい場合（同じイメージを両方の基盤で動かして比較検証できる）</li>
+<li>生成 AI のレスポンスをストリーミングで返す API を、使い慣れたフレームワークで実装したい場合</li>
+<li>チームがすでに特定の Web フレームワークに習熟しており、Lambda 専用のハンドラー実装を新たに学習するコストを避けたい場合</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="メリット" duration="0">
+        <ul>
+<li>既存の Web フレームワークの知識・資産（ルーティング、ミドルウェア、テンプレートエンジンなど）をそのまま活用できる</li>
+<li>ローカル・EC2・Fargate・Lambda で同じイメージ／コードベースを使い回せるため、移行や検証がしやすい</li>
+<li>レスポンスストリーミングや圧縮など、Lambda のネイティブ機能を意識せずに利用できる</li>
+<li>SnapStart 利用時のコネクション再確立といった、サーバーレス特有の考慮事項をフックとして分離できる</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="デメリット・注意点" duration="0">
+        <ul>
+<li>Lambda 自体の制約（最大実行時間、ペイロードサイズ、同時実行数などのクォータ）がなくなるわけではない</li>
+<li>常時 HTTP サーバープロセスと Adapter プロセスが実行環境内で動作するため、素の Lambda ハンドラーに比べてわずかにオーバーヘッドが増える</li>
+<li>ステートフルな WebSocket のような長時間の双方向接続には、Lambda の実行時間上限や API Gateway の制約が別途関わってくるため、そのままでは不向きなケースがある</li>
+<li>コールドスタート自体は Lambda 側の特性に依存するため、Adapter の導入だけで解消されるわけではない（言語ランタイムやイメージサイズの最適化は引き続き必要）</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Lambda Web Adapter は、「Lambda 専用のハンドラーを書き直す」というサーバーレス移行のハードルを取り除き、使い慣れた Web フレームワークの資産をそのまま Lambda に持ち込むための橋渡し役です。レスポンスストリーミングや SnapStart 連携など、Lambda ならではの機能とも統合されており、既存アプリケーションのサーバーレス化や、EC2／Fargate とのハイブリッド運用を検討する際の有力な選択肢になります。新規の Node.js アプリであれば、Lambda Web Functions も候補に入れて比較してください。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

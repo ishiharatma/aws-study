@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "G-01ZZ95D1K9",
+  "updated": "2026-11-11T13:47:32+09:00",
+  "id": "lambda-web-adapter-overview",
+  "duration": 0,
+  "title": "AWS Lambda Web Adapter (LWA)",
+  "authors": "ishr",
+  "summary": "Summary",
+  "source": "C:\\git\\GitHub\\private\\aws-study\\claat_header\\..\\claat_lambda-web-adapter-overview.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "aws"
+  ],
+  "tags": [
+    "awslambdawebadapter"
+  ],
+  "url": "lambda-web-adapter-overview"
+}

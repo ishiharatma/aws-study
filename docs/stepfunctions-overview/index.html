@@ -1,0 +1,232 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>AWS Step Functions</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="G-01ZZ95D1K9"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="stepfunctions-overview"
+                  title="AWS Step Functions"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="☘️ はじめに" duration="0">
+        <p>本ページは、AWS に関する個人の勉強および勉強会で使用することを目的に、AWS ドキュメントなどを参照し作成しておりますが、記載の誤り等が含まれる場合がございます。</p>
+<p>最新の情報については、AWS 公式ドキュメントをご参照ください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="👀 Contents" duration="0">
+        <ul>
+<li><a href="#aws-step-functions-%E3%81%A8%E3%81%AF" target="_blank">AWS Step Functions とは</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%83%9E%E3%82%B7%E3%83%B3%E3%81%A8-amazon-states-language" target="_blank">ステートマシンと Amazon States Language</a></li>
+<li><a href="#%E3%82%B9%E3%83%86%E3%83%BC%E3%83%88%E3%81%AE%E7%A8%AE%E9%A1%9E" target="_blank">ステートの種類</a></li>
+<li><a href="#%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC%E3%82%BF%E3%82%A4%E3%83%97" target="_blank">ワークフロータイプ</a><ul>
+<li><a href="#standard-%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">Standard ワークフロー</a></li>
+<li><a href="#express-%E3%83%AF%E3%83%BC%E3%82%AF%E3%83%95%E3%83%AD%E3%83%BC" target="_blank">Express ワークフロー</a></li>
+</ul>
+</li>
+<li><a href="#aws-%E3%81%AE%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%A8%E3%81%AE%E7%9B%B4%E6%8E%A5%E7%B5%B1%E5%90%88" target="_blank">AWS のサービスとの直接統合</a></li>
+<li><a href="#%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0%E3%81%A8%E5%86%8D%E8%A9%A6%E8%A1%8C" target="_blank">エラーハンドリングと再試行</a></li>
+<li><a href="#%E5%AE%9F%E8%A1%8C%E6%96%B9%E6%B3%95" target="_blank">実行方法</a></li>
+<li><a href="#%E3%83%A2%E3%83%8B%E3%82%BF%E3%83%AA%E3%83%B3%E3%82%B0" target="_blank">モニタリング</a></li>
+<li><a href="#%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9" target="_blank">ユースケース</a></li>
+<li><a href="#%E6%96%99%E9%87%91" target="_blank">料金</a></li>
+<li><a href="#%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88" target="_blank">メリット</a></li>
+<li><a href="#%E3%83%87%E3%83%A1%E3%83%AA%E3%83%83%E3%83%88%E6%B3%A8%E6%84%8F%E7%82%B9" target="_blank">デメリット・注意点</a></li>
+<li><a href="#-%E3%81%BE%E3%81%A8%E3%82%81" target="_blank">📖 まとめ</a></li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS Step Functions とは" duration="0">
+        <p>複数の AWS のサービスや Lambda 関数を、視覚的なワークフロー（ステートマシン）として組み合わせ、オーケストレーション（処理の順序制御）できるフルマネージドサービスです。2016 年の re:Invent で発表されました。</p>
+<p><a href="https://aws.amazon.com/step-functions/" target="_blank">AWS Step Functions サービス概要</a></p>
+<p><a href="https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html" target="_blank">AWS Step Functions ドキュメント</a></p>
+<p><a href="https://aws.amazon.com/step-functions/faqs/" target="_blank">AWS Step Functions よくある質問</a></p>
+<p><a href="https://aws.amazon.com/step-functions/pricing/" target="_blank">AWS Step Functions の料金</a></p>
+<p>各処理のステップを自前でコーディングして繋ぎ合わせる代わりに、ステートマシンとして定義しておくことで、実行順序、並列処理、条件分岐、エラー時のリトライ、待機といった制御をサービス側に任せられます。実行履歴が自動的に記録されるため、どのステップで何が起きたかを後から追いやすい点も特徴です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ステートマシンと Amazon States Language" duration="0">
+        <p>ステートマシンは、Amazon States Language（ASL）という JSON ベースの言語で定義します。ステートマシンは複数の「ステート」で構成されており、各ステートが 1 つの処理単位（タスクの実行、条件分岐、待機など）を表します。</p>
+<pre><code language="language-json" class="language-json">{
+  &#34;Comment&#34;: &#34;シンプルなステートマシンの例&#34;,
+  &#34;StartAt&#34;: &#34;ValidateOrder&#34;,
+  &#34;States&#34;: {
+    &#34;ValidateOrder&#34;: {
+      &#34;Type&#34;: &#34;Task&#34;,
+      &#34;Resource&#34;: &#34;arn:aws:lambda:ap-northeast-1:123456789012:function:validateOrder&#34;,
+      &#34;Next&#34;: &#34;IsValid&#34;
+    },
+    &#34;IsValid&#34;: {
+      &#34;Type&#34;: &#34;Choice&#34;,
+      &#34;Choices&#34;: [
+        {
+          &#34;Variable&#34;: &#34;$.valid&#34;,
+          &#34;BooleanEquals&#34;: true,
+          &#34;Next&#34;: &#34;ProcessPayment&#34;
+        }
+      ],
+      &#34;Default&#34;: &#34;RejectOrder&#34;
+    },
+    &#34;ProcessPayment&#34;: {
+      &#34;Type&#34;: &#34;Task&#34;,
+      &#34;Resource&#34;: &#34;arn:aws:lambda:ap-northeast-1:123456789012:function:processPayment&#34;,
+      &#34;End&#34;: true
+    },
+    &#34;RejectOrder&#34;: {
+      &#34;Type&#34;: &#34;Fail&#34;,
+      &#34;Error&#34;: &#34;OrderRejected&#34;
+    }
+  }
+}
+</code></pre>
+<p>コンソールには、このステートマシンをグラフとして可視化する機能（Workflow Studio）があり、ドラッグ＆ドロップでステートマシンを組み立てることもできます。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ステートの種類" duration="0">
+        <p>主なステートタイプは次のとおりです。</p>
+<ul>
+<li><code>Task</code>：Lambda 関数の実行や、他の AWS サービスの API 呼び出しなど、実際の作業を行う</li>
+<li><code>Choice</code>：条件分岐</li>
+<li><code>Parallel</code>：複数の処理分岐を並列実行</li>
+<li><code>Map</code>：配列の各要素に対して同じ処理を繰り返す（近年は大量データ向けの <code>Distributed Map</code> も利用可能）</li>
+<li><code>Wait</code>：指定時間または指定時刻まで待機</li>
+<li><code>Pass</code>：入力をそのまま（あるいは加工して）出力に渡す、デバッグ用の空処理</li>
+<li><code>Succeed</code> / <code>Fail</code>：ステートマシンの正常終了・異常終了</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ワークフロータイプ" duration="0">
+        <p>Step Functions には、用途に応じて 2 種類のワークフロータイプがあります。</p>
+<h2 is-upgraded>Standard ワークフロー</h2>
+<ul>
+<li>実行履歴を長期間保持し、実行状況を細かく追跡できる</li>
+<li>最大 1 年間実行可能な長時間ワークフローに対応</li>
+<li>実行は &#34;厳密に 1 回のみ&#34; のセマンティクスを持つ（Exactly-once）</li>
+<li>料金は状態遷移の回数に応じて課金される</li>
+</ul>
+<h2 is-upgraded>Express ワークフロー</h2>
+<ul>
+<li>高頻度・短時間（最大 5 分）のイベント処理向け</li>
+<li>&#34;少なくとも 1 回&#34; のセマンティクス（At-least-once）で、高いスループットを実現</li>
+<li>料金は実行回数、実行時間、消費メモリに基づいて課金される</li>
+<li>実行履歴は CloudWatch Logs に出力する形になる</li>
+</ul>
+<p>IoT データ処理やストリーミングデータの変換など、大量かつ短時間のイベントを処理したい場合は Express ワークフロー、注文処理や承認フローのように、実行の厳密性や長時間実行、詳細な実行履歴の追跡が必要な場合は Standard ワークフローを選ぶのが基本的な指針です。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="AWS のサービスとの直接統合" duration="0">
+        <p>Step Functions は、Lambda を経由しなくても、200 を超える AWS のサービスの API を直接呼び出せる「AWS SDK 統合」を備えています。DynamoDB へのデータ書き込み、SNS への通知発行、ECS タスクの起動、Glue ジョブの実行などを、Lambda 関数を作らずにステートマシンから直接呼び出せます。</p>
+<p>さらに、ECS タスクの完了や SNS の応答のように、処理が終わるまで待ってから次のステートに進みたい場合のための「サービス統合パターン（Run a Job、Wait for Callback など）」も用意されています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="エラーハンドリングと再試行" duration="0">
+        <p>各 <code>Task</code> ステートには、<code>Retry</code>（リトライ）と <code>Catch</code>（例外時の遷移先）を個別に設定できます。指数バックオフを伴うリトライ回数の指定や、特定のエラーの種類ごとに異なる後続処理を割り当てることが可能です。これにより、エラーハンドリングのロジックをアプリケーションコード側に書き込む必要がなくなります。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="実行方法" duration="0">
+        <ul>
+<li>マネジメントコンソールからの手動実行</li>
+<li>AWS CLI・SDK からの実行（<code>StartExecution</code> API）</li>
+<li>Amazon EventBridge のルールをトリガーにした実行</li>
+<li>API Gateway 経由での実行（HTTP リクエストからの直接起動）</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="モニタリング" duration="0">
+        <p>各実行の状態遷移はコンソール上でグラフィカルに表示され、どのステートでどれだけ時間がかかったか、どこで失敗したかを視覚的に確認できます。CloudWatch と統合されており、実行数やエラー数、実行時間などのメトリクスを監視できます。X-Ray によるトレースにも対応しています。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="ユースケース" duration="0">
+        <ul>
+<li>マイクロサービスのオーケストレーション（複数の Lambda 関数・コンテナタスクの連携）</li>
+<li>データ処理パイプライン、ETL ジョブのオーケストレーション</li>
+<li>人による承認を挟む業務プロセス（注文処理、稟議フローなど）</li>
+<li>機械学習のトレーニング・推論パイプライン</li>
+<li>IT インフラの自動運用（パッチ適用、インスタンスのプロビジョニングなど）</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="料金" duration="0">
+        <p>Standard ワークフローは状態遷移の回数に応じて課金され、月間 4,000 回までの無料利用枠があります。Express ワークフローは、実行回数、実行時間、使用メモリ量に基づく課金体系です。いずれの場合も、ステートマシンから呼び出す Lambda や他のサービス自体の料金は別途発生します。正確な単価は <a href="https://aws.amazon.com/step-functions/pricing/" target="_blank">AWS Step Functions の料金ページ</a> で確認してください。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="メリット" duration="0">
+        <ul>
+<li>複雑な分岐・並列処理・リトライを、コードを書かずに定義できる</li>
+<li>実行履歴が自動的に残り、可視化されたグラフでデバッグしやすい</li>
+<li>200 以上の AWS サービスと直接統合でき、グルーコードとしての Lambda を減らせる</li>
+<li>Standard ワークフローでは最大 1 年の長時間ワークフローに対応できる</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="デメリット・注意点" duration="0">
+        <ul>
+<li>ASL（JSON）でのステートマシン定義は、慣れるまで可読性が低く感じられることがある</li>
+<li>Standard ワークフローは状態遷移数に応じた課金のため、細かいステートに分割しすぎるとコストが増えやすい</li>
+<li>Express ワークフローは At-least-once のため、べき等性を考慮した設計が必要になる場合がある</li>
+<li>複雑なワークフローになるほどステートマシン定義自体が肥大化し、テストや変更管理の工夫が必要になる</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="📖 まとめ" duration="0">
+        <p>Step Functions は、複数の AWS サービスにまたがる処理をコードではなく宣言的なステートマシンとして定義し、実行順序・エラーハンドリング・可視化をマネージドサービスに任せられる点が最大の特徴です。Lambda を中心としたアプリケーションロジックの実装には Lambda durable functions という選択肢も登場していますが、Step Functions は多数の AWS サービスをまたぐワークフロー全体のオーケストレーションに強みがあり、両者は用途に応じて使い分ける、あるいは組み合わせて使うことになります。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>
